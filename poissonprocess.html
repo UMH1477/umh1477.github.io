@@ -44,6 +44,9 @@
 <li><a class="" href="intro.html"><span class="header-section-number">1</span> Conceptos básicos</a></li>
 <li><a class="" href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></li>
 <li><a class="active" href="poissonprocess.html"><span class="header-section-number">3</span> Proceso de Poisson</a></li>
+<li><a class="" href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
+<li><a class="" href="COLAS.html"><span class="header-section-number">5</span> Sistemas de colas</a></li>
+<li><a class="" href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
@@ -56,8 +59,7 @@
 <h1>
 <span class="header-section-number">Unidad 3</span> Proceso de Poisson<a class="anchor" aria-label="anchor" href="#poissonprocess"><i class="fas fa-link"></i></a>
 </h1>
-<p>En esta unidad se presentan se presentan los Procesos de Poisson que son la base de muchos de los sistemas de Cadenas de Markov de Tiempo Continuo que estudiaremos con más detalle más adelante. Este tipo de procesos estocásticos se utilizan para modelizar el número de ocurrencias de un evento en un periodo de tiempo determinado y nos sirven para modelizar
-situaciones bastante comunes como las llegadas de clientes a una cola, el número de fallos que se producen en una cadena de producción, el número de reclamaciones que recibe una compañía de seguros, el número de accidentes de tráfico en una carretera, el número de pedidos en un sistema de inventarios,…</p>
+<p>En esta unidad se presentan se presentan los Procesos de Poisson que son la base de muchos de los sistemas de Cadenas de Markov de Tiempo Continuo que estudiaremos con más detalle más adelante. Este tipo de procesos estocásticos se utilizan para modelizar el número de ocurrencias de un evento en un periodo de tiempo determinado y nos sirven para modelizar situaciones bastante comunes como las llegadas de clientes a una cola, el número de fallos que se producen en una cadena de producción, el número de reclamaciones que recibe una compañía de seguros, el número de accidentes de tráfico en una carretera, el número de pedidos en un sistema de inventarios,…</p>
 <p>Veamos a continuación un ejemplo sencillo de utilización de este tipo de procesos.</p>
 <div class="example">
 <p><span id="exm:pp001" class="example"><strong>Ejemplo 3.1  </strong></span>Estamos interesados en estudiar la dinámica de la llegada de llamadas telefónicas a un centro de llamadas. Para describir este proceso consideremos una colección de variables aleatorias <span class="math inline">\(\{N_t; t ≥ 0\}\)</span>, donde cada variable aleatoria <span class="math inline">\(N_t\)</span>, para un <span class="math inline">\(t\)</span> dado, denota el número acumulado de llamadas que llegan al centro hasta el momento <span class="math inline">\(t\)</span>. Como estas llamadas registran un recuento, el espacio de estado es el conjunto de números naturales con el cero, <span class="math inline">\(S= \{0,1,2,...\}\)</span>. En otras palabras, la llegada de llamadas telefónicas puede modelarse como un proceso estocástico de tiempos (parámetros) continuos con un espacio de estados contable.</p>
@@ -68,7 +70,7 @@ situaciones bastante comunes como las llegadas de clientes a una cola, el númer
 </h2>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:poissonprocess" class="definition"><strong>Definición 3.1  </strong></span>Sea un proceso estocástico de parámetro continuo <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con <span class="math inline">\(N_0 = 0\)</span> y espacio de estados el de los enteros no negativos, <span class="math inline">\(S=\{0,1,2,...\}\)</span>. Dicho proceso se denomina <strong>Proceso de Poisson (PP) de tasa <span class="math inline">\(\lambda\)</span></strong> si:</p>
+<p><span id="def:poissonprocess" class="definition"><strong>Definición 3.1  </strong></span>Sea un proceso estocástico de parámetro continuo <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con <span class="math inline">\(N_0 = 0\)</span> y espacio de estados el de los enteros no negativos, <span class="math inline">\(S=\{0,1,2,...\}\)</span>. Dicho proceso se denomina <strong>Proceso de Poisson (PP) de tasa</strong> <span class="math inline">\(\lambda\)</span> si:</p>
 <ol style="list-style-type: decimal">
 <li>
 <span class="math inline">\(P(N_t = k) = e^{\lambda t}(\lambda t)^k/k!\)</span> para <span class="math inline">\(k=\{0,1,2,...\}, t \geq 0\)</span>, esto es, <span class="math inline">\(N_t \sim Po(\lambda)\)</span>.</li>
@@ -102,18 +104,15 @@ situaciones bastante comunes como las llegadas de clientes a una cola, el númer
 <ol start="3" style="list-style-type: decimal">
 <li>¿Cuál es la probabilidad de que haya tres operaciones entre las 8 a.m. y las 12 del mediodía, y 4 operaciones entre las 12 del mediodía y las 5 p.m.?</li>
 </ol>
-<p>Si asumimos que <span class="math inline">\(t=0\)</span> se corresponde con las 8,a.m., a las 12 del mediodía han transcurrido 4 horas, y hasta las 5 p.m. han transcurrido 9 horas. La probabilidad que nos piden se refiere a una probabilidad conjunta de dos franjas horarias que no se solapan, por lo que se trata de sucesos independientes y la probabilidad conjunta es el producto de las probabilidades individuales:
-<span class="math display">\[Pr[N(4/24)-N(0)=3, N(9/24)-N(4/24)=4]=Pr[N(4/24)-N(0)=3] \cdot Pr[N(9/24)-N(4/24)=4] \]</span>
-ahora por la estacionariedad de los incrementos, tendremos que esa probabilidad la podemos escribir como
-<span class="math display">\[Pr[N(4/24)=3]\cdot Pr[N(5/24)=4]\]</span>
-con las distribuciones <span class="math inline">\(Po(24 \cdot 4/24)\)</span> y <span class="math inline">\(Po(24 \cdot 5/24)\)</span>.</p>
+<p>Si asumimos que <span class="math inline">\(t=0\)</span> se corresponde con las 8,a.m., a las 12 del mediodía han transcurrido 4 horas, y hasta las 5 p.m. han transcurrido 9 horas. La probabilidad que nos piden se refiere a una probabilidad conjunta de dos franjas horarias que no se solapan, por lo que se trata de sucesos independientes y la probabilidad conjunta es el producto de las probabilidades individuales: <span class="math display">\[Pr[N(4/24)-N(0)=3, N(9/24)-N(4/24)=4]=Pr[N(4/24)-N(0)=3] \cdot Pr[N(9/24)-N(4/24)=4] \]</span> ahora por la estacionariedad de los incrementos, tendremos que esa probabilidad la podemos escribir como</p>
+<p><span class="math display">\[Pr[N(4/24)=3]\cdot Pr[N(5/24)=4]\]</span></p>
+<p>con las distribuciones <span class="math inline">\(Po(24 \cdot 4/24)\)</span> y <span class="math inline">\(Po(24 \cdot 5/24)\)</span>.</p>
 <div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.0342805</code></pre>
 <p>Debido a las propiedades de incrementos independientes y estacionariedad de un proceso de Poisson, la distribución de los tiempos entre llegadas puede determinarse fácilmente.</p>
 <p>Sea <span class="math inline">\(T_n\)</span> una v.a. que identifica el tiempo que transcurre entre dos llegadas consecutivas <span class="math inline">\(n\)</span> y <span class="math inline">\(n-1\)</span>. La probabilidad de que no se produzca ninguna llegada en un intervalo de tiempo de amplitud <span class="math inline">\(t\)</span>, implica que <span class="math inline">\(T_n&gt;t\)</span> y viene dada por:</p>
-<p><span class="math display">\[Pr(T_n &gt; t)=Pr(N_t = 0) = e^{\lambda t}.\]</span>
-Por lo tanto, <span class="math inline">\(P(T_n \leq 0) = 1 - P(T_n &gt; 0) = 1 - e^{-\lambda t}\)</span> para <span class="math inline">\(t ≥ 0\)</span>, que es la función de distribución <a href="intro.html#exponencial">Exponencial</a>.</p>
+<p><span class="math display">\[Pr(T_n &gt; t)=Pr(N_t = 0) = e^{\lambda t}.\]</span> Por lo tanto, <span class="math inline">\(P(T_n \leq 0) = 1 - P(T_n &gt; 0) = 1 - e^{-\lambda t}\)</span> para <span class="math inline">\(t ≥ 0\)</span>, que es la función de distribución <a href="intro.html#exponencial">Exponencial</a>.</p>
 <p>Concluimos pues, que si las llegadas a un sistema se producen según un PP de tasa <span class="math inline">\(\lambda\)</span>, entonces los tiempos entre llegadas responden a una distribución exponencial de parámetro <span class="math inline">\(\lambda\)</span>.</p>
 <div class="yellowbox">
 <div class="definition">
@@ -124,8 +123,7 @@ Por lo tanto, <span class="math inline">\(P(T_n \leq 0) = 1 - P(T_n &gt; 0) = 1 
 </div>
 <div class="bluebox">
 <p>Propiedad. Si <span class="math inline">\(S_n\)</span> denota el tiempo que transcurre hasta la n-ésima llegada en un PP de tasa <span class="math inline">\(\lambda\)</span>, entonces <span class="math inline">\(S_n\)</span> se distribuye según una distribución Erlang <span class="math inline">\(Erl(n,\lambda)\)</span>, con función de densidad dada por:</p>
-<p><span class="math display">\[f(s) = \frac{\lambda(\lambda s)^{k-1}e^{-\lambda s}}{(k-1)!}, \quad \text{para } s \geq 0\]</span>
-Esta propiedad es consecuencia de que la distribución Erlang <span class="math inline">\(Erl(n,\lambda)\)</span> surge de la suma de <span class="math inline">\(n\)</span> v.a. iid <span class="math inline">\(Exp(\lambda)\)</span>.</p>
+<p><span class="math display">\[f(s) = \frac{\lambda(\lambda s)^{k-1}e^{-\lambda s}}{(k-1)!}, \quad \text{para } s \geq 0\]</span> Esta propiedad es consecuencia de que la distribución Erlang <span class="math inline">\(Erl(n,\lambda)\)</span> surge de la suma de <span class="math inline">\(n\)</span> v.a. iid <span class="math inline">\(Exp(\lambda)\)</span>.</p>
 </div>
 </div>
 <div id="extensiones_pp" class="section level2" number="3.2">
@@ -173,21 +171,17 @@ Esta propiedad es consecuencia de que la distribución Erlang <span class="math 
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:ppcompuesto" class="definition"><strong>Definición 3.5  </strong></span>Sea <span class="math inline">\(\{N_t; t \geq 0\}\)</span> un PP de tasa <span class="math inline">\(\lambda\)</span>, que representa el proceso de llegada por lotes a un sistema, y sea <span class="math inline">\(\{X_1, X_2,...\}\)</span> una secuencia de variables aleatorias i.i.d., y también independientes de <span class="math inline">\(N_t\)</span>, tales que <span class="math inline">\(X_n\)</span> representa el tamaño del lote que llega en n-ésimo lugar. El proceso <span class="math inline">\(\{Y_t; t \geq 0\}\)</span> que acumula el número total de llegadas en <span class="math inline">\((0,t]\)</span> y viene definido por la suma de las llegadas en los <span class="math inline">\(N_t\)</span> lotes que han llegado en dicho periodo, esto es,</p>
-<p><span class="math display" id="eq:ppc-ecu">\[\begin{equation} 
+<span class="math display" id="eq:ppc-ecu">\[\begin{equation} 
 Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 \tag{3.1}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>se denomina <strong>Proceso de Poisson compuesto</strong> (PPC).</p>
 </div>
 </div>
-<p>La respuesta a la cuestión planteada en el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a> se obtiene de plantear que el número total de pasajeros que llegan a la estación, denotado por <span class="math inline">\(\{Y_t; t &gt; 0 \}\)</span> será un PP compuesto, definido por:
-<span class="math display">\[Y_t=\sum_{i=1}^{N_t} X_i.\]</span>
-:::</p>
+<p>La respuesta a la cuestión planteada en el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a> se obtiene de plantear que el número total de pasajeros que llegan a la estación, denotado por <span class="math inline">\(\{Y_t; t &gt; 0 \}\)</span> será un PP compuesto, definido por: <span class="math display">\[Y_t=\sum_{i=1}^{N_t} X_i.\]</span> :::</p>
 <div class="bluebox">
 <p>Sea <span class="math inline">\(\{Y_t; t \geq 0\}\)</span> un PPC expresado según la Ecuación <a href="poissonprocess.html#eq:ppc-ecu">(3.1)</a>, que proviene de un PP de llegadas/eventos que se producen en lotes, <span class="math inline">\(\{N_t; t \geq 0\}\)</span> de tasa <span class="math inline">\(\lambda\)</span> y se conforma a partir de la suma de las v.a. <span class="math inline">\(\{X_i, i=1,...,N_t\}\)</span> independientes de <span class="math inline">\(N_t\)</span>, que representan el tamaño de los lotes, y que se distribuyen iid con media <span class="math inline">\(\mu=E(X_i)\)</span> y varianza <span class="math inline">\(\sigma^2=Var(X_i)\)</span>. Entonces la esperanza y varianza del número total de llegadas/eventos (totales) para cada valor de <span class="math inline">\(t \geq 0\)</span> se obtiene como:</p>
-<p><span class="math display">\[E(Y_t) = \mu \lambda t\]</span>
-<span class="math display">\[V(Y_t) = (\sigma^2+\mu^2) \lambda t\]</span>
-La varianza de <span class="math inline">\(Y_t\)</span> se obtiene pues, del momento de orden 2 de <span class="math inline">\(X_n\)</span>, <span class="math inline">\(E(X_n^2)=Var(X_n)+E(X_n)^2\)</span>.</p>
+<p><span class="math display">\[E(Y_t) = \mu \lambda t\]</span> <span class="math display">\[V(Y_t) = (\sigma^2+\mu^2) \lambda t\]</span> La varianza de <span class="math inline">\(Y_t\)</span> se obtiene pues, del momento de orden 2 de <span class="math inline">\(X_n\)</span>, <span class="math inline">\(E(X_n^2)=Var(X_n)+E(X_n)^2\)</span>.</p>
 </div>
 <p>Continuando con el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a>), calculemos el número esperado de pasajeros (y su error) que llegarán a la estación en un periodo de 8 horas. Para ello habremos de calcular en primer lugar la media y varianza del número de viajeros por coche (tamaño del lote):</p>
 <div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
@@ -454,8 +448,8 @@ La varianza de <span class="math inline">\(Y_t\)</span> se obtiene pues, del mom
 <li>¿Cuál es la probabilidad de que se dé al menos un parto de gemelos o mellizos?</li>
 <li>Suponiendo que durante un día han nacido unos gemelos, ¿cuál es el número de partos que se han dado?</li>
 </ol>
-<p><strong>Ejercicio B3.9.</strong> El número de coches que visitan un parque nacional sigue un PP con tasa 15 por hora. Cada coche tiene k ocupantes con probabilidad <span class="math inline">\(p_k\)</span>, donde
-<span class="math display">\[p_1=0.2, \quad, p_2=0.3, \quad p_3=0.3, \quad p_4=0.1, \quad p_5=0.5, \quad p_6=0.05.\]</span></p>
+<p><strong>Ejercicio B3.9.</strong> El número de coches que visitan un parque nacional sigue un PP con tasa 15 por hora. Cada coche tiene k ocupantes con probabilidad <span class="math inline">\(p_k\)</span>, donde</p>
+<p><span class="math display">\[p_1=0.2, \quad, p_2=0.3, \quad p_3=0.3, \quad p_4=0.1, \quad p_5=0.5, \quad p_6=0.05.\]</span></p>
 <ol style="list-style-type: decimal">
 <li>Calcula la media y la varianza del número de visitantes del parque durante un periodo de 10 horas.</li>
 <li>Si el coste de la entrada de cada coche es de 4€, con un recargo de 1€ por ocupante, calcula la media y la varianza del dinero que consigue el parque durante 10 horas.</li>
@@ -480,7 +474,7 @@ La varianza de <span class="math inline">\(Y_t\)</span> se obtiene pues, del mom
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></div>
-<div class="next"><a href="bibliograf%C3%ADa.html">Bibliografía</a></div>
+<div class="next"><a href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

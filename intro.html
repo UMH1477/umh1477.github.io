@@ -44,6 +44,9 @@
 <li><a class="active" href="intro.html"><span class="header-section-number">1</span> Conceptos básicos</a></li>
 <li><a class="" href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></li>
 <li><a class="" href="poissonprocess.html"><span class="header-section-number">3</span> Proceso de Poisson</a></li>
+<li><a class="" href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
+<li><a class="" href="COLAS.html"><span class="header-section-number">5</span> Sistemas de colas</a></li>
+<li><a class="" href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
@@ -102,9 +105,10 @@
 </div>
 </div>
 <p>En el caso de variables aleatorias de tipo discreto, la función de distribución de probabilidad se puede obtener a partir de la función de masa de probabilidad como:</p>
-<p><span class="math display">\[\begin{equation*}
+<span class="math display">\[\begin{equation*}
   F(a) = \sum_{k \leq a} f(k) = 1 - \sum_{k &gt; a} f(k).
-\end{equation*}\]</span> para cualquier valor de <span class="math inline">\(a\)</span> en <span class="math inline">\(S\)</span>.</p>
+\end{equation*}\]</span>
+<p>para cualquier valor de <span class="math inline">\(a\)</span> en <span class="math inline">\(S\)</span>.</p>
 <p>Sim embargo, en las variables aleatorias de tipo continuo no es posible asignar una probabilidad a cada uno de los infinitos valores de la variable, dado que en ese caso la probabilidad del espacio probabilístico íntegro excedería el valor 1 y por lo tanto no sería una probabilidad. En estas variables es preciso definir otra función que permita cuantificar cualquier situación que involucre los resultados del espacio probabilístico <span class="math inline">\(S\)</span> asociado a la variable aleatoria. Surge la ‘función de densidad de probabilidad.’</p>
 <div class="yellowbox">
 <div class="definition">
@@ -147,11 +151,15 @@
 <p>Muchas variables aleatorias tienen funciones de distribución complicadas y, por tanto, es difícil obtener una comprensión intuitiva del comportamiento de la variable conociendo simplemente la función de distribución. Dos medidas, la <strong>media o valor esperado</strong> y la <strong>varianza</strong> se definen para ayudar a describir el comportamiento de una variable aleatoria. El valor esperado equivale a la media aritmética de infinitas observaciones de la variable aleatoria y la varianza es una indicación de la variabilidad o dispersión de los valores de dicha variable.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-3" class="definition"><strong>Definición 1.6  </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> discreta sobre un espacio probabilístico <span class="math inline">\(S\)</span>, se define el valor esperado o <strong>esperanza</strong> de <span class="math inline">\(X\)</span>, <span class="math inline">\(E(X)\)</span>, como <span class="math display">\[E(X) = \sum_{k \ in S} kf(k)\]</span> donde <span class="math inline">\(f\)</span> es la fmp de <span class="math inline">\(X\)</span>.</p>
-<p>Cuando <span class="math inline">\(X\)</span> es una variable aleatoria continua, su valor esperado se define a partir de la fdp de <span class="math inline">\(X\)</span>: <span class="math display">\[E(X) = \int_S xf(x)dx.\]</span></p>
+<p><span id="def:unlabeled-div-3" class="definition"><strong>Definición 1.6  </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> discreta sobre un espacio probabilístico <span class="math inline">\(S\)</span>, se define el valor esperado o <strong>esperanza</strong> de <span class="math inline">\(X\)</span>, <span class="math inline">\(E(X)\)</span>, como</p>
+<p><span class="math display">\[E(X) = \sum_{k \ in S} kf(k)\]</span></p>
+<p>donde <span class="math inline">\(f\)</span> es la fmp de <span class="math inline">\(X\)</span>.</p>
+<p>Cuando <span class="math inline">\(X\)</span> es una variable aleatoria continua, su valor esperado se define a partir de la fdp de <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[E(X) = \int_S xf(x)dx.\]</span></p>
 </div>
 </div>
-<p>Esta definición se puede aplicar a cualquier función o transformación de una variable aleatoria, <span class="math inline">\(h(X)\)</span>, para obtener su valor esperado <span class="math inline">\(E[h(X)]\)</span>, y así por ejemplo en el caso continuo tendríamos: <span class="math display">\[E[h(X)]=\int_S h(x)f(x)dx.\]</span></p>
+<p>Esta definición se puede aplicar a cualquier función o transformación de una variable aleatoria, <span class="math inline">\(h(X)\)</span>, para obtener su valor esperado <span class="math inline">\(E[h(X)]\)</span>, y así por ejemplo en el caso continuo tendríamos:</p>
+<p><span class="math display">\[E[h(X)]=\int_S h(x)f(x)dx.\]</span></p>
 <p>El valor esperado nos da una medida de localización para la variable aleatoria <span class="math inline">\(X\)</span>, pero es bien sabido que dichas medidas de localización se deben acompañar siempre de una medida de dispersión, como la varianza o desviación típica.</p>
 <div class="yellowbox">
 
@@ -177,31 +185,37 @@
 <span class="header-section-number">1.2</span> Aproximación Monte Carlo<a class="anchor" aria-label="anchor" href="#APMC"><i class="fas fa-link"></i></a>
 </h2>
 <p>Cuando trabajamos con variables aleatorias, es común el problema de querer estimar el valor esperado de cualquier cantidad <span class="math inline">\(h(X)\)</span>, siendo <span class="math inline">\(X\)</span> una variable aleatoria. Utilizando la simulación es posible obtener estimaciones de dichos valores de un modo relativamente sencillo: a través de la <strong>integración Monte Carlo</strong>.</p>
-<p>Ante un problema genérico relativo a calcular el valor esperado de cierta función <span class="math inline">\(h(X)\)</span> para una variable aleatoria con fdp <span class="math inline">\(X \sim f(x)\)</span>, <span class="math display">\[\begin{equation}
+<p>Ante un problema genérico relativo a calcular el valor esperado de cierta función <span class="math inline">\(h(X)\)</span> para una variable aleatoria con fdp <span class="math inline">\(X \sim f(x)\)</span>,</p>
+<span class="math display" id="eq:problemaestimacionMC">\[\begin{equation}
 E[h(X)]=\int_S h(x) f(x) dx
-(\#eq:problemaestimacionMC)
-\end{equation}\]</span> donde <span class="math inline">\(S\)</span> denota el conjunto en el que la variable <span class="math inline">\(X\)</span> toma valores,</p>
+\tag{1.1}
+\end{equation}\]</span>
+<p>donde <span class="math inline">\(S\)</span> denota el conjunto en el que la variable <span class="math inline">\(X\)</span> toma valores,</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:MCestimacion" class="definition"><strong>Definición 1.8  </strong></span>Ante el problema de estimar <a href="#eq:problemaestimacionMC">(<strong>??</strong>)</a>, el procedimiento de estimación Monte Carlo propone simular una muestra aleatoria de la distribución de <span class="math inline">\(X\)</span>, <span class="math inline">\(x_1,\ldots,x_n\)</span> y con ella obtener una aproximación empírica a través del promedio de las cantidades <span class="math inline">\(h(x_1),\ldots,h(x_n)\)</span>, <span class="math display">\[\begin{equation}
+<p><span id="def:MCestimacion" class="definition"><strong>Definición 1.8  </strong></span>Ante el problema de estimar <a href="intro.html#eq:problemaestimacionMC">(1.1)</a>, el procedimiento de estimación Monte Carlo propone simular una muestra aleatoria de la distribución de <span class="math inline">\(X\)</span>, <span class="math inline">\(x_1,\ldots,x_n\)</span> y con ella obtener una aproximación empírica a través del promedio de las cantidades <span class="math inline">\(h(x_1),\ldots,h(x_n)\)</span>,</p>
+<span class="math display" id="eq:estimacionMC">\[\begin{equation}
 \bar{h_n}=\frac{\sum_{i=1}^n h(x_i)}{n}.
-(\#eq:estimacionMC)
-\end{equation}\]</span></p>
+\tag{1.2}
+\end{equation}\]</span>
 </div>
 </div>
-<p>Por la Ley de los Grandes Números, <span class="math inline">\(\bar{h_n}\)</span> converge casi seguro a la cantidad de interés <span class="math inline">\(E[h(X)]\)</span>. Además, cuando <span class="math inline">\(h^2(X)\)</span> tiene un valor esperado finito, la velocidad de convergencia de <span class="math inline">\(\bar{h_n}\)</span> se puede calcular y la varianza asintótica de la aproximación es <span class="math display">\[Var(\bar{h_n})=\frac{1}{n} \int_S (h(x)-E[h(X)])^2 f(x) dx,\]</span> que se puede estimar con la muestra <span class="math inline">\(x_1,\ldots,x_n\)</span> a través de <span class="math display">\[\begin{equation}
+<p>Por la Ley de los Grandes Números, <span class="math inline">\(\bar{h_n}\)</span> converge casi seguro a la cantidad de interés <span class="math inline">\(E[h(X)]\)</span>. Además, cuando <span class="math inline">\(h^2(X)\)</span> tiene un valor esperado finito, la velocidad de convergencia de <span class="math inline">\(\bar{h_n}\)</span> se puede calcular y la varianza asintótica de la aproximación es <span class="math display">\[Var(\bar{h_n})=\frac{1}{n} \int_S (h(x)-E[h(X)])^2 f(x) dx,\]</span> que se puede estimar con la muestra <span class="math inline">\(x_1,\ldots,x_n\)</span> a través de</p>
+<span class="math display" id="eq:varianzaMC">\[\begin{equation}
 v_n=\frac{1}{n^2} \sum_{i=1}^n [h(x_i)-\bar{h_n}]^2.
-(\#eq:varianzaMC)
-\end{equation}\]</span></p>
-<p>Más específicamente, por el Teorema Central del Límite, para <span class="math inline">\(n\)</span> grande tendremos que <span class="math display">\[\begin{equation}
+\tag{1.3}
+\end{equation}\]</span>
+<p>Más específicamente, por el Teorema Central del Límite, para <span class="math inline">\(n\)</span> grande tendremos que</p>
+<span class="math display" id="eq:distMC">\[\begin{equation}
 \frac{\bar{h_n}-E[h(X)]}{\sqrt{v_n}} \sim N(0,1),
-(\#eq:distMC)
-\end{equation}\]</span></p>
+\tag{1.4}
+\end{equation}\]</span>
 <p>lo que permitirá además, construir bandas de confianza para la aproximación Monte Carlo, a la que en adelante nos referiremos por “aproximación MC.”</p>
-<p><span class="math display" id="eq:icMC">\[\begin{equation}
+<span class="math display" id="eq:icMC">\[\begin{equation}
 IC_{1-\alpha}[\bar{h_n}]=[\bar{h_n}-z_{1-\alpha/2} \sqrt{v_n}, \bar{h_n}+z_{1-\alpha/2} \sqrt{v_n}]
-\tag{1.1}
-\end{equation}\]</span> donde <span class="math inline">\(z_{1-\alpha/2}\)</span> es el cuantil <span class="math inline">\(1-\alpha/2\)</span> de una normal estándar, asociado al nivel de confianza <span class="math inline">\(1-\alpha\)</span>.</p>
+\tag{1.5}
+\end{equation}\]</span>
+<p>donde <span class="math inline">\(z_{1-\alpha/2}\)</span> es el cuantil <span class="math inline">\(1-\alpha/2\)</span> de una normal estándar, asociado al nivel de confianza <span class="math inline">\(1-\alpha\)</span>.</p>
 <div id="mc-y-probabilidad" class="section level3" number="1.2.1">
 <h3>
 <span class="header-section-number">1.2.1</span> MC y probabilidad<a class="anchor" aria-label="anchor" href="#mc-y-probabilidad"><i class="fas fa-link"></i></a>
@@ -211,14 +225,19 @@ IC_{1-\alpha}[\bar{h_n}]=[\bar{h_n}-z_{1-\alpha/2} \sqrt{v_n}, \bar{h_n}+z_{1-\a
 <span class="math display">\[\begin{equation}
 Pr(X \in A) \approx \frac{\#\{x_1, x_2,...,x_N\} \in A}{N}.
 \end{equation}\]</span>
-<p>Básicamente esta definición se fundamenta en la interpretación empírica de la probabilidad, a través del ratio de casos favorables por casos posibles: <span class="math display">\[probabilidad=\frac{\mbox{casos favorables}}{\mbox{casos posibles}}.\]</span></p>
-<p>La fórmula anterior la podemos expresar en notación similar a la utilizada en <a href="#eq:estimacionMC">(<strong>??</strong>)</a> definiendo una variable dicotómica <span class="math display">\[I_A(X)=1 \text{,  si } X \in A\]</span> y 0 en otro caso, de manera que el problema de calcular una probabilidad según una distribución de probabilidad para <span class="math inline">\(X\)</span> se convierte en el valor esperado de una distribución Bernouilli para una distribución de <span class="math display">\[Pr(X \in A)=\int_A f(x)dx=\int_S I_A(X)f(x)dx=E[I_A(X)]\]</span> y la estimación MC <a href="#eq:estimacionMC">(<strong>??</strong>)</a> se puede expresar, para un conjunto de <span class="math inline">\(n\)</span> simulaciones <span class="math inline">\(x_1,\ldots,x_n\)</span>, como <span class="math display">\[\begin{equation}
+<p>Básicamente esta definición se fundamenta en la interpretación empírica de la probabilidad, a través del ratio de casos favorables por casos posibles:</p>
+<p><span class="math display">\[probabilidad=\frac{\mbox{casos favorables}}{\mbox{casos posibles}}.\]</span></p>
+<p>La fórmula anterior la podemos expresar en notación similar a la utilizada en <a href="intro.html#eq:estimacionMC">(1.2)</a> definiendo una variable dicotómica <span class="math display">\[I_A(X)=1 \text{,  si } X \in A\]</span> y 0 en otro caso, de manera que el problema de calcular una probabilidad según una distribución de probabilidad para <span class="math inline">\(X\)</span> se convierte en el valor esperado de una distribución Bernouilli para una distribución de</p>
+<p><span class="math display">\[Pr(X \in A)=\int_A f(x)dx=\int_S I_A(X)f(x)dx=E[I_A(X)]\]</span> y la estimación MC <a href="intro.html#eq:estimacionMC">(1.2)</a> se puede expresar, para un conjunto de <span class="math inline">\(n\)</span> simulaciones <span class="math inline">\(x_1,\ldots,x_n\)</span>, como</p>
+<span class="math display" id="eq:estimacionMCprob">\[\begin{equation}
 Pr(X \in A)\approx \hat{h_n}= \frac{\sum_{i=1}^n I_A(x_i)}{n},
-(\#eq:estimacionMCprob)
-\end{equation}\]</span> y su varianza con <span class="math display">\[\begin{equation}
+\tag{1.6}
+\end{equation}\]</span>
+<p>y su varianza con</p>
+<span class="math display" id="eq:varMCprob">\[\begin{equation}
 v_n=\frac{1}{n^2} \sum_{i=1}^n [I_A(x_i)-\bar{h_n}]^2.
-(\#eq:varMCprob)
-\end{equation}\]</span></p>
+\tag{1.7}
+\end{equation}\]</span>
 <div class="example">
 <p><span id="exm:unlabeled-div-4" class="example"><strong>Ejemplo 1.3  </strong></span>En la situación del ejemplo <a href="intro.html#exm:rvdiscreta">1.1</a>, supongamos que disponemos de un conjunto de 200 simulaciones del número de huevos defectuosos en 200 cajas distribuídas. Queremos descubrir, utilizando exclusivamente esas simulaciones:</p>
 <ol style="list-style-type: decimal">
@@ -274,7 +293,7 @@ v_n=\frac{1}{n^2} \sum_{i=1}^n [I_A(x_i)-\bar{h_n}]^2.
 <span class="va">prob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">sel</span><span class="op">)</span><span class="op">/</span><span class="va">nsim</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Probabilidad estimada [Pr(X/144 &lt;=0.01): "</span>, <span class="va">prob</span><span class="op">)</span></code></pre></div>
 <pre><code>## Probabilidad estimada [Pr(X/144 &lt;=0.01):  0.62</code></pre>
-<p>El error asociado a la estimación de la probabilidad anterior, lo calculamos aplicando <a href="#eq:varMCprob">(<strong>??</strong>)</a>, y también el intervalo de confianza al 95% con <a href="intro.html#eq:icMC">(1.1)</a>.</p>
+<p>El error asociado a la estimación de la probabilidad anterior, lo calculamos aplicando <a href="intro.html#eq:varMCprob">(1.7)</a>, y también el intervalo de confianza al 95% con <a href="intro.html#eq:icMC">(1.5)</a>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">I.a</span><span class="op">=</span><span class="op">(</span><span class="va">huevos</span><span class="op">$</span><span class="va">defectos</span> <span class="op">&lt;=</span> <span class="fl">1.44</span><span class="op">)</span><span class="op">*</span><span class="fl">1</span>
 <span class="va">prob</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">I.a</span><span class="op">)</span>
@@ -299,10 +318,11 @@ v_n=\frac{1}{n^2} \sum_{i=1}^n [I_A(x_i)-\bar{h_n}]^2.
 </h3>
 <p>Si disponemos de una muestra (de observaciones o simulaciones) lo suficientemente grande de la variable aleatoria <span class="math inline">\(X\)</span> podemos aproximar -de modo razonablemente preciso- el valor esperado y la varianza (o desviación típica) sin más que calcular la media y varianza de los datos que componen la muestra.</p>
 <p>La precisión de estas estimaciones estará directamente relacionada con el tamaño de la muestra utilizada.</p>
-<p>Sean <span class="math inline">\(x_1, x_2,...,x_N\)</span> simulaciones disponibles para <span class="math inline">\(X\)</span>. Entonces <span class="math display">\[\begin{eqnarray*}
+<p>Sean <span class="math inline">\(x_1, x_2,...,x_N\)</span> simulaciones disponibles para <span class="math inline">\(X\)</span>. Entonces</p>
+<span class="math display">\[\begin{eqnarray*}
 E(X) &amp;\approx&amp; \bar{x}_N=\sum_{i=1}^N x_i /N \\
 Var(X) &amp;\approx&amp; \sum_{i=1}^N (x_i-\bar{x}_N)^2/n = \bar{x}_N^2-\sum_{i=1}^N x_i^2 /N.
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 <div class="example">
 <p><span id="exm:unlabeled-div-5" class="example"><strong>Ejemplo 1.4  </strong></span>Con los datos del ejemplo anterior, queremos saber cuál es el número aproximado de huevos que se rompen en cada caja, conocer su dispersión y tener así mismo un intervalo de confianza para la media.</p>
 </div>
@@ -342,11 +362,11 @@ Pr(X = x) =
 \theta &amp; \text{ si } x = 1 (\text{ éxito})\\
 1- \theta &amp; \text{ si } x = 0 (\text{ fracaso.})
 \end{cases}
-\tag{1.2}
+\tag{1.8}
 \end{equation}\]</span>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:vber" class="definition"><strong>Definición 1.9  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> cuya fmp viene dada por <a href="intro.html#eq:var-bernouilli">(1.2)</a> se denomina <strong>variable Bernouilli</strong>, con probabilidad de éxito <span class="math inline">\(\theta\)</span>, y se denota por:</p>
+<p><span id="def:vber" class="definition"><strong>Definición 1.9  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> cuya fmp viene dada por <a href="intro.html#eq:var-bernouilli">(1.8)</a> se denomina <strong>variable Bernouilli</strong>, con probabilidad de éxito <span class="math inline">\(\theta\)</span>, y se denota por:</p>
 <p><span class="math display">\[X \sim Ber(\theta)\]</span></p>
 <p>de forma que <span class="math inline">\(E(X) = \theta\)</span> y <span class="math inline">\(V(X) = \theta(1-\theta).\)</span></p>
 </div>
@@ -367,13 +387,14 @@ Pr(X = x) =
 <span class="header-section-number">1.3.2</span> Binomial<a class="anchor" aria-label="anchor" href="#binomial"><i class="fas fa-link"></i></a>
 </h3>
 <p>Consideramos un experimento Bernouilli que repetimos en <span class="math inline">\(n\)</span> ocasiones, obteniendo en cada repetición sólo dos resultados posibles, “éxito” o “fracaso,” con cierta probabilidad <span class="math inline">\(\theta\)</span> para el éxito, y contabilizamos el número de éxitos <span class="math inline">\(N\)</span>. Los posibles resultados de este experimento son <span class="math inline">\(\{0, 1, 2,...,n\}\)</span> éxitos conseguidos en un total de <span class="math inline">\(n\)</span> pruebas. La probabilidad de observar <span class="math inline">\(x\)</span> éxitos en <span class="math inline">\(n\)</span> pruebas viene dada por la función:</p>
-<p><span class="math display" id="eq:var-binomial">\[\begin{equation}
+<span class="math display" id="eq:var-binomial">\[\begin{equation}
 Pr(N = x) = \frac{n!}{x!(n-x)!}  \theta^{x} (1-\theta)^{n-x}  \text{ para } x = 0, 1,\ldots,n,
-\tag{1.3}
-\end{equation}\]</span> con <span class="math inline">\(n\)</span> el número de repeticiones o pruebas Bernouilli realizadas, <span class="math inline">\(x\)</span> el número de éxitos obtenidos, y <span class="math inline">\(\theta\)</span> la probabilidad de éxito.</p>
+\tag{1.9}
+\end{equation}\]</span>
+<p>con <span class="math inline">\(n\)</span> el número de repeticiones o pruebas Bernouilli realizadas, <span class="math inline">\(x\)</span> el número de éxitos obtenidos, y <span class="math inline">\(\theta\)</span> la probabilidad de éxito.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:vbinom" class="definition"><strong>Definición 1.10  </strong></span>La variable aleatoria <span class="math inline">\(N\)</span> que se obtiene como la suma de <span class="math inline">\(n\)</span> variables Bernouilli independientes con la misma probabilidad de éxito <span class="math inline">\(\theta\)</span>, y cuya función de masa de probabilidad viene dada en <a href="intro.html#eq:var-binomial">(1.3)</a>, se denomina variable Binomial de tamaño <span class="math inline">\(n\)</span> y probabilidad de éxito <span class="math inline">\(\theta\)</span>, y se denota por:</p>
+<p><span id="def:vbinom" class="definition"><strong>Definición 1.10  </strong></span>La variable aleatoria <span class="math inline">\(N\)</span> que se obtiene como la suma de <span class="math inline">\(n\)</span> variables Bernouilli independientes con la misma probabilidad de éxito <span class="math inline">\(\theta\)</span>, y cuya función de masa de probabilidad viene dada en <a href="intro.html#eq:var-binomial">(1.9)</a>, se denomina variable Binomial de tamaño <span class="math inline">\(n\)</span> y probabilidad de éxito <span class="math inline">\(\theta\)</span>, y se denota por:</p>
 <p><span class="math display">\[N \sim Bi(n,\theta)\]</span></p>
 <p>con <span class="math inline">\(E(N) = n\theta\)</span> y <span class="math inline">\(V(N) = n\theta(1-\theta).\)</span></p>
 </div>
@@ -436,12 +457,12 @@ Figura 1.1: Función de masa de probabilidad y Función de distribución para el
 <span class="va">prob</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">I.a</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"AproxMC="</span>,<span class="va">prob</span><span class="op">)</span></code></pre></div>
 <pre><code>## AproxMC= 0.193</code></pre>
-<p>El error estimado de esta aproximación, que calculamos con la raíz cuadrada de <a href="#eq:varianzaMC">(<strong>??</strong>)</a> es</p>
+<p>El error estimado de esta aproximación, que calculamos con la raíz cuadrada de <a href="intro.html#eq:varianzaMC">(1.3)</a> es</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">error</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">I.a</span><span class="op">-</span><span class="va">prob</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">nsim</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Error.AproxMC="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">error</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Error.AproxMC= 0.012</code></pre>
-<p>de donde podríamos calcular un intervalo de confianza para la aproximación MC de <span class="math inline">\(Pr(N \geq 3)\)</span> al 95% utilizando la distribución <a href="#eq:distMC">(<strong>??</strong>)</a> y la fórmula <a href="intro.html#eq:icMC">(1.1)</a>:</p>
+<p>de donde podríamos calcular un intervalo de confianza para la aproximación MC de <span class="math inline">\(Pr(N \geq 3)\)</span> al 95% utilizando la distribución <a href="intro.html#eq:distMC">(1.4)</a> y la fórmula <a href="intro.html#eq:icMC">(1.5)</a>:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># límites del IC redondeados a 3 cifras decimales</span>
 <span class="va">ic.low</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">prob</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">3</span><span class="op">)</span>
@@ -452,14 +473,18 @@ Figura 1.1: Función de masa de probabilidad y Función de distribución para el
 <div class="example">
 <p><span id="exm:binom02" class="example"><strong>Ejemplo 1.6  </strong></span>Una empresa de fabricación produce piezas, de las cuales el 97% están dentro de las especiﬁcaciones y el 3% son defectuosas (fuera de las especiﬁcaciones). Aparentemente no hay ningún patrón en la producción de piezas defectuosas. La cadena de producción empaqueta las piezas en cajas de 20 piezas cada una, y produce 1000 cajas al día. Al gerente de la empresa le gustaría estimar el número de cajas con al menos dos piezas defectuosas, de entre todas las que se producen al día durante un día cualquiera.</p>
 </div>
-<p>Si <span class="math inline">\(N\)</span> es la variable aleatoria que recoge el número de piezas defectuosas en una caja, tenemos que: <span class="math display">\[N \sim Bi(20, 0.03)\]</span> La probabilidad de que una caja tenga al menos dos piezas defectuosas se calcula con <span class="math inline">\(p_N=Pr(N \geq 2)=1-Pr(N\leq 1)\)</span>.</p>
+<p>Si <span class="math inline">\(N\)</span> es la variable aleatoria que recoge el número de piezas defectuosas en una caja, tenemos que:</p>
+<p><span class="math display">\[N \sim Bi(20, 0.03)\]</span></p>
+<p>La probabilidad de que una caja tenga al menos dos piezas defectuosas se calcula con <span class="math inline">\(p_N=Pr(N \geq 2)=1-Pr(N\leq 1)\)</span>.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">=</span><span class="fl">20</span>
 <span class="va">p</span><span class="op">=</span><span class="fl">0.03</span>
 <span class="va">prob</span><span class="op">=</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n</span>,<span class="va">p</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Probabilidad de que una caja tenga al menos dos defectos="</span>,<span class="va">prob</span><span class="op">)</span></code></pre></div>
 <pre><code>## Probabilidad de que una caja tenga al menos dos defectos= 0.119838</code></pre>
-<p>Sin embargo, lo que nos piden es, de un total de 1000 cajas, cuál es el número esperado de cajas con al meos dos piezas defectuosas. Para ello, surge la variable <span class="math inline">\(D_N\)</span> que representa el número de cajas, de un total de 1000, con al menos 2 piezas defectuosas, que es binomial de tamaño 1000 y probabilidad <span class="math inline">\(p_N\)</span>, <span class="math display">\[D_N \sim Bin(1000,p_N),\]</span> y lo que nos están pidiendo es <span class="math inline">\(E(D_N)=1000 p_N\)</span>.</p>
+<p>Sin embargo, lo que nos piden es, de un total de 1000 cajas, cuál es el número esperado de cajas con al meos dos piezas defectuosas. Para ello, surge la variable <span class="math inline">\(D_N\)</span> que representa el número de cajas, de un total de 1000, con al menos 2 piezas defectuosas, que es binomial de tamaño 1000 y probabilidad <span class="math inline">\(p_N\)</span>,</p>
+<p><span class="math display">\[D_N \sim Bin(1000,p_N),\]</span></p>
+<p>y lo que nos están pidiendo es <span class="math inline">\(E(D_N)=1000 p_N\)</span>.</p>
 <p>Si simulamos con la distribución de <span class="math inline">\(N\)</span> lo acontecido un día, esto es, con 1000 cajas o simulaciones, y contamos el número de cajas con 2 o más piezas defectuosas, obtenemos una aproximación a la cantidad que nos piden.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">=</span><span class="fl">20</span>
@@ -495,14 +520,15 @@ Figura 1.1: Función de masa de probabilidad y Función de distribución para el
 <span class="header-section-number">1.3.3</span> Geométrica<a class="anchor" aria-label="anchor" href="#geom%C3%A9trica"><i class="fas fa-link"></i></a>
 </h3>
 <p>Imaginemos una situación experimental donde se repite un experimento hasta que sucede un “éxito.” En otras palabras, se piensa en <span class="math inline">\(\theta\)</span> como la probabilidad de éxito para un solo ensayo, y realizamos sucesivamente los ensayos hasta que se produce un éxito. La variable aleatoria <span class="math inline">\(N\)</span> se define entonces como el número de ensayos Bernouilli realizados hasta conseguir un éxito. Nótese que aunque la variable aleatoria geométrica es discreta, su rango es inﬁnito, y su fmp viene dada por:</p>
-<p><span class="math display" id="eq:var-geometrica">\[\begin{equation}
+<span class="math display" id="eq:var-geometrica">\[\begin{equation}
 Pr(N = x) = \theta (1-\theta)^{x}  \text{ para } x = \text{1, 2,...}
-\tag{1.4}
-\end{equation}\]</span> con <span class="math inline">\(x\)</span> el número de repeticiones hasta alcanzar un éxito, y <span class="math inline">\(\theta\)</span> la probabilidad de éxito.</p>
+\tag{1.10}
+\end{equation}\]</span>
+<p>con <span class="math inline">\(x\)</span> el número de repeticiones hasta alcanzar un éxito, y <span class="math inline">\(\theta\)</span> la probabilidad de éxito.</p>
 <div class="yellowbox">
 
 <div class="definition">
-<p><span id="def:vgeom" class="definition"><strong>Definición 1.11  </strong></span>La variable aleatoria <span class="math inline">\(N\)</span> cuya función de masa de probabilidad viene dada en <a href="intro.html#eq:var-geometrica">(1.4)</a> se denomina variable Geométrica de parámetro <span class="math inline">\(\theta\)</span>, y se denota por:</p>
+<p><span id="def:vgeom" class="definition"><strong>Definición 1.11  </strong></span>La variable aleatoria <span class="math inline">\(N\)</span> cuya función de masa de probabilidad viene dada en <a href="intro.html#eq:var-geometrica">(1.10)</a> se denomina variable Geométrica de parámetro <span class="math inline">\(\theta\)</span>, y se denota por:</p>
 <p><span class="math display">\[N \sim Ge(\theta)\]</span></p>
 con <span class="math inline">\(E(N) = \frac{1 - \theta}{\theta}\)</span> y <span class="math inline">\(V(N) = \frac{1-\theta}{\theta^2}.\)</span>
 </div>
@@ -520,7 +546,8 @@ con <span class="math inline">\(E(N) = \frac{1 - \theta}{\theta}\)</span> y <spa
 <div class="example">
 <p><span id="exm:geom01" class="example"><strong>Ejemplo 1.7  </strong></span>Una vendedora de coches ha hecho un análisis estadístico de su historial de ventas anterior y ha determinado que cada día tiene un 10% de probabilidad de vender un coche de lujo. Tras un cuidadoso análisis posterior, también está claro que la venta de un coche de lujo en un día es independiente de la ventas realizadas cualquier otro día. El día de Año Nuevo (un día festivo en el que el concesionario estaba cerrado) la vendedora está intentando predecir cuándo venderá su primer coche de lujo del año.</p>
 </div>
-<p>Si consideramos <span class="math inline">\(N\)</span> como la variable aleatoria que indica el día de la primera venta de coches de lujo (N = 1 implica que la venta se realizaría el día 2 de enero), entonces: <span class="math display">\[N \sim Ge(0.1)\]</span></p>
+<p>Si consideramos <span class="math inline">\(N\)</span> como la variable aleatoria que indica el día de la primera venta de coches de lujo (N = 1 implica que la venta se realizaría el día 2 de enero), entonces:</p>
+<p><span class="math display">\[N \sim Ge(0.1)\]</span></p>
 <p>En este caso el valor esperado del número de días transcurridos hasta la venta del primer coche de lujo es <span class="math inline">\(E(N) = 0.9/0.1 = 9\)</span> días, con una desviación típica de 9.5 días. Así pues, es posible que el día 10 de enero tenga su primera venta. En la Figura <a href="intro.html#fig:01-008">1.2</a> se muestran la fmp y la función de distribución asociadas.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Valores de N</span>
@@ -545,7 +572,7 @@ con <span class="math inline">\(E(N) = \frac{1 - \theta}{\theta}\)</span> y <spa
 Figura 1.2: Función de masa de probabilidad y Función de distribución para el día en que venderá el primer coche de lujo.
 </p>
 </div>
-<p>Hacemos a continuación un análisis de simulación para aproximar los datos teóricos dados en la definición <a href="intro.html#def:vgeom">1.11</a>. Simulamos 1000 valores de una <span class="math inline">\(Ge(0.1)\)</span>, con los que calculamos una aproximación al valor esperado de los días que deben transcurrir para vender un coche de lujo, y construimos un intervalo de confianza para la aproximación MC según <a href="intro.html#eq:icMC">(1.1)</a>.</p>
+<p>Hacemos a continuación un análisis de simulación para aproximar los datos teóricos dados en la definición <a href="intro.html#def:vgeom">1.11</a>. Simulamos 1000 valores de una <span class="math inline">\(Ge(0.1)\)</span>, con los que calculamos una aproximación al valor esperado de los días que deben transcurrir para vender un coche de lujo, y construimos un intervalo de confianza para la aproximación MC según <a href="intro.html#eq:icMC">(1.5)</a>.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Parámetros de la simulación</span>
 
@@ -582,14 +609,15 @@ Figura 1.2: Función de masa de probabilidad y Función de distribución para el
 <li><p>Un grupo de investigadores observó la ocurrencia de hemangioma capilar retiniano (RCH) en pacientes con la enfermedad de von Hippel-Lindau (VHL). RCH es un tumor vascular benigno de la retina. Usando una revisión retrospectiva de series de casos consecutivos, los investigadores encontraron que el número de medio de tumores RCH por ojo para pacientes con VHL era de 4. Están interesados en conocer cuál es la probabilidad de que se detecten más de cuatro tumores por ojo.</p></li>
 </ul>
 <p>La variable aleatoria <span class="math inline">\(N\)</span> se define entonces como el número de eventos que ocurren en un espacio o un tiempo determinados, y viene caracterizada por la denominada <em>tasa de eventos</em> o <em>número medio de eventos</em> que ocurren en el tiempo o espacio, y que se denota habitualmente por <span class="math inline">\(\lambda\)</span>. El rango de esta variable es infinito y su fmp viene dada por:</p>
-<p><span class="math display" id="eq:var-poisson">\[\begin{equation}
+<span class="math display" id="eq:var-poisson">\[\begin{equation}
 Pr(N = x) = \frac{e^{-\lambda}\lambda^x}{x!}  \text{ para } x = \text{1, 2,...}
-\tag{1.5}
-\end{equation}\]</span> con <span class="math inline">\(\lambda\)</span> es la tasa y <span class="math inline">\(x\)</span> es el número de eventos que han ocurrido.</p>
+\tag{1.11}
+\end{equation}\]</span>
+<p>con <span class="math inline">\(\lambda\)</span> es la tasa y <span class="math inline">\(x\)</span> es el número de eventos que han ocurrido.</p>
 <div class="yellowbox">
 
 <div class="definition">
-<p><span id="def:vpoisson" class="definition"><strong>Definición 1.12  </strong></span>La variable aleatoria <span class="math inline">\(X\)</span> cuya función de masa de probabilidad viene dada en <a href="intro.html#eq:var-poisson">(1.5)</a> se denomina variable poisson de parámetro <span class="math inline">\(\lambda &gt; 0\)</span>, y se denota por:</p>
+<p><span id="def:vpoisson" class="definition"><strong>Definición 1.12  </strong></span>La variable aleatoria <span class="math inline">\(X\)</span> cuya función de masa de probabilidad viene dada en <a href="intro.html#eq:var-poisson">(1.11)</a> se denomina variable poisson de parámetro <span class="math inline">\(\lambda &gt; 0\)</span>, y se denota por:</p>
 <p><span class="math display">\[N \sim Po(\lambda)\]</span></p>
 con <span class="math inline">\(E(N) = \lambda\)</span> y <span class="math inline">\(V(N) = \lambda.\)</span>
 </div>
@@ -607,8 +635,9 @@ con <span class="math inline">\(E(N) = \lambda\)</span> y <span class="math inli
 <div class="example">
 <p><span id="exm:poisson01" class="example"><strong>Ejemplo 1.8  </strong></span>Una empresa de asesoramiento está realizando el análisis del funcionamiento de una panadería y ha estimado que el número medio de barras de pan que se venden en un periodo de media hora es de 12. La empresa está interesada en saber cuál es la capacidad de venta en cada franja de diez minutos (pues es prácticamente el tiempo de horneado), y también cuál es la probabilidad de que el número de barras que se venden en diez minutos sea exactamente de tres.</p>
 </div>
-<p>Como nuestro interés radica en un periodo de diez minutos y el número de intervalos de diez minutos en un periodo de 30 minutos es tres, tenemos que el número medio de barras puestas a la venta en ese periodo viene dado por: <span class="math display">\[\lambda = 12/3 = 4.\]</span><br>
-La variable aleatoria que reproduce el número de barras que se venden en una franja de cinco minutos es:</p>
+<p>Como nuestro interés radica en un periodo de diez minutos y el número de intervalos de diez minutos en un periodo de 30 minutos es tres, tenemos que el número medio de barras puestas a la venta en ese periodo viene dado por:</p>
+<p><span class="math display">\[\lambda = 12/3 = 4.\]</span></p>
+<p>La variable aleatoria que reproduce el número de barras que se venden en una franja de cinco minutos es:</p>
 <p><span class="math display">\[N \sim Po(4)\]</span></p>
 <p>En este caso el valor esperado del número de barras que se venden es 4 y la desviación típica es igual a 2(<span class="math inline">\(=\sqrt{4}\)</span>). En la Figura <a href="intro.html#fig:01-010">1.3</a> se muestran la fmp y la función de distribución asociadas.</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
@@ -637,7 +666,7 @@ La variable aleatoria que reproduce el número de barras que se venden en una fr
 Figura 1.3: Función de masa de probabilidad y Función de distribución para el número de barras de pan que se venden cada cinco minutos.
 </p>
 </div>
-<p>Podemos reconoder en la Figura <a href="intro.html#fig:01-010">1.3</a>-izquierda los valores más probables con las barras más altas (3 y 4(. De hecho, en la Figura <a href="intro.html#fig:01-010">1.3</a>-derecha, la probabilidad de que a lo sumo se vendan menos de 5 barras es algo superior a 0.6.</p>
+<p>Podemos reconoder en la Figura <a href="intro.html#fig:01-010">1.3</a>-izquierda los valores más probables con las barras más altas (3 y 4). De hecho, en la Figura <a href="intro.html#fig:01-010">1.3</a>-derecha, la probabilidad de que a lo sumo se vendan menos de 5 barras es algo superior a 0.6.</p>
 <p>Para calcular la probabilidad pretendida, esto es, <span class="math inline">\(Pr(N=3)\)</span> utilizamos la función fmp correspondiente en <code>R</code> y la aproximamos por MC con 1000 simulaciones, dando también una banda de confianza.</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lambda</span><span class="op">=</span><span class="fl">4</span>
@@ -689,8 +718,9 @@ Figura 1.3: Función de masa de probabilidad y Función de distribución para el
 <div class="example">
 <p><span id="exm:poisson02" class="example"><strong>Ejemplo 1.9  </strong></span>Una empresa de fabricación de galletas de chocolate está analizando la calidad en su empresa para responder del mejor modo posible a sus clientes. Para ello ha fijado que con probabilidad 0.8 las galletas deben contener al menos tres trozos de chocolate para satisfacer las exigencias de los clientes. Se trata pues de fijar el valor medio de trozos de chocolate que debe ir suministrando en la cadena de producción para cumplir con el nivel de exigencia establecido.</p>
 </div>
-<p>Si <span class="math inline">\(N\)</span> es la variable aleatoria que indica el número de trozos de chocolate en una galleta, tenemos que: <span class="math display">\[N \sim Po(\lambda)\]</span><br>
-donde en este caso el valor de <span class="math inline">\(\lambda\)</span> es desconocido y representa el número medio de trozos de chocolate en cada galleta. Planteamos un estudio de simulación para aproximar dicho valor.</p>
+<p>Si <span class="math inline">\(N\)</span> es la variable aleatoria que indica el número de trozos de chocolate en una galleta, tenemos que:</p>
+<p><span class="math display">\[N \sim Po(\lambda)\]</span></p>
+<p>donde en este caso el valor de <span class="math inline">\(\lambda\)</span> es desconocido y representa el número medio de trozos de chocolate en cada galleta. Planteamos un estudio de simulación para aproximar dicho valor.</p>
 <div class="silverbox">
 <p>Algoritmo para aproximar el valor de <span class="math inline">\(\lambda\)</span>.</p>
 <ol style="list-style-type: decimal">
@@ -745,28 +775,30 @@ Figura 1.4: Probabilidad estimada de conseguir al menos 3 trozos de chocolate en
 <h3>
 <span class="header-section-number">1.4.1</span> Uniforme<a class="anchor" aria-label="anchor" href="#uniforme"><i class="fas fa-link"></i></a>
 </h3>
-<p>La distribución uniforme es la distribución de probabilidad continua más sencilla y se refiere a eventos infinitos que tienen la misma probabilidad de ocurrir en una intervalo dado. Si <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> son dos números reales con <span class="math inline">\(a &lt; b\)</span> entonces la función de distribución asociada a la probabilidad acumulada a la izquierda de cualquier valor <span class="math inline">\(x \in [a, b]\)</span> viene dada por: <span class="math display">\[\begin{equation}
+<p>La distribución uniforme es la distribución de probabilidad continua más sencilla y se refiere a eventos infinitos que tienen la misma probabilidad de ocurrir en una intervalo dado. Si <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> son dos números reales con <span class="math inline">\(a &lt; b\)</span> entonces la función de distribución asociada a la probabilidad acumulada a la izquierda de cualquier valor <span class="math inline">\(x \in [a, b]\)</span> viene dada por:</p>
+<span class="math display" id="eq:var-uniforme2">\[\begin{equation}
 F(x) = 
 \begin{cases}
 0 &amp; \text{ si } x &lt; a \\
 \frac{x-a}{b-a} &amp; \text{ si } a \leq x \leq b\\
 1 &amp; \text{ si } a \leq x \leq b.
 \end{cases}
-(\#eq:var-uniforme2)
-\end{equation}\]</span></p>
+\tag{1.12}
+\end{equation}\]</span>
 <div class="yellowbox">
 
 <div class="definition">
 <p><span id="def:vuniforme" class="definition"><strong>Definición 1.13  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> tiene una distribución uniforme en el intervalo <span class="math inline">\([a, b]\)</span>, con $a,b R,</p>
 <p><span class="math display">\[X \sim U(a,b)\]</span></p>
-si su función de densidad viene dada por la expresión <span class="math display">\[\begin{equation}
+<p>si su función de densidad viene dada por la expresión</p>
+<p><span class="math display" id="eq:var-uniforme">\[\begin{equation}
 f(x) = 
 \begin{cases}
 \frac{1}{b-a} &amp; \text{ si } a \leq x \leq b\\
 0 &amp; \text{ en otro caso }
 \end{cases}
-(\#eq:var-uniforme)
-\end{equation}\]</span>
+\tag{1.13}
+\end{equation}\]</span></p>
 de forma que <span class="math inline">\(E(X) = (a+b)/2\)</span> y <span class="math inline">\(V(X) = (b-a)^2/12.\)</span>
 </div>
 </div>
@@ -786,7 +818,8 @@ de forma que <span class="math inline">\(E(X) = (a+b)/2\)</span> y <span class="
 <span class="header-section-number">1.4.2</span> Exponencial<a class="anchor" aria-label="anchor" href="#exponencial"><i class="fas fa-link"></i></a>
 </h3>
 <p>La distribución exponencial es una distribución muy común en la modelización probabilística. Esta distribución describe procesos que describen el tiempo entre sucesos consecutivos, con la peculiaridad de que sus probabilidades no dependen del instante en que se produzcan los eventos. Es decir:</p>
-<p><span class="math display">\[Pr(X &gt; t+s | X &gt; t) = Pr(X &gt; s)\]</span> Esta propiedad es característica de la distribución exponencial y se denomina “propiedad de la pérdida de memoria.”</p>
+<p><span class="math display">\[Pr(X &gt; t+s | X &gt; t) = Pr(X &gt; s).\]</span></p>
+<p>Esta propiedad es característica de la distribución exponencial y se denomina “propiedad de la pérdida de memoria.”</p>
 <p>Ejemplos de este tipo de distribución son:</p>
 <ul>
 <li><p>El tiempo que tarda una partícula radiactiva en desintegrarse. El conocimiento de la ley que sigue este evento se utiliza en ciencias para, por ejemplo, la datación de fósiles o cualquier materia orgánica mediante la técnica del carbono 14.</p></li>
@@ -800,15 +833,17 @@ F(x) =
 0 &amp; \text{ si } x &lt; 0 \\
 1 - e^{\lambda x} &amp; \text{ si } x \geq 0.
 \end{cases}
-\tag{1.6}
+\tag{1.14}
 \end{equation}\]</span>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:vexponencial" class="definition"><strong>Definición 1.14  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> tiene una distribución exponencial de parámetro <span class="math inline">\(\lambda\)</span>, que se denota por</p>
 <p><span class="math display">\[X \sim Exp(\lambda)\]</span></p>
-<p>si su función de densidad viene dada por <span class="math display">\[\begin{equation}
+<p>si su función de densidad viene dada por</p>
+<span class="math display">\[\begin{equation}
 f(x)=\lambda e^{-\lambda x}, \quad x \geq 0,
-\end{equation}\]</span> de forma que <span class="math inline">\(E(X) = 1/\lambda\)</span> y <span class="math inline">\(V(X) = 1/\lambda^2.\)</span></p>
+\end{equation}\]</span>
+<p>de forma que <span class="math inline">\(E(X) = 1/\lambda\)</span> y <span class="math inline">\(V(X) = 1/\lambda^2.\)</span></p>
 </div>
 </div>
 <p>Las funciones relacionadas con la distribución exponencial en <code>R</code> son:</p>
@@ -826,8 +861,8 @@ f(x)=\lambda e^{-\lambda x}, \quad x \geq 0,
 <p><span id="exm:exponencial01" class="example"><strong>Ejemplo 1.10  </strong></span>Se ha comprobado que el tiempo de vida de cierto tipo de marcapasos sigue una distribución exponencial con media 16 años. (1) ¿Cuál es la probabilidad de que a una persona a la que se le ha implantado este marcapasos se le deba reimplantar otro antes de 20 años? (2) Si el marcapasos lleva funcionando correctamente 5 años en un paciente, ¿cuál es la probabilidad de que haya que cambiarlo antes de 25 años desde que se implantó?</p>
 </div>
 <p>Si <span class="math inline">\(T\)</span> es la variable aleatoria que indica el tiempo de vida del marcapasos tenemos que:</p>
-<p><span class="math display">\[T \sim Exp(\lambda = 1/16)\]</span><br>
-Se puede reponder fácilmente a las preguntas planteadas sin más que hacer uso de la función <code><a href="https://rdrr.io/r/stats/Exponential.html">pexp()</a></code>. Sin embargo, también simularemos para aproximarlas. Hemos de calcular</p>
+<p><span class="math display">\[T \sim Exp(\lambda = 1/16)\]</span></p>
+<p>Se puede reponder fácilmente a las preguntas planteadas sin más que hacer uso de la función <code><a href="https://rdrr.io/r/stats/Exponential.html">pexp()</a></code>. Sin embargo, también simularemos para aproximarlas. Hemos de calcular</p>
 <p>(1). Si es preciso implantar antes de 20 años, es porque el tiempo de vida no va a ser superior a 20. Hemos de calcular pues, <span class="math inline">\(Pr(T \leq 20)\)</span>. (2). Nos piden <span class="math inline">\(Pr(T \leq 25|T&gt;5)=Pr(T\leq 20)\)</span>, por la propiedad de la pérdida de memoria. Es decir, respondiendo a (1) tendremos respondidas las dos preguntas formuladas.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">16</span>
@@ -921,7 +956,7 @@ Figura 1.6: Tiempo de garantía recomendado en función de la probabilidad de qu
 <p>si su función de densidad viene dada por la expresión</p>
 <span class="math display" id="eq:dgamma">\[\begin{equation}
 f(x) = \frac{x^{\alpha -1} e^{-x/\beta}}{\beta^{\alpha} \Gamma(\alpha)}; \quad \text{ para } x \geq 0,
-\tag{1.7}
+\tag{1.15}
 \end{equation}\]</span>
 <p>con <span class="math inline">\(\Gamma()\)</span> la función gamma, de forma que <span class="math inline">\(E(X) = \alpha\beta\)</span> y <span class="math inline">\(V(X) = \alpha\beta^2.\)</span></p>
 </div>
@@ -929,7 +964,7 @@ f(x) = \frac{x^{\alpha -1} e^{-x/\beta}}{\beta^{\alpha} \Gamma(\alpha)}; \quad \
 <p>Un caso especial de la distribución Gamma es la <strong>distribución Erlang</strong>, que se denota por <span class="math inline">\(X \sim Erlang(k, \beta)\)</span>, y que se utiliza habitualmente en la modelización de sistemas de colas de espera. Su función de densidad viene dada por :</p>
 <span class="math display" id="eq:derlang">\[\begin{equation}
 f(x) = \frac{k(kx)^{\alpha -1} e^{-xk/\beta}}{\beta^{k} (k-1)!}; \quad \text{ para } x \geq 0,
-\tag{1.8}
+\tag{1.16}
 \end{equation}\]</span>
 <p>con <span class="math inline">\(E(x) = \beta\)</span> y <span class="math inline">\(V(X) = \beta^2/k\)</span>. La utilidad de una variable aleatoria Erlang con parámetros <span class="math inline">\(k\)</span> y <span class="math inline">\(\beta\)</span> es que es el resultado de sumar <span class="math inline">\(k\)</span> variables aleatorias exponenciales (independientes) cada una con media <span class="math inline">\(\beta/k\)</span>. En la modelización de los tiempos relacionados con un proceso industrial, la distribución exponencial suele ser inadecuada porque la desviación estándar no es tan grande como la media. Los ingenieros suelen tratar de diseñar sistemas que produzcan una desviación estándar de los tiempos del proceso que resulte significativamente menor que su media. La distribución Erlang tiene esta propiedad: su desviación estándar disminuye a medida que aumenta <span class="math inline">\(k\)</span>, de modo que los tiempos de proceso con una desviación estándar pequeña a menudo suelen ser aproximados por una variable aleatoria Erlang.</p>
 <div class="whitebox">
@@ -943,7 +978,8 @@ f(x) = \frac{k(kx)^{\alpha -1} e^{-xk/\beta}}{\beta^{k} (k-1)!}; \quad \text{ pa
 <p>Para simular un dato de una distribución <span class="math inline">\(y \sim (Erlang(k, \beta)\)</span>) generamos <span class="math inline">\(k\)</span> datos exponenciales de <span class="math inline">\(x_i \sim Exp(\beta/k), i=1,\ldots,k,\)</span> y calculamos la suma de todos esos valores,<span class="math inline">\(y=\sum_i x_i\)</span>. Repetir este proceso tantas veces como indique el tamaño de la muestra simulada que deseamos para la distribución Erlang.</p>
 </div>
 <p>Si disponemos de la media y varianza de los datos resulta muy fácil ajustar los parámetros de la distribución Gamma o Erlang sin más que resolver las ecuaciones que nos dan el valor esperado y la varianza. Si <span class="math inline">\(\bar{x}\)</span> y <span class="math inline">\(s^2\)</span> son respectivamente la media y varianza, podemos ajustar los parámetros de la Gamma con:</p>
-<p><span class="math display">\[ \beta = s^2/\bar{x}; \quad \alpha = \bar{x}/\beta\]</span> mientras que para la Erlang tenemos:</p>
+<p><span class="math display">\[ \beta = s^2/\bar{x}; \quad \alpha = \bar{x}/\beta\]</span></p>
+<p>mientras que para la Erlang tenemos:</p>
 <p><span class="math display">\[ \beta = \bar{x}; \quad k = \bar{x}^2/s^2.\]</span></p>
 <p>A continuación se presenta la función para generar datos Erlang a patir de datos exponenciales:</p>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
@@ -978,17 +1014,18 @@ F(x) =
 0 &amp; \text{ si } x &lt; 0 \\
 1 - e^{-(x/\beta)^{\alpha}} &amp; \text{ si } x \geq 0
 \end{cases}
-\tag{1.9}
+\tag{1.17}
 \end{equation}\]</span>
 <p>Como en el caso de la distribución Gamma el parámetro de forma determina la forma general de la fdp y el parámetro de escala expande o contrae la fdp.</p>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:vweibull" class="definition"><strong>Definición 1.16  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> tiene una distribución Weibull de parámetros <span class="math inline">\(\alpha&gt;0\)</span> y <span class="math inline">\(\beta&gt;0\)</span>, que se denota por</p>
 <p><span class="math display">\[X \sim Weib(\alpha, \beta)\]</span></p>
-<p>si su función de densidad viene dada por la expresión <span class="math display">\[\begin{equation}
+<p>si su función de densidad viene dada por la expresión</p>
+<span class="math display" id="eq:var-weibull">\[\begin{equation}
 f(x)=\frac{\alpha}{\beta}\frac{x}{\beta}^{\alpha-1}e^{-(x/\beta)^{\alpha}}, \quad x \geq 0.
-(\#eq:var-weibull)
-\end{equation}\]</span></p>
+\tag{1.18}
+\end{equation}\]</span>
 <p>El valor esperado y la varianza vienen dados por:</p>
 <p><span class="math display">\[E(X) = \beta \Gamma(1 + 1/\alpha); \quad V(X) = \beta^2 (\Gamma(1 + 2/\alpha) - (\Gamma(1 + 1/\alpha))^2).\]</span></p>
 </div>
@@ -1003,11 +1040,12 @@ f(x)=\frac{\alpha}{\beta}\frac{x}{\beta}^{\alpha-1}e^{-(x/\beta)^{\alpha}}, \qua
 <code>rweibull(n, shape, scale)</code> permite generar <span class="math inline">\(n\)</span> valores de una variable Weibull.</li>
 </ul>
 </div>
-<p>A partir de la media (<span class="math inline">\(\bar{x}\)</span>) y varianza (<span class="math inline">\(S^2\)</span>) de un conjunto de datos, es posible obtener los parámetros de la distribución Weibull sin más que resolver las ecuaciones: <span class="math display">\[\begin{eqnarray}
+<p>A partir de la media (<span class="math inline">\(\bar{x}\)</span>) y varianza (<span class="math inline">\(S^2\)</span>) de un conjunto de datos, es posible obtener los parámetros de la distribución Weibull sin más que resolver las ecuaciones:</p>
+<span class="math display" id="eq:estimaweibuleq">\[\begin{eqnarray}
 \beta &amp;=&amp; \frac{\bar{x}}{\Gamma(1 + 1/ \alpha)} \\
 \frac{s^2}{\bar{x}^2} - \frac{\Gamma(1+ 2/\alpha)}{(\Gamma(1 + 1/ \alpha))^2} + 1 &amp;=&amp; 0.
-(\#eq:estimaweibuleq)
-\end{eqnarray}\]</span></p>
+\tag{1.19}
+\end{eqnarray}\]</span>
 <p>A continuación se propone una función que permite obtener los parámetros a partir de la media y varianza de los datos, junto con un pequeño ejemplo para verificar su funcionalidad.</p>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">estima.weibull</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">m</span>, <span class="va">s</span><span class="op">)</span>
@@ -1043,10 +1081,12 @@ f(x)=\frac{\alpha}{\beta}\frac{x}{\beta}^{\alpha-1}e^{-(x/\beta)^{\alpha}}, \qua
 <p>La distribución normal es la distribución más común, reconocida por la mayoría de personas por su curva en forma de “campana,” y también llamada “campana de Gauss.” Aunque la distribución normal no se utiliza mucho en la modelización de procesos y sitemas, es sin duda, la más relevante de las distribuciones aleatorias, ya que representa el supuesto básico distribucional para resolver muchos de los problemas de inferencia estadística habituales, como veremos en la sección final de esta unidad.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:vnormal" class="definition"><strong>Definición 1.17  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> tiene una distribución Normal de parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> con <span class="math inline">\(\sigma &gt;0\)</span>, denotada por <span class="math display">\[ X \sim N(\mu, \sigma^2),\]</span><br>
-si su función de densidad viene dada por <span class="math display">\[\begin{equation}
+<p><span id="def:vnormal" class="definition"><strong>Definición 1.17  </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> tiene una distribución Normal de parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> con <span class="math inline">\(\sigma &gt;0\)</span>, denotada por</p>
+<p><span class="math display">\[ X \sim N(\mu, \sigma^2),\]</span></p>
+<p>si su función de densidad viene dada por</p>
+<span class="math display">\[\begin{equation}
 f(x) = \frac{1}{\sigma\sqrt{2\pi}} exp\left(\frac{-(x-\mu)^2}{2\sigma^2}\right), \quad x \in R
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>con <span class="math inline">\(E(X) = \mu\)</span> y <span class="math inline">\(V(X) = \sigma^2\)</span>, y que se denota:</p>
 </div>
 </div>
@@ -1177,8 +1217,11 @@ Figura 1.10: Funciones de densidad para varias distribuciones F-Snedecor.
 <p><span id="def:aticontinua" class="definition"><strong>Definición 1.18  </strong></span><strong>Algoritmo de la transformada inversa para variables continuas</strong></p>
 <p>Dada una variable aleatoria <span class="math inline">\(X\)</span> de tipo continuo, cuya función de distribución viene dada por <span class="math inline">\(F(x)\)</span>, y cuya función de distribución inversa se denota por <span class="math inline">\(F^{-1}(x)\)</span>, el algoritmo de la transformada inversa permite obtener una muestra de tamaño <span class="math inline">\(n\)</span> de la variable <span class="math inline">\(X\)</span> mediante el siguiente procedimiento:</p>
 <ul>
-<li><p>Generar <span class="math inline">\(n\)</span> valores uniformes en el intervalo <span class="math inline">\([0,1]\)</span>, <span class="math display">\[u_i\sim U(0,1), \quad i=1,...,n\]</span></p></li>
-<li><p>Devolver <span class="math inline">\(x_i = F^{-1}(u_i)\)</span>.</p></li>
+<li>Generar <span class="math inline">\(n\)</span> valores uniformes en el intervalo <span class="math inline">\([0,1]\)</span>,</li>
+</ul>
+<p><span class="math display">\[u_i\sim U(0,1), \quad i=1,...,n\]</span></p>
+<ul>
+<li>Devolver <span class="math inline">\(x_i = F^{-1}(u_i)\)</span>.</li>
 </ul>
 <p>Así los valores <span class="math inline">\(\{x_1,...,x_n\}\)</span> constituyen una muestra de <span class="math inline">\(X\)</span>.</p>
 </div>
@@ -1221,7 +1264,7 @@ Pr(N = k) =
 0.15 &amp; \text{ para } k = 1\\
 0.03 &amp; \text{ para } k = 2\\
 \end{cases}
-\tag{1.10}
+\tag{1.20}
 \end{equation}\]</span>
 <p>La empresa quiere estudiar el beneficio estimado de acuerdo a la politica de producción actual para el próximo mes, sabiendo que se pueden llegar a producir hasta 1500 cajas en ese periodo. Además la empresa está interesada en conocer el beneficio estimado si cambiara su politica de calidad reduciendo su tasa de defectos por caja de acuerdo a las siguientes proporciones:</p>
 <span class="math display" id="eq:var-discreta1-1">\[\begin{equation}
@@ -1231,10 +1274,10 @@ Pr(N = k) =
 0.13 &amp; \text{ para } k = 1\\
 0.02 &amp; \text{ para } k = 2\\
 \end{cases}
-\tag{1.11}
+\tag{1.21}
 \end{equation}\]</span>
 </div>
-<p>Para resolver las inquietudes de la empresa, vamos a simular el proceso en las dos situaciones planteadas, para el horizonte propuesto de un mes, esto es, simulando las 1500 cajas y estimando el beneficio obtenido de acuerdo a las políticas de calidad dadas en <a href="intro.html#eq:var-discreta1">(1.10)</a> y <a href="intro.html#eq:var-discreta1-1">(1.11)</a>.</p>
+<p>Para resolver las inquietudes de la empresa, vamos a simular el proceso en las dos situaciones planteadas, para el horizonte propuesto de un mes, esto es, simulando las 1500 cajas y estimando el beneficio obtenido de acuerdo a las políticas de calidad dadas en <a href="intro.html#eq:var-discreta1">(1.20)</a> y <a href="intro.html#eq:var-discreta1-1">(1.21)</a>.</p>
 <p>Proponemos el siguiente algoritmo de simulación para obtener la ganancia asociada a cada una de las políticas de calidad, y con dichas ganancias compararlas y concluir cuál es la más beneficiosa.</p>
 <div class="silverbox">
 <p><strong>Algoritmo de simulación</strong> Ante una política de calidad:</p>
@@ -1429,14 +1472,16 @@ Pr(I = i)=
 0.5 &amp; i=0 \text{ (si no compra) }
 \end{cases}
 \end{equation*}\]</span></p>
-<p>De modo que un cliente que no compra produce beneficios 0 con probabilidad 1, <span class="math display">\[Pr(X_0=0)=1,\]</span> y el beneficio de un cliente que no compra tiene como distribución de probabilidad: <span class="math display">\[\begin{equation*}
+<p>De modo que un cliente que no compra produce beneficios 0 con probabilidad 1,</p>
+<p><span class="math display">\[Pr(X_0=0)=1,\]</span> y el beneficio de un cliente que no compra tiene como distribución de probabilidad:</p>
+<span class="math display">\[\begin{equation*}
 Pr(X_1 = k) = 
 \begin{cases}
 0.25 &amp; \text{ para } k = 30 \text{ modelo sencillo}\\
 0.50 &amp; \text{ para } k = 60 \text{ modelo estándar}\\
 0.25 &amp; \text{ para } k = 75 \text{ modelo lujo}.
 \end{cases}
-\end{equation*}\]</span></p>
+\end{equation*}\]</span>
 <p>Es fácil simular cualquiera de estas distribuciones discretas mediante el algoritmo de la transformada inversa para variables discretas en la Definición <a href="intro.html#def:atidiscreta">1.19</a>, para acabar simulando de <span class="math inline">\(T\)</span> con el algoritmo anterior en la Definición <a href="intro.html#def:mixturadiscreta">1.20</a>.</p>
 <p>Simulemos pues el proceso de venta para 30 clientes, recopilando, además de la ganancia que genera cada uno, la ganancia acumulada por las compras realizadas. Construimos una función para simular el proceso, en la que introducimos como parámetros la semilla de inicialización de la simulación y el número de clientes, por si deseamos ampliar el espectro de simulación en algún momento.</p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
@@ -1557,36 +1602,40 @@ Figura 1.11: Frecuencia relativa de cada tipo de venta (izquierda) y beneficio a
 </ul>
 </div>
 <p>Modelicemos el problema como una mixtura de distribuciones discretas según la Definición <a href="intro.html#def:mixturadiscreta">1.20</a>.</p>
-<p>Sea <span class="math inline">\(I_i\)</span> la variable indicadora tal que <span class="math display">\[\begin{equation*}
+<p>Sea <span class="math inline">\(I_i\)</span> la variable indicadora tal que</p>
+<span class="math display">\[\begin{equation*}
 Pr(I = k) = 
 \begin{cases}
 0.25 &amp; \text{ para } k = 1 \text{ fracaso}\\
 0.50 &amp; \text{ para } k = 2 \text{ éxito moderado}\\
 0.25 &amp; \text{ para } k = 3 \text{ gran éxito}.
 \end{cases}
-\end{equation*}\]</span></p>
-<p>Luego definimos las variables <span class="math inline">\(X_i\)</span> que representan la calificación del jurado de un producto cuyo éxito o fracaso funcionó según <span class="math inline">\(I=i\)</span>: <span class="math inline">\(X_1\)</span> calificación de un producto que fue un fracaso (<span class="math inline">\(I=1\)</span>), <span class="math inline">\(X_2\)</span> calificación de un producto con un éxito moderado (<span class="math inline">\(I=2\)</span>) y <span class="math inline">\(X_3\)</span> calificación de un producto con una gran éxito (<span class="math inline">\(I=3\)</span>). Las distribuciones de <span class="math inline">\(X_1, X_2, X_3\)</span> vienen dadas por: <span class="math display">\[\begin{equation*}
+\end{equation*}\]</span>
+<p>Luego definimos las variables <span class="math inline">\(X_i\)</span> que representan la calificación del jurado de un producto cuyo éxito o fracaso funcionó según <span class="math inline">\(I=i\)</span>: <span class="math inline">\(X_1\)</span> calificación de un producto que fue un fracaso (<span class="math inline">\(I=1\)</span>), <span class="math inline">\(X_2\)</span> calificación de un producto con un éxito moderado (<span class="math inline">\(I=2\)</span>) y <span class="math inline">\(X_3\)</span> calificación de un producto con una gran éxito (<span class="math inline">\(I=3\)</span>). Las distribuciones de <span class="math inline">\(X_1, X_2, X_3\)</span> vienen dadas por:</p>
+<span class="math display">\[\begin{equation*}
 Pr(X_1 = k) = 
 \begin{cases}
 0.5 &amp; \text{ para } k = 1 \text{ malo}\\
 0.3 &amp; \text{ para } k = 2 \text{ regular}\\
 0.2 &amp; \text{ para } k = 3 \text{ bueno}.
 \end{cases}
-\end{equation*}\]</span> <span class="math display">\[\begin{equation*}
+\end{equation*}\]</span>
+<span class="math display">\[\begin{equation*}
 Pr(X_2 = k) = 
 \begin{cases}
 0.2 &amp; \text{ para } k = 1 \text{ malo}\\
 0.4 &amp; \text{ para } k = 2 \text{ regular}\\
 0.4 &amp; \text{ para } k = 3 \text{ bueno}.
 \end{cases}
-\end{equation*}\]</span> <span class="math display">\[\begin{equation*}
+\end{equation*}\]</span>
+<span class="math display">\[\begin{equation*}
 Pr(X_3 = k) = 
 \begin{cases}
 0.1 &amp; \text{ para } k = 1 \text{ malo}\\
 0.3 &amp; \text{ para } k = 2 \text{ regular}\\
 0.6 &amp; \text{ para } k = 3 \text{ bueno}.
 \end{cases}
-\end{equation*}\]</span></p>
+\end{equation*}\]</span>
 <p>Veamos el algoritmo de simulación necesario para este problema. Queremos simular productos que pueden haber tenido un gran éxito, un éxito moderado y o haber fracasado. Y para cada uno de ellos, queremos simular su calificación por el jurado que lo evaluó.</p>
 <div class="silverbox">
 <p>Consideramos una variable <span class="math inline">\(I\)</span> que indica el éxito de un nuevo producto y <span class="math inline">\(X_I\)</span> que indica la evaluación del producto por un jurado (para cada tipo de producto <span class="math inline">\(I\)</span>). En esta situación debemos proporcionar las simulaciones correspondientes a <span class="math inline">\(I\)</span> e <span class="math inline">\(X_I\)</span>. En concreto:</p>
@@ -1853,7 +1902,8 @@ Regular
 <ul>
 <li>¿Cuál es la probabilidad conjunta de que un producto tenga un éxito moderado y reciba una mala calificación? Estamos interesados en la probabilidad</li>
 </ul>
-<p><span class="math display">\[Pr(\text{Éxito = "Moderado" y Evaluación =  "Malo"})\]</span> cuyo valor es 0.0584.</p>
+<p><span class="math display">\[Pr(\text{Éxito = "Moderado" y Evaluación =  "Malo"})\]</span></p>
+<p>cuyo valor es 0.0584.</p>
 <ul>
 <li>Si un nuevo producto tiene una buena calificación, ¿cuál es la probabilidad de que fracase? Para responder a esta pregunta podemos aplicar el Teorema de Bayes para resolver la probabilidad condicionada siguiente a partir de las frecuencias observadas en la simulación y mostradas en la Tabla <a href="intro.html#tab:01-030a">1.1</a>,</li>
 </ul>
@@ -1949,7 +1999,8 @@ Bueno
 <ul>
 <li>¿Cuál es la probabilidad de que un producto tenga éxito moderado dado que éste obtuvo una mala calificación? Procedemos como en la pregunta anterior ya que estamos interesados en</li>
 </ul>
-<p><span class="math display">\[Pr(\text{E= "Moderado" | Eval = "Malo"}) = \frac{Pr(\text{E= "Moderado" , Eval = "Malo"})}{Pr(\text{ Eval= "Malo"})}\]</span> Y lo resolvemos de nuevo generando la distribución condicionada a que la evaluación por el jurado sea “Mala,” que se muestra en la Tabla <a href="intro.html#tab:01-032">1.4</a></p>
+<p><span class="math display">\[Pr(\text{E= "Moderado" | Eval = "Malo"}) = \frac{Pr(\text{E= "Moderado" , Eval = "Malo"})}{Pr(\text{ Eval= "Malo"})}\]</span></p>
+<p>y lo resolvemos de nuevo generando la distribución condicionada a que la evaluación por el jurado sea “Mala,” que se muestra en la Tabla <a href="intro.html#tab:01-032">1.4</a></p>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">distri.conjunta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">jurado</span> <span class="op">==</span> <span class="st">"Malo"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -2046,9 +2097,10 @@ Malo
 </h3>
 <p>Estudiamos aquí, a través de ejemplos, la simulación de variables aleatorias de tipo continua para las que conocemos la función de densidad o distribución, y se quiere revolver algún problema inferencial.</p>
 <div class="example">
-<p><span id="exm:cont1" class="example"><strong>Ejemplo 1.16  </strong></span>Sea <span class="math inline">\(X\)</span> una variable aleatoria de tipo continuo cuya función de densidad viene dada por: <span class="math display">\[\begin{equation*}
+<p><span id="exm:cont1" class="example"><strong>Ejemplo 1.16  </strong></span>Sea <span class="math inline">\(X\)</span> una variable aleatoria de tipo continuo cuya función de densidad viene dada por:</p>
+<span class="math display">\[\begin{equation*}
 f(x) = 2e^{-2x}  \text{ para } x \geq 0
-\end{equation*}\]</span></p>
+\end{equation*}\]</span>
 <p>Estamos interesados en conocer:</p>
 <ul>
 <li>¿Cuál es la probabilidad de que la variable de interés tome valores en el intervalo [1, 2]?</li>
@@ -2059,12 +2111,12 @@ f(x) = 2e^{-2x}  \text{ para } x \geq 0
 <p>Para poder responder a las preguntas planteadas debemos obtener en primer lugar la función de distribución asociada a <span class="math inline">\(X\)</span>, que viene dada por:</p>
 <span class="math display" id="eq:fd1-16">\[\begin{equation}
 F(x) = \int_0^x 2e^{-2s} ds=1 - e^{-2x} \text{ para } x \geq 0
-\tag{1.12}
+\tag{1.22}
 \end{equation}\]</span>
 <p>Podemos aplicar ahora el método de la transformada inversa para obtener una muestra de <span class="math inline">\(X\)</span>.</p>
 <p>El algoritmo de simulación basado en la transformada inversa, en la Definición <a href="intro.html#def:aticontinua">1.18</a> viene dado por:</p>
 <div class="silverbox">
-<p>Si <span class="math inline">\(F(X)\)</span> es la función de distribución para <span class="math inline">\(X\)</span> dada en la Ecuación <a href="intro.html#eq:fd1-16">(1.12)</a></p>
+<p>Si <span class="math inline">\(F(X)\)</span> es la función de distribución para <span class="math inline">\(X\)</span> dada en la Ecuación <a href="intro.html#eq:fd1-16">(1.22)</a></p>
 <ul>
 <li>Paso 1. Establecer el tamaño de muestra a simular <span class="math inline">\(nsim\)</span>.</li>
 </ul>
@@ -2145,12 +2197,12 @@ F(x) =
 x^3 &amp; \text{ para } 0 &lt; x &lt; 1\\
 1 &amp; \text{ para } x \geq 1
 \end{cases}
-\tag{1.13}
+\tag{1.23}
 \end{equation}\]</span>
 <p>La función de distribución inversa es pues: <span class="math display">\[F^{-1}(u)=u^{1/3}\]</span></p>
 <p>El algoritmo para obtener una muestra de <span class="math inline">\(Y\)</span> viene dado por:</p>
 <div class="silverbox">
-<p>Si <span class="math inline">\(F(X)\)</span> es la función de distribución para <span class="math inline">\(X\)</span> dada en <a href="intro.html#eq:fdx2">(1.13)</a></p>
+<p>Si <span class="math inline">\(F(X)\)</span> es la función de distribución para <span class="math inline">\(X\)</span> dada en <a href="intro.html#eq:fdx2">(1.23)</a></p>
 <ul>
 <li>Paso 1. Establecer tamaño de muestra a simular <span class="math inline">\(nsim\)</span>.</li>
 </ul>
@@ -2237,10 +2289,11 @@ Figura 1.12: Función de densidad empírica e histogramas para X e Y.
 </div>
 <p>Estudiamos a continuación algunos ejemplos donde se aplica el algoritmo expuesto.</p>
 <div class="example">
-<p><span id="exm:combined1" class="example"><strong>Ejemplo 1.18  </strong></span>Supongamos que tenemos un conjunto de 10 variables <span class="math inline">\(X_1,...,X_{10}\)</span>, tales que cada una de ellas se distribuye de forma independiente como: <span class="math display">\[X_i \sim U(0,1), \quad i=1,...,10\]</span> y consideramos además las variables aleatorias <span class="math display">\[\begin{eqnarray*}
+<p><span id="exm:combined1" class="example"><strong>Ejemplo 1.18  </strong></span>Supongamos que tenemos un conjunto de 10 variables <span class="math inline">\(X_1,...,X_{10}\)</span>, tales que cada una de ellas se distribuye de forma independiente como: <span class="math display">\[X_i \sim U(0,1), \quad i=1,...,10\]</span> y consideramos además las variables aleatorias</p>
+<span class="math display">\[\begin{eqnarray*}
 Y_{min} &amp;=&amp; min\{X_1,...,X_{10}\},\\
 Y_{max} &amp;=&amp; max\{X_1,...,X_{10}\}.
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 <p>Estamos interesados en conocer:</p>
 <ul>
 <li>¿Cuál es el valor de <span class="math inline">\(Pr[(Y_{min} \leq 0.1) \cap (Y_{max} \geq 0.8)]\)</span>.</li>
@@ -2409,7 +2462,8 @@ Figura 1.14: Simulaciones del proceso de calidad para tuercas y pernos.
 </ol>
 </div>
 <p>Si denominamos <span class="math inline">\(LA\)</span>, <span class="math inline">\(LB\)</span>, y <span class="math inline">\(LC\)</span> a las variables aleatorias correspondientes a las longitudes de las secciones A, B, y C respectivamente, las distribuciones asociadas vienen dadas por:</p>
-<p><span class="math display">\[LA \sim N(20, \sqrt{0.04}); \quad LB \sim N(14, \sqrt{0.01}); \quad  LC \sim N(26, \sqrt{0.04})\]</span> La otra variable involucrada es la suma de barra al unir las piezas, que se obtiene como <span class="math inline">\(L=LA+LB+LC-4\)</span>, dado que en cada junta se pierden 2 pulgadas. Las especificaciones de calidad sobre ella son <span class="math inline">\(55.5 \leq L \leq y 56.5\)</span>.</p>
+<p><span class="math display">\[LA \sim N(20, \sqrt{0.04}); \quad LB \sim N(14, \sqrt{0.01}); \quad  LC \sim N(26, \sqrt{0.04})\]</span></p>
+<p>La otra variable involucrada es la suma de barra al unir las piezas, que se obtiene como <span class="math inline">\(L=LA+LB+LC-4\)</span>, dado que en cada junta se pierden 2 pulgadas. Las especificaciones de calidad sobre ella son <span class="math inline">\(55.5 \leq L \leq y 56.5\)</span>.</p>
 <p>Proponemos pues, un algoritmo de simulación que nos permita simular la longitud total de la barra a partir de cada una de las secciones, y verificar si está dentro de las especificaciones de calidad establecidas.</p>
 <div class="silverbox">
 <ul>
@@ -2440,7 +2494,7 @@ Figura 1.14: Simulaciones del proceso de calidad para tuercas y pernos.
                          LC <span class="op">=</span> <span class="va">LC</span>, L <span class="op">=</span> <span class="va">L</span>,valid<span class="op">=</span><span class="va">valid</span><span class="op">)</span></code></pre></div>
 <p>Respondamos a las preguntas a partir de las simulaciones obtenidas.</p>
 <ol style="list-style-type: decimal">
-<li>¿Cuál es la probabilidad de que la barra sea utilizable? La respuesta viene aproximada por la proporción de piezas válidas. Calculamos también un intervalo de confianza utilizando la ecuación <a href="intro.html#eq:icMC">(1.1)</a>.</li>
+<li>¿Cuál es la probabilidad de que la barra sea utilizable? La respuesta viene aproximada por la proporción de piezas válidas. Calculamos también un intervalo de confianza utilizando la ecuación <a href="intro.html#eq:icMC">(1.5)</a>.</li>
 </ol>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#  Pr proceso cumpla criterios calidad</span>
@@ -2888,7 +2942,7 @@ Figura 1.15: Gráfico del ciclo de vida y de la probabilidad del tiempo de fabri
 <li>
 <span class="math inline">\(ttotal\)</span>: tiempo total acumulado de funcionamiento y reparaciones.</li>
 </ul>
-<p>Puesto que nos piden modelizar con distribuciones Weibull y sólo nos han dado su media y su varianza, hemos de calcular los parámetros a utilizar, para lo que acudimos a la función que ya propusimos en la Ecuación <a href="#eq:estimaweibuleq">(<strong>??</strong>)</a>.</p>
+<p>Puesto que nos piden modelizar con distribuciones Weibull y sólo nos han dado su media y su varianza, hemos de calcular los parámetros a utilizar, para lo que acudimos a la función que ya propusimos en la Ecuación <a href="intro.html#eq:estimaweibuleq">(1.19)</a>.</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Parámetros tiempo funcionamiento (en minutos)</span>
 <span class="va">tf.params</span> <span class="op">&lt;-</span> <span class="fu">estima.weibull</span><span class="op">(</span><span class="fl">80</span><span class="op">*</span><span class="fl">60</span>, <span class="fl">50</span><span class="op">*</span><span class="fl">60</span><span class="op">)</span>; <span class="va">tf.params</span></code></pre></div>
@@ -2905,12 +2959,13 @@ Figura 1.15: Gráfico del ciclo de vida y de la probabilidad del tiempo de fabri
 <code class="sourceCode R"><span class="co"># Tiempo de reparación para avería moderada</span>
 <span class="va">tr.grave</span> <span class="op">&lt;-</span> <span class="fu">estima.weibull</span><span class="op">(</span><span class="fl">120</span>, <span class="fl">45</span><span class="op">)</span>; <span class="va">tr.grave</span></code></pre></div>
 <pre><code>## [1]   2.90 134.58</code></pre>
-<p>Así, tendremos las siguientes distribuciones para el tiempo de funcionamiento <span class="math inline">\(tf\)</span> y los tiempos de reparación <span class="math inline">\(tr\)</span>: <span class="math display">\[\begin{eqnarray*}
+<p>Así, tendremos las siguientes distribuciones para el tiempo de funcionamiento <span class="math inline">\(tf\)</span> y los tiempos de reparación <span class="math inline">\(tr\)</span>:</p>
+<span class="math display">\[\begin{eqnarray*}
 TF &amp;\sim&amp; Weib(1.64,5365.22) \\
 TR.leve &amp;\sim&amp; Weib(2.10, 33.87)  \\
 TR.moderado &amp;\sim&amp; Weib(2.10, 67.74)  \\
 TR.grave &amp;\sim&amp; Weib(2.90, 134.58).  
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 <p>Veamos ahora el algoritmo de simulación para este problema.</p>
 <div class="silverbox">
 <p><strong>Algoritmo secuencial para el estudio de fallo de la máquina</strong></p>
@@ -3209,7 +3264,7 @@ leve
 <p>Puesto un proceso estocástico es una colección de variables aleatorias, la forma de inferir sobre él es a través de la <strong>función de distribución conjunta</strong> que se construye a partir de las variables <span class="math inline">\(X(t_1), X(t_2),...,X(t_n)\)</span>:</p>
 <span class="math display" id="eq:dproceso">\[\begin{equation}
 F(x_1, x_2,...,x_n) = Pr(X(t_1) \leq x_1, X(t_2) \leq x_2,..., X(t_n) \leq x_n) 
-\tag{1.14}
+\tag{1.24}
 \end{equation}\]</span>
 <p>donde <span class="math inline">\(x_1, x_2,..., x_n \in \mathbb{R}^n.\)</span></p>
 <p>Si el proceso estocástico tiene una estructura simple, entonces los cálculos no son excesivamente complicados, pero no suele ser la tónica de procesos útiles para representar sistemas reales. A lo largo de los años los investigadores han modelizado y estudiado clases especiales de procesos estocásticos que pueden utilizarse para describir una gran variedad de sistemas reales, resolviendo y posibilitando así los cálculos probabilísticos necesarios, aunque su complejidad en ocasiones no haya sido evitable. Las dos clases más importantes de procesos estocásticos ya modelizados son las <strong>cadenas de Markov de tiempo discreto (CMTD)</strong> y las <strong>cadenas de Markov de tiempo continuo (CMTC)</strong>. Sin embargo, en los últimos años el desarrollo de la computación ha posibilitado el uso intensivo de la simulación para resolver de un modo sencillo cálculos probabilísticos complejos y así analizar fácilmente el comportamiento de los sistemas reales, sin necesidad de extraer analíticamente la distribución de probabilidad conjunta del proceso.</p>
@@ -3253,9 +3308,10 @@ F(x_1, x_2,...,x_n) = Pr(X(t_1) \leq x_1, X(t_2) \leq x_2,..., X(t_n) \leq x_n)
 <li>¿Cuál es la probabilidad de que la ganancia total sea igual o superior a 2000 euros?</li>
 <li>¿Cuál es la probabilidad de que la ganancia sea inferior a 2000 euros?</li>
 </ol>
-<p><strong>Ejercicio B1.10.</strong> Sea <span class="math inline">\(X\)</span> una variable aleatoria de tipo continuo cuya función de densidad viene dada por: <span class="math display">\[\begin{equation*}
+<p><strong>Ejercicio B1.10.</strong> Sea <span class="math inline">\(X\)</span> una variable aleatoria de tipo continuo cuya función de densidad viene dada por:</p>
+<span class="math display">\[\begin{equation*}
 f(x) = \frac{5}{3}(1-x^3)x  \text{ para } 0 \leq x \leq 1
-\end{equation*}\]</span></p>
+\end{equation*}\]</span>
 <p>Utilizando simulación:</p>
 <ol style="list-style-type: decimal">
 <li>Determina la <span class="math inline">\(Pr(X \leq 0.5).\)</span>

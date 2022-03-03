@@ -44,6 +44,9 @@
 <li><a class="" href="intro.html"><span class="header-section-number">1</span> Conceptos básicos</a></li>
 <li><a class="active" href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></li>
 <li><a class="" href="poissonprocess.html"><span class="header-section-number">3</span> Proceso de Poisson</a></li>
+<li><a class="" href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
+<li><a class="" href="COLAS.html"><span class="header-section-number">5</span> Sistemas de colas</a></li>
+<li><a class="" href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
@@ -70,11 +73,11 @@
 \tag{2.1}
 \end{eqnarray}\]</span>
 <p>es decir, la probabilidad de que el proceso en un instante <span class="math inline">\(t+1\)</span> se encuentre en un estado <span class="math inline">\(j\)</span>, dada toda la evolución del proceso a lo largo del tiempo, sólo depende del estado en el que el sistema se encuentrara justamente en el instante anterior <span class="math inline">\(t\)</span>, esto es, <span class="math inline">\(X(t)=i\)</span>, y y no del estado del proceso en los instantes anteriores <span class="math inline">\(t-1, t-2,...,0\)</span>.</p>
-<p>En ocasiones utilizaremos la siguiente notación,
-<span class="math display">\[X(n)=X_n, \qquad n \geq 0\]</span></p>
+<p>En ocasiones utilizaremos la siguiente notación, <span class="math display">\[X(n)=X_n, \qquad n \geq 0\]</span></p>
 </div>
 </div>
-<p>La probabilidad condicionada dada en <a href="cmtd.html#eq:cmtd">(2.1)</a> se denomina <strong>probabilidad de transición de un paso</strong> y se denota por <span class="math inline">\(p_{ij}(t,t+1)\)</span>, y es la probabilidad de que, dado que el proceso en el instante <span class="math inline">\(t\)</span> está en el estado <span class="math inline">\(i\)</span>, un instante más tarde, <span class="math inline">\(t+1\)</span> haya cambiado al estado <span class="math inline">\(j\)</span>: <span class="math display">\[p_{ij}(t,t+1)=Pr(X(t+1) = j | X(t) = i).\]</span></p>
+<p>La probabilidad condicionada dada en <a href="cmtd.html#eq:cmtd">(2.1)</a> se denomina <strong>probabilidad de transición de un paso</strong> y se denota por <span class="math inline">\(p_{ij}(t,t+1)\)</span>, y es la probabilidad de que, dado que el proceso en el instante <span class="math inline">\(t\)</span> está en el estado <span class="math inline">\(i\)</span>, un instante más tarde, <span class="math inline">\(t+1\)</span> haya cambiado al estado <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[p_{ij}(t,t+1)=Pr(X(t+1) = j | X(t) = i).\]</span></p>
 <p>De forma similar podemos definir la probabilidad de transición de <span class="math inline">\(n\)</span> pasos, <span class="math inline">\(p_{ij}(t,t+n)\)</span> como la probabilidad de que, dado que el proceso en el instante <span class="math inline">\(t\)</span> está en el estado <span class="math inline">\(i\)</span>, <span class="math inline">\(n\)</span> instantes más tarde, <span class="math inline">\(t+n\)</span>, esté en el estado <span class="math inline">\(j\)</span> :</p>
 <span class="math display" id="eq:probtrans">\[\begin{equation}
 p_{ij}(t,t+n)=Pr(X(t+n) = j | X(t) = i).
@@ -104,9 +107,7 @@ p_{ij}(n) &amp;=&amp; Pr[X(t+n) = j | X(t) = i].
 Pr[X(t)= k] =  \sum_{i \in S} p_{ik}(t) p_i(0),
 \tag{2.3}
 \end{equation}\]</span>
-<p>con <span class="math inline">\(p_i(0) = Pr(X(0) = i)\)</span> la probabilidad de que en el instante inicial el proceso se encuentre en el estado <span class="math inline">\(i\)</span>. De hecho, el vector
-<span class="math display">\[p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}\]</span>
-se denomina <strong>distribución inicial de la cadena</strong> e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.</p>
+<p>con <span class="math inline">\(p_i(0) = Pr(X(0) = i)\)</span> la probabilidad de que en el instante inicial el proceso se encuentre en el estado <span class="math inline">\(i\)</span>. De hecho, el vector <span class="math display">\[p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}\]</span> se denomina <strong>distribución inicial de la cadena</strong> e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.</p>
 </div>
 </div>
 <p>De forma habitual se suelen expresar las probabilidades de transición de un paso para <span class="math inline">\(N\)</span> estados en una <span class="math inline">\(CMTD\)</span> mediante la denominada <strong>matriz de transición de un paso</strong> <span class="math inline">\(P\)</span>, que es una matriz estocástica con todos sus elementos constituidos por probabilidades, dada por:</p>
@@ -126,10 +127,11 @@ p_{21}(n) &amp; p_{22}(n) &amp; ... &amp; p_{2N}(n)\\
 ... &amp; ... &amp; ... &amp; ...\\
 p_{N1}(n) &amp; p_{N2}(n) &amp; ... &amp; p_{NN}(n)
 \end{pmatrix}\]</span></p>
-<p>con <span class="math display">\[\begin{eqnarray*}
+<p>con</p>
+<span class="math display">\[\begin{eqnarray*}
 0 \leq p_{ij}(n) &amp;\leq&amp; 1 \\
 \sum_{j \in S} p_{ij}(n) &amp;=&amp; 1.
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 <p>De forma genérica denotamos por <span class="math inline">\(p(n)\)</span> a la distribución del proceso en la n-ésima transición:</p>
 <p><span class="math display">\[p(n) = \{p_i(n)=Pr[X(n)=i], \ i \in S\}\]</span></p>
 <p>Cualquier <span class="math inline">\(CMTD\)</span> homogénea verifica la denominada <strong>Ecuación de Chapman-Kolmogorov</strong> que permite calcular la probabilidad de transición de un estado <span class="math inline">\(i\)</span> a un estado <span class="math inline">\(j\)</span> en <span class="math inline">\(n\)</span> pasos a través de todas las probabilidades de transición de <span class="math inline">\(s\)</span> y <span class="math inline">\(n-s\)</span> pasos, para cualquier <span class="math inline">\(s&lt;n\)</span> y cualquier <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> en <span class="math inline">\(S\)</span>:</p>
@@ -140,15 +142,15 @@ p_{ij}(n) = \sum_{k \in S} p_{ik}(s) p_{kj}(n-s),
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:p-npasos" class="definition"><strong>Definición 2.4  </strong></span>Haciendo uso de la ecuación <a href="cmtd.html#eq:ChapmanKol">(2.4)</a> se puede demostrar que la matriz de transición de <span class="math inline">\(n\)</span> pasos <span class="math inline">\(P(n)\)</span> se puede obtener como la potencia <span class="math inline">\(n\)</span> de la matriz de transición de un paso <span class="math inline">\(P\)</span>, esto es,</p>
-<p><span class="math display" id="eq:matriznpasos">\[\begin{equation}
+<span class="math display" id="eq:matriznpasos">\[\begin{equation}
 P(n) = P^n,
 \tag{2.5}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>de modo que conociendo la distribución inicial del proceso <span class="math inline">\(p(0)\)</span> y la matriz de transición de un paso <span class="math inline">\(P\)</span>, tenemos perfectamente identificada la distribución del proceso en cualquier momento:</p>
-<p><span class="math display" id="eq:distriproceso">\[\begin{equation}
+<span class="math display" id="eq:distriproceso">\[\begin{equation}
 p(n) = p(0)P^n.
 \tag{2.6}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 </div>
 </div>
 </div>
@@ -169,8 +171,7 @@ p(n) = p(0)P^n.
 <p>Planteamos resolver las cuestiones siguientes:</p>
 <p>(1). Queremos representar el proceso a través de un grafo.</p>
 <div class="whitebox">
-<p>Para representar el proceso con <code>markovchain</code>, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code> para generar un objeto del tipo <code>markovchain</code>:
-<span class="math display">\[new("markovchain",states,byrow=TRUE,transitionMatrix)\]</span></p>
+<p>Para representar el proceso con <code>markovchain</code>, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code> para generar un objeto del tipo <code>markovchain</code>: <span class="math display">\[new("markovchain",states,byrow=TRUE,transitionMatrix)\]</span></p>
 <p>introduciendo el vector de estados en <code>states</code>, la matriz de transición en <code>transitionMatrix</code>, y especificando si dicha matriz se ha de leer por filas.</p>
 <p>A continuación lo pintamos con la función <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>.</p>
 </div>
@@ -256,8 +257,7 @@ Figura 2.1: Grafo del proceso.
 <li>RESPUESTA: Para ver el comportamiento de un proceso después de que transcurran <span class="math inline">\(n\)</span> pasos habrá que simularlo durante <span class="math inline">\(n\)</span> instantes de tiempo. Puesto que buscamos una estimación de lo que va a ocurrir en ese momento, simularemos <span class="math inline">\(nsim=100\)</span> veces el proceso hasta el instante <span class="math inline">\(n=10\)</span>, nos quedaremos con el estado en que se encuentra el proceso en ese instante <span class="math inline">\(n\)</span> y evaluaremos las probabilidades obtenidas para los tres estados <span class="math inline">\(\{a,b,c\}\)</span>. Los resultados serán más próximos a la solución analítica, cuanto mayor sea el número de simulaciones (prueba a modificar <span class="math inline">\(nsim\)</span>).</li>
 </ul>
 <div class="whitebox">
-<p>Para simular una CMTD hasta una transición <span class="math inline">\(n\)</span> con la librería <code>markovchain</code>
-basta utilizar la función <code>rmarkovchain(n, proceso)</code>, donde proceso ha sido definido previamente con la función <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code>.</p>
+<p>Para simular una CMTD hasta una transición <span class="math inline">\(n\)</span> con la librería <code>markovchain</code> basta utilizar la función <code>rmarkovchain(n, proceso)</code>, donde proceso ha sido definido previamente con la función <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code>.</p>
 </div>
 <div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Simulación del proceso para n=10 instantes </span>
@@ -326,7 +326,8 @@ X_{n} =
 1 &amp; \text{ On}
 \end{cases}
 \end{equation*}\]</span>
-<p>de forma que la matriz de transicción viene dada por: <span class="math display">\[P = 
+<p>de forma que la matriz de transicción viene dada por:</p>
+<p><span class="math display">\[P = 
 \begin{pmatrix}
 0.03 &amp; 0.97\\
 0.02 &amp; 0.98
@@ -334,7 +335,8 @@ X_{n} =
 <p>Supongamos ahora que la empresa mantiene dos máquinas de este tipo que son idénticas, se comportan de forma independiente y cada una tiene su propio reparador.</p>
 <p>Sea <span class="math inline">\(Y_n\)</span> el número de máquinas en estado “On” al principio del día <span class="math inline">\(n\)</span>, que constituye una CMTD cuyo espacio de estados es <span class="math inline">\(\{0, 1, 2\}\)</span>, puesto que la situación de las máquinas un día cualquiera sólo depende de cómo estaban el día anterior (cumplen la Ecuación <a href="cmtd.html#eq:cmtd">(2.1)</a>.</p>
 <p>Calculemos la probabilidad de transición para un caso concreto: <span class="math inline">\(Y_n = i = 1\)</span> e <span class="math inline">\(Y_{n+1} = j = 0\)</span>, que identifica una situación en la que una máquina está en funcionamiento y otra en paro el día <span class="math inline">\(n\)</span>, pero al día siguiente ambas están paradas. Así, la máquina que está “Off” el día <span class="math inline">\(n\)</span> debe permanecer “Off” al día siguiente, y la máquina que está “On” debe cambiar a “Off” el día siguiente. Como las máquinas son independientes, la probabilidad de cambio de estado es:</p>
-<p><span class="math display">\[p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006\]</span> Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:</p>
+<p><span class="math display">\[p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006\]</span></p>
+<p>Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 0.0009 &amp; 0.0582 &amp; 0.9409\\
@@ -784,7 +786,8 @@ Pr[X_{n+1} = K | X_n = i] &amp; = Pr[min(X_n + A_{n+1} - 1, K) = K | X_n = i]\\
 &amp; = \sum_{k=K-i+1}^{\infty} a_k=1-\sum_{k=0}^{K-i} a_k
 \end{array}\]</span></p>
 <p>Si consideramos:</p>
-<p><span class="math display">\[b_j = \sum_{k=j}^{\infty} a_k\]</span> la matriz de transiciones de un paso la podemos escribir como:</p>
+<p><span class="math display">\[b_j = \sum_{k=j}^{\infty} a_k\]</span></p>
+<p>la matriz de transiciones de un paso la podemos escribir como:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 a_0 &amp; a_1 &amp; ... &amp; a_{K-1} &amp; b_K\\
@@ -809,7 +812,8 @@ a_0 &amp; a_1 &amp; ... &amp; a_{K-1} &amp; b_K\\
 <p><span class="math display">\[\begin{array}{ll}
 \text{ si } X_n \leq A &amp; \rightarrow X_{n+1} = B - Y_{n+1} \\
 \text{ si } A &lt; X_n \leq B &amp; \rightarrow X_{n+1} = X_n - Y_{n+1} 
-\end{array}\]</span> con espacio de estados <span class="math inline">\(S = \{B, B-1,..., 1, 0, -1, -2,...\}\)</span>, donde los valores negativos indican que la demanda supera a la cantidad almacenada y será servida en instantes posteriores (demanda insatisfecha).</p>
+\end{array}\]</span></p>
+<p>con espacio de estados <span class="math inline">\(S = \{B, B-1,..., 1, 0, -1, -2,...\}\)</span>, donde los valores negativos indican que la demanda supera a la cantidad almacenada y será servida en instantes posteriores (demanda insatisfecha).</p>
 <p>Las probabilidades de transición vienen dadas por:</p>
 <ul>
 <li>si <span class="math inline">\(i \leq A\)</span>
@@ -836,7 +840,8 @@ a_{i-j}, \quad \text{ si } i \geq j\\
  \end{cases}
 \end{array}\]</span></p>
 <p>A modo de ejemplo consideramos <span class="math inline">\(A = 0\)</span>, <span class="math inline">\(B = 2\)</span>, con probabilidades para <span class="math inline">\(Y_n\)</span> dadas por:</p>
-<p><span class="math display">\[Pr[Y_n = 0] = 0.5; \quad Pr[Y_n = 1] = 0.4; \quad Pr[Y_n = 2] = 0.1,\]</span> entonces la matriz de transición, para el espacio de estados <span class="math inline">\(S = \{-1, 0, 1, 2\}\)</span>, viene dada por:</p>
+<p><span class="math display">\[Pr[Y_n = 0] = 0.5; \quad Pr[Y_n = 1] = 0.4; \quad Pr[Y_n = 2] = 0.1,\]</span></p>
+<p>entonces la matriz de transición, para el espacio de estados <span class="math inline">\(S = \{-1, 0, 1, 2\}\)</span>, viene dada por:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 0 &amp; 0.1 &amp; 0.4 &amp; 0.5\\
@@ -924,9 +929,9 @@ Figura 2.7: Diagrama del sistema del problema de inventario.
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:unlabeled-div-11" class="definition"><strong>Definición 2.9  </strong></span>Un conjunto de estados <span class="math inline">\(C \subset S\)</span> se denomina <strong>cerrado</strong> cuando no es posible pasar de un estado de <span class="math inline">\(C\)</span> a otro que no esté en <span class="math inline">\(C\)</span>, esto es,</p>
-<p><span class="math display">\[\forall i \in C, \quad \forall j \notin C \quad \Rightarrow \quad p_{ij}(n) = 0, \quad n\geq 1\]</span>
-o lo que es lo mismo,
-<span class="math display">\[ \sum_{j \in C} p_{ij}=1, \quad \forall i \in C.\]</span></p>
+<p><span class="math display">\[\forall i \in C, \quad \forall j \notin C \quad \Rightarrow \quad p_{ij}(n) = 0, \quad n\geq 1\]</span></p>
+<p>o lo que es lo mismo,</p>
+<p><span class="math display">\[ \sum_{j \in C} p_{ij}=1, \quad \forall i \in C.\]</span></p>
 <p>Esto implica que cuando accedamos a un conjunto cerrado, será imposible salir de él y sólo será factible moverse dentro de él.</p>
 <p>Si el conjunto cerrado está compuesto por un único estado <span class="math inline">\(i\)</span> diremos que ese estado <span class="math inline">\(i\)</span> es <strong>absorbente</strong>. Eso implica que si se llega a dicho estado, el proceso se queda estancado en él y ya no es posible moverse a otro estado.</p>
 </div>
@@ -1037,22 +1042,21 @@ o lo que es lo mismo,
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:unlabeled-div-14" class="definition"><strong>Definición 2.11  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, matriz de probabilidades de transición de una paso <span class="math inline">\(P\)</span>, y distribución inicial <span class="math inline">\(p(0)\)</span>. Consideramos la variable aleatoria <span class="math inline">\(N_j(n)\)</span> como el número de visitas al estado <span class="math inline">\(j\)</span> en el periodo <span class="math inline">\(\{1, 2,...,n\}\)</span> y definimos</p>
-<p><span class="math display">\[m_{ij}(n) = E[N_j(n)|X_0 = i]\]</span>
-como el número esperado de visitas o <strong>tiempo de ocupación</strong> del estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(n\)</span>, partiendo del estado <span class="math inline">\(i\)</span>.</p>
-<p>A partir de las cantidades <span class="math inline">\(m_{ij}(n)\)</span> se puede definir la <strong>matriz de tiempos de ocupación hasta un instante <span class="math inline">\(n\)</span></strong>, <span class="math inline">\(M(n)\)</span>, que se puede calcular a partir de la matriz de transición <span class="math inline">\(P\)</span> como:</p>
-<p><span class="math display" id="eq:tposocupa">\[\begin{equation}
+<p><span class="math display">\[m_{ij}(n) = E[N_j(n)|X_0 = i]\]</span></p>
+<p>como el número esperado de visitas o <strong>tiempo de ocupación</strong> del estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(n\)</span>, partiendo del estado <span class="math inline">\(i\)</span>.</p>
+<p>A partir de las cantidades <span class="math inline">\(m_{ij}(n)\)</span> se puede definir la <strong>matriz de tiempos de ocupación hasta un instante</strong> <span class="math inline">\(n\)</span>, <span class="math inline">\(M(n)\)</span>, que se puede calcular a partir de la matriz de transición <span class="math inline">\(P\)</span> como:</p>
+<span class="math display" id="eq:tposocupa">\[\begin{equation}
 M(n) = \sum_{r=0}^n P^r
 \tag{2.7}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 </div>
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-15" class="definition"><strong>Definición 2.12  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span>. Se define el <strong>número de visitas al estado <span class="math inline">\(j\)</span></strong> a lo largo de la vida de la cadena como
-<span class="math display">\[N_j=\sum_{n=0}^{\infty} I(X_n,j),\]</span>
-donde <span class="math inline">\(I(X_n,j)=1\)</span> si <span class="math inline">\(X_n=j\)</span> y 0 en otro caso.</p>
-<p>Así, el número esperado de visitas al estado <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena, partiendo del estado <span class="math inline">\(i\)</span>, se define como
-<span class="math display">\[m_{ij} = E[N_j|X_0 = i].\]</span></p>
+<p><span id="def:unlabeled-div-15" class="definition"><strong>Definición 2.12  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span>. Se define el <strong>número de visitas al estado</strong> <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena como</p>
+<p><span class="math display">\[N_j=\sum_{n=0}^{\infty} I(X_n,j),\]</span></p>
+<p>donde <span class="math inline">\(I(X_n,j)=1\)</span> si <span class="math inline">\(X_n=j\)</span> y 0 en otro caso.</p>
+<p>Así, el número esperado de visitas al estado <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena, partiendo del estado <span class="math inline">\(i\)</span>, se define como <span class="math display">\[m_{ij} = E[N_j|X_0 = i].\]</span></p>
 </div>
 </div>
 <div class="yellowbox">
@@ -1114,20 +1118,19 @@ donde <span class="math inline">\(I(X_n,j)=1\)</span> si <span class="math inlin
 </h3>
 <p>Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados <strong>modelos de costes</strong>, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, beneficios, pérdidas, etc..</p>
 <p>Sea <span class="math inline">\(X_n\)</span> el estado del sistema en el tiempo <span class="math inline">\(n\)</span>. Asumimos que <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,...,N\}\)</span>, matriz de transición <span class="math inline">\(P\)</span>, y matriz de tiempos de ocupación <span class="math inline">\(M(n)\)</span>.</p>
-<p>En esta situación, hablamos de que cada visita a cierto estado <span class="math inline">\(i\)</span> tiene un coste asociado <span class="math inline">\(C(i)\)</span>, y el coste esperado por visitar el estado <span class="math inline">\(i\)</span> a lo largo de la vida del proceso viene dado por <span class="math inline">\(c(i) = E[C(i)]\)</span>. Definimos la matriz de costes esperados asociados a los estados, como <span class="math inline">\(c\)</span>, de dimensión <span class="math inline">\(N\times 1\)</span>, como:
-<span class="math display">\[c' = (c(1),c(2),\ldots,c(N))\]</span></p>
+<p>En esta situación, hablamos de que cada visita a cierto estado <span class="math inline">\(i\)</span> tiene un coste asociado <span class="math inline">\(C(i)\)</span>, y el coste esperado por visitar el estado <span class="math inline">\(i\)</span> a lo largo de la vida del proceso viene dado por <span class="math inline">\(c(i) = E[C(i)]\)</span>. Definimos la matriz de costes esperados asociados a los estados, como <span class="math inline">\(c\)</span>, de dimensión <span class="math inline">\(N\times 1\)</span>, como: <span class="math display">\[c' = (c(1),c(2),\ldots,c(N))\]</span></p>
 <p>Así mismo, hablamos del coste <span class="math inline">\(C(X_r)\)</span> en el que incurre el sistema en un instante concreto <span class="math inline">\(r\)</span>, y <span class="math inline">\(\sum_{r=0}^n C(X_r)\)</span> el coste acumulado desde el inicio del proceso hasta llegar al instante <span class="math inline">\(n\)</span>. Entonces el <strong>coste esperado total (CET)</strong> asociado al funcionamiento del sistema hasta llegar al instante <span class="math inline">\(n\)</span> se calculará como <span class="math inline">\(E\left[\sum_{r=0}^n C(X_r)\right]\)</span>.</p>
-<p>Definimos el coste esperado total (CET) hasta el instante <span class="math inline">\(n\)</span> partiendo del estado <span class="math inline">\(i\)</span>, <span class="math inline">\(g(i,n)\)</span>, como:
-<span class="math display">\[g(i,n) = E\left[\sum_{r=0}^n C(X_r)| X_0 = i \right]\]</span></p>
-<p>y construimos la matriz de <strong>costes totales sobre un horizonte finito (CTHF) hasta el instante <span class="math inline">\(n\)</span></strong>, <span class="math inline">\(g(n)\)</span>, de dimensión <span class="math inline">\(N \times 1\)</span>, a través de estos costes esperados partiendo de cualesquier estado <span class="math inline">\(i \in S\)</span>, como
-<span class="math display">\[g(n)' = (g(1,n),g(2,n),\ldots,g(N,n))\]</span></p>
+<p>Definimos el coste esperado total (CET) hasta el instante <span class="math inline">\(n\)</span> partiendo del estado <span class="math inline">\(i\)</span>, <span class="math inline">\(g(i,n)\)</span>, como:</p>
+<p><span class="math display">\[g(i,n) = E\left[\sum_{r=0}^n C(X_r)| X_0 = i \right]\]</span></p>
+<p>y construimos la matriz de <strong>costes totales sobre un horizonte finito (CTHF) hasta el instante</strong> <span class="math inline">\(n\)</span>, <span class="math inline">\(g(n)\)</span>, de dimensión <span class="math inline">\(N \times 1\)</span>, a través de estos costes esperados partiendo de cualesquier estado <span class="math inline">\(i \in S\)</span>, como</p>
+<p><span class="math display">\[g(n)' = (g(1,n),g(2,n),\ldots,g(N,n))\]</span></p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-18" class="definition"><strong>Definición 2.14  </strong></span>Si queremos calcular el <strong>coste esperado total sobre un horizonte finito hasta un instante <span class="math inline">\(n\)</span></strong>, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante <span class="math inline">\(n\)</span>, <span class="math inline">\(M(n)\)</span>, por la matriz de costes esperados asociados a los estados del sistema, <span class="math inline">\(c\)</span>:
+<p><span id="def:unlabeled-div-18" class="definition"><strong>Definición 2.14  </strong></span>Si queremos calcular el <strong>coste esperado total sobre un horizonte finito hasta un instante</strong> <span class="math inline">\(n\)</span>, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante <span class="math inline">\(n\)</span>, <span class="math inline">\(M(n)\)</span>, por la matriz de costes esperados asociados a los estados del sistema, <span class="math inline">\(c\)</span>:</p>
 <span class="math display" id="eq:CTHF">\[\begin{equation}
 g(n) = M(n) \cdot c
 \tag{2.8}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 </div>
 </div>
 <div class="example">
@@ -1146,10 +1149,10 @@ D_n &amp; \text{ si } i &gt; D_n \text{, con } Pr[i &gt; D_n]
 <p>de esta forma tenemos que su valor esperado vendrá dado por:</p>
 <p><span class="math display">\[E[Z_{i,n}] = i*Pr[i \leq D_n] + \sum_{d=0}^{i-1} d \cdot Pr(D_n=d).\]</span></p>
 <p>Recordando que <span class="math inline">\(D_n\sim Pois(3)\)</span> en el ejemplo original, para <span class="math inline">\(i=2\)</span> la expresión anterior da lugar a:</p>
-<p><span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[\begin{eqnarray*}
 E[Z_{2,n}] &amp;= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
 &amp;= 2*0.8008+0.1494 = 1.751
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 <p>y por tanto:</p>
 <p><span class="math display">\[c(2) =  250*1.751 -50*2 = 337.75\]</span></p>
 <p>De forma análoga podemos obtener el resto de costes esperados por el hecho de tener <span class="math inline">\(i\)</span> PCs en la tienda,</p>
@@ -1160,9 +1163,7 @@ E[Z_{2,n}] &amp;= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
 470.15 \\
 466.23 
 \end{pmatrix}\]</span></p>
-<p>de donde podemos calcular los ingresos netos totales esperados durante las próximas <span class="math inline">\(n=10\)</span> semanas, sea cual sea el estado inicial del sistema, a través de la matriz
-<span class="math display">\[g(10)=M(10) \cdot c\]</span>
-que calculamos a continuación:</p>
+<p>de donde podemos calcular los ingresos netos totales esperados durante las próximas <span class="math inline">\(n=10\)</span> semanas, sea cual sea el estado inicial del sistema, a través de la matriz <span class="math display">\[g(10)=M(10) \cdot c\]</span> que calculamos a continuación:</p>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">337.75</span>,<span class="fl">431.95</span>,<span class="fl">470.15</span>,<span class="fl">466.23</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">M10</span><span class="op">=</span><span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">inventario</span>,<span class="fl">10</span><span class="op">)</span>
@@ -1240,8 +1241,8 @@ que calculamos a continuación:</p>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:unlabeled-div-21" class="definition"><strong>Definición 2.16  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Si estamos interesados en obtener el tiempo esperado de primer paso para el estado <span class="math inline">\(j\)</span> desde cualquier estado <span class="math inline">\(i\)</span>, dado por:</p>
-<p><span class="math display">\[v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n &gt; 0, X_n = j | X_0 = i\}\]</span>$
-y construimos la matriz de dimensión <span class="math inline">\((N-1) \times 1\)</span> <span class="math inline">\(\mathbf{v_j'}=(v_{1j},...,v_{j-1,j},v_{j+1,j},...,v_{Nj})\)</span><br>
+<p><span class="math display">\[v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n &gt; 0, X_n = j | X_0 = i\}\]</span>$</p>
+<p>y construimos la matriz de dimensión <span class="math inline">\((N-1) \times 1\)</span> <span class="math inline">\(\mathbf{v_j'}=(v_{1j},...,v_{j-1,j},v_{j+1,j},...,v_{Nj})\)</span><br>
 basta con resolver el sistema:</p>
 <p><span class="math display">\[[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}\]</span></p>
 <p>donde</p>
@@ -1288,17 +1289,17 @@ basta con resolver el sistema:</p>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:unlabeled-div-22" class="definition"><strong>Definición 2.17  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Se definen las <strong>probabilidades de primera visita</strong> o primer paso del estado <span class="math inline">\(i\)</span> al <span class="math inline">\(j\)</span> en <span class="math inline">\(n\)</span> transiciones, con <span class="math inline">\(f_{ij}(n)\)</span>,</p>
-<p><span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[\begin{eqnarray*}
 f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 = i] \\ 
 &amp;=&amp; Pr(T_{ij}=n), \quad n \geq 0
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 <p>donde por convenio <span class="math inline">\(f_{ij}(0) = 0.\)</span></p>
 </div>
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-23" class="definition"><strong>Definición 2.18  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Sea <span class="math inline">\(m_{ij}\)</span> el número esperado de visitas al estado <span class="math inline">\(j\)</span> cuando se parte del estado <span class="math inline">\(i\)</span>, y <span class="math inline">\(f_{ij}=Pr(T_{ij}&lt;\infty)\)</span> la probabilidad de alcanzar el estado <span class="math inline">\(j\)</span> partiendo del estado <span class="math inline">\(i\)</span>. Entonces se cumple la relación:
-<span class="math display">\[ m_{ij}=\begin{cases}
+<p><span id="def:unlabeled-div-23" class="definition"><strong>Definición 2.18  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Sea <span class="math inline">\(m_{ij}\)</span> el número esperado de visitas al estado <span class="math inline">\(j\)</span> cuando se parte del estado <span class="math inline">\(i\)</span>, y <span class="math inline">\(f_{ij}=Pr(T_{ij}&lt;\infty)\)</span> la probabilidad de alcanzar el estado <span class="math inline">\(j\)</span> partiendo del estado <span class="math inline">\(i\)</span>. Entonces se cumple la relación:</p>
+<p><span class="math display">\[ m_{ij}=\begin{cases}
 \frac{1}{1-f_{jj}}, \quad \text{ si } i=j \\
 \frac{f_{ij}}{1-f_{jj}}, \quad \text{ si } i\neq j
 \end{cases}\]</span></p>
@@ -1458,24 +1459,24 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 <div class="yellowbox">
 <div class=".definition">
 <p>Si existe la distribución a largo plazo de un proceso CMTD <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, la denominamos <strong>distribución límite</strong> o <strong>distribución en estado estacionario</strong>, y la denotamos por:</p>
-<p><span class="math display">\[\pi = [\pi_1, \pi_2,...,\pi_N]\]</span> donde</p>
+<p><span class="math display">\[\pi = [\pi_1, \pi_2,...,\pi_N]\]</span></p>
+<p>donde</p>
 <p><span class="math display">\[\pi_j = \underset{n \rightarrow \infty}{lim} Pr[X_n = j], \quad j \in S\]</span></p>
 </div>
 </div>
-<p>La siguiente pregunta de interés, cuando dicha distribución existe, es si es única.
-Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.</p>
+<p>La siguiente pregunta de interés, cuando dicha distribución existe, es si es única. Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.</p>
 <p>La última pregunta se refiere a la práctica: si hay una única distribución límite, ¿cómo podemos calcularla? Pues bien, aunque responder las dos primeras preguntas pueda ser más complejo, la respuesta a esta pregunta es fácil, puesto que si esta distribución límite exite, entonces satisface la siguiente propiedad.</p>
 <div class="yellowbox">
 <div class=".definition">
-<p>Si existe la distribución límite de un proceso CMTD <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, entonces las probabilidades <span class="math inline">\(\pi_j\)</span> satisfacen la siguiente ecuación:
-<span class="math display">\[\pi_j = \sum_{i=1}^N \pi_i p_{ij}, \quad \forall j \in S,\]</span>
-donde <span class="math inline">\(p_{ij}\)</span> son las probabilidades de transición (en la matriz <span class="math inline">\(P\)</span>). Esta propiedad en formato matricial da lugar a la <strong>ecuación de balance</strong> o <strong>del estado estacionario</strong>, que viene dada por:
+<p>Si existe la distribución límite de un proceso CMTD <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, entonces las probabilidades <span class="math inline">\(\pi_j\)</span> satisfacen la siguiente ecuación:</p>
+<p><span class="math display">\[\pi_j = \sum_{i=1}^N \pi_i p_{ij}, \quad \forall j \in S,\]</span></p>
+<p>donde <span class="math inline">\(p_{ij}\)</span> son las probabilidades de transición (en la matriz <span class="math inline">\(P\)</span>). Esta propiedad en formato matricial da lugar a la <strong>ecuación de balance</strong> o <strong>del estado estacionario</strong>, que viene dada por:</p>
 <span class="math display" id="eq:ecuee">\[\begin{equation}
 \pi = \pi*P, \qquad \text{ con } 
 \tag{2.9}
 \end{equation}\]</span>
-junto con la restricción de normalización
-<span class="math display">\[\sum_{j=1}^N \pi_j = 1.\]</span></p>
+<p>junto con la restricción de normalización</p>
+<p><span class="math display">\[\sum_{j=1}^N \pi_j = 1.\]</span></p>
 </div>
 </div>
 <div class="whitebox">
@@ -1493,13 +1494,11 @@ junto con la restricción de normalización
 <p>Podemos encontrar procesos CMTD en los que no existe distribución límite, pero aun así podemos resolver las ecuaciones de balance, junto con la restricción de normalización (Ecuación <a href="cmtd.html#eq:ecuee">(2.9)</a>). Supongamos que tenemos una distribución inicial de la CMTD dada por <span class="math inline">\(\{\pi^*, i \in S\}\)</span>. Si también la distribución de <span class="math inline">\(X_1, \ldots, X_n\)</span> permanece invariante para todos los <span class="math inline">\(n\)</span>, decimos que la distribución inicial es una <strong>distribución estacionaria</strong>. Definámoslo a continuación.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:steadystatedist" class="definition"><strong>Definición 2.20  </strong></span>Una distribución de probabilidad
-<span class="math display">\[\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]\]</span>
-se dice que es <strong>estacionaria</strong> si</p>
-<p><span class="math display">\[\begin{eqnarray*}
+<p><span id="def:steadystatedist" class="definition"><strong>Definición 2.20  </strong></span>Una distribución de probabilidad <span class="math display">\[\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]\]</span> se dice que es <strong>estacionaria</strong> si</p>
+<span class="math display">\[\begin{eqnarray*}
 Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 &amp;\Rightarrow&amp; Pr[X_n = i] = \pi_i^*, 1 \leq i \leq N, \text{ y } n \geq 0.
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
 </div>
 </div>
 <p>Las preguntas que previamente planteamos sobre la distribución límite (es decir, la existencia, la unicidad y el método de cálculo) pueden formularse también sobre la distribución estacionaria. Respondámoslas.</p>
@@ -1513,10 +1512,10 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 <p>Veamos a continuación una propiedad interesante, respecto a estacionariedad, de la distribución del ratio de ocupación, esto es, de la proporción de tiempo que el proceso permanece en cada estado.</p>
 <div class="yellowbox">
 <div class=".definition">
-<p>Si existe la <strong>distribución de ocupación</strong> del proceso <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span>, dada por
-<span class="math display">\[\hat{\pi}_j=lim_{n \rightarrow \infty} \frac{m_{ij}(n)}{n+1}, \qquad \text{ con } m_{ij}(n)=E[N_j(n)|X_0=i]\]</span>
-entonces satisface las ecuaciones de balance sujetas a la restricción de normalización, esto es,
-<span class="math display">\[\hat{\pi}_j = \sum_{i=1}^N \hat{\pi}_i p_{ij}, \quad \forall j \in S, \qquad \text{ y } \sum_{j=1}^N \hat{\pi}_j=1.\]</span></p>
+<p>Si existe la <strong>distribución de ocupación</strong> del proceso <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span>, dada por</p>
+<p><span class="math display">\[\hat{\pi}_j=lim_{n \rightarrow \infty} \frac{m_{ij}(n)}{n+1}, \qquad \text{ con } m_{ij}(n)=E[N_j(n)|X_0=i]\]</span></p>
+<p>entonces satisface las ecuaciones de balance sujetas a la restricción de normalización, esto es,</p>
+<p><span class="math display">\[\hat{\pi}_j = \sum_{i=1}^N \hat{\pi}_i p_{ij}, \quad \forall j \in S, \qquad \text{ y } \sum_{j=1}^N \hat{\pi}_j=1.\]</span></p>
 </div>
 </div>
 <p>Tenemos pues, que toda distribución que cumpla las ecuaciones de balance junto con las restricciones de normalización, será una distribución límte, también estacionaria o será la distribución de ocupación. Las preguntas relativas a estas ecuaciones son: ¿siempre habrá una solución? ¿Será única? ¿Cuándo dicha solución se podrá interpretar como una distribución límite, estacionaria o de ocupación? Intentemos dar respuesta a estas preguntas introduciendo algún concepto más referido a los procesos <span class="math inline">\(CMTD\)</span>.</p>
@@ -1542,7 +1541,7 @@ entonces satisface las ecuaciones de balance sujetas a la restricción de normal
 <div class="definition">
 <p><span id="def:periodo" class="definition"><strong>Definición 2.24  </strong></span>Sea la <span class="math inline">\(CMTD\)</span> <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y <span class="math inline">\(d\)</span> el entero más grande tal que para cualquier estado <span class="math inline">\(i \in S\)</span></p>
 <p><span class="math display">\[\text{si } Pr[X_n = i | X_0 = i] &gt;0 \Rightarrow n \text{ es  múltiplo de } d,\]</span></p>
-<p>Se dice entonces que dicha <span class="math inline">\(CMTD\)</span> es <strong>periódica con periodo <span class="math inline">\(d\)</span></strong> si <span class="math inline">\(d&gt;1\)</span>, y <strong>aperiódica</strong> si <span class="math inline">\(d = 1\)</span>.</p>
+<p>Se dice entonces que dicha <span class="math inline">\(CMTD\)</span> es <strong>periódica con periodo</strong> <span class="math inline">\(d\)</span> si <span class="math inline">\(d&gt;1\)</span>, y <strong>aperiódica</strong> si <span class="math inline">\(d = 1\)</span>.</p>
 </div>
 </div>
 <p>Así, una CMTD con periodo <span class="math inline">\(d\)</span> puede volver a su estado inicial sólo en los instantes <span class="math inline">\(d, 2d, 3d, ...\)</span>. En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo <span class="math inline">\(d\)</span> para cualquier estado <span class="math inline">\(i \in S\)</span>, puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo.</p>
@@ -1561,8 +1560,8 @@ entonces satisface las ecuaciones de balance sujetas a la restricción de normal
 <p>Tenemos un resultado adicional sobre el comportamiento de los <strong>costes en el estado estacionario</strong>.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:costesestacionarios" class="definition"><strong>Definición 2.26  </strong></span>Si <span class="math inline">\(c(i)\)</span> es el coste esperado en el que incurrimos cuando visitamos el estado <span class="math inline">\(i \in S\)</span>, de una CMTD irreducible con distribución de ocupación <span class="math inline">\(\pi\)</span>, entonces el coste esperado por unidad a largo plazo (en el estado estacionario) viene dado por:
-<span class="math display">\[g= \sum_{j\in S} \pi_j \ c(j).\]</span></p>
+<p><span id="def:costesestacionarios" class="definition"><strong>Definición 2.26  </strong></span>Si <span class="math inline">\(c(i)\)</span> es el coste esperado en el que incurrimos cuando visitamos el estado <span class="math inline">\(i \in S\)</span>, de una CMTD irreducible con distribución de ocupación <span class="math inline">\(\pi\)</span>, entonces el coste esperado por unidad a largo plazo (en el estado estacionario) viene dado por:</p>
+<p><span class="math display">\[g= \sum_{j\in S} \pi_j \ c(j).\]</span></p>
 </div>
 </div>
 <div class="example">
@@ -1959,8 +1958,7 @@ p2=\left(\begin{matrix}
 <ol style="list-style-type: decimal">
 <li>Por cada 100 caracteres en un texto de cada idioma, ¿cuántos son vocales?</li>
 </ol>
-<p>Nos están preguntando por los tiempos de ocupación de las vocales en 100 transiciones.
-Aplicamos la Ecuación <a href="cmtd.html#eq:tposocupa">(2.7)</a> para calcular la matriz de ocupación tras 100 transiciones, y la función que definimos en la Sección <a href="tiemposocupa-sec">Tiempos de ocupación</a>. Para ello hemos de definir como CMTD ambos procesos, con la librería <code>markovchain</code>.</p>
+<p>Nos están preguntando por los tiempos de ocupación de las vocales en 100 transiciones. Aplicamos la Ecuación <a href="cmtd.html#eq:tposocupa">(2.7)</a> para calcular la matriz de ocupación tras 100 transiciones, y la función que definimos en la Sección <a href="tiemposocupa-sec">Tiempos de ocupación</a>. Para ello hemos de definir como CMTD ambos procesos, con la librería <code>markovchain</code>.</p>
 <div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idioma1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/methods/new.html">new</a></span><span class="op">(</span><span class="st">"markovchain"</span>,states<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span>,byrow<span class="op">=</span><span class="cn">TRUE</span>,transitionMatrix<span class="op">=</span><span class="va">p1</span>,name<span class="op">=</span><span class="st">"idioma1"</span><span class="op">)</span>
 <span class="va">idioma2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/methods/new.html">new</a></span><span class="op">(</span><span class="st">"markovchain"</span>,states<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">p2</span><span class="op">)</span>,byrow<span class="op">=</span><span class="cn">TRUE</span>,transitionMatrix<span class="op">=</span><span class="va">p2</span>,name<span class="op">=</span><span class="st">"idioma2"</span><span class="op">)</span>
@@ -1975,8 +1973,7 @@ Aplicamos la Ecuación <a href="cmtd.html#eq:tposocupa">(2.7)</a> para calcular 
 <pre><code>##               vocal consonante
 ## vocal      1.333333   4.000000
 ## consonante 1.428571   3.333333</code></pre>
-<p>Así pues, en el idioma 1, si el texto arranca en una vocal
-## Ejercicios {#ejer-u2}</p>
+<p>Así pues, en el idioma 1, si el texto arranca en una vocal ## Ejercicios {#ejer-u2}</p>
 <div id="básicos-1" class="section level3" number="2.6.1">
 <h3>
 <span class="header-section-number">2.6.1</span> Básicos<a class="anchor" aria-label="anchor" href="#b%C3%A1sicos-1"><i class="fas fa-link"></i></a>
@@ -1997,8 +1994,8 @@ Aplicamos la Ecuación <a href="cmtd.html#eq:tposocupa">(2.7)</a> para calcular 
 <p><strong>Ejercicio B2.7.</strong> Consideramos el proceso descrito en la sección <a href="cmtd.html#inventario">Problema de inventario</a>. Estamos interesados en conocer cuál es la proporción de semanas en que el inventario estará lleno durante el proximo año, si empezamos con un inventario de 5 PCs?</p>
 <p><strong>Ejercicio B2.8.</strong> La secuencia de consonantes y vocales en el lenguaje humano se puede modelizar mediante una <span class="math inline">\(CMTD\)</span> dado que después de una vocal siempre le sigue una consonante con probabilidad 0.49 y una vocal con probabilidad 0.51. Después de una consonante hay otra consonante con probabilidad 0.1. Codificamos un texto completo con una secuencia de ceros (vocal) y unos (consonantes). Obtén la matriz de transición para este proceso. Si el texto comienza con una consonante, ¿qué tipo de elemento será el que aparezca en la quinta posición de la secuencia? ¿Qué porcentaje de vocales y consonantes encontraremos en un texto de 2000 letras?</p>
 <p><strong>Ejercicio B2.9</strong> Considera el proceso descrito en la sección <a href="cmtd.html#fiabilidad">Fiabilidad de máquinas</a>, con dos máquinas. Supón que ambas máquinas están operativas al principio del día 0. Calcula la probabilidad de que el número de máquinas operativas al principio de los próximos tres días sea 2, 1 y 2, en ese orden.</p>
-<p><strong>Ejercicio B2.10</strong>. Calcula la matriz de ocupación <span class="math inline">\(M(10)\)</span>, la distribución límite y la estacionaria, para un proceso CMTD con matriz de transición dada por:
-<span class="math display">\[P=\begin{pmatrix}
+<p><strong>Ejercicio B2.10</strong>. Calcula la matriz de ocupación <span class="math inline">\(M(10)\)</span>, la distribución límite y la estacionaria, para un proceso CMTD con matriz de transición dada por:</p>
+<p><span class="math display">\[P=\begin{pmatrix}
 0.1 &amp; 0.3 &amp; 0.2 &amp; 0.4 \\
 0.1 &amp; 0.3 &amp; 0.4 &amp; 0.2 \\
 0.3 &amp; 0.1 &amp; 0.1 &amp; 0.5 \\

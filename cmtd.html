@@ -64,17 +64,15 @@
 <h2>
 <span class="header-section-number">2.1</span> Definiciones<a class="anchor" aria-label="anchor" href="#definiciones"><i class="fas fa-link"></i></a>
 </h2>
-<div class="yellowbox">
 <div class="definition">
 <p><span id="def:CMTC" class="definition"><strong>Definición 2.1  </strong></span>Un proceso estocástico <span class="math inline">\(\{X(t), t \in \mathbb{N}\}\)</span> con espacio de estados de tipo discreto, <span class="math inline">\(S\)</span>, se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> de <span class="math inline">\(S\)</span> tenemos que:</p>
-<span class="math display" id="eq:cmtd">\[\begin{eqnarray}
-&amp;Pr(X(t+1) = j | X(t) = i, X(t-1),...,X(0)) = \\
-&amp;= Pr(X(t+1) = j | X(t) = i),
+<p><span class="math display" id="eq:cmtd">\[\begin{eqnarray}
+&amp;Pr(X(t+1) = j \| X(t) = i, X(t-1),...,X(0)) = \\
+&amp;= Pr(X(t+1) = j \| X(t) = i),
 \tag{2.1}
-\end{eqnarray}\]</span>
+\end{eqnarray}\]</span></p>
 <p>es decir, la probabilidad de que el proceso en un instante <span class="math inline">\(t+1\)</span> se encuentre en un estado <span class="math inline">\(j\)</span>, dada toda la evolución del proceso a lo largo del tiempo, sólo depende del estado en el que el sistema se encuentrara justamente en el instante anterior <span class="math inline">\(t\)</span>, esto es, <span class="math inline">\(X(t)=i\)</span>, y y no del estado del proceso en los instantes anteriores <span class="math inline">\(t-1, t-2,...,0\)</span>.</p>
 <p>En ocasiones utilizaremos la siguiente notación, <span class="math display">\[X(n)=X_n, \qquad n \geq 0\]</span></p>
-</div>
 </div>
 <p>La probabilidad condicionada dada en <a href="cmtd.html#eq:cmtd">(2.1)</a> se denomina <strong>probabilidad de transición de un paso</strong> y se denota por <span class="math inline">\(p_{ij}(t,t+1)\)</span>, y es la probabilidad de que, dado que el proceso en el instante <span class="math inline">\(t\)</span> está en el estado <span class="math inline">\(i\)</span>, un instante más tarde, <span class="math inline">\(t+1\)</span> haya cambiado al estado <span class="math inline">\(j\)</span>:</p>
 <p><span class="math display">\[p_{ij}(t,t+1)=Pr(X(t+1) = j | X(t) = i).\]</span></p>

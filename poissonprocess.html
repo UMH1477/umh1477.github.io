@@ -70,7 +70,7 @@
 </h2>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:poissonprocess" class="definition"><strong>Definición 3.1  </strong></span>Sea un proceso estocástico de parámetro continuo <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con <span class="math inline">\(N_0 = 0\)</span> y espacio de estados el de los enteros no negativos, <span class="math inline">\(S=\{0,1,2,...\}\)</span>. Dicho proceso se denomina <strong>Proceso de Poisson (PP) de tasa</strong> <span class="math inline">\(\lambda\)</span> si:</p>
+<p><span id="def:unlabeled-div-33" class="definition"><strong>Definición 3.1  </strong></span>Sea un proceso estocástico de parámetro continuo <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con <span class="math inline">\(N_0 = 0\)</span> y espacio de estados el de los enteros no negativos, <span class="math inline">\(S=\{0,1,2,...\}\)</span>. Dicho proceso se denomina <strong>Proceso de Poisson (PP) de tasa</strong> <span class="math inline">\(\lambda\)</span> si:</p>
 <ol style="list-style-type: decimal">
 <li>
 <span class="math inline">\(P(N_t = k) = e^{\lambda t}(\lambda t)^k/k!\)</span> para <span class="math inline">\(k=\{0,1,2,...\}, t \geq 0\)</span>, esto es, <span class="math inline">\(N_t \sim Po(\lambda)\)</span>.</li>
@@ -104,7 +104,8 @@
 <ol start="3" style="list-style-type: decimal">
 <li>¿Cuál es la probabilidad de que haya tres operaciones entre las 8 a.m. y las 12 del mediodía, y 4 operaciones entre las 12 del mediodía y las 5 p.m.?</li>
 </ol>
-<p>Si asumimos que <span class="math inline">\(t=0\)</span> se corresponde con las 8,a.m., a las 12 del mediodía han transcurrido 4 horas, y hasta las 5 p.m. han transcurrido 9 horas. La probabilidad que nos piden se refiere a una probabilidad conjunta de dos franjas horarias que no se solapan, por lo que se trata de sucesos independientes y la probabilidad conjunta es el producto de las probabilidades individuales: <span class="math display">\[Pr[N(4/24)-N(0)=3, N(9/24)-N(4/24)=4]=Pr[N(4/24)-N(0)=3] \cdot Pr[N(9/24)-N(4/24)=4] \]</span> ahora por la estacionariedad de los incrementos, tendremos que esa probabilidad la podemos escribir como</p>
+<p>Si asumimos que <span class="math inline">\(t=0\)</span> se corresponde con las 8,a.m., a las 12 del mediodía han transcurrido 4 horas, y hasta las 5 p.m. han transcurrido 9 horas. La probabilidad que nos piden se refiere a una probabilidad conjunta de dos franjas horarias que no se solapan, por lo que se trata de sucesos independientes y la probabilidad conjunta es el producto de las probabilidades individuales:</p>
+<p><span class="math display">\[Pr[N(4/24)-N(0)=3, N(9/24)-N(4/24)=4]=Pr[N(4/24)-N(0)=3] \cdot Pr[N(9/24)-N(4/24)=4] \]</span> ahora por la estacionariedad de los incrementos, tendremos que esa probabilidad la podemos escribir como</p>
 <p><span class="math display">\[Pr[N(4/24)=3]\cdot Pr[N(5/24)=4]\]</span></p>
 <p>con las distribuciones <span class="math inline">\(Po(24 \cdot 4/24)\)</span> y <span class="math inline">\(Po(24 \cdot 5/24)\)</span>.</p>
 <div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
@@ -139,7 +140,7 @@
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-33" class="definition"><strong>Definición 3.3  </strong></span>Sean <span class="math inline">\(\{N_t; t \geq 0\}\)</span> y <span class="math inline">\(\{M_t; t \geq 0\}\)</span> dos PP independientes con tasas <span class="math inline">\(\lambda_1\)</span> y <span class="math inline">\(\lambda_2\)</span> respectivamente. Entonces el proceso <span class="math inline">\(\{Y_t = N_t + M_t, t \geq 0\}\)</span> es un PP con tasa <span class="math inline">\(\lambda_1 + \lambda_2\)</span>, que se obtiene de la superposición de los dos PP.</p>
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definición 3.3  </strong></span>Sean <span class="math inline">\(\{N_t; t \geq 0\}\)</span> y <span class="math inline">\(\{M_t; t \geq 0\}\)</span> dos PP independientes con tasas <span class="math inline">\(\lambda_1\)</span> y <span class="math inline">\(\lambda_2\)</span> respectivamente. Entonces el proceso <span class="math inline">\(\{Y_t = N_t + M_t, t \geq 0\}\)</span> es un PP con tasa <span class="math inline">\(\lambda_1 + \lambda_2\)</span>, que se obtiene de la superposición de los dos PP.</p>
 </div>
 </div>
 <p>La solución al Ejemplo <a href="poissonprocess.html#exm:pp002">3.3</a> para el proceso de salidas de la autovía viene dada por la superposición de los dos procesos de entradas, <span class="math inline">\(C=A+B\)</span>, de modo que responderá a un PP de tasa <span class="math inline">\(14=8+6\)</span>.</p>
@@ -153,7 +154,7 @@
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-34" class="definition"><strong>Definición 3.4  </strong></span>Sea <span class="math inline">\(\{N_t; t \geq 0\}\)</span> un PP con tasa <span class="math inline">\(\lambda\)</span> y sea <span class="math inline">\(\{X1,X2,...\}\)</span> una secuencia de variables aleatorias iid Bernoulli <span class="math inline">\(Ber(p)\)</span>, independientes del proceso de Poisson. Sea <span class="math inline">\(M = \{M_t ;t \geq 0 \}\)</span> un nuevo proceso que registra las llegadas de <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con probabilidad <span class="math inline">\(p\)</span>, esto es, si <span class="math inline">\(X_n=1\)</span> la llegada n-ésima se registra, y si <span class="math inline">\(X_n=0\)</span> no se registra. Entonces el proceso <span class="math inline">\(\{M_t; t \geq 0\}\)</span> resultante, que supone un “adelgazamiento” o encogimiento del proceso original <span class="math inline">\(N_t\)</span>, es un PP con tasa <span class="math inline">\(\lambda p\)</span>.</p>
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definición 3.4  </strong></span>Sea <span class="math inline">\(\{N_t; t \geq 0\}\)</span> un PP con tasa <span class="math inline">\(\lambda\)</span> y sea <span class="math inline">\(\{X1,X2,...\}\)</span> una secuencia de variables aleatorias iid Bernoulli <span class="math inline">\(Ber(p)\)</span>, independientes del proceso de Poisson. Sea <span class="math inline">\(M = \{M_t ;t \geq 0 \}\)</span> un nuevo proceso que registra las llegadas de <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con probabilidad <span class="math inline">\(p\)</span>, esto es, si <span class="math inline">\(X_n=1\)</span> la llegada n-ésima se registra, y si <span class="math inline">\(X_n=0\)</span> no se registra. Entonces el proceso <span class="math inline">\(\{M_t; t \geq 0\}\)</span> resultante, que supone un “adelgazamiento” o encogimiento del proceso original <span class="math inline">\(N_t\)</span>, es un PP con tasa <span class="math inline">\(\lambda p\)</span>.</p>
 </div>
 </div>
 <p>Aplicando este resultado al Ejemplo <a href="poissonprocess.html#exm:pp003">3.4</a>, y suponiendo que todos los coches actúan de forma independiente, el flujo de giros por la bifurcación de la izquierda forma un PP con una tasa de <span class="math inline">\(0.6=0.3\cdot 2\)</span> por minuto, y el flujo de giros por la bifurcación de la derecha forma un PP con una tasa de <span class="math inline">\(1.4=0.7\cdot 2\)</span> coches por minuto.</p>

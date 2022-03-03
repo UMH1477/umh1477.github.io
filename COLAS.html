@@ -302,16 +302,16 @@ En cuanto a la segunda pregunta debemos tener en cuenta que:</p>
 ## {
 ##     1 - exp(-t/W)
 ## }
-## &lt;bytecode: 0x7fd66e7ed970&gt;
-## &lt;environment: 0x7fd66e7ed2a8&gt;
+## &lt;bytecode: 0x7f85d1ec1970&gt;
+## &lt;environment: 0x7f85d1ec12a8&gt;
 ## 
 ## $FWq
 ## function (t) 
 ## {
 ##     1 - (RO * exp(-t/W))
 ## }
-## &lt;bytecode: 0x7fd66e7eddd0&gt;
-## &lt;environment: 0x7fd66e7ed2a8&gt;
+## &lt;bytecode: 0x7f85d1ec1dd0&gt;
+## &lt;environment: 0x7f85d1ec12a8&gt;
 ## 
 ## attr(,"class")
 ## [1] "o_MM1"</code></pre>
@@ -577,7 +577,7 @@ c_n =
 <p>La suma de la serie de los <span class="math inline">\(c_n\)</span> será convergente (el sistema es estacionario) si <span class="math inline">\(\rho &lt; 1\)</span>, es decir,
 <span class="math inline">\(\lambda &lt; s\mu\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-52" class="example"><strong>Ejemplo 5.1  </strong></span>En una determinada planta de fabricación, la operación final es una operación de pintura. En el centro de pintura siempre hay dos trabajadores que trabajan en paralelo, aunque debido a la configuración física, no pueden ayudarse mutuamente. Las llegdas al centro de pintura se producen según un proceso de Poisson con
+<p><span id="exm:unlabeled-div-53" class="example"><strong>Ejemplo 5.1  </strong></span>En una determinada planta de fabricación, la operación final es una operación de pintura. En el centro de pintura siempre hay dos trabajadores que trabajan en paralelo, aunque debido a la configuración física, no pueden ayudarse mutuamente. Las llegdas al centro de pintura se producen según un proceso de Poisson con
 con una tasa de llegada media de 100 al día. Cada trabajador tarda una media de 27 minutos en pintar cada artículo. Últimamente, el exceso de trabajo en curso es motivo de preocupación, por lo que la dirección está considerando ampliar el centro de pintura y contratar a un tercer trabajador. (Se supone que el tercer trabajador, tras un periodo de formación, también tardará una media de 27 minutos por pieza). Otra opción sería comprar un robot para realizar la tarea de los trabajadores, ya que se sabe que el tiempo medio que tardará en cada pieza es de 10 minutos.</p>
 <ul>
 <li>Analiza cada uno de los tres sistemas respecto de las medidas de eficiencia e indica que alternativa reduciría el inventario.</li>
@@ -665,7 +665,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <p><span class="math display">\[\bar{\rho} = \frac{\bar{\lambda}}{\mu s}\]</span></p>
 <p>Este sistema siempre es estacionario. A continuación, se presenta un ejemplo de este sistema donde se muestra la función que debemos usar para analiar este tipo de cola.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-53" class="example"><strong>Ejemplo 5.2  </strong></span>Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos siendo atendidas por las operadoras y otras tres en espera, recibe el tono de “línea ocupada”). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada y dicho tiempo de distribución exponencial. Calcular:</p>
+<p><span id="exm:unlabeled-div-54" class="example"><strong>Ejemplo 5.2  </strong></span>Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos siendo atendidas por las operadoras y otras tres en espera, recibe el tono de “línea ocupada”). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada y dicho tiempo de distribución exponencial. Calcular:</p>
 <ul>
 <li>El porcentaje de tiempo en que cada operadora está ocupada y el número medio de servidores ocupados.</li>
 <li>El número medio de llamadas en espera.</li>
@@ -759,7 +759,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <p><span class="math display">\[L_{q_{red}} = \lambda W_{q_{red}}\]</span></p>
 <p>de esta forma basta con analizar cada una de las clas que conforman la red para estudiar el comportamiento global del sistema.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-54" class="example"><strong>Ejemplo 5.3  </strong></span>Una empresa de ITV en una localidad dispone de una superficie que consta de tres partes: Una caseta donde los clientes entregan la documentación del vehículo y realizan el pago de tasas, sin restricciones paa atender ningún vehículo. Una nave formada por dos circuitos (revisión y oficina de personal técnico) atendidos por dos técnicos cada uno de ellos. Los vehículos que llegan a la nave son atendidos con una tasa de servicio medio de 45 clientes/hora para la revisión y 2 minutos/cliente en la oficina de personal técnico. Los coches acuden a la empresa a una media de 57 clientes/hora, ya que un mayor número de vehículos colapsaría el trabajo de la caseta, cuyo empleado atiende a un ritmo medio de 1 cliente/minuto. Las llegadas siguen un Proceso de Poisson y los tiempos de servicio se distribuyen según una variable exponencial. Se pide:</p>
+<p><span id="exm:unlabeled-div-55" class="example"><strong>Ejemplo 5.3  </strong></span>Una empresa de ITV en una localidad dispone de una superficie que consta de tres partes: Una caseta donde los clientes entregan la documentación del vehículo y realizan el pago de tasas, sin restricciones paa atender ningún vehículo. Una nave formada por dos circuitos (revisión y oficina de personal técnico) atendidos por dos técnicos cada uno de ellos. Los vehículos que llegan a la nave son atendidos con una tasa de servicio medio de 45 clientes/hora para la revisión y 2 minutos/cliente en la oficina de personal técnico. Los coches acuden a la empresa a una media de 57 clientes/hora, ya que un mayor número de vehículos colapsaría el trabajo de la caseta, cuyo empleado atiende a un ritmo medio de 1 cliente/minuto. Las llegadas siguen un Proceso de Poisson y los tiempos de servicio se distribuyen según una variable exponencial. Se pide:</p>
 <ul>
 <li>Factor de utilziación o intensidad de tráfico en cada nodo de la red.</li>
 <li>Probabildiades de que no haya ningún cliente en cada uno de los nodos de la red.</li>

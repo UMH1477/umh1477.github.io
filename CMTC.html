@@ -1236,7 +1236,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 \end{equation}\]</span></p>
 <p>que es una matriz estocástica.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-35" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de tarnsición de probabilidades, <span class="math inline">\(P\)</span>, de una CMTC viene dada por:</p>
+<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de tarnsición de probabilidades, <span class="math inline">\(P\)</span>, de una CMTC viene dada por:</p>
 <p><span class="math display">\[P(t) = \sum_{k=0}^{\infty} e^{-rt}\frac{(rt)^k}{k!} \hat{P}^k\]</span></p>
 </div>
 <p>Esta forma de obtener <span class="math inline">\(P\)</span> se denomina <strong>método de uniformización</strong>, y proporciona un método numérico para obtener las probabilidades de transición deseadas, sin más que usar los <span class="math inline">\(m\)</span> primeros términos de la serie infinita definida. Para asegurar la convergencia de dichas probabilidades se usan como reglas habituales:</p>
@@ -1322,7 +1322,7 @@ Al finalizar la matriz <span class="math inline">\(B\)</span> es una aproximaci�
 <p>¿Cómo interpretamos esas probabilidades?</p>
 <p>Veamos ahora la aplicación de este algoritmo a alguno de los ejemplos con los que hemos ido trabajando en esta unidad.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-36" class="example"><strong>Ejemplo 4.3  </strong></span>Para los datos correspondientes al cajero bancario estamos interesados en conocer la probabilidad de que después de 50 minutos de funcionamiento el sistema este completamente ocupado (1 usuario atendido y tres en cola), cuando partímos de <span class="math inline">\(0\)</span> clientes en el sistema (<span class="math inline">\(p_{04}(4)\)</span>). La matriz de tasas viene dada por:</p>
+<p><span id="exm:unlabeled-div-37" class="example"><strong>Ejemplo 4.3  </strong></span>Para los datos correspondientes al cajero bancario estamos interesados en conocer la probabilidad de que después de 50 minutos de funcionamiento el sistema este completamente ocupado (1 usuario atendido y tres en cola), cuando partímos de <span class="math inline">\(0\)</span> clientes en el sistema (<span class="math inline">\(p_{04}(4)\)</span>). La matriz de tasas viene dada por:</p>
 </div>
 <div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>
@@ -1378,12 +1378,12 @@ Al finalizar la matriz <span class="math inline">\(B\)</span> es una aproximaci�
 </h2>
 <p>En esta sección, nos concentramos en el análisis de los tiempos de ocupación de un estado determinado en un intervalo de tiempo finito <span class="math inline">\([0, T]\)</span>, es decir, la duración esperada de tiempo que el sistema pasa en ese estado. Como ocurre con las probabildiades de trasnsición presentamos un algortimo para obtener las cantidades de interés a partir de la matriz de tasas, y veremos como la simulación del proceso nos puede ayudar a dar respuesta a las mismas cuestiones.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-37" class="theorem"><strong>Teorema 4.3  </strong></span>Si <span class="math inline">\(P(t)\)</span> es la matriz de transiciones de probabilidad del proceso <span class="math inline">\(\{X(t), t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, se define la cantidad <span class="math inline">\(m_{ij}(T)\)</span> como el tiempo de ocupación del estado <span class="math inline">\(j\)</span> hasta el tiempo <span class="math inline">\(T\)</span> partiendo del estado <span class="math inline">\(i\)</span> como:</p>
+<p><span id="thm:unlabeled-div-38" class="theorem"><strong>Teorema 4.3  </strong></span>Si <span class="math inline">\(P(t)\)</span> es la matriz de transiciones de probabilidad del proceso <span class="math inline">\(\{X(t), t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, se define la cantidad <span class="math inline">\(m_{ij}(T)\)</span> como el tiempo de ocupación del estado <span class="math inline">\(j\)</span> hasta el tiempo <span class="math inline">\(T\)</span> partiendo del estado <span class="math inline">\(i\)</span> como:</p>
 <p><span class="math display">\[m_{ij}(T) = \int_0^T p_{ij}(t)dt, \quad 1 \leq i, j \leq N.\]</span></p>
 </div>
 <p>Cuando tenemos formas explicitas para cada uno de los elemntos de <span class="math inline">\(P(t)\)</span> (este es el caso para la mayoría de los sistemas de colas de espera) este probelma se puede resolver teóricamente, pero en la mayoria de ocasiones es necesario un algoritmo de computación para aproximar estas cantidades. A continuación se presenta el algoritmo necesario, pero antes veamos la aproximación mediante series de la matriz <span class="math inline">\(M(T) = [m_{ij}(t)]\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-38" class="theorem"><strong>Teorema 4.4  </strong></span>Si <span class="math inline">\(Y\)</span> es una variable aletoria Poisson de parámetro <span class="math inline">\(r*t\)</span> entonces:</p>
+<p><span id="thm:unlabeled-div-39" class="theorem"><strong>Teorema 4.4  </strong></span>Si <span class="math inline">\(Y\)</span> es una variable aletoria Poisson de parámetro <span class="math inline">\(r*t\)</span> entonces:</p>
 <p><span class="math display">\[M(T) = \frac{1}{r} \sum_{k = 0}^{\infty} P(Y &gt; k) \hat{P}^k, \quad T \geq 0.\]</span></p>
 </div>
 <div class="silverbox">
@@ -1446,7 +1446,7 @@ Al finalizar la matriz <span class="math inline">\(B/r\)</span> es una aproximac
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">B</span><span class="op">/</span><span class="va">rlimit</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-39" class="example"><strong>Ejemplo 4.4  </strong></span>Retomamdo el sistema sobre el tiempo de vida de una máquina descrito en el ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es el tiempo total esperado de funcionamiento de la máquina al finalizar el mes de enero? Dado que el proceso sólo tiene espacio de estados <span class="math inline">\(S = \{0, 1\}\)</span>, la cantidad de interés es <span class="math inline">\(m_{11}(31)\)</span>. Con <span class="math inline">\(\lambda = 1\)</span> y <span class="math inline">\(\mu = 0.1\)</span>, la matriz de tasas del proceso viene dada por:</p>
+<p><span id="exm:unlabeled-div-40" class="example"><strong>Ejemplo 4.4  </strong></span>Retomamdo el sistema sobre el tiempo de vida de una máquina descrito en el ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es el tiempo total esperado de funcionamiento de la máquina al finalizar el mes de enero? Dado que el proceso sólo tiene espacio de estados <span class="math inline">\(S = \{0, 1\}\)</span>, la cantidad de interés es <span class="math inline">\(m_{11}(31)\)</span>. Con <span class="math inline">\(\lambda = 1\)</span> y <span class="math inline">\(\mu = 0.1\)</span>, la matriz de tasas del proceso viene dada por:</p>
 </div>
 <div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">2</span>
@@ -1492,19 +1492,19 @@ Al finalizar la matriz <span class="math inline">\(B/r\)</span> es una aproximac
 <p><span class="math display">\[\lim_{t \rightarrow \infty} P(X(t) = j, \quad 1 \leq j \leq N\]</span></p>
 <p>Si existen dichos límites el conjunto <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span> se conoce como distribución límite de la CMTC.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-40" class="theorem"><strong>Teorema 4.5  </strong></span>Una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con matriz de tasas <span class="math inline">\(R\)</span> tiene una única distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span>, que se puede obtener como solución de las ecuaciones de balance:</p>
+<p><span id="thm:unlabeled-div-41" class="theorem"><strong>Teorema 4.5  </strong></span>Una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con matriz de tasas <span class="math inline">\(R\)</span> tiene una única distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span>, que se puede obtener como solución de las ecuaciones de balance:</p>
 <p><span class="math display">\[p_j r_j = \sum_{i=1}^N p_ir_{ij}, \quad 1 \leq j \leq N\]</span>
 <span class="math display">\[\sum_{i=1}^N p_i = 1\]</span></p>
 </div>
 <p>En este sentido podemos interpretar <span class="math inline">\(p_jr_j\)</span> como la tasa de la CMTC cuanod deja el estado <span class="math inline">\(j\)</span>, mientras que <span class="math inline">\(p_jr_{ij}\)</span> es la tasa de entrada de la CMTC a estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-41" class="theorem"><strong>Teorema 4.6  </strong></span>Dado una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con distribución límite <span class="math inline">\(p\)</span>, entonces la distribución estacionaria de la CMTC viene dada por <span class="math inline">\(p\)</span>, es decir:</p>
+<p><span id="thm:unlabeled-div-42" class="theorem"><strong>Teorema 4.6  </strong></span>Dado una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con distribución límite <span class="math inline">\(p\)</span>, entonces la distribución estacionaria de la CMTC viene dada por <span class="math inline">\(p\)</span>, es decir:</p>
 <p><span class="math display">\[P(X(0) = j) = p_j \text{ para } 1 \leq j leq N\]</span>
 <span class="math inline">\(P(X(t) = j) = p_j \text{ para } 1 \leq j leq N, t \geq 0\)</span>$</p>
 </div>
 <p>A partir de la distribución límite resulta posible obtener la distribución de ocupación de la CMTC.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-42" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado hata el tiempo <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces:</p>
+<p><span id="thm:unlabeled-div-43" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado hata el tiempo <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces:</p>
 <p><span class="math display">\[\lim_{T \rightarrow \infty} \frac{m_{ij}(T)}{T} = p_j\]</span></p>
 </div>
 <p>A continuación se presenta la solución de la distrbución límite para los procesos de nacimiento y muerte. En el resto de sistemas se deberan plantear las ecuaciones de balance y resorverlas. En ambas situaciones presentamos las correspondientes funciones que nos permiten obtener las cantidades de interés.</p>
@@ -1539,7 +1539,7 @@ donde <span class="math inline">\(\rho_0 = 1,\)</span> y</p>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-43" class="example"><strong>Ejemplo 4.5  </strong></span>Retomamdo el sistema descrito en el ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es la distribución límite del proceso?</p>
+<p><span id="exm:unlabeled-div-44" class="example"><strong>Ejemplo 4.5  </strong></span>Retomamdo el sistema descrito en el ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es la distribución límite del proceso?</p>
 <p>Este sistema es un proceso de nacimiento y muerte donde podemos aplicar la función anterior para obtener la distribución límite con dos estados y tasas <span class="math inline">\(\lambda = 1\)</span>, <span class="math inline">\(\mu = 1/10\)</span> (expresadas en periodos de diez días).</p>
 </div>
 <div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
@@ -1574,7 +1574,7 @@ donde <span class="math inline">\(\rho_0 = 1,\)</span> y</p>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-44" class="example"><strong>Ejemplo 4.6  </strong></span>Para el sistema de proceso de fabricación se está interesado en conocer cuando la máquina estará parada a largo plazo. Dado que el espacio de estados es <span class="math inline">\(S = \{1, 2,...,6\}.\)</span> la máquina está aprada cuando nos encontramos en los estados <span class="math inline">\(5 = (4, 0)\)</span> y <span class="math inline">\(6 = (3, 0)\)</span>. A partir de la información del sistema podemos obtener la distribución límite del proceso, pero en este caso como no se trata de un proceso de nacimiento y muerte debemos plantear las ecuaciones de balance, a partir de la matriz de tasas, y resolver el sistema numéricamente.</p>
+<p><span id="exm:unlabeled-div-45" class="example"><strong>Ejemplo 4.6  </strong></span>Para el sistema de proceso de fabricación se está interesado en conocer cuando la máquina estará parada a largo plazo. Dado que el espacio de estados es <span class="math inline">\(S = \{1, 2,...,6\}.\)</span> la máquina está aprada cuando nos encontramos en los estados <span class="math inline">\(5 = (4, 0)\)</span> y <span class="math inline">\(6 = (3, 0)\)</span>. A partir de la información del sistema podemos obtener la distribución límite del proceso, pero en este caso como no se trata de un proceso de nacimiento y muerte debemos plantear las ecuaciones de balance, a partir de la matriz de tasas, y resolver el sistema numéricamente.</p>
 </div>
 <p>Resolvemos las ecuaciones de balance para el sistema del proceso de fabricación. Definimos la matriz de tasas y ejecutamos la función anterior para obtener las probabilidades límite del proceso:</p>
 <div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
@@ -1619,7 +1619,7 @@ donde <span class="math inline">\(\rho_0 = 1,\)</span> y</p>
 <p>donde <span class="math inline">\(c = [c(1), c(2),...,c(N-1), c(N)]'\)</span> y <span class="math inline">\(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.\)</span>
 :::</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-45" class="example"><strong>Ejemplo 4.7  </strong></span>Para el sistema de mantenimiento de máquinas se conoce que que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas si al finalizar todas las máquinas están funcionando. Si <span class="math inline">\(X(t)\)</span> es el número de máquinas funcionando en el instante <span class="math inline">\(t\)</span>, el espacio de estados para 4 máquinas viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span> y el vector de costes es:</p>
+<p><span id="exm:unlabeled-div-46" class="example"><strong>Ejemplo 4.7  </strong></span>Para el sistema de mantenimiento de máquinas se conoce que que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas si al finalizar todas las máquinas están funcionando. Si <span class="math inline">\(X(t)\)</span> es el número de máquinas funcionando en el instante <span class="math inline">\(t\)</span>, el espacio de estados para 4 máquinas viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span> y el vector de costes es:</p>
 </div>
 <p><span class="math display">\[
 \begin{matrix}
@@ -1678,11 +1678,11 @@ g(24) = M(24)*c =
 </h3>
 <p>Para el sistema de <code>vida de una máquina</code>, supongamos que se da el coste <span class="math inline">\(C\)</span> del tiempo de inactividad. Queremos saber a cuánto debe ser la tasa de ingresos durante el tiempo de actividad para que sea económicamente rentable operar la máquina. Si nos guiamos por el coste total, la respuesta dependerá de del horizonte de planificación <span class="math inline">\(T\)</span> y también del estado inicial de la máquina. Una alternativa es calcular los ingresos netos a largo plazo por unidad de tiempo para esta máquina e insistir en que sea positivo para la rentabilidad. Esta respuesta no dependerá de <span class="math inline">\(T\)</span>, y, como veremos ni siquiera del estado inicial de la máquina. Por lo tanto, el cálculo de estos índices de costes o ingresos a largo plazo es muy útil. En esta subsección mostraremos cómo calcular estas cantidades.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-46" class="theorem"><strong>Teorema 4.8  </strong></span>Sea <span class="math inline">\(\{X(t), t \ geq 0\}\)</span> una CMTC irreducible con estados <span class="math inline">\(\{1, 2,...,N\}\)</span>, distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span> y vector de costes <span class="math inline">\(c = [c_1, c_2,..., c_N]\)</span>, entonces la tasa de coste a largo plazo viene dada por:</p>
+<p><span id="thm:unlabeled-div-47" class="theorem"><strong>Teorema 4.8  </strong></span>Sea <span class="math inline">\(\{X(t), t \ geq 0\}\)</span> una CMTC irreducible con estados <span class="math inline">\(\{1, 2,...,N\}\)</span>, distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span> y vector de costes <span class="math inline">\(c = [c_1, c_2,..., c_N]\)</span>, entonces la tasa de coste a largo plazo viene dada por:</p>
 <p><span class="math display">\[g(i) = \sum_{j = 1}^N p_jc(j), \quad 1 \leq i \leq N\]</span></p>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-47" class="example"><strong>Ejemplo 4.8  </strong></span>Si consideramos el sistema de <code>vida de una máquina</code> supongamos que el coste por unidad de tiempo de que la máquina este apagado es <span class="math inline">\(C\)</span>. ¿Cuál es el la tasa mínima de ingresos <span class="math inline">\(I\)</span> necesaria durante el tiempo de actividad para alcanzar el punto de equilibrio a largo plazo?</p>
+<p><span id="exm:unlabeled-div-48" class="example"><strong>Ejemplo 4.8  </strong></span>Si consideramos el sistema de <code>vida de una máquina</code> supongamos que el coste por unidad de tiempo de que la máquina este apagado es <span class="math inline">\(C\)</span>. ¿Cuál es el la tasa mínima de ingresos <span class="math inline">\(I\)</span> necesaria durante el tiempo de actividad para alcanzar el punto de equilibrio a largo plazo?</p>
 </div>
 <p>Utilizando las tasas definidas anteriormente (<span class="math inline">\(\lambda = 1, \mu = 0.1\)</span>), la distribución límite del sistema <span class="math inline">\(p = [0.0909, 0.9091]\)</span>, y el vector de costes <span class="math inline">\(c =[-C, I]\)</span> para el espacio de estados <span class="math inline">\(S = \{0, 1\}\)</span>, la tasa de coste a largo plazo por unidad de tiempo viene dada por la expresión:</p>
 <p><span class="math display">\[ g = 0.9091*I - 0.0909*C\]</span>
@@ -1690,7 +1690,7 @@ de forma que para mantener el sistema en equilibrio, <span class="math inline">\
 <p><span class="math display">\[I \geq \frac{0.0909}{0.9091}*C = 0.099989*C \approx 0.1*C\]</span></p>
 <p>Así, los ingresos por unidad de tiempo superiores a 0.1 veces por el coste de que la máquina este parada por unidad de tiempo resulta rentable. Si la empresa ha establecido un ingreso por hora de 50 euros, cuando sabe que el coste por hora es de 10 euros cuando está apagada, se desea saber si se cumple la condición de equilibrio para los costes.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-48" class="example"><strong>Ejemplo 4.9  </strong></span>Consideramos el sistema de la <code>central telefónica</code> donde la capacidad máxima de la centralita es de seis llamadas. Las llamadas llegan según un <span class="math inline">\(PP\)</span> con una tasa de 4/minuto, y la duración media de cada llamada exponencial de media 2 minutos. En primer lugar deseamos conocer le beneficio por unidad de tiempo si la facturación por minuto de cada llamada es de 10 céntimos. En segundo lugar deseamos estimar la pérdida que sufrimos por todas las llamadas que no pueden ser atendidas. Consideramos como <span class="math inline">\(X(t)\)</span> al número de llamadas que están siendo atendidas en el instante <span class="math inline">\(t\)</span>.</p>
+<p><span id="exm:unlabeled-div-49" class="example"><strong>Ejemplo 4.9  </strong></span>Consideramos el sistema de la <code>central telefónica</code> donde la capacidad máxima de la centralita es de seis llamadas. Las llamadas llegan según un <span class="math inline">\(PP\)</span> con una tasa de 4/minuto, y la duración media de cada llamada exponencial de media 2 minutos. En primer lugar deseamos conocer le beneficio por unidad de tiempo si la facturación por minuto de cada llamada es de 10 céntimos. En segundo lugar deseamos estimar la pérdida que sufrimos por todas las llamadas que no pueden ser atendidas. Consideramos como <span class="math inline">\(X(t)\)</span> al número de llamadas que están siendo atendidas en el instante <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>En primer lugar calculamos la distribución límite del proceso. Dado que se trata de un proceso de nacimeinto y muerte utilizamos la función correspondiente.</p>
 <div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
@@ -1720,7 +1720,7 @@ de forma que para mantener el sistema en equilibrio, <span class="math inline">\
 <p><span class="math display">\[m_i = E(T \mid X(0) = i), \quad 1 \leq i \leq N-1\]</span>
 y <span class="math inline">\(m_N = 0.\)</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-49" class="theorem"><strong>Teorema 4.9  </strong></span>Los valores <span class="math inline">\(\{m_i, 1 \leq i \leq N-1\}\)</span> satisfacen</p>
+<p><span id="thm:unlabeled-div-50" class="theorem"><strong>Teorema 4.9  </strong></span>Los valores <span class="math inline">\(\{m_i, 1 \leq i \leq N-1\}\)</span> satisfacen</p>
 <p><span class="math display">\[r_im_i = 1 + \sum_{j=1}^{N-1} r_{ij}m_j, \quad 1\leq i \leq N-1.\]</span></p>
 </div>
 <p>Si deseamos calcular los tiempos de primer paso a un subconjunto de estados, <span class="math inline">\(A\)</span> se puede adaptar el teorema anterior ya que sólo debemos resolver el sistema:</p>
@@ -1757,7 +1757,7 @@ y <span class="math inline">\(m_N = 0.\)</span></p>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-50" class="example"><strong>Ejemplo 4.10  </strong></span>En las condiciones del sistema <span class="math inline">\(M/M/1/K\)</span> del <code>cajero bancario</code> descrito anteriormente, estamos interesados en conocer el tiempo quen debe trasncurrir hasta que la cola esta vacia si ahora mismo hay un cliente en el sistema y cero en la cola (<span class="math inline">\(X(0) = 0\)</span>). Recordemos que el esapcio de estados hace referencia al número de clientes en la cola y viene dado por <span class="math inline">\(\{0, 1, 2, 3, 4, 5\}.\)</span></p>
+<p><span id="exm:unlabeled-div-51" class="example"><strong>Ejemplo 4.10  </strong></span>En las condiciones del sistema <span class="math inline">\(M/M/1/K\)</span> del <code>cajero bancario</code> descrito anteriormente, estamos interesados en conocer el tiempo quen debe trasncurrir hasta que la cola esta vacia si ahora mismo hay un cliente en el sistema y cero en la cola (<span class="math inline">\(X(0) = 0\)</span>). Recordemos que el esapcio de estados hace referencia al número de clientes en la cola y viene dado por <span class="math inline">\(\{0, 1, 2, 3, 4, 5\}.\)</span></p>
 </div>
 <div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Definición matriz de tasas</span>
@@ -1784,7 +1784,7 @@ y <span class="math inline">\(m_N = 0.\)</span></p>
 ## estado 5 0.6526749</code></pre>
 <p>El tiempo esperado hasta que la cola este vacia de nuevo son 0.1736 horas o 10.42 minutos.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-51" class="example"><strong>Ejemplo 4.11  </strong></span>En las condiciones del sistema de <code>mantenimiento de areonaves</code> descrito anteriormente. Supongamos que en un experimento de prueba el avión despega con cuatro motores motores que funcionan correctamente y sigue volando hasta que se estrella. Estamos interesados en conocer el tiempo esperado del accidente.</p>
+<p><span id="exm:unlabeled-div-52" class="example"><strong>Ejemplo 4.11  </strong></span>En las condiciones del sistema de <code>mantenimiento de areonaves</code> descrito anteriormente. Supongamos que en un experimento de prueba el avión despega con cuatro motores motores que funcionan correctamente y sigue volando hasta que se estrella. Estamos interesados en conocer el tiempo esperado del accidente.</p>
 <p>Recordemos que el espacio de estados del sistema es <span class="math inline">\(\{1, 2,...,,9\}\)</span>, y sabemos que el avión se estrallará si en algún momento accedemos al subconjunto de estados <span class="math inline">\(\{1, 2, 3, 4, 7\}.\)</span> Calculamos los tiempos de primer paso cuando <span class="math inline">\(X(0) = \{5, 6, 8, 9\}\)</span>, aunque como el avión está en condiciones çoptimas para despegar nos debermeos fijar en el valor correspondiente al estado 9. Recordemos que el tiempo medio hasta que falla un motor es de 200 horas, de forma que <span class="math inline">\(\lambda = 1/200 = 0.005.\)</span></p>
 </div>
 <div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">

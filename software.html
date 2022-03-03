@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Software | Simulación de Procesos y Sistemas</title>
+<meta name="description" content="Para poder utilizar el código expuesto en estos materiales es necesario la instalación de los programas R,7 que actúa como lenguaje de programación, y RStudio.8 que actúa como interfaz, y que se...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Software | Simulación de Procesos y Sistemas">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Para poder utilizar el código expuesto en estos materiales es necesario la instalación de los programas R,7 que actúa como lenguaje de programación, y RStudio.8 que actúa como interfaz, y que se...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Software | Simulación de Procesos y Sistemas">
+<meta name="twitter:description" content="Para poder utilizar el código expuesto en estos materiales es necesario la instalación de los programas R,7 que actúa como lenguaje de programación, y RStudio.8 que actúa como interfaz, y que se...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Simulación de Procesos y Sistemas</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Antes de comenzar</a></li>
+<li><a class="active" href="software.html">Software</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> Conceptos básicos</a></li>
+<li><a class="" href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></li>
+<li><a class="" href="poissonprocess.html"><span class="header-section-number">3</span> Proceso de Poisson</a></li>
+<li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="software" class="section level1 unnumbered">
+<h1>Software<a class="anchor" aria-label="anchor" href="#software"><i class="fas fa-link"></i></a>
+</h1>
+<p>Para poder utilizar el código expuesto en estos materiales es necesario la instalación de los programas R,<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-base" role="doc-biblioref"&gt;R Core Team, &lt;em&gt;R: A Language and Environment for Statistical Computing&lt;/em&gt; (Vienna, Austria: R Foundation for Statistical Computing, 2021), &lt;/a&gt;&lt;a href="https://www.R-project.org/" role="doc-biblioref"&gt;https://www.R-project.org/&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a></span> que actúa como lenguaje de programación, y RStudio.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-rstudio" role="doc-biblioref"&gt;RStudio Team, &lt;em&gt;RStudio: Integrated Development Environment for r&lt;/em&gt; (Boston, MA: RStudio, Inc., 2019), &lt;/a&gt;&lt;a href="http://www.rstudio.com/" role="doc-biblioref"&gt;http://www.rstudio.com/&lt;/a&gt;.&lt;/p&gt;'><sup>8</sup></a></span> que actúa como interfaz, y que se pueden descargar desde:</p>
+<ul>
+<li>R: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>
+</li>
+<li>RStudio: <a href="https://rstudio.com/" class="uri">https://rstudio.com/</a>
+</li>
+</ul>
+<p>Para crear informes directos a partir del código utilizado al programar en R con RStudio se recomienda RMarkdown.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-rmarkdown" role="doc-biblioref"&gt;JJ Allaire et al., &lt;em&gt;Rmarkdown: Dynamic Documents for r&lt;/em&gt;, 2021, &lt;/a&gt;&lt;a href="https://CRAN.R-project.org/package=rmarkdown" role="doc-biblioref"&gt;https://CRAN.R-project.org/package=rmarkdown&lt;/a&gt;.&lt;/p&gt;'><sup>9</sup></a></span></p>
+<p>A continuación se detallan brevemente las librerías especifícas de R utilizadas en este manual. Conviene tenerlas instaladas y actualizadas todas ellas. El conjunto de librerías útiles en Simulación de Procesos y Sistemas son:</p>
+<ul>
+<li><p><strong>tidyverse</strong>, en <span class="citation"><a href="bibliograf%C3%ADa.html#ref-tidyverse2019" role="doc-biblioref">Hadley Wickham et al.</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-tidyverse2019" role="doc-biblioref"&gt;&lt;span&gt;“Welcome to the &lt;span class="nocase"&gt;tidyverse&lt;/span&gt;,”&lt;/span&gt; &lt;em&gt;Journal of Open Source Software&lt;/em&gt; 4, no. 43 (2019): 1686, &lt;/a&gt;&lt;a href="https://doi.org/10.21105/joss.01686" role="doc-biblioref"&gt;https://doi.org/10.21105/joss.01686&lt;/a&gt;.&lt;/p&gt;'><sup>10</sup></a></span> y <span class="citation"><a href="bibliograf%C3%ADa.html#ref-R-tidyverse" role="doc-biblioref">Hadley Wickham</a>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-tidyverse" role="doc-biblioref"&gt;&lt;em&gt;Tidyverse: Easily Install and Load the Tidyverse&lt;/em&gt;, 2021, &lt;/a&gt;&lt;a href="https://CRAN.R-project.org/package=tidyverse" role="doc-biblioref"&gt;https://CRAN.R-project.org/package=tidyverse&lt;/a&gt;.&lt;/p&gt;'><sup>11</sup></a></span> Es una colección de librerías en R para la ciencia de datos, que comparten una misma filosofía, gramática y estructuras de datos y facilita el tratamiento de datos. Para aprender a utilizar estas librerías es recomendable el libro <em>R for Data Science</em> de <span class="citation"><a href="bibliograf%C3%ADa.html#ref-wickham-grolemund" role="doc-biblioref">Hadley Wickham and Garret Grolemund</a>,<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-wickham-grolemund" role="doc-biblioref"&gt;&lt;em&gt;R for Data Science, 1st Edition&lt;/em&gt; (O’Reilly Media, 2017), &lt;/a&gt;&lt;a href="https://r4ds.had.co.nz/%20,%20https://es.r4ds.hadley.nz/" role="doc-biblioref"&gt;https://r4ds.had.co.nz/ , https://es.r4ds.hadley.nz/&lt;/a&gt;.&lt;/p&gt;'><sup>12</sup></a></span> así como el manual de <span class="citation"><a href="bibliograf%C3%ADa.html#ref-grosser18" role="doc-biblioref">Malte Grosser</a>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-grosser18" role="doc-biblioref"&gt;&lt;em&gt;Tidyverse Cookbook&lt;/em&gt;, 2018, &lt;/a&gt;&lt;a href="https://bookdown.org/Tazinho/Tidyverse-Cookbook/" role="doc-biblioref"&gt;https://bookdown.org/Tazinho/Tidyverse-Cookbook/&lt;/a&gt;.&lt;/p&gt;'><sup>13</sup></a></span></p></li>
+<li><p><strong>simmer</strong>, en <span class="citation"><a href="bibliograf%C3%ADa.html#ref-simmer2019" role="doc-biblioref">Iñaki Ucar, Bart Smeets, and Arturo Azcorra</a>,<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-simmer2019" role="doc-biblioref"&gt;&lt;span&gt;“&lt;span class="nocase"&gt;simmer&lt;/span&gt;: Discrete-Event Simulation for &lt;span&gt;R&lt;/span&gt;,”&lt;/span&gt; &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 90, no. 2 (2019): 1–30, &lt;/a&gt;&lt;a href="https://doi.org/10.18637/jss.v090.i02" role="doc-biblioref"&gt;https://doi.org/10.18637/jss.v090.i02&lt;/a&gt;.&lt;/p&gt;'><sup>14</sup></a></span> <span class="citation"><a href="bibliograf%C3%ADa.html#ref-ucar_smeets" role="doc-biblioref">IÃ±aki Ucar and Bart Smeets</a>,<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-ucar_smeets" role="doc-biblioref"&gt;&lt;span&gt;“Simmer”&lt;/span&gt; (Web, 2021), https://doi.org/&lt;/a&gt;&lt;a href="https://doi.org/10.18637/jss.v090.i02" role="doc-biblioref"&gt;https://doi.org/10.18637/jss.v090.i02&lt;/a&gt;.&lt;/p&gt;'><sup>15</sup></a></span> <span class="citation"><a href="bibliograf%C3%ADa.html#ref-R-simmer" role="doc-biblioref">Iñaki Ucar and Bart Smeets</a>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-simmer" role="doc-biblioref"&gt;&lt;em&gt;Simmer: Discrete-Event Simulation for r&lt;/em&gt;, 2021, &lt;/a&gt;&lt;a href="https://CRAN.R-project.org/package=simmer" role="doc-biblioref"&gt;https://CRAN.R-project.org/package=simmer&lt;/a&gt;.&lt;/p&gt;'><sup>16</sup></a></span> Es una librería R para la simulación de eventos discretos (DES) orientada a procesos. Diseñado para ser un marco genérico como SimPy o SimJulia, aprovecha la potencia de Rcpp para aumentar el rendimiento y hacer factible el DES en R. Como característica destacable, simmer explota el concepto de trayectoria: un camino común en el modelo de simulación para entidades del mismo tipo. Es bastante flexible y sencillo de utilizar, y aprovecha el flujo de trabajo de encadenamiento/conducción introducido por el paquete <code>magrittr</code> (<span class="citation"><a href="bibliograf%C3%ADa.html#ref-R-magrittr" role="doc-biblioref">Stefan Milton Bache and Hadley Wickham</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-magrittr" role="doc-biblioref"&gt;&lt;em&gt;Magrittr: A Forward-Pipe Operator for r&lt;/em&gt;, 2022, &lt;/a&gt;&lt;a href="https://CRAN.R-project.org/package=magrittr" role="doc-biblioref"&gt;https://CRAN.R-project.org/package=magrittr&lt;/a&gt;.&lt;/p&gt;'><sup>17</sup></a></span>). También utilizaremos las librerías vinculadas <code>simmer.plot</code>, <code>simmer.optim</code>, <code>simmer.json</code>, y <code>simmer.mom</code>.</p></li>
+<li><p><strong>markovchain</strong>:<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-markovchain" role="doc-biblioref"&gt;Giorgio Alfredo Spedicato et al., &lt;em&gt;Markovchain: Easy Handling Discrete Time Markov Chains&lt;/em&gt;, 2021, &lt;/a&gt;&lt;a href="https://github.com/spedygiorgio/markovchain/" role="doc-biblioref"&gt;https://github.com/spedygiorgio/markovchain/&lt;/a&gt;.&lt;/p&gt;'><sup>18</sup></a></span> Librería de R que proporciona clases, métodos y funciones para manejar fácilmente las Cadenas de Markov de Tiempo Discreto (DTMC), realizando análisis probabilísticos y ajustes.</p></li>
+<li><p><strong>queueing</strong>:<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-queueing" role="doc-biblioref"&gt;Pedro Canadilla, &lt;em&gt;Queueing: Analysis of Queueing Networks and Models&lt;/em&gt;, 2019, &lt;/a&gt;&lt;a href="https://www.r-project.org" role="doc-biblioref"&gt;https://www.r-project.org&lt;/a&gt;.&lt;/p&gt;'><sup>19</sup></a></span> Proporciona una herramienta versátil para el análisis de los modelos de colas markovianos basados en el nacimiento y la muerte y de las redes de colas monoclase y multiclase.</p></li>
+<li><p><strong>queuecomputer</strong>, en <span class="citation"><a href="bibliograf%C3%ADa.html#ref-queuecomputer2020" role="doc-biblioref">Anthony Ebert et al.</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-queuecomputer2020" role="doc-biblioref"&gt;&lt;span&gt;“Computationally Efficient Simulation of Queues: The &lt;span&gt;R&lt;/span&gt; Package &lt;span class="nocase"&gt;queuecomputer&lt;/span&gt;,”&lt;/span&gt; &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 95, no. 5 (2020): 1–29, &lt;/a&gt;&lt;a href="https://doi.org/10.18637/jss.v095.i05" role="doc-biblioref"&gt;https://doi.org/10.18637/jss.v095.i05&lt;/a&gt;.&lt;/p&gt;'><sup>20</sup></a></span> y <span class="citation"><a href="bibliograf%C3%ADa.html#ref-R-queuecomputer" role="doc-biblioref">Anthony Ebert</a>:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-queuecomputer" role="doc-biblioref"&gt;&lt;em&gt;Queuecomputer: Computationally Efficient Queue Simulation&lt;/em&gt;, 2021, &lt;/a&gt;&lt;a href="https://github.com/AnthonyEbert/queuecomputer" role="doc-biblioref"&gt;https://github.com/AnthonyEbert/queuecomputer&lt;/a&gt;.&lt;/p&gt;'><sup>21</sup></a></span> Implementación de un método computacionalmente eficiente para simular colas con tiempos de llegada y servicio arbitrarios.</p></li>
+</ul>
+<p>Las versiones de las librerías de R utilizadas son las siguientes:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre class="Rout"><code>## R version 4.1.2 (2021-11-01)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS Big Sur 10.16
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] es_ES.UTF-8/es_ES.UTF-8/es_ES.UTF-8/C/es_ES.UTF-8/es_ES.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] kableExtra_1.3.4    gridExtra_2.3       sjPlot_2.8.10       rootSolve_1.8.2.3  
+##  [5] queuecomputer_1.1.0 queueing_0.2.12     markovchain_0.8.6   diagram_1.6.5      
+##  [9] shape_1.4.6         simmer.plot_0.1.17  simmer.bricks_0.2.1 simmer_4.4.3       
+## [13] forcats_0.5.1       stringr_1.4.0       dplyr_1.0.7         purrr_0.3.4        
+## [17] readr_2.1.2         tidyr_1.2.0         tibble_3.1.6        ggplot2_3.3.5      
+## [21] tidyverse_1.3.1    
+## 
+## loaded via a namespace (and not attached):
+##  [1] minqa_1.2.4          colorspace_2.0-2     ellipsis_0.3.2       sjlabelled_1.1.8    
+##  [5] estimability_1.3     parameters_0.16.0    fs_1.5.2             rstudioapi_0.13     
+##  [9] matlab_1.0.2         fansi_1.0.2          mvtnorm_1.1-3        lubridate_1.8.0     
+## [13] xml2_1.3.3           codetools_0.2-18     splines_4.1.2        downlit_0.4.0       
+## [17] cachem_1.0.6         knitr_1.37           sjmisc_2.8.9         jsonlite_1.7.3      
+## [21] nloptr_2.0.0         ggeffects_1.1.1      broom_0.7.12         dbplyr_2.1.1        
+## [25] effectsize_0.6.0.1   compiler_4.1.2       httr_1.4.2           sjstats_0.18.1      
+## [29] emmeans_1.7.2        backports_1.4.1      assertthat_0.2.1     Matrix_1.3-4        
+## [33] fastmap_1.1.0        cli_3.1.1            htmltools_0.5.2.9000 tools_4.1.2         
+## [37] igraph_1.2.11        coda_0.19-4          gtable_0.3.0         glue_1.6.1          
+## [41] Rcpp_1.0.8           jquerylib_0.1.4      cellranger_1.1.0     vctrs_0.3.8         
+## [45] svglite_2.1.0        nlme_3.1-153         insight_0.15.0       xfun_0.29           
+## [49] lme4_1.1-28          rvest_1.0.2          lifecycle_1.0.1      MASS_7.3-54         
+## [53] scales_1.1.1         hms_1.1.1            parallel_4.1.2       expm_0.999-6        
+## [57] yaml_2.2.2           memoise_2.0.1        sass_0.4.0           stringi_1.7.6       
+## [61] bayestestR_0.11.5    boot_1.3-28          rlang_1.0.1          pkgconfig_2.0.3     
+## [65] systemfonts_1.0.2    evaluate_0.14        lattice_0.20-45      tidyselect_1.1.1    
+## [69] magrittr_2.0.2       bookdown_0.24        R6_2.5.1             generics_0.1.2      
+## [73] DBI_1.1.2            pillar_1.7.0         haven_2.4.3          withr_2.4.3         
+## [77] datawizard_0.2.3     performance_0.8.0    modelr_0.1.8         crayon_1.4.2        
+## [81] utf8_1.2.2           tzdb_0.2.0           rmarkdown_2.11       grid_4.1.2          
+## [85] readxl_1.3.1         reprex_2.0.1         digest_0.6.29        webshot_0.5.2       
+## [89] xtable_1.8-4         RcppParallel_5.1.5   stats4_4.1.2         munsell_0.5.0       
+## [93] viridisLite_0.4.0    bslib_0.3.1</code></pre>
+<p>Cargamos las librerías de interés que utilizaremos en este manual.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># librerías</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org">simmer.bricks</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer.plot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">diagram</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/spedygiorgio/markovchain/">markovchain</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">queueing</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AnthonyEbert/queuecomputer">queuecomputer</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span>
+<span class="co"># Librerías de entorno gráfico</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://strengejacke.github.io/sjPlot/">sjPlot</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span> <span class="co"># y tablas</span></code></pre></div>
+<p>Configuramos además el tema de los gráficos para que tengan un aspecto más limpio y más fácil de exportar en formato pdf o word. Para ellos utilizamos la función <code><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/sjPlot-themes.html">theme_sjplot2</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><strong>Manuales de referencia</strong></p>
+<p>Se recomiendan los siguientes manuales para trabajar con R, RStudio y las librerías proporcionadas:</p>
+<ul>
+<li><p>APS 135: Introduction to Exploratory Data Analysis with R.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-childs19" role="doc-biblioref"&gt;Dylan Z. Childs, &lt;em&gt;APS 135: Introduction to Exploratory Data Analysis with r&lt;/em&gt;, 2019, &lt;/a&gt;&lt;a href="https://dzchilds.github.io/eda-for-bio/" role="doc-biblioref"&gt;https://dzchilds.github.io/eda-for-bio/&lt;/a&gt;.&lt;/p&gt;'><sup>22</sup></a></span> <a href="https://dzchilds.github.io/eda-for-bio/">Versión electrónica</a>.</p></li>
+<li><p>R for Data Science.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-wickham-grolemund" role="doc-biblioref"&gt;Wickham and Grolemund, &lt;em&gt;R for Data Science, 1st Edition&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>23</sup></a></span> <a href="http://r4ds.had.co.nz/">Acceso web</a>.</p></li>
+<li><p>Advanced R.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-advanced-R" role="doc-biblioref"&gt;Hadley Wickham, &lt;em&gt;Advanced r, 2nd Edition&lt;/em&gt; (CRC Press, 2019), &lt;/a&gt;&lt;a href="https://adv-r.hadley.nz/" role="doc-biblioref"&gt;https://adv-r.hadley.nz/&lt;/a&gt;.&lt;/p&gt;'><sup>24</sup></a></span> <a href="https://adv-r.hadley.nz/">Versión online</a> y <a href="https://es.r4ds.hadley.nz/">Versión en español</a>.</p></li>
+<li><p>Tidyverse Cookbook.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-grosser18" role="doc-biblioref"&gt;Grosser, &lt;em&gt;Tidyverse Cookbook&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>25</sup></a></span> <a href="https://bookdown.org/Tazinho/Tidyverse-Cookbook/">Versión online incompleta</a>.</p></li>
+<li><p>ggplot2, part of the tidyverse<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-ggplot2" role="doc-biblioref"&gt;Hadley Wickham et al., &lt;em&gt;Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics&lt;/em&gt;, 2021, &lt;/a&gt;&lt;a href="https://CRAN.R-project.org/package=ggplot2" role="doc-biblioref"&gt;https://CRAN.R-project.org/package=ggplot2&lt;/a&gt;.&lt;/p&gt;'><sup>26</sup></a></span> <a href="https://ggplot2.tidyverse.org/">Acceso web</a>.</p></li>
+<li><p>RMarkdown básico.<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-Goicoa17" role="doc-biblioref"&gt;Tomas Goicoa, &lt;em&gt;RMarkdown bÃ¡sico&lt;/em&gt;, 2017, &lt;/a&gt;&lt;a href="http://www.unavarra.es/personal/tgoicoa/ESTADISTICA_RMarkdown_tomas/basicRmarkdown/index.html" role="doc-biblioref"&gt;http://www.unavarra.es/personal/tgoicoa/ESTADISTICA_RMarkdown_tomas/basicRmarkdown/index.html&lt;/a&gt;.&lt;/p&gt;'><sup>27</sup></a></span> <a href="http://www.unavarra.es/personal/tgoicoa/ESTADISTICA_RMarkdown_tomas/basicRmarkdown/index.html">Acceso web</a>.</p></li>
+<li><p><em>RMarkdown Cookbook</em><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-rmarkdown2020" role="doc-biblioref"&gt;Yihui Xie, Christophe Dervieux, and Emily Riederer, &lt;em&gt;R Markdown Cookbook&lt;/em&gt; (Boca Raton, Florida: Chapman; Hall/CRC, 2020), &lt;/a&gt;&lt;a href="https://bookdown.org/yihui/rmarkdown-cookbook" role="doc-biblioref"&gt;https://bookdown.org/yihui/rmarkdown-cookbook&lt;/a&gt;.&lt;/p&gt;'><sup>28</sup></a></span> <a href="https://bookdown.org/yihui/rmarkdown-cookbook">Versión online</a>.</p></li>
+</ul>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Antes de comenzar</a></div>
+<div class="next"><a href="intro.html"><span class="header-section-number">1</span> Conceptos básicos</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#software">Software</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Unidad 5 Sistemas de colas | Simulación de Procesos y Sistemas</title>
+<meta name="description" content="En esta unidad, consideramos especificamente los sistemas basados en colas de espera. Nos centraremos en los más sencillos y que están basados en el Proceso de Poisson, algunos de los cuales ya...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Unidad 5 Sistemas de colas | Simulación de Procesos y Sistemas">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En esta unidad, consideramos especificamente los sistemas basados en colas de espera. Nos centraremos en los más sencillos y que están basados en el Proceso de Poisson, algunos de los cuales ya...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unidad 5 Sistemas de colas | Simulación de Procesos y Sistemas">
+<meta name="twitter:description" content="En esta unidad, consideramos especificamente los sistemas basados en colas de espera. Nos centraremos en los más sencillos y que están basados en el Proceso de Poisson, algunos de los cuales ya...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Simulación de Procesos y Sistemas</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Antes de comenzar</a></li>
+<li><a class="" href="software.html">Software</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> Conceptos básicos</a></li>
+<li><a class="" href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></li>
+<li><a class="" href="poissonprocess.html"><span class="header-section-number">3</span> Proceso de Poisson</a></li>
+<li><a class="" href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
+<li><a class="active" href="COLAS.html"><span class="header-section-number">5</span> Sistemas de colas</a></li>
+<li><a class="" href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></li>
+<li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="COLAS" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Unidad 5</span> Sistemas de colas<a class="anchor" aria-label="anchor" href="#COLAS"><i class="fas fa-link"></i></a>
+</h1>
+<p>En esta unidad, consideramos especificamente los sistemas basados en colas de espera. Nos centraremos en los más sencillos y que están basados en el Proceso de Poisson, algunos de los cuales ya hemos presentado en la unidad anterior.</p>
+<p>Los sistemas de colas están ampliamente extendidos en nuestra vida real y es necesario dedicar una unidad a un análsis
+más extenso para poder responder a preguntas como:</p>
+<ul>
+<li>¿Cuántos clientes hay en la cola en promedio?</li>
+<li>¿Cuanto tiempo esta un cliente e la cola?</li>
+<li>¿cuántos clientes son rechazados o se pierden por la capacidad de la cola?</li>
+<li>¿cómo están de ocupados los servidores?</li>
+</ul>
+<p>Comenzamos introduciendo la nomenclatura estándar para los sistemas de colas:</p>
+<ul>
+<li><p><strong>Proceso de llegadas</strong>: Es la forma en que los “clientes” entran al sistema de forma que los tiempos de llegadas sucesivas son variables aleatorias iid. Dicho proceso, se describe mediante la distribución de los tiempos de llegada, representados por los símbolos: <span class="math inline">\(M\)</span> (exponencial), <span class="math inline">\(G\)</span> (general), <span class="math inline">\(D\)</span> (determinista), y <span class="math inline">\(E_k\)</span> (Erlang con <span class="math inline">\(k\)</span> fases).</p></li>
+<li><p><strong>Tiempos de servicio</strong>: Suponemos que los tiempos de servicio de los sucesivos clientes son variables aleatorias iid. Se representan por las mismas letras que los tiempos de interllegada.</p></li>
+<li><p><strong>Numero de servidores</strong>: Habitualmente se denota por <span class="math inline">\(s\)</span> y se asume que todos ellos se comportan de la misma forma, de forma que cada cliente es antendido por un único servidor.</p></li>
+<li><p><strong>Capacidad del sistema</strong>: Habitualmemte se denota por <span class="math inline">\(K\)</span> y es la capacidad total del sistema incluyendo tanto los clientes que pueden ser atendidos como los que pueden esperar en la cola. Si un nuevo cliente encuentra <span class="math inline">\(K\)</span> clientes en el sistema, este se pierde. La capacidad del sistema puede ser finita o infinita, pero sino se indica nada se considera infinita.</p></li>
+<li><p><strong>Disciplina de la cola</strong>: Como son tratados los nuevos clientes cuando acceden al sistema. Las opciones consideradas son: FIFO (el primero que entra es el primero en ser atendido), LIFO (el último en llegar es el primero en ser atendido), SIRO (servicio en orden aleatorio), y PRI (discilina de la cola con prioridades). Sino se indica nada se considera por defecto la disciplina FIFO.</p></li>
+</ul>
+<p>La notación habitual de una cola se establece como:</p>
+<p><span class="math display">\[\text{Llegadas} / \text{Servicio} / \text{Servidores} / \text{Capacidad} / \text{Disciplina}\]</span></p>
+<p>Una cola <span class="math inline">\(M/M/1\)</span> representa que tanto el proceso de llegadas como servicio son exponenciales, sólo disponemos de un servidor, con capacidad de la cola infinita y con disciplina FIFO.</p>
+<p>Todas ls colas que presentamos en esta unidad pueden ser descritas mediante procesos de nacimiento y muerte, tal y como los definimos en la unidad anterior. Sin embargo, en el punto siguienteintroducimos la terminología básica de los sistemas de colas.</p>
+<div id="COLASA" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Terminología y y medidas de eficiencia<a class="anchor" aria-label="anchor" href="#COLASA"><i class="fas fa-link"></i></a>
+</h2>
+<p>Notación habitual de los sistemas de colas:</p>
+<p><strong><span class="math inline">\(N(t)\)</span></strong>: Denota el número de clientes en el sistema en el instante <span class="math inline">\(t\)</span>. <span class="math inline">\(N(t)\)</span> es una CMTC con espacio de estdos discreto.</p>
+<p><strong><span class="math inline">\(N_q(t)\)</span></strong>: Representa el número de clientes en la cola en el instante <span class="math inline">\(t\)</span>.</p>
+<p><strong><span class="math inline">\(P_n(t)\)</span></strong>: Es la probabilidad de que, en el instante <span class="math inline">\(t\)</span>, se encuentren <span class="math inline">\(n\)</span> clientes en el sistema. A estos efectos se supone conocido el número de clientes en el instante cero (usualmente dicho número es cero). Estas probabilidades se corresponden con las probabilidades de trasnsición comenzando desde el estado 0 que vimos en la unidad anterior.</p>
+<p><strong><span class="math inline">\(s\)</span></strong>: Denota el número de servidores del mecanismo de servicio.</p>
+<p><strong><span class="math inline">\(\lambda_n\)</span></strong>: Representa el número medio de llegadas de clientes al sistema, por unidad de tiempo, cuando ya hay <span class="math inline">\(n\)</span> clientes en él. También se denomina tasa de llegadas (que se correspondería con la tasa de nacimientos si <span class="math inline">\(N(t)\)</span> es un proceso de nacimiento y muerte). Cuando las tasas de llegada no dependen de <span class="math inline">\(n\)</span> (es decir todos los <span class="math inline">\(n\)</span> son constantes) suele denotarse <span class="math inline">\(\lambda\)</span> dicho valor constante.</p>
+<p><strong><span class="math inline">\(\mu_n\)</span></strong>: Es el número medio de clientes a los que se les completa el servicio, por unidad de tiempo, cuando hay <span class="math inline">\(n\)</span> clientes en el sistema. Es frecuente referirse a los <span class="math inline">\(mu_n\)</span> como tasas de complección de servicio (o, simplemente, tasas de servicio). Si todos los servidores tienen la misma distribución del tiempo de servicio, suele denotarse por <span class="math inline">\(\mu\)</span> el número medio de clientes que puede atender cada servidor por unidad de tiempo. Como consecuencia se tiene que <span class="math inline">\(\mu_n = n\mu\)</span> si <span class="math inline">\(n = 1, 2,... ,s\)</span> y <span class="math inline">\(\mu_n = s\mu\)</span> para <span class="math inline">\(n \geq s\)</span>.</p>
+<p><strong><span class="math inline">\(\rho\)</span></strong>: Es la llamada razón o constante de utilización del sistema (o intensidad de tráfico. Se define, como</p>
+<p><span class="math display">\[\rho = \frac{\lambda}{s\mu}\]</span></p>
+<p>Cuando los <span class="math inline">\(\lambda_n\)</span> son constantes y todos los servidores tienen la misma distribución de tiempo de servicio, <span class="math inline">\(\lambda\)</span> es el número medio de clientes que entran en el sistema y <span class="math inline">\(s\mu\)</span> es el número medio de clientes a los que pueden dar servicio los <span class="math inline">\(s\)</span> servidores cuando todos están ocupados. En estas condiciones, <span class="math inline">\(\rho\)</span> representa la fracción de recursos del sistema que es consumida por los clientes. Así, intuitivamente, parece necesario que se cumpla, en estos casos, que <span class="math inline">\(\rho &lt; 1\)</span> y además cuanto más cercano a 1 que sea <span class="math inline">\(\rho\)</span>, más tráfico ha de soportar el sistema (o menos tiempo libre tendrán los servidores, o más espera habrán de sufrir los clientes, como se quiera expresar).</p>
+<p>En toda la unidad asumimos que todos los modelos de colas son estacionarios, de forma que los procesos <span class="math inline">\(\{N(t), t \geq 0\}\)</span> y {N_q(t), t }$ no cambían con el tiempo. Podemos entonces definir las variables de interés del sistema:</p>
+<p><strong><span class="math inline">\(N\)</span></strong>: Es la variable aleatoria que contabiliza el número de clientes en el sistema.</p>
+<p><strong><span class="math inline">\(N_q\)</span></strong>: Denota la variable aleatoria número de clientes en la cola.</p>
+<p><strong><span class="math inline">\(p_n\)</span></strong>: Probabilidad de que se encuentren <span class="math inline">\(n\)</span> clientes en el sistema <span class="math inline">\((n = 0, 1,... )\)</span>.</p>
+<p>y las medidas de eficiencia:</p>
+<p><strong><span class="math inline">\(L\)</span></strong>: Representa el número medio de clientes en el sistema, es decir <span class="math inline">\(L = E(N)\)</span>.</p>
+<p><strong><span class="math inline">\(L_q\)</span></strong>: Que no es más que el número medio de clientes en la cola, o lo que es lo mismo, <span class="math inline">\(L_q = E(N_q)\)</span>.</p>
+<p><strong><span class="math inline">\(T\)</span></strong>: Es la variable aleatoria que describe el tiempo que un cliente pasa en el sistema.</p>
+<p><strong><span class="math inline">\(T_q\)</span></strong>: Representa el tiempo que un cliente espera en la cola.</p>
+<p><strong><span class="math inline">\(W\)</span></strong> : Es el tiempo medio que un cliente está en el sistema, o simplemente, <span class="math inline">\(W = E(T)\)</span>.</p>
+<p><strong><span class="math inline">\(W_q\)</span></strong>: Denota el tiempo medio de espera en la cola para un cliente genérico. Matemáticamente, <span class="math inline">\(W_q = E(T_q)\)</span>.</p>
+</div>
+<div id="COLASB" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Formulas de Little<a class="anchor" aria-label="anchor" href="#COLASB"><i class="fas fa-link"></i></a>
+</h2>
+<p>En los modelos con distribución del tiempo entre llegadas y distribución del servicio exponencial (así como en muchos otros modelos más generales llamados ergódicos) se verifican ciertas fórmulas que relacionan los números medios de clientes, en el sistema o en la cola, con los tiempos medios de un clientes en el sistema o en la cola. Estas son las llamadas fórmulas de Little.</p>
+<p>Cuando las tasas de llegada son constantes (es decir <span class="math inline">\(\lambda_n = \lambda\)</span> para $n = 0, 1,… $), la primera fórmula de Little establece la igualdad:</p>
+<p><span class="math display">\[L = \lambda W,\]</span>
+mientras que la segunda se expresa mediante</p>
+<p><span class="math display">\[L_q = \lambda W_q.\]</span>
+Una forma intuitiva de entender el porqué de la validez de las fórmulas de Little es la siguiente. Considérese un cliente que llega al sistema justo ahora. Después de un tiempo, cuya media es <span class="math inline">\(W\)</span> , ese cliente saldrá servido del sistema. Como el número medio de clientes que llegan al sistema por unidad de tiempo es , el número medio de clientes que habrán llegado desde que nuestro cliente en cuestión entró en el sistema hasta que salió de él es <span class="math inline">\(W\)</span>. Por otra parte, es obvio que dicho número medio de clientes es precisamente el número medio de clientes que hay en el sistema justo en el momento que sale del sistema nuestro cliente particular, es decir, <span class="math inline">\(L\)</span>. Un razonamiento análogo es válido para la segunda fórmula de Little.</p>
+<p>Obviamente, las fórmulas de Little no pueden ser válidas si las <span class="math inline">\(\lambda_n\)</span> no son constantes pero sí pueden generalizarse a esa situación mediante:</p>
+<p><span class="math display">\[L = \bar{\lambda}W\]</span>
+<span class="math display">\[L_q = \bar{\lambda}W_q\]</span></p>
+<p>con</p>
+<p><span class="math display">\[\bar{\lambda} = \sum_{n = 0}^{\infty} \lambda_np_n\]</span>
+Otra relación importante (en este caso para relacionar <span class="math inline">\(W\)</span> y <span class="math inline">\(W_q\)</span>) es la dada por:</p>
+<p><span class="math display">\[W = W_q + \frac{1}{\mu}\]</span>
+Su deducción es inmediata pues viene a decir que el tiempo medio que un cliente está en el sistema (<span class="math inline">\(W\)</span>) coincide con la suma del tiempo medio en la cola (<span class="math inline">\(W_q\)</span>) más el tiempo medio que tarda en ser servido (<span class="math inline">\(1/\mu\)</span>, ya que <span class="math inline">\(\mu\)</span> es el número medio de clientes que un servidor puede atender por unidad de tiempo).</p>
+</div>
+<div id="COLASC" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Colas con un único servidor<a class="anchor" aria-label="anchor" href="#COLASC"><i class="fas fa-link"></i></a>
+</h2>
+<p>En este apartado presentamos los aspectos más relvantes referidos a los sistemas de colas con un único servidor.
+empezando por el más sencillo que considera tiempos de llegadas y servicio exponenciales, y con un único servidor.</p>
+<div id="mm1" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> M/M/1<a class="anchor" aria-label="anchor" href="#mm1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Comenzamos con le sistema más sencillo donde se consideran tiempos de llegadas y servicio exponenciales, un único servidor, capacidad del sistema infinita y prioridad FIFO. De esta forma, tanto las tasas de llegadas como las tasas de servicio vienen dadas por:</p>
+<p><span class="math display">\[
+\begin{matrix}
+\lambda_n = \lambda &amp; n = 0, 1,...\\
+\mu_n = \mu &amp; n = 1, 2,...
+\end{matrix}\]</span></p>
+<p>de forma que la matriz de tasas vieen dada por:</p>
+<p><span class="math display">\[
+R = \begin{pmatrix}
+ 0 &amp; \lambda &amp; 0 &amp; 0 &amp; ...\\
+\mu &amp; 0 &amp; \lambda &amp; 0 &amp; ...\\
+0 &amp; \mu &amp; 0 &amp; \lambda &amp; ...\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots
+\end{pmatrix}\]</span></p>
+<p>donde a partir de las ecuaciones de equilibrio podemos obtener la relación entre tasas de llegadas y servicio:</p>
+<p><span class="math display">\[c_n = \frac{\lambda_{n-1}\lambda_{n-2}...\lambda_0}{\mu_{n}\mu_{n-1}...\mu_1} = \frac{\lambda^n}{\mu^n} = \rho^n, \quad n = 1, 2,...\]</span></p>
+<p>Utilizando propiedades de series geométricas, dado que <span class="math inline">\(\rho &gt;0\)</span>, el modelo será estacionario si <span class="math inline">\(\rho &lt; 1\)</span>. Otra forma de expresarlo es <span class="math inline">\(\lambda &lt; \mu\)</span>, que tiene la interpretación adicional de que el número medio de clientes que entran en el sistema por unidad de tiempo sea menor que el número medio de clientes que podrían ser atendidos por el servidor por unidad de tiempo, en caso de que éste estuviese absolutamente todo el tiempo atendiendo a clientes (cosa que no ocurre siempre).</p>
+<p>En lo que sigue supondremos que el sistema de la cola es estacionario (es decir <span class="math inline">\(\rho &lt; 1\)</span>). Lo primero que debemos calcular es la suma de la serie de las <span class="math inline">\(c_n\)</span>:</p>
+<p><span class="math display">\[\sum_{n = 1}^{\infty} c_n = \sum_{n = 1}^{\infty} \rho^n = \frac{\rho}{1-\rho}.\]</span>
+<span class="math display">\[
+\begin{matrix}
+p_0 = 1 - \rho\\
+p_n = c_np_0 = (1 - \rho)\rho^n
+\end{matrix}\]</span></p>
+<p>De esta forma, la distribución de probabilidad de la variable aleatoria del “número de clientes en el sistema” es:</p>
+<p><span class="math display">\[P(N = n) = p_n = (1-\rho)\rho^n, \quad n = 0, 1,...\]</span></p>
+<p>que corresponde con una distribuión geométrica de parámetro <span class="math inline">\((1 - \rho)\)</span>. Por tanto, el valor de <span class="math inline">\(L\)</span> viene dado por:</p>
+<p><span class="math display">\[L = E(N) = \sum_{n = 0}^{\infty} np_n = (1 - \rho)\rho \sum_{n = 1}^{\infty} n \rho^{n-1} = (1 - \rho)\rho\frac{1}{(1 - \rho^2)} = \frac{\rho}{1 - \rho} = \frac{\lambda}{\mu - \lambda}.\]</span></p>
+<p>A partir de ella podemos obtener:</p>
+<p><span class="math display">\[L_q = L - (1 - p_0)\]</span></p>
+<p>que es válido para cualquier sistema de cola, y que en nuestro caso es:</p>
+<p><span class="math display">\[L_q = \frac{\lambda^2}{\mu(\mu-\lambda)}\]</span></p>
+<p>Aplicando las fórmulas de Little tenemos:</p>
+<p><span class="math display">\[
+\begin{matrix}
+W = \frac{L}{\lambda} = \frac{1}{\mu - \lambda},\\
+W_q = \frac{L_q}{\lambda} = \frac{\lambda}{\mu(\mu - \lambda),}
+\end{matrix}\]</span></p>
+<p>de donde podemos deducir:</p>
+<p><span class="math display">\[W = W_q + \frac{1}{\mu}\]</span></p>
+<p>Si se desea tener más información sobre la espera de clientes en la cola o en el sistema, debe calcularse la distribución de rpoabbildiad de las variables <span class="math inline">\(T\)</span> y <span class="math inline">\(T_q\)</span>. Estas distribuciones permitirán calcular la probabilidad de cualquier suceso relativo al tiempo de estancia en la cola o en el sistema. Si denotamos por <span class="math inline">\(W(t)\)</span> y <span class="math inline">\(W_q(t)\)</span> a las coorespondientes funciones de distribución de <span class="math inline">\(T\)</span> y <span class="math inline">\(T_q\)</span> tendremos:</p>
+<p><span class="math display">\[W(t) = 1 - exp[-(\mu - \lambda)t]\]</span></p>
+<p><span class="math display">\[
+W_q(t) =
+\begin{cases}
+1 - \frac{\lambda}{\mu}exp[-(\mu - \lambda)t] &amp; \text{ si } t \geq 0\\
+0 &amp; \text{ si } t &lt; 0
+\end{cases}
+\]</span></p>
+<p>::: {.example #colas001 name = “Operador de elevador”}</p>
+<p>Un operador de un pequeño elevador de grano tiene un único muelle de descarga. Las llegadas de camiones durante la temporada alta forman un proceso de Poisson con una tasa de llegada media de cuatro por hora. Debido a la variación de las cargas (y al deseo de los conductores de hablar) el tiempo que cada camión pasa frente al muelle de descarga se aproxima por una variable aleatoria exponencial con una media de 14 minutos. Suponiendo que que las plazas de aparcamiento son ilimitadas, el sistema de colas <span class="math inline">\(M/M/1\)</span> puede describir el comportamiento del proceso con tasas de llegadas <span class="math inline">\(\lambda = 4 hora\)</span> y tasa de servicio <span class="math inline">\(\mu = 60/14 hora\)</span>.</p>
+<ul>
+<li>¿cuál es la probabilidad de que el muelle de descarga esté inactivo?</li>
+<li>¿cuál es la probabilidad de que haya exactamente tres camiones esperando?</li>
+<li>¿cuál es la probabilidad de que haya cuatro o más camiones en el sistema?</li>
+</ul>
+<p>:::</p>
+<p>Resolvemos el ejemplo de dos formas diferentes: 1) teóricamente con las fórmulas anteriores, 2) con la libreria <code>queueing</code>. Al final de la unidad presentamos la solución de <code>simmer</code> para simular de una cola <span class="math inline">\(M/M/1\)</span>. En este último caso deberemos aproximar las cantidades de interés mediante los correspondientes estimadores Monte-Carlo, si repetimos las imualacion del sistema un número adecuado de veces.</p>
+<p>Para responder a la primera pregunta tenemos en cuenta que <span class="math inline">\(\rho = 0.9333\)</span> y que la probabilidad buscada es la que corresponde al estado <span class="math inline">\(0\)</span> de la distribución estacionaria, es decir,</p>
+<p><span class="math display">\[p_0 = 1 - \rho = 0.0667\]</span>
+En cuanto a la segunda pregunta debemos tener en cuenta que:</p>
+<p><span class="math display">\[P(N_q = 3) = P(N = 4) = p_4 = 0.0667*0.9333^4 = 0.0506.\]</span></p>
+<p>Para resolver la última pregunta tenemos que:</p>
+<p><span class="math display">\[P(N \geq 4) = 1 - P(N \leq 3) = 1 - \sum_{n = 0}^{3} p_n = \rho^4 = 0.759.\]</span></p>
+<p>Utilizamos ahora la librería <code>queueing</code> para resolver las mismas preguntas. En primer lugar tenemos que definir el sistema y sus características (tasas de llegada, tasas de servicio, y número de elementos de la distribución estacionaria que debemos calcular). Para ello utilizamos la función <code>NewInput()</code> con <span class="math inline">\(n = 4\)</span> elemntos de la distribución estacionaria, ya que las probabildiades buscadas hacen referencia a esos cuatro primeros valores.</p>
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Deficición del entorno</span>
+<span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">4</span>, mu <span class="op">=</span> <span class="fl">60</span><span class="op">/</span><span class="fl">14</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="co"># Características del sistema</span>
+<span class="va">s.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span></code></pre></div>
+<p>Los valores y funciones del sistema que proporciona la función son:</p>
+<ul>
+<li>
+<span class="math inline">\(RO\)</span> = valor de intensidad de tráfico <span class="math inline">\(\rho\)</span>.</li>
+<li>
+<span class="math inline">\(Lq\)</span> = número medio de clientes en la cola.</li>
+<li>
+<span class="math inline">\(VNq\)</span> = varianza del número de clientes e la cola.</li>
+<li>
+<span class="math inline">\(Wq\)</span> = tiempo medio de espera en la cola.</li>
+<li>
+<span class="math inline">\(VTq\)</span> = varianza del tiempo de espera en la cola.</li>
+<li>
+<span class="math inline">\(L\)</span> = número medio de clientes en el sistema.</li>
+<li>
+<span class="math inline">\(VN\)</span> = varianza del número de clientes en el sistema.</li>
+<li>
+<span class="math inline">\(W\)</span> = tiempo medio que un cliente está en el sistema.</li>
+<li>
+<span class="math inline">\(VT\)</span> = varianza del tiempo que un cliente está en el sistema.</li>
+<li>
+<span class="math inline">\(Wqq\)</span> = tiempo medio que un cliente permanece en la cola cuando está existe.</li>
+<li>
+<span class="math inline">\(Lqq\)</span> = número medio de clientes en la cola cuando está existe.</li>
+<li>
+<span class="math inline">\(Pn\)</span> = Distribición estacionaria de sistema.</li>
+<li>
+<span class="math inline">\(Qn\)</span> = Probabilidad de que un cliente encuentre <span class="math inline">\(n\)</span> clientes.</li>
+<li>
+<span class="math inline">\(FW\)</span> = Función de distribución de <span class="math inline">\(W\)</span> para un conjunto de valores de <span class="math inline">\(t\)</span>.</li>
+<li>
+<span class="math inline">\(FWq\)</span> = Función de distribución de <span class="math inline">\(W_q\)</span> para un conjunto de valores de <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p>Veamos la salida completa:</p>
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Medidas del sistema</span>
+<span class="va">s.MM1</span></code></pre></div>
+<pre><code>## $Inputs
+## $lambda
+## [1] 4
+## 
+## $mu
+## [1] 4.285714
+## 
+## $n
+## [1] 4
+## 
+## attr(,"class")
+## [1] "i_MM1"
+## 
+## $RO
+## [1] 0.9333333
+## 
+## $Lq
+## [1] 13.06667
+## 
+## $VNq
+## [1] 208.1956
+## 
+## $Wq
+## [1] 3.266667
+## 
+## $VTq
+## [1] 12.19556
+## 
+## $Throughput
+## [1] 4
+## 
+## $L
+## [1] 14
+## 
+## $VN
+## [1] 210
+## 
+## $W
+## [1] 3.5
+## 
+## $VT
+## [1] 12.25
+## 
+## $Wqq
+## [1] 3.5
+## 
+## $Lqq
+## [1] 15
+## 
+## $Pn
+## [1] 0.06666667 0.06222222 0.05807407 0.05420247 0.05058897
+## 
+## $Qn
+## [1] 0.06666667 0.06222222 0.05807407 0.05420247 0.05058897
+## 
+## $FW
+## function (t) 
+## {
+##     1 - exp(-t/W)
+## }
+## &lt;bytecode: 0x7fd29ec41ad0&gt;
+## &lt;environment: 0x7fd29ec41408&gt;
+## 
+## $FWq
+## function (t) 
+## {
+##     1 - (RO * exp(-t/W))
+## }
+## &lt;bytecode: 0x7fd29ec41f30&gt;
+## &lt;environment: 0x7fd29ec41408&gt;
+## 
+## attr(,"class")
+## [1] "o_MM1"</code></pre>
+<p>Podemos respondera ahora a las cuestiones de interés sin más que buscar en los elemntos que proporciona la función.</p>
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ¿cuál es la probabilidad de que el muelle de descarga esté inactivo?</span>
+<span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<pre><code>## [1] 0.06666667</code></pre>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ¿cuál es la probabilidad de que haya exactamente tres camiones esperando?</span>
+<span class="co"># se corresponde con el elmento 4 + 1 de pn</span>
+<span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code>## [1] 0.05058897</code></pre>
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ¿cuál es la probabilidad de que haya cuatro o más camiones en el sistema?</span>
+<span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.7588346</code></pre>
+<p>::: {.example #colas002 name = “Estación de trabajo”}</p>
+<p>En una estación de trabajo con un único procesador se ejecutan programas (que se supone prácticamente su única carga de trabajo) con tiempo de CPU de distribución exponencial de media 3 minutos. Los programas se atienden según una disciplina FIFO. Sabiendo que las llegadas de programas a la estación se producen según un proceso de Poisson con una intensidad de 15 programas cada hora, por término medio, se pide:</p>
+<ul>
+<li>¿Cuál es la probabilidad de que haya más de dos programas en espera de ejecución (además del que se está ejecutando)?</li>
+<li>Calcular el tiempo medio que transcurre desde que se envía un programa al servidor hasta que se termina su ejecución. ¿Cuál es la relación entre este tiempo y el tiempo medio de CPU?</li>
+<li>Calcular la probabilidad de que el programa esté en el servidor (esperando o ejecutándose) más de 10 minutos.</li>
+<li>¿Cuál es el número medio de programas que están a la espera de comenzar a ejecutarse?</li>
+<li>Obtener las respuestas a los apartados anteriores suponiendo que ahora se ha incrementado la llegada de programas hasta 18 a la hora, por término medio.</li>
+</ul>
+<p>En este caso utilizaremos la librería <code>queueing</code> para los cálculos numéricos. Si tomamos como unidad de tiempo las horas tendremos que <span class="math inline">\(\lambda = 15\)</span> y <span class="math inline">\(1/\mu = 3 /60\)</span>, con lo cual <span class="math inline">\(\mu = 20.\)</span></p>
+<p>:::</p>
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Deficición del entorno</span>
+<span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">15</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="co"># Características del sistema</span>
+<span class="va">s.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span></code></pre></div>
+<p>Para responder a la cuestión 1 debemos calcular:</p>
+<p><span class="math display">\[P(N_q \geq 3) = P(N \geq 4) = 1 - P(N \leq 3)\]</span></p>
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.3164062</code></pre>
+<p>Para el primer apartado de la segunda cuestión sólo necesitamos el valor de <span class="math inline">\(W\)</span>, que corresponde con el tiempo medio en el sistema:</p>
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span></code></pre></div>
+<pre><code>## [1] 0.2</code></pre>
+<p>El tiempo medio es de 0.2 horas o 12 minutos. Para responder a la segunda pregunta hay que tener en cuenta que el tiempo de CPU corresponde con el tiempo de servicio, es decir, la relción buscada es:</p>
+<p><span class="math display">\[\frac{W}{1/\mu}\]</span></p>
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Cada proceso está en la estación un tiempo equivalente a cuatro veces su tiempo de CPU.</p>
+<p>Para respondear al tercer apartado debemos calcular (expresado en las unidades de tiempo utilizadas:</p>
+<p><span class="math display">\[P(T &gt; 10/60)\]</span>
+Dicha probabilidad se obtiene a partir de la función de distribuvión de los tiempos que el cliente está en el sistema:</p>
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="va">s.MM1</span><span class="op">$</span><span class="fu">FW</span><span class="op">(</span><span class="fl">10</span><span class="op">/</span><span class="fl">60</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.4345982</code></pre>
+<p>La cuarta cuestión se corresponde con el valor de <span class="math inline">\(L_q\)</span>:</p>
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 2.25</code></pre>
+<p>de forma que el número de procesos en espera es de 2.25.</p>
+<p>Para responder al quinto apartado debemos cambiar el valor de la tasa de llegadas y volver a hacer los cálculos:</p>
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Deficición del entorno</span>
+<span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">18</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="co"># Características del sistema</span>
+<span class="va">s.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span>
+<span class="co"># Cuestión 1</span>
+<span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.6561</code></pre>
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Cuestión 2.1</span>
+<span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span></code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Cuestión 2.2</span>
+<span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Cuestión 3</span>
+<span class="fl">1</span> <span class="op">-</span> <span class="va">s.MM1</span><span class="op">$</span><span class="fu">FW</span><span class="op">(</span><span class="fl">10</span><span class="op">/</span><span class="fl">60</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.7165313</code></pre>
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Cuestión 4</span>
+<span class="va">s.MM1</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 8.1</code></pre>
+<p>Como puede verse numéricamente el sistema está bastante más congestionado ahora. Podemos representar gráficamente ambas soluciones.</p>
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Primer sistema</span>
+<span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">15</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">s.MM1.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span>
+<span class="co"># Segundo sistema</span>
+<span class="va">env.MM2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">18</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">s.MM1.2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM2</span><span class="op">)</span>
+<span class="co"># Establecemos secuencia de tiempos pra el análisis</span>
+<span class="va">tiempos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">0.01</span><span class="op">)</span>
+<span class="co"># Almaceamos los resultados</span>
+<span class="va">sistema</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>tiempos <span class="op">=</span> <span class="va">tiempos</span>, 
+                      FW1 <span class="op">=</span> <span class="va">s.MM1.1</span><span class="op">$</span><span class="fu">FW</span><span class="op">(</span><span class="va">tiempos</span><span class="op">)</span>,
+                      FWq1 <span class="op">=</span> <span class="va">s.MM1.1</span><span class="op">$</span><span class="fu">FWq</span><span class="op">(</span><span class="va">tiempos</span><span class="op">)</span>,
+                      FW2 <span class="op">=</span> <span class="va">s.MM1.2</span><span class="op">$</span><span class="fu">FW</span><span class="op">(</span><span class="va">tiempos</span><span class="op">)</span>,
+                      FWq2 <span class="op">=</span> <span class="va">s.MM1.2</span><span class="op">$</span><span class="fu">FWq</span><span class="op">(</span><span class="va">tiempos</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># gráficos</span>
+<span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">sistema</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">tiempos</span>, <span class="va">FW1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">tiempos</span>, <span class="va">FW2</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tiempo (en horas)"</span>, y <span class="op">=</span> <span class="st">"Probabilidad"</span>, title <span class="op">=</span> <span class="st">"W(t)"</span><span class="op">)</span>
+<span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">sistema</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">tiempos</span>, <span class="va">FWq1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">tiempos</span>, <span class="va">FWq2</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tiempo (en horas)"</span>, y <span class="op">=</span> <span class="st">"Probabilidad"</span>, title <span class="op">=</span> <span class="st">"Wq(t)"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:colas-012"></span>
+<img src="05-Colas_files/figure-html/colas-012-1.png" alt="Funciones de distribución de W y Wq para ambos sistemas (sistema 1 = línea continua, sistema 2 = línea discontinua." width="95%"><p class="caption">
+Figura 5.1: Funciones de distribución de W y Wq para ambos sistemas (sistema 1 = línea continua, sistema 2 = línea discontinua.
+</p>
+</div>
+<p>Como se puede ver los tiempos medios de espera de los clientes en el sistema y en la cola para la segunda opción tienen probabildides más bajas a lo largo del tiempo, lo que indica que el sistema está más congestionado porque los tiempos de atención son superiores (valores donde se alcanza la probabilidad 1).</p>
+</div>
+<div id="mm1k" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> M/M/1/K<a class="anchor" aria-label="anchor" href="#mm1k"><i class="fas fa-link"></i></a>
+</h3>
+<p>Se trata de un modelo como el <span class="math inline">\(M/M/1\)</span>, ya estudiado, pero con límitación <span class="math inline">\(K\)</span> para el tamaño de la cola. Es decir, la distribución del tiempo entre dos intentos de llegadas al sistema de clientes consecutivos es un PP de tasa <span class="math inline">\(\lambda\)</span>, mietras que la distribución del tiempo de servicio es exponencial de media <span class="math inline">\(1/\mu\)</span> y sólo hay un servidor. Además el número de clientes que pueden estar en la cola es como mucho <span class="math inline">\(K\)</span>, la población potencial es infinita y la disciplina es FIFO. Obviamente, en este modelo se puede dar el caso de que un cliente que intente entrar en el sistema no lo consiga, por estar la cola llena.</p>
+<p>En esta situación tenemos que las tasas de llegadas viene dadas por:</p>
+<p><span class="math display">\[
+\lambda_n =
+\begin{cases}
+\lambda &amp; \text{ si } n = 0, 1,...,K\\
+0 &amp; \text{ si } n = K+1, K+2,...
+\end{cases}
+\]</span>
+mientras que las tasas de servicio se corresponden con la cola <span class="math inline">\(M/M/1\)</span></p>
+<p><span class="math display">\[
+\mu_n = \mu, \quad n = 1, 2,...
+\]</span>
+donde a partir de las ecuaciones de equilibrio podemos obtener la relación entre tasas de llegadas y servicio:</p>
+<p><span class="math display">\[
+c_n =
+\begin{cases}
+\rho^n &amp; \text{ si } n = 0, 1,...,K, K+1\\
+0 &amp; \text{ si } n = K+2, K+3,...
+\end{cases}
+\]</span>
+En este caso, por muy frecuente que sea la llegada de clientes al sistema en relación con la capacidad del servidor para dar servicio, la propia limitación en el tamaño de la cola fuerza a la estacionariedad, pues lo peor que podríamos imaginar es que prácticamente todo el tiempo estuviese el sistema saturado (es decir <span class="math inline">\(P(N = K + 1) = 1\)</span>). Para analizar el comportamiento de la serie distinguiremos que <span class="math inline">\(\rho \neq 1\)</span> y <span class="math inline">\(\rho = 1\)</span>.</p>
+<p><strong>Caso <span class="math inline">\(\rho \neq 1\)</span></strong></p>
+<p>De esta forma, la distribución de probabilidad de la variable aleatoria del “número de clientes en el sistema” es:</p>
+<p><span class="math display">\[
+P(N = n) = p_n =
+\begin{cases}
+\frac{\rho - 1}{\rho^{K+2} - 1} \rho^n &amp; \text{ si } n = 0, 1,..., K+1\\
+0  &amp; \text{ si } n = K+2, K+3,...
+\end{cases}
+\]</span></p>
+<p>El número medio de clientes en el sistema es:</p>
+<p><span class="math display">\[L = \frac{\rho}{1 - \rho} - \frac{(K + 2)\rho^{K+2}}{1 - \rho^{K+2}}\]</span></p>
+<p>Dado que las tasas de llegada no son contantes, necesitamos obtener el valor de <span class="math inline">\(\bar{\lambda}\)</span> para aplicar la fórmula de Little al resto de cantidades de interés. En este caso:</p>
+<p><span class="math display">\[\bar{\lambda} = \frac{\lambda(\rho^{K+1} - 1)}{\rho^{K+1} - 1}\]</span></p>
+<p>A partir de esta expresión podemos obtener el tiempo medio de espera de los clientes en la cola como:</p>
+<p><span class="math display">\[W = \frac{1}{\mu - \lambda} - \frac{(K+1)\rho^{K+2}}{\lambda(1-\rho^{K+1})}\]</span></p>
+<p>De la relación entre <span class="math inline">\(W\)</span> y <span class="math inline">\(W_q\)</span> podemos obtener:</p>
+<p><span class="math display">\[W_q = \frac{\lambda}{\mu(\mu - \lambda)} - \frac{(K+1)\rho^{K+2}}{\lambda(1-\rho^{K+1})}\]</span>
+Por último:</p>
+<p><span class="math display">\[L_q =  \frac{\rho^2}{1 - \rho} - \frac{(K + 1 + \rho)\rho^{K+2}}{1 - \rho^{K+2}}\]</span></p>
+<p><strong>Caso <span class="math inline">\(\rho = 1\)</span></strong></p>
+<p>En este caso las fórmulas anteriroes se simplifican a:</p>
+<p><span class="math display">\[p_n = \frac{1}{K+2}, \text{ para } n = 0, 1,...,K + 1\]</span>
+<span class="math display">\[L = \frac{K + 1}{2}\]</span>
+<span class="math display">\[\bar{\lambda} = \frac{\lambda(K + 1)}{K + 2}\]</span></p>
+<p><span class="math display">\[W = \frac{K + 2}{2\lambda}\]</span>
+<span class="math display">\[W_q = \frac{K}{2\lambda}\]</span>
+<span class="math display">\[L_q = \frac{K(K + 1)}{2(K+2)}\]</span></p>
+<p>En este modelo (y en otros posteriores) el significado de <span class="math inline">\(\rho\)</span> como intensidad de tráfico se desvirtúa. Aquí <span class="math inline">\(\rho\)</span> no puede interpretarse como el cociente entre número medio de llegadas de clientes al sistema por unidad de tiempo y el número medio de clientes a los que el servidor tendría capacidad de dar servicio por unidad de tiempo, sinó más bien como un cociente semejante, pero donde el númerador representa el número medio de intentos de llegada, más que de llegadas efectivas al sistema. De hecho, por este motivo <span class="math inline">\(\rho\)</span> puede ser mayor o igual que 1, aún siendo el sistema estacionario.
+El valor de <span class="math inline">\(\bar{\lambda}\)</span> sí representa el número medio de entradas efectivas de clientes en el sistema por unidad de tiempo y, así, la verdadera intensidad de tráfico podría medirse a través de:</p>
+<p><span class="math display">\[
+\bar{\rho} = \frac{\bar{\lambda}}{\mu} =
+\begin{cases}
+\frac{K+1}{K+2} &amp; \text{ si } \rho = 1 \\
+\frac{\rho^{K+2}-\rho}{\rho^{K+2}-1} &amp; \text{ si } \rho \neq 1 
+\end{cases}
+\]</span>
+que efectivamente sí es siempre menor que 1.</p>
+<p>::: {.example name = “Taller Mecánico”}</p>
+<p>En un taller mecánico llegan vehículos para una puesta a punto antes de pasar la ITV, las llegadas siguen un proceso de Poisson de promedio 18 vehículos/hora. Las dimensiones del taller sólo permiten que haya 4 vehículos, y las ordenanzas municipales no permiten esperar en la vía pública. El taller despacha un promedio de 6 vehículos/hora de acuerdo con una distribución exponencial. Se pide:</p>
+<ul>
+<li>¿Cuál es la probabilidad de que no haya ningún vehículo en el taller?</li>
+<li>¿Cuál es el promedio de vehículos en el taller?</li>
+<li>¿Cuánto tiempo pasa por término medio un vehículo en el taller?</li>
+<li>¿Cuánto tiempo esperan por término medio los vehículos en la cola?</li>
+<li>¿Cuál es la longitud media de la cola?</li>
+</ul>
+<p>:::</p>
+<p>Se trata de un sistema <span class="math inline">\(M/M/1/K\)</span> con <span class="math inline">\(K = 4\)</span>, y utilizaremos la librería <code>queueing</code> para los cálculos numéricos. Si tomamos como unidad de tiempo las horas tendremos que <span class="math inline">\(\lambda = 18\)</span> y <span class="math inline">\(\mu = 6\)</span>. Geenramos el sistema de cola definido y procedemos con los cálculos solicitados.</p>
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Deficición del entorno</span>
+<span class="va">env.MM1K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1K.html">NewInput.MM1K</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">18</span>, mu <span class="op">=</span> <span class="fl">6</span>, k <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="co"># Características del sistema</span>
+<span class="va">s.MM1K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1K</span><span class="op">)</span></code></pre></div>
+<p>Las medidas proporcionadas por la función son las mismas que con el modelo <span class="math inline">\(M/M/1\)</span>. Comenzamos a responder las preguntas:</p>
+<ul>
+<li>Apartado 1. La probabilidad de que no haya ningún vehículo en el taller es <span class="math inline">\(p_0\)</span>:</li>
+</ul>
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
+<pre><code>## [1] 0.008264463</code></pre>
+<ul>
+<li>Apartado 2. Obtenemos el número medio de vehículos en el sistema <span class="math inline">\(L\)</span>:</li>
+</ul>
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">L</span></code></pre></div>
+<pre><code>## [1] 3.520661</code></pre>
+<ul>
+<li>Apartado 3. En este caso estamos interesados en el tiempo medio de estancia en el sistema (<span class="math inline">\(W\)</span>):</li>
+</ul>
+<div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">W</span></code></pre></div>
+<pre><code>## [1] 0.5916667</code></pre>
+<ul>
+<li>Apartado 4. En este caso estamos interesados en el tiempo medio de estancia en la cola (<span class="math inline">\(W_q\)</span>):</li>
+</ul>
+<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">Wq</span></code></pre></div>
+<pre><code>## [1] 0.425</code></pre>
+<ul>
+<li>Apartado 5. En este caso estamos interesados en el número medio de clientes en la cola (<span class="math inline">\(L_q\)</span>):</li>
+</ul>
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 2.528926</code></pre>
+<div class="bluebox">
+<p>Para el resto de sistemas de colas que vamos a presentar no desarrollaremos de forma completa todas las fórmulas teóricas, y nos centraremos en los resultados numéricos que proporciona la libreria <code>queueing</code> para la resolución de aplicaciones.</p>
+</div>
+</div>
+</div>
+<div id="COLASD" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Colas con múltiples servidores<a class="anchor" aria-label="anchor" href="#COLASD"><i class="fas fa-link"></i></a>
+</h2>
+<p>Generalizamos los modelos anteriores a situaciones donde tenemos múltiples servidores.</p>
+<div id="mms" class="section level3" number="5.4.1">
+<h3>
+<span class="header-section-number">5.4.1</span> M/M/s<a class="anchor" aria-label="anchor" href="#mms"><i class="fas fa-link"></i></a>
+</h3>
+<p>Es una generalización del modelo <span class="math inline">\(M/M/1\)</span> en el caso en que haya <span class="math inline">\(s\)</span> servidores. Se trata pues de una cola en la que la distribución del tiempo entre llegadas consecutivas es una <span class="math inline">\(exp(\lambda)\)</span>, la distribución del tiempo de servicio es <span class="math inline">\(exp(\mu)\)</span> y hay <span class="math inline">\(s\)</span> servidores. En este caso la población potencial y la capacidad de la cola son infinitas y la disciplina de la cola es FIFO.</p>
+<p>Las tasas de llegadas vienen dadas por</p>
+<p><span class="math display">\[\lambda_n = \lambda, \text{ para } n = 0, 1,...\]</span>
+y las tasas de servicio</p>
+<p><span class="math display">\[\mu_n = 
+\begin{cases}
+n\mu &amp; \text{ si } n = 1, 2,...,s\\
+s\mu &amp; \text{ si } n = s+1, s+2,...
+\end{cases}
+\]</span></p>
+<p>con ratio de ocupación</p>
+<p><span class="math display">\[\rho = \frac{\lambda}{\mu s}\]</span></p>
+<p>A partir de las ecuaciones de equilibrio podemos obtener la relación entre tasas de llegadas y servicio:</p>
+<p><span class="math display">\[
+c_n =
+\begin{cases}
+\frac{\lambda^n}{n!\mu^n} &amp; \text{ si } n = 0, 1,...,s\\
+\frac{\lambda^s}{s!\mu^s}\rho^{n-s} &amp; \text{ si } n = s+1, s+2,...
+\end{cases}
+\]</span></p>
+<p>La suma de la serie de los <span class="math inline">\(c_n\)</span> será convergente (el sistema es estacionario) si <span class="math inline">\(\rho &lt; 1\)</span>, es decir,
+<span class="math inline">\(\lambda &lt; s\mu\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-52" class="example"><strong>Ejemplo 5.1  </strong></span>En una determinada planta de fabricación, la operación final es una operación de pintura. En el centro de pintura siempre hay dos trabajadores que trabajan en paralelo, aunque debido a la configuración física, no pueden ayudarse mutuamente. Las llegdas al centro de pintura se producen según un proceso de Poisson con
+con una tasa de llegada media de 100 al día. Cada trabajador tarda una media de 27 minutos en pintar cada artículo. Últimamente, el exceso de trabajo en curso es motivo de preocupación, por lo que la dirección está considerando ampliar el centro de pintura y contratar a un tercer trabajador. (Se supone que el tercer trabajador, tras un periodo de formación, también tardará una media de 27 minutos por pieza). Otra opción sería comprar un robot para realizar la tarea de los trabajadores, ya que se sabe que el tiempo medio que tardará en cada pieza es de 10 minutos.</p>
+<ul>
+<li>Analiza cada uno de los tres sistemas respecto de las medidas de eficiencia e indica que alternativa reduciría el inventario.</li>
+<li>El coste del inventario (incluyendo la pieza que se está trabajando) se estima en 0,50 euros por pieza y hora. El coste por trabajador (salario y gastos generales) se estima en 40.000 euros al año, y el coste de instalación y mantenimiento de un robot se estima en 100.000 euros al año ¿Qué alternativa, si es que hay alguna, es justificable utilizando un criterio de coste esperado a largo plazo?</li>
+</ul>
+</div>
+<p>Se proponen tres sistemas de colas con las características siguientes (utilizando como unidad de tiempo las horas):</p>
+<ul>
+<li>Situación 1. Cola <span class="math inline">\(M/M/2\)</span> con <span class="math inline">\(\lambda = 100/24\)</span> y <span class="math inline">\(\mu = 60/27\)</span>
+</li>
+<li>Situación 2. Cola <span class="math inline">\(M/M/3\)</span> con <span class="math inline">\(\lambda = 100/24\)</span> y <span class="math inline">\(\mu = 60/27\)</span>
+</li>
+<li>Situación 3. Cola <span class="math inline">\(M/M/1\)</span> con <span class="math inline">\(\lambda = 100/24\)</span> y <span class="math inline">\(\mu = 60/10\)</span>
+</li>
+</ul>
+<p>Para determinar que sistema mejoraría el estado del inventario utilizamos varias medidas relativas a cada uno de ellos:</p>
+<ul>
+<li>ratio de ocupación,</li>
+<li>probabilidad de que el sistema este ocupado,</li>
+<li>tiempo medio de las piezas en el sistema.</li>
+</ul>
+<p>Definimos los tres sistemas y obtenemos las medidas de interés. Para los sistemas <span class="math inline">\(M/M/s\)</span> utilizaremos la función <code>NewInput.MMC</code>, donde el parámetro <span class="math inline">\(c\)</span> indica el número de servidores. Generamos los tres sistemas:</p>
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Parámetros de los sistemas</span>
+<span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">/</span><span class="fl">24</span>
+<span class="va">muk</span> <span class="op">&lt;-</span> <span class="fl">60</span><span class="op">/</span><span class="fl">27</span>
+<span class="va">mu1</span> <span class="op">&lt;-</span> <span class="fl">60</span><span class="op">/</span><span class="fl">10</span>
+
+<span class="co"># M/M/2</span>
+<span class="va">env.MM2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMC.html">NewInput.MMC</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda</span>, mu <span class="op">=</span> <span class="va">muk</span>, c <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">s.MM2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM2</span><span class="op">)</span>
+<span class="co"># M/M/3</span>
+<span class="va">env.MM3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMC.html">NewInput.MMC</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda</span>, mu <span class="op">=</span> <span class="va">muk</span>, c <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">s.MM3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM3</span><span class="op">)</span>
+<span class="co"># M/M/1</span>
+<span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda</span>, mu <span class="op">=</span> <span class="va">mu1</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="va">s.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span></code></pre></div>
+<p>Obtenemos y comparamos las diferentes medidas consideradas</p>
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ratio de ocupación</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">s.MM2</span><span class="op">$</span><span class="va">RO</span>, <span class="va">s.MM3</span><span class="op">$</span><span class="va">RO</span>, <span class="va">s.MM1</span><span class="op">$</span><span class="va">RO</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.9375000 0.6250000 0.6944444</code></pre>
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Probabildid de que el sistema este ocupado</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">s.MM2</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">1</span><span class="op">-</span><span class="va">s.MM3</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">1</span><span class="op">-</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.9677419 0.8677686 0.6944444</code></pre>
+<div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Tiempo medio en el sistema</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">s.MM2</span><span class="op">$</span><span class="va">W</span>, <span class="va">s.MM3</span><span class="op">$</span><span class="va">W</span>, <span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 3.7161290 0.6049587 0.5454545</code></pre>
+<p>Desde el punto de vista de ratio de ocupación el mejor sistema sería el de tres trabajores, pero si utilizamos los otros dos criterios el mejor sistema sería el que utiliza el robot.</p>
+<p>Hacemos ahora la evaluación de costes por hora teniendo en cuenta que cada año tiene 8760 horas (365*24). Para obtener los costes asociados debemos estimar el número de piezas en el sistema por hora para evaluar el coste total de inventario, ay añadir el coste de la mano de obra. En esta situación tenemos:</p>
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Coste M/M/2</span>
+<span class="va">s.MM2</span><span class="op">$</span><span class="va">L</span><span class="op">*</span><span class="fl">0.50</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">40000</span><span class="op">/</span><span class="fl">8760</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 16.87436</code></pre>
+<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Coste M/M/3</span>
+<span class="va">s.MM3</span><span class="op">$</span><span class="va">L</span><span class="op">*</span><span class="fl">0.50</span> <span class="op">+</span> <span class="fl">3</span><span class="op">*</span><span class="op">(</span><span class="fl">40000</span><span class="op">/</span><span class="fl">8760</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 14.95896</code></pre>
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Coste M/M/1</span>
+<span class="va">s.MM3</span><span class="op">$</span><span class="va">L</span><span class="op">*</span><span class="fl">0.50</span> <span class="op">+</span> <span class="op">(</span><span class="fl">100000</span><span class="op">/</span><span class="fl">8760</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 12.67586</code></pre>
+<p>Atendiendo a los costes, el modelo que utiliza el robot resulta en un menor coste por hora por lo que resulta el más beneficioso.</p>
+</div>
+<div id="mmsk" class="section level3" number="5.4.2">
+<h3>
+<span class="header-section-number">5.4.2</span> M/M/s/K<a class="anchor" aria-label="anchor" href="#mmsk"><i class="fas fa-link"></i></a>
+</h3>
+<p>Es una generalización del modelo <span class="math inline">\(M/M/1/K\)</span> en el caso en que haya <span class="math inline">\(s\)</span> servidores. Las tasas de llegada son casi idénticas a las del modelo <span class="math inline">\(M/M/1\)</span>, mientras que las de servicio son exáctamente iguales a las de un <span class="math inline">\(M/M/s\)</span>:</p>
+<p><span class="math display">\[\lambda_n = 
+\begin{cases}
+\lambda \text{ para } n = 0, 1,..., K+s-1\\
+0 \text{ para } n = K+s, K+s+1,...
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[\mu_n = 
+\begin{cases}
+n\mu &amp; \text{ si } n = 1, 2,...,s\\
+s\mu &amp; \text{ si } n = s+1, s+2,...
+\end{cases}
+\]</span></p>
+<p>con ratio efectivo de ocupación</p>
+<p><span class="math display">\[\bar{\rho} = \frac{\bar{\lambda}}{\mu s}\]</span></p>
+<p>Este sistema siempre es estacionario. A continuación, se presenta un ejemplo de este sistema donde se muestra la función que debemos usar para analiar este tipo de cola.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-53" class="example"><strong>Ejemplo 5.2  </strong></span>Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos siendo atendidas por las operadoras y otras tres en espera, recibe el tono de “línea ocupada”). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada y dicho tiempo de distribución exponencial. Calcular:</p>
+<ul>
+<li>El porcentaje de tiempo en que cada operadora está ocupada y el número medio de servidores ocupados.</li>
+<li>El número medio de llamadas en espera.</li>
+<li>La probabilidad de que una llamada obtenga la señal de “línea ocupada.”</li>
+<li>Calcular las tres cantidades anteriores bajo el supuesto de que se amplie a 5 las llamadas en espera.</li>
+</ul>
+</div>
+<p>Para el análisis de este sistema utilizamos la función <code>NewInput.MMCK</code> donde además de las tasas, debemos indicar el número de servidores, y la capacidad del sistema. Tomaremos como unidad de tiempo los minutos de forma que <span class="math inline">\(\lambda = 6\)</span> y <span class="math inline">\(\mu = 60/15 = 4\)</span>. La capacidad del sistema es <span class="math inline">\(K = 5\)</span> que se corresponde con dos llamadas atendidas y tres en espera. Se trata pues de un sistema <span class="math inline">\(M/M/2/5\)</span>.</p>
+<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># M/M/2/5</span>
+<span class="va">env.MM25</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMCK.html">NewInput.MMCK</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">6</span>, mu <span class="op">=</span> <span class="fl">4</span>, c <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
+<span class="va">s.MM25</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM25</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function</code></pre>
+<p>Veamos como responder a cada una de las cuestiones planteadas utilizando los resultados del sistema diseñado. para responder al primer apartado debemos obtener el ratio efectivo de ocupación, asi como la diferencia entre el número medio de clientes en el sistema y el número medio de clientes en la cola para determinar el número medio de servidores ocupados.</p>
+<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Porcentaje de tiempo servidor ocupado</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">s.MM25</span><span class="op">$</span><span class="va">RO</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 68.62</code></pre>
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Número medio de servidores ocupados</span>
+<span class="va">s.MM25</span><span class="op">$</span><span class="va">L</span> <span class="op">-</span> <span class="va">s.MM25</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 1.372329</code></pre>
+<p>La ocupación de cada operadora es del 68.6% y el número medio de operadores ocupados es del 1.4. Con respecto al número medio de llamadas en espera tenemos:</p>
+<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Número medio de llamadas en espera</span>
+<span class="va">s.MM25</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 0.6336252</code></pre>
+<p>En cuanto a la probabilidad solicitada debemos calcular <span class="math inline">\(P(N_q = 3) = P(N = 5)\)</span> que se obtiene como:</p>
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Probabilidad de linea ocupada</span>
+<span class="va">s.MM25</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
+<pre><code>## [1] 0.08511384</code></pre>
+<p>Tan solo en un 8.5% de las ocasiones salta el mensaje de línea ocupada, es decir, el sistema esta ocupado al 100%.</p>
+<p>Evaluamos ahora el incremento del tamaño de sistema aumentado las llamadas en espera.</p>
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># M/M/2/7</span>
+<span class="va">env.MM27</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMCK.html">NewInput.MMCK</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">6</span>, mu <span class="op">=</span> <span class="fl">4</span>, c <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
+<span class="va">s.MM27</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM27</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function
+
+## Warning in formals(fun): argument is not a function</code></pre>
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Porcentaje de tiempo servidor ocupado</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">s.MM27</span><span class="op">$</span><span class="va">RO</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 71.77</code></pre>
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Número medio de servidores ocupados</span>
+<span class="va">s.MM27</span><span class="op">$</span><span class="va">L</span> <span class="op">-</span> <span class="va">s.MM27</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 1.435402</code></pre>
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Número medio de llamadas en espera</span>
+<span class="va">s.MM27</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
+<pre><code>## [1] 1.014966</code></pre>
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Probabilidad de linea ocupada</span>
+<span class="va">s.MM27</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">8</span><span class="op">]</span></code></pre></div>
+<pre><code>## [1] 0.04306559</code></pre>
+</div>
+</div>
+<div id="COLASE" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Redes de colas en serie<a class="anchor" aria-label="anchor" href="#COLASE"><i class="fas fa-link"></i></a>
+</h2>
+<p>Una red de colas en serie es una colección de <span class="math inline">\(K\)</span> colas que se suceden unas a otras de tal manera que sólo es posible la entrada de clientes dede fuera del sistema a la primera de ellas, produciéndose la salida de ellas tras el servicio de la última cola. En esta situación podemos definir las medidas de eficiencia del sistema completo de colas en función de las medidas de efiecencia de cada una de las colas que conforman el sistema, teniendo en cuenta que tan sólo hay una tasa de llegada que corresponde con la cola inicial de la red.</p>
+<p>Imaginemos <span class="math inline">\(i=1,2,...,k\)</span> colas en red del tipo <span class="math inline">\(M/M/s_i\)</span> independientes con tasa de entrada <span class="math inline">\(\lambda\)</span> y tasa de servicio <span class="math inline">\(\mu_i\)</span>, y con medidas de eficiencia <span class="math inline">\(L_i, W_i, L_{q_i}, W_{q_i}\)</span>. Dadoq ue en este caso el flujo de un cliente a través de la red es secuencial será cierto que los tiempos medios de un cliente en la red son la suma de los correspondientes a cada subsistema. Si denotamos por <span class="math inline">\(L_{red}, W_{red}, L_{q_{red}}, W_{q_{red}}\)</span> las medidas de eficencia del sistema, aplicando este razonamiento tenemos que:</p>
+<p><span class="math display">\[L_{red} = \sum_{i = 1}^k L_i\]</span></p>
+<p><span class="math display">\[W_{red} = \sum_{i = 1}^k W_i\]</span></p>
+<p><span class="math display">\[W_{q_{red}} = W_{red} - \left(\sum_{i = 1}^k \frac{1}{\mu_i}\right)\]</span></p>
+<p><span class="math display">\[L_{q_{red}} = \lambda W_{q_{red}}\]</span></p>
+<p>de esta forma basta con analizar cada una de las clas que conforman la red para estudiar el comportamiento global del sistema.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-54" class="example"><strong>Ejemplo 5.3  </strong></span>Una empresa de ITV en una localidad dispone de una superficie que consta de tres partes: Una caseta donde los clientes entregan la documentación del vehículo y realizan el pago de tasas, sin restricciones paa atender ningún vehículo. Una nave formada por dos circuitos (revisión y oficina de personal técnico) atendidos por dos técnicos cada uno de ellos. Los vehículos que llegan a la nave son atendidos con una tasa de servicio medio de 45 clientes/hora para la revisión y 2 minutos/cliente en la oficina de personal técnico. Los coches acuden a la empresa a una media de 57 clientes/hora, ya que un mayor número de vehículos colapsaría el trabajo de la caseta, cuyo empleado atiende a un ritmo medio de 1 cliente/minuto. Las llegadas siguen un Proceso de Poisson y los tiempos de servicio se distribuyen según una variable exponencial. Se pide:</p>
+<ul>
+<li>Factor de utilziación o intensidad de tráfico en cada nodo de la red.</li>
+<li>Probabildiades de que no haya ningún cliente en cada uno de los nodos de la red.</li>
+<li>Longitud media de la cola de vehículos que habiendo pagado las tasas se encuentran esperando a la entrada de la nave.</li>
+<li>Tiempo medio que un cliente pasa en la revisión.</li>
+<li>Tiempo medio que un cliente pasa en la oficina de personal técnico.</li>
+<li>Tiempo medio que un cliente se encuentra en la ITV.</li>
+<li>Para agilizar el proceso la empresa estudia la posibilidad de ampliar el número de servidores en la caseta o en la oficina. Suponiendo que el coste de ampliación en uno u otro lugar fuera equivalente, ¿qué criterio sería más acertado para que el tiempo de servicio del sistema fuera menor?</li>
+</ul>
+</div>
+<p>El sistema se puede describir com una red de colas en serie con nodos: caseta (<span class="math inline">\(M/M/1\)</span>), equipamiento (<span class="math inline">\(M/M/2\)</span>) y personal técnico (<span class="math inline">\(M/M/2\)</span>), con tasas de llegadas y servicio (expresadas en minutos) dadas por:</p>
+<p><span class="math display">\[\lambda_1 = \lambda_2 = \lambda_3 = 57/60 = 0.95\]</span></p>
+<p><span class="math display">\[\mu_1 = 1; \mu_2 = 45/60 = 0.75; \mu_3 = 1/2 = 0.5\]</span></p>
+<p>Planteamos los tres sistemas de colas y obtenemos las correspondientes medidas de eficiencia:</p>
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># M/M/1</span>
+<span class="va">nodo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.95</span>, mu <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># M/M/2</span>
+<span class="va">nodo2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMC.html">NewInput.MMC</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.95</span>, mu <span class="op">=</span> <span class="fl">0.75</span>, c <span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># M/M/2</span>
+<span class="va">nodo3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMC.html">NewInput.MMC</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.95</span>, mu <span class="op">=</span> <span class="fl">0.5</span>, c<span class="op">=</span> <span class="fl">2</span>, n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Medidas de eficiencia de cada nodo</span>
+<span class="va">ef.nodo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nodo1</span><span class="op">$</span><span class="va">RO</span>, <span class="va">nodo1</span><span class="op">$</span><span class="va">L</span>, <span class="va">nodo1</span><span class="op">$</span><span class="va">Lq</span>, <span class="va">nodo1</span><span class="op">$</span><span class="va">W</span>, <span class="va">nodo1</span><span class="op">$</span><span class="va">Wq</span>, <span class="va">nodo1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> 
+<span class="va">ef.nodo2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nodo2</span><span class="op">$</span><span class="va">RO</span>, <span class="va">nodo2</span><span class="op">$</span><span class="va">L</span>, <span class="va">nodo2</span><span class="op">$</span><span class="va">Lq</span>, <span class="va">nodo2</span><span class="op">$</span><span class="va">W</span>, <span class="va">nodo2</span><span class="op">$</span><span class="va">Wq</span>, <span class="va">nodo2</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> 
+<span class="va">ef.nodo3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">nodo3</span><span class="op">$</span><span class="va">RO</span>, <span class="va">nodo3</span><span class="op">$</span><span class="va">L</span>, <span class="va">nodo3</span><span class="op">$</span><span class="va">Lq</span>, <span class="va">nodo3</span><span class="op">$</span><span class="va">W</span>, <span class="va">nodo3</span><span class="op">$</span><span class="va">Wq</span>, <span class="va">nodo3</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
+<span class="va">eficiencia</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">ef.nodo1</span>, <span class="va">ef.nodo2</span>, <span class="va">ef.nodo3</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">eficiencia</span><span class="op">)</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ro"</span>, <span class="st">"L"</span>, <span class="st">"Lq"</span>, <span class="st">"W"</span>, <span class="st">"Wq"</span>,<span class="st">"P_0"</span><span class="op">)</span> 
+<span class="va">eficiencia</span></code></pre></div>
+<pre><code>##                 Ro         L         Lq         W         Wq        P_0
+## ef.nodo1 0.9500000 19.000000 18.0500000 20.000000 19.0000000 0.05000000
+## ef.nodo2 0.6333333  2.115028  0.8483612  2.226345  0.8930118 0.22448980
+## ef.nodo3 0.9500000 19.487179 17.5871795 20.512821 18.5128205 0.02564103</code></pre>
+</div>
+<div id="COLASF" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Funciones simmer<a class="anchor" aria-label="anchor" href="#COLASF"><i class="fas fa-link"></i></a>
+</h2>
+<p>En este apartado se presentan los algoritmos de simulación de simmer para los sistemas de colas estudiados.</p>
+<div id="mm1-1" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> <span class="math inline">\(M/M/1\)</span><a class="anchor" aria-label="anchor" href="#mm1-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Sistema</span>
+<span class="co">#################################################</span>
+<span class="va">cola.MM1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span><span class="op">)</span>
+<span class="op">{</span>
+  <span class="co"># lambda: tasa de llegadas</span>
+  <span class="co"># mu: tasa de servicio</span>
+
+  <span class="co"># Funciones de tiempos</span>
+  <span class="va">tarrival</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda</span><span class="op">)</span>
+  <span class="va">tserver</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span>
+  
+  <span class="co"># Trayectoria de servicio</span>
+  <span class="va">servicio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/visit.html">visit</a></span><span class="op">(</span><span class="st">"server"</span>, <span class="va">tserver</span><span class="op">)</span>               
+
+  <span class="co"># Entorno del sistema </span>
+  <span class="co">#################################################</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"server"</span>, capacity <span class="op">=</span> <span class="fl">1</span>, queue_size <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           
+    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival"</span>, <span class="va">servicio</span>, <span class="va">tarrival</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
+<span class="op">}</span></code></pre></div>
+</div>
+<div id="mm1k-1" class="section level3" number="5.6.2">
+<h3>
+<span class="header-section-number">5.6.2</span> <span class="math inline">\(M/M/1/K\)</span><a class="anchor" aria-label="anchor" href="#mm1k-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Sistema</span>
+<span class="co">#################################################</span>
+<span class="va">cola.MM1K</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">K</span><span class="op">)</span>
+<span class="op">{</span>
+  <span class="co"># lambda: tasa de llegadas</span>
+  <span class="co"># mu: tasa de servicio</span>
+  <span class="co"># K: capacidad del sistema</span>
+
+  <span class="co"># Funciones de tiempos</span>
+  <span class="va">tarrival</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda</span><span class="op">)</span>
+  <span class="va">tserver</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span>
+  
+  <span class="co"># Tamaño de la cola</span>
+  <span class="va">qsize</span> <span class="op">&lt;-</span> <span class="va">K</span> <span class="op">-</span> <span class="fl">1</span>
+  
+  <span class="co"># Trayectoria de servicio</span>
+  <span class="va">servicio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/visit.html">visit</a></span><span class="op">(</span><span class="st">"server"</span>, <span class="va">tserver</span><span class="op">)</span>               
+
+  <span class="co"># Entorno del sistema </span>
+  <span class="co">#################################################</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"server"</span>, capacity <span class="op">=</span> <span class="fl">1</span>, queue_size <span class="op">=</span> <span class="va">qsize</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           
+    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival"</span>, <span class="va">servicio</span>, <span class="va">tarrival</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
+<span class="op">}</span></code></pre></div>
+</div>
+<div id="mms-1" class="section level3" number="5.6.3">
+<h3>
+<span class="header-section-number">5.6.3</span> <span class="math inline">\(M/M/s\)</span><a class="anchor" aria-label="anchor" href="#mms-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Sistema</span>
+<span class="co">#################################################</span>
+<span class="va">cola.MMs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">s</span><span class="op">)</span>
+<span class="op">{</span>
+  <span class="co"># lambda: tasa de llegadas</span>
+  <span class="co"># mu: tasa de servicio</span>
+  <span class="co"># s: servidores idénticos disponibles</span>
+
+  <span class="co"># Funciones de tiempos</span>
+  <span class="va">tarrival</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda</span><span class="op">)</span>
+  <span class="va">tserver</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span>
+  
+  <span class="co"># Trayectoria de servicio</span>
+  <span class="va">servicio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/visit.html">visit</a></span><span class="op">(</span><span class="st">"server"</span>, <span class="va">tserver</span><span class="op">)</span>               
+
+  <span class="co"># Entorno del sistema </span>
+  <span class="co">#################################################</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"server"</span>, capacity <span class="op">=</span> <span class="va">s</span>, queue_size <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           
+    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival"</span>, <span class="va">servicio</span>, <span class="va">tarrival</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
+<span class="op">}</span></code></pre></div>
+</div>
+<div id="mmsk-1" class="section level3" number="5.6.4">
+<h3>
+<span class="header-section-number">5.6.4</span> <span class="math inline">\(M/M/s/K\)</span><a class="anchor" aria-label="anchor" href="#mmsk-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Sistema</span>
+<span class="co">#################################################</span>
+<span class="va">cola.MMsK</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">s</span>, <span class="va">K</span><span class="op">)</span>
+<span class="op">{</span>
+  <span class="co"># lambda: tasa de llegadas</span>
+  <span class="co"># mu: tasa de servicio</span>
+  <span class="co"># s: servidores</span>
+  <span class="co"># K: capacidad del sistema</span>
+
+  <span class="co"># Funciones de tiempos</span>
+  <span class="va">tarrival</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda</span><span class="op">)</span>
+  <span class="va">tserver</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span>
+  
+  <span class="co"># Tamaño de la cola</span>
+  <span class="va">qsize</span> <span class="op">&lt;-</span> <span class="va">K</span> <span class="op">-</span> <span class="va">s</span>
+  
+  <span class="co"># Trayectoria de servicio</span>
+  <span class="va">servicio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/visit.html">visit</a></span><span class="op">(</span><span class="st">"server"</span>, <span class="va">tserver</span><span class="op">)</span>               
+
+  <span class="co"># Entorno del sistema </span>
+  <span class="co">#################################################</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"server"</span>, capacity <span class="op">=</span> <span class="va">s</span>, queue_size <span class="op">=</span> <span class="va">qsize</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           
+    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"arrival"</span>, <span class="va">servicio</span>, <span class="va">tarrival</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
+<span class="op">}</span></code></pre></div>
+</div>
+</div>
+<div id="COLASG" class="section level2" number="5.7">
+<h2>
+<span class="header-section-number">5.7</span> Ejercicios<a class="anchor" aria-label="anchor" href="#COLASG"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los ejercicios que se presentan a continuación se estruturan en dos niveles de dificultad. El primer nivel son ejercicios más básicos (codificados con una B que provienen de los ejemplso vistos en la unidad), mientras que el segundo bloque necesitan una mayor cantidad de trabajo (codificados con una A). Cuando consideres necesario puedes plantear una solución mediante simulación para contestar a las preguntas de interés.</p>
+<p><strong>Ejercicio B-1.</strong> Para el ejemplo del sistema de la estación de trabajo descrito para el sistema <span class="math inline">\(M/M/1\)</span> vamos a contestar a las diferentes cuestiones que allí se planteaban pero considerando que la estación de trabajo dispone de tres servidores idénticos. Hallar también el número medio total de procesos en la estación.</p>
+<p><strong>Ejercicio A-1.</strong> Los coches llegan a un peaje 24 horas al día según un proceso de Poisson con
+una tasa media de 15 por hora. Estamos interesados en:</p>
+<ul>
+<li>¿Cuál es el número esperado de coches que llegarán a la cabina entre la 1:00 p.m. y 1:30 p.m.?</li>
+<li>¿Cuál es el tiempo esperado entre dos coches que llegan consecutivamente?</li>
+<li>Son las 13:12 y acaba de llegar un coche. ¿Cuál es el número esperado de coches que llegarán entre este momento y la 1:30 p.m.?</li>
+<li>Son las 13:12 y acaba de llegar un coche. ¿Cuál es la probabilidad de que lleguen dos más coches lleguen de aquí a las 13:30?</li>
+<li>Son las 13:12 y el último coche en llegar lo hizo a las 13:05. ¿Cuál es la probabilidad de que no lleguen más coches hasta las 13:30?</li>
+<li>Son las 13:12 y el último coche en llegar lo hizo a las 13:05. ¿Cuál es la tiempo esperado entre la llegada del último coche y la del siguiente?</li>
+</ul>
+<p><strong>Ejercicio A-2.</strong> Un gran hotel ha colocado un ordenador para uso de los clientes en una sala de atención al cliente. La llegada de clientes que necesitan utilizar el ordenador sigue un proceso de Poisson con una media de ocho por hora. El tiempo que cada persona utiliza el ordenador es muy variable y se aproxima mediante una distribución exponencial con un tiempo medio de 5 minutos. El hotel está interesado en:</p>
+<ul>
+<li>¿Cuál es la probabilidad de que la sala donde está el ordenador esté vacía?</li>
+<li>¿Cuál es la probabilidad de que nadie esté esperando para utilizar el ordenador?</li>
+<li>¿Cuál es el tiempo medio que un cliente debe esperar en la cola para utilizar el ordenador?</li>
+<li>¿Cuál es la probabilidad de que un cliente que llega vea a dos personas esperando en cola?</li>
+</ul>
+<p><strong>Ejercicio A-3.</strong> Una prensa de taladro en un taller de trabajo tiene piezas que llegan para ser taladradas de acuerdo con un proceso de Poisson con una tasa media de 15 por hora. El tiempo medio que se tarda en completar cada pieza es una variable aleatoria con una función de distribución exponencial cuya media es de 3 minutos. Estamos interesados en conocer:</p>
+<ul>
+<li>¿Cuál es la probabilidad de que el taladro esté ocupado?</li>
+<li>¿Cuál es el número medio de piezas en espera de ser taladradas?</li>
+<li>¿Cuál es la probabilidad de que al menos una pieza esté esperando para ser taladrada?</li>
+<li>¿Cuál es el tiempo medio que pasa una pieza en la sala de taladrado?</li>
+<li>A la empresa le cuesta 8 céntimos por cada minuto que pasa cada pieza en la sala de taladrado. Por un gasto adicional de 10 euros por hora, la empresa puede disminuir la duración media de la operación de taladrado a 2 minutos. ¿Merece la pena el coste adicional?</li>
+</ul>
+<p><strong>Ejercicio A-4.</strong> Una tienda de alimentacion es atendida por una persona. Aparentemente el patr ´ on de llegadas de clientes durante los sabados se comporta siguiendo un proceso de Poisson con una tasa de llegadas de 10 personas por hora. A los clientes se les atiende siguiendo un orden tipo FIFO y debido al prestigio de la tienda, una vez que llegan estan dispuestos a esperar el servicio. Se estima que el tiempo que se tarda en atender a un cliente se distribuye exponencialmente, con un tiempo medio de 4 minutos.
+Determina:</p>
+<ul>
+<li>La probabilidad de que haya alguién en la cola.</li>
+<li>La longitud media de la cola.</li>
+<li>Tiempo medio que un cliente permanece en la cola.</li>
+</ul>
+<p><strong>Ejercicio A-5.</strong> En una fabrica existe una oficina de la Seguridad Social a la que los obreros tienen acceso durante las horas de trabajo. El jefe de personal, que ha observado la afluencia de obreros a la ventanilla, ha solicitado que se haga un estudio relativo al funcionamiento de este servicio. Se designa a un especialista para que determine el tiempo medio de espera de los obreros en la cola y la duracion
+media de la conversacion que cada uno mantiene con el empleado de la ventanilla. Este analista<br>
+llega a la conclusion de que durante la primera y la última media hora de la jornada la afluencia es<br>
+muy reducida y fluctuante, pero que durante el resto de la jornada el fenómeno se puede considerar
+estacionario. Del analisis de 100 periodos de 5 minutos, sucesivos o no, pero situados en la fase
+estacionaria, se dedujo que el numero medio de obreros que acudían a la ventanilla era de 1.25 por
+periodo y que el tiempo entre llegadas seguía una distribucion exponencial. Un estudio similar sobre
+la duracion de las conversaciones, llevó a la conclusión de que se distribuían exponencialmente con
+duracion media de 3.33 minutos. Determina:</p>
+<ul>
+<li>Número medio de obreros en cola.</li>
+<li>Tiempo medio de espera en la cola.</li>
+<li>Compara el tiempo perdido por los obreros con el tiempo perdido por el oficinista. Calcula el coste para la empresa, sin una hora de inactividad del oficinista vale 250 euros y una hora del obrero 400 euros.</li>
+</ul>
+<p><strong>Ejercicio A-6.</strong> Una compañía ferroviaria pinta sus propios vagones, según se vayan necesitando, en sus propios talleres donde se pinta a mano de uno en uno con una velocidad que se distribuye según una exponencial de media uno cada 4 horas y un coste anual de 4 millones de euros. Se ha determinado que los vagones pueden llegar según un proceso de Poisson de media uno cada 5 horas. Además el coste por cada vagón que no está activo es de 500 euros la hora.</p>
+<p>Se plantean otras dos posibilidades. Una es encargar dicho trabajo a una empresa de pintura que lo haría con aerosol con el consiguiente ahorro de tiempo. Sin embargo el presupuesto para esta segunda alternativa es de 10 millones de euros anuales. En este caso, el proceso se aproxima a uno de Poisson con una tasa de uno cada 3 horas. La otra opción es poner otro taller exactamente igual al que hay actualmente, con igual tasa de servicio y coste anual que permita pintar dos vagones a la vez.</p>
+<p>En todos los casos el trabajo se considera ininterrumpido, esto es, se trabajan 24 × 365 = 8760 horas anuales. ¿Cuál de los tres procedimientos es preferible?</p>
+<p><strong>Ejercicio A-7.</strong> Un taller utiliza 10 máquinas idénticas. Cada máquina deja de funcionar en promedio una vez cada 7 horas. Un operario puede reparar una máquina en 4 horas en promedio, pero el tiempo de reparación real varía según una distribución exponencial.</p>
+<p>Interpretar y comparar las respuestas:
+* El número mínimo de mecánicos que se necesita para que el número estimado de máquinas que fallan sea menor que 4.
+* El número mínimo de mecánicos que se necesita, de manera que la demora esperada hasta que se repare una máquina sea menor que 4 horas.</p>
+<p><strong>Ejercicio A-8.</strong> Un asesor fiscal dispone de un local para atender a sus clientes, los cuales se
+concentran mayoritariamente entre los meses de mayo y junio. El local tiene una capacidad máxima de 8 asientos en espera, el cliente se va si no encuentra un asiento libre, y el tiempo entre llegada de clientes se puede considerar distribuido exponencialmente con 20 clientes/hora en período punta. El tiempo de una consulta esta distribuido exponencialmente con una media de 12 minutos.</p>
+<ul>
+<li>¿Cuántas consultas por hora realizará en promedio?</li>
+<li>¿Cuál es el tiempo medio de permanencia en el local?</li>
+</ul>
+<p><strong>Ejercicio A-9.</strong> Un estudiante trabaja como encargado de una biblioteca por las noches y es el único en el mostrador durante todo su turno de trabajo. Las llegadas al mostrador siguen una distribución de Poisson con una media de 8 por hora. Cada usuario de la biblioteca es atendido de uno en uno, y el tiempo de servicio sigue una distribución exponencial con una media de 5 minutos.</p>
+<ul>
+<li>¿Cuál es la probabilidad de que se forme cola?</li>
+<li>¿Cuál es la longitud media de la cola?</li>
+<li>¿Cuál es el tiempo medio que un cliente pasa en la biblioteca hasta que le han atendido?</li>
+<li>¿Cuál es el tiempo medio que un cliente pasa en la cola esperando a que le atiendan?</li>
+<li>El estudiante pasa su tiempo en que no hay clientes clasificando artículos de revistas. Si puede clasificar 22 fichas por hora como media cuando trabaja continuamente, ¿cuántas fichas puede ordenar durante su trabajo?</li>
+</ul>
+<p><strong>Ejercicio A-10.</strong> Una compañía de alquiler de coches tiene un servicio de mantenimiento de coches (revisión del aceite, frenos, lavado…) que sólo es capaz de atender los coches de uno en uno y que trabaja 24 horas al día. Los coches llegan al taller con una media de 3 coches por día. El tiempo que dura el servicio de mantenimiento de un coche sigue una distribución exponencial de media 7 horas. El servicio de
+mantenimiento cuesta a la compañía 375 euros por día. La compañía estima en 25 euros/día el coste de tener el coche parado sin poderse alquilar. La compañía se plantea la posibilidad de cambiar el servicio de mantenimiento por uno más rápido que puede bajar el tiempo de mantenimiento a una media de 5 horas, pero esto también supone un incremento del coste. ¿Hasta que valor puede aumentar el coste para que la compañía contrate los nuevos servicios de mantenimiento?</p>
+<p><strong>Ejercicio A-11.</strong> Nuestro local de comida rápida, “Panis,” tiene mucho que aprender sobre teoría
+de colas. Insta a los clientes a que formen 3 colas en las que se distribuyen de forma aleatoria delante de los empleados durante el periodo de comidas diario. Además han instalado entre las tres colas barreras para que los clientes no se pasen a otras colas para prevenir que la gente se “cambie de cola.” Llegan los
+clientes según una distribución de Poisson con una media de 60 por hora y el tiempo en que un cliente es servido varía según una distribución exponencial de media 150 segundos. Asumiendo el estado permanente del sistema, ¿cuál es el tiempo medio de estancia del cliente hasta que ha sido atendido? El gerente de “Panis” ha creído ahora que es preferible una única cola para distribuir finalmente a los tres servidores y por tanto las barreras son eliminadas. ¿cuál es el tiempo de espera de este modo?</p>
+<p><strong>Ejercicio A-12.</strong> Una organización está actualmente envuelta en el establecimiento de un centro de telecomunicaciones para tener una mejor capacidad de las mismas. El centro deberá ser el responsable de la salida de los mensajes así como de la entrada y distribución dentro de la organización. El encargado del centro es el responsable de determinar los operadores que deben trabajar en él. Los operarios encargados de la salida de mensajes son responsables de hacer pequeñas correcciones a los mensajes, mantener un índice de códigos y un fichero con los mensajes salientes en los últimos 30 días, y por supuesto, transmitir el mensaje. Se ha establecido que este proceso es exponencial y requiere una media de 28 min/mensaje. Los operarios de transmisión trabajarán en el centro 7 horas al día y cinco días a la semana. Todos los mensajes salientes serán procesados según el orden en que se vayan recibiendo y siguen una distribución de Poisson con una media de 21 por cada 7 horas diarias. Los mensajes deben ser atendidos en 2 horas como máximo. Determine el número mínimo de personal que se necesita para cumplir este criterio de servicio.</p>
+<p><strong>Ejercicio A-13.</strong> La empresa “Refrigeración Hermanos Pérez” debe elegir entre dos tipos de sistema para el mantenimiento de sus camiones. Se estima que los camiones llegarán al puesto de mantenimiento de acuerdo con una distribución exponencial de media 40 minutos y se cree que este ratio de llegada es independiente del sistema de servicio que se establezca. El primer tipo de sistema puede atender a dos camiones en paralelo, y cada camión se le haría todo el servicio en una media de 30 minutos (el tiempo sigue una distribución exponencial). En el segundo sistema sólo se podría atender a un camión pero el tiempo medio en que se realiza el mantenimiento de un camión es de 15 minutos (distribución exponencial). Para ayudar al encargado de la decisión responda las siguientes cuestiones:</p>
+<ul>
+<li>¿cuántos camiones habrá por término medio habrá en cualquiera de los dos sistemas?</li>
+<li>¿Cuánto tiempo pasará cada camión en el taller en cualquiera de los dos sistemas?</li>
+<li>El encargado estima que cada minuto que un camión pasa en el taller reduce los beneficios en 2 euros. Se sabe que el sistema de dos camiones en paralelo tiene un coste de un euro por minuto. ¿Qué debería costar el segundo sistema para que no haya diferencia económica entre los dos?</li>
+</ul>
+<p><strong>Ejercicio A-14.</strong> Una empresa que alquila ordenadores, considera necesario revisarlos una vez al año. La primera alternativa, con un coste de 750.000 € es hacer un mantenimiento manual en el que cada ordenador necesitaría un tiempo que sigue una distribución exponencial con una media de 6 horas. La segundo opción sería un mantenimiento con máquinas, con un coste de un millón de euros, en este caso el tiempo de mantenimiento es de 3 horas con una distribución exponencial. Para ambas alternativas los ordenadores llegan siguiendo una distribución de poisson 3 al día. El tiempo en que está parado un ordenador tiene un coste de 150 € por hora. ¿Qué alternativa debe elegir la empresa? Se asume que la empresa trabaja 24 horas, 365 días al año.</p>
+<p><strong>Ejercicio A-15.</strong> Un pequeño autoservicio de lavado en el que el coche que entra no puede hacerlo hasta que el otro haya salido completamente, tiene una capacidad de aparcamiento de 10 coches, incluyendo el que está siendo lavado. La empresa ha estimado que los coches llegan siguiendo una distribución de Poisson con una media de 20 coches/hora, el tiempo de servicio sigue una distribución exponencial de 12 minutos. La empresa abre durante 10 horas al día. ¿Cuál es la media de coches perdidos cada día debido a las limitaciones de espacio?</p>
+<p><strong>Ejercicio A-16.</strong> La compañía “Gasolinas y Aceites SA” es la encargada de descargar los barcos cargados de petróleo que llegan al puerto y llevarlo a la refinería. En el puerto tiene 6 muelles de descarga y 4 equipos para la descarga del barco. Cuando los muelles están llenos, los barcos se desvía a muelles de espera hasta que les toca su turno. Los barcos llegan según una media de uno cada 2 horas. Para descargar el barco se necesita una media de 10 horas, siguiendo una distribución exponencial. La compañía desea saber los siguientes datos:</p>
+<ul>
+<li>Por término medio, ¿cuántos barcos hay en el puerto?</li>
+<li>Por término medio, ¿cuánto tiempo pasa un barco en el puerto?</li>
+<li>¿cuál es la media de llegada de los barcos a los muelles de espera?</li>
+<li>La compañía estudia la posibilidad de construir otro muelle de descarga. La construcción y mantenimiento del puerto costaría X € al año. La compañía estima que desviar un barco hacia los muelles de espera cuando los muelles de descarga están llenos tiene un coste de Y €. ¿Cuál es la relación entre X e Y para que la compañía construya otro puerto de descarga?</li>
+</ul>
+<p><strong>Ejercicio A-17.</strong> Uno de los hospitales de la ciudad de Valencia ofrece todos los miércoles por la noches revisiones gratis de vista. Un test necesita, por término medio, 20 minutos distribuyéndose según una exponencial. Los clientes llegan según una distribución de Poisson de media 6/hora, y los pacientes se atienden según norma FIFO. Los encargados del hospital desean saber que cantidad de personal sanitario deben disponer. Para ello habría que calcular para diferentes cantidades de doctores: 1) ¿cuál es el número medio de gente esperando? 2) el tiempo medio que un cliente pasa en la clínica y 3) el tiempo medio que los doctores están parados.</p>
+<p><strong>Ejercicio A-18.</strong> Una estación de ITV cuenta con tres puestos para inspección y en cada uno sólo puede ser atendido un coche. Cuando un coche sale de un puesto la vacante es ocupada por otro que está en cola. La llegada de coches sigue una distribución de Poisson con una media de un coche por minuto en sus horas punta, que duran tres horas. En el parking sólo caben 4 vehículos. El tiempo de inspección sigue una distribución exponencial de media 6 minutos. El inspector jefe desea saber el número medio de coches en la estación, el tiempo medio (incluida la inspección) de espera, y el número medio de coches en cola debido a que los puestos están ocupados. ¿Cuántos coches tendrán que volver en otro momento?</p>
+<p><strong>Ejercicio A-19.</strong> En el departamento de emergencia de un hospital los pacientes llegan mediante un Proceso de Poisson a 3 clientes/hora. El médico que está en dicho departamento los atiende con una frecuencia de servicio exponencial a una tasa de 4 clientes/hora. ¿Contrataría o no a un segundo médico? Para responder a esta pregunta se deben comparar las siguientes características en ambos sistemas:</p>
+<ul>
+<li>Probabilidad de que no se encuentren pacientes en el departamento de emergencias.</li>
+<li>Probabilidad de que existan 3 pacientes en el departamento de emergencias.</li>
+<li>Tiempo total del cliente en el departamento de emergencias.</li>
+<li>Tiempo total de espera por en el departamento de emergencias.</li>
+<li>El número de pacientes en el departamento de emergencias en un momento dado.</li>
+<li>El número de pacientes en el departamento de emergencias esperando a ser atendidos.</li>
+<li>Probabilidad de que el cliente espere más de 1 hora en el departamento de emergencias.</li>
+<li>Probabilidad de que el cliente espere más de 1 hora en ser atendido en el departamento de emergencias.</li>
+</ul>
+<p><strong>Ejercicio A-20.</strong> Una base de mantenimiento de aviones dispone de recursos para revisar unicamente un motor de avión a la vez. Por tanto, para devolver los aviones lo antes posible, la política que se sigue consiste en aplazar la revision de los 4 motores de cada avión. En otras palabras, solamente se revisa un
+motor cada vez que un avión llega a la base. Con esta política, los aviones llegan segun una distribucion de Poisson de tasa media uno al día. El tiempo requerido para revisar un motor (una vez que se empieza el trabajo) tiene una distribucion exponencial de media 1/2 día. Se ha hecho una propuesta para cambiar la política de revision de manera que los 4 motores se revisen de forma consecutiva cada vez que un avión llegue a la base. A pesar de que ello supondría cuadruplicar el tiempo esperado de servicio, cada avion necesitaría ser revisado unicamente con una frecuencia 4 veces menor. Utliza las medidas descriptivas del sistema para comparar ambas políticas.</p>
+<p><strong>Ejercicio A-21.</strong> Una pequeña estación de servicio junto a una autopista interestatal está abierta las 24 horas al día y tiene un surtidor y espacio para otros dos coches. El proceso de llegadas es un PP con tasa media de llegada de 8 coches/hora y el tiempo medio de servicio en el surtidores es una variable aleatoria exponencial de 6 minutos. El beneficio esperado de cada coche es de 5 dólares. Por 60 dólares más al día, el propietario de la estación puede aumentar la capacidad de los coches en espera en uno. Analiza cada uno de los sistemas propuestos y determina si merece la pena pagar 60 dólares más.</p>
+<p><strong>Ejercicio A-22.</strong> Un centro de reparación dentro de una planta de fabricación está abierto las 24 horas del día y siempre hay una persona presente. La llegada de artículos que necesitan ser reparados en el centro de reparación se ajusta a un proceso de Poisson con una tasa media de 6 por día. La duración de la reparación de los artículos es muy variable y sigue una distribución exponencial con una media de 5 horas. La política de gestión actual es permitir un máximo de tres trabajos en el centro de reparación. Si hay tres trabajos en el centro y llega un cuarto, el trabajo se envía a un contratista externo que devolverá el trabajo 24 horas más tarde. Por cada día que un artículo está en el centro de reparaciones, le cuesta a la empresa 30 euros. Cuando un artículo se envía al contratista externo, le cuesta a la empresa 30 euros por el tiempo perdido, más 75 euros por la reparación. Contesta a las cuestiones siguientes:</p>
+<ul>
+<li>Se ha sugerido que la dirección cambie la política para permitir cuatro trabajos en el centro; así los trabajos se enviarían al contratista externo sólo cuando haya cuatro presentes. ¿Es esta una política mejor?</li>
+<li>¿Cuál sería la política de corte óptima? En otras palabras, ¿a qué nivel sería mejor enviar los trabajos excedentes al contratista externo?</li>
+<li>El personal y el mantenimiento del centro de reparaciones durante las 24 horas del día cuestan 400 por día. ¿Es una política económica acertada o sería mejor cerrar el centro de reparaciones centro de reparaciones y utilizar sólo el contratista externo?</li>
+</ul>
+<p><strong>Ejercicio A-23.</strong> Una pequeña tienda de informática tiene dos dependientes para atender a los clientes (pero capacidad infinita para retener a los clientes). Los clientes llegan a la tienda según un proceso de Poisson con una tasa media de 5 por hora. El 50% de los que llegan quieren comprar hardware y el 50% quiere comprar software. La política actual de la tienda es que un dependiente atiende sólo a los clientes de software y otro para atender sólo a los clientes de hardware, por lo que la tienda actúa como dos sistemas M/M/1 independientes. Tanto si el cliente quiere hardware como software, el tiempo que pasa con uno de los dependientes de la tienda se distribuye exponencialmente con una media de 20 minutos. El propietario de la tienda está considerando cambiar la política de funcionamiento de la tienda y hacer que los dependientes ayuden tanto con el software como con el hardware; así, nunca habría nunca habrá un dependiente inactivo cuando haya dos o más clientes en la tienda. La desventaja es que los dependientes serían menos eficientes, ya que tendrían que ocuparse de algunas cosas que no conocen. Se calcula que el cambio aumentaría el tiempo medio de tiempo de servicio a 21 minutos.</p>
+<ul>
+<li>Si el objetivo es minimizar el tiempo de espera esperado de un cliente, ¿qué política es la mejor?</li>
+<li>Si el objetivo es minimizar el número esperado de clientes en la tienda, ¿qué política es la mejor?</li>
+</ul>
+<p><strong>Ejercicio A-24.</strong> Los clientes llegan a una cola de una estación a un ritmo de cinco por hora. Cada cliente necesita una media de 78 minutos de servicio. ¿Cuál es el número mínimo de servidores necesarios para mantener el sistema estable? ¿Cuál es el número esperado de servidores ocupados si el sistema emplea <span class="math inline">\(s\)</span> servidores (<span class="math inline">\(1 \leq s \leq 10\)</span>)? ¿¿Cuántos servidores son necesarios si la legislación laboral estipula que un servidor no puede estar ocupado más del 80% del tiempo?</p>
+<p><strong>Ejercicio A-25.</strong> Los clientes llegan a una barbería según un proceso de Poisson a un ritmo de ocho por hora. Cada cliente requiere 15 minutos de media. La barbería tiene cuatro sillas y un solo barbero. Un cliente no espera si todas las sillas están ocupadas. Suponiendo una distribución exponencial de los tiempos de servicio:</p>
+<ul>
+<li>Calculae el tiempo esperado que pasa un cliente en la barbería.</li>
+<li>Supongamos que el barbero cobra 12 euors por el servicio. Calcula la tasa de ingresos a largo plazo del barbero. (Pista: ¿Qué fracción de los clientes que llegan ingresan?)</li>
+<li>Supongamos que el barbero contrata a un ayudante, por lo que ahora hay dos barberos. ¿Cuál es la nueva tasa de ingresos?</li>
+<li>Supongamos que el barbero instala una silla más para que los clientes esperen. ¿Cuánto aumentan los ingresos debido a la silla adicional?</li>
+</ul>
+<p><strong>Ejercicio A-26.</strong> Una máquina produce artículos de uno en uno, siendo los tiempos de producción iid exponenciales con media <span class="math inline">\(1/\lambda\)</span>. Los artículos producidos se almacenan en un almacén de capacidad <span class="math inline">\(K\)</span>. Cuando el almacén está lleno, la máquina se apaga, y se vuelve a encender cuando el almacén tiene espacio para al menos un artículo. La demanda de los artículos se produce según a un <span class="math inline">\(PP(\mu)\)</span>. La demanda que no puede satisfacerse se pierde. Supongamos que el tiempo medio de tiempo de fabricación es de 1 hora y la tasa de demanda es de 20 al día. Supongamos que la capacidad del capacidad del almacén es de 10.</p>
+<ul>
+<li>Calcula la fracción de tiempo que la máquina está apagada a largo plazo.</li>
+<li>Calcula la fracción de la demanda perdida a largo plazo.</li>
+<li>Cuando un artículo entra en el almacén, su valor es de 100 euros Sin embargo, pierde valor a razón de
+1 euro por hora mientras espera en el almacén. Así, si un artículo ha estado en el almacén durante 10 horas cuando se vende, sólo alcanza 90 euros Calcule los ingresos a largo plazo por hora.</li>
+</ul>
+<p><strong>Ejercicio A-27.</strong> Una sucursal bancaria dispone de 3 cajeros automáticos. De vez en cuan- do el papel de algún cajero se atasca y el aparato deja de funcionar hasta que uno de los empleados (especialmente adiestrado para llevar a cabo esta tarea) consigue arreglar la avería. Se sabe que el tiempo que utiliza dicho empleado sigue una distribución exponencial con media de l0 minutos, mientras que la distribución del tiempo que un cajero está fun- cionando hasta que se atasca el papel es también exponencial pero con media de 2 horas. Calcular:</p>
+<ul>
+<li>La probabilidad de que funcionen los tres cajeros.</li>
+<li>El número medio de cajeros averiados.</li>
+<li>El tiempo medio que un cajero está averiado.</li>
+<li>Si en un momento dado funcionan los tres cajeros, ¿cuál es el tiempo medio hasta la próxima avería?</li>
+</ul>
+<p><strong>Ejercicio A-28.</strong> Un laboratorio de informática consta de 5 estaciones de trabajo. Cada estación se avería, por término medio, una vez cada 30 días, siendo el tiempo hasta la próxima avería, de distribución exponencial. El laboratorio dispone de dos personas que, en caso de ser necesario, pueden arreglar estas averías. El tiempo de reparación (para cada uno de los técnicos) es exponencial, con media de 3 días. Calcular:</p>
+<ul>
+<li>El número medio de estaciones funcionando.</li>
+<li>El porcentaje de tiempo que cada uno de los técnicos puede dedicar a otras tareas ajenas a la reparación de las estaciones.</li>
+</ul>
+<p><strong>Ejercicio A-29.</strong> A una máquina perforadora de una cadena de producción llegan mecanismos de interruptores diferenciales según un proceso de Poisson, con media de l0 por minuto. El tiempo, en minutos, necesario para llevar a cabo la perforación del mecanismo es de distribución exponencial con parámetro l2. Cuando un nuevo mecanismo llega a la máquina perforadora y ésta está ocupada, aguarda, según el turno que le corresponda, hasta que pueda ser perforado. A tal efecto, se supone que la zona de espera en la que se van almacenando los mecanismos antes de ser perforados es lo suficientemente amplia para que no existan aglomeraciones que sobrepasen estas dimensiones.</p>
+<ul>
+<li>¿Cuál es el porcentaje de tiempo durante el cual la perforadora está libre?</li>
+<li>¿Cuál es el número medio de mecanismos en toda la zona de per- foración (perforadora y zona de espera)?</li>
+<li>Calcular el tiempo medio que un mecanismo pasa en todo el proceso de perforación (desde que llega a esa zona hasta que sale perforado) y la probabilidad de que para un mecanismo se emplee más de un minuto en todo ese proceso.</li>
+<li>Si ahora se supone que la zona de espera tiene sólo capacidad para 3 mecanismos y que cuando un mecanismo que llega y se encuentra dicha zona completa, se desvía a otra rama de la cadena de producción, calcular la probabilidad de que se produzca dicho desvío.</li>
+</ul>
+<p><strong>Ejercicio A-30.</strong> A una máquina perforadora de una cadena de producción llegan mecanismos de interruptores diferenciales según un proceso de Poisson, con media de l0 por minuto. El tiempo, en minutos, necesario para llevar a cabo la perforación del mecanismo es de distribución exponencial con parámetro l2. Cuando un nuevo mecanismo llega a la máquina perforadora y ésta está ocupada, aguarda, según el turno que le corresponda, hasta que pueda ser perforado. A tal efecto, se supone que la zona de espera en la que se van almacenando los mecanismos antes de ser perforados es lo suficientemente amplia para que no existan aglomeraciones que sobrepasen estas dimensiones.</p>
+<ul>
+<li>¿Cuál es el porcentaje de tiempo durante el cual la perforadora está libre?</li>
+<li>¿Cuál es el número medio de mecanismos en toda la zona de per- foración (perforadora y zona de espera)?</li>
+<li>Calcular el tiempo medio que un mecanismo pasa en todo el proceso de perforación (desde que llega a esa zona hasta que sale perforado) y la probabilidad de que para un mecanismo se emplee más de un minuto en todo ese proceso.</li>
+<li>Si ahora se supone que la zona de espera tiene sólo capacidad para 3 mecanismos y que cuando un mecanismo que llega y se encuentra dicha zona completa, se desvía a otra rama de la cadena de producción, calcular la probabilidad de que se produzca dicho desvío.</li>
+</ul>
+<p><strong>Ejercicio A-31.</strong> Un sistema informático de una biblioteca dispone de 3 lectores de CD que funcionan ininterrumpidamente. No obstante, de vez en cuando se produce algún error de lectura en alguno de ellos y deja de funcionar hasta que uno de los encargados de la biblioteca (que es quien siempre lleva a cabo esta tarea) consigue arreglar la avería. Se sabe que el tiempo que esta persona utiliza en dicha reparación sigue una distribución exponen- cial con media de 5 minutos, mientras que la distribución del tiempo que un lector está funcionando hasta que se produce algún error de lectura es también exponencial pero con media de l hora. Calcular:</p>
+<ul>
+<li>La probabilidad de que funcionen los tres lectores.</li>
+<li>El número medio de lectores averiados.</li>
+<li>El tiempo medio que un lector está averiado.</li>
+<li>Si en un momento dado funcionan dos lectores, ¿cuál es el tiempo medio hasta la próxima avería?</li>
+</ul>
+<p><strong>Ejercicio A-32.</strong> Una factoría dispone de cuatro equipos de generación de corriente eléctrica que suministran gran parte de la energía que necesita dicha empresa. La distribución del tiempo que transcurre desde que un generador comienza a funcionar hasta que se avería es exponencial, con media de 40 días. El tiempo de reparación de un generador es una variable aleatoria de distribución exponencial y media l0 días. Sabiendo que existe un único técnico capaz de reparar los generadores, se pide:</p>
+<ul>
+<li>La probabilidad de que el técnico esté ocupado.</li>
+<li>El porcentaje medio de tiempo en el que todos los equipos de gene- ración están averiados.</li>
+<li>El número medio de averías de equipos en un mes.</li>
+<li>El tiempo medio que transcurre desde la avería de un equipo hasta su reparación.</li>
+<li>El número medio de equipos funcionando.</li>
+</ul>
+<p><strong>Ejercicio A-33.</strong> Un autoservicio dispone de tres empleados, un camarero sirve el primer plato, el segundo camarero sirve el segundo plato y el tercero se encarga de la caja. El primer camarero dispone de suficiente espacio para atender a clientes sin limitación, mientras que los otros dos camareros tienen un espacio limitado a dos personas como máximo. El autoservicio muestra que la tasa media de llegada a la hora de la comida es de 54 clientes/hora, el pimer camarero tiene un tiempo medio de servicio de un minuto, el segundo camarero de treinta segundos, y el tercero de 1 minuto.</p>
+<p>Se solicita:
+* Medidas de eficiencia del sistema descrito.
+* Longitud de las colas que forman el sistema.
+* Tiempo medio que un cliente pasa en el autoservicio desde que llega hasta que sale dispuesto para comer.</p>
+<p><strong>Ejercicio A-34.</strong> Una empresa de fabricación de puertas de madera tiene una unidad de negocio que fabrica puertas de muebles de cocina. Dichas puertas, de dimensiones diferentes según pedidos, reciben un tratamiento en 3 etapas. El número de puertas que la unidad de negocio fabrica son alrededor de 50000 puertas al año. La primera etapa es capaz de procesar 220 puertas al día. La segunda etapa consta de dos
+máquinas que procesan cada una 140 puertas al día. La tercera etapa es una etapa manual, para la que se dispone de 3 trabajadores que tardan aproximadamente 5 minutos por puerta. Los días tienen 480 minutos y los años 240 días. Se pueden suponer tiempos distribuidos según una distribución exponencial tanto para las llegadas de pedidos como para los ritmos de producción.</p>
+<ul>
+<li>¿Cuál es el número de puertas que habrá en cada etapa, incluyendo las puertas en las máquinas y las que están siendo procesadas por los operarios?</li>
+<li>¿En que afectaría al sistema anterior que en la etapa segunda se colocara un limitador de capacidad, mediante el cual no se aceptaran al almacén previo a dicha etapa más de 5 puertas?</li>
+<li>Suponga que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por no comprar una máquina nueva en la primera etapa, ¿Cuántas horas extra al día debe trabajar la primera máquina? ¿En qué afectaría dicho cambio a los plazos de entrega? ¿Cómo se comportarían los almacenes?</li>
+<li>Suponga que en la segunda etapa, no hay dos si no tres máquinas. Dichas máquinas tardan en estropearse 3 días desde que se arreglan y un mecánico tarda de media 5 horas en arreglarlas cada vez. Sólo se dispone de un mecánico. ¿Tiene este sistema suficiente capacidad para hacer frente a la demanda?</li>
+<li>Sobre el caso anterior ¿Qué porcentaje de tiempo sólo hay una máquina trabajando? ¿Y ninguna? ¿Qué ocurre con los almacenes durante este tiempo que hay menos de dos máquinas trabajando?</li>
+<li>Sobre el caso anterior ¿Qué opinión le merece que vaya uno de los trabajadores de la tercera sección a ayudar al mecánico cuando haya dos o más máquinas estropeadas? Debe sustentar la opinión con datos, suponga para ello que el trabajador de la tercera sección se comporta como un mecánico más, cuando trabaja como tal.</li>
+<li>¿Cuál sería en el caso anterior la probabilidad de que hubiera más de una máquina estropeada?</li>
+</ul>
+<p><strong>Ejercicio A-35.</strong> Una sección de una empresa fabrica puertas metálicas para ascensores. Las puertas para ascensores pueden tener una gran variedad de formatos, colores y huecos para vidrios variables.
+Se puede admitir que el proceso de producción se compone de 4 etapas consecutivas pero independientes. La empresa trabaja alrededor de 220 días al año. Cada día tiene 7 horas y 30 minutos de trabajo efectivo. Durante el pasado año se recibieron pedidos por una cantidad de 8.500 puertas. Los pedidos tienen
+una cantidad variable de unidades, y los ajustes de cambio de partida, aunque importantes en ocasiones, no parecen repercutir en los ritmos de producción promedio de las diferentes etapas de trabajo.</p>
+<p>La primera etapa se realiza simultáneamente por dos equipos de trabajo, con un ritmo promedio cada uno de ellos de una puerta cada 20 minutos. La segunda etapa la realiza un equipo de trabajo con un tiempo de ciclo promedio de 11 minutos por puerta. La tercera etapa requiere del uso de otra máquina con un
+tiempo de ciclo promedio de 10 minutos por puerta. Por último la cuarta etapa es de preparación final. Como es un trabajo principalmente manual, que realiza un único operario, tiene un tiempo de ciclo de 18
+minutos por unidad, y se dispone de tantos trabajadores como se requieran, pues irán viniendo de otras secciones siempre que haya una puerta por preparar. ASumiendo tiempos exponenciales:</p>
+<ul>
+<li>¿Cuál será el número medio de puertas que habrá en el sistema?.</li>
+<li>¿Cuántos trabajadores serán necesarios normalmente en la cuarta etapa?.</li>
+<li>Si un pedido tiene 30 puertas ¿Cuánto tiempo tardará en promedio en ser servido?</li>
+<li>¿Cuál es el tiempo promedio previsto de entrega de una puerta? Si le dicen que el tiempo de entrega promedio es de 5 días. ¿A qué puede ser debido?. Proponga un mecanismo de corrección.</li>
+<li>Cual será el efecto sobre la cantidad de puertas en la primera etapa si en lugar de dos equipos de trabajo con tiempos de ciclo como los citados se establece un único equipo más eficiente con un tiempo de ciclo de 9 minutos por unidad.</li>
+</ul>
+<p><strong>Ejercicio A-36.</strong> Una empresa dedicada a la fabricación de cocinas tiene una linea de producción dedicada en exclusividad a las puertas de cocina. Dichas puertas, de dimensiones diferentes según pedidos, reciben un tratamiento en 3 etapas. El número de puertas que la unidad de negocio fabrica son alrededor de 50000 puertas al año. La primera etapa es capaz de procesar 220 puertas al día. La segunda etapa consta de dos máquinas que procesan cada una 140 puertas al día. La tercera etapa es una etapa manual, para la que se dispone de 3 trabajadores que tardan aproximadamente 5 minutos por puerta. Los días tienen 480 minutos y los años 240 días. Asumiendo que los tiempos y la demanda de pedidos se comportan segun variables aletaorias exponenciales, la empresa está interesada en:</p>
+<ul>
+<li>¿Cuál es el número de puertas que habrá en cada etapa, incluyendo las puertas en las máquinas y las que están siendo procesadas por los operarios?</li>
+<li>¿En que afectaría al sistema anterior que en la etapa segunda se colocara un limitador de capacidad, mediante el cual no se aceptaran al almacén previo a dicha etapa más de 5 puertas?</li>
+<li>Suponga que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por no comprar una máquina nueva en la primera etapa, ¿Cuántas horas extra al día debe trabajar la primera máquina? ¿En qué afectaría dicho cambio a los plazos de entrega? ¿Cómo se comportarían los almacenes?</li>
+<li>Suponga que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por no comprar una máquina nueva en la primera etapa, ¿Cuántas horas extra al día debe trabajar la primera máquina? ¿En qué afectaría dicho cambio a los plazos de entrega? ¿Cómo se comportarían los almacenes?</li>
+<li>Suponga que en la segunda etapa, no hay dos si no tres máquinas. Dichas máquinas tardan en estropearse 3 días desde que se arreglan y un mecánico tarda de media 5 horas en arreglarlas cada vez. Sólo se dispone de un mecánico. ¿Tiene este sistema suficiente capacidad para hacer frente a la demanda?</li>
+<li>Sobre el caso anterior ¿Qué porcentaje de tiempo sólo hay una máquina trabajando? ¿ Y ninguna? ¿Qué ocurre con los almacenes durante este tiempo que hay menos de dos máquinas trabajando?</li>
+<li>Sobre el caso anterior ¿Qué opinión le merece que vaya uno de los trabajadores de la tercera sección a ayudar al mecánico cuando haya dos o más máquinas estropeadas? Debe sustentar la opinión con datos, suponga para ello que el trabajador de la tercera sección se comporta como un mecánico más, cuando trabaja como tal.</li>
+<li>¿Cuál sería en el caso anterior la probabilidad de que hubiera más de una máquina estropeada?</li>
+</ul>
+<p><strong>Ejercicio A-37.</strong> Una empresa fabrica puertas metálicas para ascensores. Las puertas para ascensores pueden tener una gran variedad de formatos, colores y huecos para vidrios variables. Se puede admitir que el proceso de producción se compone de 4 etapas consecutivas pero independientes. La empresa trabaja alrededor de 220 días al año. Cada día tiene 7 horas y 30 minutos de trabajo efectivo. Durante el pasado año se recibieron pedidos por una cantidad de 8.500 puertas. Los pedidos tienen una cantidad variable de unidades, y los ajustes de cambio de partida, aunque importantes en ocasiones, no parecen repercutir en los ritmos de producción promedio de las diferentes etapas de trabajo.</p>
+<p>La primera etapa se realiza simultáneamente por dos equipos de trabajo, con un ritmo promedio cada uno de ellos de una puerta cada 20 minutos. La segunda etapa la realiza un equipo de trabajo con un tiempo de ciclo promedio de 11 minutos por puerta. La tercera etapa requiere del uso de otra máquina con un tiempo de ciclo promedio de 10 minutos por puerta. Por último la cuarta etapa es de preparación final. Como es un trabajo principalmente manual, que realiza un único operario, tiene un tiempo de ciclo de 18 minutos por unidad, y se dispone de tantos trabajadores como se requieran, pues irán viniendo de otras secciones siempre que haya una puerta por preparar.</p>
+<p>La empresa está interesada en conocer:</p>
+<ul>
+<li>¿Cuál será el número medio de puertas que habrá en el sistema?.</li>
+<li>¿Cuántos trabajadores serán necesarios normalmente en la cuarta etapa?.</li>
+<li>Si un pedido tiene 30 puertas ¿Cuánto tiempo tardará en promedio en ser servido?</li>
+<li>¿Cuál es el tiempo promedio previsto de entrega de una puerta? Si le dicen que el tiempo de entrega promedio es de 5 días. ¿A qué puede ser debido?. Proponga un mecanismo de corrección.</li>
+<li>Cual será el efecto sobre la cantidad de puertas en la primera etapa si en lugar de dos equipos de trabajo con tiempos de ciclo como los citados se establece un único equipo más eficiente con un tiempo de ciclo de 9 minutos por unidad.</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></div>
+<div class="next"><a href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#COLAS"><span class="header-section-number">5</span> Sistemas de colas</a></li>
+<li><a class="nav-link" href="#COLASA"><span class="header-section-number">5.1</span> Terminología y y medidas de eficiencia</a></li>
+<li><a class="nav-link" href="#COLASB"><span class="header-section-number">5.2</span> Formulas de Little</a></li>
+<li>
+<a class="nav-link" href="#COLASC"><span class="header-section-number">5.3</span> Colas con un único servidor</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mm1"><span class="header-section-number">5.3.1</span> M/M/1</a></li>
+<li><a class="nav-link" href="#mm1k"><span class="header-section-number">5.3.2</span> M/M/1/K</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#COLASD"><span class="header-section-number">5.4</span> Colas con múltiples servidores</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mms"><span class="header-section-number">5.4.1</span> M/M/s</a></li>
+<li><a class="nav-link" href="#mmsk"><span class="header-section-number">5.4.2</span> M/M/s/K</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#COLASE"><span class="header-section-number">5.5</span> Redes de colas en serie</a></li>
+<li>
+<a class="nav-link" href="#COLASF"><span class="header-section-number">5.6</span> Funciones simmer</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mm1-1"><span class="header-section-number">5.6.1</span> \(M/M/1\)</a></li>
+<li><a class="nav-link" href="#mm1k-1"><span class="header-section-number">5.6.2</span> \(M/M/1/K\)</a></li>
+<li><a class="nav-link" href="#mms-1"><span class="header-section-number">5.6.3</span> \(M/M/s\)</a></li>
+<li><a class="nav-link" href="#mmsk-1"><span class="header-section-number">5.6.4</span> \(M/M/s/K\)</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#COLASG"><span class="header-section-number">5.7</span> Ejercicios</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

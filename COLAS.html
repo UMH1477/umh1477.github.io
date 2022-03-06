@@ -200,7 +200,7 @@ En cuanto a la segunda pregunta debemos tener en cuenta que:</p>
 <p>Para resolver la última pregunta tenemos que:</p>
 <p><span class="math display">\[P(N \geq 4) = 1 - P(N \leq 3) = 1 - \sum_{n = 0}^{3} p_n = \rho^4 = 0.759.\]</span></p>
 <p>Utilizamos ahora la librería <code>queueing</code> para resolver las mismas preguntas. En primer lugar tenemos que definir el sistema y sus características (tasas de llegada, tasas de servicio, y número de elementos de la distribución estacionaria que debemos calcular). Para ello utilizamos la función <code>NewInput()</code> con <span class="math inline">\(n = 4\)</span> elemntos de la distribución estacionaria, ya que las probabildiades buscadas hacen referencia a esos cuatro primeros valores.</p>
-<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Deficición del entorno</span>
 <span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">4</span>, mu <span class="op">=</span> <span class="fl">60</span><span class="op">/</span><span class="fl">14</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co"># Características del sistema</span>
@@ -239,7 +239,7 @@ En cuanto a la segunda pregunta debemos tener en cuenta que:</p>
 <span class="math inline">\(FWq\)</span> = Función de distribución de <span class="math inline">\(W_q\)</span> para un conjunto de valores de <span class="math inline">\(t\)</span>.</li>
 </ul>
 <p>Veamos la salida completa:</p>
-<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Medidas del sistema</span>
 <span class="va">s.MM1</span></code></pre></div>
 <pre><code>## $Inputs
@@ -302,30 +302,30 @@ En cuanto a la segunda pregunta debemos tener en cuenta que:</p>
 ## {
 ##     1 - exp(-t/W)
 ## }
-## &lt;bytecode: 0x7f973308a0a8&gt;
-## &lt;environment: 0x7f97330899e0&gt;
+## &lt;bytecode: 0x7fca20c360a8&gt;
+## &lt;environment: 0x7fca20c359e0&gt;
 ## 
 ## $FWq
 ## function (t) 
 ## {
 ##     1 - (RO * exp(-t/W))
 ## }
-## &lt;bytecode: 0x7f97330865f8&gt;
-## &lt;environment: 0x7f97330899e0&gt;
+## &lt;bytecode: 0x7fca20c325f8&gt;
+## &lt;environment: 0x7fca20c359e0&gt;
 ## 
 ## attr(,"class")
 ## [1] "o_MM1"</code></pre>
 <p>Podemos respondera ahora a las cuestiones de interés sin más que buscar en los elemntos que proporciona la función.</p>
-<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ¿cuál es la probabilidad de que el muelle de descarga esté inactivo?</span>
 <span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.06666667</code></pre>
-<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ¿cuál es la probabilidad de que haya exactamente tres camiones esperando?</span>
 <span class="co"># se corresponde con el elmento 4 + 1 de pn</span>
 <span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.05058897</code></pre>
-<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ¿cuál es la probabilidad de que haya cuatro o más camiones en el sistema?</span>
 <span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.7588346</code></pre>
@@ -340,39 +340,39 @@ En cuanto a la segunda pregunta debemos tener en cuenta que:</p>
 </ul>
 <p>En este caso utilizaremos la librería <code>queueing</code> para los cálculos numéricos. Si tomamos como unidad de tiempo las horas tendremos que <span class="math inline">\(\lambda = 15\)</span> y <span class="math inline">\(1/\mu = 3 /60\)</span>, con lo cual <span class="math inline">\(\mu = 20.\)</span></p>
 <p>:::</p>
-<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Deficición del entorno</span>
 <span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">15</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co"># Características del sistema</span>
 <span class="va">s.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span></code></pre></div>
 <p>Para responder a la cuestión 1 debemos calcular:</p>
 <p><span class="math display">\[P(N_q \geq 3) = P(N \geq 4) = 1 - P(N \leq 3)\]</span></p>
-<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.3164062</code></pre>
 <p>Para el primer apartado de la segunda cuestión sólo necesitamos el valor de <span class="math inline">\(W\)</span>, que corresponde con el tiempo medio en el sistema:</p>
-<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span></code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
 <p>El tiempo medio es de 0.2 horas o 12 minutos. Para responder a la segunda pregunta hay que tener en cuenta que el tiempo de CPU corresponde con el tiempo de servicio, es decir, la relción buscada es:</p>
 <p><span class="math display">\[\frac{W}{1/\mu}\]</span></p>
-<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>Cada proceso está en la estación un tiempo equivalente a cuatro veces su tiempo de CPU.</p>
 <p>Para respondear al tercer apartado debemos calcular (expresado en las unidades de tiempo utilizadas:</p>
 <p><span class="math display">\[P(T &gt; 10/60)\]</span>
 Dicha probabilidad se obtiene a partir de la función de distribuvión de los tiempos que el cliente está en el sistema:</p>
-<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="va">s.MM1</span><span class="op">$</span><span class="fu">FW</span><span class="op">(</span><span class="fl">10</span><span class="op">/</span><span class="fl">60</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.4345982</code></pre>
 <p>La cuarta cuestión se corresponde con el valor de <span class="math inline">\(L_q\)</span>:</p>
-<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 2.25</code></pre>
 <p>de forma que el número de procesos en espera es de 2.25.</p>
 <p>Para responder al quinto apartado debemos cambiar el valor de la tasa de llegadas y volver a hacer los cálculos:</p>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Deficición del entorno</span>
 <span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">18</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co"># Características del sistema</span>
@@ -380,24 +380,24 @@ Dicha probabilidad se obtiene a partir de la función de distribuvión de los ti
 <span class="co"># Cuestión 1</span>
 <span class="fl">1</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.6561</code></pre>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cuestión 2.1</span>
 <span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cuestión 2.2</span>
 <span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cuestión 3</span>
 <span class="fl">1</span> <span class="op">-</span> <span class="va">s.MM1</span><span class="op">$</span><span class="fu">FW</span><span class="op">(</span><span class="fl">10</span><span class="op">/</span><span class="fl">60</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.7165313</code></pre>
-<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Cuestión 4</span>
 <span class="va">s.MM1</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 8.1</code></pre>
 <p>Como puede verse numéricamente el sistema está bastante más congestionado ahora. Podemos representar gráficamente ambas soluciones.</p>
-<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Primer sistema</span>
 <span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">15</span>, mu <span class="op">=</span> <span class="fl">20</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="va">s.MM1.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span>
@@ -504,7 +504,7 @@ que efectivamente sí es siempre menor que 1.</p>
 </ul>
 <p>:::</p>
 <p>Se trata de un sistema <span class="math inline">\(M/M/1/K\)</span> con <span class="math inline">\(K = 4\)</span>, y utilizaremos la librería <code>queueing</code> para los cálculos numéricos. Si tomamos como unidad de tiempo las horas tendremos que <span class="math inline">\(\lambda = 18\)</span> y <span class="math inline">\(\mu = 6\)</span>. Geenramos el sistema de cola definido y procedemos con los cálculos solicitados.</p>
-<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Deficición del entorno</span>
 <span class="va">env.MM1K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1K.html">NewInput.MM1K</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">18</span>, mu <span class="op">=</span> <span class="fl">6</span>, k <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co"># Características del sistema</span>
@@ -513,31 +513,31 @@ que efectivamente sí es siempre menor que 1.</p>
 <ul>
 <li>Apartado 1. La probabilidad de que no haya ningún vehículo en el taller es <span class="math inline">\(p_0\)</span>:</li>
 </ul>
-<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.008264463</code></pre>
 <ul>
 <li>Apartado 2. Obtenemos el número medio de vehículos en el sistema <span class="math inline">\(L\)</span>:</li>
 </ul>
-<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">L</span></code></pre></div>
 <pre><code>## [1] 3.520661</code></pre>
 <ul>
 <li>Apartado 3. En este caso estamos interesados en el tiempo medio de estancia en el sistema (<span class="math inline">\(W\)</span>):</li>
 </ul>
-<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">W</span></code></pre></div>
 <pre><code>## [1] 0.5916667</code></pre>
 <ul>
 <li>Apartado 4. En este caso estamos interesados en el tiempo medio de estancia en la cola (<span class="math inline">\(W_q\)</span>):</li>
 </ul>
-<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">Wq</span></code></pre></div>
 <pre><code>## [1] 0.425</code></pre>
 <ul>
 <li>Apartado 5. En este caso estamos interesados en el número medio de clientes en la cola (<span class="math inline">\(L_q\)</span>):</li>
 </ul>
-<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s.MM1K</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 2.528926</code></pre>
 <div class="bluebox">
@@ -577,7 +577,7 @@ c_n =
 <p>La suma de la serie de los <span class="math inline">\(c_n\)</span> será convergente (el sistema es estacionario) si <span class="math inline">\(\rho &lt; 1\)</span>, es decir,
 <span class="math inline">\(\lambda &lt; s\mu\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-53" class="example"><strong>Ejemplo 5.1  </strong></span>En una determinada planta de fabricación, la operación final es una operación de pintura. En el centro de pintura siempre hay dos trabajadores que trabajan en paralelo, aunque debido a la configuración física, no pueden ayudarse mutuamente. Las llegdas al centro de pintura se producen según un proceso de Poisson con
+<p><span id="exm:unlabeled-div-52" class="example"><strong>Ejemplo 5.1  </strong></span>En una determinada planta de fabricación, la operación final es una operación de pintura. En el centro de pintura siempre hay dos trabajadores que trabajan en paralelo, aunque debido a la configuración física, no pueden ayudarse mutuamente. Las llegdas al centro de pintura se producen según un proceso de Poisson con
 con una tasa de llegada media de 100 al día. Cada trabajador tarda una media de 27 minutos en pintar cada artículo. Últimamente, el exceso de trabajo en curso es motivo de preocupación, por lo que la dirección está considerando ampliar el centro de pintura y contratar a un tercer trabajador. (Se supone que el tercer trabajador, tras un periodo de formación, también tardará una media de 27 minutos por pieza). Otra opción sería comprar un robot para realizar la tarea de los trabajadores, ya que se sabe que el tiempo medio que tardará en cada pieza es de 10 minutos.</p>
 <ul>
 <li>Analiza cada uno de los tres sistemas respecto de las medidas de eficiencia e indica que alternativa reduciría el inventario.</li>
@@ -600,7 +600,7 @@ con una tasa de llegada media de 100 al día. Cada trabajador tarda una media de
 <li>tiempo medio de las piezas en el sistema.</li>
 </ul>
 <p>Definimos los tres sistemas y obtenemos las medidas de interés. Para los sistemas <span class="math inline">\(M/M/s\)</span> utilizaremos la función <code>NewInput.MMC</code>, donde el parámetro <span class="math inline">\(c\)</span> indica el número de servidores. Generamos los tres sistemas:</p>
-<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Parámetros de los sistemas</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">/</span><span class="fl">24</span>
 <span class="va">muk</span> <span class="op">&lt;-</span> <span class="fl">60</span><span class="op">/</span><span class="fl">27</span>
@@ -616,29 +616,29 @@ con una tasa de llegada media de 100 al día. Cada trabajador tarda una media de
 <span class="va">env.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda</span>, mu <span class="op">=</span> <span class="va">mu1</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">s.MM1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM1</span><span class="op">)</span></code></pre></div>
 <p>Obtenemos y comparamos las diferentes medidas consideradas</p>
-<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ratio de ocupación</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">s.MM2</span><span class="op">$</span><span class="va">RO</span>, <span class="va">s.MM3</span><span class="op">$</span><span class="va">RO</span>, <span class="va">s.MM1</span><span class="op">$</span><span class="va">RO</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.9375000 0.6250000 0.6944444</code></pre>
-<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probabildid de que el sistema este ocupado</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">s.MM2</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">1</span><span class="op">-</span><span class="va">s.MM3</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">1</span><span class="op">-</span><span class="va">s.MM1</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.9677419 0.8677686 0.6944444</code></pre>
-<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo medio en el sistema</span>
 <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">s.MM2</span><span class="op">$</span><span class="va">W</span>, <span class="va">s.MM3</span><span class="op">$</span><span class="va">W</span>, <span class="va">s.MM1</span><span class="op">$</span><span class="va">W</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 3.7161290 0.6049587 0.5454545</code></pre>
 <p>Desde el punto de vista de ratio de ocupación el mejor sistema sería el de tres trabajores, pero si utilizamos los otros dos criterios el mejor sistema sería el que utiliza el robot.</p>
 <p>Hacemos ahora la evaluación de costes por hora teniendo en cuenta que cada año tiene 8760 horas (365*24). Para obtener los costes asociados debemos estimar el número de piezas en el sistema por hora para evaluar el coste total de inventario, ay añadir el coste de la mano de obra. En esta situación tenemos:</p>
-<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Coste M/M/2</span>
 <span class="va">s.MM2</span><span class="op">$</span><span class="va">L</span><span class="op">*</span><span class="fl">0.50</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">40000</span><span class="op">/</span><span class="fl">8760</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 16.87436</code></pre>
-<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Coste M/M/3</span>
 <span class="va">s.MM3</span><span class="op">$</span><span class="va">L</span><span class="op">*</span><span class="fl">0.50</span> <span class="op">+</span> <span class="fl">3</span><span class="op">*</span><span class="op">(</span><span class="fl">40000</span><span class="op">/</span><span class="fl">8760</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 14.95896</code></pre>
-<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Coste M/M/1</span>
 <span class="va">s.MM3</span><span class="op">$</span><span class="va">L</span><span class="op">*</span><span class="fl">0.50</span> <span class="op">+</span> <span class="op">(</span><span class="fl">100000</span><span class="op">/</span><span class="fl">8760</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 12.67586</code></pre>
@@ -665,7 +665,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <p><span class="math display">\[\bar{\rho} = \frac{\bar{\lambda}}{\mu s}\]</span></p>
 <p>Este sistema siempre es estacionario. A continuación, se presenta un ejemplo de este sistema donde se muestra la función que debemos usar para analiar este tipo de cola.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-54" class="example"><strong>Ejemplo 5.2  </strong></span>Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos siendo atendidas por las operadoras y otras tres en espera, recibe el tono de “línea ocupada”). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada y dicho tiempo de distribución exponencial. Calcular:</p>
+<p><span id="exm:unlabeled-div-53" class="example"><strong>Ejemplo 5.2  </strong></span>Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos siendo atendidas por las operadoras y otras tres en espera, recibe el tono de “línea ocupada”). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada y dicho tiempo de distribución exponencial. Calcular:</p>
 <ul>
 <li>El porcentaje de tiempo en que cada operadora está ocupada y el número medio de servidores ocupados.</li>
 <li>El número medio de llamadas en espera.</li>
@@ -674,7 +674,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 </ul>
 </div>
 <p>Para el análisis de este sistema utilizamos la función <code>NewInput.MMCK</code> donde además de las tasas, debemos indicar el número de servidores, y la capacidad del sistema. Tomaremos como unidad de tiempo los minutos de forma que <span class="math inline">\(\lambda = 6\)</span> y <span class="math inline">\(\mu = 60/15 = 4\)</span>. La capacidad del sistema es <span class="math inline">\(K = 5\)</span> que se corresponde con dos llamadas atendidas y tres en espera. Se trata pues de un sistema <span class="math inline">\(M/M/2/5\)</span>.</p>
-<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># M/M/2/5</span>
 <span class="va">env.MM25</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMCK.html">NewInput.MMCK</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">6</span>, mu <span class="op">=</span> <span class="fl">4</span>, c <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 <span class="va">s.MM25</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM25</span><span class="op">)</span></code></pre></div>
@@ -692,27 +692,27 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 
 ## Warning in formals(fun): argument is not a function</code></pre>
 <p>Veamos como responder a cada una de las cuestiones planteadas utilizando los resultados del sistema diseñado. para responder al primer apartado debemos obtener el ratio efectivo de ocupación, asi como la diferencia entre el número medio de clientes en el sistema y el número medio de clientes en la cola para determinar el número medio de servidores ocupados.</p>
-<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Porcentaje de tiempo servidor ocupado</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">s.MM25</span><span class="op">$</span><span class="va">RO</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 68.62</code></pre>
-<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Número medio de servidores ocupados</span>
 <span class="va">s.MM25</span><span class="op">$</span><span class="va">L</span> <span class="op">-</span> <span class="va">s.MM25</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 1.372329</code></pre>
 <p>La ocupación de cada operadora es del 68.6% y el número medio de operadores ocupados es del 1.4. Con respecto al número medio de llamadas en espera tenemos:</p>
-<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Número medio de llamadas en espera</span>
 <span class="va">s.MM25</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 0.6336252</code></pre>
 <p>En cuanto a la probabilidad solicitada debemos calcular <span class="math inline">\(P(N_q = 3) = P(N = 5)\)</span> que se obtiene como:</p>
-<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probabilidad de linea ocupada</span>
 <span class="va">s.MM25</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.08511384</code></pre>
 <p>Tan solo en un 8.5% de las ocasiones salta el mensaje de línea ocupada, es decir, el sistema esta ocupado al 100%.</p>
 <p>Evaluamos ahora el incremento del tamaño de sistema aumentado las llamadas en espera.</p>
-<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># M/M/2/7</span>
 <span class="va">env.MM27</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MMCK.html">NewInput.MMCK</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">6</span>, mu <span class="op">=</span> <span class="fl">4</span>, c <span class="op">=</span> <span class="fl">2</span>, k <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="va">s.MM27</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="va">env.MM27</span><span class="op">)</span></code></pre></div>
@@ -729,19 +729,19 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 ## Warning in formals(fun): argument is not a function
 
 ## Warning in formals(fun): argument is not a function</code></pre>
-<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Porcentaje de tiempo servidor ocupado</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">s.MM27</span><span class="op">$</span><span class="va">RO</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 71.77</code></pre>
-<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Número medio de servidores ocupados</span>
 <span class="va">s.MM27</span><span class="op">$</span><span class="va">L</span> <span class="op">-</span> <span class="va">s.MM27</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 1.435402</code></pre>
-<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Número medio de llamadas en espera</span>
 <span class="va">s.MM27</span><span class="op">$</span><span class="va">Lq</span></code></pre></div>
 <pre><code>## [1] 1.014966</code></pre>
-<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probabilidad de linea ocupada</span>
 <span class="va">s.MM27</span><span class="op">$</span><span class="va">Pn</span><span class="op">[</span><span class="fl">8</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.04306559</code></pre>
@@ -759,7 +759,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <p><span class="math display">\[L_{q_{red}} = \lambda W_{q_{red}}\]</span></p>
 <p>de esta forma basta con analizar cada una de las clas que conforman la red para estudiar el comportamiento global del sistema.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-55" class="example"><strong>Ejemplo 5.3  </strong></span>Una empresa de ITV en una localidad dispone de una superficie que consta de tres partes: Una caseta donde los clientes entregan la documentación del vehículo y realizan el pago de tasas, sin restricciones paa atender ningún vehículo. Una nave formada por dos circuitos (revisión y oficina de personal técnico) atendidos por dos técnicos cada uno de ellos. Los vehículos que llegan a la nave son atendidos con una tasa de servicio medio de 45 clientes/hora para la revisión y 2 minutos/cliente en la oficina de personal técnico. Los coches acuden a la empresa a una media de 57 clientes/hora, ya que un mayor número de vehículos colapsaría el trabajo de la caseta, cuyo empleado atiende a un ritmo medio de 1 cliente/minuto. Las llegadas siguen un Proceso de Poisson y los tiempos de servicio se distribuyen según una variable exponencial. Se pide:</p>
+<p><span id="exm:unlabeled-div-54" class="example"><strong>Ejemplo 5.3  </strong></span>Una empresa de ITV en una localidad dispone de una superficie que consta de tres partes: Una caseta donde los clientes entregan la documentación del vehículo y realizan el pago de tasas, sin restricciones paa atender ningún vehículo. Una nave formada por dos circuitos (revisión y oficina de personal técnico) atendidos por dos técnicos cada uno de ellos. Los vehículos que llegan a la nave son atendidos con una tasa de servicio medio de 45 clientes/hora para la revisión y 2 minutos/cliente en la oficina de personal técnico. Los coches acuden a la empresa a una media de 57 clientes/hora, ya que un mayor número de vehículos colapsaría el trabajo de la caseta, cuyo empleado atiende a un ritmo medio de 1 cliente/minuto. Las llegadas siguen un Proceso de Poisson y los tiempos de servicio se distribuyen según una variable exponencial. Se pide:</p>
 <ul>
 <li>Factor de utilziación o intensidad de tráfico en cada nodo de la red.</li>
 <li>Probabildiades de que no haya ningún cliente en cada uno de los nodos de la red.</li>
@@ -774,7 +774,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <p><span class="math display">\[\lambda_1 = \lambda_2 = \lambda_3 = 57/60 = 0.95\]</span></p>
 <p><span class="math display">\[\mu_1 = 1; \mu_2 = 45/60 = 0.75; \mu_3 = 1/2 = 0.5\]</span></p>
 <p>Planteamos los tres sistemas de colas y obtenemos las correspondientes medidas de eficiencia:</p>
-<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># M/M/1</span>
 <span class="va">nodo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/queueing/man/QueueingModel.html">QueueingModel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/queueing/man/NewInput.MM1.html">NewInput.MM1</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">0.95</span>, mu <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># M/M/2</span>
@@ -802,7 +802,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <h3>
 <span class="header-section-number">5.6.1</span> <span class="math inline">\(M/M/1\)</span><a class="anchor" aria-label="anchor" href="#mm1-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">cola.MM1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span><span class="op">)</span>
@@ -830,7 +830,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <h3>
 <span class="header-section-number">5.6.2</span> <span class="math inline">\(M/M/1/K\)</span><a class="anchor" aria-label="anchor" href="#mm1k-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">cola.MM1K</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">K</span><span class="op">)</span>
@@ -862,7 +862,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <h3>
 <span class="header-section-number">5.6.3</span> <span class="math inline">\(M/M/s\)</span><a class="anchor" aria-label="anchor" href="#mms-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">cola.MMs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">s</span><span class="op">)</span>
@@ -891,7 +891,7 @@ s\mu &amp; \text{ si } n = s+1, s+2,...
 <h3>
 <span class="header-section-number">5.6.4</span> <span class="math inline">\(M/M/s/K\)</span><a class="anchor" aria-label="anchor" href="#mmsk-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">cola.MMsK</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">s</span>, <span class="va">K</span><span class="op">)</span>

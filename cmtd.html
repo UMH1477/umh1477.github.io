@@ -64,15 +64,17 @@
 <h2>
 <span class="header-section-number">2.1</span> Definiciones<a class="anchor" aria-label="anchor" href="#definiciones"><i class="fas fa-link"></i></a>
 </h2>
+<div class="yellowbox">
 <div class="definition">
-<p><span id="def:CMTC" class="definition"><strong>Definición 2.1  </strong></span>Un proceso estocástico <span class="math inline">\(\{X(t), t \in \mathbb{N}\}\)</span> con espacio de estados de tipo discreto, <span class="math inline">\(S\)</span>, se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> de <span class="math inline">\(S\)</span> tenemos que:</p>
-<p><span class="math display" id="eq:cmtd">\[\begin{eqnarray}
-&amp;Pr(X(t+1) = j \| X(t) = i, X(t-1),...,X(0)) = \\
-&amp;= Pr(X(t+1) = j \| X(t) = i),
+<p><span id="def:CMTC" class="definition"><strong>Definición 2.1  </strong></span>Un proceso estocástico <span class="math inline">\(\{X(t), t \in \mathbb{N}^*\}\)</span>, con <span class="math inline">\(\mathbb{N}^*\)</span> el conjunto de todos los números naturales incluido el cero, y con espacio de estados de tipo discreto, <span class="math inline">\(S\)</span>, se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> de <span class="math inline">\(S\)</span> se verifica la propiedad de Markov, esto es, que la probabilidad de que el proceso en un instante <span class="math inline">\(t+1\)</span> se encuentre en un estado <span class="math inline">\(j\)</span>, dado su comportamiento previo, sólo depende del estado en el que el sistema se encontraba justamente en el instante anterior <span class="math inline">\(t\)</span>, esto es, <span class="math inline">\(X(t)=i\)</span>, y no del estado del proceso en los instantes anteriores <span class="math inline">\(t-1, t-2,...,0\)</span>:</p>
+<span class="math display" id="eq:cmtd">\[\begin{eqnarray}
+&amp;Pr(X(t+1) = j | X(t) = i, X(t-1),...,X(0)) = \nonumber \\
+&amp;= Pr(X(t+1) = j | X(t) = i),
 \tag{2.1}
-\end{eqnarray}\]</span></p>
-<p>es decir, la probabilidad de que el proceso en un instante <span class="math inline">\(t+1\)</span> se encuentre en un estado <span class="math inline">\(j\)</span>, dada toda la evolución del proceso a lo largo del tiempo, sólo depende del estado en el que el sistema se encuentrara justamente en el instante anterior <span class="math inline">\(t\)</span>, esto es, <span class="math inline">\(X(t)=i\)</span>, y y no del estado del proceso en los instantes anteriores <span class="math inline">\(t-1, t-2,...,0\)</span>.</p>
-<p>En ocasiones utilizaremos la siguiente notación, <span class="math display">\[X(n)=X_n, \qquad n \geq 0\]</span></p>
+\end{eqnarray}\]</span>
+<p>Utilizaremos indistintamente la siguiente notación:</p>
+<p><span class="math display">\[\{X(n), n \in \mathbb{N}^*\}\equiv \{X_n,  n \geq 0\}\]</span></p>
+</div>
 </div>
 <p>La probabilidad condicionada dada en <a href="cmtd.html#eq:cmtd">(2.1)</a> se denomina <strong>probabilidad de transición de un paso</strong> y se denota por <span class="math inline">\(p_{ij}(t,t+1)\)</span>, y es la probabilidad de que, dado que el proceso en el instante <span class="math inline">\(t\)</span> está en el estado <span class="math inline">\(i\)</span>, un instante más tarde, <span class="math inline">\(t+1\)</span> haya cambiado al estado <span class="math inline">\(j\)</span>:</p>
 <p><span class="math display">\[p_{ij}(t,t+1)=Pr(X(t+1) = j | X(t) = i).\]</span></p>
@@ -105,7 +107,9 @@ p_{ij}(n) &amp;=&amp; Pr[X(t+n) = j | X(t) = i].
 Pr[X(t)= k] =  \sum_{i \in S} p_{ik}(t) p_i(0),
 \tag{2.3}
 \end{equation}\]</span>
-<p>con <span class="math inline">\(p_i(0) = Pr(X(0) = i)\)</span> la probabilidad de que en el instante inicial el proceso se encuentre en el estado <span class="math inline">\(i\)</span>. De hecho, el vector <span class="math display">\[p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}\]</span> se denomina <strong>distribución inicial de la cadena</strong> e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.</p>
+<p>con <span class="math inline">\(p_i(0) = Pr(X(0) = i)\)</span> la probabilidad de que en el instante inicial el proceso se encuentre en el estado <span class="math inline">\(i\)</span>. De hecho, el vector</p>
+<p><span class="math display">\[p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}\]</span>
+se denomina <strong>distribución inicial de la cadena</strong> e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.</p>
 </div>
 </div>
 <p>De forma habitual se suelen expresar las probabilidades de transición de un paso para <span class="math inline">\(N\)</span> estados en una <span class="math inline">\(CMTD\)</span> mediante la denominada <strong>matriz de transición de un paso</strong> <span class="math inline">\(P\)</span>, que es una matriz estocástica con todos sus elementos constituidos por probabilidades, dada por:</p>
@@ -125,11 +129,10 @@ p_{21}(n) &amp; p_{22}(n) &amp; ... &amp; p_{2N}(n)\\
 ... &amp; ... &amp; ... &amp; ...\\
 p_{N1}(n) &amp; p_{N2}(n) &amp; ... &amp; p_{NN}(n)
 \end{pmatrix}\]</span></p>
-<p>con</p>
-<span class="math display">\[\begin{eqnarray*}
+<p>con <span class="math display">\[\begin{eqnarray*}
 0 \leq p_{ij}(n) &amp;\leq&amp; 1 \\
 \sum_{j \in S} p_{ij}(n) &amp;=&amp; 1.
-\end{eqnarray*}\]</span>
+\end{eqnarray*}\]</span></p>
 <p>De forma genérica denotamos por <span class="math inline">\(p(n)\)</span> a la distribución del proceso en la n-ésima transición:</p>
 <p><span class="math display">\[p(n) = \{p_i(n)=Pr[X(n)=i], \ i \in S\}\]</span></p>
 <p>Cualquier <span class="math inline">\(CMTD\)</span> homogénea verifica la denominada <strong>Ecuación de Chapman-Kolmogorov</strong> que permite calcular la probabilidad de transición de un estado <span class="math inline">\(i\)</span> a un estado <span class="math inline">\(j\)</span> en <span class="math inline">\(n\)</span> pasos a través de todas las probabilidades de transición de <span class="math inline">\(s\)</span> y <span class="math inline">\(n-s\)</span> pasos, para cualquier <span class="math inline">\(s&lt;n\)</span> y cualquier <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> en <span class="math inline">\(S\)</span>:</p>
@@ -169,7 +172,8 @@ p(n) = p(0)P^n.
 <p>Planteamos resolver las cuestiones siguientes:</p>
 <p>(1). Queremos representar el proceso a través de un grafo.</p>
 <div class="whitebox">
-<p>Para representar el proceso con <code>markovchain</code>, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code> para generar un objeto del tipo <code>markovchain</code>: <span class="math display">\[new("markovchain",states,byrow=TRUE,transitionMatrix)\]</span></p>
+<p>Para representar el proceso con <code>markovchain</code>, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code> para generar un objeto del tipo <code>markovchain</code>:</p>
+<p><span class="math display">\[new("markovchain",states,byrow=TRUE,transitionMatrix)\]</span></p>
 <p>introduciendo el vector de estados en <code>states</code>, la matriz de transición en <code>transitionMatrix</code>, y especificando si dicha matriz se ha de leer por filas.</p>
 <p>A continuación lo pintamos con la función <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>.</p>
 </div>
@@ -255,7 +259,8 @@ Figura 2.1: Grafo del proceso.
 <li>RESPUESTA: Para ver el comportamiento de un proceso después de que transcurran <span class="math inline">\(n\)</span> pasos habrá que simularlo durante <span class="math inline">\(n\)</span> instantes de tiempo. Puesto que buscamos una estimación de lo que va a ocurrir en ese momento, simularemos <span class="math inline">\(nsim=100\)</span> veces el proceso hasta el instante <span class="math inline">\(n=10\)</span>, nos quedaremos con el estado en que se encuentra el proceso en ese instante <span class="math inline">\(n\)</span> y evaluaremos las probabilidades obtenidas para los tres estados <span class="math inline">\(\{a,b,c\}\)</span>. Los resultados serán más próximos a la solución analítica, cuanto mayor sea el número de simulaciones (prueba a modificar <span class="math inline">\(nsim\)</span>).</li>
 </ul>
 <div class="whitebox">
-<p>Para simular una CMTD hasta una transición <span class="math inline">\(n\)</span> con la librería <code>markovchain</code> basta utilizar la función <code>rmarkovchain(n, proceso)</code>, donde proceso ha sido definido previamente con la función <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code>.</p>
+<p>Para simular una CMTD hasta una transición <span class="math inline">\(n\)</span> con la librería <code>markovchain</code>
+basta utilizar la función <code>rmarkovchain(n, proceso)</code>, donde proceso ha sido definido previamente con la función <code><a href="https://rdrr.io/r/methods/new.html">new()</a></code>.</p>
 </div>
 <div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Simulación del proceso para n=10 instantes </span>
@@ -333,8 +338,7 @@ X_{n} =
 <p>Supongamos ahora que la empresa mantiene dos máquinas de este tipo que son idénticas, se comportan de forma independiente y cada una tiene su propio reparador.</p>
 <p>Sea <span class="math inline">\(Y_n\)</span> el número de máquinas en estado “On” al principio del día <span class="math inline">\(n\)</span>, que constituye una CMTD cuyo espacio de estados es <span class="math inline">\(\{0, 1, 2\}\)</span>, puesto que la situación de las máquinas un día cualquiera sólo depende de cómo estaban el día anterior (cumplen la Ecuación <a href="cmtd.html#eq:cmtd">(2.1)</a>.</p>
 <p>Calculemos la probabilidad de transición para un caso concreto: <span class="math inline">\(Y_n = i = 1\)</span> e <span class="math inline">\(Y_{n+1} = j = 0\)</span>, que identifica una situación en la que una máquina está en funcionamiento y otra en paro el día <span class="math inline">\(n\)</span>, pero al día siguiente ambas están paradas. Así, la máquina que está “Off” el día <span class="math inline">\(n\)</span> debe permanecer “Off” al día siguiente, y la máquina que está “On” debe cambiar a “Off” el día siguiente. Como las máquinas son independientes, la probabilidad de cambio de estado es:</p>
-<p><span class="math display">\[p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006\]</span></p>
-<p>Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:</p>
+<p><span class="math display">\[p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006\]</span> Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 0.0009 &amp; 0.0582 &amp; 0.9409\\
@@ -927,8 +931,8 @@ Figura 2.7: Diagrama del sistema del problema de inventario.
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:unlabeled-div-11" class="definition"><strong>Definición 2.9  </strong></span>Un conjunto de estados <span class="math inline">\(C \subset S\)</span> se denomina <strong>cerrado</strong> cuando no es posible pasar de un estado de <span class="math inline">\(C\)</span> a otro que no esté en <span class="math inline">\(C\)</span>, esto es,</p>
-<p><span class="math display">\[\forall i \in C, \quad \forall j \notin C \quad \Rightarrow \quad p_{ij}(n) = 0, \quad n\geq 1\]</span></p>
-<p>o lo que es lo mismo,</p>
+<p><span class="math display">\[\forall i \in C, \quad \forall j \notin C \quad \Rightarrow \quad p_{ij}(n) = 0, \quad n\geq 1\]</span>
+o lo que es lo mismo,</p>
 <p><span class="math display">\[ \sum_{j \in C} p_{ij}=1, \quad \forall i \in C.\]</span></p>
 <p>Esto implica que cuando accedamos a un conjunto cerrado, será imposible salir de él y sólo será factible moverse dentro de él.</p>
 <p>Si el conjunto cerrado está compuesto por un único estado <span class="math inline">\(i\)</span> diremos que ese estado <span class="math inline">\(i\)</span> es <strong>absorbente</strong>. Eso implica que si se llega a dicho estado, el proceso se queda estancado en él y ya no es posible moverse a otro estado.</p>
@@ -1039,10 +1043,10 @@ Figura 2.7: Diagrama del sistema del problema de inventario.
 </h3>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-14" class="definition"><strong>Definición 2.11  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, matriz de probabilidades de transición de una paso <span class="math inline">\(P\)</span>, y distribución inicial <span class="math inline">\(p(0)\)</span>. Consideramos la variable aleatoria <span class="math inline">\(N_j(n)\)</span> como el número de visitas al estado <span class="math inline">\(j\)</span> en el periodo <span class="math inline">\(\{1, 2,...,n\}\)</span> y definimos</p>
-<p><span class="math display">\[m_{ij}(n) = E[N_j(n)|X_0 = i]\]</span></p>
-<p>como el número esperado de visitas o <strong>tiempo de ocupación</strong> del estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(n\)</span>, partiendo del estado <span class="math inline">\(i\)</span>.</p>
-<p>A partir de las cantidades <span class="math inline">\(m_{ij}(n)\)</span> se puede definir la <strong>matriz de tiempos de ocupación hasta un instante</strong> <span class="math inline">\(n\)</span>, <span class="math inline">\(M(n)\)</span>, que se puede calcular a partir de la matriz de transición <span class="math inline">\(P\)</span> como:</p>
+<p><span id="def:unlabeled-div-14" class="definition"><strong>Definición 2.11  </strong></span>Sea <span class="math inline">\(\{X_n, n \geq 0\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, matriz de probabilidades de transición de una paso <span class="math inline">\(P\)</span>, y distribución inicial <span class="math inline">\(p(0)\)</span>. Consideramos la variable aleatoria <span class="math inline">\(N_j(n)\)</span> como el <strong>número de visitas al estado <span class="math inline">\(j\)</span> en <span class="math inline">\(n\)</span> transiciones</strong> y definimos</p>
+<p><span class="math display">\[m_{ij}(n) = E[N_j(n)|X_0 = i]\]</span>
+como el <strong>número esperado de visitas</strong> o <strong>tiempo de ocupación del estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(n\)</span>, partiendo del estado <span class="math inline">\(i\)</span></strong>.</p>
+<p>A partir de las cantidades <span class="math inline">\(m_{ij}(n)\)</span> se puede definir la <strong>matriz de tiempos de ocupación hasta un instante <span class="math inline">\(n\)</span></strong>, <span class="math inline">\(M(n)\)</span>, que se puede calcular a partir de la matriz de transición <span class="math inline">\(P\)</span> como:</p>
 <span class="math display" id="eq:tposocupa">\[\begin{equation}
 M(n) = \sum_{r=0}^n P^r
 \tag{2.7}
@@ -1051,10 +1055,11 @@ M(n) = \sum_{r=0}^n P^r
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-15" class="definition"><strong>Definición 2.12  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span>. Se define el <strong>número de visitas al estado</strong> <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena como</p>
-<p><span class="math display">\[N_j=\sum_{n=0}^{\infty} I(X_n,j),\]</span></p>
-<p>donde <span class="math inline">\(I(X_n,j)=1\)</span> si <span class="math inline">\(X_n=j\)</span> y 0 en otro caso.</p>
-<p>Así, el número esperado de visitas al estado <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena, partiendo del estado <span class="math inline">\(i\)</span>, se define como <span class="math display">\[m_{ij} = E[N_j|X_0 = i].\]</span></p>
+<p><span id="def:unlabeled-div-15" class="definition"><strong>Definición 2.12  </strong></span>Sea <span class="math inline">\(\{X_n, n \geq 0\}\)</span> una <span class="math inline">\(CMTD\)</span>. Se define el <strong>número de visitas al estado <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena</strong> como</p>
+<p><span class="math display">\[N_j=\sum_{n=0}^{\infty} I(X_n,j),\]</span>
+donde <span class="math inline">\(I(X_n,j)=1\)</span> si <span class="math inline">\(X_n=j\)</span> y 0 en otro caso.</p>
+<p>Así, el número esperado de visitas al estado <span class="math inline">\(j\)</span> a lo largo de la vida de la cadena, partiendo del estado <span class="math inline">\(i\)</span>, se define como</p>
+<p><span class="math display">\[m_{ij} = E[N_j|X_0 = i].\]</span></p>
 </div>
 </div>
 <div class="yellowbox">
@@ -1114,19 +1119,21 @@ M(n) = \sum_{r=0}^n P^r
 <h3>
 <span class="header-section-number">2.4.3</span> Análisis de costes<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-de-costes"><i class="fas fa-link"></i></a>
 </h3>
-<p>Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados <strong>modelos de costes</strong>, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, beneficios, pérdidas, etc..</p>
-<p>Sea <span class="math inline">\(X_n\)</span> el estado del sistema en el tiempo <span class="math inline">\(n\)</span>. Asumimos que <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,...,N\}\)</span>, matriz de transición <span class="math inline">\(P\)</span>, y matriz de tiempos de ocupación <span class="math inline">\(M(n)\)</span>.</p>
-<p>En esta situación, hablamos de que cada visita a cierto estado <span class="math inline">\(i\)</span> tiene un coste asociado <span class="math inline">\(C(i)\)</span>, y el coste esperado por visitar el estado <span class="math inline">\(i\)</span> a lo largo de la vida del proceso viene dado por <span class="math inline">\(c(i) = E[C(i)]\)</span>. Definimos la matriz de costes esperados asociados a los estados, como <span class="math inline">\(c\)</span>, de dimensión <span class="math inline">\(N\times 1\)</span>, como: <span class="math display">\[c' = (c(1),c(2),\ldots,c(N))\]</span></p>
-<p>Así mismo, hablamos del coste <span class="math inline">\(C(X_r)\)</span> en el que incurre el sistema en un instante concreto <span class="math inline">\(r\)</span>, y <span class="math inline">\(\sum_{r=0}^n C(X_r)\)</span> el coste acumulado desde el inicio del proceso hasta llegar al instante <span class="math inline">\(n\)</span>. Entonces el <strong>coste esperado total (CET)</strong> asociado al funcionamiento del sistema hasta llegar al instante <span class="math inline">\(n\)</span> se calculará como <span class="math inline">\(E\left[\sum_{r=0}^n C(X_r)\right]\)</span>.</p>
-<p>Definimos el coste esperado total (CET) hasta el instante <span class="math inline">\(n\)</span> partiendo del estado <span class="math inline">\(i\)</span>, <span class="math inline">\(g(i,n)\)</span>, como:</p>
+<p>Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados <strong>modelos de costes</strong>, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, pero también a beneficios, pérdidas, etc..</p>
+<p>Sea <span class="math inline">\(X_n\)</span> el estado del sistema en el tiempo <span class="math inline">\(n\)</span>. Asumimos que <span class="math inline">\(\{X_n, n \geq 0 \}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,...,N\}\)</span>, matriz de transición <span class="math inline">\(P\)</span>, y matriz de tiempos de ocupación <span class="math inline">\(M(n)\)</span>.</p>
+<p>En esta situación, hablamos de que cada visita a cierto estado <span class="math inline">\(i\)</span> tiene un coste aleatorio asociado <span class="math inline">\(C(i)\)</span>, y el coste esperado por cada visita al estado <span class="math inline">\(i\)</span> viene dado por <span class="math inline">\(c(i) = E[C(i)]\)</span>. Definimos la matriz de costes esperados asociados a los estados, como <span class="math inline">\(\mathbf{c}\)</span>, de dimensión <span class="math inline">\(N\times 1\)</span>, como:</p>
+<p><span class="math display">\[\mathbf{c}' = (c(1),c(2),\ldots,c(N))\]</span></p>
+<p>Así mismo, hablamos del coste <span class="math inline">\(C(X_r)\)</span> en el que incurre el sistema en un instante concreto <span class="math inline">\(r\)</span>, y <span class="math inline">\(\sum_{r=0}^n C(X_r)\)</span> el coste acumulado desde el inicio del proceso hasta llegar al instante <span class="math inline">\(n\)</span>. Entonces el <strong>coste esperado total (CET)</strong> asociado al funcionamiento del sistema hasta llegar al instante <span class="math inline">\(n\)</span> se calculará como</p>
+<p><span class="math display">\[CET=E\left[\sum_{r=0}^n C(X_r)\right]\]</span></p>
+<p>Definimos el coste esperado total hasta el instante <span class="math inline">\(n\)</span> partiendo del estado <span class="math inline">\(i\)</span>, <span class="math inline">\(g(i,n)\)</span>, como:</p>
 <p><span class="math display">\[g(i,n) = E\left[\sum_{r=0}^n C(X_r)| X_0 = i \right]\]</span></p>
-<p>y construimos la matriz de <strong>costes totales sobre un horizonte finito (CTHF) hasta el instante</strong> <span class="math inline">\(n\)</span>, <span class="math inline">\(g(n)\)</span>, de dimensión <span class="math inline">\(N \times 1\)</span>, a través de estos costes esperados partiendo de cualesquier estado <span class="math inline">\(i \in S\)</span>, como</p>
-<p><span class="math display">\[g(n)' = (g(1,n),g(2,n),\ldots,g(N,n))\]</span></p>
+<p>y construimos la matriz de <strong>costes totales sobre un horizonte finito (CTHF) hasta el instante <span class="math inline">\(n\)</span></strong>, <span class="math inline">\(\mathbf{g}(n)\)</span>, de dimensión <span class="math inline">\(N \times 1\)</span>, a través de estos costes esperados partiendo de cualesquier estado <span class="math inline">\(i \in S\)</span>, como</p>
+<p><span class="math display">\[\mathbf{g}(n)' = (g(1,n),g(2,n),\ldots,g(N,n))\]</span></p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-18" class="definition"><strong>Definición 2.14  </strong></span>Si queremos calcular el <strong>coste esperado total sobre un horizonte finito hasta un instante</strong> <span class="math inline">\(n\)</span>, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante <span class="math inline">\(n\)</span>, <span class="math inline">\(M(n)\)</span>, por la matriz de costes esperados asociados a los estados del sistema, <span class="math inline">\(c\)</span>:</p>
+<p><span id="def:unlabeled-div-18" class="definition"><strong>Definición 2.14  </strong></span>Si vinculado al funcionamiento de un sistema CMTD queremos calcular el <strong>coste esperado total sobre un horizonte finito hasta un instante <span class="math inline">\(n\)</span></strong>, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante <span class="math inline">\(n\)</span>, <span class="math inline">\(M(n)\)</span>, por la matriz de costes esperados asociados a los estados del sistema, <span class="math inline">\(\mathbf{c}\)</span>, esto es, resolver la Ecuación <a href="cmtd.html#eq:CTHF">(2.8)</a>.</p>
 <span class="math display" id="eq:CTHF">\[\begin{equation}
-g(n) = M(n) \cdot c
+\mathbf{g}(n) = M(n) \cdot \mathbf{c}
 \tag{2.8}
 \end{equation}\]</span>
 </div>
@@ -1134,54 +1141,66 @@ g(n) = M(n) \cdot c
 <div class="example">
 <p><span id="exm:unlabeled-div-19" class="example"><strong>Ejemplo 2.5  </strong></span>Volvamos al proceso de inventario presentado en el <a href="cmtd.html#inventario">Problema de inventario</a> con espacio de estados <span class="math inline">\(\{2,3,4,5\}\)</span>. Supongamos que la empresa compra PCs por 1500 euros y los vende por 1750 euros. Además el coste de almacenamiento semanal es de 50 euros por cada unidad que está en la tienda al inicio de una semana. Queremos calcular los ingresos netos que la tienda espera obtener durante las próximas 10 semanas, suponiendo que comienza con cinco PCs en stock al inicio del periodo.</p>
 </div>
-<p>En esta situación, si hay <span class="math inline">\(i\)</span> PCs al principio de la semana <span class="math inline">\(n\)</span>, el coste esperado de almacenamiento esa semana es <span class="math inline">\(50i\)</span>. Si <span class="math inline">\(D_n\)</span> es la demanda durante la semana <span class="math inline">\(n\)</span>, el número esperado de PCs vendidos durante la semana <span class="math inline">\(n\)</span> será <span class="math inline">\(E[min(i, D_n)]\)</span>, por lo que los ingresos netos previstos para la semana <span class="math inline">\(n\)</span> provendrán de los ingresos por ventas menos los gastos de almacenaje, esto es,</p>
+<p>En esta situación, estamos interesados en los ingresos, por lo que definimos <span class="math inline">\(c(i)\)</span> como los ingresos netos que se obtienen en una semana cualquiera en la que hay <span class="math inline">\(i\)</span> PCs al principio de la semana. Sabemos que los costes de almacenamiento de <span class="math inline">\(i\)</span> PCs es <span class="math inline">\(50i\)</span>. Las ganancias provendrán de los PCs que se hayan vendido. Si <span class="math inline">\(D_n\)</span> es la demanda durante una semana cualquiera <span class="math inline">\(n\)</span>, el número esperado de PCs vendidos durante esa semana será <span class="math inline">\(E[min(i, D_n)]\)</span>. Así, los ingresos netos previstos para una semana cualquiera <span class="math inline">\(n\)</span> en la que se tienen <span class="math inline">\(i\)</span> PCs almacenados al inicio, <span class="math inline">\(c(i)\)</span>, provendrán de los ingresos por ventas menos los gastos de almacenaje, esto es,</p>
 <p><span class="math display">\[c(i) = (1750-1500)E[min(i, D_n)] -50i, \quad 2 \leq i \leq 5\]</span></p>
 <p>Necesitamos pues, obtener el valor de <span class="math inline">\(E[min(i, D_n)]\)</span>, para cada valor de <span class="math inline">\(i\)</span>. Veamos cómo hacerlo, tanto de forma teórica como mediante simulación. Denotemos por <span class="math inline">\(Z_{i,n} = min(i, D_n),\)</span> para <span class="math inline">\(i=2, 3, 4, 5\)</span> de forma que:</p>
 <span class="math display">\[\begin{equation*}
 Z_{i,n} =  
 \begin{cases}
-i &amp; \text{ si } i \leq D_n \text{, con } Pr[i \leq D_n]\\
-D_n &amp; \text{ si } i &gt; D_n \text{, con } Pr[i &gt; D_n]
+i &amp; \text{ si } i &lt;D_n \\
+D_n &amp; \text{ si } i \geq  D_n 
 \end{cases}
 \end{equation*}\]</span>
 <p>de esta forma tenemos que su valor esperado vendrá dado por:</p>
-<p><span class="math display">\[E[Z_{i,n}] = i*Pr[i \leq D_n] + \sum_{d=0}^{i-1} d \cdot Pr(D_n=d).\]</span></p>
+<p><span class="math display">\[E[Z_{i,n}] = i \cdot Pr[i &lt; D_n] + \sum_{d=0}^{i} d \cdot Pr(D_n=d).\]</span></p>
 <p>Recordando que <span class="math inline">\(D_n\sim Pois(3)\)</span> en el ejemplo original, para <span class="math inline">\(i=2\)</span> la expresión anterior da lugar a:</p>
-<span class="math display">\[\begin{eqnarray*}
-E[Z_{2,n}] &amp;= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
-&amp;= 2*0.8008+0.1494 = 1.751
-\end{eqnarray*}\]</span>
-<p>y por tanto:</p>
-<p><span class="math display">\[c(2) =  250*1.751 -50*2 = 337.75\]</span></p>
-<p>De forma análoga podemos obtener el resto de costes esperados por el hecho de tener <span class="math inline">\(i\)</span> PCs en la tienda,</p>
-<p><span class="math display">\[c = 
+<p><span class="math display">\[\begin{eqnarray*}
+E[Z_{2,n}] &amp;= 2 \cdot Pr[D_n &gt; 2] + 0 \cdot Pr[D_n = 0] + 1 \cdot Pr[D_n =1] +2 \cdot Pr(D_n=2) \\
+&amp;= 2 \cdot (1-Pr(D_n \leq 2)) + 1 \cdot Pr[D_n =1] + 2 \cdot Pr(D_n=2) \\
+&amp;= 2 \cdot 0.5768 +0.1494 +2 \cdot 0.2240 = 1.751
+\end{eqnarray*}\]</span></p>
+<p>de donde calculamos los ingresos <span class="math inline">\(c(2)\)</span> con la ecuación anterior.
+<span class="math display">\[c(2) =  250 \cdot 1.751 -50 \cdot 2 = 337.75\]</span>
+Hacemos fácilmente los cálculos para todos los estados:</p>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estados</span><span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span>
+<span class="va">lambda</span><span class="op">=</span><span class="fl">3</span>   <span class="co"># Poisson para la demanda</span>
+<span class="co"># número esperado de ventas</span>
+<span class="va">ez</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">estados</span><span class="op">)</span><span class="op">{</span>
+<span class="va">ez</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">i</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="va">i</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="va">i</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="va">i</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="va">ingresos</span><span class="op">=</span><span class="fl">250</span><span class="op">*</span><span class="va">ez</span><span class="op">-</span><span class="fl">50</span><span class="op">*</span><span class="va">estados</span>;<span class="va">ingresos</span></code></pre></div>
+<pre><code>## [1] 337.7662 431.9686 470.1607 466.3449</code></pre>
+<p>Y obtenemos
+<span class="math display">\[\mathbf{c} = 
 \begin{pmatrix}
 337.75 \\
 431.95 \\
 470.15 \\
 466.23 
 \end{pmatrix}\]</span></p>
-<p>de donde podemos calcular los ingresos netos totales esperados durante las próximas <span class="math inline">\(n=10\)</span> semanas, sea cual sea el estado inicial del sistema, a través de la matriz <span class="math display">\[g(10)=M(10) \cdot c\]</span> que calculamos a continuación:</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">337.75</span>,<span class="fl">431.95</span>,<span class="fl">470.15</span>,<span class="fl">466.23</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<p>Con esta matriz y la matriz de ocupación hasta el instante <span class="math inline">\(n=10\)</span> podemos calcular los ingresos netos totales esperados durante las próximas <span class="math inline">\(n=10\)</span> semanas, sea cual sea el estado inicial del sistema:</p>
+<p><span class="math display">\[g(10)=M(10) \cdot c\]</span>
+que calculamos a continuación:</p>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ingresos</span>,<span class="fl">2</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">M10</span><span class="op">=</span><span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">inventario</span>,<span class="fl">10</span><span class="op">)</span>
 <span class="va">g</span><span class="op">=</span><span class="va">M10</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">c</span>
 <span class="va">g</span></code></pre></div>
 <pre><code>##           [,1]
-## 2 PCs 5282.121
-## 3 PCs 3459.052
-## 4 PCs 2536.941
-## 5 PCs 2325.006</code></pre>
-<p>y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con <span class="math inline">\(i=5\)</span> PCs en tienda, esto es, como <span class="math inline">\(g(5,10)=2325.006\)</span> euros.</p>
+## 2 PCs 5283.122
+## 3 PCs 3459.611
+## 4 PCs 2537.260
+## 5 PCs 2325.253</code></pre>
+<p>y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con <span class="math inline">\(i=5\)</span> PCs en tienda, esto es, como <span class="math inline">\(g(5,10)=4842.59\)</span> euros.</p>
 <p>Los valores de <span class="math inline">\(c\)</span> se pueden aproximar mediante simulación sin necesidad de calcularlos de forma teórica. A continuación se presenta el código necesario para realizar la simulación. Concretamente definimos una función que depende del valor del estado inicial <span class="math inline">\(i\)</span>.</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">c.sim</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">estado</span>, <span class="va">nsim</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># estado: estado inicial del sistema</span>
   <span class="co"># nsim: nº simulaciones para la aproximación</span>
   
-  <span class="co"># Fijamos semilla</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>
   <span class="co"># Simulamos valores del mínimo entre i y D_n</span>
   <span class="va">datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>rsim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">nsim</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">rdos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">estado</span>, <span class="va">nsim</span><span class="op">)</span><span class="op">)</span>
   <span class="va">minimo</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">datos</span>, <span class="fl">1</span> ,<span class="va">min</span><span class="op">)</span> <span class="co"># Mínimo por filas</span>
@@ -1192,29 +1211,30 @@ E[Z_{2,n}] &amp;= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">coste</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Aproximamos pues por simulación, los valores de la matriz <span class="math inline">\(c\)</span> con <span class="math inline">\(nsim=1.000.000\)</span> simulaciones</p>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nsim</span> <span class="op">&lt;-</span> <span class="fl">1000000</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>
 <span class="va">c.s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">c.sim</span><span class="op">(</span><span class="fl">2</span>, <span class="va">nsim</span><span class="op">)</span>,<span class="fu">c.sim</span><span class="op">(</span><span class="fl">3</span>, <span class="va">nsim</span><span class="op">)</span>,
       <span class="fu">c.sim</span><span class="op">(</span><span class="fl">4</span>, <span class="va">nsim</span><span class="op">)</span>,<span class="fu">c.sim</span><span class="op">(</span><span class="fl">5</span>, <span class="va">nsim</span><span class="op">)</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">c.s</span></code></pre></div>
 <pre><code>##        [,1]
 ## [1,] 337.66
-## [2,] 431.81
-## [3,] 470.04
-## [4,] 466.20</code></pre>
+## [2,] 431.61
+## [3,] 470.28
+## [4,] 466.69</code></pre>
 <p>Como se puede ver, la simulación funciona bastante bien para aproximar el vector <span class="math inline">\(c\)</span>; resolvamos pues los cálculos de <span class="math inline">\(g(5,10)\)</span> con estos valores, que de nuevo aproximarán las cantidades que buscamos.</p>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># matriz M</span>
 <span class="va">Mmat</span> <span class="op">&lt;-</span> <span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">inventario</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="co"># vector g</span>
 <span class="va">beneficio</span> <span class="op">&lt;-</span> <span class="va">Mmat</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">c.s</span>
 <span class="va">beneficio</span></code></pre></div>
 <pre><code>##           [,1]
-## 2 PCs 5281.517
-## 3 PCs 3458.551
-## 4 PCs 2536.474
-## 5 PCs 2324.530</code></pre>
-<p>Mientras que teóricamente obteníamos unos ingresos esperados de 2325€, con la simulación obtenemos una aproximación de 2324.53€.</p>
+## 2 PCs 5285.787
+## 3 PCs 3460.827
+## 4 PCs 2537.646
+## 5 PCs 2325.374</code></pre>
+<p>Mientras que teóricamente obteníamos unos ingresos esperados de 4842.59€, con la simulación obtenemos una aproximación de 4844.27€.</p>
 </div>
 <div id="tiempos-de-primer-paso" class="section level3" number="2.4.4">
 <h3>
@@ -1222,7 +1242,7 @@ E[Z_{2,n}] &amp;= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
 </h3>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-20" class="definition"><strong>Definición 2.15  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Se define el <strong>tiempo de primer paso</strong> o <strong>tiempo de primera visita</strong> al estado <span class="math inline">\(j\)</span> partiendo del estado <span class="math inline">\(i\)</span>, <span class="math inline">\(T_{ij}\)</span>, como el mínimo número de transiciones necesarias para alcanzar el estado <span class="math inline">\(j\)</span> partiendo del estado inicial <span class="math inline">\(i\)</span>, es decir:</p>
+<p><span id="def:unlabeled-div-20" class="definition"><strong>Definición 2.15  </strong></span>Sea <span class="math inline">\(\{X_n, n \geq 0\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Se define el <strong>tiempo de primer paso</strong> o <strong>tiempo de primera visita</strong> al estado <span class="math inline">\(j\)</span> partiendo del estado <span class="math inline">\(i\)</span>, <span class="math inline">\(T_{ij}\)</span>, como el mínimo número de transiciones necesarias para alcanzar el estado <span class="math inline">\(j\)</span> partiendo del estado inicial <span class="math inline">\(i\)</span>, es decir:</p>
 <p><span class="math display">\[T_{ij} = \underset{n}{min}\{n &gt; 0, X_n = j | X_0 = i\}\]</span></p>
 <p>En ocasiones interesará sin embargo el tiempo de primer paso de un estado a un conjunto de estados <span class="math inline">\(A\)</span>:</p>
 <p><span class="math display">\[T_{iA} = \underset{n}{min}\{n &gt; 0, X_n \in A | X_0 = i\}.\]</span></p>
@@ -1230,19 +1250,20 @@ E[Z_{2,n}] &amp;= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
 </div>
 <div class="whitebox">
 <p>Para obtener los tiempos esperados de recurrencia <span class="math inline">\(f=(f_{11},...,f_{NN})\)</span> para el espacio de estados <span class="math inline">\(S=\{1,...,N\}\)</span>, utilizamos la función <code>meanRecurrenceTime(proceso)</code> de la librería <code>markovchain</code>.</p>
-<p>Podemos obtener la distribución de probabilidad asociada al tiempo de primer paso del estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span> en <span class="math inline">\(n\)</span> transiciones, <span class="math inline">\(f_{ij}(n)\)</span>, con la función <code>firstPassageMultiple(proceso,state=i,set=j,n=n)</code>.</p>
+<p>Para obtener los tiempos esperados de primer paso por un estado <span class="math inline">\(j\)</span> desde cualquier estado de <span class="math inline">\(S\)</span>, podemos utilizar la función <code>meanFirstPassageTime(proceso,destination=j)</code> de la librería <code>markovchain</code>.
+Si queremos calcular la matriz de tiempos esperados para llegar a cualquier estado desde cualquier estado, basta utilizar <code>meanFirstPassageTime(proceso)</code>.</p>
 </div>
-<div class="whitebox">
-<p>Para obtener los tiempos esperados de primer paso por un estado <span class="math inline">\(j\)</span> desde cualquier estado de <span class="math inline">\(S\)</span>, podemos utilizar la función <code>meanFirstPassageTime(proceso,destination=j)</code> de la librería <code>markovchain</code>. Si queremos calcular la matriz de tiempos esperados para llegar a cualquier estado desde cualquier estado, basta utilizar <code>meanFirstPassageTime(proceso)</code>.</p>
-</div>
-<p>En caso de que no podamos utilizar la función <code>meanFirstPassageTime</code> para el cálculo del tiempo de primer paso, podemos utilizar la propiedad que pasamos a describir.</p>
+<p>En caso de que no podamos utilizar la función <code>meanFirstPassageTime</code> para el cálculo del tiempo esperado de primer paso, podemos utilizar la propiedad que pasamos a describir.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-21" class="definition"><strong>Definición 2.16  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Si estamos interesados en obtener el tiempo esperado de primer paso para el estado <span class="math inline">\(j\)</span> desde cualquier estado <span class="math inline">\(i\)</span>, dado por:</p>
-<p><span class="math display">\[v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n &gt; 0, X_n = j | X_0 = i\}\]</span>$</p>
+<p><span id="def:unlabeled-div-21" class="definition"><strong>Definición 2.16  </strong></span>Sea <span class="math inline">\(\{X_n, n \geq 0\}\)</span> una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Si estamos interesados en obtener el tiempo esperado de primer paso para el estado <span class="math inline">\(j\)</span> desde cualquier estado <span class="math inline">\(i\)</span>, dado por:</p>
+<p><span class="math display">\[v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n &gt; 0, X_n = j | X_0 = i\}\]</span></p>
 <p>y construimos la matriz de dimensión <span class="math inline">\((N-1) \times 1\)</span> <span class="math inline">\(\mathbf{v_j'}=(v_{1j},...,v_{j-1,j},v_{j+1,j},...,v_{Nj})\)</span><br>
 basta con resolver el sistema:</p>
-<p><span class="math display">\[[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}\]</span></p>
+<span class="math display" id="eq:primerpaso-ecu">\[\begin{equation}
+[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}
+\tag{2.9}
+\end{equation}\]</span>
 <p>donde</p>
 <ul>
 <li>
@@ -1262,7 +1283,7 @@ basta con resolver el sistema:</p>
 <li>proceso: <span class="math inline">\(CMTD\)</span> que describe el sistema a estudio</li>
 <li>estado: estado o conjunto de estados que se desean alcanzar, partiendo desde cualquier estado inicial que no está en este conjunto.</li>
 </ul>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Función para obtener el tiempo esperado de primer paso por "estado"</span>
 <span class="co"># (equivalente a meanFirstPassageTime de markovchain)</span>
 <span class="va">tiempo.pp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">proceso</span>, <span class="va">estado</span><span class="op">)</span>
@@ -1286,39 +1307,33 @@ basta con resolver el sistema:</p>
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-22" class="definition"><strong>Definición 2.17  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Se definen las <strong>probabilidades de primera visita</strong> o primer paso del estado <span class="math inline">\(i\)</span> al <span class="math inline">\(j\)</span> en <span class="math inline">\(n\)</span> transiciones, con <span class="math inline">\(f_{ij}(n)\)</span>,</p>
-<span class="math display">\[\begin{eqnarray*}
+<p><span id="def:unlabeled-div-22" class="definition"><strong>Definición 2.17  </strong></span>Sea <span class="math inline">\(\{X_n, n \geq 0\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Se definen las <strong>probabilidades de primera visita</strong> o primer paso del estado <span class="math inline">\(i\)</span> al <span class="math inline">\(j\)</span> en <span class="math inline">\(n\)</span> transiciones, con <span class="math inline">\(f_{ij}(n)\)</span>,</p>
+<p><span class="math display">\[\begin{eqnarray*}
 f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 = i] \\ 
 &amp;=&amp; Pr(T_{ij}=n), \quad n \geq 0
-\end{eqnarray*}\]</span>
+\end{eqnarray*}\]</span></p>
 <p>donde por convenio <span class="math inline">\(f_{ij}(0) = 0.\)</span></p>
 </div>
 </div>
-<div class="yellowbox">
-<div class="definition">
-<p><span id="def:unlabeled-div-23" class="definition"><strong>Definición 2.18  </strong></span>Sea <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> una <span class="math inline">\(CMTD\)</span> homogénea con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>. Sea <span class="math inline">\(m_{ij}\)</span> el número esperado de visitas al estado <span class="math inline">\(j\)</span> cuando se parte del estado <span class="math inline">\(i\)</span>, y <span class="math inline">\(f_{ij}=Pr(T_{ij}&lt;\infty)\)</span> la probabilidad de alcanzar el estado <span class="math inline">\(j\)</span> partiendo del estado <span class="math inline">\(i\)</span>. Entonces se cumple la relación:</p>
-<p><span class="math display">\[ m_{ij}=\begin{cases}
-\frac{1}{1-f_{jj}}, \quad \text{ si } i=j \\
-\frac{f_{ij}}{1-f_{jj}}, \quad \text{ si } i\neq j
-\end{cases}\]</span></p>
-</div>
+<div class="whitebox">
+<p>Podemos obtener la distribución de probabilidad asociada al tiempo de primer paso del estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span> en <span class="math inline">\(n\)</span> transiciones, <span class="math inline">\(f_{ij}(n)\)</span>, con la función <code>firstPassageMultiple(proceso,state=i,set=j,n=n)</code>.</p>
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-24" class="definition"><strong>Definición 2.19  </strong></span>Si <span class="math inline">\(T_{ii}\)</span> denota el <strong>tiempo del primer retorno</strong>, o <strong>tiempo de recurrencia</strong> al estado <span class="math inline">\(i\)</span>, entonces se dice que el estado <span class="math inline">\(i\)</span> es <strong>recurrente</strong> si <span class="math inline">\(f_{ii}=Pr(T_{ii}&lt;\infty)=1\)</span>, es decir, si el sistema se inicia en él, pueda volver a él. Es transitorio si <span class="math inline">\(f_{ii}&lt;1\)</span>.</p>
+<p><span id="def:unlabeled-div-23" class="definition"><strong>Definición 2.18  </strong></span>Si <span class="math inline">\(T_{ii}\)</span> denota el <strong>tiempo del primer retorno</strong>, o <strong>tiempo de recurrencia</strong> al estado <span class="math inline">\(i\)</span>, entonces se dice que el estado <span class="math inline">\(i\)</span> es <strong>recurrente</strong> si <span class="math inline">\(f_{ii}=Pr(T_{ii}&lt;\infty)=1\)</span>, es decir, si el sistema se inicia en él, pueda volver a él. Es transitorio si <span class="math inline">\(f_{ii}&lt;1\)</span>.</p>
 </div>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-25" class="example"><strong>Ejemplo 2.6  </strong></span>Analizamos los tiempos de primer paso, tiempos de recurrencia y probabilidades de primer paso sobre el proceso presentado en el Ejemplo <a href="cmtd.html#exm:diagramCMTD">2.1</a>. Estamos interesados en saber cuándo alcanzaremos el estado “b” partiendo desde cualquier estado en el momento inicial.</p>
+<p><span id="exm:unlabeled-div-24" class="example"><strong>Ejemplo 2.6  </strong></span>Analizamos los tiempos de primer paso, tiempos de recurrencia y probabilidades de primer paso sobre el proceso presentado en el Ejemplo <a href="cmtd.html#exm:diagramCMTD">2.1</a>. Estamos interesados en saber cuándo alcanzaremos el estado “b” partiendo desde cualquier estado en el momento inicial.</p>
 </div>
 <p>Comenzamos calculando los tiempos de primer paso utilizando las dos funciones consideradas, la propia y la de <code>markovchain</code>.</p>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo de primer paso partiendo del estado "b"</span>
 <span class="co"># libreria</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">proceso</span>, <span class="st">"b"</span><span class="op">)</span></code></pre></div>
 <pre><code>##        a        c 
 ## 6.363636 8.181818</code></pre>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># definida por nosotros</span>
 <span class="fu">tiempo.pp</span><span class="op">(</span><span class="va">proceso</span>, <span class="st">"b"</span><span class="op">)</span></code></pre></div>
 <pre><code>##       [,1]
@@ -1326,19 +1341,19 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 ## c 8.181818</code></pre>
 <p>Podemos ver que ambas funciones proporcionan el mismo resultado. Si comenzamos en el estado “a” tardaremos en promedio seis transiciones para alcanzar por primera vez el estado “b,” mientras que si empezamos en el estado “c” tardaremos 8 transiciones en alcanzar el estado “b.”</p>
 <p>Si deseamos la matriz del valor esperado del primer paso en cualquier estado basta con ejecutar</p>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">proceso</span><span class="op">)</span></code></pre></div>
 <pre><code>##          a        b        c
 ## a 0.000000 6.363636 1.688312
 ## b 2.636364 0.000000 1.168831
 ## c 1.818182 8.181818 0.000000</code></pre>
 <p>Obtenemos ahora el tiempo de primer paso (utilizando la función programada) y la probabilidad de primer paso de pasar del estado <span class="math inline">\(b\)</span> a cualquiera de los estados <span class="math inline">\(a\)</span> o <span class="math inline">\(c\)</span> en 10 transiciones (<span class="math inline">\(A = \{a, c\}\)</span>)</p>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo esperado e primer paso de "b" a "A"</span>
 <span class="fu">tiempo.pp</span><span class="op">(</span><span class="va">proceso</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"c"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    1</code></pre>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probabilidad de primer paso de "b" a "A"</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">proceso</span>, <span class="st">"b"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>,<span class="st">"c"</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>##             set
@@ -1354,13 +1369,13 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 ## 10 0.0008392372</code></pre>
 <p>Se espera poder pasar de <span class="math inline">\(b\)</span> a <span class="math inline">\(A\)</span> en una transición (lógico puesto que A es el conjunto complementario a <span class="math inline">\(b\)</span> en el conjunto de estados), mientras que la probabilidad de pasar del estado <span class="math inline">\(b\)</span> al conjunto <span class="math inline">\(A\)</span> en dos transiciones es de <span class="math inline">\(0.55\)</span> y tan solo de <span class="math inline">\(0.0008\)</span> en 10 transiciones.</p>
 <p>En cuanto a los tiempos de recurrencia, tenemos:</p>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo de recurrencia</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">proceso</span><span class="op">)</span></code></pre></div>
 <pre><code>##        a        b        c 
 ## 2.700000 9.000000 1.928571</code></pre>
 <p>Podemos ver que una vez hemos pasado por el estado “b” tardamos 9 transiciones en volver a él. Calculamos ahora la probabilidad de recurrencia en 10 transiciones.</p>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Probabilidad de recurrencia en 10 pasos</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">proceso</span>, <span class="st">"b"</span>, <span class="st">"b"</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>##           set
@@ -1377,10 +1392,10 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 <p>Si iniciamos el proceso en el estado “b” la probabilidad de volver a dicho estado es muy baja en cualquiera de las 10 primeras transiciones. La probabilidad de volver en 3 transiciones es de 0.15, pero de volver en 10 transiciones es de 0.046.</p>
 <p>¿Qué implicaciones prácticas tienen los análisis realizados en el proceso estudiado?</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-26" class="example"><strong>Ejemplo 2.7  </strong></span>Consideramos el proceso que ya vimos sobre <a href="cmtd.html#fiabilidad">Fiabilidad de máquinas</a>. Supongamos que en el instante inicial (dia 0) las dos máquinas están “On,” y que deseamos calcular el tiempo esperado hasta que las dos máquinas estén “Off” por primera vez.</p>
+<p><span id="exm:unlabeled-div-25" class="example"><strong>Ejemplo 2.7  </strong></span>Consideramos el proceso que ya vimos sobre <a href="cmtd.html#fiabilidad">Fiabilidad de máquinas</a>. Supongamos que en el instante inicial (dia 0) las dos máquinas están “On,” y que deseamos calcular el tiempo esperado hasta que las dos máquinas estén “Off” por primera vez.</p>
 </div>
 <p>Si <span class="math inline">\(Y_n\)</span> es el proceso que representa el número de máquinas que están “On,” con espacio de estados <span class="math inline">\(S = \{0, 1, 2\}\)</span>, estamos interesados en calcular el tiempo esperado para llegar a <span class="math inline">\(Y_n = 0\)</span> (dos máquinas “Off”) partiendo de <span class="math inline">\(Y_0 = 2\)</span> (dos máquinas “On”). Utilizamos la función propia estableciendo el estado objetivo.</p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo de primer paso para acabar en el estado "0"</span>
 <span class="fu">tiempo.pp</span><span class="op">(</span><span class="va">fiabilidad</span>, <span class="st">"0"</span><span class="op">)</span></code></pre></div>
 <pre><code>##       [,1]
@@ -1388,7 +1403,7 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 ## 2 2451.485</code></pre>
 <p>El tiempo esperado para que las dos máquinas estén en estado “Off” comenzando con ambas en el estado “On” es 2451.5, que expresado en años será <span class="math inline">\(2451.5/365 = 6.71\)</span> años.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-27" class="example"><strong>Ejemplo 2.8  </strong></span>Consideramos el proceso ya presentado sobre <a href="cmtd.html#planificacion">Planificación de mano de obra</a>. Deseamos el tiempo medio de permanencia en la empresa para un empleado recién reclutado. Recordemos que un nuevo empleado siempre empieza en el nivel “1.” Definamos un proceso <span class="math inline">\(Y_n\)</span> que representa el nivel de un empleado novel en la semana n-ésima, proceso que puede tomar los valores <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span>, donde <span class="math inline">\(Y_n=0\)</span> significa que deja la empresa en n semanas después de empezar. En esta situación el proceso <span class="math inline">\(\{Y_n, n \in \mathbb{N}\}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span> y matriz de probabilidades de transición calculadas a partir de las probabilidades que se daban en el desarrollo de <a href="cmtd.html#planificacion">Planificación de mano de obra</a> y teniendo en cuenta que si está fuera de la empresa, a la semana siguiente también lo estará:</p>
+<p><span id="exm:unlabeled-div-26" class="example"><strong>Ejemplo 2.8  </strong></span>Consideramos el proceso ya presentado sobre <a href="cmtd.html#planificacion">Planificación de mano de obra</a>. Deseamos el tiempo medio de permanencia en la empresa para un empleado recién reclutado. Recordemos que un nuevo empleado siempre empieza en el nivel “1.” Definamos un proceso <span class="math inline">\(Y_n\)</span> que representa el nivel de un empleado novel en la semana n-ésima, proceso que puede tomar los valores <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span>, donde <span class="math inline">\(Y_n=0\)</span> significa que deja la empresa en n semanas después de empezar. En esta situación el proceso <span class="math inline">\(\{Y_n, n \geq 0\}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span> y matriz de probabilidades de transición calculadas a partir de las probabilidades que se daban en el desarrollo de <a href="cmtd.html#planificacion">Planificación de mano de obra</a> y teniendo en cuenta que si está fuera de la empresa, a la semana siguiente también lo estará:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1399,7 +1414,7 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 \end{pmatrix}\]</span></p>
 </div>
 <p>Creamos la estructura del sistema:</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Definimos estados</span>
 <span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span><span class="op">)</span>
 <span class="co"># Matriz de transición </span>
@@ -1425,7 +1440,7 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 ## 2 0.008 0.00 0.982 0.010 0.000
 ## 3 0.020 0.00 0.000 0.975 0.005
 ## 4 0.010 0.00 0.000 0.000 0.990</code></pre>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># y describimos el sistema</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">planificacion2</span><span class="op">)</span></code></pre></div>
 <pre><code>## planificacion  Markov chain that is composed by: 
@@ -1438,7 +1453,7 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 ## The Markov chain is not irreducible 
 ## The absorbing states are: 0</code></pre>
 <p>En este caso el estado “0” es absorbente (cuando es despedido, ya no vuelve), y el resto de estados son transitorios. Al tener un estado absorbente, no es irreducible y no se puede aplicar la función <code><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime()</a></code> para calcular los tiempos de primer paso esperados. Usamos pues, la función que hemos programado:</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo esperado para llegar a estado 0</span>
 <span class="fu">tiempo.pp</span><span class="op">(</span><span class="va">planificacion2</span>, <span class="st">"0"</span><span class="op">)</span></code></pre></div>
 <pre><code>##        [,1]
@@ -1456,22 +1471,23 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 <p>En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una <span class="math inline">\(CMTD\)</span>, es decir, el comportamiento cuando <span class="math inline">\(n \rightarrow \infty\)</span>. La primera pregunta más obvia es si la distribución de <span class="math inline">\(X_n\)</span> se aproxima a algún límite finito cuando <span class="math inline">\(n\)</span> tiende a infinito.</p>
 <div class="yellowbox">
 <div class=".definition">
-<p>Si existe la distribución a largo plazo de un proceso CMTD <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, la denominamos <strong>distribución límite</strong> o <strong>distribución en estado estacionario</strong>, y la denotamos por:</p>
+<p>Si existe la distribución a largo plazo de un proceso CMTD <span class="math inline">\(\{X_n, n \geq 0\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, la denominamos <strong>distribución límite</strong> o <strong>distribución en estado estacionario</strong>, y la denotamos por:</p>
 <p><span class="math display">\[\pi = [\pi_1, \pi_2,...,\pi_N]\]</span></p>
 <p>donde</p>
 <p><span class="math display">\[\pi_j = \underset{n \rightarrow \infty}{lim} Pr[X_n = j], \quad j \in S\]</span></p>
 </div>
 </div>
-<p>La siguiente pregunta de interés, cuando dicha distribución existe, es si es única. Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.</p>
+<p>La siguiente pregunta de interés, cuando dicha distribución existe, es si es única.
+Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.</p>
 <p>La última pregunta se refiere a la práctica: si hay una única distribución límite, ¿cómo podemos calcularla? Pues bien, aunque responder las dos primeras preguntas pueda ser más complejo, la respuesta a esta pregunta es fácil, puesto que si esta distribución límite exite, entonces satisface la siguiente propiedad.</p>
 <div class="yellowbox">
 <div class=".definition">
-<p>Si existe la distribución límite de un proceso CMTD <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, entonces las probabilidades <span class="math inline">\(\pi_j\)</span> satisfacen la siguiente ecuación:</p>
-<p><span class="math display">\[\pi_j = \sum_{i=1}^N \pi_i p_{ij}, \quad \forall j \in S,\]</span></p>
-<p>donde <span class="math inline">\(p_{ij}\)</span> son las probabilidades de transición (en la matriz <span class="math inline">\(P\)</span>). Esta propiedad en formato matricial da lugar a la <strong>ecuación de balance</strong> o <strong>del estado estacionario</strong>, que viene dada por:</p>
+<p>Si existe la distribución límite de un proceso CMTD <span class="math inline">\(\{X_n, n \geq 0\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, entonces las probabilidades <span class="math inline">\(\pi_j\)</span> satisfacen la siguiente ecuación:</p>
+<p><span class="math display">\[\pi_j = \sum_{i=1}^N \pi_i p_{ij}, \quad \forall j \in S,\]</span>
+donde <span class="math inline">\(p_{ij}\)</span> son las probabilidades de transición (en la matriz <span class="math inline">\(P\)</span>). Esta propiedad en formato matricial da lugar a la <strong>ecuación de balance</strong> o <strong>del estado estacionario</strong>, que viene dada por:</p>
 <span class="math display" id="eq:ecuee">\[\begin{equation}
-\pi = \pi*P, \qquad \text{ con } 
-\tag{2.9}
+\pi = \pi \cdot P, \qquad \text{ con } 
+\tag{2.10}
 \end{equation}\]</span>
 <p>junto con la restricción de normalización</p>
 <p><span class="math display">\[\sum_{j=1}^N \pi_j = 1.\]</span></p>
@@ -1481,45 +1497,17 @@ f_{ij}(n) &amp;=&amp; Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 
 <p>La función <code><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates()</a></code> de la librería <code>markovchain</code> nos devuelve la distribución estacionaria de una <span class="math inline">\(CMTD\)</span>.</p>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-28" class="example"><strong>Ejemplo 2.9  </strong></span>Analizamos el sistema presentado en el Ejemplo <a href="cmtd.html#exm:diagramCMTD">2.1</a> para obtener la distribución estacionaria:</p>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<p><span id="exm:unlabeled-div-27" class="example"><strong>Ejemplo 2.9  </strong></span>Analizamos el sistema presentado en el Ejemplo <a href="cmtd.html#exm:diagramCMTD">2.1</a> para obtener la distribución estacionaria:</p>
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Distribución estacionaria</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">proceso</span><span class="op">)</span></code></pre></div>
 <pre><code>##              a         b         c
 ## [1,] 0.3703704 0.1111111 0.5185185</code></pre>
 <p>Obtenemos de esta forma las probabilidades asintóticas de estar en cada uno de los estados. Vemos pues, que a la larga lo más probable es que nos encontremos en el estado ‘c,’ y lo menos probable es estar en el estado ‘b.’</p>
 </div>
-<p>Podemos encontrar procesos CMTD en los que no existe distribución límite, pero aun así podemos resolver las ecuaciones de balance, junto con la restricción de normalización (Ecuación <a href="cmtd.html#eq:ecuee">(2.9)</a>). Supongamos que tenemos una distribución inicial de la CMTD dada por <span class="math inline">\(\{\pi^*, i \in S\}\)</span>. Si también la distribución de <span class="math inline">\(X_1, \ldots, X_n\)</span> permanece invariante para todos los <span class="math inline">\(n\)</span>, decimos que la distribución inicial es una <strong>distribución estacionaria</strong>. Definámoslo a continuación.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:steadystatedist" class="definition"><strong>Definición 2.20  </strong></span>Una distribución de probabilidad <span class="math display">\[\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]\]</span> se dice que es <strong>estacionaria</strong> si</p>
-<span class="math display">\[\begin{eqnarray*}
-Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
-&amp;\Rightarrow&amp; Pr[X_n = i] = \pi_i^*, 1 \leq i \leq N, \text{ y } n \geq 0.
-\end{eqnarray*}\]</span>
-</div>
-</div>
-<p>Las preguntas que previamente planteamos sobre la distribución límite (es decir, la existencia, la unicidad y el método de cálculo) pueden formularse también sobre la distribución estacionaria. Respondámoslas.</p>
-<div class="yellowbox">
-<div class="definition">
-<p><span id="def:steadystatedist2" class="definition"><strong>Definición 2.21  </strong></span>La distribución <span class="math inline">\(\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]\)</span> es una distribución estacionaria para la CMTD <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span>, con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y matriz de probabilidades de transición <span class="math inline">\(P\)</span>, si y solo si se cumple que:</p>
-<p><span class="math display">\[\pi^* = \pi^* P, \qquad \text{ con } \sum_{j=1}^N \pi_j^* = 1, \quad \forall j \in S.\]</span></p>
-</div>
-</div>
-<p>Por tanto, la distribución límite, cuando existe, es una distribución estacionaria. En caso de que tengamos más de una distribución límite (pues puede depender del estado inicial), por la Definición <a href="cmtd.html#def:steadystatedist2">2.21</a>, cualquiera de dichas distribuciones límite será una distribución estacionaria.</p>
-<p>Veamos a continuación una propiedad interesante, respecto a estacionariedad, de la distribución del ratio de ocupación, esto es, de la proporción de tiempo que el proceso permanece en cada estado.</p>
-<div class="yellowbox">
-<div class=".definition">
-<p>Si existe la <strong>distribución de ocupación</strong> del proceso <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span>, dada por</p>
-<p><span class="math display">\[\hat{\pi}_j=lim_{n \rightarrow \infty} \frac{m_{ij}(n)}{n+1}, \qquad \text{ con } m_{ij}(n)=E[N_j(n)|X_0=i]\]</span></p>
-<p>entonces satisface las ecuaciones de balance sujetas a la restricción de normalización, esto es,</p>
-<p><span class="math display">\[\hat{\pi}_j = \sum_{i=1}^N \hat{\pi}_i p_{ij}, \quad \forall j \in S, \qquad \text{ y } \sum_{j=1}^N \hat{\pi}_j=1.\]</span></p>
-</div>
-</div>
-<p>Tenemos pues, que toda distribución que cumpla las ecuaciones de balance junto con las restricciones de normalización, será una distribución límte, también estacionaria o será la distribución de ocupación. Las preguntas relativas a estas ecuaciones son: ¿siempre habrá una solución? ¿Será única? ¿Cuándo dicha solución se podrá interpretar como una distribución límite, estacionaria o de ocupación? Intentemos dar respuesta a estas preguntas introduciendo algún concepto más referido a los procesos <span class="math inline">\(CMTD\)</span>.</p>
-<div class="yellowbox">
-<div class="definition">
-<p><span id="def:irreducible" class="definition"><strong>Definición 2.22  </strong></span>Una <span class="math inline">\(CMTD\)</span> <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> con espacio de estados <span class="math inline">\(S\)</span> se dice que es <strong>irreducible</strong> si para cada pareja de estados <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> en <span class="math inline">\(S\)</span>, existe algún instante de tiempo <span class="math inline">\(k&gt;0\)</span> en el que es posible llegar a <span class="math inline">\(j\)</span> desde <span class="math inline">\(i\)</span>, esto es,</p>
+<p><span id="def:irreducible" class="definition"><strong>Definición 2.19  </strong></span>Una <span class="math inline">\(CMTD\)</span> <span class="math inline">\(\{X_n, n \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S\)</span> se dice que es <strong>irreducible</strong> si para cada pareja de estados <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> en <span class="math inline">\(S\)</span>, existe algún instante de tiempo <span class="math inline">\(k&gt;0\)</span> en el que es posible llegar a <span class="math inline">\(j\)</span> desde <span class="math inline">\(i\)</span>, esto es,</p>
 <p><span class="math display">\[Pr[X_k = j | X_0 = i] &gt;0.\]</span></p>
 </div>
 </div>
@@ -1530,16 +1518,16 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 <p>La utilidad del concepto de irreducibilidad se justifica con los resultados que presentamos a continuación, referidos a la unicidad de la distribución estacionaria.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-29" class="definition"><strong>Definición 2.23  </strong></span>Una CMTD de espacios finitos que sea irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.</p>
+<p><span id="def:unlabeled-div-28" class="definition"><strong>Definición 2.20  </strong></span>Una CMTD de espacio de estados finitos que sea irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.</p>
 <p>Además, una CMTD de espacios finitos que sea irreducible tiene una única distribución de ocupación y es igual a la distribución estacionaria.</p>
 </div>
 </div>
-<p>Introducimos ahora el concepto de periodicidad, que nos ayudará a decidir cuando exista la distribución límite.</p>
+<p>Introducimos ahora el concepto de periodicidad, que nos ayudará a comprobar cuándo existe la distribución estacionaria.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:periodo" class="definition"><strong>Definición 2.24  </strong></span>Sea la <span class="math inline">\(CMTD\)</span> <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y <span class="math inline">\(d\)</span> el entero más grande tal que para cualquier estado <span class="math inline">\(i \in S\)</span></p>
+<p><span id="def:periodo" class="definition"><strong>Definición 2.21  </strong></span>Sea la <span class="math inline">\(CMTD\)</span> <span class="math inline">\(\{X_n, n \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S =\{1, 2,..., N\}\)</span> y <span class="math inline">\(d\)</span> el entero más grande tal que para cualquier estado <span class="math inline">\(i \in S\)</span></p>
 <p><span class="math display">\[\text{si } Pr[X_n = i | X_0 = i] &gt;0 \Rightarrow n \text{ es  múltiplo de } d,\]</span></p>
-<p>Se dice entonces que dicha <span class="math inline">\(CMTD\)</span> es <strong>periódica con periodo</strong> <span class="math inline">\(d\)</span> si <span class="math inline">\(d&gt;1\)</span>, y <strong>aperiódica</strong> si <span class="math inline">\(d = 1\)</span>.</p>
+<p>Se dice entonces que dicha <span class="math inline">\(CMTD\)</span> es <strong>periódica con periodo <span class="math inline">\(d\)</span></strong> si <span class="math inline">\(d&gt;1\)</span>, y <strong>aperiódica</strong> si <span class="math inline">\(d = 1\)</span>.</p>
 </div>
 </div>
 <p>Así, una CMTD con periodo <span class="math inline">\(d\)</span> puede volver a su estado inicial sólo en los instantes <span class="math inline">\(d, 2d, 3d, ...\)</span>. En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo <span class="math inline">\(d\)</span> para cualquier estado <span class="math inline">\(i \in S\)</span>, puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo.</p>
@@ -1547,23 +1535,44 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 <p>Podemos estudiar la periocidad de un sistema mediante la función <code><a href="https://rdrr.io/pkg/markovchain/man/structuralAnalysis.html">period()</a></code> de la librería <code>markovchain</code>.</p>
 </div>
 <p>En particular, si <span class="math inline">\(p_{ii}&gt;0\)</span> para cualquier <span class="math inline">\(i\in S\)</span> de una CMTD irreducible, entonces <span class="math inline">\(d=1\)</span> y la CMTD será aperiódica.</p>
-<p>El resultado más relevante es que si tenemos una <span class="math inline">\(CMTD\)</span> que es irreducible y aperiódica, entonces tiene una única distribución límite, que es la solución de la ecuación de balance y de normalización (Ecuación <a href="cmtd.html#eq:ecuee">(2.9)</a>).Además, esta será la distribución estacionaria de la CMTD y también la distribución de ocupación.</p>
+<p>El resultado más relevante es que si tenemos una <span class="math inline">\(CMTD\)</span> que es irreducible y aperiódica, entonces tiene una única distribución límite, que es la solución de la ecuación de balance y de normalización <a href="cmtd.html#eq:ecuee">(2.10)</a>. Además, esta será la distribución estacionaria de la CMTD y también la distribución de ocupación.</p>
 <p>La distribución límite/estacionaria de una CMTD reducible no es única y depende del estado inicial de la cadena.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Ejemplo 2.10  </strong></span>Verifiquemos la unicidad de la distribución estacionaria revisando las propiedades del proceso en el Ejemplo <a href="cmtd.html#exm:diagramCMTD">2.1</a>.</p>
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">proceso</span><span class="op">)</span></code></pre></div>
+<pre><code>## Unnamed Markov chain  Markov chain that is composed by: 
+## Closed classes: 
+## a b c 
+## Recurrent classes: 
+## {a,b,c}
+## Transient classes: 
+## NONE 
+## The Markov chain is irreducible 
+## The absorbing states are: NONE</code></pre>
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/structuralAnalysis.html">period</a></span><span class="op">(</span><span class="va">proceso</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Este proceso es irreducible y de periodo 1, luego tiene una única distribución límite que es la distribución estacionaria.</p>
+</div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-30" class="definition"><strong>Definición 2.25  </strong></span>Si <span class="math inline">\(i\)</span> es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de probabilidad de <span class="math inline">\(i\)</span> según la distribución estacionaria, es decir,</p>
-<p><span class="math display">\[E[T_{jj}|X_0=j] = 1/\pi_j.\]</span></p>
+<p><span id="def:unlabeled-div-30" class="definition"><strong>Definición 2.22  </strong></span>Si <span class="math inline">\(i\)</span> es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de la probabilidad de <span class="math inline">\(i\)</span> según la distribución estacionaria, es decir,</p>
+<span class="math display" id="eq:et-piestacionaria">\[\begin{equation}
+E[T_{jj}] = 1/\pi_j.
+\tag{2.11}
+\end{equation}\]</span>
 </div>
 </div>
 <p>Tenemos un resultado adicional sobre el comportamiento de los <strong>costes en el estado estacionario</strong>.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:costesestacionarios" class="definition"><strong>Definición 2.26  </strong></span>Si <span class="math inline">\(c(i)\)</span> es el coste esperado en el que incurrimos cuando visitamos el estado <span class="math inline">\(i \in S\)</span>, de una CMTD irreducible con distribución de ocupación <span class="math inline">\(\pi\)</span>, entonces el coste esperado por unidad a largo plazo (en el estado estacionario) viene dado por:</p>
+<p><span id="def:costesestacionarios" class="definition"><strong>Definición 2.23  </strong></span>Si <span class="math inline">\(c(i)\)</span> es el coste esperado en el que incurrimos cuando visitamos el estado <span class="math inline">\(i \in S\)</span>, de una CMTD irreducible con distribución de ocupación <span class="math inline">\(\pi\)</span>, entonces el coste esperado por unidad a largo plazo (en el estado estacionario) viene dado por:</p>
 <p><span class="math display">\[g= \sum_{j\in S} \pi_j \ c(j).\]</span></p>
 </div>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-31" class="example"><strong>Ejemplo 2.10  </strong></span>Para el proceso descrito en la sección <a href="cmtd.html#telecomunicaciones">Telecomunicaciones</a>, en el que los paquetes de datos que se generan en el instante (ranura) <span class="math inline">\(n\)</span>, <span class="math inline">\(A_n \sim Po(1)\)</span>, se almacenaban en un buffer de capacidad <span class="math inline">\(K=7\)</span>, que se van eliminando conforme a cierta estrategia. Interesados en el proceso <span class="math inline">\(\{X_n, n\geq 0\}\)</span> que describe el número de paquetes en el buffer al final de la n-ésima ranura, con espacio de estados <span class="math inline">\(S=\{0, 1,..., 7\}\)</span> y matriz de probabilidades de transición:</p>
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Ejemplo 2.11  </strong></span>Para el proceso descrito en la sección <a href="cmtd.html#telecomunicaciones">Telecomunicaciones</a>, en el que los paquetes de datos que se generan en el instante (ranura) <span class="math inline">\(n\)</span>, <span class="math inline">\(A_n \sim Po(1)\)</span>, se almacenaban en un buffer de capacidad <span class="math inline">\(K=7\)</span>, que se van eliminando conforme a cierta estrategia. Interesados en el proceso <span class="math inline">\(\{X_n, n\geq 0\}\)</span> que describe el número de paquetes en el buffer al final de la n-ésima ranura, con espacio de estados <span class="math inline">\(S=\{0, 1,..., 7\}\)</span> y matriz de probabilidades de transición:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 0.3679 &amp; 0.3679 &amp; 0.1839 &amp; 0.0613 &amp; 0.0153 &amp; 0.0031 &amp; 0.0005 &amp; 0.0001\\
@@ -1583,7 +1592,7 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 </ol>
 </div>
 <p>Definamos la estructura del proceso para la librería <code>markovchain</code>, y pidamos la distribución estacionaria.</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Estructura del proceso</span>
 <span class="co"># Definimos estados</span>
 <span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>
@@ -1614,11 +1623,11 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 ## NONE 
 ## The Markov chain is irreducible 
 ## The absorbing states are: NONE</code></pre>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Periodo del sistema</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/structuralAnalysis.html">period</a></span><span class="op">(</span><span class="va">teleco</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Distribución estacionaria</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">teleco</span><span class="op">)</span></code></pre></div>
 <pre><code>##               0         1         2         3         4         5         6         7
@@ -1626,7 +1635,7 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 <p>Tenemos que la CMTD es irreducible, luego por los resultados teóricos tiene una única distribución estacionaria, que coincidirá con la distribución límite y con la distribución de los tiempos de ocupación.</p>
 <p>Que el buffer esté lleno significa que nos encontramos en el estado “7,” y al ser la distribución estacionaria la del tiempo de ocupación, tenemos que la fracción de tiempo en que el buffer está lleno es del 13.64%.</p>
 <p>El número esperado de paquetes en el buffer en el estado estacionario es un valor esperado calculado con la distribución límite/estacionaria, que al ser discreta se calcula fácilmente a partir de las distribución estacionaria obtenida, esto es,</p>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">estados</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">7</span>
 <span class="va">distribucion</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">teleco</span><span class="op">)</span>
 <span class="co"># Valor esperado</span>
@@ -1634,10 +1643,10 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 <pre><code>## [1] 3.791421</code></pre>
 <p>Por lo tanto, a largo plazo se espera que el buffer esté a un poco más de la mitad de su capacidad.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-32" class="example"><strong>Ejemplo 2.11  </strong></span>Consideramos el proceso de <a href="cmtd.html#planificacion">Planificación de mano de obra</a>, donde suponemos que la empresa tiene 70 empleados cuyo nivel no cambia a lo largo del tiempo. Supongamos que los gastos de nómina semanales por persona son de 400 dólares para el grado 1, 600 dólares para el grado 2, 800 dólares para grado 3, y $1000 para el grado 4. Estamos interesados en calcular los gastos semanales promedio por empleado.</p>
+<p><span id="exm:unlabeled-div-32" class="example"><strong>Ejemplo 2.12  </strong></span>Consideramos el proceso de <a href="cmtd.html#planificacion">Planificación de mano de obra</a>, donde suponemos que la empresa tiene 70 empleados cuyo nivel no cambia a lo largo del tiempo. Supongamos que los gastos de nómina semanales por persona son de 400 dólares para el grado 1, 600 dólares para el grado 2, 800 dólares para grado 3, y $1000 para el grado 4. Estamos interesados en calcular los gastos semanales promedio por empleado.</p>
 </div>
-<p>Aplicando el resultado en la Definición <a href="cmtd.html#def:costesestacionarios">2.26</a>, comprobemos que el proceso es irreducible y procedamos a aplicar la fórmula correspondiente, si es el caso.</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<p>Aplicando el resultado en la Definición <a href="cmtd.html#def:costesestacionarios">2.23</a>, comprobemos que el proceso es irreducible y procedamos a aplicar la fórmula correspondiente, si es el caso.</p>
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ¿el proceso es irreducible?</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">planificacion</span><span class="op">)</span></code></pre></div>
 <pre><code>## planificacion  Markov chain that is composed by: 
@@ -1649,7 +1658,7 @@ Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &amp;\Rightarrow&amp; \\
 ## NONE 
 ## The Markov chain is irreducible 
 ## The absorbing states are: NONE</code></pre>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Vector de costes</span>
 <span class="va">costes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">600</span>, <span class="fl">800</span>, <span class="fl">1000</span><span class="op">)</span>
 <span class="co"># distribución estado estacionario</span>
@@ -1677,7 +1686,7 @@ p2=\left(\begin{matrix}
 \end{matrix}
 \right)\]</span></p>
 <p>Definimos primero los procesos para la librería <code>markovchain</code> a partir de las probabilidades de transición.</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">estados</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"vocal"</span>,<span class="st">"consonante"</span><span class="op">)</span>
 <span class="co"># matriz de transición idioma1</span>
 <span class="va">p1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.51</span>,<span class="fl">0.49</span>,<span class="fl">0.9</span>,<span class="fl">0.1</span><span class="op">)</span>,byrow <span class="op">=</span> <span class="cn">TRUE</span>,ncol<span class="op">=</span><span class="fl">2</span>,dimnames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">estados</span>,<span class="va">estados</span><span class="op">)</span><span class="op">)</span>
@@ -1695,7 +1704,7 @@ p2=\left(\begin{matrix}
 ## 2      vocal consonante 0.49
 ## 3 consonante      vocal 0.90
 ## 4 consonante consonante 0.10</code></pre>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="va">idioma2</span>,<span class="st">"data.frame"</span><span class="op">)</span></code></pre></div>
 <pre><code>##           t0         t1 prob
 ## 1      vocal      vocal 0.25
@@ -1703,10 +1712,10 @@ p2=\left(\begin{matrix}
 ## 3 consonante      vocal 0.30
 ## 4 consonante consonante 0.70</code></pre>
 <p>Verificamos que todos sus estados son recurrentes y la cadena es irreducible.</p>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Descripción idioma1\n"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Descripción idioma1</code></pre>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
 <pre><code>## idioma1  Markov chain that is composed by: 
 ## Closed classes: 
@@ -1717,11 +1726,11 @@ p2=\left(\begin{matrix}
 ## NONE 
 ## The Markov chain is irreducible 
 ## The absorbing states are: NONE</code></pre>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n Descripción idioma2\n"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Descripción idioma2</code></pre>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span></code></pre></div>
 <pre><code>## idioma2  Markov chain that is composed by: 
 ## Closed classes: 
@@ -1737,31 +1746,31 @@ p2=\left(\begin{matrix}
 <li>En cada idioma, ¿cuál es la probabilidad de que si un texto empieza por vocal, el siguiente carácter sea consonante?</li>
 </ol>
 <p>Calculamos pues, la distribución de los estados del sistema partiendo de una vocal, manualmente y con la función <code><a href="https://rdrr.io/pkg/markovchain/man/transitionProbability.html">transitionProbability()</a></code> o con <code><a href="https://rdrr.io/pkg/markovchain/man/conditionalDistribution.html">conditionalDistribution()</a></code>, que nos da la distribución condicional partiendo de un estado:</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#determinamos el estado inicial</span>
 <span class="va">ini</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span>
 <span class="co"># y manualmente evaluamos los productos</span>
 <span class="va">final1</span><span class="op">=</span><span class="va">ini</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">p1</span>; <span class="va">final1</span></code></pre></div>
 <pre><code>##      vocal consonante
 ## [1,]  0.51       0.49</code></pre>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">final2</span><span class="op">=</span><span class="va">ini</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">p2</span>; <span class="va">final2</span></code></pre></div>
 <pre><code>##      vocal consonante
 ## [1,]  0.25       0.75</code></pre>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># o extraemos la distribución condicional partiendo del estado inicial "vocal":</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/conditionalDistribution.html">conditionalDistribution</a></span><span class="op">(</span><span class="va">idioma1</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
 <pre><code>##      vocal consonante 
 ##       0.51       0.49</code></pre>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/conditionalDistribution.html">conditionalDistribution</a></span><span class="op">(</span><span class="va">idioma2</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
 <pre><code>##      vocal consonante 
 ##       0.25       0.75</code></pre>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># o usamos la función de la librería markovchain</span>
 <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/transitionProbability.html">transitionProbability</a></span><span class="op">(</span><span class="va">idioma1</span>,t0<span class="op">=</span><span class="st">"vocal"</span>,t1<span class="op">=</span><span class="st">"consonante"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.49</code></pre>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/transitionProbability.html">transitionProbability</a></span><span class="op">(</span><span class="va">idioma2</span>,t0<span class="op">=</span><span class="st">"vocal"</span>,t1<span class="op">=</span><span class="st">"consonante"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.75</code></pre>
 <p>Resulta que en el idioma1 la probabilidad de que si un texto empieza por vocal el siguiente carácter sea consonante es de 0.49 y en el idioma2 de 0.75.</p>
@@ -1769,118 +1778,160 @@ p2=\left(\begin{matrix}
 <li>En cada idioma, ¿cuál es la probabilidad de que si un texto empieza por vocal, tras contar 10 caracteres más, encontremos una consonante?</li>
 </ol>
 <p>Utilizamos el resultado que se mostró en la Ecuación <a href="cmtd.html#eq:matriznpasos">(2.5)</a> para calcular la matriz de transición de <span class="math inline">\(n\)</span> pasos.</p>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ini</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span>
 <span class="va">final1.10</span> <span class="op">=</span> <span class="va">ini</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">p1</span><span class="op">^</span><span class="fl">10</span>; <span class="va">final1.10</span></code></pre></div>
 <pre><code>##            vocal   consonante
 ## [1,] 0.001190424 0.0007979227</code></pre>
-<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">final2.10</span> <span class="op">=</span> <span class="va">ini</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">p2</span><span class="op">^</span><span class="fl">10</span>; <span class="va">final2.10</span></code></pre></div>
 <pre><code>##             vocal consonante
 ## [1,] 9.536743e-07 0.05631351</code></pre>
 <p>Las probabilidades ahora se reducen drásticamente, y en el idioma1 resulta de 0.0008, y en el idioma2 de 0.0563.</p>
 <ol start="3" style="list-style-type: decimal">
+<li>En cada idioma, en un texto de 1000 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y consonantes?</li>
+</ol>
+<p>Nos pregunta por el número de visitas o tiempo de ocupación de cada uno de los estados en un periodo de duración 1000. Calculamos pues la matriz de tiempos de ocupación hasta el instante <span class="math inline">\(n=1000\)</span> con la Ecuación <a href="cmtd.html#eq:tposocupa">(2.7)</a>, y para la que utilizamos la función <code>mocupa.proceso()</code> que definimos en la Sección <a href="tiemposocupa-sec">Tiempos de ocupación</a>.</p>
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span><span class="op">=</span><span class="fl">1000</span>
+<span class="va">mocupa1</span><span class="op">=</span><span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">idioma1</span>,<span class="va">n</span><span class="op">)</span>;<span class="va">mocupa1</span></code></pre></div>
+<pre><code>##                vocal consonante
+## vocal       2.040816   1.960784
+## consonante 10.000000   1.111111</code></pre>
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mocupa2</span><span class="op">=</span><span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">idioma2</span>,<span class="va">n</span><span class="op">)</span>;<span class="va">mocupa2</span></code></pre></div>
+<pre><code>##               vocal consonante
+## vocal      1.333333   4.000000
+## consonante 1.428571   3.333333</code></pre>
+<p>Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar, en 1000 caracteres, 648 vocales y 353 consonantes. En el idioma2, el número de vocales esperadas es de 287 y 714 consonantes.</p>
+<ol start="4" style="list-style-type: decimal">
 <li>¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?</li>
 </ol>
-<p>Nos están preguntando por el tiempo medio de primer paso. Resolvemos con la función <code><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime()</a></code>.</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
+<p>Nos están preguntando por el tiempo medio de primer paso por una vocal, partiendo de una consonante. Resolvemos con la función <code><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime()</a></code>.</p>
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># todos los tiempos de primer paso</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
 <pre><code>##               vocal consonante
 ## vocal      0.000000   2.040816
 ## consonante 1.111111   0.000000</code></pre>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma1</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># tiempo de primer paso por una vocal</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma1</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
 <pre><code>## consonante 
 ##   1.111111</code></pre>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span></code></pre></div>
 <pre><code>##               vocal consonante
 ## vocal      0.000000   1.333333
 ## consonante 3.333333   0.000000</code></pre>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma2</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
 <pre><code>## consonante 
 ##   3.333333</code></pre>
 <p>Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1.1, y en el idioma2 de 3.3 (tres veces más).</p>
-<ol start="4" style="list-style-type: decimal">
+<ol start="5" style="list-style-type: decimal">
+<li>En un texto que se inicia con una vocal, ¿con qué probabilidad encontraremos la primera consonante en los siguientes 3 caracteres? Compara los resultados para los dos idiomas.</li>
+</ol>
+<p>Nos preguntan por la probabilidad de primer paso por el estado “consonante” partiendo de una “vocal” transcurridos tres caracteres. Utilizamos la función <code><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple()</a></code> de la librería <code>markovchain</code>.</p>
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">n</span><span class="op">=</span><span class="fl">3</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">idioma1</span>,state<span class="op">=</span><span class="st">"vocal"</span>,set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"consonante"</span><span class="op">)</span>,n<span class="op">=</span><span class="va">n</span><span class="op">)</span></code></pre></div>
+<pre><code>##        set
+## 1 0.490000
+## 2 0.249900
+## 3 0.127449</code></pre>
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">idioma2</span>,state<span class="op">=</span><span class="st">"vocal"</span>,set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"consonante"</span><span class="op">)</span>,n<span class="op">=</span><span class="va">n</span><span class="op">)</span></code></pre></div>
+<pre><code>##        set
+## 1 0.750000
+## 2 0.187500
+## 3 0.046875</code></pre>
+<p>Así, tenemos que en el idioma1 la probabilidad de que la primera consonante que encontremos esté tres caracteres después de la vocal de inicio es de 0.127, mientras que esta probabilidad en el idioma2 es sólo de 0.047 (pues es muy probable que se encuentre a continuación de la vocal en <span class="math inline">\(n=1\)</span>, con probabilidad 0.75).</p>
+<ol start="6" style="list-style-type: decimal">
 <li>A partir de una consonante, ¿cuántos caracteres, por término medio, tardamos en encontrar otra consonante en cada idioma?</li>
 </ol>
-<p>Nos están pidiendo el tiempo medio de recurrencia, que calculamos con la función <code><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime()</a></code>.</p>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<p>Nos están pidiendo el tiempo medio de recurrencia, esto es, volver a encontrar otra consonante si partimos de una consonante, que calculamos con la función <code><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime()</a></code>.</p>
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
 <pre><code>##      vocal consonante 
 ##   1.544444   2.836735</code></pre>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span></code></pre></div>
 <pre><code>##      vocal consonante 
 ##        3.5        1.4</code></pre>
 <p>Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres (2.84) hasta encontrar otra consonante, mientras que en el idioma2 sólo 1.4 por término medio.</p>
-<ol start="5" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>¿Qué proporción de vocales y consonantes hay en cada idioma?</li>
 </ol>
-<p>Recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles. La calculamos con la función <code><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates()</a></code>.</p>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
+<p>Recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles. Sabemos que cuando una CMTD es irreducible y aperiódica, esta distribución es única. Que es irreducible ya lo comprobamos anteriormente; verifiquemos pues que es aperiódica, esto es, que su periodo es 1, con la función <code><a href="https://rdrr.io/pkg/markovchain/man/structuralAnalysis.html">period()</a></code>.</p>
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/structuralAnalysis.html">period</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/structuralAnalysis.html">period</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Tenemos entonces que ambos procesos son aperiódicos (periodo <span class="math inline">\(d=1\)</span>), esto es, siempre es posible volver a cualquier estado en una única transición.</p>
+<p>La distribución estacionaria la calculamos a continuación con la función <code><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates()</a></code>.</p>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pi1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span>; <span class="va">pi1</span></code></pre></div>
 <pre><code>##         vocal consonante
 ## [1,] 0.647482   0.352518</code></pre>
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pi2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/steadyStates.html">steadyStates</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span>; <span class="va">pi2</span></code></pre></div>
 <pre><code>##          vocal consonante
 ## [1,] 0.2857143  0.7142857</code></pre>
-<p>Así pues, tenemos que en el idioma1 el 65% de los caracteres en un texto son vocales, mientras que en el idioma2 sólo un 29%, y la supremacía es de las consonantes, con un 71.4%.</p>
-<ol start="6" style="list-style-type: decimal">
-<li>Simula un texto de 1000 caracteres para cada idioma, empezando por una vocal y estima con esas simulaciones las probabilidades de transición. Compara los resultados con las matrices iniciales.</li>
+<p>Así pues, tenemos que en el idioma1 el 65% de los caracteres en un texto son vocales, que predominan sobre las consonantes, mientras que en el idioma2 sólo un 29%, y la supremacía es de las consonantes, con un 71.4%.</p>
+<p>Vamos a comprobar, además, que la distribución estacionaria verifica la ecuación de balance o del estado estacionario que se muestra en la Ecuación <a href="cmtd.html#eq:ecuee">(2.10)</a>.</p>
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ecuación de balance para la d.estacionaria del idioma1</span>
+<span class="va">pi1</span></code></pre></div>
+<pre><code>##         vocal consonante
+## [1,] 0.647482   0.352518</code></pre>
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># es igual a su producto por la matriz de transición</span>
+<span class="va">pi1</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">p1</span></code></pre></div>
+<pre><code>##         vocal consonante
+## [1,] 0.647482   0.352518</code></pre>
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># y sus probabilidades suman 1</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pi1</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Con la distribución estacionaria comprobamos que se verifica la Ecuación <a href="cmtd.html#eq:et-piestacionaria">(2.11)</a> que nos permite calcular los tiempos medios de recurrencia con el inverso de las probabilidades estacionarias. Lo hacemos sólo con el idioma1.</p>
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">1</span><span class="op">/</span><span class="va">pi1</span></code></pre></div>
+<pre><code>##         vocal consonante
+## [1,] 1.544444   2.836735</code></pre>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
+<pre><code>##      vocal consonante 
+##   1.544444   2.836735</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Simula un texto de 1000 caracteres para el idioma1, empezando por una vocal y estima con esas simulaciones las probabilidades de transición. Compara los resultados con la matriz inicial.</li>
 </ol>
 <p>Para simular una CMTD recurrimos a la función <code><a href="https://rdrr.io/pkg/markovchain/man/rmarkovchain.html">rmarkovchain()</a></code>.</p>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>
 <span class="va">n</span><span class="op">=</span><span class="fl">1000</span>
-<span class="va">idioma1.sim</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/rmarkovchain.html">rmarkovchain</a></span><span class="op">(</span><span class="va">n</span>,<span class="va">idioma1</span>,t0<span class="op">=</span><span class="st">"vocal"</span>,include.t0<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">idioma2.sim</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/rmarkovchain.html">rmarkovchain</a></span><span class="op">(</span><span class="va">n</span>,<span class="va">idioma2</span>,t0<span class="op">=</span><span class="st">"vocal"</span>,include.t0<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Para estimar las probabilidades de transición con ellas vamos a seguir dos procedimientos: el artesanal a través de una función que construiremos nosotros para calcular las frecuencias de salto entre vocales y consonantes, y con una función en la librería <code>markovchain</code> que específicamente nos proporciona esa estimación, y que es <code><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">markovchainFit()</a></code>.</p>
-<p>Construyamos en primer lugar una función que nos proporcione las frecuencias de salto entre vocales y consonantes, a través de las cuales vamos a estimar las probabilidades de transición, con el fin de comprender bien cómo funcionaría la estimación más simple.</p>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">probtransi.texto</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">texto</span><span class="op">)</span><span class="op">{</span>
- <span class="co"># calcula frecuencias de salto vocal/consonante en un texto</span>
-  <span class="co"># el input (texto) es una sucesión de vocales/consonantes</span>
-<span class="va">n</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">texto</span><span class="op">)</span>
-<span class="va">n.estados</span><span class="op">=</span><span class="fl">2</span>
-<span class="va">estados</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"vocal"</span>,<span class="st">"consonante"</span><span class="op">)</span>
-<span class="co"># definimos la matriz de probs. transición</span>
-<span class="va">pmat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,ncol<span class="op">=</span><span class="va">n.estados</span>,nrow<span class="op">=</span><span class="va">n.estados</span>,dimnames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">estados</span>,<span class="va">estados</span><span class="op">)</span><span class="op">)</span>
-<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-  <span class="kw">if</span><span class="op">(</span><span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="st">"vocal"</span> <span class="op">&amp;</span> <span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">==</span><span class="st">"vocal"</span><span class="op">)</span>
-    <span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span>
-  <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="st">"vocal"</span> <span class="op">&amp;</span> <span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">==</span><span class="st">"consonante"</span><span class="op">)</span>
-    <span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span>  
-  <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="st">"consonante"</span> <span class="op">&amp;</span> <span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">==</span><span class="st">"vocal"</span><span class="op">)</span>
-    <span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span>
-  <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="st">"consonante"</span> <span class="op">&amp;</span> <span class="va">texto</span><span class="op">[</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">==</span><span class="st">"consonante"</span><span class="op">)</span>
-    <span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span>
-<span class="op">}</span>
-<span class="co"># una vez tenemos las frecuencias de salto, las convertimos en probabilidades</span>
-<span class="co"># las probabilidades en cada fila han de sumar 1</span>
-<span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">=</span><span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>
-<span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">=</span><span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pmat</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">pmat</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-<p>Y utilizamos esta función para estimar las probabilidades de transición:</p>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">probtransi.texto</span><span class="op">(</span><span class="va">idioma1.sim</span><span class="op">)</span></code></pre></div>
-<pre><code>##                vocal consonante
-## vocal      0.5215385  0.4784615
-## consonante 0.8885714  0.1114286</code></pre>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">probtransi.texto</span><span class="op">(</span><span class="va">idioma2.sim</span><span class="op">)</span></code></pre></div>
-<pre><code>##                vocal consonante
-## vocal      0.2461538  0.7538462
-## consonante 0.2648649  0.7351351</code></pre>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n Estimación de p1 \n"</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Estimación de p1</code></pre>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">markovchainFit</a></span><span class="op">(</span><span class="va">idioma1.sim</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>;<span class="va">p1</span></code></pre></div>
+<span class="va">idioma1.sim</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/rmarkovchain.html">rmarkovchain</a></span><span class="op">(</span><span class="va">n</span>,<span class="va">idioma1</span>,t0<span class="op">=</span><span class="st">"vocal"</span>,include.t0<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Para estimar las probabilidades de transición con los textos simulados vamos a utilizar la librería <code>markovchain</code> que específicamente nos proporciona las frecuencias de salto, así como una estimación (junto con su error), basada en dichas frecuencias, bajo diversos procedimientos de estimación.</p>
+<p>La función <code><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">createSequenceMatrix()</a></code> nos proporciona una matriz de frecuencias (absolutas o relativas) de las transiciones entre todos los estados posibles del sistema</p>
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># frecuencias de transiciones o saltos</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">createSequenceMatrix</a></span><span class="op">(</span><span class="va">idioma1.sim</span><span class="op">)</span></code></pre></div>
+<pre><code>##            consonante vocal
+## consonante         39   311
+## vocal             311   339</code></pre>
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># frecuencias relativas de transiciones o saltos</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">createSequenceMatrix</a></span><span class="op">(</span><span class="va">idioma1.sim</span>,toRowProbs <span class="op">=</span> <span class="cn">TRUE</span> <span class="op">)</span></code></pre></div>
+<pre><code>##            consonante     vocal
+## consonante  0.1114286 0.8885714
+## vocal       0.4784615 0.5215385</code></pre>
+<p>Utilizamos ahora la función <code><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">markovchainFit()</a></code> que, a partir de datos simulados en estado estacionario, estima las probabilidades de transición. Podemos usar varios métodos de optimización alternativos, si bien por defecto se usa la estimación máximo-verosímil, <code>method="mle"</code>. Las alternativas son EMV con suavizado de Laplace (“laplace”), bootstrap (“bootstrap”) y máximo a posteriori (“map”).</p>
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Estimación de p1</span>
+<span class="va">p1.sim</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">markovchainFit</a></span><span class="op">(</span><span class="va">idioma1.sim</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">p1.sim</span>;<span class="va">p1</span></code></pre></div>
 <pre><code>## $estimate
 ## MLE Fit 
 ##  A  2 - dimensional discrete Markov Chain defined by the following states: 
@@ -1914,67 +1965,114 @@ p2=\left(\begin{matrix}
 <pre><code>##            vocal consonante
 ## vocal       0.51       0.49
 ## consonante  0.90       0.10</code></pre>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n Estimación de p2 \n"</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-##  Estimación de p2</code></pre>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/markovchainFit.html">markovchainFit</a></span><span class="op">(</span><span class="va">idioma2.sim</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>;<span class="va">p2</span></code></pre></div>
-<pre><code>## $estimate
-## MLE Fit 
-##  A  2 - dimensional discrete Markov Chain defined by the following states: 
-##  consonante, vocal 
-##  The transition matrix  (by rows)  is defined as follows: 
-##            consonante     vocal
-## consonante  0.7351351 0.2648649
-## vocal       0.7538462 0.2461538
-## 
-## 
-## $standardError
-##            consonante      vocal
-## consonante 0.03151866 0.01891892
-## vocal      0.05384615 0.03076923
-## 
-## $confidenceLevel
-## [1] 0.95
-## 
-## $lowerEndpointMatrix
-##            consonante     vocal
-## consonante  0.6733597 0.2277845
-## vocal       0.6483096 0.1858472
-## 
-## $upperEndpointMatrix
-##            consonante     vocal
-## consonante  0.7969106 0.3019453
-## vocal       0.8593827 0.3064604
-## 
-## $logLikelihood
-## [1] -572.8805</code></pre>
-<pre><code>##            vocal consonante
-## vocal       0.25       0.75
-## consonante  0.30       0.70</code></pre>
-<ol style="list-style-type: decimal">
-<li>Por cada 100 caracteres en un texto de cada idioma, ¿cuántos son vocales?</li>
+<p>Esta función nos proporciona, además de la estimación de las probabilidades de transición, una estimación del error e intervalos de confianza.</p>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">estimate</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="va">p1.sim</span><span class="op">$</span><span class="va">estimate</span>,<span class="st">"data.frame"</span><span class="op">)</span>
+<span class="va">error</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">p1.sim</span><span class="op">$</span><span class="va">standardError</span><span class="op">)</span>
+<span class="va">ic.low</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">p1.sim</span><span class="op">$</span><span class="va">lowerEndpointMatrix</span><span class="op">)</span>
+<span class="va">ic.up</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">p1.sim</span><span class="op">$</span><span class="va">upperEndpointMatrix</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">estimate</span>,<span class="va">error</span>,<span class="va">ic.low</span>,<span class="va">ic.up</span><span class="op">)</span></code></pre></div>
+<pre><code>##           t0         t1      prob      error     ic.low     ic.up
+## 1 consonante consonante 0.1114286 0.01784285 0.07645722 0.1463999
+## 2 consonante      vocal 0.8885714 0.02713106 0.42528562 0.5316375
+## 3      vocal consonante 0.4784615 0.05038626 0.78981615 0.9873267
+## 4      vocal      vocal 0.5215385 0.02832608 0.46602035 0.5770566</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Supón que accedes a un texto que transformas en una secuencia de vocales y consonantes (disponible para descarga en <a href="%22https://raw.githubusercontent.com/UMH1477/data/f4e4a62533e24a74be27b8984f9fc23eb1b1ff49/textos.csv%22">Github</a>). Verifica, con dicha secuencia que proviene de una CMTD.</li>
 </ol>
-<p>Nos están preguntando por los tiempos de ocupación de las vocales en 100 transiciones. Aplicamos la Ecuación <a href="cmtd.html#eq:tposocupa">(2.7)</a> para calcular la matriz de ocupación tras 100 transiciones, y la función que definimos en la Sección <a href="tiemposocupa-sec">Tiempos de ocupación</a>. Para ello hemos de definir como CMTD ambos procesos, con la librería <code>markovchain</code>.</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idioma1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/methods/new.html">new</a></span><span class="op">(</span><span class="st">"markovchain"</span>,states<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span>,byrow<span class="op">=</span><span class="cn">TRUE</span>,transitionMatrix<span class="op">=</span><span class="va">p1</span>,name<span class="op">=</span><span class="st">"idioma1"</span><span class="op">)</span>
-<span class="va">idioma2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/methods/new.html">new</a></span><span class="op">(</span><span class="st">"markovchain"</span>,states<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">p2</span><span class="op">)</span>,byrow<span class="op">=</span><span class="cn">TRUE</span>,transitionMatrix<span class="op">=</span><span class="va">p2</span>,name<span class="op">=</span><span class="st">"idioma2"</span><span class="op">)</span>
-<span class="co"># número de transiciones (caracteres)</span>
-<span class="va">n</span><span class="op">=</span><span class="fl">100</span>
-<span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">idioma1</span>,<span class="fl">100</span><span class="op">)</span></code></pre></div>
-<pre><code>##               vocal consonante
-## vocal      2.040816   1.960784
-## consonante 9.999761   1.111111</code></pre>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">mocupa.proceso</span><span class="op">(</span><span class="va">idioma2</span>,<span class="fl">100</span><span class="op">)</span></code></pre></div>
-<pre><code>##               vocal consonante
-## vocal      1.333333   4.000000
-## consonante 1.428571   3.333333</code></pre>
-<p>Así pues, en el idioma 1, si el texto arranca en una vocal ## Ejercicios {#ejer-u2}</p>
-<div id="básicos-1" class="section level3" number="2.6.1">
+<p>Para ello podemos utilizar la función <code><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">verifyMarkovProperty()</a></code> que resuelve un test de hipótesis basado en la Chi-cuadrado, sobre el cumplimiento de la propiedad de Markov con los datos proporcionados. Obtener un p-valor significativo significa que rechazaríamos esa propiedad y por lo tanto rechazaríamos que se trata de una CMTD.</p>
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># leemos los datos de Github</span>
+<span class="va">texto</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/UMH1477/data/f4e4a62533e24a74be27b8984f9fc23eb1b1ff49/textos.csv"</span><span class="op">)</span>
+<span class="co"># visualizamos el formato de los datos, con 2 columnas de texto</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">texto</span><span class="op">)</span></code></pre></div>
+<pre><code>##       texto1     texto2
+## 1      vocal consonante
+## 2      vocal consonante
+## 3 consonante consonante
+## 4      vocal      vocal
+## 5 consonante consonante
+## 6 consonante consonante</code></pre>
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># y ejecutamos el test sobre una de las columnas de texto</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">verifyMarkovProperty</a></span><span class="op">(</span><span class="va">texto</span><span class="op">$</span><span class="va">texto1</span><span class="op">)</span></code></pre></div>
+<pre><code>## Testing markovianity property on given data sequence
+## Chi - square statistic is: 2.056533 
+## Degrees of freedom are: 5 
+## And corresponding p-value is: 0.8412687</code></pre>
+<p>El p-valor es de 0.84, que no permite rechazar la propiedad de Markov.</p>
+<p>Por último, para testar la estacionariedad, esto es, si <span class="math inline">\(p_{ij}(n)=p_{ij}\)</span> para cualquier <span class="math inline">\(n\)</span>, tenemos la función <code><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">assessStationarity()</a></code>. Obtener un p-valor significativo significa que rechazaríamos esa propiedad y por lo tanto rechazaríamos que se trata de una CMTD.</p>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">assessStationarity</a></span><span class="op">(</span><span class="va">texto</span><span class="op">$</span><span class="va">texto1</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## Warning in assessStationarity(texto$texto1, 5): The accuracy of the statistical inference functions
+## has been questioned. It will be thoroughly investigated in future versions of the package.</code></pre>
+<pre><code>## Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+
+## Warning in chisq.test(mat): Chi-squared approximation may be incorrect</code></pre>
+<pre><code>## The assessStationarity test statistic is:  0.0002538706 
+## The Chi-Square d.f. are:  8 
+## The p-value is:  1</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Con los datos utilizados en el apartado anterior, verifica si alguno de los textos que se proporcionan en las columnas de la base de datos, se podría asimilar como perteneciente a alguno de los idiomas presentados, idioma1 o idioma2.</li>
+</ol>
+<p>Para contrastar la similitud entre una secuencia y un proceso teórico que tenemos definido podemos utilizar la función <code><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">verifyEmpiricalToTheoretical()</a></code>. Veamos cómo funciona con los procesos idioma1 e idioma2.</p>
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># comparamos con el idioma1</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">verifyEmpiricalToTheoretical</a></span><span class="op">(</span><span class="va">texto</span><span class="op">$</span><span class="va">texto1</span>,<span class="va">idioma1</span><span class="op">)</span></code></pre></div>
+<pre><code>## Testing whether the
+##            vocal consonante
+## vocal      32800      31854
+## consonante 31854       3491
+## transition matrix is compatible with
+##            vocal consonante
+## vocal       0.51       0.49
+## consonante  0.90       0.10
+## [1] "theoretical transition matrix"
+## ChiSq statistic is 2.460873 d.o.f are 2 corresponding p-value is 0.292165</code></pre>
+<pre><code>## $statistic
+##    vocal 
+## 2.460873 
+## 
+## $dof
+## [1] 2
+## 
+## $pvalue
+##    vocal 
+## 0.292165</code></pre>
+<p>El p-valor resultante es 0.29, con lo cual no se puede rechazar la hipótesis nula de que la secuencia dada es compatible con el idioma1. Podría ser pues, un texto de dicho idioma</p>
+<p>Veamos ahora su compatibilidad con el idioma2:</p>
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># comparamos con el idioma2</span>
+<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/statisticalTests.html">verifyEmpiricalToTheoretical</a></span><span class="op">(</span><span class="va">texto</span><span class="op">$</span><span class="va">texto1</span>,<span class="va">idioma2</span><span class="op">)</span></code></pre></div>
+<pre><code>## Testing whether the
+##            vocal consonante
+## vocal      32800      31854
+## consonante 31854       3491
+## transition matrix is compatible with
+##            vocal consonante
+## vocal       0.25       0.75
+## consonante  0.30       0.70
+## [1] "theoretical transition matrix"
+## ChiSq statistic is 76057.57 d.o.f are 2 corresponding p-value is 0</code></pre>
+<pre><code>## $statistic
+##    vocal 
+## 76057.57 
+## 
+## $dof
+## [1] 2
+## 
+## $pvalue
+## vocal 
+##     0</code></pre>
+<p>En este caso el p-valor es cero, por lo que rechazamos la compatibilidad y claramente aceptamos que este texto no proviene del idioma2.</p>
+</div>
+<div id="ejer-u2" class="section level2" number="2.7">
+<h2>
+<span class="header-section-number">2.7</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejer-u2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="básicos-1" class="section level3" number="2.7.1">
 <h3>
-<span class="header-section-number">2.6.1</span> Básicos<a class="anchor" aria-label="anchor" href="#b%C3%A1sicos-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.1</span> Básicos<a class="anchor" aria-label="anchor" href="#b%C3%A1sicos-1"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Ejercicio B2.1.</strong> Para el proceso <a href="cmtd.html#meteo">Meteorologia</a> se desea conocer cuál es el tiempo estimado para tener un día lluvioso si hoy tenemos un día soleado.</p>
 <p><strong>Ejercicio B2.2.</strong> Para el proceso <a href="cmtd.html#mercadovalores">Mercado de valores</a> se desea conocer cuál es el tiempo estimado en conseguir que las acciones alcancen los valores <span class="math inline">\(8, 9, 10\)</span> partiendo de un valor inicial de <span class="math inline">\(5\)</span>.</p>
@@ -2000,9 +2098,9 @@ p2=\left(\begin{matrix}
 0.15 &amp; 0.25 &amp; 0.35 &amp; 0.25 
 \end{pmatrix}\]</span></p>
 </div>
-<div id="avanzados-1" class="section level3" number="2.6.2">
+<div id="avanzados-1" class="section level3" number="2.7.2">
 <h3>
-<span class="header-section-number">2.6.2</span> Avanzados<a class="anchor" aria-label="anchor" href="#avanzados-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7.2</span> Avanzados<a class="anchor" aria-label="anchor" href="#avanzados-1"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Ejercicio A2.1.</strong> Los artículos llegan a un taller mecánico de forma determinista a un ritmo de uno por minuto. Cada artículo se comprueba antes de cargarlo en la máquina. Un artículo es adecuado con probabilidad <span class="math inline">\(p\)</span> y defectuoso con una probabilidad <span class="math inline">\(1-p\)</span>. Si un artículo es defectuoso, se descarta; en caso contrario, se carga en la máquina. La máquina tarda exactamente 1 minuto en procesar el artículo, tras lo cual está lista para procesar el siguiente. Consideramos la variable aleatoria <span class="math inline">\(X_n\)</span> que toma el valor <span class="math inline">\(0\)</span> si la máquina está inactiva al principio del n-ésimo minuto y 1 si está iniciando el proceso.</p>
 <ol style="list-style-type: decimal">
@@ -2200,10 +2298,11 @@ p2=\left(\begin{matrix}
 </ul>
 </li>
 <li><a class="nav-link" href="#AsinCMTD"><span class="header-section-number">2.5</span> Comportamiento a largo plazo</a></li>
+<li><a class="nav-link" href="#estudio-de-caso"><span class="header-section-number">2.6</span> Estudio de caso</a></li>
 <li>
-<a class="nav-link" href="#estudio-de-caso"><span class="header-section-number">2.6</span> Estudio de caso</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#b%C3%A1sicos-1"><span class="header-section-number">2.6.1</span> Básicos</a></li>
-<li><a class="nav-link" href="#avanzados-1"><span class="header-section-number">2.6.2</span> Avanzados</a></li>
+<a class="nav-link" href="#ejer-u2"><span class="header-section-number">2.7</span> Ejercicios</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#b%C3%A1sicos-1"><span class="header-section-number">2.7.1</span> Básicos</a></li>
+<li><a class="nav-link" href="#avanzados-1"><span class="header-section-number">2.7.2</span> Avanzados</a></li>
 </ul>
 </li>
 </ul>
@@ -2222,7 +2321,7 @@ p2=\left(\begin{matrix}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-03.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

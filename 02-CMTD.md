@@ -4,21 +4,26 @@ En esta unidad trabajamos con un tipo especial de proceso estocástico de tiempo
 
 ## Definiciones
 
+::: {.yellowbox data-latex=""}
 ::: {#CMTC .definition}
-Un proceso estocástico $\{X(t), t \in \mathbb{N}\}$ con espacio de estados de tipo discreto, $S$, se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados $i$ y $j$ de $S$ tenemos que:
+Un proceso estocástico $\{X(t), t \in \mathbb{N}^*\}$, con $\mathbb{N}^*$ el conjunto de todos los números naturales incluido el cero, y con espacio de estados de tipo discreto, $S$, se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados $i$ y $j$ de $S$ se verifica la propiedad de Markov, esto es, que la probabilidad de que el proceso en un instante $t+1$ se encuentre en un estado $j$, dado su comportamiento previo, sólo depende del estado en el que el sistema se encontraba justamente en el instante anterior $t$, esto es, $X(t)=i$, y no del estado del proceso en los instantes anteriores $t-1, t-2,...,0$:
 
+```{=tex}
 \begin{eqnarray}
-&Pr(X(t+1) = j \| X(t) = i, X(t-1),...,X(0)) = \\
-&= Pr(X(t+1) = j \| X(t) = i),
+&Pr(X(t+1) = j | X(t) = i, X(t-1),...,X(0)) = \nonumber \\
+&= Pr(X(t+1) = j | X(t) = i),
 (\#eq:cmtd)
 \end{eqnarray}
+```
 
-es decir, la probabilidad de que el proceso en un instante $t+1$ se encuentre en un estado $j$, dada toda la evolución del proceso a lo largo del tiempo, sólo depende del estado en el que el sistema se encuentrara justamente en el instante anterior $t$, esto es, $X(t)=i$, y y no del estado del proceso en los instantes anteriores $t-1, t-2,...,0$.
 
-En ocasiones utilizaremos la siguiente notación, $$X(n)=X_n, \qquad n \geq 0$$
+Utilizaremos indistintamente la siguiente notación:
+
+$$\{X(n), n \in \mathbb{N}^*\}\equiv \{X_n,  n \geq 0\}$$
+:::
 :::
 
-La probabilidad condicionada dada en \@ref(eq:cmtd) se denomina **probabilidad de transición de un paso** y se denota por $p_{ij}(t,t+1)$, y es la probabilidad de que, dado que el proceso en el instante $t$ está en el estado $i$, un instante más tarde, $t+1$ haya cambiado al estado $j$:
+La probabilidad condicionada dada en \@ref(eq:cmtd) se denomina **probabilidad de transición de un paso** y se denota por $p_{ij}(t,t+1)$, y es la probabilidad de que, dado que el proceso en el instante $t$ está en el estado $i$, un instante más tarde, $t+1$ haya cambiado al estado $j$: 
 
 $$p_{ij}(t,t+1)=Pr(X(t+1) = j | X(t) = i).$$
 
@@ -30,6 +35,7 @@ p_{ij}(t,t+n)=Pr(X(t+n) = j | X(t) = i).
 (\#eq:probtrans)
 \end{equation}
 ```
+
 Las probabilidades de transición así definidas cumplen que:
 
 ```{=tex}
@@ -47,6 +53,7 @@ Una $CMTD$ dada por $\{X(t), t \in \mathbb{N}\}$ es **homogénea** cuando tiene 
 p_{ij}(t, t+n) = p_{ij}(s, s+n).
 \end{equation*}
 ```
+
 :::
 :::
 
@@ -65,7 +72,11 @@ Pr[X(t)= k] =  \sum_{i \in S} p_{ik}(t) p_i(0),
 (\#eq:probtotal-cmtd)
 \end{equation}
 ```
-con $p_i(0) = Pr(X(0) = i)$ la probabilidad de que en el instante inicial el proceso se encuentre en el estado $i$. De hecho, el vector $$p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}$$ se denomina **distribución inicial de la cadena** e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.
+
+con $p_i(0) = Pr(X(0) = i)$ la probabilidad de que en el instante inicial el proceso se encuentre en el estado $i$. De hecho, el vector 
+
+$$p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}$$ 
+se denomina **distribución inicial de la cadena** e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.
 :::
 :::
 
@@ -91,17 +102,15 @@ p_{21}(n) & p_{22}(n) & ... & p_{2N}(n)\\
 p_{N1}(n) & p_{N2}(n) & ... & p_{NN}(n)
 \end{pmatrix}$$
 
-con
-
-```{=tex}
-\begin{eqnarray*}
+con \begin{eqnarray*}
 0 \leq p_{ij}(n) &\leq& 1 \\
 \sum_{j \in S} p_{ij}(n) &=& 1.
 \end{eqnarray*}
-```
+
 De forma genérica denotamos por $p(n)$ a la distribución del proceso en la n-ésima transición:
 
 $$p(n) = \{p_i(n)=Pr[X(n)=i], \ i \in S\}$$
+
 
 Cualquier $CMTD$ homogénea verifica la denominada **Ecuación de Chapman-Kolmogorov** que permite calcular la probabilidad de transición de un estado $i$ a un estado $j$ en $n$ pasos a través de todas las probabilidades de transición de $s$ y $n-s$ pasos, para cualquier $s<n$ y cualquier $i$ y $j$ en $S$:
 
@@ -111,9 +120,10 @@ p_{ij}(n) = \sum_{k \in S} p_{ik}(s) p_{kj}(n-s),
 (\#eq:ChapmanKol)
 \end{equation}
 ```
+
 ::: {.yellowbox data-latex=""}
 ::: {#p-npasos .definition}
-Haciendo uso de la ecuación \@ref(eq:ChapmanKol) se puede demostrar que la matriz de transición de $n$ pasos $P(n)$ se puede obtener como la potencia $n$ de la matriz de transición de un paso $P$, esto es,
+Haciendo uso de la ecuación \@ref(eq:ChapmanKol) se puede demostrar que la matriz de transición de $n$ pasos $P(n)$ se puede obtener como la potencia $n$ de la matriz de transición de un paso $P$, esto es, 
 
 ```{=tex}
 \begin{equation}
@@ -121,7 +131,8 @@ P(n) = P^n,
 (\#eq:matriznpasos)
 \end{equation}
 ```
-de modo que conociendo la distribución inicial del proceso $p(0)$ y la matriz de transición de un paso $P$, tenemos perfectamente identificada la distribución del proceso en cualquier momento:
+
+de modo que conociendo la distribución inicial del proceso $p(0)$ y la matriz de transición de un paso $P$, tenemos perfectamente identificada la distribución del proceso en cualquier momento: 
 
 ```{=tex}
 \begin{equation}
@@ -129,6 +140,7 @@ p(n) = p(0)P^n.
 (\#eq:distriproceso)
 \end{equation}
 ```
+
 :::
 :::
 
@@ -149,10 +161,12 @@ $$P =
 
 Planteamos resolver las cuestiones siguientes:
 
-(1). Queremos representar el proceso a través de un grafo.
+(1). Queremos representar el proceso a través de un grafo. 
 
 ::: {.whitebox data-latex=""}
-Para representar el proceso con `markovchain`, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica `new()` para generar un objeto del tipo `markovchain`: $$new("markovchain",states,byrow=TRUE,transitionMatrix)$$
+Para representar el proceso con `markovchain`, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica `new()` para generar un objeto del tipo `markovchain`:
+
+$$new("markovchain",states,byrow=TRUE,transitionMatrix)$$ 
 
 introduciendo el vector de estados en `states`, la matriz de transición en `transitionMatrix`, y especificando si dicha matriz se ha de leer por filas.
 
@@ -207,7 +221,7 @@ plot(proceso)
 -   RESPUESTA: Nos preguntan por la probabilidad de transición para pasar, en un solo paso, del estado $c$ (3) al estado $a$ (1), por lo que viene dada por la componente $p_{31}$ de la matriz de transición, es decir, 0.55.
 
 ::: {.whitebox data-latex=""}
-Para resolver el cálculo con el ordenador basta utilizar la función `transitionProbability()`, con los argumentos: `object` (la cadena de markov), `t0` (el estado en el instante inicial), `t1` (el estado en el instante final).
+Para resolver el cálculo con el ordenador basta utilizar la función  `transitionProbability()`, con los argumentos: `object` (la cadena de markov), `t0` (el estado en el instante inicial), `t1` (el estado en el instante final). 
 :::
 
 Así la pregunta (2) se responde con:
@@ -279,7 +293,8 @@ En base a la distribución del proceso tras $n=10$ pasos, apreciamos que lo más
 -   RESPUESTA: Para ver el comportamiento de un proceso después de que transcurran $n$ pasos habrá que simularlo durante $n$ instantes de tiempo. Puesto que buscamos una estimación de lo que va a ocurrir en ese momento, simularemos $nsim=100$ veces el proceso hasta el instante $n=10$, nos quedaremos con el estado en que se encuentra el proceso en ese instante $n$ y evaluaremos las probabilidades obtenidas para los tres estados $\{a,b,c\}$. Los resultados serán más próximos a la solución analítica, cuanto mayor sea el número de simulaciones (prueba a modificar $nsim$).
 
 ::: {.whitebox data-latex=""}
-Para simular una CMTD hasta una transición $n$ con la librería `markovchain` basta utilizar la función `rmarkovchain(n, proceso)`, donde proceso ha sido definido previamente con la función `new()`.
+Para simular una CMTD hasta una transición $n$ con la librería `markovchain`
+basta utilizar la función `rmarkovchain(n, proceso)`, donde proceso ha sido definido previamente con la función `new()`.
 :::
 
 
@@ -322,6 +337,7 @@ X_n - 1 + Y_n & \text{ si } X_n \neq 0
 \end{cases}
 \end{equation*}
 ```
+
 de forma que cada $X_n$ sólo dependerá de lo que haya ocurrido en el periodo inmediatamente anterior, luego $\{X_n, n \in \mathbb{N}\}$ es una $CMTD$, con probabilidades de transición dadas por:
 
 ```{=tex}
@@ -357,7 +373,8 @@ X_{n} =
 \end{cases}
 \end{equation*}
 ```
-de forma que la matriz de transicción viene dada por:
+
+de forma que la matriz de transicción viene dada por: 
 
 $$P = 
 \begin{pmatrix}
@@ -371,9 +388,7 @@ Sea $Y_n$ el número de máquinas en estado "On" al principio del día $n$, que 
 
 Calculemos la probabilidad de transición para un caso concreto: $Y_n = i = 1$ e $Y_{n+1} = j = 0$, que identifica una situación en la que una máquina está en funcionamiento y otra en paro el día $n$, pero al día siguiente ambas están paradas. Así, la máquina que está "Off" el día $n$ debe permanecer "Off" al día siguiente, y la máquina que está "On" debe cambiar a "Off" el día siguiente. Como las máquinas son independientes, la probabilidad de cambio de estado es:
 
-$$p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006$$
-
-Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:
+$$p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006$$ Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:
 
 $$P = 
 \begin{pmatrix}
@@ -449,6 +464,7 @@ X_{n} =
 \end{cases}
 \end{equation*}
 ```
+
 de forma que el proceso $\{X_n, n \in \mathbb{N}\}$ con espacio de estados $S = \{1, 2, 3\}$ se puede considerar como una $CMTD$, cuya matriz de transición se puede obtener de forma muy rápida como:
 
 $$P = 
@@ -535,6 +551,7 @@ X_n - D_n & \text{ si } X_n - D_n \geq 2\\
 \end{cases}
 \end{equation*}
 ```
+
 Necesariamente entonces, $X_{n+1} \geq X_n$ dado que $D_n \geq 0$.
 
 Se trata de una CMTD con espacio de estados $\{2, 3, 4, 5\}$, puesto que el estado del sistema en la semana $n+1$ sólo depende de su estado en la semana anterior $n$. Calculemos las probabilidades de transición.
@@ -714,7 +731,7 @@ plot(planificacion, vertex.color="steelblue",
 
 ### Mercado de valores {#mercadovalores}
 
-Las acciones ordinarias de la empresa Gadgets-R-Us se cotizan en el mercado de valores. El director financiero de Gadgets-R-Us compra y vende las acciones de su propia empresa para que el precio nunca baje de 2 dólares y nunca supera los 10 dólares. Para simplificar, suponemos que $X_n$, es el precio de las acciones al final del día $n$, y sólo toma valores enteros; es decir, el espacio de estados del proceso $\{X_n, n \in \mathbb{N}\}$ es $S = 2, 3,...,10$. Si denominamos $I_{n+1}$ al movimiento potencial del precio de las acciones en el día $n+1$ en ausencia de cualquier intervención del director financiero, entonces tenemos que:
+Las acciones ordinarias de la empresa Gadgets-R-Us se cotizan en el mercado de valores. El director financiero de Gadgets-R-Us compra y vende las acciones de su propia empresa para que el precio nunca baje de 2 dólares y nunca supere los 10 dólares (cuando esto ocurre, vende). Para simplificar, suponemos que $X_n$, es el precio de cada acción al final del día $n$, y sólo toma valores enteros; es decir, el espacio de estados del proceso $\{X_n, n \in \mathbb{N}\}$ es $S = 2, 3,...,10$. Si denominamos $I_{n+1}$ al movimiento potencial del precio de las acciones en el día $n+1$ en ausencia de cualquier intervención del director financiero, entonces tenemos que:
 
 ```{=tex}
 \begin{equation*}
@@ -726,28 +743,26 @@ X_n + I_{n+1} & \text{ si } 2 < X_n + I_{n+1} < 10\\
 \end{cases}
 \end{equation*}
 ```
-Un análisis continuado de los datos del pasado sugieren que los movimientos potenciales $\{I_n, n \geq 1\}$ son una secuencia de variables iid con función de masa de probabilidad dada por:
+
+Un análisis continuado de los datos del pasado sugiere que los movimientos potenciales $\{I_n, n \geq 1\}$ son una secuencia de variables iid con función de masa de probabilidad dada por:
 
 $$Pr(I_n = k) = 0.2, \quad k = -2, -1, 0, 1, 2.$$
 
-Esto implica que $\{X_n, n \in \mathbb{N}\}$ es una $CMTD$ con espacio de estados $S = \{2, 3,...,10\}$, donde las probabilidadees de transición se pueden obtener de forma sencilla. A modo de ejemplo presentamos los tres casos siguientes:
+Esto implica que $\{X_n, n \in \mathbb{N}\}$ es una $CMTD$ con espacio de estados $S = \{2, 3,...,10\}$, donde las probabilidades de transición se pueden obtener de forma sencilla. A modo de ejemplo presentamos los tres casos siguientes:
 
 $$\begin{array}{ll}
 Pr[X_{n+1} = 2 | X_n = 3] & = Pr[X_n + I_{n+1} \leq 2 | X_n = 3]\\
-& = Pr[I_{n+1} \leq -1]\\
-& = 0.4
+& = Pr[I_{n+1} \leq -1]= 0.4
 \end{array}$$
 
 $$\begin{array}{ll}
-Pr[X_{n+1} = 6 | X_n = 5] & = Pr[X_n + I_{n+1} = 6 | X_n = 3]\\
-& = Pr[I_{n+1} = 1]\\
-& = 0.2
+Pr[X_{n+1} = 6 | X_n = 5] & = Pr[X_n + I_{n+1} = 6 | X_n = 5]\\
+& = Pr[I_{n+1} = 1]  = 0.2
 \end{array}$$
 
 $$\begin{array}{ll}
 Pr[X_{n+1} = 10 | X_n = 10] & = Pr[X_n + I_{n+1} \geq 10 | X_n = 10]\\
-& = Pr[I_{n+1} \geq 0]\\
-& = 0.6
+& = Pr[I_{n+1} \geq 0] = 0.6
 \end{array}$$
 
 de forma que la matriz de transición del sistema viene dada por:
@@ -853,6 +868,7 @@ min(X_n + A_{n+1} - 1, K) & \text{ si } 0 < X_n \leq K
 \end{cases}
 \end{equation*}
 ```
+
 Asumimos que $\{A_n, n \geq 1\}$ es una secuencia de variables iid con función de masa de probabilidad dada por:
 
 $$Pr(A_n = k) = a_k, \quad k \geq 0.$$
@@ -891,7 +907,7 @@ Pr[X_{n+1} = K | X_n = i] & = Pr[min(X_n + A_{n+1} - 1, K) = K | X_n = i]\\
 
 Si consideramos:
 
-$$b_j = \sum_{k=j}^{\infty} a_k$$
+$$b_j = \sum_{k=j}^{\infty} a_k$$ 
 
 la matriz de transiciones de un paso la podemos escribir como:
 
@@ -921,7 +937,7 @@ En esta situación el proceso $\{X_n, n \in \mathbb{N}\}$ es un proceso estocás
 $$\begin{array}{ll}
 \text{ si } X_n \leq A & \rightarrow X_{n+1} = B - Y_{n+1} \\
 \text{ si } A < X_n \leq B & \rightarrow X_{n+1} = X_n - Y_{n+1} 
-\end{array}$$
+\end{array}$$ 
 
 con espacio de estados $S = \{B, B-1,..., 1, 0, -1, -2,...\}$, donde los valores negativos indican que la demanda supera a la cantidad almacenada y será servida en instantes posteriores (demanda insatisfecha).
 
@@ -951,7 +967,7 @@ a_{i-j}, \quad \text{ si } i \geq j\\
 
 A modo de ejemplo consideramos $A = 0$, $B = 2$, con probabilidades para $Y_n$ dadas por:
 
-$$Pr[Y_n = 0] = 0.5; \quad Pr[Y_n = 1] = 0.4; \quad Pr[Y_n = 2] = 0.1,$$
+$$Pr[Y_n = 0] = 0.5; \quad Pr[Y_n = 1] = 0.4; \quad Pr[Y_n = 2] = 0.1,$$ 
 
 entonces la matriz de transición, para el espacio de estados $S = \{-1, 0, 1, 2\}$, viene dada por:
 
@@ -1062,12 +1078,11 @@ Un estado $i \in S$ se denomina **estado sin retorno** cuando no es viable volve
 Un conjunto de estados $C \subset S$ se denomina **cerrado** cuando no es posible pasar de un estado de $C$ a otro que no esté en $C$, esto es,
 
 $$\forall i \in C, \quad \forall j \notin C \quad \Rightarrow \quad p_{ij}(n) = 0, \quad n\geq 1$$
-
-o lo que es lo mismo,
+o lo que es lo mismo, 
 
 $$ \sum_{j \in C} p_{ij}=1, \quad \forall i \in C.$$
 
-Esto implica que cuando accedamos a un conjunto cerrado, será imposible salir de él y sólo será factible moverse dentro de él.
+Esto implica que cuando accedamos a un conjunto cerrado, será imposible salir de él y sólo será factible moverse dentro de él. 
 
 Si el conjunto cerrado está compuesto por un único estado $i$ diremos que ese estado $i$ es **absorbente**. Eso implica que si se llega a dicho estado, el proceso se queda estancado en él y ya no es posible moverse a otro estado.
 :::
@@ -1085,8 +1100,8 @@ Todos los estados dentro de un conjunto irreducible son del mismo tipo.
 Para caracterizar una CMTD mediante la librería `markovchain` es útil usar la función `summary(object)` donde 'object' identifica el proceso a estudiar.
 :::
 
-::: {#summary-markovchain .example}
-Queremos caracterizar el proceso presentado en el Ejemplo \@ref(exm:diagramCMTD). Cargamos los datos y ejecutamos la sintaxis a continuación.
+::: {.example #summary-markovchain}
+Queremos caracterizar el proceso presentado en el Ejemplo \@ref(exm:diagramCMTD). Cargamos los datos y ejecutamos la sintaxis a continuación. 
 
 
 ```r
@@ -1105,9 +1120,9 @@ summary(proceso)
 ## The Markov chain is irreducible 
 ## The absorbing states are: NONE
 ```
-
 A la vista del resultado, concluimos que este proceso es cerrado (todo su espacio de estados es cerrado). Todos sus estados son recurrentes y no tiene estados transitorios (estos conceptos los veremos más adelante). No tiene estados absorbentes y la cadena de Markov es irreducible (todos sus estados están comunicados).
 :::
+
 
 ::: {.bluebox data-latex=""}
 **PRACTICA** Caracterizar los procesos: [Fiabilidad de máquinas](#fiabilidad),[Metereología](#meteo), [Problema de inventario](#inventario), [Planificación de mano de obra](#planificacion), [Mercado de valores](#mercadovalores) e [Inventario con desabastecimiento](#inventario2).
@@ -1116,9 +1131,10 @@ A la vista del resultado, concluimos que este proceso es cerrado (todo su espaci
 ::: example
 Veamos ahora cómo utilizar la simulación para responder a diferentes preguntas de interés. En concreto, para el ejemplo en la sección [Inventario con desabastecimiento](#inventario2) (recordemos que se trataba de un almacén que se reabastecía cuando el inventario quedaba por debajo o igual a un nivel mínimo de almacenaje, $A=0$, y con una política de reabastecimiento que dependía del nivel de almacenaje máximo $B=2$), planteamos estas preguntas:
 
-1.  Durante las próximas 20 semanas, ¿en cuántas de ellas será preciso reabastecerse?
+1.  Durante las próximas 20 semanas, ¿en cuántas de ellas será preciso reabastecerse? 
 
 2.  Durante las próximas 20 semanas, ¿cuál es la proporción de semanas en que la demanda no ha sido satisfecha (por rebasar el stock)?
+
 :::
 
 Para responder estas preguntas hay que considerar el proceso $\{X_n, n \geq 0\}$ y la variable $Y_n$ que identifica la demanda en la semana $n$. Planteamos el siguiente algoritmo de simulación.
@@ -1126,15 +1142,14 @@ Para responder estas preguntas hay que considerar el proceso $\{X_n, n \geq 0\}$
 ::: {.silverbox data-latex=""}
 **Algoritmo para simulación de inventario**
 
--   Paso 1. Fijar el número de transiciones del proceso, $n$, e inicializar $X_0 = 2$ (máximo almacenaje).
+* Paso 1. Fijar el número de transiciones del proceso, $n$, e inicializar $X_0 = 2$ (máximo almacenaje).
 
 Repetir pasos 2 y 3 hasta alcanzar el número de transiciones deseadas.
 
--   Paso 2. Generar $Y_i$ con el método de la transformada inversa.
+* Paso 2. Generar $Y_i$ con el método de la transformada inversa. 
+* Paso 3. Actualizar el valor $X_i$ y reabastecer si fuera necesario.
 
--   Paso 3. Actualizar el valor $X_i$ y reabastecer si fuera necesario.
-
--   Paso 4. Devolver la secuencia $\{X_i, Y_i; i=1,\ldots,n\}$ para estudiar la evolución del sistema y la demanda.
+* Paso 4. Devolver la secuencia $\{X_i, Y_i;  i=1,\ldots,n\}$ para estudiar la evolución del sistema y la demanda.
 :::
 
 Desarrollemos pues, el algoritmo.
@@ -1188,7 +1203,6 @@ head(inventario2.sim)
 
 La estimación del número de semanas que hay que reabastecerse viene dada por el número de simulaciones en las que el nivel de inventario es menor o igual al nivel mínimo de almacenamiento, $invent=X\leq 0$, es decir
 
-
 ```r
 sum(inventario2.sim$invent <= A)
 ```
@@ -1196,9 +1210,7 @@ sum(inventario2.sim$invent <= A)
 ```
 ## [1] 3
 ```
-
 La proporción de semanas en que la demanda no ha sido satisfecha (por rebasar el stock) corresponde a aquellas en las que la demanda ha superado al inventario,
-
 
 ```r
 mean(inventario2.sim$invent <inventario2.sim$demanda)
@@ -1212,13 +1224,12 @@ mean(inventario2.sim$invent <inventario2.sim$demanda)
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Sea $\{X_n, n \in \mathbb{N}\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$, matriz de probabilidades de transición de una paso $P$, y distribución inicial $p(0)$. Consideramos la variable aleatoria $N_j(n)$ como el número de visitas al estado $j$ en el periodo $\{1, 2,...,n\}$ y definimos
+Sea $\{X_n, n \geq 0\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$, matriz de probabilidades de transición de una paso $P$, y distribución inicial $p(0)$. Consideramos la variable aleatoria $N_j(n)$ como el **número de visitas al estado $j$ en $n$ transiciones** y definimos
 
 $$m_{ij}(n) = E[N_j(n)|X_0 = i]$$
+como el **número esperado de visitas** o **tiempo de ocupación del estado $j$ hasta el instante $n$, partiendo del estado $i$**.
 
-como el número esperado de visitas o **tiempo de ocupación** del estado $j$ hasta el instante $n$, partiendo del estado $i$.
-
-A partir de las cantidades $m_{ij}(n)$ se puede definir la **matriz de tiempos de ocupación hasta un instante** $n$, $M(n)$, que se puede calcular a partir de la matriz de transición $P$ como:
+A partir de las cantidades $m_{ij}(n)$ se puede definir la **matriz de tiempos de ocupación hasta un instante $n$**, $M(n)$, que se puede calcular a partir de la matriz de transición $P$ como:
 
 ```{=tex}
 \begin{equation}
@@ -1226,18 +1237,20 @@ M(n) = \sum_{r=0}^n P^r
 (\#eq:tposocupa)
 \end{equation}
 ```
+
 :::
 :::
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Sea $\{X_n, n \in \mathbb{N}\}$ una $CMTD$. Se define el **número de visitas al estado** $j$ a lo largo de la vida de la cadena como
+Sea $\{X_n, n \geq 0\}$ una $CMTD$. Se define el **número de visitas al estado $j$ a lo largo de la vida de la cadena** como
 
 $$N_j=\sum_{n=0}^{\infty} I(X_n,j),$$
-
 donde $I(X_n,j)=1$ si $X_n=j$ y 0 en otro caso.
 
-Así, el número esperado de visitas al estado $j$ a lo largo de la vida de la cadena, partiendo del estado $i$, se define como $$m_{ij} = E[N_j|X_0 = i].$$
+Así, el número esperado de visitas al estado $j$ a lo largo de la vida de la cadena, partiendo del estado $i$, se define como
+
+$$m_{ij} = E[N_j|X_0 = i].$$
 :::
 :::
 
@@ -1276,8 +1289,9 @@ mocupa
 ## c 2.219126 1.000000 1.817903
 ```
 
-Podemos ver cómo el número esperado de visitas al estado $c$ partiendo del estado $b$ en las próximas 10 transiciones es casi de 7 (6.86). Sin embargo, si partimos del estado $b$, en 10 transiciones sólo esperamos volver a dicho estado 1 vez.
+Podemos ver cómo el número esperado de visitas al estado $c$ partiendo del estado $b$ en las próximas 10 transiciones es casi de 7 (6.86). Sin embargo, si partimos del estado $b$, en 10 transiciones sólo esperamos volver a dicho estado 1 vez. 
 :::
+
 
 ::: {.whitebox data-latex=""}
 Definamos una función para obtener la matriz de tiempos de ocupación (o número esperado de visitas) durante un periodo de duración de $n$ unidades de tiempo.
@@ -1301,7 +1315,9 @@ mocupa.proceso <- function(sistema, n)
   return(mocupa)
 }
 ```
+
 :::
+
 
 ::: {.bluebox data-latex=""}
 **PRACTICA** Obtener y caracterizar la matriz del número esperado de visitas en 20 transiciones para los procesos: [Fiabilidad de máquinas](#fiabilidad),[Metereología](#meteo), [Problema de inventario](#inventario), [Planificación de mano de obra](#planificacion) y [Mercado de valores](#mercadovalores).
@@ -1309,40 +1325,46 @@ mocupa.proceso <- function(sistema, n)
 
 ### Análisis de costes
 
-Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados **modelos de costes**, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, beneficios, pérdidas, etc..
+Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados **modelos de costes**, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, pero también a beneficios, pérdidas, etc.. 
 
-Sea $X_n$ el estado del sistema en el tiempo $n$. Asumimos que $\{X_n, n \in \mathbb{N}\}$ es una $CMTD$ con espacio de estados $S =\{1, 2,...,N\}$, matriz de transición $P$, y matriz de tiempos de ocupación $M(n)$.
+Sea $X_n$ el estado del sistema en el tiempo $n$. Asumimos que $\{X_n, n \geq 0 \}$ es una $CMTD$ con espacio de estados $S =\{1, 2,...,N\}$, matriz de transición $P$, y matriz de tiempos de ocupación $M(n)$. 
 
-En esta situación, hablamos de que cada visita a cierto estado $i$ tiene un coste asociado $C(i)$, y el coste esperado por visitar el estado $i$ a lo largo de la vida del proceso viene dado por $c(i) = E[C(i)]$. Definimos la matriz de costes esperados asociados a los estados, como $c$, de dimensión $N\times 1$, como: $$c' = (c(1),c(2),\ldots,c(N))$$
+En esta situación, hablamos de que cada visita a cierto estado $i$ tiene un coste aleatorio asociado $C(i)$, y el coste esperado por cada visita al estado $i$ viene dado por $c(i) = E[C(i)]$. Definimos la matriz de costes esperados asociados a los estados, como $\mathbf{c}$, de dimensión $N\times 1$, como:
 
-Así mismo, hablamos del coste $C(X_r)$ en el que incurre el sistema en un instante concreto $r$, y $\sum_{r=0}^n C(X_r)$ el coste acumulado desde el inicio del proceso hasta llegar al instante $n$. Entonces el **coste esperado total (CET)** asociado al funcionamiento del sistema hasta llegar al instante $n$ se calculará como $E\left[\sum_{r=0}^n C(X_r)\right]$.
+$$\mathbf{c}' = (c(1),c(2),\ldots,c(N))$$
 
-Definimos el coste esperado total (CET) hasta el instante $n$ partiendo del estado $i$, $g(i,n)$, como:
+Así mismo, hablamos del coste $C(X_r)$ en el que incurre el sistema en un instante concreto $r$, y $\sum_{r=0}^n C(X_r)$ el coste acumulado desde el inicio del proceso hasta llegar al instante $n$. Entonces el **coste esperado total (CET)** asociado al funcionamiento del sistema hasta llegar al instante $n$ se calculará como 
+
+$$CET=E\left[\sum_{r=0}^n C(X_r)\right]$$
+
+Definimos el coste esperado total hasta el instante $n$ partiendo del estado $i$, $g(i,n)$, como:
 
 $$g(i,n) = E\left[\sum_{r=0}^n C(X_r)| X_0 = i \right]$$
 
-y construimos la matriz de **costes totales sobre un horizonte finito (CTHF) hasta el instante** $n$, $g(n)$, de dimensión $N \times 1$, a través de estos costes esperados partiendo de cualesquier estado $i \in S$, como
+y construimos la matriz de **costes totales sobre un horizonte finito (CTHF) hasta el instante $n$**, $\mathbf{g}(n)$, de dimensión $N \times 1$, a través de estos costes esperados partiendo de cualesquier estado $i \in S$, como
 
-$$g(n)' = (g(1,n),g(2,n),\ldots,g(N,n))$$
+$$\mathbf{g}(n)' = (g(1,n),g(2,n),\ldots,g(N,n))$$ 
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Si queremos calcular el **coste esperado total sobre un horizonte finito hasta un instante** $n$, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante $n$, $M(n)$, por la matriz de costes esperados asociados a los estados del sistema, $c$:
+Si vinculado al funcionamiento de un sistema CMTD queremos calcular el **coste esperado total sobre un horizonte finito hasta un instante $n$**, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante $n$, $M(n)$, por la matriz de costes esperados asociados a los estados del sistema, $\mathbf{c}$, esto es, resolver la Ecuación \@ref(eq:CTHF).
 
 ```{=tex}
 \begin{equation}
-g(n) = M(n) \cdot c
+\mathbf{g}(n) = M(n) \cdot \mathbf{c}
 (\#eq:CTHF)
 \end{equation}
 ```
+
 :::
 :::
 
 ::: example
+
 Volvamos al proceso de inventario presentado en el [Problema de inventario](#inventario) con espacio de estados $\{2,3,4,5\}$. Supongamos que la empresa compra PCs por 1500 euros y los vende por 1750 euros. Además el coste de almacenamiento semanal es de 50 euros por cada unidad que está en la tienda al inicio de una semana. Queremos calcular los ingresos netos que la tienda espera obtener durante las próximas 10 semanas, suponiendo que comienza con cinco PCs en stock al inicio del periodo.
 :::
 
-En esta situación, si hay $i$ PCs al principio de la semana $n$, el coste esperado de almacenamiento esa semana es $50i$. Si $D_n$ es la demanda durante la semana $n$, el número esperado de PCs vendidos durante la semana $n$ será $E[min(i, D_n)]$, por lo que los ingresos netos previstos para la semana $n$ provendrán de los ingresos por ventas menos los gastos de almacenaje, esto es,
+En esta situación, estamos interesados en los ingresos, por lo que definimos $c(i)$ como los ingresos netos que se obtienen en una semana cualquiera en la que  hay $i$ PCs al principio de la semana. Sabemos que los costes de almacenamiento de $i$ PCs es $50i$. Las ganancias provendrán de los PCs que se hayan vendido. Si $D_n$ es la demanda durante una semana cualquiera $n$, el número esperado de PCs vendidos durante esa semana será $E[min(i, D_n)]$. Así, los ingresos netos previstos para una semana cualquiera $n$ en la que se tienen $i$ PCs almacenados al inicio, $c(i)$, provendrán de los ingresos por ventas menos los gastos de almacenaje, esto es, 
 
 $$c(i) = (1750-1500)E[min(i, D_n)] -50i, \quad 2 \leq i \leq 5$$
 
@@ -1352,30 +1374,46 @@ Necesitamos pues, obtener el valor de $E[min(i, D_n)]$, para cada valor de $i$. 
 \begin{equation*}
 Z_{i,n} =  
 \begin{cases}
-i & \text{ si } i \leq D_n \text{, con } Pr[i \leq D_n]\\
-D_n & \text{ si } i > D_n \text{, con } Pr[i > D_n]
+i & \text{ si } i <D_n \\
+D_n & \text{ si } i \geq  D_n 
 \end{cases}
 \end{equation*}
 ```
+
 de esta forma tenemos que su valor esperado vendrá dado por:
 
-$$E[Z_{i,n}] = i*Pr[i \leq D_n] + \sum_{d=0}^{i-1} d \cdot Pr(D_n=d).$$
+$$E[Z_{i,n}] = i \cdot Pr[i < D_n] + \sum_{d=0}^{i} d \cdot Pr(D_n=d).$$ 
 
 Recordando que $D_n\sim Pois(3)$ en el ejemplo original, para $i=2$ la expresión anterior da lugar a:
 
-```{=tex}
 \begin{eqnarray*}
-E[Z_{2,n}] &= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
-&= 2*0.8008+0.1494 = 1.751
+E[Z_{2,n}] &= 2 \cdot Pr[D_n > 2] + 0 \cdot Pr[D_n = 0] + 1 \cdot Pr[D_n =1] +2 \cdot Pr(D_n=2) \\
+&= 2 \cdot (1-Pr(D_n \leq 2)) + 1 \cdot Pr[D_n =1] + 2 \cdot Pr(D_n=2) \\
+&= 2 \cdot 0.5768 +0.1494 +2 \cdot 0.2240 = 1.751
 \end{eqnarray*}
+
+de donde calculamos los ingresos $c(2)$ con la ecuación anterior.
+$$c(2) =  250 \cdot 1.751 -50 \cdot 2 = 337.75$$ 
+Hacemos fácilmente los cálculos para todos los estados:
+
+
+```r
+estados=2:5
+lambda=3   # Poisson para la demanda
+# número esperado de ventas
+ez=c()
+for(i in estados){
+ez[i-1]=i*(1-ppois(i,lambda))+sum((0:i)*dpois(0:i,lambda))
+}
+ingresos=250*ez-50*estados;ingresos
 ```
-y por tanto:
 
-$$c(2) =  250*1.751 -50*2 = 337.75$$
+```
+## [1] 337.7662 431.9686 470.1607 466.3449
+```
 
-De forma análoga podemos obtener el resto de costes esperados por el hecho de tener $i$ PCs en la tienda,
-
-$$c = 
+Y obtenemos 
+$$\mathbf{c} = 
 \begin{pmatrix}
 337.75 \\
 431.95 \\
@@ -1383,11 +1421,13 @@ $$c =
 466.23 
 \end{pmatrix}$$
 
-de donde podemos calcular los ingresos netos totales esperados durante las próximas $n=10$ semanas, sea cual sea el estado inicial del sistema, a través de la matriz $$g(10)=M(10) \cdot c$$ que calculamos a continuación:
+Con esta matriz y la matriz de ocupación hasta el instante $n=10$ podemos calcular los ingresos netos totales esperados durante las próximas $n=10$ semanas, sea cual sea el estado inicial del sistema:
 
+$$g(10)=M(10) \cdot c$$ 
+que calculamos a continuación:
 
 ```r
-c=matrix(c(337.75,431.95,470.15,466.23), ncol=1)
+c=matrix(round(ingresos,2), ncol=1)
 M10=mocupa.proceso(inventario,10)
 g=M10 %*% c
 g
@@ -1395,25 +1435,24 @@ g
 
 ```
 ##           [,1]
-## 2 PCs 5282.121
-## 3 PCs 3459.052
-## 4 PCs 2536.941
-## 5 PCs 2325.006
+## 2 PCs 5283.122
+## 3 PCs 3459.611
+## 4 PCs 2537.260
+## 5 PCs 2325.253
 ```
+y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con $i=5$ PCs en tienda, esto es, como $g(5,10)=4842.59$ euros.
 
-y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con $i=5$ PCs en tienda, esto es, como $g(5,10)=2325.006$ euros.
 
 Los valores de $c$ se pueden aproximar mediante simulación sin necesidad de calcularlos de forma teórica. A continuación se presenta el código necesario para realizar la simulación. Concretamente definimos una función que depende del valor del estado inicial $i$.
 
 
 ```r
+# simulador del valor esperado del número esperado de ventas
 c.sim <- function(estado, nsim)
 {
   # estado: estado inicial del sistema
   # nsim: nº simulaciones para la aproximación
   
-  # Fijamos semilla
-  set.seed(12)
   # Simulamos valores del mínimo entre i y D_n
   datos <- data.frame(rsim = rpois(nsim, 3), rdos <- rep(estado, nsim))
   minimo <-apply(datos, 1 ,min) # Mínimo por filas
@@ -1430,6 +1469,7 @@ Aproximamos pues por simulación, los valores de la matriz $c$ con $nsim=1.000.0
 
 ```r
 nsim <- 1000000
+set.seed(12)
 c.s=matrix(c(c.sim(2, nsim),c.sim(3, nsim),
       c.sim(4, nsim),c.sim(5, nsim)),ncol=1)
 c.s
@@ -1438,12 +1478,13 @@ c.s
 ```
 ##        [,1]
 ## [1,] 337.66
-## [2,] 431.81
-## [3,] 470.04
-## [4,] 466.20
+## [2,] 431.61
+## [3,] 470.28
+## [4,] 466.69
 ```
 
 Como se puede ver, la simulación funciona bastante bien para aproximar el vector $c$; resolvamos pues los cálculos de $g(5,10)$ con estos valores, que de nuevo aproximarán las cantidades que buscamos.
+
 
 
 ```r
@@ -1456,21 +1497,21 @@ beneficio
 
 ```
 ##           [,1]
-## 2 PCs 5281.517
-## 3 PCs 3458.551
-## 4 PCs 2536.474
-## 5 PCs 2324.530
+## 2 PCs 5285.787
+## 3 PCs 3460.827
+## 4 PCs 2537.646
+## 5 PCs 2325.374
 ```
 
-Mientras que teóricamente obteníamos unos ingresos esperados de 2325€, con la simulación obtenemos una aproximación de 2324.53€.
+Mientras que teóricamente obteníamos unos ingresos esperados de 4842.59€, con la simulación obtenemos una aproximación de 4844.27€.
 
 ### Tiempos de primer paso
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Sea $\{X_n, n \in \mathbb{N}\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$. Se define el **tiempo de primer paso** o **tiempo de primera visita** al estado $j$ partiendo del estado $i$, $T_{ij}$, como el mínimo número de transiciones necesarias para alcanzar el estado $j$ partiendo del estado inicial $i$, es decir:
-
-$$T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}$$
+Sea $\{X_n, n \geq 0\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$. Se define el **tiempo de primer paso** o **tiempo de primera visita** al estado $j$ partiendo del estado $i$, $T_{ij}$, como el mínimo número de transiciones necesarias para alcanzar el estado $j$ partiendo del estado inicial $i$, es decir:
+  
+$$T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}$$  
 
 En ocasiones interesará sin embargo el tiempo de primer paso de un estado a un conjunto de estados $A$:
 
@@ -1479,33 +1520,35 @@ $$T_{iA} = \underset{n}{min}\{n > 0, X_n \in A | X_0 = i\}.$$
 :::
 
 ::: {.whitebox data-latex=""}
-Para obtener los tiempos esperados de recurrencia $f=(f_{11},...,f_{NN})$ para el espacio de estados $S=\{1,...,N\}$, utilizamos la función `meanRecurrenceTime(proceso)` de la librería `markovchain`.
+Para obtener los tiempos esperados de recurrencia $f=(f_{11},...,f_{NN})$ para el espacio de estados $S=\{1,...,N\}$, utilizamos la función `meanRecurrenceTime(proceso)` de la librería `markovchain`. 
 
-Podemos obtener la distribución de probabilidad asociada al tiempo de primer paso del estado $j$ desde el estado $i$ en $n$ transiciones, $f_{ij}(n)$, con la función `firstPassageMultiple(proceso,state=i,set=j,n=n)`.
+Para obtener los tiempos esperados de primer paso por un estado $j$ desde cualquier estado de $S$, podemos  utilizar la función `meanFirstPassageTime(proceso,destination=j)` de la librería `markovchain`. 
+Si queremos calcular la matriz de tiempos esperados para llegar a cualquier estado desde cualquier estado, basta utilizar `meanFirstPassageTime(proceso)`.
 :::
 
-::: {.whitebox data-latex=""}
-Para obtener los tiempos esperados de primer paso por un estado $j$ desde cualquier estado de $S$, podemos utilizar la función `meanFirstPassageTime(proceso,destination=j)` de la librería `markovchain`. Si queremos calcular la matriz de tiempos esperados para llegar a cualquier estado desde cualquier estado, basta utilizar `meanFirstPassageTime(proceso)`.
-:::
-
-En caso de que no podamos utilizar la función `meanFirstPassageTime` para el cálculo del tiempo de primer paso, podemos utilizar la propiedad que pasamos a describir.
+En caso de que no podamos utilizar la función `meanFirstPassageTime` para el cálculo del tiempo esperado de primer paso, podemos utilizar la propiedad que pasamos a describir.
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Sea $\{X_n, n \in \mathbb{N}\}$ una $CMTD$ con espacio de estados $S = \{1, 2,...,N\}$. Si estamos interesados en obtener el tiempo esperado de primer paso para el estado $j$ desde cualquier estado $i$, dado por:
+Sea $\{X_n, n \geq 0\}$ una $CMTD$ con espacio de estados $S = \{1, 2,...,N\}$. Si estamos interesados en obtener el tiempo esperado de primer paso para el estado $j$ desde cualquier estado $i$, dado por:
 
-$$v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}$$\$
+$$v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}$$
 
-y construimos la matriz de dimensión $(N-1) \times 1$ $\mathbf{v_j'}=(v_{1j},...,v_{j-1,j},v_{j+1,j},...,v_{Nj})$\
+y construimos la matriz de dimensión $(N-1) \times 1$ $\mathbf{v_j'}=(v_{1j},...,v_{j-1,j},v_{j+1,j},...,v_{Nj})$  
 basta con resolver el sistema:
+  
+```{=tex}
+\begin{equation}
+[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}
+(\#eq:primerpaso-ecu)
+\end{equation}
+```
+ 
+donde 
 
-$$[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}$$
-
-donde
-
--   $P_{-j}$ es la matriz de transición eliminando la fila y columna del estado $j$,
--   $\mathbf{1}$ es un vector de unos, de dimensión $N-1$,
--   $\mathbf{I}$ es una matriz diagonal de las mismas dimensiones que $P_{-N}$.
+* $P_{-j}$ es la matriz de transición eliminando la fila y columna del estado $j$, 
+* $\mathbf{1}$ es un vector de unos, de dimensión $N-1$, 
+* $\mathbf{I}$ es una matriz diagonal de las mismas dimensiones que $P_{-N}$.
 
 Esta ecuación se puede generalizar para obtener los tiempos esperados de primer paso desde un estado $i$ hasta cualquier subconjunto de estados $S_c \subset S$.
 :::
@@ -1544,34 +1587,27 @@ tiempo.pp <- function(proceso, estado)
 ```
 :::
 
+
 ::: {.yellowbox data-latex=""}
 ::: definition
-Sea $\{X_n, n \in \mathbb{N}\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$. Se definen las **probabilidades de primera visita** o primer paso del estado $i$ al $j$ en $n$ transiciones, con $f_{ij}(n)$,
+Sea $\{X_n, n \geq 0\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$. Se definen las **probabilidades de primera visita** o primer paso del estado $i$ al $j$ en $n$ transiciones, con $f_{ij}(n)$, 
 
-```{=tex}
 \begin{eqnarray*}
 f_{ij}(n) &=& Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 = i] \\ 
 &=& Pr(T_{ij}=n), \quad n \geq 0
 \end{eqnarray*}
-```
+
 donde por convenio $f_{ij}(0) = 0.$
 :::
 :::
 
-::: {.yellowbox data-latex=""}
-::: definition
-Sea $\{X_n, n \in \mathbb{N}\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2,...,N\}$. Sea $m_{ij}$ el número esperado de visitas al estado $j$ cuando se parte del estado $i$, y $f_{ij}=Pr(T_{ij}<\infty)$ la probabilidad de alcanzar el estado $j$ partiendo del estado $i$. Entonces se cumple la relación:
-
-$$ m_{ij}=\begin{cases}
-\frac{1}{1-f_{jj}}, \quad \text{ si } i=j \\
-\frac{f_{ij}}{1-f_{jj}}, \quad \text{ si } i\neq j
-\end{cases}$$
-:::
+::: {.whitebox data-latex=""}
+Podemos obtener la distribución de probabilidad asociada al tiempo de primer paso del estado $j$ desde el estado $i$ en $n$ transiciones, $f_{ij}(n)$, con la función `firstPassageMultiple(proceso,state=i,set=j,n=n)`.
 :::
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Si $T_{ii}$ denota el **tiempo del primer retorno**, o **tiempo de recurrencia** al estado $i$, entonces se dice que el estado $i$ es **recurrente** si $f_{ii}=Pr(T_{ii}<\infty)=1$, es decir, si el sistema se inicia en él, pueda volver a él. Es transitorio si $f_{ii}<1$.
+Si $T_{ii}$  denota el **tiempo del primer retorno**, o **tiempo de recurrencia** al estado $i$, entonces se dice que el estado $i$ es **recurrente** si $f_{ii}=Pr(T_{ii}<\infty)=1$, es decir, si el sistema se inicia en él, pueda volver a él. Es transitorio si $f_{ii}<1$.
 :::
 :::
 
@@ -1604,10 +1640,9 @@ tiempo.pp(proceso, "b")
 ## c 8.181818
 ```
 
-Podemos ver que ambas funciones proporcionan el mismo resultado. Si comenzamos en el estado "a" tardaremos en promedio seis transiciones para alcanzar por primera vez el estado "b", mientras que si empezamos en el estado "c" tardaremos 8 transiciones en alcanzar el estado "b".
+Podemos ver que ambas funciones proporcionan el mismo resultado. Si comenzamos en el estado "a" tardaremos en promedio seis transiciones para alcanzar por primera vez el estado "b", mientras que si empezamos en el estado "c" tardaremos 8 transiciones en alcanzar el estado "b". 
 
-Si deseamos la matriz del valor esperado del primer paso en cualquier estado basta con ejecutar
-
+Si deseamos la matriz  del valor esperado del primer paso en cualquier estado basta con ejecutar 
 
 ```r
 meanFirstPassageTime(proceso)
@@ -1619,6 +1654,7 @@ meanFirstPassageTime(proceso)
 ## b 2.636364 0.000000 1.168831
 ## c 1.818182 8.181818 0.000000
 ```
+
 
 Obtenemos ahora el tiempo de primer paso (utilizando la función programada) y la probabilidad de primer paso de pasar del estado $b$ a cualquiera de los estados $a$ o $c$ en 10 transiciones ($A = \{a, c\}$)
 
@@ -1713,8 +1749,8 @@ tiempo.pp(fiabilidad, "0")
 
 El tiempo esperado para que las dos máquinas estén en estado "Off" comenzando con ambas en el estado "On" es 2451.5, que expresado en años será $2451.5/365 = 6.71$ años.
 
-::: example
-Consideramos el proceso ya presentado sobre [Planificación de mano de obra](#planificacion). Deseamos el tiempo medio de permanencia en la empresa para un empleado recién reclutado. Recordemos que un nuevo empleado siempre empieza en el nivel "1". Definamos un proceso $Y_n$ que representa el nivel de un empleado novel en la semana n-ésima, proceso que puede tomar los valores $S = \{0, 1, 2, 3, 4\}$, donde $Y_n=0$ significa que deja la empresa en n semanas después de empezar. En esta situación el proceso $\{Y_n, n \in \mathbb{N}\}$ es una $CMTD$ con espacio de estados $S = \{0, 1, 2, 3, 4\}$ y matriz de probabilidades de transición calculadas a partir de las probabilidades que se daban en el desarrollo de [Planificación de mano de obra](#planificacion) y teniendo en cuenta que si está fuera de la empresa, a la semana siguiente también lo estará:
+::: example 
+Consideramos el proceso ya presentado sobre [Planificación de mano de obra](#planificacion). Deseamos el tiempo medio de permanencia en la empresa para un empleado recién reclutado. Recordemos que un nuevo empleado siempre empieza en el nivel "1". Definamos un proceso $Y_n$ que representa el nivel de un empleado novel en la semana n-ésima, proceso que puede tomar los valores $S = \{0, 1, 2, 3, 4\}$, donde $Y_n=0$ significa que deja la empresa en n semanas después de empezar. En esta situación el proceso $\{Y_n, n \geq 0\}$ es una $CMTD$ con espacio de estados $S = \{0, 1, 2, 3, 4\}$ y matriz de probabilidades de transición calculadas a partir de las probabilidades que se daban en el desarrollo de [Planificación de mano de obra](#planificacion) y teniendo en cuenta que si está fuera de la empresa, a la semana siguiente también lo estará:
 
 $$P = 
 \begin{pmatrix}
@@ -1725,6 +1761,7 @@ $$P =
 0.01 & 0 & 0 & 0 & 0.99
 \end{pmatrix}$$
 :::
+
 
 Creamos la estructura del sistema:
 
@@ -1797,13 +1834,13 @@ Puesto que el nuevo empleado comienza siempre en el nivel "1", el tiempo esperad
 
 ## Comportamiento a largo plazo {#AsinCMTD}
 
-En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una $CMTD$, es decir, el comportamiento cuando $n \rightarrow \infty$. La primera pregunta más obvia es si la distribución de $X_n$ se aproxima a algún límite finito cuando $n$ tiende a infinito.
+En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una $CMTD$, es decir, el comportamiento cuando $n \rightarrow \infty$. La primera pregunta más obvia es si la distribución de $X_n$ se aproxima a algún límite finito cuando $n$ tiende a infinito. 
 
 ::: {.yellowbox data-latex=""}
 ::: .definition
-Si existe la distribución a largo plazo de un proceso CMTD $\{X_n, n \in \mathbb{N}\}$, con espacio de estados $S =\{1, 2,..., N\}$ y matriz de probabilidades de transición $P$, la denominamos **distribución límite** o **distribución en estado estacionario**, y la denotamos por:
+Si existe la distribución a largo plazo de un proceso CMTD $\{X_n, n \geq 0\}$, con espacio de estados $S =\{1, 2,..., N\}$ y matriz de probabilidades de transición $P$, la denominamos **distribución límite** o **distribución en estado estacionario**, y la denotamos por:
 
-$$\pi = [\pi_1, \pi_2,...,\pi_N]$$
+$$\pi = [\pi_1, \pi_2,...,\pi_N]$$ 
 
 donde
 
@@ -1811,32 +1848,34 @@ $$\pi_j = \underset{n \rightarrow \infty}{lim} Pr[X_n = j], \quad j \in S$$
 :::
 :::
 
-La siguiente pregunta de interés, cuando dicha distribución existe, es si es única. Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.
+La siguiente pregunta de interés, cuando dicha distribución existe, es si es única.
+Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.
 
 La última pregunta se refiere a la práctica: si hay una única distribución límite, ¿cómo podemos calcularla? Pues bien, aunque responder las dos primeras preguntas pueda ser más complejo, la respuesta a esta pregunta es fácil, puesto que si esta distribución límite exite, entonces satisface la siguiente propiedad.
 
 ::: {.yellowbox data-latex=""}
 ::: .definition
-Si existe la distribución límite de un proceso CMTD $\{X_n, n \in \mathbb{N}\}$, con espacio de estados $S =\{1, 2,..., N\}$ y matriz de probabilidades de transición $P$, entonces las probabilidades $\pi_j$ satisfacen la siguiente ecuación:
+Si existe la distribución límite de un proceso CMTD $\{X_n, n \geq 0\}$, con espacio de estados $S =\{1, 2,..., N\}$ y matriz de probabilidades de transición $P$, entonces las probabilidades $\pi_j$ satisfacen la siguiente ecuación:
 
 $$\pi_j = \sum_{i=1}^N \pi_i p_{ij}, \quad \forall j \in S,$$
-
 donde $p_{ij}$ son las probabilidades de transición (en la matriz $P$). Esta propiedad en formato matricial da lugar a la **ecuación de balance** o **del estado estacionario**, que viene dada por:
 
 ```{=tex}
 \begin{equation}
-\pi = \pi*P, \qquad \text{ con } 
+\pi = \pi \cdot P, \qquad \text{ con } 
 (\#eq:ecuee)
 \end{equation}
 ```
+
 junto con la restricción de normalización
 
 $$\sum_{j=1}^N \pi_j = 1.$$
+
 :::
 :::
 
 ::: {.whitebox data-latex=""}
-La función `steadyStates()` de la librería `markovchain` nos devuelve la distribución estacionaria de una $CMTD$.
+La función `steadyStates()` de la librería `markovchain` nos devuelve la distribución estacionaria de una $CMTD$. 
 :::
 
 ::: example
@@ -1856,116 +1895,87 @@ steadyStates(proceso)
 Obtenemos de esta forma las probabilidades asintóticas de estar en cada uno de los estados. Vemos pues, que a la larga lo más probable es que nos encontremos en el estado 'c', y lo menos probable es estar en el estado 'b'.
 :::
 
-Podemos encontrar procesos CMTD en los que no existe distribución límite, pero aun así podemos resolver las ecuaciones de balance, junto con la restricción de normalización (Ecuación \@ref(eq:ecuee)). Supongamos que tenemos una distribución inicial de la CMTD dada por $\{\pi^*, i \in S\}$. Si también la distribución de $X_1, \ldots, X_n$ permanece invariante para todos los $n$, decimos que la distribución inicial es una **distribución estacionaria**. Definámoslo a continuación.
 
 ::: {.yellowbox data-latex=""}
-::: {#steadystatedist .definition}
-Una distribución de probabilidad $$\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]$$ se dice que es **estacionaria** si
+::: {.definition #irreducible}
 
-```{=tex}
-\begin{eqnarray*}
-Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &\Rightarrow& \\
-&\Rightarrow& Pr[X_n = i] = \pi_i^*, 1 \leq i \leq N, \text{ y } n \geq 0.
-\end{eqnarray*}
-```
-:::
-:::
-
-Las preguntas que previamente planteamos sobre la distribución límite (es decir, la existencia, la unicidad y el método de cálculo) pueden formularse también sobre la distribución estacionaria. Respondámoslas.
-
-::: {.yellowbox data-latex=""}
-::: {#steadystatedist2 .definition}
-La distribución $\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]$ es una distribución estacionaria para la CMTD $\{X_n, n \in \mathbb{N}\}$, con espacio de estados $S =\{1, 2,..., N\}$ y matriz de probabilidades de transición $P$, si y solo si se cumple que:
-
-$$\pi^* = \pi^* P, \qquad \text{ con } \sum_{j=1}^N \pi_j^* = 1, \quad \forall j \in S.$$
-:::
-:::
-
-Por tanto, la distribución límite, cuando existe, es una distribución estacionaria. En caso de que tengamos más de una distribución límite (pues puede depender del estado inicial), por la Definición \@ref(def:steadystatedist2), cualquiera de dichas distribuciones límite será una distribución estacionaria.
-
-Veamos a continuación una propiedad interesante, respecto a estacionariedad, de la distribución del ratio de ocupación, esto es, de la proporción de tiempo que el proceso permanece en cada estado.
-
-::: {.yellowbox data-latex=""}
-::: .definition
-Si existe la **distribución de ocupación** del proceso $\{X_n, n \in \mathbb{N}\}$ con espacio de estados $S =\{1, 2,..., N\}$, dada por
-
-$$\hat{\pi}_j=lim_{n \rightarrow \infty} \frac{m_{ij}(n)}{n+1}, \qquad \text{ con } m_{ij}(n)=E[N_j(n)|X_0=i]$$
-
-entonces satisface las ecuaciones de balance sujetas a la restricción de normalización, esto es,
-
-$$\hat{\pi}_j = \sum_{i=1}^N \hat{\pi}_i p_{ij}, \quad \forall j \in S, \qquad \text{ y } \sum_{j=1}^N \hat{\pi}_j=1.$$
-:::
-:::
-
-Tenemos pues, que toda distribución que cumpla las ecuaciones de balance junto con las restricciones de normalización, será una distribución límte, también estacionaria o será la distribución de ocupación. Las preguntas relativas a estas ecuaciones son: ¿siempre habrá una solución? ¿Será única? ¿Cuándo dicha solución se podrá interpretar como una distribución límite, estacionaria o de ocupación? Intentemos dar respuesta a estas preguntas introduciendo algún concepto más referido a los procesos $CMTD$.
-
-::: {.yellowbox data-latex=""}
-::: {#irreducible .definition}
-Una $CMTD$ $\{X_n, n \in \mathbb{N}\}$ con espacio de estados $S$ se dice que es **irreducible** si para cada pareja de estados $i$ y $j$ en $S$, existe algún instante de tiempo $k>0$ en el que es posible llegar a $j$ desde $i$, esto es,
-
+Una $CMTD$ $\{X_n, n \geq 0\}$ con espacio de estados $S$ se dice que es **irreducible** si para cada pareja de estados $i$ y $j$ en $S$, existe algún instante de tiempo $k>0$ en el que es posible llegar a $j$ desde $i$, esto es,
+  
 $$Pr[X_k = j | X_0 = i] >0.$$
 :::
 :::
 
-Una $CMTD$ que no es irreducible se denomina **reducible**.
+Una $CMTD$ que no es irreducible se denomina **reducible**. 
 
 ::: {.whitebox data-latex=""}
 Podemos estudiar esta característica del proceso mediante un análisis descriptivo del mismo, con la función `summary()` de la librería `markovchain`, como ya vimos en el Ejemplo \@ref(exm:summary-markovchain).
 :::
 
+
 La utilidad del concepto de irreducibilidad se justifica con los resultados que presentamos a continuación, referidos a la unicidad de la distribución estacionaria.
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Una CMTD de espacios finitos que sea irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.
+Una CMTD de espacio de estados finitos que sea irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.
 
 Además, una CMTD de espacios finitos que sea irreducible tiene una única distribución de ocupación y es igual a la distribución estacionaria.
 :::
 :::
 
-Introducimos ahora el concepto de periodicidad, que nos ayudará a decidir cuando exista la distribución límite.
+Introducimos ahora el concepto de periodicidad, que nos ayudará a comprobar cuándo existe la distribución estacionaria.
 
 ::: {.yellowbox data-latex=""}
-::: {#periodo .definition}
-Sea la $CMTD$ $\{X_n, n \in \mathbb{N}\}$ con espacio de estados $S =\{1, 2,..., N\}$ y $d$ el entero más grande tal que para cualquier estado $i \in S$
+::: {.definition #periodo}
 
+Sea la $CMTD$ $\{X_n, n \geq 0\}$ con espacio de estados $S =\{1, 2,..., N\}$ y $d$ el entero más grande tal que para cualquier estado $i \in S$
+  
 $$\text{si } Pr[X_n = i | X_0 = i] >0 \Rightarrow n \text{ es  múltiplo de } d,$$
-
-Se dice entonces que dicha $CMTD$ es **periódica con periodo** $d$ si $d>1$, y **aperiódica** si $d = 1$.
+  
+Se dice entonces que dicha $CMTD$ es **periódica con periodo $d$** si $d>1$, y **aperiódica** si $d = 1$.  
 :::
 :::
 
-Así, una CMTD con periodo $d$ puede volver a su estado inicial sólo en los instantes $d, 2d, 3d, ...$. En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo $d$ para cualquier estado $i \in S$, puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo.
+Así, una CMTD con periodo $d$ puede volver a su estado inicial sólo en los instantes $d, 2d, 3d, ...$. En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo $d$ para cualquier estado $i \in S$, puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo. 
+
 
 ::: {.whitebox data-latex=""}
 Podemos estudiar la periocidad de un sistema mediante la función `period()` de la librería `markovchain`.
 :::
 
+
 En particular, si $p_{ii}>0$ para cualquier $i\in S$ de una CMTD irreducible, entonces $d=1$ y la CMTD será aperiódica.
 
-El resultado más relevante es que si tenemos una $CMTD$ que es irreducible y aperiódica, entonces tiene una única distribución límite, que es la solución de la ecuación de balance y de normalización (Ecuación \@ref(eq:ecuee)).Además, esta será la distribución estacionaria de la CMTD y también la distribución de ocupación.
+El resultado más relevante es que si tenemos una $CMTD$ que es irreducible y aperiódica, entonces tiene una única distribución límite, que es la solución de la ecuación de balance y de normalización \@ref(eq:ecuee). Además, esta será la distribución estacionaria de la CMTD y también la distribución de ocupación.
 
 La distribución límite/estacionaria de una CMTD reducible no es única y depende del estado inicial de la cadena.
 
+
 ::: {.yellowbox data-latex=""}
 ::: definition
-Si $i$ es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de probabilidad de $i$ según la distribución estacionaria, es decir,
+Si $i$ es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de la probabilidad de $i$ según la distribución estacionaria, es decir,
 
-$$E[T_{jj}|X_0=j] = 1/\pi_j.$$
+```{=tex}
+\begin{equation}
+E[T_{jj}] = 1/\pi_j.
+(\#eq:et-piestacionaria)
+\end{equation}
+```
 :::
 :::
 
 Tenemos un resultado adicional sobre el comportamiento de los **costes en el estado estacionario**.
 
 ::: {.yellowbox data-latex=""}
-::: {#costesestacionarios .definition}
+::: {.definition #costesestacionarios}
+
 Si $c(i)$ es el coste esperado en el que incurrimos cuando visitamos el estado $i \in S$, de una CMTD irreducible con distribución de ocupación $\pi$, entonces el coste esperado por unidad a largo plazo (en el estado estacionario) viene dado por:
 
 $$g= \sum_{j\in S} \pi_j \ c(j).$$
 :::
 :::
 
-::: example
+
+::: example 
 Para el proceso descrito en la sección [Telecomunicaciones](#telecomunicaciones), en el que los paquetes de datos que se generan en el instante (ranura) $n$, $A_n \sim Po(1)$, se almacenaban en un buffer de capacidad $K=7$, que se van eliminando conforme a cierta estrategia. Interesados en el proceso $\{X_n, n\geq 0\}$ que describe el número de paquetes en el buffer al final de la n-ésima ranura, con espacio de estados $S=\{0, 1,..., 7\}$ y matriz de probabilidades de transición:
 
 $$P = 
@@ -1982,13 +1992,12 @@ $$P =
 
 En esta situación estamos interesados en analizar las siguientes características del estado estacionario del proceso $X_n$:
 
-1.  Periodo del proceso.
-2.  Fracción de tiempo en que el buffer estará lleno.
-3.  Número esperado de paquetes que esperan en el buffer.
+1. Periodo del proceso.
+2. Fracción de tiempo en que el buffer estará lleno.
+3. Número esperado de paquetes que esperan en el buffer.
 :::
 
 Definamos la estructura del proceso para la librería `markovchain`, y pidamos la distribución estacionaria.
-
 
 ```r
 # Estructura del proceso
@@ -2045,7 +2054,7 @@ steadyStates(teleco)
 ## [1,] 0.06820411 0.1171835 0.1331324 0.1360701 0.1363485 0.1363554 0.1363497 0.1363562
 ```
 
-Tenemos que la CMTD es irreducible, luego por los resultados teóricos tiene una única distribución estacionaria, que coincidirá con la distribución límite y con la distribución de los tiempos de ocupación.
+Tenemos que la CMTD es irreducible, luego por los resultados teóricos tiene una única distribución estacionaria, que coincidirá con la distribución límite y con la distribución de los tiempos de ocupación. 
 
 Que el buffer esté lleno significa que nos encontramos en el estado "7", y al ser la distribución estacionaria la del tiempo de ocupación, tenemos que la fracción de tiempo en que el buffer está lleno es del 13.64%.
 
@@ -2064,6 +2073,7 @@ sum(estados*distribucion)
 ```
 
 Por lo tanto, a largo plazo se espera que el buffer esté a un poco más de la mitad de su capacidad.
+
 
 ::: example
 Consideramos el proceso de [Planificación de mano de obra](#planificacion), donde suponemos que la empresa tiene 70 empleados cuyo nivel no cambia a lo largo del tiempo. Supongamos que los gastos de nómina semanales por persona son de 400 dólares para el grado 1, 600 dólares para el grado 2, 800 dólares para grado 3, y \$1000 para el grado 4. Estamos interesados en calcular los gastos semanales promedio por empleado.
@@ -2106,10 +2116,9 @@ cat("\n Gastos semanales:",sum(distribucion*costes))
 Por tanto, los gastos semanales promedio por trabajador son de 618.20 dólares, lo que multiplicado por el número de empleados (70) supone 43274 dólares.
 
 ## Estudio de caso
+Veamos por último, una aplicación completa del análisis de una CMTD. 
 
-Veamos por último, una aplicación completa del análisis de una CMTD.
-
-Sabemos que en cada idioma las frecuencias de transición entre vocales y consonantes son diferentes. A partir de análisis recurrentes con textos de dos idiomas hemos identificado las probabilidades de transición entre vocales y consonantes en cada uno, estados=(vocal,consonante), y que vienen dadas a continuación.
+Sabemos que en cada idioma las frecuencias de transición entre vocales y consonantes son diferentes. A partir de análisis recurrentes con textos de dos idiomas hemos identificado las probabilidades de transición entre vocales y consonantes en cada uno, estados=(vocal,consonante), y que vienen dadas a continuación. 
 
 $$p1=\left(\begin{matrix}
 0.51 & 0.49 \\
@@ -2121,6 +2130,7 @@ p2=\left(\begin{matrix}
 0.30 & 0.70
 \end{matrix}
 \right)$$
+
 
 Definimos primero los procesos para la librería `markovchain` a partir de las probabilidades de transición.
 
@@ -2161,7 +2171,6 @@ as(idioma2,"data.frame")
 ```
 
 Verificamos que todos sus estados son recurrentes y la cadena es irreducible.
-
 
 ```r
 cat("Descripción idioma1\n")
@@ -2214,10 +2223,9 @@ summary(idioma2)
 
 Planteamos ahora una serie de preguntas a responder.
 
-1.  En cada idioma, ¿cuál es la probabilidad de que si un texto empieza por vocal, el siguiente carácter sea consonante?
+1. En cada idioma, ¿cuál es la probabilidad de que si un texto empieza por vocal, el siguiente carácter sea consonante?
 
 Calculamos pues, la distribución de los estados del sistema partiendo de una vocal, manualmente y con la función `transitionProbability()` o con `conditionalDistribution()`, que nos da la distribución condicional partiendo de un estado:
-
 
 ```r
 #determinamos el estado inicial
@@ -2275,13 +2283,11 @@ transitionProbability(idioma2,t0="vocal",t1="consonante")
 ```
 ## [1] 0.75
 ```
-
 Resulta que en el idioma1 la probabilidad de que si un texto empieza por vocal el siguiente carácter sea consonante es de 0.49 y en el idioma2 de 0.75.
 
-2.  En cada idioma, ¿cuál es la probabilidad de que si un texto empieza por vocal, tras contar 10 caracteres más, encontremos una consonante?
+2. En cada idioma, ¿cuál es la probabilidad de que si un texto empieza por vocal, tras contar 10 caracteres más, encontremos una consonante?
 
 Utilizamos el resultado que se mostró en la Ecuación \@ref(eq:matriznpasos) para calcular la matriz de transición de $n$ pasos.
-
 
 ```r
 ini = c(1,0)
@@ -2301,15 +2307,44 @@ final2.10 = ini %*% p2^10; final2.10
 ##             vocal consonante
 ## [1,] 9.536743e-07 0.05631351
 ```
-
 Las probabilidades ahora se reducen drásticamente, y en el idioma1 resulta de 0.0008, y en el idioma2 de 0.0563.
 
-3.  ¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?
 
-Nos están preguntando por el tiempo medio de primer paso. Resolvemos con la función `meanFirstPassageTime()`.
+3. En cada idioma, en un texto de 1000 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y consonantes?
+
+Nos pregunta por el número de visitas o tiempo de ocupación de cada uno de los estados en un periodo de duración 1000. Calculamos pues la matriz de tiempos de ocupación hasta el instante $n=1000$ con la Ecuación \@ref(eq:tposocupa), y para la que utilizamos la función `mocupa.proceso()` que definimos en la Sección [Tiempos de ocupación](tiemposocupa-sec).
 
 
 ```r
+n=1000
+mocupa1=mocupa.proceso(idioma1,n);mocupa1
+```
+
+```
+##                vocal consonante
+## vocal       2.040816   1.960784
+## consonante 10.000000   1.111111
+```
+
+```r
+mocupa2=mocupa.proceso(idioma2,n);mocupa2
+```
+
+```
+##               vocal consonante
+## vocal      1.333333   4.000000
+## consonante 1.428571   3.333333
+```
+
+Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar, en 1000 caracteres, 2 vocales y 2 consonantes. En el idioma2, el número de vocales esperadas tras una vocal en 1000 caracteres es de 1 y 2 consonantes.
+
+4. ¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?
+
+Nos están preguntando por el tiempo medio de primer paso por una vocal, partiendo de una consonante. Resolvemos con la función `meanFirstPassageTime()`.
+
+
+```r
+# todos los tiempos de primer paso
 meanFirstPassageTime(idioma1)
 ```
 
@@ -2320,7 +2355,8 @@ meanFirstPassageTime(idioma1)
 ```
 
 ```r
-meanFirstPassageTime(idioma1,"vocal")
+# tiempo de primer paso por una vocal
+mfpt1=meanFirstPassageTime(idioma1,"vocal");mfpt1
 ```
 
 ```
@@ -2339,20 +2375,159 @@ meanFirstPassageTime(idioma2)
 ```
 
 ```r
-meanFirstPassageTime(idioma2,"vocal")
+mfpt2=meanFirstPassageTime(idioma2,"vocal");mfpt2
 ```
 
 ```
 ## consonante 
 ##   3.333333
 ```
+Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1, y en el idioma2 de 3.
 
-Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1.1, y en el idioma2 de 3.3 (tres veces más).
+5. En un texto que se inicia con una vocal, ¿con qué probabilidad encontraremos la primera consonante en los siguientes 3 caracteres? Compara los resultados para los dos idiomas.
 
-4.  A partir de una consonante, ¿cuántos caracteres, por término medio, tardamos en encontrar otra consonante en cada idioma?
+Nos preguntan por la probabilidad de primer paso por el estado "consonante" partiendo de una "vocal" transcurridos tres caracteres. Utilizamos la función `firstPassageMultiple()` de la librería `markovchain`.
 
-Nos están pidiendo el tiempo medio de recurrencia, que calculamos con la función `meanRecurrenceTime()`.
 
+```r
+n=3
+fpm1=firstPassageMultiple(idioma1,state="vocal",set=c("consonante"),n=n);fpm1
+```
+
+```
+##        set
+## 1 0.490000
+## 2 0.249900
+## 3 0.127449
+```
+
+```r
+fpm2=firstPassageMultiple(idioma2,state="vocal",set=c("consonante"),n=n);fpm2
+```
+
+```
+##        set
+## 1 0.750000
+## 2 0.187500
+## 3 0.046875
+```
+
+Así, tenemos que en el idioma1 la probabilidad de que la primera consonante que encontremos esté tres caracteres después de la vocal de inicio es de 0.127449, mientras que esta probabilidad en el idioma2 es sólo de 0.127449.
+
+6. A partir de una consonante, ¿cuántos caracteres, por término medio, tardamos en encontrar otra consonante en cada idioma?
+
+Nos están pidiendo el tiempo medio de recurrencia, esto es, volver a encontrar otra consonante si partimos de una consonante, que calculamos con la función `meanRecurrenceTime()`.
+
+
+```r
+mrt1=meanRecurrenceTime(idioma1);mrt1
+```
+
+```
+##      vocal consonante 
+##   1.544444   2.836735
+```
+
+```r
+mrt2=meanRecurrenceTime(idioma2);mrt2
+```
+
+```
+##      vocal consonante 
+##        3.5        1.4
+```
+
+Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres hasta encontrar otra consonante, mientras que en el idioma2 sólo 1 por término medio.
+
+7. ¿Qué proporción de vocales y consonantes hay en cada idioma? 
+
+Recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles. Sabemos que cuando una CMTD es irreducible y aperiódica, esta distribución es única. Que es irreducible ya lo comprobamos anteriormente; verifiquemos pues que es aperiódica, esto es, que su periodo es 1, con la función `period()`.
+
+
+```r
+period(idioma1)
+```
+
+```
+## [1] 1
+```
+
+```r
+period(idioma2)
+```
+
+```
+## [1] 1
+```
+
+Tenemos entonces que ambos procesos son aperiódicos (periodo $d=1$), esto es, siempre es posible volver a cualquier estado en una única transición.
+
+La distribución estacionaria la calculamos a continuación con la función `steadyStates()`.
+
+
+```r
+pi1=steadyStates(idioma1); pi1
+```
+
+```
+##         vocal consonante
+## [1,] 0.647482   0.352518
+```
+
+```r
+pi2=steadyStates(idioma2); pi2
+```
+
+```
+##          vocal consonante
+## [1,] 0.2857143  0.7142857
+```
+
+Así pues, tenemos que en el idioma1 el 65% de los caracteres en un texto son vocales, que predominan sobre las consonantes, mientras que en el idioma2 sólo un 29%, y la supremacía es de las consonantes, con un 71.4%.
+
+Vamos a comprobar, además, que la distribución estacionaria verifica la ecuación de balance o del estado estacionario que se muestra en la Ecuación \@ref(eq:ecuee).
+
+
+```r
+# ecuación de balance para la d.estacionaria del idioma1
+pi1
+```
+
+```
+##         vocal consonante
+## [1,] 0.647482   0.352518
+```
+
+```r
+# es igual a su producto por la matriz de transición
+pi1%*%p1
+```
+
+```
+##         vocal consonante
+## [1,] 0.647482   0.352518
+```
+
+```r
+# y sus probabilidades suman 1
+sum(pi1)
+```
+
+```
+## [1] 1
+```
+
+Con la distribución estacionaria comprobamos que se verifica la Ecuación \@ref(eq:et-piestacionaria) que nos permite calcular los tiempos medios de recurrencia con el inverso de las probabilidades estacionarias. Lo hacemos sólo con el idioma1.
+
+
+```r
+1/pi1
+```
+
+```
+##         vocal consonante
+## [1,] 1.544444   2.836735
+```
 
 ```r
 meanRecurrenceTime(idioma1)
@@ -2363,43 +2538,8 @@ meanRecurrenceTime(idioma1)
 ##   1.544444   2.836735
 ```
 
-```r
-meanRecurrenceTime(idioma2)
-```
 
-```
-##      vocal consonante 
-##        3.5        1.4
-```
-
-Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres (2.84) hasta encontrar otra consonante, mientras que en el idioma2 sólo 1.4 por término medio.
-
-5.  ¿Qué proporción de vocales y consonantes hay en cada idioma?
-
-Recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles. La calculamos con la función `steadyStates()`.
-
-
-```r
-steadyStates(idioma1)
-```
-
-```
-##         vocal consonante
-## [1,] 0.647482   0.352518
-```
-
-```r
-steadyStates(idioma2)
-```
-
-```
-##          vocal consonante
-## [1,] 0.2857143  0.7142857
-```
-
-Así pues, tenemos que en el idioma1 el 65% de los caracteres en un texto son vocales, mientras que en el idioma2 sólo un 29%, y la supremacía es de las consonantes, con un 71.4%.
-
-6.  Simula un texto de 1000 caracteres para cada idioma, empezando por una vocal y estima con esas simulaciones las probabilidades de transición. Compara los resultados con las matrices iniciales.
+8. Simula un texto de 1000 caracteres para el idioma1, empezando por una vocal y estima con esas simulaciones las probabilidades de transición. Compara los resultados con la matriz inicial.
 
 Para simular una CMTD recurrimos a la función `rmarkovchain()`.
 
@@ -2408,76 +2548,43 @@ Para simular una CMTD recurrimos a la función `rmarkovchain()`.
 set.seed(12)
 n=1000
 idioma1.sim=rmarkovchain(n,idioma1,t0="vocal",include.t0=TRUE)
-idioma2.sim=rmarkovchain(n,idioma2,t0="vocal",include.t0=TRUE)
 ```
 
-Para estimar las probabilidades de transición con ellas vamos a seguir dos procedimientos: el artesanal a través de una función que construiremos nosotros para calcular las frecuencias de salto entre vocales y consonantes, y con una función en la librería `markovchain` que específicamente nos proporciona esa estimación, y que es `markovchainFit()`.
+Para estimar las probabilidades de transición con los textos simulados vamos a utilizar la librería `markovchain` que específicamente nos proporciona las frecuencias de salto, así como una estimación (junto con su error), basada en dichas frecuencias, bajo diversos procedimientos de estimación. 
 
-Construyamos en primer lugar una función que nos proporcione las frecuencias de salto entre vocales y consonantes, a través de las cuales vamos a estimar las probabilidades de transición, con el fin de comprender bien cómo funcionaría la estimación más simple.
+La función `createSequenceMatrix()` nos proporciona una matriz de frecuencias (absolutas o relativas) de las transiciones entre todos los estados posibles del sistema
 
 
 ```r
-probtransi.texto=function(texto){
- # calcula frecuencias de salto vocal/consonante en un texto
-  # el input (texto) es una sucesión de vocales/consonantes
-n=length(texto)
-n.estados=2
-estados=c("vocal","consonante")
-# definimos la matriz de probs. transición
-pmat=matrix(0,ncol=n.estados,nrow=n.estados,dimnames=list(estados,estados))
-for(i in 1:(n-1)){
-  if(texto[i]=="vocal" & texto[i+1]=="vocal")
-    pmat[1,1]=pmat[1,1]+1
-  else if (texto[i]=="vocal" & texto[i+1]=="consonante")
-    pmat[1,2]=pmat[1,2]+1  
-  else if (texto[i]=="consonante" & texto[i+1]=="vocal")
-    pmat[2,1]=pmat[2,1]+1
-  else if (texto[i]=="consonante" & texto[i+1]=="consonante")
-    pmat[2,2]=pmat[2,2]+1
-}
-# una vez tenemos las frecuencias de salto, las convertimos en probabilidades
-# las probabilidades en cada fila han de sumar 1
-pmat[1,]=pmat[1,]/sum(pmat[1,])
-pmat[2,]=pmat[2,]/sum(pmat[2,])
-return(pmat)
-}
-```
-
-Y utilizamos esta función para estimar las probabilidades de transición:
-
-
-```r
-probtransi.texto(idioma1.sim)
+# frecuencias de transiciones o saltos
+createSequenceMatrix(idioma1.sim)
 ```
 
 ```
-##                vocal consonante
-## vocal      0.5215385  0.4784615
-## consonante 0.8885714  0.1114286
+##            consonante vocal
+## consonante         39   311
+## vocal             311   339
 ```
 
 ```r
-probtransi.texto(idioma2.sim)
+# frecuencias relativas de transiciones o saltos
+createSequenceMatrix(idioma1.sim,toRowProbs = TRUE )
 ```
 
 ```
-##                vocal consonante
-## vocal      0.2461538  0.7538462
-## consonante 0.2648649  0.7351351
+##            consonante     vocal
+## consonante  0.1114286 0.8885714
+## vocal       0.4784615 0.5215385
 ```
 
 
-```r
-cat("\n Estimación de p1 \n")
-```
+Utilizamos ahora la función `markovchainFit()` que, a partir de datos simulados en estado estacionario, estima las probabilidades de transición. Podemos usar varios métodos de optimización alternativos, si bien por defecto se usa la estimación máximo-verosímil, `method="mle"`. Las alternativas son EMV con suavizado de Laplace ("laplace"), bootstrap ("bootstrap") y máximo a posteriori ("map").
 
-```
-## 
-##  Estimación de p1
-```
 
 ```r
-markovchainFit(idioma1.sim,byrow=TRUE);p1
+# Estimación de p1
+p1.sim = markovchainFit(idioma1.sim,byrow=TRUE)
+p1.sim;p1
 ```
 
 ```
@@ -2519,88 +2626,159 @@ markovchainFit(idioma1.sim,byrow=TRUE);p1
 ## consonante  0.90       0.10
 ```
 
-```r
-cat("\n Estimación de p2 \n")
-```
+Esta función nos proporciona, además de la estimación de las probabilidades de transición, una estimación del error e intervalos de confianza.
 
-```
-## 
-##  Estimación de p2
-```
 
 ```r
-markovchainFit(idioma2.sim,byrow=TRUE);p2
+estimate = as(p1.sim$estimate,"data.frame")
+error = as.vector(p1.sim$standardError)
+ic.low = as.vector(p1.sim$lowerEndpointMatrix)
+ic.up = as.vector(p1.sim$upperEndpointMatrix)
+cbind(estimate,error,ic.low,ic.up)
 ```
 
 ```
-## $estimate
-## MLE Fit 
-##  A  2 - dimensional discrete Markov Chain defined by the following states: 
-##  consonante, vocal 
-##  The transition matrix  (by rows)  is defined as follows: 
-##            consonante     vocal
-## consonante  0.7351351 0.2648649
-## vocal       0.7538462 0.2461538
-## 
-## 
-## $standardError
-##            consonante      vocal
-## consonante 0.03151866 0.01891892
-## vocal      0.05384615 0.03076923
-## 
-## $confidenceLevel
-## [1] 0.95
-## 
-## $lowerEndpointMatrix
-##            consonante     vocal
-## consonante  0.6733597 0.2277845
-## vocal       0.6483096 0.1858472
-## 
-## $upperEndpointMatrix
-##            consonante     vocal
-## consonante  0.7969106 0.3019453
-## vocal       0.8593827 0.3064604
-## 
-## $logLikelihood
-## [1] -572.8805
+##           t0         t1      prob      error     ic.low     ic.up
+## 1 consonante consonante 0.1114286 0.01784285 0.07645722 0.1463999
+## 2 consonante      vocal 0.8885714 0.02713106 0.42528562 0.5316375
+## 3      vocal consonante 0.4784615 0.05038626 0.78981615 0.9873267
+## 4      vocal      vocal 0.5215385 0.02832608 0.46602035 0.5770566
+```
+
+9. Supón que accedes a un texto que transformas en una secuencia de vocales y consonantes (disponible para descarga en [Github]("https://raw.githubusercontent.com/UMH1477/data/f4e4a62533e24a74be27b8984f9fc23eb1b1ff49/textos.csv")). Verifica, con dicha secuencia que proviene de una CMTD.
+
+Para ello podemos utilizar la función `verifyMarkovProperty()` que resuelve un test de hipótesis basado en la Chi-cuadrado, sobre el cumplimiento de la propiedad de Markov con los datos proporcionados. Obtener un p-valor significativo significa que rechazaríamos esa propiedad y por lo tanto rechazaríamos que se trata de una CMTD.
+
+
+```r
+# leemos los datos de Github
+texto=read.csv("https://raw.githubusercontent.com/UMH1477/data/f4e4a62533e24a74be27b8984f9fc23eb1b1ff49/textos.csv")
+# visualizamos el formato de los datos, con 2 columnas de texto
+head(texto)
 ```
 
 ```
+##       texto1     texto2
+## 1      vocal consonante
+## 2      vocal consonante
+## 3 consonante consonante
+## 4      vocal      vocal
+## 5 consonante consonante
+## 6 consonante consonante
+```
+
+```r
+# y ejecutamos el test sobre una de las columnas de texto
+verifyMarkovProperty(texto$texto1)
+```
+
+```
+## Testing markovianity property on given data sequence
+## Chi - square statistic is: 2.056533 
+## Degrees of freedom are: 5 
+## And corresponding p-value is: 0.8412687
+```
+
+El p-valor es de 0.84, que no permite rechazar la propiedad de Markov.
+
+Por último, para testar la estacionariedad, esto es, si $p_{ij}(n)=p_{ij}$ para cualquier $n$, tenemos la función `assessStationarity()`. Obtener un p-valor significativo significa que rechazaríamos esa propiedad y por lo tanto rechazaríamos que se trata de una CMTD.
+
+
+```r
+assessStationarity(texto$texto1,5)
+```
+
+```
+## Warning in assessStationarity(texto$texto1, 5): The accuracy of the statistical inference functions
+## has been questioned. It will be thoroughly investigated in future versions of the package.
+```
+
+```
+## Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+
+## Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+```
+
+```
+## The assessStationarity test statistic is:  0.0002538706 
+## The Chi-Square d.f. are:  8 
+## The p-value is:  1
+```
+
+10. Con los datos utilizados en el apartado anterior, verifica si alguno de los textos que se proporcionan en las columnas de la base de datos, se podría asimilar como perteneciente a alguno de los idiomas presentados, idioma1 o idioma2.
+
+Para contrastar la similitud entre una secuencia y un proceso teórico que tenemos definido podemos utilizar la función `verifyEmpiricalToTheoretical()`. Veamos cómo funciona con los procesos idioma1 e idioma2.
+
+
+```r
+# comparamos con el idioma1
+verifyEmpiricalToTheoretical(texto$texto1,idioma1)
+```
+
+```
+## Testing whether the
+##            vocal consonante
+## vocal      32800      31854
+## consonante 31854       3491
+## transition matrix is compatible with
+##            vocal consonante
+## vocal       0.51       0.49
+## consonante  0.90       0.10
+## [1] "theoretical transition matrix"
+## ChiSq statistic is 2.460873 d.o.f are 2 corresponding p-value is 0.292165
+```
+
+```
+## $statistic
+##    vocal 
+## 2.460873 
+## 
+## $dof
+## [1] 2
+## 
+## $pvalue
+##    vocal 
+## 0.292165
+```
+El p-valor resultante es 0.29, con lo cual no se puede rechazar la hipótesis nula de que la secuencia dada es compatible con el idioma1. Podría ser pues, un texto de dicho idioma
+
+Veamos ahora su compatibilidad con el idioma2:
+
+```r
+# comparamos con el idioma2
+verifyEmpiricalToTheoretical(texto$texto1,idioma2)
+```
+
+```
+## Testing whether the
+##            vocal consonante
+## vocal      32800      31854
+## consonante 31854       3491
+## transition matrix is compatible with
 ##            vocal consonante
 ## vocal       0.25       0.75
 ## consonante  0.30       0.70
-```
-
-1.  Por cada 100 caracteres en un texto de cada idioma, ¿cuántos son vocales?
-
-Nos están preguntando por los tiempos de ocupación de las vocales en 100 transiciones. Aplicamos la Ecuación \@ref(eq:tposocupa) para calcular la matriz de ocupación tras 100 transiciones, y la función que definimos en la Sección [Tiempos de ocupación](tiemposocupa-sec). Para ello hemos de definir como CMTD ambos procesos, con la librería `markovchain`.
-
-
-```r
-idioma1=new("markovchain",states=colnames(p1),byrow=TRUE,transitionMatrix=p1,name="idioma1")
-idioma2=new("markovchain",states=colnames(p2),byrow=TRUE,transitionMatrix=p2,name="idioma2")
-# número de transiciones (caracteres)
-n=100
-mocupa.proceso(idioma1,100)
+## [1] "theoretical transition matrix"
+## ChiSq statistic is 76057.57 d.o.f are 2 corresponding p-value is 0
 ```
 
 ```
-##               vocal consonante
-## vocal      2.040816   1.960784
-## consonante 9.999761   1.111111
+## $statistic
+##    vocal 
+## 76057.57 
+## 
+## $dof
+## [1] 2
+## 
+## $pvalue
+## vocal 
+##     0
 ```
 
-```r
-mocupa.proceso(idioma2,100)
-```
+En este caso el p-valor es cero, por lo que rechazamos la compatibilidad y claramente aceptamos que este texto no proviene del idioma2.
 
-```
-##               vocal consonante
-## vocal      1.333333   4.000000
-## consonante 1.428571   3.333333
-```
 
-Así pues, en el idioma 1, si el texto arranca en una vocal ## Ejercicios {#ejer-u2}
+## Ejercicios {#ejer-u2}
 
 ### Básicos
 
@@ -2619,7 +2797,7 @@ $$P =
 0.3 & 0.2 & 0.5\\
 \end{pmatrix}$$
 
-Si en la semana 1 se expone el tipo A en el escaparate, ¿cuál es la probabilidad de que en la semana 10 se esté promocionando cualquiera de las tres marcas?
+Si en la semana 1 se expone el tipo A en el escaparate, ¿cuál es la probabilidad de que en la semana 10 se esté promocionando cualquiera de las tres marcas? 
 
 **Ejercicio B2.5.** Consideramos el proceso descrito en la sección [Telecomunicaciones](#telecomunicaciones). Asumimos que en el estado inicial el buffer está lleno y deseamos conocer el número esperado de paquetes en el buffer en los instantes $n =1, 2, 5$ y $10$, asumiendo que el tamaño del buffer es 10 y que el número de paquetes que llegan en un instante es una variable aleatoria $Bi(5, 0.2).$
 
@@ -2644,23 +2822,24 @@ $$P=\begin{pmatrix}
 
 **Ejercicio A2.1.** Los artículos llegan a un taller mecánico de forma determinista a un ritmo de uno por minuto. Cada artículo se comprueba antes de cargarlo en la máquina. Un artículo es adecuado con probabilidad $p$ y defectuoso con una probabilidad $1-p$. Si un artículo es defectuoso, se descarta; en caso contrario, se carga en la máquina. La máquina tarda exactamente 1 minuto en procesar el artículo, tras lo cual está lista para procesar el siguiente. Consideramos la variable aleatoria $X_n$ que toma el valor $0$ si la máquina está inactiva al principio del n-ésimo minuto y 1 si está iniciando el proceso.
 
-1.  Obtén la matriz de transición de este proceso.
-2.  Si $p = 0.98$, ¿cuál es la proporción de tiempo en que la máquina está cargando un artículo durante las próximas ocho horas?
-3.  ¿Cuántas horas tendrán que pasar para que la máquina descarte un artículo cuando el primero no se descarta?
+1. Obtén la matriz de transición de este proceso. 
+2. Si $p = 0.98$, ¿cuál es la proporción de tiempo en que la máquina está cargando un artículo durante las próximas ocho horas? 
+3. ¿Cuántas horas tendrán que pasar para que la máquina descarte un artículo cuando el primero no se descarta?
 
 Supongamos ahora que la máquina puede procesar dos artículos simultáneamente. Sin embargo, tarda 2 minutos en completar el procesamiento. Delante de la máquina hay un contenedor en el que se pueden almacenar dos artículos no defectuosos. En cuanto hay dos artículos en la bandeja, se cargan en la máquina y ésta empieza a procesarlos.
 
-4.  Obtén la matriz de transición de este proceso.
-5.  ¿Cuál es la proporción de tiempo en que la máquina carga artículos durante las próximas ocho horas?
-6.  ¿Cuántas horas tendrán que pasar para que la máquina descarte dos artículos cuando los dos primeros no son defectuosos?
+4. Obtén la matriz de transición de este proceso. 
+5. ¿Cuál es la proporción de tiempo en que la máquina carga artículos durante las próximas ocho horas? 
+6. ¿Cuántas horas tendrán que pasar para que la máquina descarte dos artículos cuando los dos primeros no son defectuosos?
 
-**Ejercicio A2.2.** Un vendedor vive en la ciudad "a" y es responsable de la venta de su producto en las ciudades "a", "b" y 'c'. Cada semana tiene que visitar una ciudad diferente. Cuando está en su ciudad natal, le da igual la ciudad que visite a continuación, así que lanza una moneda y si sale cara va a "b" y si sale cruz va a "c". Sin embargo, después de pasar una semana fuera de casa tiene una ligera preferencia por volver a casa, así que cuando está en las ciudades 'b' o 'c' lanza dos monedas. Si salen dos caras, se va a la otra ciudad; de lo contrario va a 'a'. Las sucesivas ciudades que visita forman una cadena de Markov con un espacio de estados $S = \{a, b, c\}$ en la que la variable aleatoria $X_n$ es igual a 'a', 'b' o 'c' según su ubicación durante la semana $n$. Obtén la matriz de transición de este proceso.
+**Ejercicio A2.2.** Un vendedor vive en la ciudad "a" y es responsable de la venta de su producto en las ciudades "a", "b" y 'c'. Cada semana tiene que visitar una ciudad diferente. Cuando está en su ciudad natal, le da igual la ciudad que visite a continuación, así que lanza una moneda y si sale cara va a "b" y si sale cruz va a "c". Sin embargo, después de pasar una semana fuera de casa tiene una ligera preferencia por volver a casa, así que cuando está en las ciudades 'b' o 'c' lanza dos monedas. Si salen dos caras, se va a la otra ciudad; de lo contrario va a 'a'. Las sucesivas ciudades que visita forman una cadena de Markov con un espacio de estados $S = \{a, b, c\}$ en la que la variable aleatoria $X_n$ es igual a 'a', 'b' o 'c' según su ubicación durante la semana $n$. Obtén la matriz de transición de este proceso. 
 
-1.  Empezando en su ciudad natal, ¿en qué ciudad se encontrará dentro de seis semanas?
-2.  ¿Cuál es la proporción de tiempo en que el vendedor se encontrará fuera de casa durante los próximos seis meses?
-3.  Si inicialmente está en la ciudad 'a', ¿cuántas semanas tendrán que pasar para que visite la ciudad 'c'?
-4.  Si el vendedor obtiene un beneficio de 1200 euros cuando pasa una semana en la ciudad 'a', de 1200 euros cuando está en 'b', y de 1250 cuando está en 'c', ¿cuál será el beneficio esperado después de 12 semanas si comienza en su ciudad natal?
-5.  ¿Cuál será el beneficio esperado después de 12 semanas si desconocemos la ciudad de partida pero sabemos que hay una probabilidad de 0.5 que sea 'a', 0.3 de que sea 'b', y 0.2 de que sea 'c'?
+
+1. Empezando en su ciudad natal, ¿en qué ciudad se encontrará dentro de seis semanas? 
+2. ¿Cuál es la proporción de tiempo en que el vendedor se encontrará fuera de casa durante los próximos seis meses? 
+3. Si inicialmente está en la ciudad 'a', ¿cuántas semanas tendrán que pasar para que visite la ciudad 'c'?
+4. Si el vendedor obtiene un beneficio de 1200 euros cuando pasa una semana en la ciudad 'a', de 1200 euros cuando está en 'b', y de 1250 cuando está en 'c', ¿cuál será el beneficio esperado después de 12 semanas si comienza en su ciudad natal? 
+5. ¿Cuál será el beneficio esperado después de 12 semanas si desconocemos la ciudad de partida pero sabemos que hay una probabilidad de 0.5 que sea 'a', 0.3 de que sea 'b', y 0.2 de que sea 'c'?
 
 **Ejercicio A2.3.** Se lleva a cabo un análisis de mercado para conocer las preferencias de compras de coches en formato "renting", según el cual cada año se renueva el coche a cada cliente del servicio en el mes de enero. La empresa está interesada en conocer si los clientes cambian el estilo de vehículo entre las tres opciones posibles ("sedan", "station wagon", y "convertible") de un año al siguiente. Para estudiar este proceso se toman los datos de cambio de vehículo del último mes de enero:
 
@@ -2674,20 +2853,20 @@ Supongamos ahora que la máquina puede procesar dos artículos simultáneamente.
 | 150           | convertible for sedan           |
 | 50            | convertible for convertible     |
 
-Este sistema se puede modelizar según una $CMTD$ con espacio de estados $S = \{s, w, c\}$.
+Este sistema se puede modelizar según una $CMTD$ con espacio de estados $S = \{s, w, c\}$. 
 
-1.  Obtén la matriz de transición asociada a este proceso.
-2.  ¿Cuál es la probabilidad de que un cliente mantenga el mismo tipo de vehículo dentro de tres años? ¿y de cinco?
-3.  ¿Cuál es el tiempo esperado de permanencia con el mismo tipo de vehículo en los próximos 10 años?
-4.  ¿Cuál es el tiempo esperado hasta el primer cambio para cualquiera de los tipos considerados?
-5.  Si un "sedan" proporciona un beneficio anual de 1200 euros, el "station wagon" de 1500, y el "convertible" de 2500 euros, ¿cuál es el beneficio promedio esperado para un año? ¿y para 5 años?
+1. Obtén la matriz de transición asociada a este proceso. 
+2. ¿Cuál es la probabilidad de que un cliente mantenga el mismo tipo de vehículo dentro de tres años? ¿y de cinco? 
+3. ¿Cuál es el tiempo esperado de permanencia con el mismo tipo de vehículo en los próximos 10 años? 
+4. ¿Cuál es el tiempo esperado hasta el primer cambio para cualquiera de los tipos considerados?
+5. Si un "sedan" proporciona un beneficio anual de 1200 euros, el "station wagon" de 1500, y el "convertible" de 2500 euros, ¿cuál es el beneficio promedio esperado para un año? ¿y para 5 años?
 
 **Ejercicio A2.4.** Un proceso de fabricación consiste en dos etapas consecutivas mediante el esquema siguiente:
 
 -   En la etapa 1, el 20% de las piezas son devueltas para su reelaboración, el 10% son desechadas, y el 70% restante pasan a la etapa 2.
 -   En la etapa 2, el 5% de las piezas deben ser devueltas a la etapa 1, el 10% deben ser reelaboradas, el 5% son desechadas, y el 80% restantes se consideran adecuadas para la venta.
 
-1.  Considerando todos los estados del proceso (e1 = etapa 1; e2 = etapa 2; d = desechado; v = venta) construye la matriz de transición correspondiente a este proceso.
+1. Considerando todos los estados del proceso (e1 = etapa 1; e2 = etapa 2; d = desechado; v = venta) construye la matriz de transición correspondiente a este proceso.
 
 La estructura de costes del proceso viene dada por:
 
@@ -2697,10 +2876,10 @@ La estructura de costes del proceso viene dada por:
 -   Cada parte que no es rechazada en el etapa 1 pero si es rechazada en l etapa 2 incurre en un coste de 850 euros.
 -   El material que es desechado debe someterse a un proceso de eliminación especial con u coste de 50 euros por parte.
 
-El sistema es capaz de tratar suficiente material para generar 100 partes al cabo de un día (aptas para la venta o desechadas).
+El sistema es capaz de tratar suficiente material para generar 100 partes al cabo de un día (aptas para la venta o desechadas). 
 
-2.  Plantea un algoritmo de simulación que permita responder a cuál es el coste medio del proceso de fabricación para los próximos 15 días. ¿Y la variabilidad estimada de dicho coste?
-3.  Si la empresa quiere asegurar un beneficio neto del 5%, ¿a qué precio debe vender las piezas aptas para asegurar dicho beneficio de acuerdo al coste medio estimado del proceso? ¿Cuál sería el rango de venta teniendo en cuenta las fluctuaciones del coste medio?
+2. Plantea un algoritmo de simulación que permita responder a cuál es el coste medio del proceso de fabricación para los próximos 15 días. ¿Y la variabilidad estimada de dicho coste?
+3. Si la empresa quiere asegurar un beneficio neto del 5%, ¿a qué precio debe vender las piezas aptas para asegurar dicho beneficio de acuerdo al coste medio estimado del proceso? ¿Cuál sería el rango de venta teniendo en cuenta las fluctuaciones del coste medio?
 
 **Ejercicio A2.5.** Se lanza un misil al que se le envía una secuencia de señales de corrección de rumbo cuando es necesario. Supongamos que el sistema tiene cuatro estados que se etiquetan como sigue:
 
@@ -2711,58 +2890,58 @@ El sistema es capaz de tratar suficiente material para generar 100 partes al cab
 
 Sea $X_n$ que representa el estado del sistema después de la n-ésima corrección, de forma que si el mísil está en curso en el instante $n$ se mantendrá en curso durante todo el vuelo; si necesita una corrección mímima, entonces con probabilidad 0.5 no será necesaria ninguna corrección posterior, con probabilidad 0.25 será necesaria una nueva corrección menor, y con probabilidad 0.25 será necesaria una corrección mayor. Si en el instante $n$ necesitamos una corrección mayor, con probabilidad 0.5 necesitaremos una corrección menor a continuación, con probabilidad 0.25 necesitaremos otra corrección mayor, y con probabilidad 0.25 deberemos abortar la misión.
 
-1.  ¿Cuál es la matriz de transición para este proceso?
-2.  Si un mísil necesita una corrección menor al inicio del lanzamiento, ¿cuál será su situación después de 3 correcciones?
+1. ¿Cuál es la matriz de transición para este proceso? 
+2. Si un mísil necesita una corrección menor al inicio del lanzamiento, ¿cuál será su situación después de 3 correcciones?
 
 El mísil gasta 50000 libras de combustible en el lanzamiento, 1000 libras cuando una corrección menor es necesaria, y 5000 cuando una corrección mayor es necesaria. Simula el proceso para tratar de responder a estas preguntas:
 
-3.  ¿Cuál será el consumo medio de combustible después de 4 correcciones?
-4.  ¿Y si lanzamos 6 cohetes a la vez?
+3. ¿Cuál será el consumo medio de combustible después de 4 correcciones? 
+4. ¿Y si lanzamos 6 cohetes a la vez? 
 
-**Ejercicio A2.6.** Al comienzo de cada semana, el estado de una máquina se determina midiendo la cantidad de corriente eléctrica que utiliza. En función de su lectura de amperaje, la máquina se clasifica en uno de los cuatro estados siguientes: bajo, medio, alto, fallido. Una máquina en estado bajo tiene una probabilidad de 0.05, 0.03 y 0.02 de estar en el estado medio, alto o fallido, respectivamente, al comienzo de la siguiente semana. Una máquina en estado medio tiene una probabilidad de 0.09 y 0.06 de estar en estado alta o fallida, respectivamente, al inicio de la siguiente semana; no puede, por sí sola, pasar al estado bajo. Una máquina en estado alto tiene una probabilidad de 0.1 de estar en el estado fallido al comienzo de la siguiente semana; no puede, por sí misma, pasar al estado bajo o medio. Si una máquina se encuentra en estado de fallo al comienzo de la semana, se inicia inmediatamente la reparación de la máquina para que (con probabilidad 1) esté en el estado bajo al comienzo de la semana siguiente.
+**Ejercicio A2.6.** Al comienzo de cada semana, el estado de una máquina se determina midiendo la cantidad de corriente eléctrica que utiliza. En función de su lectura de amperaje, la máquina se clasifica en uno de los cuatro estados siguientes: bajo, medio, alto, fallido. Una máquina en estado bajo tiene una probabilidad de 0.05, 0.03 y 0.02 de estar en el estado medio, alto o fallido, respectivamente, al comienzo de la siguiente semana. Una máquina en estado medio tiene una probabilidad de 0.09 y 0.06 de estar en estado alta o fallida, respectivamente, al inicio de la siguiente semana; no puede, por sí sola, pasar al estado bajo. Una máquina en estado alto tiene una probabilidad de 0.1 de estar en el estado fallido al comienzo de la siguiente semana;  no puede, por sí misma, pasar al estado bajo o medio. Si una máquina se encuentra en estado de fallo al comienzo de la semana, se inicia inmediatamente la reparación de la máquina para que (con probabilidad 1) esté en el estado bajo al comienzo de la semana siguiente.
 
-1.  Modeliza este proceso como una $CMTD$ y obtén la correspondiente matriz de transición.
+1. Modeliza este proceso como una $CMTD$ y obtén la correspondiente matriz de transición.
 2.  Si una máquina nueva siempre comienza en el estado bajo, ¿cuál es la probabilidad de que la máquina esté en estado de fallo tras tres semanas?
-3.  ¿Cuál es la probabilidad de que una máquina nueva tenga al menos un fallo dentro de tres semanas?
-4.  En promedio, ¿cuántas semanas al año estará trabajando la máquina?
+3. ¿Cuál es la probabilidad de que una máquina nueva tenga al menos un fallo dentro de tres semanas?
+4. En promedio, ¿cuántas semanas al año estará trabajando la máquina?
 
-Cada semana que la máquina está en estado bajo, se obtiene un beneficio de 1.000 dólares; cada semana que la máquina está en el estado medio, se obtiene un beneficio de 500 dólares; cada semana que la máquina está en estado alto, se obtiene un beneficio de 400 dólares; y la semana en la que se fija un fallo, se incurre en un coste de 700 dólares.
+Cada semana que la máquina está en estado bajo, se obtiene un beneficio de 1.000 dólares; cada semana que la máquina está en el estado medio, se obtiene un beneficio de 500 dólares; cada semana que la máquina está en estado alto, se obtiene un beneficio de 400 dólares; y la semana en la que se fija un fallo, se incurre en un coste de 700 dólares. 
 
-5.  ¿Cuál es el beneficio semanal a medio a largo plazo obtenido por la máquina?
+5. ¿Cuál es el beneficio semanal a medio a largo plazo obtenido por la máquina?
 
-Se ha sugerido cambiar la política de mantenimiento de la máquina. Si al comienzo de una semana la máquina está en el estado alto, la máquina se deja fuera de servicio y es reparada para que al inicio de la siguiente semana vuelva a estar en el estado bajo. Cuando se realiza una reparación se incurre en un coste de 600 euros.
+Se ha sugerido cambiar la política de mantenimiento de la máquina. Si al comienzo de una semana la máquina está en el estado alto, la máquina se deja fuera de servicio y es reparada para que al inicio de la siguiente semana vuelva a estar en el estado bajo. Cuando se realiza una reparación se incurre en un coste de 600 euros. 
 
-6.  ¿Merece la pena esta nueva política de mantenimiento?
+6. ¿Merece la pena esta nueva política de mantenimiento?
 
-**Ejercicio A2.7.** Nos interesa el traslado de planta de los pacientes dentro de un hospital. A efectos de nuestro análisis, consideraremos que el hospital tiene tres tipos diferentes de plantas: habitaciones de "cuidados generales", habitaciones de "cuidados especiales" y "cuidados intensivos". Basándonos en datos anteriores, el 60% de los pacientes que llegan, ingresan inicialmente en la categoría de "cuidados generales", el 30% en la de "cuidados especiales" y el 10% en la de "cuidados intensivos". Un paciente de "cuidados generales" tiene un 55% de posibilidades de ser dado de alta sano al día siguiente, un 30% de permanecer en la planta de "cuidados generales", y un 15% de ser trasladado a la planta de "cuidados especiales". Un paciente de "cuidados especiales" tiene un 10% de posibilidades de ser dado de alta al día siguiente, un 20% de ser trasladado a "cuidados generales", un 15% de pasar a "cuidados intensivos". Un paciente de "cuidados intensivos" nunca es dado de alta, hasta que muestra mejoría. Las probabilidades de que el paciente sea trasladado a "cuidados generales", "cuidados especiales" o que permanezca en "cuidados intensivos" son del 5%, el 30% o el 55%, respectivamente.
+**Ejercicio A2.7.** Nos interesa el traslado de planta de los pacientes dentro de un hospital. A efectos de  nuestro análisis, consideraremos que el hospital tiene tres tipos diferentes de plantas: habitaciones de "cuidados generales", habitaciones de "cuidados especiales" y "cuidados intensivos". Basándonos en datos anteriores, el 60% de los pacientes que llegan, ingresan inicialmente en la categoría de "cuidados generales", el 30% en la de "cuidados especiales" y el 10% en la de "cuidados intensivos". Un paciente de "cuidados generales" tiene un 55% de posibilidades de ser dado de alta sano al día siguiente, un 30% de permanecer en la planta de "cuidados generales", y un 15% de ser trasladado a la planta de "cuidados especiales". Un paciente de "cuidados especiales" tiene un 10% de posibilidades de ser dado de alta al día siguiente, un 20% de ser trasladado a "cuidados generales", un 15% de pasar a "cuidados intensivos". Un paciente de "cuidados intensivos" nunca es dado de alta, hasta que muestra mejoría. Las probabilidades de que el paciente sea trasladado a "cuidados generales", "cuidados especiales" o que permanezca en "cuidados intensivos" son del 5%, el 30% o el 55%, respectivamente.
 
-1.  Modeliza este sistema como una $CMTD$ y obtén la correspondiente matriz de transición.
-2.  ¿Cuál es la probabilidad de que un paciente ingresado en la sala de cuidados intensivos salga sano del hospital?
-3.  ¿Cuál es el número esperado de días que un paciente, ingresado en cuidados intensivos pasará en la UCI?
-4.  ¿Cuál es la duración prevista de la estancia de un paciente ingresado en el hospital como paciente de cuidados generales?
-5.  Durante un día normal, ingresan en el hospital 100 pacientes. ¿Cuál es el número medio de pacientes en la UCI?
+1. Modeliza este sistema como una $CMTD$ y obtén la correspondiente matriz de transición.
+2. ¿Cuál es la probabilidad de que un paciente ingresado en la sala de cuidados intensivos salga sano del hospital?
+3. ¿Cuál es el número esperado de días que un paciente, ingresado en cuidados intensivos pasará en la UCI?
+4. ¿Cuál es la duración prevista de la estancia de un paciente ingresado en el hospital como paciente de cuidados generales?
+5. Durante un día normal, ingresan en el hospital 100 pacientes. ¿Cuál es el número medio de pacientes en la UCI?
 
 **Ejercicio A2.8.** La fabricación de un determinado tipo de placa electrónica consta de cuatro pasos: preparación, montaje, inserción y soldadura. Después de la etapa de montaje, el 5% de las piezas deben ser retiradas; después de la etapa de inserción, el 20% de las piezas son retiradas; y después de la etapa de soldadura, el 30% de las piezas deben ser devueltas a la inserción y el 10% debe desecharse. Suponemos que cuando una pieza se devuelve a una etapa de procesamiento, es tratada como cualquier otra pieza que entra en esa etapa.
 
-1.  Modeliza este sistema como una $CMTD$ y obtén la correspondiente matriz de transición.
-2.  Si un lote de 100 placas comienza este proceso de fabricación, ¿cuántas se espera que acaben desechadas?
-3.  ¿Con cuántas placas deberíamos empezar si el objetivo es que el número esperado de placas que terminen siendo aceptadas sea igual a 100?
-4.  ¿Con cuántas placas deberíamos empezar si queremos estar seguros al 90% de que terminamos con un lote de 100 placas?
+1. Modeliza este sistema como una $CMTD$ y obtén la correspondiente matriz de transición.
+2. Si un lote de 100 placas comienza este proceso de fabricación, ¿cuántas se espera que acaben desechadas?
+3. ¿Con cuántas placas deberíamos empezar si el objetivo es que el número esperado de placas que terminen siendo aceptadas sea igual a 100?
+4. ¿Con cuántas placas deberíamos empezar si queremos estar seguros al 90% de que terminamos con un lote de 100 placas?
 
-Cada vez que una placa pasa por una etapa de procesamiento, los costes directos de mano de obra y material son de 10 euros para la preparación, 15 euros para el montaje, 25 euros para la inserción y 20 euros para la soldadura. La materia prima cuesta 8 euros, y una placa desechada devuelve 2 euros. La tasa media de gastos generales es de 1.000.000 de euros al año, lo que incluye valores de recuperación de capital. El ritmo de procesamiento medio es de 5.000 placas por semana.
+Cada vez que una placa pasa por una etapa de procesamiento, los costes directos de mano de obra y material son de 10 euros para la preparación, 15 euros para el montaje, 25 euros para la inserción y 20 euros para la soldadura. La materia prima cuesta 8 euros, y una placa desechada devuelve 2 euros. La tasa media de gastos generales es de 1.000.000 de euros al año, lo que incluye valores de recuperación de capital. El ritmo de procesamiento medio es de 5.000 placas por semana. 
 
-5.  Queremos fijar un precio por placa para que los ingresos previstos sean un 25% superiores a los costes previstos. ¿En qué valor debemos fijar el precio?
+5. Queremos fijar un precio por placa para que los ingresos previstos sean un 25% superiores a los costes previstos. ¿En qué valor debemos fijar el precio?
 
 **Ejercicio A2.9.** Dentro de un área de mercado determinada hay dos marcas de jabón que la mayoría de la gente utiliza, el "superjabón" y el "jabón barato", y el mercado actual se divide por igual entre las dos marcas. Una empresa está pensando en introducir una tercera marca llamada "jabón extra limpio", y ha realizado algunos estudios iniciales sobre las condiciones del mercado. Sus estimaciones de las pautas de compra semanales son las siguientes: si un cliente compra superjabón esta semana, hay un 75% de posibilidades de que la próxima semana vuelva a comprarlo, un 10% de probabilidad de que use el jabón extra limpio y un 15% de probabilidad de que use el jabón barato. Si un cliente compra el jabón extra limpio esta semana, hay un 50% de probabilidades de que cambie, y si lo hace, siempre será al superjabón. Si un cliente compra jabón barato esta semana, es igual de probable que la próxima semana el cliente compre cualquiera de las tres marcas.
 
-1.  Asumiendo que se cumplen las condiciones de Markov, ¿cuál es la mariz de transición para este proceso?
-2.  ¿Cuál es la cuota de mercado a largo plazo del nuevo jabón?
-3.  ¿Cuál será la cuota de mercado del nuevo jabón dos semanas después de su introducción?
+1. Asumiendo que se cumplen las condiciones de Markov, ¿cuál es la mariz de transición para este proceso?
+2. ¿Cuál es la cuota de mercado a largo plazo del nuevo jabón?
+3. ¿Cuál será la cuota de mercado del nuevo jabón dos semanas después de su introducción?
 
-El mercado consta de aproximadamente un millón de clientes cada semana. Cada compra de superjabón produce un beneficio de 15 céntimos; una compra de jabón barato produce un beneficio de 10 céntimos; y una compra del extra limpio produce un beneficio de 25 céntimos. Supongamos que el mercado se encuentra en estado estacionario con la misma distribución entre los dos productos ya comercializados. La campaña publicitaria inicial para introducir la nueva marca fue de 100.000 dólares.
+El mercado consta de aproximadamente un millón de clientes cada semana. Cada compra de superjabón produce un beneficio de 15 céntimos; una compra de jabón barato produce un beneficio de 10 céntimos; y una compra del extra limpio produce un beneficio de 25 céntimos. Supongamos que el mercado se encuentra en estado estacionario con la misma distribución entre los dos productos ya comercializados. La campaña publicitaria inicial para introducir la nueva marca fue de 100.000 dólares. 
 
-4.  ¿Cuántas semanas pasarán hasta que se recuperen los 100.000 dólares de los ingresos añadidos del nuevo producto?
-5.  La empresa considera que con estas tres marcas, una campaña publicitaria de 30.000 dólares por semana aumentará el mercado total semanal en un cuarto de millón de clientes? ¿Merece la pena la campaña? (Utiliza un criterio de media a largo plazo).
+4. ¿Cuántas semanas pasarán hasta que se recuperen los 100.000 dólares de los ingresos añadidos del nuevo producto?
+5. La empresa considera que con estas tres marcas, una campaña publicitaria de 30.000 dólares por semana aumentará el mercado total semanal en un cuarto de millón de clientes? ¿Merece la pena la campaña? (Utiliza un criterio de media a largo plazo).
 
 **Ejercicio A2.10.** Considera una $CMTD$ con espacio de estados $S=\{a, b, c\}$ y con matriz de transición:
 
@@ -2773,9 +2952,9 @@ $$P =
 0.8 & 0.0 & 0.2\\
 \end{pmatrix}$$
 
-Cada visita al 'estado a' produce un beneficio de 5 dólares, cada visita al 'estado b' produce un beneficio de 10 dólares, y cada visita al 'estado c' produce un beneficio de 12 dólares.
+Cada visita al 'estado a' produce un beneficio de 5 dólares, cada visita al 'estado b' produce un beneficio de 10 dólares, y cada visita al 'estado c' produce un beneficio de 12 dólares. 
 
-1.  Escribir un algoritmo que simule la cadena de Markov para poder estimar el beneficio esperado por paso, asumiendo que la cadena siempre comienza en el 'estado a'.
-2.  Realizar 10 repeticiones del proceso con 25 pasos en cada una y obtener el valor medio del beneficio y rango para las 10 réplicas.
-3.  Realizar 10 repeticiones con 1000 pasos en cada una y obtener el valor medio del beneficio y rango para las 10 réplicas.
-4.  Comparar las estimaciones y los rangos de los dos escenarios propuestos.
+1. Escribir un algoritmo que simule la cadena de Markov para poder estimar el beneficio esperado por paso, asumiendo que la cadena siempre comienza en el 'estado a'.
+2. Realizar 10 repeticiones del proceso con 25 pasos en cada una y obtener el valor medio del beneficio y rango para las 10 réplicas.
+3. Realizar 10 repeticiones con 1000 pasos en cada una y obtener el valor medio del beneficio y rango para las 10 réplicas.
+4. Comparar las estimaciones y los rangos de los dos escenarios propuestos.

@@ -647,7 +647,7 @@ Figura 2.5: Diagrama del sistema de planificación
 <h3>
 <span class="header-section-number">2.3.6</span> Mercado de valores<a class="anchor" aria-label="anchor" href="#mercadovalores"><i class="fas fa-link"></i></a>
 </h3>
-<p>Las acciones ordinarias de la empresa Gadgets-R-Us se cotizan en el mercado de valores. El director financiero de Gadgets-R-Us compra y vende las acciones de su propia empresa para que el precio nunca baje de 2 dólares y nunca supera los 10 dólares. Para simplificar, suponemos que <span class="math inline">\(X_n\)</span>, es el precio de las acciones al final del día <span class="math inline">\(n\)</span>, y sólo toma valores enteros; es decir, el espacio de estados del proceso <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> es <span class="math inline">\(S = 2, 3,...,10\)</span>. Si denominamos <span class="math inline">\(I_{n+1}\)</span> al movimiento potencial del precio de las acciones en el día <span class="math inline">\(n+1\)</span> en ausencia de cualquier intervención del director financiero, entonces tenemos que:</p>
+<p>Las acciones ordinarias de la empresa Gadgets-R-Us se cotizan en el mercado de valores. El director financiero de Gadgets-R-Us compra y vende las acciones de su propia empresa para que el precio nunca baje de 2 dólares y nunca supere los 10 dólares (cuando esto ocurre, vende). Para simplificar, suponemos que <span class="math inline">\(X_n\)</span>, es el precio de cada acción al final del día <span class="math inline">\(n\)</span>, y sólo toma valores enteros; es decir, el espacio de estados del proceso <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> es <span class="math inline">\(S = 2, 3,...,10\)</span>. Si denominamos <span class="math inline">\(I_{n+1}\)</span> al movimiento potencial del precio de las acciones en el día <span class="math inline">\(n+1\)</span> en ausencia de cualquier intervención del director financiero, entonces tenemos que:</p>
 <span class="math display">\[\begin{equation*}
 X_{n+1} =  
 \begin{cases}
@@ -656,23 +656,20 @@ X_n + I_{n+1} &amp; \text{ si } 2 &lt; X_n + I_{n+1} &lt; 10\\
 10 &amp; \text{ si }  X_n + I_{n+1} \geq 10
 \end{cases}
 \end{equation*}\]</span>
-<p>Un análisis continuado de los datos del pasado sugieren que los movimientos potenciales <span class="math inline">\(\{I_n, n \geq 1\}\)</span> son una secuencia de variables iid con función de masa de probabilidad dada por:</p>
+<p>Un análisis continuado de los datos del pasado sugiere que los movimientos potenciales <span class="math inline">\(\{I_n, n \geq 1\}\)</span> son una secuencia de variables iid con función de masa de probabilidad dada por:</p>
 <p><span class="math display">\[Pr(I_n = k) = 0.2, \quad k = -2, -1, 0, 1, 2.\]</span></p>
-<p>Esto implica que <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{2, 3,...,10\}\)</span>, donde las probabilidadees de transición se pueden obtener de forma sencilla. A modo de ejemplo presentamos los tres casos siguientes:</p>
+<p>Esto implica que <span class="math inline">\(\{X_n, n \in \mathbb{N}\}\)</span> es una <span class="math inline">\(CMTD\)</span> con espacio de estados <span class="math inline">\(S = \{2, 3,...,10\}\)</span>, donde las probabilidades de transición se pueden obtener de forma sencilla. A modo de ejemplo presentamos los tres casos siguientes:</p>
 <p><span class="math display">\[\begin{array}{ll}
 Pr[X_{n+1} = 2 | X_n = 3] &amp; = Pr[X_n + I_{n+1} \leq 2 | X_n = 3]\\
-&amp; = Pr[I_{n+1} \leq -1]\\
-&amp; = 0.4
+&amp; = Pr[I_{n+1} \leq -1]= 0.4
 \end{array}\]</span></p>
 <p><span class="math display">\[\begin{array}{ll}
-Pr[X_{n+1} = 6 | X_n = 5] &amp; = Pr[X_n + I_{n+1} = 6 | X_n = 3]\\
-&amp; = Pr[I_{n+1} = 1]\\
-&amp; = 0.2
+Pr[X_{n+1} = 6 | X_n = 5] &amp; = Pr[X_n + I_{n+1} = 6 | X_n = 5]\\
+&amp; = Pr[I_{n+1} = 1]  = 0.2
 \end{array}\]</span></p>
 <p><span class="math display">\[\begin{array}{ll}
 Pr[X_{n+1} = 10 | X_n = 10] &amp; = Pr[X_n + I_{n+1} \geq 10 | X_n = 10]\\
-&amp; = Pr[I_{n+1} \geq 0]\\
-&amp; = 0.6
+&amp; = Pr[I_{n+1} \geq 0] = 0.6
 \end{array}\]</span></p>
 <p>de forma que la matriz de transición del sistema viene dada por:</p>
 <p><span class="math display">\[P = 
@@ -1786,7 +1783,7 @@ p2=\left(\begin{matrix}
 <pre><code>##               vocal consonante
 ## vocal      1.333333   4.000000
 ## consonante 1.428571   3.333333</code></pre>
-<p>Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar, en 1000 caracteres, 648 vocales y 353 consonantes. En el idioma2, el número de vocales esperadas es de 287 y 714 consonantes.</p>
+<p>Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar, en 1000 caracteres, 2 vocales y 2 consonantes. En el idioma2, el número de vocales esperadas tras una vocal en 1000 caracteres es de 1 y 2 consonantes.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?</li>
 </ol>
@@ -1799,7 +1796,7 @@ p2=\left(\begin{matrix}
 ## consonante 1.111111   0.000000</code></pre>
 <div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tiempo de primer paso por una vocal</span>
-<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma1</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
+<span class="va">mfpt1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma1</span>,<span class="st">"vocal"</span><span class="op">)</span>;<span class="va">mfpt1</span></code></pre></div>
 <pre><code>## consonante 
 ##   1.111111</code></pre>
 <div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
@@ -1808,41 +1805,41 @@ p2=\left(\begin{matrix}
 ## vocal      0.000000   1.333333
 ## consonante 3.333333   0.000000</code></pre>
 <div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma2</span>,<span class="st">"vocal"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">mfpt2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanFirstPassageTime.html">meanFirstPassageTime</a></span><span class="op">(</span><span class="va">idioma2</span>,<span class="st">"vocal"</span><span class="op">)</span>;<span class="va">mfpt2</span></code></pre></div>
 <pre><code>## consonante 
 ##   3.333333</code></pre>
-<p>Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1.1, y en el idioma2 de 3.3 (tres veces más).</p>
+<p>Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1, y en el idioma2 de 3.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>En un texto que se inicia con una vocal, ¿con qué probabilidad encontraremos la primera consonante en los siguientes 3 caracteres? Compara los resultados para los dos idiomas.</li>
 </ol>
 <p>Nos preguntan por la probabilidad de primer paso por el estado “consonante” partiendo de una “vocal” transcurridos tres caracteres. Utilizamos la función <code><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple()</a></code> de la librería <code>markovchain</code>.</p>
 <div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">=</span><span class="fl">3</span>
-<span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">idioma1</span>,state<span class="op">=</span><span class="st">"vocal"</span>,set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"consonante"</span><span class="op">)</span>,n<span class="op">=</span><span class="va">n</span><span class="op">)</span></code></pre></div>
+<span class="va">fpm1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">idioma1</span>,state<span class="op">=</span><span class="st">"vocal"</span>,set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"consonante"</span><span class="op">)</span>,n<span class="op">=</span><span class="va">n</span><span class="op">)</span>;<span class="va">fpm1</span></code></pre></div>
 <pre><code>##        set
 ## 1 0.490000
 ## 2 0.249900
 ## 3 0.127449</code></pre>
 <div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">idioma2</span>,state<span class="op">=</span><span class="st">"vocal"</span>,set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"consonante"</span><span class="op">)</span>,n<span class="op">=</span><span class="va">n</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">fpm2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/firstPassageMultiple.html">firstPassageMultiple</a></span><span class="op">(</span><span class="va">idioma2</span>,state<span class="op">=</span><span class="st">"vocal"</span>,set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"consonante"</span><span class="op">)</span>,n<span class="op">=</span><span class="va">n</span><span class="op">)</span>;<span class="va">fpm2</span></code></pre></div>
 <pre><code>##        set
 ## 1 0.750000
 ## 2 0.187500
 ## 3 0.046875</code></pre>
-<p>Así, tenemos que en el idioma1 la probabilidad de que la primera consonante que encontremos esté tres caracteres después de la vocal de inicio es de 0.127, mientras que esta probabilidad en el idioma2 es sólo de 0.047 (pues es muy probable que se encuentre a continuación de la vocal en <span class="math inline">\(n=1\)</span>, con probabilidad 0.75).</p>
+<p>Así, tenemos que en el idioma1 la probabilidad de que la primera consonante que encontremos esté tres caracteres después de la vocal de inicio es de 0.127449, mientras que esta probabilidad en el idioma2 es sólo de 0.127449.</p>
 <ol start="6" style="list-style-type: decimal">
 <li>A partir de una consonante, ¿cuántos caracteres, por término medio, tardamos en encontrar otra consonante en cada idioma?</li>
 </ol>
 <p>Nos están pidiendo el tiempo medio de recurrencia, esto es, volver a encontrar otra consonante si partimos de una consonante, que calculamos con la función <code><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime()</a></code>.</p>
 <div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">mrt1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma1</span><span class="op">)</span>;<span class="va">mrt1</span></code></pre></div>
 <pre><code>##      vocal consonante 
 ##   1.544444   2.836735</code></pre>
 <div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">mrt2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/markovchain/man/meanRecurrenceTime.html">meanRecurrenceTime</a></span><span class="op">(</span><span class="va">idioma2</span><span class="op">)</span>;<span class="va">mrt2</span></code></pre></div>
 <pre><code>##      vocal consonante 
 ##        3.5        1.4</code></pre>
-<p>Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres (2.84) hasta encontrar otra consonante, mientras que en el idioma2 sólo 1.4 por término medio.</p>
+<p>Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres hasta encontrar otra consonante, mientras que en el idioma2 sólo 1 por término medio.</p>
 <ol start="7" style="list-style-type: decimal">
 <li>¿Qué proporción de vocales y consonantes hay en cada idioma?</li>
 </ol>
@@ -2304,7 +2301,7 @@ p2=\left(\begin{matrix}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-06.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

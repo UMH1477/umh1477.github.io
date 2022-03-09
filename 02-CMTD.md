@@ -665,7 +665,7 @@ Para obtener la matriz de transiciones procedemos con un ejemplo. Supongamos que
 -   Si deja la empresa, es reemplazado por un nuevo empleado de grado 1 ($X_{n+1}^k = 1$) de forma que $Pr[X_{n+1}^k = 1 | X_n^k = 3] = 0.02.$
 -   Si se mantiene en el mismo puesto, tenemos que $Pr[X_{n+1}^k = 3 | X_n^k = 3] = 0.975.$
 
-Procediendo de forma similar en el resto de situaciones tenemos la matriz de transición para cualquiera de los trabajores como:
+Procediendo de forma similar en el resto de situaciones tenemos la matriz de transición para cualquiera de los trabajadores como:
 
 $$P = 
 \begin{pmatrix}
@@ -855,7 +855,7 @@ Sean:
 
 Ahora, si $X_n = 0$, entonces no hay paquetes disponibles para la transmisión al principio de la ranura $n+1$. Por lo tanto, todos los paquetes que llegan durante esa ranura, es decir, $A_{n+1}$, están en el buffer al final de esa ranura mientras tenga capacidad, esto es, $A_{n+1} \leq K$; si $A_{n+1}>K$, entonces la memoria intermedia está llena al final de la ranura $n+1$, $X_{n+1}=K$. Por lo tanto, en general $X_{n+1} = min(A_{n+1}, K)$, cuando $X_n=0$.
 
-Por otro lado, si hay algún paquete al final del instante $n$, $X_n > 0$, pasan al conumtador en la siguiente ranura $n+1$, se elimina un paquete al principio de la misma y se añaden los paquetes que lleguen durante esa ranura, $A_{n+1}$, con sujeción a las limitaciones de capacidad.
+Por otro lado, si hay algún paquete al final del instante $n$, $X_n > 0$, pasan al conmutador en la siguiente ranura $n+1$, se elimina un paquete al principio de la misma y se añaden los paquetes que lleguen durante esa ranura, $A_{n+1}$, con sujeción a las limitaciones de capacidad.
 
 Combinando estos casos, obtenemos:
 
@@ -873,46 +873,48 @@ Asumimos que $\{A_n, n \geq 1\}$ es una secuencia de variables iid con función 
 
 $$Pr(A_n = k) = a_k, \quad k \geq 0.$$
 
-Bajo esta condición $\{X_n, n \in \mathbb{N}\}$ es una $CMTD$ con espacio de estados $S = \{0, 1, 2,..., K\}$, cuyas probabilidades de transición vienen dadas a continuación:
+Bajo esta condición $\{X_n, n \in \mathbb{N}\}$ es una $CMTD$ con espacio de estados $S = \{0, 1, 2,..., K\}$, cuyas probabilidades de transición vienen dadas a continuación para todos los estados $0 \leq j \leq K$:
 
-Para $0 \leq j < K$:
 
-$$\begin{array}{ll}
-Pr[X_{n+1} = j | X_n = 0] & = Pr[min(A_{n+1}, K) = j | X_n = 0]\\
-& = Pr[A_{n+1} = j]\\
-& = a_j
-\end{array}$$
+Para $X_n=0 \ (i=0)$:
 
 $$\begin{array}{ll}
-Pr[X_{n+1} = K | X_n = 0] & = Pr[min(A_{n+1}, K) = K | X_n = 0]\\
-& = Pr[A_{n+1} \geq K]\\
-& =\sum_{k=K}^{\infty} a_k =1-\sum_{k=0}^{K-1} a_k
+Pr[X_{n+1} = j | X_n = 0] & = Pr[min(A_{n+1}, K) = j]\\
+& = \begin{cases}
+Pr[A_{n+1} \geq K], \quad \text{ si } j=K\\
+Pr[A_{n+1}=j], \quad \text{ si } j<K
+\end{cases} \\
+&= \begin{cases}
+\sum_{r=K}^{\infty} a_r \quad \text{ si } j=K\\
+a_j, \qquad \quad \text{ si } j<K
+\end{cases}
 \end{array}$$
 
-De igual forma, para $0 \leq i -1 \leq j < K,$
+Para $0< X_n=i \leq K$:
 
 $$\begin{array}{ll}
-Pr[X_{n+1} = j | X_n = i] & = Pr[min(X_n + A_{n+1} - 1, K) = j | X_n = i]\\
-& = Pr[A_{n+1} = j - i + 1]\\
-& = a_{j-i+1}
+Pr[X_{n+1} = j | X_n = i] & = Pr[min(A_{n+1}+X_n-1, K) = j]\\
+& = \begin{cases}
+Pr[A_{n+1} +i-1 \geq K], \quad \text{ si } j=K\\
+Pr[A_{n+1}+i-1=j], \quad \text{ si } j<K
+\end{cases} \\
+& = \begin{cases}
+\sum_{r=0}^{K-i+1} a_r, \qquad \text{ si } j=K\\
+a_{j-i+1}, \qquad \qquad \text{ si } i-1 \leq j<K\\
+0, \qquad \qquad \qquad  \text{ si } j<i-1
+\end{cases}
 \end{array}$$
 
-y para $1 \leq i \leq K,$
-
-$$\begin{array}{ll}
-Pr[X_{n+1} = K | X_n = i] & = Pr[min(X_n + A_{n+1} - 1, K) = K | X_n = i]\\
-& = Pr[A_{n+1} \geq K - i + 1]\\
-& = \sum_{k=K-i+1}^{\infty} a_k=1-\sum_{k=0}^{K-i} a_k
-\end{array}$$
 
 Si consideramos:
 
-$$b_j = \sum_{k=j}^{\infty} a_k$$ 
+$$b_j = \sum_{r=j}^{\infty} a_r=1-\sum_{r=0}^{j-1} a_r, \quad j=1,2,...,K$$ 
 
-la matriz de transiciones de un paso la podemos escribir como:
+la matriz de transiciones de un paso (de dimensión $(K+1) \times (K+1)$ la podemos escribir como:
 
 $$P = 
 \begin{pmatrix}
+a_0 & a_1 & ... & a_{K-1} & b_K\\
 a_0 & a_1 & ... & a_{K-1} & b_K\\
 0 & a_0 & ... & a_{K-2} & b_{K-1}\\
 ...&...&...&...&...\\
@@ -1090,7 +1092,7 @@ Si el conjunto cerrado está compuesto por un único estado $i$ diremos que ese 
 
 ::: {.yellowbox data-latex=""}
 ::: definition
-Una $CMTD$ es **irreducible** cuando todos sus estados están comunicados entre sí. Un conjunto de estados en S se dice irreducible cuando no contiene ningún subconjunto cerrado. Si la $CMTD$ no es irreducible, se llama **reducible**.
+Una $CMTD$ es **irreducible** cuando todos sus estados están comunicados entre sí, esto es, para cualquier $i,j \in S$ existe algún instante de tiempo $n \geq 0$ tal que $Pr(X_n=j|X_0=i)>0$. Un conjunto de estados en S se dice irreducible cuando no contiene ningún subconjunto cerrado. Si la $CMTD$ no es irreducible, se llama **reducible**.
 
 Todos los estados dentro de un conjunto irreducible son del mismo tipo.
 :::
@@ -1229,7 +1231,7 @@ Sea $\{X_n, n \geq 0\}$ una $CMTD$ homogénea con espacio de estados $S = \{1, 2
 $$m_{ij}(n) = E[N_j(n)|X_0 = i]$$
 como el **número esperado de visitas** o **tiempo de ocupación del estado $j$ hasta el instante $n$, partiendo del estado $i$**.
 
-A partir de las cantidades $m_{ij}(n)$ se puede definir la **matriz de tiempos de ocupación hasta un instante $n$**, $M(n)$, que se puede calcular a partir de la matriz de transición $P$ como:
+A partir de las cantidades $m_{ij}(n)$ se puede definir la **matriz de tiempos de ocupación hasta un instante** $n$, $M(n)=(m_{ij}(n))_{ij}$, que se puede calcular a partir de la matriz de transición $P$ como:
 
 ```{=tex}
 \begin{equation}
@@ -1238,19 +1240,6 @@ M(n) = \sum_{r=0}^n P^r
 \end{equation}
 ```
 
-:::
-:::
-
-::: {.yellowbox data-latex=""}
-::: definition
-Sea $\{X_n, n \geq 0\}$ una $CMTD$. Se define el **número de visitas al estado $j$ a lo largo de la vida de la cadena** como
-
-$$N_j=\sum_{n=0}^{\infty} I(X_n,j),$$
-donde $I(X_n,j)=1$ si $X_n=j$ y 0 en otro caso.
-
-Así, el número esperado de visitas al estado $j$ a lo largo de la vida de la cadena, partiendo del estado $i$, se define como
-
-$$m_{ij} = E[N_j|X_0 = i].$$
 :::
 :::
 
@@ -1834,7 +1823,15 @@ Puesto que el nuevo empleado comienza siempre en el nivel "1", el tiempo esperad
 
 ## Comportamiento a largo plazo {#AsinCMTD}
 
-En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una $CMTD$, es decir, el comportamiento cuando $n \rightarrow \infty$. La primera pregunta más obvia es si la distribución de $X_n$ se aproxima a algún límite finito cuando $n$ tiende a infinito. 
+En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una $CMTD$, es decir, el comportamiento cuando $n \rightarrow \infty$. 
+
+::: {.yellowbox data-latex=""}
+::: .definition
+La distribución estacionaria $\{\pi_1,..., \pi_N\}$ de una CMTD $\{X_n, n \geq 0\}$, con espacio de estados $S =\{1, 2,..., N\}$ verifica que:
+
+$$Pr(X_n=i)=\pi_i, \forall i \in S, \ n \geq 0.$$
+:::
+:::
 
 ::: {.yellowbox data-latex=""}
 ::: .definition
@@ -1845,13 +1842,10 @@ $$\pi = [\pi_1, \pi_2,...,\pi_N]$$
 donde
 
 $$\pi_j = \underset{n \rightarrow \infty}{lim} Pr[X_n = j], \quad j \in S$$
+Si existe la distribución límite o en estado estacionario, dicha distribución es la distribución estacionaria.
 :::
 :::
 
-La siguiente pregunta de interés, cuando dicha distribución existe, es si es única.
-Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.
-
-La última pregunta se refiere a la práctica: si hay una única distribución límite, ¿cómo podemos calcularla? Pues bien, aunque responder las dos primeras preguntas pueda ser más complejo, la respuesta a esta pregunta es fácil, puesto que si esta distribución límite exite, entonces satisface la siguiente propiedad.
 
 ::: {.yellowbox data-latex=""}
 ::: .definition
@@ -1870,17 +1864,78 @@ donde $p_{ij}$ son las probabilidades de transición (en la matriz $P$). Esta pr
 junto con la restricción de normalización
 
 $$\sum_{j=1}^N \pi_j = 1.$$
+:::
+:::
 
+
+::: {.yellowbox data-latex=""}
+::: definition
+Sea $\{X_n, n \geq 0\}$ una $CMTD$, con $N_j(n)$ el número de visitas o tiempo de ocupación del estado $j$. La **ocupación** del estado $j$ se define como la proporción de visitas al estado $j$ (o proporción del tiempo de ocupación que el sistema está en $j$) en el largo plazo ($n \rightarrow \infty$):
+
+\begin{equation}
+\pi_j=lim_{n \rightarrow \infty} \frac{E[N_j(n)|X_0=i]}{n+1}
+(\#eq:ocupacion)
+\end{equation}
+
+Si existe esta distribución de ocupación, entonces satisface las ecuaciones de balance y de normalización en \@ref(eq:ecuee).
 :::
 :::
+
+
+::: {.yellowbox data-latex=""}
+::: theorem
+Una CMTD con espacio de estados finitos y que es irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.
+
+Una CMTD con espacio de estados finitos y que es irreducible tiene una única distribución de ocupación y es igual a la distribución estacionaria.
+:::
+:::
+
+
+Introducimos ahora el concepto de periodicidad, que nos ayudará a decidir cuándo existe la distribución estacionaria.
+
+::: {.yellowbox data-latex=""}
+::: {.definition #periodo}
+
+Sea la $CMTD$ $\{X_n, n \geq 0\}$ con espacio de estados $S =\{1, 2,..., N\}$ y $d$ el entero más grande tal que para cualquier estado $i \in S$
+  
+$$\text{si } Pr[X_n = i | X_0 = i] >0 \Rightarrow n \text{ es  múltiplo de } d,$$
+  
+Se dice entonces que dicha $CMTD$ es **periódica con periodo $d$** si $d>1$, y **aperiódica** si $d = 1$.  
+:::
+:::
+
+Así, una CMTD con periodo $d$ puede volver a su estado inicial sólo en los instantes $d, 2d, 3d, ...$. En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo $d$ para cualquier estado $i \in S$, puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo. 
+
+En particular, si $p_{ii}>0$ para cualquier $i\in S$ (todos los estados son recurrentes) de una CMTD irreducible, entonces $d=1$ y la CMTD será aperiódica.
+
+
+::: {.yellowbox data-latex=""}
+::: theorem
+Una CMTD con espacio de estados finitos, irreducible y aperiódica tiene una única distribución límite o en el estado estacionario, que coincide pues con la distribución estacionaria y también con la de los tiempos de ocupación.
+
+La distribución límite o en estado estacionario de una CMTD reducible no es única y depende del estado inicial de la cadena.
+:::
+:::
+
 
 ::: {.whitebox data-latex=""}
+
+Podemos estudiar la periocidad de un sistema mediante la función `period()` de la librería `markovchain`.
+
 La función `steadyStates()` de la librería `markovchain` nos devuelve la distribución estacionaria de una $CMTD$. 
 :::
 
 ::: example
 Analizamos el sistema presentado en el Ejemplo \@ref(exm:diagramCMTD) para obtener la distribución estacionaria:
 
+
+```r
+period(proceso)
+```
+
+```
+## [1] 1
+```
 
 ```r
 # Distribución estacionaria
@@ -1897,66 +1952,12 @@ Obtenemos de esta forma las probabilidades asintóticas de estar en cada uno de 
 
 
 ::: {.yellowbox data-latex=""}
-::: {.definition #irreducible}
-
-Una $CMTD$ $\{X_n, n \geq 0\}$ con espacio de estados $S$ se dice que es **irreducible** si para cada pareja de estados $i$ y $j$ en $S$, existe algún instante de tiempo $k>0$ en el que es posible llegar a $j$ desde $i$, esto es,
-  
-$$Pr[X_k = j | X_0 = i] >0.$$
-:::
-:::
-
-Una $CMTD$ que no es irreducible se denomina **reducible**. 
-
-::: {.whitebox data-latex=""}
-Podemos estudiar esta característica del proceso mediante un análisis descriptivo del mismo, con la función `summary()` de la librería `markovchain`, como ya vimos en el Ejemplo \@ref(exm:summary-markovchain).
-:::
-
-
-La utilidad del concepto de irreducibilidad se justifica con los resultados que presentamos a continuación, referidos a la unicidad de la distribución estacionaria.
-
-::: {.yellowbox data-latex=""}
-::: definition
-Una CMTD de espacio de estados finitos que sea irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.
-
-Además, una CMTD de espacios finitos que sea irreducible tiene una única distribución de ocupación y es igual a la distribución estacionaria.
-:::
-:::
-
-Introducimos ahora el concepto de periodicidad, que nos ayudará a comprobar cuándo existe la distribución estacionaria.
-
-::: {.yellowbox data-latex=""}
-::: {.definition #periodo}
-
-Sea la $CMTD$ $\{X_n, n \geq 0\}$ con espacio de estados $S =\{1, 2,..., N\}$ y $d$ el entero más grande tal que para cualquier estado $i \in S$
-  
-$$\text{si } Pr[X_n = i | X_0 = i] >0 \Rightarrow n \text{ es  múltiplo de } d,$$
-  
-Se dice entonces que dicha $CMTD$ es **periódica con periodo $d$** si $d>1$, y **aperiódica** si $d = 1$.  
-:::
-:::
-
-Así, una CMTD con periodo $d$ puede volver a su estado inicial sólo en los instantes $d, 2d, 3d, ...$. En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo $d$ para cualquier estado $i \in S$, puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo. 
-
-
-::: {.whitebox data-latex=""}
-Podemos estudiar la periocidad de un sistema mediante la función `period()` de la librería `markovchain`.
-:::
-
-
-En particular, si $p_{ii}>0$ para cualquier $i\in S$ de una CMTD irreducible, entonces $d=1$ y la CMTD será aperiódica.
-
-El resultado más relevante es que si tenemos una $CMTD$ que es irreducible y aperiódica, entonces tiene una única distribución límite, que es la solución de la ecuación de balance y de normalización \@ref(eq:ecuee). Además, esta será la distribución estacionaria de la CMTD y también la distribución de ocupación.
-
-La distribución límite/estacionaria de una CMTD reducible no es única y depende del estado inicial de la cadena.
-
-
-::: {.yellowbox data-latex=""}
 ::: definition
 Si $i$ es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de la probabilidad de $i$ según la distribución estacionaria, es decir,
 
 ```{=tex}
 \begin{equation}
-E[T_{jj}] = 1/\pi_j.
+E[T_{ii}] = 1/\pi_i.
 (\#eq:et-piestacionaria)
 \end{equation}
 ```
@@ -2310,20 +2311,20 @@ final2.10 = ini %*% p2^10; final2.10
 Las probabilidades ahora se reducen drásticamente, y en el idioma1 resulta de 0.0008, y en el idioma2 de 0.0563.
 
 
-3. En cada idioma, en un texto de 1000 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y consonantes?
+3. En cada idioma, en a palabra de 5 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y si la palabra empieza por consonante?
 
-Nos pregunta por el número de visitas o tiempo de ocupación de cada uno de los estados en un periodo de duración 1000. Calculamos pues la matriz de tiempos de ocupación hasta el instante $n=1000$ con la Ecuación \@ref(eq:tposocupa), y para la que utilizamos la función `mocupa.proceso()` que definimos en la Sección [Tiempos de ocupación](tiemposocupa-sec).
+Nos pregunta por el número de visitas o tiempo de ocupación de cada uno de los estados (vocal/consonante) cuando llegamos a 5 caracteres (en 4 transiciones entre caracteres). Calculamos pues la matriz de tiempos de ocupación hasta el instante $n=4$ con la Ecuación \@ref(eq:tposocupa), y para la que utilizamos la función `mocupa.proceso()` que definimos en la Sección [Tiempos de ocupación](tiemposocupa-sec).
 
 
 ```r
-n=1000
+n=4
 mocupa1=mocupa.proceso(idioma1,n);mocupa1
 ```
 
 ```
-##                vocal consonante
-## vocal       2.040816   1.960784
-## consonante 10.000000   1.111111
+##               vocal consonante
+## vocal      1.970403   1.905397
+## consonante 4.095100   1.111100
 ```
 
 ```r
@@ -2332,11 +2333,11 @@ mocupa2=mocupa.proceso(idioma2,n);mocupa2
 
 ```
 ##               vocal consonante
-## vocal      1.333333   4.000000
-## consonante 1.428571   3.333333
+## vocal      1.332031   3.050781
+## consonante 1.425100   2.773100
 ```
 
-Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar, en 1000 caracteres, 2 vocales y 2 consonantes. En el idioma2, el número de vocales esperadas tras una vocal en 1000 caracteres es de 1 y 2 consonantes.
+Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar 2 vocales y si partimos de una consonante, 4.1 vocales. En el idioma2, si el primer carácter es vocal, encontraré 1.3 vocales y 4 vocales si el texto empieza por consonante.
 
 4. ¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?
 
@@ -2439,9 +2440,11 @@ mrt2=meanRecurrenceTime(idioma2);mrt2
 
 Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres hasta encontrar otra consonante, mientras que en el idioma2 sólo 1 por término medio.
 
-7. ¿Qué proporción de vocales y consonantes hay en cada idioma? 
+7. ¿Qué proporción de vocales y consonantes hay en cada idioma?  En un texto de 1000 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y consonantes?
 
-Recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles. Sabemos que cuando una CMTD es irreducible y aperiódica, esta distribución es única. Que es irreducible ya lo comprobamos anteriormente; verifiquemos pues que es aperiódica, esto es, que su periodo es 1, con la función `period()`.
+Para contestar la primera pregunta recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles, o lo que es lo mismo, la proporción de vocales y consonantes. Para responder la segunda pregunta, puesto que estamos en un texto muy largo con 1000 caracteres, ya no utilizaremos a la matriz de ocupación hasta un instante $n=1000$, sino la distribución de ocupación, que coincide con la distribución estacionaria. 
+
+Sabemos que una CMTD irreducible y aperiódica tiene una única distribución estacionaria, que coincide con la distribución de ocupación. Que es irreducible ya lo comprobamos anteriormente al definir el sistema; verifiquemos pues que es aperiódica, esto es, que su periodo es 1, con la función `period()`.
 
 
 ```r
@@ -2460,9 +2463,7 @@ period(idioma2)
 ## [1] 1
 ```
 
-Tenemos entonces que ambos procesos son aperiódicos (periodo $d=1$), esto es, siempre es posible volver a cualquier estado en una única transición.
-
-La distribución estacionaria la calculamos a continuación con la función `steadyStates()`.
+Así pues, calculamos la distribución estacionaria a continuación con la función `steadyStates()`.
 
 
 ```r
@@ -2483,7 +2484,29 @@ pi2=steadyStates(idioma2); pi2
 ## [1,] 0.2857143  0.7142857
 ```
 
-Así pues, tenemos que en el idioma1 el 65% de los caracteres en un texto son vocales, que predominan sobre las consonantes, mientras que en el idioma2 sólo un 29%, y la supremacía es de las consonantes, con un 71.4%.
+Tenemos que en el idioma1 el 65% de los caracteres en un texto son vocales, que predominan sobre las consonantes, mientras que en el idioma2 sólo un 29%, y la supremacía es de las consonantes, con un 71.4%.
+
+Para calcular el número esperado de vocales y consonantes en un texto de 1000 caracteres, basta multiplicar estas probabilidades por 1000.
+
+
+```r
+round(1000*pi1)
+```
+
+```
+##      vocal consonante
+## [1,]   647        353
+```
+
+```r
+round(1000*pi2)
+```
+
+```
+##      vocal consonante
+## [1,]   286        714
+```
+Así, en un texto de 1000 caracteres esperamos 647 vocales en el idioma1 y 286 en el idioma2.
 
 Vamos a comprobar, además, que la distribución estacionaria verifica la ecuación de balance o del estado estacionario que se muestra en la Ecuación \@ref(eq:ecuee).
 
@@ -2792,7 +2815,7 @@ En este caso el p-valor es cero, por lo que rechazamos la compatibilidad y clara
 
 $$P = 
 \begin{pmatrix}
-0.1 & 0.3 & 0.4\\
+0.3 & 0.3 & 0.4\\
 0.1 & 0.5 & 0.4\\
 0.3 & 0.2 & 0.5\\
 \end{pmatrix}$$

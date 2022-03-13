@@ -6,7 +6,7 @@
 ]{book}
 \title{Simulación de Procesos y Sistemas}
 \author{true \and true}
-\date{2022-03-03}
+\date{2022-03-13}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -278,34 +278,31 @@ Las versiones de las librerías de R utilizadas son las siguientes:
 ## other attached packages:
 ##  [1] kableExtra_1.3.4    gridExtra_2.3       sjPlot_2.8.10       rootSolve_1.8.2.3  
 ##  [5] queuecomputer_1.1.0 queueing_0.2.12     markovchain_0.8.6   diagram_1.6.5      
-##  [9] shape_1.4.6         simmer.plot_0.1.17  simmer.bricks_0.2.1 simmer_4.4.3       
-## [13] forcats_0.5.1       stringr_1.4.0       dplyr_1.0.7         purrr_0.3.4        
+##  [9] shape_1.4.6         simmer.plot_0.1.17  simmer.bricks_0.2.1 simmer_4.4.4       
+## [13] forcats_0.5.1       stringr_1.4.0       dplyr_1.0.8         purrr_0.3.4        
 ## [17] readr_2.1.2         tidyr_1.2.0         tibble_3.1.6        ggplot2_3.3.5      
 ## [21] tidyverse_1.3.1    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] minqa_1.2.4          colorspace_2.0-2     ellipsis_0.3.2       sjlabelled_1.1.8    
-##  [5] estimability_1.3     parameters_0.16.0    fs_1.5.2             rstudioapi_0.13     
-##  [9] matlab_1.0.2         fansi_1.0.2          mvtnorm_1.1-3        lubridate_1.8.0     
-## [13] xml2_1.3.3           codetools_0.2-18     splines_4.1.2        knitr_1.37          
-## [17] sjmisc_2.8.9         jsonlite_1.7.3       nloptr_2.0.0         ggeffects_1.1.1     
-## [21] broom_0.7.12         dbplyr_2.1.1         effectsize_0.6.0.1   compiler_4.1.2      
-## [25] httr_1.4.2           sjstats_0.18.1       emmeans_1.7.2        backports_1.4.1     
-## [29] assertthat_0.2.1     Matrix_1.3-4         fastmap_1.1.0        cli_3.1.1           
-## [33] htmltools_0.5.2.9000 tools_4.1.2          igraph_1.2.11        coda_0.19-4         
-## [37] gtable_0.3.0         glue_1.6.1           Rcpp_1.0.8           cellranger_1.1.0    
-## [41] vctrs_0.3.8          svglite_2.1.0        nlme_3.1-153         insight_0.15.0      
-## [45] xfun_0.29            lme4_1.1-28          rvest_1.0.2          lifecycle_1.0.1     
-## [49] MASS_7.3-54          scales_1.1.1         hms_1.1.1            parallel_4.1.2      
-## [53] expm_0.999-6         yaml_2.2.2           stringi_1.7.6        bayestestR_0.11.5   
-## [57] boot_1.3-28          rlang_1.0.1          pkgconfig_2.0.3      systemfonts_1.0.2   
-## [61] evaluate_0.14        lattice_0.20-45      tidyselect_1.1.1     magrittr_2.0.2      
-## [65] bookdown_0.24        R6_2.5.1             generics_0.1.2       DBI_1.1.2           
-## [69] pillar_1.7.0         haven_2.4.3          withr_2.4.3          datawizard_0.2.3    
-## [73] performance_0.8.0    modelr_0.1.8         crayon_1.4.2         utf8_1.2.2          
-## [77] tzdb_0.2.0           rmarkdown_2.11       grid_4.1.2           readxl_1.3.1        
-## [81] reprex_2.0.1         digest_0.6.29        webshot_0.5.2        xtable_1.8-4        
-## [85] RcppParallel_5.1.5   stats4_4.1.2         munsell_0.5.0        viridisLite_0.4.0
+##  [1] TH.data_1.1-0      minqa_1.2.4        colorspace_2.0-3   ellipsis_0.3.2     sjlabelled_1.1.8  
+##  [6] estimability_1.3   parameters_0.16.0  fs_1.5.2           rstudioapi_0.13    matlab_1.0.2      
+## [11] fansi_1.0.2        mvtnorm_1.1-3      lubridate_1.8.0    xml2_1.3.3         codetools_0.2-18  
+## [16] splines_4.1.2      knitr_1.37         sjmisc_2.8.9       jsonlite_1.8.0     nloptr_2.0.0      
+## [21] ggeffects_1.1.1    broom_0.7.12       dbplyr_2.1.1       effectsize_0.6.0.1 compiler_4.1.2    
+## [26] httr_1.4.2         sjstats_0.18.1     emmeans_1.7.2      backports_1.4.1    assertthat_0.2.1  
+## [31] Matrix_1.4-0       fastmap_1.1.0      cli_3.2.0          formatR_1.11       htmltools_0.5.2   
+## [36] tools_4.1.2        igraph_1.2.11      coda_0.19-4        gtable_0.3.0       glue_1.6.2        
+## [41] Rcpp_1.0.8         cellranger_1.1.0   vctrs_0.3.8        svglite_2.1.0      nlme_3.1-155      
+## [46] insight_0.16.0     xfun_0.29          lme4_1.1-28        rvest_1.0.2        lifecycle_1.0.1   
+## [51] MASS_7.3-55        zoo_1.8-9          scales_1.1.1       hms_1.1.1          parallel_4.1.2    
+## [56] sandwich_3.0-1     expm_0.999-6       yaml_2.3.4         stringi_1.7.6      bayestestR_0.11.5 
+## [61] boot_1.3-28        systemfonts_1.0.4  rlang_1.0.1        pkgconfig_2.0.3    evaluate_0.15     
+## [66] lattice_0.20-45    tidyselect_1.1.1   magrittr_2.0.2     bookdown_0.24      R6_2.5.1          
+## [71] generics_0.1.2     multcomp_1.4-18    DBI_1.1.2          pillar_1.7.0       haven_2.4.3       
+## [76] withr_2.5.0        survival_3.2-13    datawizard_0.2.3   performance_0.8.0  modelr_0.1.8      
+## [81] crayon_1.5.0       utf8_1.2.2         tzdb_0.2.0         rmarkdown_2.11     grid_4.1.2        
+## [86] readxl_1.3.1       webshot_0.5.2      reprex_2.0.1       digest_0.6.29      xtable_1.8-4      
+## [91] RcppParallel_5.1.5 stats4_4.1.2       munsell_0.5.0      viridisLite_0.4.0
 \end{verbatim}
 
 Cargamos las librerías de interés que utilizaremos en este manual.
@@ -325,7 +322,7 @@ Cargamos las librerías de interés que utilizaremos en este manual.
 \CommentTok{\# Librerías de entorno gráfico}
 \FunctionTok{library}\NormalTok{(sjPlot)}
 \FunctionTok{library}\NormalTok{(gridExtra)}
-\FunctionTok{library}\NormalTok{(kableExtra) }\CommentTok{\# y tablas}
+\FunctionTok{library}\NormalTok{(kableExtra)  }\CommentTok{\# y tablas}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4661,19 +4658,23 @@ En esta unidad trabajamos con un tipo especial de proceso estocástico de tiempo
 \hypertarget{definiciones}{%
 \section{Definiciones}\label{definiciones}}
 
+\begin{yellowbox}
+
 \begin{definition}
-\protect\hypertarget{def:CMTC}{}\label{def:CMTC}Un proceso estocástico \(\{X(t), t \in \mathbb{N}\}\) con espacio de estados de tipo discreto, \(S\), se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados \(i\) y \(j\) de \(S\) tenemos que:
+\protect\hypertarget{def:CMTC}{}\label{def:CMTC}Un proceso estocástico \(\{X(t), t \in \mathbb{N}^*\}\), con \(\mathbb{N}^*\) el conjunto de todos los números naturales incluido el cero, y con espacio de estados de tipo discreto, \(S\), se denomina Cadena de Markov de Tiempo Discreto, si para cualquier par de estados \(i\) y \(j\) de \(S\) se verifica la propiedad de Markov, esto es, que la probabilidad de que el proceso en un instante \(t+1\) se encuentre en un estado \(j\), dado su comportamiento previo, sólo depende del estado en el que el sistema se encontraba justamente en el instante anterior \(t\), esto es, \(X(t)=i\), y no del estado del proceso en los instantes anteriores \(t-1, t-2,...,0\):
 
 \begin{eqnarray}
-&Pr(X(t+1) = j \| X(t) = i, X(t-1),...,X(0)) = \\
-&= Pr(X(t+1) = j \| X(t) = i),
+&Pr(X(t+1) = j | X(t) = i, X(t-1),...,X(0)) = \nonumber \\
+&= Pr(X(t+1) = j | X(t) = i),
 \label{eq:cmtd}
 \end{eqnarray}
 
-es decir, la probabilidad de que el proceso en un instante \(t+1\) se encuentre en un estado \(j\), dada toda la evolución del proceso a lo largo del tiempo, sólo depende del estado en el que el sistema se encuentrara justamente en el instante anterior \(t\), esto es, \(X(t)=i\), y y no del estado del proceso en los instantes anteriores \(t-1, t-2,...,0\).
+Utilizaremos indistintamente la siguiente notación:
 
-En ocasiones utilizaremos la siguiente notación, \[X(n)=X_n, \qquad n \geq 0\]
+\[\{X(n), n \in \mathbb{N}^*\}\equiv \{X_n,  n \geq 0\}\]
 \end{definition}
+
+\end{yellowbox}
 
 La probabilidad condicionada dada en \eqref{eq:cmtd} se denomina \textbf{probabilidad de transición de un paso} y se denota por \(p_{ij}(t,t+1)\), y es la probabilidad de que, dado que el proceso en el instante \(t\) está en el estado \(i\), un instante más tarde, \(t+1\) haya cambiado al estado \(j\):
 
@@ -4723,7 +4724,16 @@ Pr[X(t)= k] =  \sum_{i \in S} p_{ik}(t) p_i(0),
 \label{eq:probtotal-cmtd}
 \end{equation}
 
-con \(p_i(0) = Pr(X(0) = i)\) la probabilidad de que en el instante inicial el proceso se encuentre en el estado \(i\). De hecho, el vector \[p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}\] se denomina \textbf{distribución inicial de la cadena} e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.
+con \(p_i(0) = Pr(X(0) = i)\) la probabilidad de que en el instante inicial el proceso se encuentre en el estado \(i\). De hecho, el vector
+
+\[p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}\]
+se denomina \textbf{distribución inicial de la cadena} e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.
+
+En formato matricial, cuando el espacio de estados es finito, \(S=\{1,...,N\}\), la distribución marginal transcurridas \(n\) transiciones en el proceso, se obtendrá a partir del vector de probabilidades iniciales \(p(0) =(p_1(0),p_2(0),\ldots,p_N(0))\) y la matriz de transición \(p=(p_{ij})_{i,j =1,...,N}\),
+
+\begin{equation}
+p(n)=p(0) %*% p
+\end{equation}
 \end{definition}
 
 \end{yellowbox}
@@ -4750,9 +4760,7 @@ p_{21}(n) & p_{22}(n) & ... & p_{2N}(n)\\
 p_{N1}(n) & p_{N2}(n) & ... & p_{NN}(n)
 \end{pmatrix}\]
 
-con
-
-\begin{eqnarray*}
+con \begin{eqnarray*}
 0 \leq p_{ij}(n) &\leq& 1 \\
 \sum_{j \in S} p_{ij}(n) &=& 1.
 \end{eqnarray*}
@@ -4791,6 +4799,29 @@ p(n) = p(0)P^n.
 
 \end{yellowbox}
 
+\begin{whitebox}
+
+Para calcular la matriz de transición de \(n\) pasos en R habrá que utilizar el producto matricial para obtener estas matrices. Definimos entonces una función que nos permitirá calcularla a partir de la matriz de transición de un paso.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Matriz de probs. transición de n pasos}
+\NormalTok{ptran.n}\OtherTok{=}\ControlFlowTok{function}\NormalTok{(ptran,n)\{}
+  \CommentTok{\# ptran es la matriz de transición de 1 paso}
+  \CommentTok{\# n son los pasos a dar}
+\NormalTok{  i}\OtherTok{=}\DecValTok{1}
+\NormalTok{  p}\OtherTok{=}\NormalTok{ptran}
+  \ControlFlowTok{while}\NormalTok{(i}\SpecialCharTok{\textless{}}\NormalTok{n)\{}
+\NormalTok{    p}\OtherTok{=}\NormalTok{p}\SpecialCharTok{\%*\%}\NormalTok{ptran}
+\NormalTok{    i}\OtherTok{=}\NormalTok{i}\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{  \}}
+\FunctionTok{return}\NormalTok{(p)  }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{whitebox}
+
 \hypertarget{libMC}{%
 \section{Librería markovchain}\label{libMC}}
 
@@ -4812,7 +4843,9 @@ Planteamos resolver las cuestiones siguientes:
 (1). Queremos representar el proceso a través de un grafo.
 
 \begin{whitebox}
-Para representar el proceso con \texttt{markovchain}, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica \texttt{new()} para generar un objeto del tipo \texttt{markovchain}: \[new("markovchain",states,byrow=TRUE,transitionMatrix)\]
+Para representar el proceso con \texttt{markovchain}, hemos de crear un vector con los estados y la matriz de transición con las probabilidades de transición. Definimos entonces el proceso con la función genérica \texttt{new()} para generar un objeto del tipo \texttt{markovchain}:
+
+\[new("markovchain",states,byrow=TRUE,transitionMatrix)\]
 
 introduciendo el vector de estados en \texttt{states}, la matriz de transición en \texttt{transitionMatrix}, y especificando si dicha matriz se ha de leer por filas.
 
@@ -4904,9 +4937,35 @@ Así la pregunta (2) se responde con:
 \CommentTok{\# Estado inicial en c}
 \NormalTok{sini }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
 \CommentTok{\# matriz de transición de 3 pasos}
-\NormalTok{mt3 }\OtherTok{\textless{}{-}}\NormalTok{ proceso}\SpecialCharTok{\^{}}\DecValTok{3}
+\NormalTok{mt3 }\OtherTok{\textless{}{-}} \FunctionTok{ptran.n}\NormalTok{(pmat,}\DecValTok{3}\NormalTok{);mt3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          a       b        c
+## a 0.402250 0.10350 0.494250
+## b 0.356250 0.15450 0.489250
+## c 0.350625 0.10725 0.542125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# o bien extrayendo la matriz de transición del proceso}
+\FunctionTok{ptran.n}\NormalTok{(proceso[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{],}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          a       b        c
+## a 0.402250 0.10350 0.494250
+## b 0.356250 0.15450 0.489250
+## c 0.350625 0.10725 0.542125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Situación del proceso dentro de 3 instantes}
-\NormalTok{sini}\SpecialCharTok{*}\NormalTok{mt3}
+\NormalTok{sini}\SpecialCharTok{\%*\%}\NormalTok{mt3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4918,9 +4977,9 @@ Así la pregunta (2) se responde con:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# matriz de transición de 10 pasos}
-\NormalTok{mt10 }\OtherTok{\textless{}{-}}\NormalTok{ proceso}\SpecialCharTok{\^{}}\DecValTok{10}
+\NormalTok{mt10 }\OtherTok{\textless{}{-}}\FunctionTok{ptran.n}\NormalTok{(pmat,}\DecValTok{10}\NormalTok{)}
 \CommentTok{\# Situación del proceso dentro de 10 instantes}
-\NormalTok{sini}\SpecialCharTok{*}\NormalTok{mt10}
+\NormalTok{sini}\SpecialCharTok{\%*\%}\NormalTok{mt10}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4943,9 +5002,9 @@ Así la pregunta (2) se responde con:
 \CommentTok{\# Distribución de  probabilidad inicial}
 \NormalTok{dini }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.4}\NormalTok{)}
 \CommentTok{\# matriz de transición de 10 pasos}
-\NormalTok{mt10 }\OtherTok{\textless{}{-}}\NormalTok{ proceso}\SpecialCharTok{\^{}}\DecValTok{10}
-\CommentTok{\# distribución de probabilidad en 10 pasos}
-\NormalTok{dini}\SpecialCharTok{*}\NormalTok{mt10}
+\NormalTok{mt10 }\OtherTok{\textless{}{-}} \FunctionTok{ptran.n}\NormalTok{(pmat,}\DecValTok{10}\NormalTok{)}
+\CommentTok{\# distribución de probabilidad marginal en 10 pasos: inicial x condicional}
+\NormalTok{dini}\SpecialCharTok{\%*\%}\NormalTok{mt10}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4965,7 +5024,8 @@ En base a la distribución del proceso tras \(n=10\) pasos, apreciamos que lo m�
 \end{itemize}
 
 \begin{whitebox}
-Para simular una CMTD hasta una transición \(n\) con la librería \texttt{markovchain} basta utilizar la función \texttt{rmarkovchain(n,\ proceso)}, donde proceso ha sido definido previamente con la función \texttt{new()}.
+Para simular una CMTD hasta una transición \(n\) con la librería \texttt{markovchain}
+basta utilizar la función \texttt{rmarkovchain(n,\ proceso)}, donde proceso ha sido definido previamente con la función \texttt{new()}.
 
 \end{whitebox}
 
@@ -5067,9 +5127,7 @@ Sea \(Y_n\) el número de máquinas en estado ``On'' al principio del día \(n\)
 
 Calculemos la probabilidad de transición para un caso concreto: \(Y_n = i = 1\) e \(Y_{n+1} = j = 0\), que identifica una situación en la que una máquina está en funcionamiento y otra en paro el día \(n\), pero al día siguiente ambas están paradas. Así, la máquina que está ``Off'' el día \(n\) debe permanecer ``Off'' al día siguiente, y la máquina que está ``On'' debe cambiar a ``Off'' el día siguiente. Como las máquinas son independientes, la probabilidad de cambio de estado es:
 
-\[p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006\]
-
-Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:
+\[p_{10}=Pr[Y_{n+1} = 0 | Y_n = 1] = 0.03 * 0.02 = 0.0006\] Procediendo de la misma forma obtenemos la matriz completa de transición de un paso del proceso como:
 
 \[P = 
 \begin{pmatrix}
@@ -5382,7 +5440,7 @@ Para obtener la matriz de transiciones procedemos con un ejemplo. Supongamos que
   Si se mantiene en el mismo puesto, tenemos que \(Pr[X_{n+1}^k = 3 | X_n^k = 3] = 0.975.\)
 \end{itemize}
 
-Procediendo de forma similar en el resto de situaciones tenemos la matriz de transición para cualquiera de los trabajores como:
+Procediendo de forma similar en el resto de situaciones tenemos la matriz de transición para cualquiera de los trabajadores como:
 
 \[P = 
 \begin{pmatrix}
@@ -5451,7 +5509,7 @@ Representamos a continuación este sistema en forma de grafo en la Figura \ref{f
 \hypertarget{mercadovalores}{%
 \subsection{Mercado de valores}\label{mercadovalores}}
 
-Las acciones ordinarias de la empresa Gadgets-R-Us se cotizan en el mercado de valores. El director financiero de Gadgets-R-Us compra y vende las acciones de su propia empresa para que el precio nunca baje de 2 dólares y nunca supera los 10 dólares. Para simplificar, suponemos que \(X_n\), es el precio de las acciones al final del día \(n\), y sólo toma valores enteros; es decir, el espacio de estados del proceso \(\{X_n, n \in \mathbb{N}\}\) es \(S = 2, 3,...,10\). Si denominamos \(I_{n+1}\) al movimiento potencial del precio de las acciones en el día \(n+1\) en ausencia de cualquier intervención del director financiero, entonces tenemos que:
+Las acciones ordinarias de la empresa Gadgets-R-Us se cotizan en el mercado de valores. El director financiero de Gadgets-R-Us compra y vende las acciones de su propia empresa para que el precio nunca baje de 2 dólares y nunca supere los 10 dólares (cuando esto ocurre, vende). Para simplificar, suponemos que \(X_n\), es el precio de cada acción al final del día \(n\), y sólo toma valores enteros; es decir, el espacio de estados del proceso \(\{X_n, n \in \mathbb{N}\}\) es \(S = 2, 3,...,10\). Si denominamos \(I_{n+1}\) al movimiento potencial del precio de las acciones en el día \(n+1\) en ausencia de cualquier intervención del director financiero, entonces tenemos que:
 
 \begin{equation*}
 X_{n+1} =  
@@ -5462,28 +5520,25 @@ X_n + I_{n+1} & \text{ si } 2 < X_n + I_{n+1} < 10\\
 \end{cases}
 \end{equation*}
 
-Un análisis continuado de los datos del pasado sugieren que los movimientos potenciales \(\{I_n, n \geq 1\}\) son una secuencia de variables iid con función de masa de probabilidad dada por:
+Un análisis continuado de los datos del pasado sugiere que los movimientos potenciales \(\{I_n, n \geq 1\}\) son una secuencia de variables iid con función de masa de probabilidad dada por:
 
 \[Pr(I_n = k) = 0.2, \quad k = -2, -1, 0, 1, 2.\]
 
-Esto implica que \(\{X_n, n \in \mathbb{N}\}\) es una \(CMTD\) con espacio de estados \(S = \{2, 3,...,10\}\), donde las probabilidadees de transición se pueden obtener de forma sencilla. A modo de ejemplo presentamos los tres casos siguientes:
+Esto implica que \(\{X_n, n \in \mathbb{N}\}\) es una \(CMTD\) con espacio de estados \(S = \{2, 3,...,10\}\), donde las probabilidades de transición se pueden obtener de forma sencilla. A modo de ejemplo presentamos los tres casos siguientes:
 
 \[\begin{array}{ll}
 Pr[X_{n+1} = 2 | X_n = 3] & = Pr[X_n + I_{n+1} \leq 2 | X_n = 3]\\
-& = Pr[I_{n+1} \leq -1]\\
-& = 0.4
+& = Pr[I_{n+1} \leq -1]= 0.4
 \end{array}\]
 
 \[\begin{array}{ll}
-Pr[X_{n+1} = 6 | X_n = 5] & = Pr[X_n + I_{n+1} = 6 | X_n = 3]\\
-& = Pr[I_{n+1} = 1]\\
-& = 0.2
+Pr[X_{n+1} = 6 | X_n = 5] & = Pr[X_n + I_{n+1} = 6 | X_n = 5]\\
+& = Pr[I_{n+1} = 1]  = 0.2
 \end{array}\]
 
 \[\begin{array}{ll}
 Pr[X_{n+1} = 10 | X_n = 10] & = Pr[X_n + I_{n+1} \geq 10 | X_n = 10]\\
-& = Pr[I_{n+1} \geq 0]\\
-& = 0.6
+& = Pr[I_{n+1} \geq 0] = 0.6
 \end{array}\]
 
 de forma que la matriz de transición del sistema viene dada por:
@@ -5584,7 +5639,7 @@ Sean:
 
 Ahora, si \(X_n = 0\), entonces no hay paquetes disponibles para la transmisión al principio de la ranura \(n+1\). Por lo tanto, todos los paquetes que llegan durante esa ranura, es decir, \(A_{n+1}\), están en el buffer al final de esa ranura mientras tenga capacidad, esto es, \(A_{n+1} \leq K\); si \(A_{n+1}>K\), entonces la memoria intermedia está llena al final de la ranura \(n+1\), \(X_{n+1}=K\). Por lo tanto, en general \(X_{n+1} = min(A_{n+1}, K)\), cuando \(X_n=0\).
 
-Por otro lado, si hay algún paquete al final del instante \(n\), \(X_n > 0\), pasan al conumtador en la siguiente ranura \(n+1\), se elimina un paquete al principio de la misma y se añaden los paquetes que lleguen durante esa ranura, \(A_{n+1}\), con sujeción a las limitaciones de capacidad.
+Por otro lado, si hay algún paquete al final del instante \(n\), \(X_n > 0\), pasan al conmutador en la siguiente ranura \(n+1\), se elimina un paquete al principio de la misma y se añaden los paquetes que lleguen durante esa ranura, \(A_{n+1}\), con sujeción a las limitaciones de capacidad.
 
 Combinando estos casos, obtenemos:
 
@@ -5600,46 +5655,46 @@ Asumimos que \(\{A_n, n \geq 1\}\) es una secuencia de variables iid con funció
 
 \[Pr(A_n = k) = a_k, \quad k \geq 0.\]
 
-Bajo esta condición \(\{X_n, n \in \mathbb{N}\}\) es una \(CMTD\) con espacio de estados \(S = \{0, 1, 2,..., K\}\), cuyas probabilidades de transición vienen dadas a continuación:
+Bajo esta condición \(\{X_n, n \in \mathbb{N}\}\) es una \(CMTD\) con espacio de estados \(S = \{0, 1, 2,..., K\}\), cuyas probabilidades de transición vienen dadas a continuación para todos los estados \(0 \leq j \leq K\):
 
-Para \(0 \leq j < K\):
+Para \(X_n=0 \ (i=0)\):
 
 \[\begin{array}{ll}
-Pr[X_{n+1} = j | X_n = 0] & = Pr[min(A_{n+1}, K) = j | X_n = 0]\\
-& = Pr[A_{n+1} = j]\\
-& = a_j
+Pr[X_{n+1} = j | X_n = 0] & = Pr[min(A_{n+1}, K) = j]\\
+& = \begin{cases}
+Pr[A_{n+1} \geq K], \quad \text{ si } j=K\\
+Pr[A_{n+1}=j], \quad \text{ si } j<K
+\end{cases} \\
+&= \begin{cases}
+\sum_{r=K}^{\infty} a_r \quad \text{ si } j=K\\
+a_j, \qquad \quad \text{ si } j<K
+\end{cases}
 \end{array}\]
 
-\[\begin{array}{ll}
-Pr[X_{n+1} = K | X_n = 0] & = Pr[min(A_{n+1}, K) = K | X_n = 0]\\
-& = Pr[A_{n+1} \geq K]\\
-& =\sum_{k=K}^{\infty} a_k =1-\sum_{k=0}^{K-1} a_k
-\end{array}\]
-
-De igual forma, para \(0 \leq i -1 \leq j < K,\)
+Para \(0< X_n=i \leq K\):
 
 \[\begin{array}{ll}
-Pr[X_{n+1} = j | X_n = i] & = Pr[min(X_n + A_{n+1} - 1, K) = j | X_n = i]\\
-& = Pr[A_{n+1} = j - i + 1]\\
-& = a_{j-i+1}
-\end{array}\]
-
-y para \(1 \leq i \leq K,\)
-
-\[\begin{array}{ll}
-Pr[X_{n+1} = K | X_n = i] & = Pr[min(X_n + A_{n+1} - 1, K) = K | X_n = i]\\
-& = Pr[A_{n+1} \geq K - i + 1]\\
-& = \sum_{k=K-i+1}^{\infty} a_k=1-\sum_{k=0}^{K-i} a_k
+Pr[X_{n+1} = j | X_n = i] & = Pr[min(A_{n+1}+X_n-1, K) = j]\\
+& = \begin{cases}
+Pr[A_{n+1} +i-1 \geq K], \quad \text{ si } j=K\\
+Pr[A_{n+1}+i-1=j], \quad \text{ si } j<K
+\end{cases} \\
+& = \begin{cases}
+\sum_{K-i+1}^{\infty} a_r, \qquad \text{ si } j=K\\
+a_{j-i+1}, \qquad \qquad \text{ si } i-1 \leq j<K\\
+0, \qquad \qquad \qquad  \text{ si } j<i-1
+\end{cases}
 \end{array}\]
 
 Si consideramos:
 
-\[b_j = \sum_{k=j}^{\infty} a_k\]
+\[b_j = \sum_{r=j}^{\infty} a_r=1-\sum_{r=0}^{j-1} a_r, \quad j=1,2,...,K\]
 
-la matriz de transiciones de un paso la podemos escribir como:
+la matriz de transiciones de un paso (de dimensión \((K+1) \times (K+1)\) la podemos escribir como:
 
 \[P = 
 \begin{pmatrix}
+a_0 & a_1 & ... & a_{K-1} & b_K\\
 a_0 & a_1 & ... & a_{K-1} & b_K\\
 0 & a_0 & ... & a_{K-2} & b_{K-1}\\
 ...&...&...&...&...\\
@@ -5832,7 +5887,6 @@ Un estado \(i \in S\) se denomina \textbf{estado sin retorno} cuando no es viabl
 Un conjunto de estados \(C \subset S\) se denomina \textbf{cerrado} cuando no es posible pasar de un estado de \(C\) a otro que no esté en \(C\), esto es,
 
 \[\forall i \in C, \quad \forall j \notin C \quad \Rightarrow \quad p_{ij}(n) = 0, \quad n\geq 1\]
-
 o lo que es lo mismo,
 
 \[ \sum_{j \in C} p_{ij}=1, \quad \forall i \in C.\]
@@ -5847,7 +5901,7 @@ Si el conjunto cerrado está compuesto por un único estado \(i\) diremos que es
 \begin{yellowbox}
 
 \begin{definition}
-Una \(CMTD\) es \textbf{irreducible} cuando todos sus estados están comunicados entre sí. Un conjunto de estados en S se dice irreducible cuando no contiene ningún subconjunto cerrado. Si la \(CMTD\) no es irreducible, se llama \textbf{reducible}.
+Una \(CMTD\) es \textbf{irreducible} cuando todos sus estados están comunicados entre sí, esto es, para cualquier \(i,j \in S\) existe algún instante de tiempo \(n \geq 0\) tal que \(Pr(X_n=j|X_0=i)>0\). Un conjunto de estados en S se dice irreducible cuando no contiene ningún subconjunto cerrado. Si la \(CMTD\) no es irreducible, se llama \textbf{reducible}.
 
 Todos los estados dentro de un conjunto irreducible son del mismo tipo.
 \end{definition}
@@ -6009,33 +6063,18 @@ La proporción de semanas en que la demanda no ha sido satisfecha (por rebasar e
 
 \begin{definition}
 
-Sea \(\{X_n, n \in \mathbb{N}\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\), matriz de probabilidades de transición de una paso \(P\), y distribución inicial \(p(0)\). Consideramos la variable aleatoria \(N_j(n)\) como el número de visitas al estado \(j\) en el periodo \(\{1, 2,...,n\}\) y definimos
+Sea \(\{X_n, n \geq 0\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\), matriz de probabilidades de transición de una paso \(P\), y distribución inicial \(p(0)\). Consideramos la variable aleatoria \(N_j(n)\) como el \textbf{número de visitas al estado \(j\) en \(n\) transiciones} y definimos
 
 \[m_{ij}(n) = E[N_j(n)|X_0 = i]\]
+como el \textbf{número esperado de visitas} o \textbf{tiempo de ocupación del estado \(j\) hasta el instante \(n\), partiendo del estado \(i\)}.
 
-como el número esperado de visitas o \textbf{tiempo de ocupación} del estado \(j\) hasta el instante \(n\), partiendo del estado \(i\).
-
-A partir de las cantidades \(m_{ij}(n)\) se puede definir la \textbf{matriz de tiempos de ocupación hasta un instante} \(n\), \(M(n)\), que se puede calcular a partir de la matriz de transición \(P\) como:
+A partir de las cantidades \(m_{ij}(n)\) se puede definir la \textbf{matriz de tiempos de ocupación hasta un instante} \(n\), \(M(n)=(m_{ij}(n))_{ij}\), que se puede calcular a partir de la matriz de transición \(P\) como:
 
 \begin{equation}
 M(n) = \sum_{r=0}^n P^r
 \label{eq:tposocupa}
 \end{equation}
 
-\end{definition}
-
-\end{yellowbox}
-
-\begin{yellowbox}
-
-\begin{definition}
-Sea \(\{X_n, n \in \mathbb{N}\}\) una \(CMTD\). Se define el \textbf{número de visitas al estado} \(j\) a lo largo de la vida de la cadena como
-
-\[N_j=\sum_{n=0}^{\infty} I(X_n,j),\]
-
-donde \(I(X_n,j)=1\) si \(X_n=j\) y 0 en otro caso.
-
-Así, el número esperado de visitas al estado \(j\) a lo largo de la vida de la cadena, partiendo del estado \(i\), se define como \[m_{ij} = E[N_j|X_0 = i].\]
 \end{definition}
 
 \end{yellowbox}
@@ -6059,13 +6098,14 @@ Volvemos sobre el Ejemplo \ref{exm:diagramCMTD} para calcular los tiempos de ocu
 \CommentTok{\# Estados}
 \NormalTok{nombres}\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(proceso)}
 \CommentTok{\# Generamos la matriz de ocupaciones}
-\NormalTok{mocupa }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,nestat}\SpecialCharTok{*}\NormalTok{nestat),}
-                 \AttributeTok{nrow =}\NormalTok{ nestat, }\AttributeTok{dimnames =} \FunctionTok{list}\NormalTok{(nombres, nombres))}
+\CommentTok{\# el primer elemento es la matriz identidad: p\^{}0}
+\NormalTok{mocupa }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(nestat)}
+  \FunctionTok{dimnames}\NormalTok{(mocupa) }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(nombres, nombres)}
 \CommentTok{\# Bucle de cálculo de los tiempos de ocupación}
 \NormalTok{P}\OtherTok{=}\NormalTok{proceso[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nestat,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nestat] }\CommentTok{\# matriz de transición}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
 \NormalTok{\{}
-\NormalTok{   mocupa }\OtherTok{\textless{}{-}}\NormalTok{ mocupa }\SpecialCharTok{+}\NormalTok{ P}\SpecialCharTok{\^{}}\NormalTok{i}
+\NormalTok{   mocupa }\OtherTok{\textless{}{-}}\NormalTok{ mocupa }\SpecialCharTok{+} \FunctionTok{ptran.n}\NormalTok{(P,i)}
 \NormalTok{\}}
 \NormalTok{mocupa}
 \end{Highlighting}
@@ -6073,9 +6113,9 @@ Volvemos sobre el Ejemplo \ref{exm:diagramCMTD} para calcular los tiempos de ocu
 
 \begin{verbatim}
 ##          a        b        c
-## a 1.250000 1.428569 1.999023
-## b 1.111111 1.000000 6.861894
-## c 2.219126 1.000000 1.817903
+## a 4.531739 1.248415 5.219845
+## b 3.555292 1.955489 5.489220
+## c 3.858338 1.046384 6.095278
 \end{verbatim}
 
 Podemos ver cómo el número esperado de visitas al estado \(c\) partiendo del estado \(b\) en las próximas 10 transiciones es casi de 7 (6.86). Sin embargo, si partimos del estado \(b\), en 10 transiciones sólo esperamos volver a dicho estado 1 vez.
@@ -6087,19 +6127,21 @@ Definamos una función para obtener la matriz de tiempos de ocupación (o númer
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mocupa.proceso }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(sistema, n)}
+\NormalTok{mocupa.proceso }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(proceso, n)}
 \NormalTok{\{}
   \CommentTok{\# Número de estados del proceso}
-\NormalTok{  nestat }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(sistema)}
+\NormalTok{  nestat }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(proceso)}
   \CommentTok{\# Estados}
-\NormalTok{  nombres}\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(sistema)}
+\NormalTok{  nombres}\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(proceso)}
   \CommentTok{\# Generamos la matriz de ocupaciones}
-\NormalTok{  mocupa }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, nestat}\SpecialCharTok{*}\NormalTok{nestat),}
-                 \AttributeTok{nrow =}\NormalTok{ nestat, }\AttributeTok{dimnames =} \FunctionTok{list}\NormalTok{(nombres, nombres))}
-  \CommentTok{\# Bucle de calculo de los tiempos de ocupación}
-\NormalTok{  P}\OtherTok{=}\NormalTok{sistema[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nestat,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nestat]}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{0}\SpecialCharTok{:}\NormalTok{n)}
-\NormalTok{   mocupa }\OtherTok{\textless{}{-}}\NormalTok{ mocupa }\SpecialCharTok{+}\NormalTok{ P}\SpecialCharTok{\^{}}\NormalTok{i}
+\NormalTok{  mocupa }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(nestat)}
+  \FunctionTok{dimnames}\NormalTok{(mocupa) }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(nombres, nombres)}
+\CommentTok{\#  mocupa \textless{}{-} matrix(rep(0, nestat*nestat),}
+\CommentTok{\#                 nrow = nestat, dimnames = list(nombres, nombres))}
+  \CommentTok{\# Bucle de cálculo de los tiempos de ocupación}
+\NormalTok{  P}\OtherTok{=}\NormalTok{proceso[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nestat,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nestat]}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)}
+\NormalTok{   mocupa }\OtherTok{\textless{}{-}}\NormalTok{ mocupa }\SpecialCharTok{+} \FunctionTok{ptran.n}\NormalTok{(P,i)}
   
   \FunctionTok{return}\NormalTok{(mocupa)}
 \NormalTok{\}}
@@ -6116,30 +6158,34 @@ Definamos una función para obtener la matriz de tiempos de ocupación (o númer
 \hypertarget{anuxe1lisis-de-costes}{%
 \subsection{Análisis de costes}\label{anuxe1lisis-de-costes}}
 
-Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados \textbf{modelos de costes}, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, beneficios, pérdidas, etc..
+Una aplicación muy habitual de los tiempos de ocupación es directa en los denominados \textbf{modelos de costes}, que describimos brevemente, y que pueden estar vinculados en situaciones específicas a costes, pero también a beneficios, pérdidas, etc..
 
-Sea \(X_n\) el estado del sistema en el tiempo \(n\). Asumimos que \(\{X_n, n \in \mathbb{N}\}\) es una \(CMTD\) con espacio de estados \(S =\{1, 2,...,N\}\), matriz de transición \(P\), y matriz de tiempos de ocupación \(M(n)\).
+Sea \(X_n\) el estado del sistema en el tiempo \(n\). Asumimos que \(\{X_n, n \geq 0 \}\) es una \(CMTD\) con espacio de estados \(S =\{1, 2,...,N\}\), matriz de transición \(P\), y matriz de tiempos de ocupación \(M(n)\).
 
-En esta situación, hablamos de que cada visita a cierto estado \(i\) tiene un coste asociado \(C(i)\), y el coste esperado por visitar el estado \(i\) a lo largo de la vida del proceso viene dado por \(c(i) = E[C(i)]\). Definimos la matriz de costes esperados asociados a los estados, como \(c\), de dimensión \(N\times 1\), como: \[c' = (c(1),c(2),\ldots,c(N))\]
+En esta situación, hablamos de que cada visita a cierto estado \(i\) tiene un coste aleatorio asociado \(C(i)\), y el coste esperado por cada visita al estado \(i\) viene dado por \(c(i) = E[C(i)]\). Definimos la matriz de costes esperados asociados a los estados, como \(\mathbf{c}\), de dimensión \(N\times 1\), como:
 
-Así mismo, hablamos del coste \(C(X_r)\) en el que incurre el sistema en un instante concreto \(r\), y \(\sum_{r=0}^n C(X_r)\) el coste acumulado desde el inicio del proceso hasta llegar al instante \(n\). Entonces el \textbf{coste esperado total (CET)} asociado al funcionamiento del sistema hasta llegar al instante \(n\) se calculará como \(E\left[\sum_{r=0}^n C(X_r)\right]\).
+\[\mathbf{c}' = (c(1),c(2),\ldots,c(N))\]
 
-Definimos el coste esperado total (CET) hasta el instante \(n\) partiendo del estado \(i\), \(g(i,n)\), como:
+Así mismo, hablamos del coste \(C(X_r)\) en el que incurre el sistema en un instante concreto \(r\), y \(\sum_{r=0}^n C(X_r)\) el coste acumulado desde el inicio del proceso hasta llegar al instante \(n\). Entonces el \textbf{coste esperado total (CET)} asociado al funcionamiento del sistema hasta llegar al instante \(n\) se calculará como
+
+\[CET=E\left[\sum_{r=0}^n C(X_r)\right]\]
+
+Definimos el coste esperado total hasta el instante \(n\) partiendo del estado \(i\), \(g(i,n)\), como:
 
 \[g(i,n) = E\left[\sum_{r=0}^n C(X_r)| X_0 = i \right]\]
 
-y construimos la matriz de \textbf{costes totales sobre un horizonte finito (CTHF) hasta el instante} \(n\), \(g(n)\), de dimensión \(N \times 1\), a través de estos costes esperados partiendo de cualesquier estado \(i \in S\), como
+y construimos la matriz de \textbf{costes totales sobre un horizonte finito (CTHF) hasta el instante \(n\)}, \(\mathbf{g}(n)\), de dimensión \(N \times 1\), a través de estos costes esperados partiendo de cualesquier estado \(i \in S\), como
 
-\[g(n)' = (g(1,n),g(2,n),\ldots,g(N,n))\]
+\[\mathbf{g}(n)' = (g(1,n),g(2,n),\ldots,g(N,n))\]
 
 \begin{yellowbox}
 
 \begin{definition}
 
-Si queremos calcular el \textbf{coste esperado total sobre un horizonte finito hasta un instante} \(n\), (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante \(n\), \(M(n)\), por la matriz de costes esperados asociados a los estados del sistema, \(c\):
+Si vinculado al funcionamiento de un sistema CMTD queremos calcular el \textbf{coste esperado total sobre un horizonte finito hasta un instante \(n\)}, (CTHF), basta multiplicar la matriz de tiempos de ocupación hasta el instante \(n\), \(M(n)\), por la matriz de costes esperados asociados a los estados del sistema, \(\mathbf{c}\), esto es, resolver la Ecuación \eqref{eq:CTHF}.
 
 \begin{equation}
-g(n) = M(n) \cdot c
+\mathbf{g}(n) = M(n) \cdot \mathbf{c}
 \label{eq:CTHF}
 \end{equation}
 
@@ -6151,7 +6197,7 @@ g(n) = M(n) \cdot c
 Volvamos al proceso de inventario presentado en el \protect\hyperlink{inventario}{Problema de inventario} con espacio de estados \(\{2,3,4,5\}\). Supongamos que la empresa compra PCs por 1500 euros y los vende por 1750 euros. Además el coste de almacenamiento semanal es de 50 euros por cada unidad que está en la tienda al inicio de una semana. Queremos calcular los ingresos netos que la tienda espera obtener durante las próximas 10 semanas, suponiendo que comienza con cinco PCs en stock al inicio del periodo.
 \end{example}
 
-En esta situación, si hay \(i\) PCs al principio de la semana \(n\), el coste esperado de almacenamiento esa semana es \(50i\). Si \(D_n\) es la demanda durante la semana \(n\), el número esperado de PCs vendidos durante la semana \(n\) será \(E[min(i, D_n)]\), por lo que los ingresos netos previstos para la semana \(n\) provendrán de los ingresos por ventas menos los gastos de almacenaje, esto es,
+En esta situación, estamos interesados en los ingresos, por lo que definimos \(c(i)\) como los ingresos netos que se obtienen en una semana cualquiera en la que hay \(i\) PCs al principio de la semana. Sabemos que los costes de almacenamiento de \(i\) PCs es \(50i\). Las ganancias provendrán de los PCs que se hayan vendido. Si \(D_n\) es la demanda durante una semana cualquiera \(n\), el número esperado de PCs vendidos durante esa semana será \(E[min(i, D_n)]\). Así, los ingresos netos previstos para una semana cualquiera \(n\) en la que se tienen \(i\) PCs almacenados al inicio, \(c(i)\), provendrán de los ingresos por ventas menos los gastos de almacenaje, esto es,
 
 \[c(i) = (1750-1500)E[min(i, D_n)] -50i, \quad 2 \leq i \leq 5\]
 
@@ -6160,29 +6206,47 @@ Necesitamos pues, obtener el valor de \(E[min(i, D_n)]\), para cada valor de \(i
 \begin{equation*}
 Z_{i,n} =  
 \begin{cases}
-i & \text{ si } i \leq D_n \text{, con } Pr[i \leq D_n]\\
-D_n & \text{ si } i > D_n \text{, con } Pr[i > D_n]
+i & \text{ si } i <D_n \\
+D_n & \text{ si } i \geq  D_n 
 \end{cases}
 \end{equation*}
 
 de esta forma tenemos que su valor esperado vendrá dado por:
 
-\[E[Z_{i,n}] = i*Pr[i \leq D_n] + \sum_{d=0}^{i-1} d \cdot Pr(D_n=d).\]
+\[E[Z_{i,n}] = i \cdot Pr[i < D_n] + \sum_{d=0}^{i} d \cdot Pr(D_n=d).\]
 
 Recordando que \(D_n\sim Pois(3)\) en el ejemplo original, para \(i=2\) la expresión anterior da lugar a:
 
 \begin{eqnarray*}
-E[Z_{2,n}] &= 2*Pr[D_n \geq 2] + 0*Pr[D_n = 0] + 1*Pr[D_n =1] \\
-&= 2*0.8008+0.1494 = 1.751
+E[Z_{2,n}] &= 2 \cdot Pr[D_n > 2] + 0 \cdot Pr[D_n = 0] + 1 \cdot Pr[D_n =1] +2 \cdot Pr(D_n=2) \\
+&= 2 \cdot (1-Pr(D_n \leq 2)) + 1 \cdot Pr[D_n =1] + 2 \cdot Pr(D_n=2) \\
+&= 2 \cdot 0.5768 +0.1494 +2 \cdot 0.2240 = 1.751
 \end{eqnarray*}
 
-y por tanto:
+de donde calculamos los ingresos \(c(2)\) con la ecuación anterior.
+\[c(2) =  250 \cdot 1.751 -50 \cdot 2 = 337.75\]
+Hacemos fácilmente los cálculos para todos los estados:
 
-\[c(2) =  250*1.751 -50*2 = 337.75\]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{estados}\OtherTok{=}\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{lambda}\OtherTok{=}\DecValTok{3}   \CommentTok{\# Poisson para la demanda}
+\CommentTok{\# número esperado de ventas}
+\NormalTok{ez}\OtherTok{=}\FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ estados)\{}
+\NormalTok{ez[i}\DecValTok{{-}1}\NormalTok{]}\OtherTok{=}\NormalTok{i}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{ppois}\NormalTok{(i,lambda))}\SpecialCharTok{+}\FunctionTok{sum}\NormalTok{((}\DecValTok{0}\SpecialCharTok{:}\NormalTok{i)}\SpecialCharTok{*}\FunctionTok{dpois}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\NormalTok{i,lambda))}
+\NormalTok{\}}
+\NormalTok{ingresos}\OtherTok{=}\DecValTok{250}\SpecialCharTok{*}\NormalTok{ez}\DecValTok{{-}50}\SpecialCharTok{*}\NormalTok{estados;ingresos}
+\end{Highlighting}
+\end{Shaded}
 
-De forma análoga podemos obtener el resto de costes esperados por el hecho de tener \(i\) PCs en la tienda,
+\begin{verbatim}
+## [1] 337.7662 431.9686 470.1607 466.3449
+\end{verbatim}
 
-\[c = 
+Y obtenemos
+
+\[\mathbf{c} = 
 \begin{pmatrix}
 337.75 \\
 431.95 \\
@@ -6190,11 +6254,14 @@ De forma análoga podemos obtener el resto de costes esperados por el hecho de t
 466.23 
 \end{pmatrix}\]
 
-de donde podemos calcular los ingresos netos totales esperados durante las próximas \(n=10\) semanas, sea cual sea el estado inicial del sistema, a través de la matriz \[g(10)=M(10) \cdot c\] que calculamos a continuación:
+Con esta matriz y la matriz de ocupación hasta el instante \(n=10\) podemos calcular los ingresos netos totales esperados durante las próximas \(n=10\) semanas, sea cual sea el estado inicial del sistema:
+
+\[g(10)=M(10) \cdot c\]
+que calculamos a continuación:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{c}\OtherTok{=}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{337.75}\NormalTok{,}\FloatTok{431.95}\NormalTok{,}\FloatTok{470.15}\NormalTok{,}\FloatTok{466.23}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{1}\NormalTok{)}
+\NormalTok{c}\OtherTok{=}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{round}\NormalTok{(ingresos,}\DecValTok{2}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{1}\NormalTok{)}
 \NormalTok{M10}\OtherTok{=}\FunctionTok{mocupa.proceso}\NormalTok{(inventario,}\DecValTok{10}\NormalTok{)}
 \NormalTok{g}\OtherTok{=}\NormalTok{M10 }\SpecialCharTok{\%*\%}\NormalTok{ c}
 \NormalTok{g}
@@ -6203,25 +6270,24 @@ de donde podemos calcular los ingresos netos totales esperados durante las próx
 
 \begin{verbatim}
 ##           [,1]
-## 2 PCs 5282.121
-## 3 PCs 3459.052
-## 4 PCs 2536.941
-## 5 PCs 2325.006
+## 2 PCs 4736.876
+## 3 PCs 4819.392
+## 4 PCs 4847.637
+## 5 PCs 4842.589
 \end{verbatim}
 
-y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con \(i=5\) PCs en tienda, esto es, como \(g(5,10)=2325.006\) euros.
+y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con \(i=5\) PCs en tienda, esto es, como \$g(5,10)=\$4842.59 euros.
 
 Los valores de \(c\) se pueden aproximar mediante simulación sin necesidad de calcularlos de forma teórica. A continuación se presenta el código necesario para realizar la simulación. Concretamente definimos una función que depende del valor del estado inicial \(i\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# simulador del valor esperado del número esperado de ventas}
 \NormalTok{c.sim }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(estado, nsim)}
 \NormalTok{\{}
   \CommentTok{\# estado: estado inicial del sistema}
   \CommentTok{\# nsim: nº simulaciones para la aproximación}
   
-  \CommentTok{\# Fijamos semilla}
-  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{12}\NormalTok{)}
   \CommentTok{\# Simulamos valores del mínimo entre i y D\_n}
 \NormalTok{  datos }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{rsim =} \FunctionTok{rpois}\NormalTok{(nsim, }\DecValTok{3}\NormalTok{), rdos }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(estado, nsim))}
 \NormalTok{  minimo }\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(datos, }\DecValTok{1}\NormalTok{ ,min) }\CommentTok{\# Mínimo por filas}
@@ -6239,6 +6305,7 @@ Aproximamos pues por simulación, los valores de la matriz \(c\) con \(nsim=1.00
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{1000000}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{12}\NormalTok{)}
 \NormalTok{c.s}\OtherTok{=}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FunctionTok{c.sim}\NormalTok{(}\DecValTok{2}\NormalTok{, nsim),}\FunctionTok{c.sim}\NormalTok{(}\DecValTok{3}\NormalTok{, nsim),}
       \FunctionTok{c.sim}\NormalTok{(}\DecValTok{4}\NormalTok{, nsim),}\FunctionTok{c.sim}\NormalTok{(}\DecValTok{5}\NormalTok{, nsim)),}\AttributeTok{ncol=}\DecValTok{1}\NormalTok{)}
 \NormalTok{c.s}
@@ -6248,9 +6315,9 @@ Aproximamos pues por simulación, los valores de la matriz \(c\) con \(nsim=1.00
 \begin{verbatim}
 ##        [,1]
 ## [1,] 337.66
-## [2,] 431.81
-## [3,] 470.04
-## [4,] 466.20
+## [2,] 431.61
+## [3,] 470.28
+## [4,] 466.69
 \end{verbatim}
 
 Como se puede ver, la simulación funciona bastante bien para aproximar el vector \(c\); resolvamos pues los cálculos de \(g(5,10)\) con estos valores, que de nuevo aproximarán las cantidades que buscamos.
@@ -6267,13 +6334,13 @@ Como se puede ver, la simulación funciona bastante bien para aproximar el vecto
 
 \begin{verbatim}
 ##           [,1]
-## 2 PCs 5281.517
-## 3 PCs 3458.551
-## 4 PCs 2536.474
-## 5 PCs 2324.530
+## 2 PCs 4738.291
+## 3 PCs 4820.502
+## 4 PCs 4849.143
+## 5 PCs 4844.266
 \end{verbatim}
 
-Mientras que teóricamente obteníamos unos ingresos esperados de 2325€, con la simulación obtenemos una aproximación de 2324.53€.
+Mientras que teóricamente obteníamos unos ingresos esperados de 4842.59€, con la simulación obtenemos una aproximación de 4844.27€.
 
 \hypertarget{tiempos-de-primer-paso}{%
 \subsection{Tiempos de primer paso}\label{tiempos-de-primer-paso}}
@@ -6281,7 +6348,7 @@ Mientras que teóricamente obteníamos unos ingresos esperados de 2325€, con l
 \begin{yellowbox}
 
 \begin{definition}
-Sea \(\{X_n, n \in \mathbb{N}\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\). Se define el \textbf{tiempo de primer paso} o \textbf{tiempo de primera visita} al estado \(j\) partiendo del estado \(i\), \(T_{ij}\), como el mínimo número de transiciones necesarias para alcanzar el estado \(j\) partiendo del estado inicial \(i\), es decir:
+Sea \(\{X_n, n \geq 0\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\). Se define el \textbf{tiempo de primer paso} o \textbf{tiempo de primera visita} al estado \(j\) partiendo del estado \(i\), \(T_{ij}\), como el mínimo número de transiciones necesarias para alcanzar el estado \(j\) partiendo del estado inicial \(i\), es decir:
 
 \[T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}\]
 
@@ -6295,28 +6362,27 @@ En ocasiones interesará sin embargo el tiempo de primer paso de un estado a un 
 \begin{whitebox}
 Para obtener los tiempos esperados de recurrencia \(f=(f_{11},...,f_{NN})\) para el espacio de estados \(S=\{1,...,N\}\), utilizamos la función \texttt{meanRecurrenceTime(proceso)} de la librería \texttt{markovchain}.
 
-Podemos obtener la distribución de probabilidad asociada al tiempo de primer paso del estado \(j\) desde el estado \(i\) en \(n\) transiciones, \(f_{ij}(n)\), con la función \texttt{firstPassageMultiple(proceso,state=i,set=j,n=n)}.
+Para obtener los tiempos esperados de primer paso por un estado \(j\) desde cualquier estado de \(S\), podemos utilizar la función \texttt{meanFirstPassageTime(proceso,destination=j)} de la librería \texttt{markovchain}.
+Si queremos calcular la matriz de tiempos esperados para llegar a cualquier estado desde cualquier estado, basta utilizar \texttt{meanFirstPassageTime(proceso)}.
 
 \end{whitebox}
 
-\begin{whitebox}
-Para obtener los tiempos esperados de primer paso por un estado \(j\) desde cualquier estado de \(S\), podemos utilizar la función \texttt{meanFirstPassageTime(proceso,destination=j)} de la librería \texttt{markovchain}. Si queremos calcular la matriz de tiempos esperados para llegar a cualquier estado desde cualquier estado, basta utilizar \texttt{meanFirstPassageTime(proceso)}.
-
-\end{whitebox}
-
-En caso de que no podamos utilizar la función \texttt{meanFirstPassageTime} para el cálculo del tiempo de primer paso, podemos utilizar la propiedad que pasamos a describir.
+En caso de que no podamos utilizar la función \texttt{meanFirstPassageTime} para el cálculo del tiempo esperado de primer paso, podemos utilizar la propiedad que pasamos a describir.
 
 \begin{yellowbox}
 
 \begin{definition}
-Sea \(\{X_n, n \in \mathbb{N}\}\) una \(CMTD\) con espacio de estados \(S = \{1, 2,...,N\}\). Si estamos interesados en obtener el tiempo esperado de primer paso para el estado \(j\) desde cualquier estado \(i\), dado por:
+Sea \(\{X_n, n \geq 0\}\) una \(CMTD\) con espacio de estados \(S = \{1, 2,...,N\}\). Si estamos interesados en obtener el tiempo esperado de primer paso para el estado \(j\) desde cualquier estado \(i\), dado por:
 
-\[v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}\]\$
+\[v_{ij} = E(T_{ij}), \quad \text{ con } T_{ij} = \underset{n}{min}\{n > 0, X_n = j | X_0 = i\}\]
 
 y construimos la matriz de dimensión \((N-1) \times 1\) \(\mathbf{v_j'}=(v_{1j},...,v_{j-1,j},v_{j+1,j},...,v_{Nj})\)\\
 basta con resolver el sistema:
 
-\[[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}\]
+\begin{equation}
+[\mathbf{I} - P_{-j}]\mathbf{v_j} = \mathbf{1}
+\label{eq:primerpaso-ecu}
+\end{equation}
 
 donde
 
@@ -6379,7 +6445,7 @@ Como alternativa a la función definida en \texttt{markovchain}, programamos a c
 \begin{yellowbox}
 
 \begin{definition}
-Sea \(\{X_n, n \in \mathbb{N}\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\). Se definen las \textbf{probabilidades de primera visita} o primer paso del estado \(i\) al \(j\) en \(n\) transiciones, con \(f_{ij}(n)\),
+Sea \(\{X_n, n \geq 0\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\). Se definen las \textbf{probabilidades de primera visita} o primer paso del estado \(i\) al \(j\) en \(n\) transiciones, con \(f_{ij}(n)\),
 
 \begin{eqnarray*}
 f_{ij}(n) &=& Pr[X_n = j, X_{n-1} \neq j,\ldots, X_1 \neq j | \quad X_0 = i] \\ 
@@ -6391,18 +6457,10 @@ donde por convenio \(f_{ij}(0) = 0.\)
 
 \end{yellowbox}
 
-\begin{yellowbox}
+\begin{whitebox}
+Podemos obtener la distribución de probabilidad asociada al tiempo de primer paso del estado \(j\) desde el estado \(i\) en \(n\) transiciones, \(f_{ij}(n)\), con la función \texttt{firstPassageMultiple(proceso,state=i,set=j,n=n)}.
 
-\begin{definition}
-Sea \(\{X_n, n \in \mathbb{N}\}\) una \(CMTD\) homogénea con espacio de estados \(S = \{1, 2,...,N\}\). Sea \(m_{ij}\) el número esperado de visitas al estado \(j\) cuando se parte del estado \(i\), y \(f_{ij}=Pr(T_{ij}<\infty)\) la probabilidad de alcanzar el estado \(j\) partiendo del estado \(i\). Entonces se cumple la relación:
-
-\[ m_{ij}=\begin{cases}
-\frac{1}{1-f_{jj}}, \quad \text{ si } i=j \\
-\frac{f_{ij}}{1-f_{jj}}, \quad \text{ si } i\neq j
-\end{cases}\]
-\end{definition}
-
-\end{yellowbox}
+\end{whitebox}
 
 \begin{yellowbox}
 
@@ -6561,7 +6619,7 @@ Si \(Y_n\) es el proceso que representa el número de máquinas que están ``On'
 El tiempo esperado para que las dos máquinas estén en estado ``Off'' comenzando con ambas en el estado ``On'' es 2451.5, que expresado en años será \(2451.5/365 = 6.71\) años.
 
 \begin{example}
-Consideramos el proceso ya presentado sobre \protect\hyperlink{planificacion}{Planificación de mano de obra}. Deseamos el tiempo medio de permanencia en la empresa para un empleado recién reclutado. Recordemos que un nuevo empleado siempre empieza en el nivel ``1''. Definamos un proceso \(Y_n\) que representa el nivel de un empleado novel en la semana n-ésima, proceso que puede tomar los valores \(S = \{0, 1, 2, 3, 4\}\), donde \(Y_n=0\) significa que deja la empresa en n semanas después de empezar. En esta situación el proceso \(\{Y_n, n \in \mathbb{N}\}\) es una \(CMTD\) con espacio de estados \(S = \{0, 1, 2, 3, 4\}\) y matriz de probabilidades de transición calculadas a partir de las probabilidades que se daban en el desarrollo de \protect\hyperlink{planificacion}{Planificación de mano de obra} y teniendo en cuenta que si está fuera de la empresa, a la semana siguiente también lo estará:
+Consideramos el proceso ya presentado sobre \protect\hyperlink{planificacion}{Planificación de mano de obra}. Deseamos el tiempo medio de permanencia en la empresa para un empleado recién reclutado. Recordemos que un nuevo empleado siempre empieza en el nivel ``1''. Definamos un proceso \(Y_n\) que representa el nivel de un empleado novel en la semana n-ésima, proceso que puede tomar los valores \(S = \{0, 1, 2, 3, 4\}\), donde \(Y_n=0\) significa que deja la empresa en n semanas después de empezar. En esta situación el proceso \(\{Y_n, n \geq 0\}\) es una \(CMTD\) con espacio de estados \(S = \{0, 1, 2, 3, 4\}\) y matriz de probabilidades de transición calculadas a partir de las probabilidades que se daban en el desarrollo de \protect\hyperlink{planificacion}{Planificación de mano de obra} y teniendo en cuenta que si está fuera de la empresa, a la semana siguiente también lo estará:
 
 \[P = 
 \begin{pmatrix}
@@ -6649,34 +6707,38 @@ Puesto que el nuevo empleado comienza siempre en el nivel ``1'', el tiempo esper
 \hypertarget{AsinCMTD}{%
 \section{Comportamiento a largo plazo}\label{AsinCMTD}}
 
-En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una \(CMTD\), es decir, el comportamiento cuando \(n \rightarrow \infty\). La primera pregunta más obvia es si la distribución de \(X_n\) se aproxima a algún límite finito cuando \(n\) tiende a infinito.
+En está sección estamos interesados en estudiar el comportamiento a largo plazo o asintótico de una \(CMTD\), es decir, el comportamiento cuando \(n \rightarrow \infty\).
 
 \begin{yellowbox}
 
-Si existe la distribución a largo plazo de un proceso CMTD \(\{X_n, n \in \mathbb{N}\}\), con espacio de estados \(S =\{1, 2,..., N\}\) y matriz de probabilidades de transición \(P\), la denominamos \textbf{distribución límite} o \textbf{distribución en estado estacionario}, y la denotamos por:
+La distribución estacionaria \(\{\pi_1,..., \pi_N\}\) de una CMTD \(\{X_n, n \geq 0\}\), con espacio de estados \(S =\{1, 2,..., N\}\) verifica que:
+
+\[Pr(X_n=i)=\pi_i, \forall i \in S, \ n \geq 0.\]
+
+\end{yellowbox}
+
+\begin{yellowbox}
+
+Si existe la distribución a largo plazo de un proceso CMTD \(\{X_n, n \geq 0\}\), con espacio de estados \(S =\{1, 2,..., N\}\) y matriz de probabilidades de transición \(P\), la denominamos \textbf{distribución límite} o \textbf{distribución en estado estacionario}, y la denotamos por:
 
 \[\pi = [\pi_1, \pi_2,...,\pi_N]\]
 
 donde
 
 \[\pi_j = \underset{n \rightarrow \infty}{lim} Pr[X_n = j], \quad j \in S\]
+Si existe la distribución límite o en estado estacionario, dicha distribución es la distribución estacionaria.
 
 \end{yellowbox}
 
-La siguiente pregunta de interés, cuando dicha distribución existe, es si es única. Esta pregunta tiene sentido porque es razonable pensar que el límite pueda depender del estado inicial, o de la distribución inicial de la CMTD.
-
-La última pregunta se refiere a la práctica: si hay una única distribución límite, ¿cómo podemos calcularla? Pues bien, aunque responder las dos primeras preguntas pueda ser más complejo, la respuesta a esta pregunta es fácil, puesto que si esta distribución límite exite, entonces satisface la siguiente propiedad.
-
 \begin{yellowbox}
 
-Si existe la distribución límite de un proceso CMTD \(\{X_n, n \in \mathbb{N}\}\), con espacio de estados \(S =\{1, 2,..., N\}\) y matriz de probabilidades de transición \(P\), entonces las probabilidades \(\pi_j\) satisfacen la siguiente ecuación:
+Si existe la distribución límite de un proceso CMTD \(\{X_n, n \geq 0\}\), con espacio de estados \(S =\{1, 2,..., N\}\) y matriz de probabilidades de transición \(P\), entonces las probabilidades \(\pi_j\) satisfacen la siguiente ecuación:
 
 \[\pi_j = \sum_{i=1}^N \pi_i p_{ij}, \quad \forall j \in S,\]
-
 donde \(p_{ij}\) son las probabilidades de transición (en la matriz \(P\)). Esta propiedad en formato matricial da lugar a la \textbf{ecuación de balance} o \textbf{del estado estacionario}, que viene dada por:
 
 \begin{equation}
-\pi = \pi*P, \qquad \text{ con } 
+\pi = \pi \cdot P, \qquad \text{ con } 
 \label{eq:ecuee}
 \end{equation}
 
@@ -6686,13 +6748,78 @@ junto con la restricción de normalización
 
 \end{yellowbox}
 
+\begin{yellowbox}
+
+\begin{definition}
+Sea \(\{X_n, n \geq 0\}\) una \(CMTD\), con \(N_j(n)\) el número de visitas o tiempo de ocupación del estado \(j\). La \textbf{ocupación} del estado \(j\) se define como la proporción de visitas al estado \(j\) (o proporción del tiempo de ocupación que el sistema está en \(j\)) en el largo plazo (\(n \rightarrow \infty\)):
+
+\begin{equation}
+\pi_j=lim_{n \rightarrow \infty} \frac{E[N_j(n)|X_0=i]}{n+1}
+\label{eq:ocupacion}
+\end{equation}
+
+Si existe esta distribución de ocupación, entonces satisface las ecuaciones de balance y de normalización en \eqref{eq:ecuee}.
+\end{definition}
+
+\end{yellowbox}
+
+\begin{yellowbox}
+
+\begin{theorem}
+Una CMTD con espacio de estados finitos y que es irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.
+
+Una CMTD con espacio de estados finitos y que es irreducible tiene una única distribución de ocupación y es igual a la distribución estacionaria.
+\end{theorem}
+
+\end{yellowbox}
+
+Introducimos ahora el concepto de periodicidad, que nos ayudará a decidir cuándo existe la distribución estacionaria.
+
+\begin{yellowbox}
+
+\begin{definition}
+\protect\hypertarget{def:periodo}{}\label{def:periodo}Sea la \(CMTD\) \(\{X_n, n \geq 0\}\) con espacio de estados \(S =\{1, 2,..., N\}\) y \(d\) el entero más grande tal que para cualquier estado \(i \in S\)
+
+\[\text{si } Pr[X_n = i | X_0 = i] >0 \Rightarrow n \text{ es  múltiplo de } d,\]
+
+Se dice entonces que dicha \(CMTD\) es \textbf{periódica con periodo \(d\)} si \(d>1\), y \textbf{aperiódica} si \(d = 1\).
+\end{definition}
+
+\end{yellowbox}
+
+Así, una CMTD con periodo \(d\) puede volver a su estado inicial sólo en los instantes \(d, 2d, 3d, ...\). En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo \(d\) para cualquier estado \(i \in S\), puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo.
+
+En particular, si \(p_{ii}>0\) para cualquier \(i\in S\) (todos los estados son recurrentes) de una CMTD irreducible, entonces \(d=1\) y la CMTD será aperiódica.
+
+\begin{yellowbox}
+
+\begin{theorem}
+Una CMTD con espacio de estados finitos, irreducible y aperiódica tiene una única distribución límite o en el estado estacionario, que coincide pues con la distribución estacionaria y también con la de los tiempos de ocupación.
+
+La distribución límite o en estado estacionario de una CMTD reducible no es única y depende del estado inicial de la cadena.
+\end{theorem}
+
+\end{yellowbox}
+
 \begin{whitebox}
+Podemos estudiar la periocidad de un sistema mediante la función \texttt{period()} de la librería \texttt{markovchain}.
+
 La función \texttt{steadyStates()} de la librería \texttt{markovchain} nos devuelve la distribución estacionaria de una \(CMTD\).
 
 \end{whitebox}
 
 \begin{example}
 Analizamos el sistema presentado en el Ejemplo \ref{exm:diagramCMTD} para obtener la distribución estacionaria:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{period}\NormalTok{(proceso)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6709,116 +6836,17 @@ Analizamos el sistema presentado en el Ejemplo \ref{exm:diagramCMTD} para obtene
 Obtenemos de esta forma las probabilidades asintóticas de estar en cada uno de los estados. Vemos pues, que a la larga lo más probable es que nos encontremos en el estado `c', y lo menos probable es estar en el estado `b'.
 \end{example}
 
-Podemos encontrar procesos CMTD en los que no existe distribución límite, pero aun así podemos resolver las ecuaciones de balance, junto con la restricción de normalización (Ecuación \eqref{eq:ecuee}). Supongamos que tenemos una distribución inicial de la CMTD dada por \(\{\pi^*, i \in S\}\). Si también la distribución de \(X_1, \ldots, X_n\) permanece invariante para todos los \(n\), decimos que la distribución inicial es una \textbf{distribución estacionaria}. Definámoslo a continuación.
-
 \begin{yellowbox}
 
 \begin{definition}
-\protect\hypertarget{def:steadystatedist}{}\label{def:steadystatedist}
 
-Una distribución de probabilidad \[\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]\] se dice que es \textbf{estacionaria} si
+Si \(i\) es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de la probabilidad de \(i\) según la distribución estacionaria, es decir,
 
-\begin{eqnarray*}
-Pr[X_0 = i] = \pi_i^*,  1 \leq i \leq N &\Rightarrow& \\
-&\Rightarrow& Pr[X_n = i] = \pi_i^*, 1 \leq i \leq N, \text{ y } n \geq 0.
-\end{eqnarray*}
+\begin{equation}
+E[T_{ii}] = 1/\pi_i.
+\label{eq:et-piestacionaria}
+\end{equation}
 
-\end{definition}
-
-\end{yellowbox}
-
-Las preguntas que previamente planteamos sobre la distribución límite (es decir, la existencia, la unicidad y el método de cálculo) pueden formularse también sobre la distribución estacionaria. Respondámoslas.
-
-\begin{yellowbox}
-
-\begin{definition}
-\protect\hypertarget{def:steadystatedist2}{}\label{def:steadystatedist2}La distribución \(\pi^* = [\pi_1^*, \pi_2^*,...,\pi_N^*]\) es una distribución estacionaria para la CMTD \(\{X_n, n \in \mathbb{N}\}\), con espacio de estados \(S =\{1, 2,..., N\}\) y matriz de probabilidades de transición \(P\), si y solo si se cumple que:
-
-\[\pi^* = \pi^* P, \qquad \text{ con } \sum_{j=1}^N \pi_j^* = 1, \quad \forall j \in S.\]
-\end{definition}
-
-\end{yellowbox}
-
-Por tanto, la distribución límite, cuando existe, es una distribución estacionaria. En caso de que tengamos más de una distribución límite (pues puede depender del estado inicial), por la Definición \ref{def:steadystatedist2}, cualquiera de dichas distribuciones límite será una distribución estacionaria.
-
-Veamos a continuación una propiedad interesante, respecto a estacionariedad, de la distribución del ratio de ocupación, esto es, de la proporción de tiempo que el proceso permanece en cada estado.
-
-\begin{yellowbox}
-
-Si existe la \textbf{distribución de ocupación} del proceso \(\{X_n, n \in \mathbb{N}\}\) con espacio de estados \(S =\{1, 2,..., N\}\), dada por
-
-\[\hat{\pi}_j=lim_{n \rightarrow \infty} \frac{m_{ij}(n)}{n+1}, \qquad \text{ con } m_{ij}(n)=E[N_j(n)|X_0=i]\]
-
-entonces satisface las ecuaciones de balance sujetas a la restricción de normalización, esto es,
-
-\[\hat{\pi}_j = \sum_{i=1}^N \hat{\pi}_i p_{ij}, \quad \forall j \in S, \qquad \text{ y } \sum_{j=1}^N \hat{\pi}_j=1.\]
-
-\end{yellowbox}
-
-Tenemos pues, que toda distribución que cumpla las ecuaciones de balance junto con las restricciones de normalización, será una distribución límte, también estacionaria o será la distribución de ocupación. Las preguntas relativas a estas ecuaciones son: ¿siempre habrá una solución? ¿Será única? ¿Cuándo dicha solución se podrá interpretar como una distribución límite, estacionaria o de ocupación? Intentemos dar respuesta a estas preguntas introduciendo algún concepto más referido a los procesos \(CMTD\).
-
-\begin{yellowbox}
-
-\begin{definition}
-\protect\hypertarget{def:irreducible}{}\label{def:irreducible}Una \(CMTD\) \(\{X_n, n \in \mathbb{N}\}\) con espacio de estados \(S\) se dice que es \textbf{irreducible} si para cada pareja de estados \(i\) y \(j\) en \(S\), existe algún instante de tiempo \(k>0\) en el que es posible llegar a \(j\) desde \(i\), esto es,
-
-\[Pr[X_k = j | X_0 = i] >0.\]
-\end{definition}
-
-\end{yellowbox}
-
-Una \(CMTD\) que no es irreducible se denomina \textbf{reducible}.
-
-\begin{whitebox}
-Podemos estudiar esta característica del proceso mediante un análisis descriptivo del mismo, con la función \texttt{summary()} de la librería \texttt{markovchain}, como ya vimos en el Ejemplo \ref{exm:summary-markovchain}.
-
-\end{whitebox}
-
-La utilidad del concepto de irreducibilidad se justifica con los resultados que presentamos a continuación, referidos a la unicidad de la distribución estacionaria.
-
-\begin{yellowbox}
-
-\begin{definition}
-Una CMTD de espacios finitos que sea irreducible tiene una única distribución estacionaria, es decir, sólo hay una solución normalizada de la ecuación de balance.
-
-Además, una CMTD de espacios finitos que sea irreducible tiene una única distribución de ocupación y es igual a la distribución estacionaria.
-\end{definition}
-
-\end{yellowbox}
-
-Introducimos ahora el concepto de periodicidad, que nos ayudará a decidir cuando exista la distribución límite.
-
-\begin{yellowbox}
-
-\begin{definition}
-\protect\hypertarget{def:periodo}{}\label{def:periodo}Sea la \(CMTD\) \(\{X_n, n \in \mathbb{N}\}\) con espacio de estados \(S =\{1, 2,..., N\}\) y \(d\) el entero más grande tal que para cualquier estado \(i \in S\)
-
-\[\text{si } Pr[X_n = i | X_0 = i] >0 \Rightarrow n \text{ es  múltiplo de } d,\]
-
-Se dice entonces que dicha \(CMTD\) es \textbf{periódica con periodo} \(d\) si \(d>1\), y \textbf{aperiódica} si \(d = 1\).
-\end{definition}
-
-\end{yellowbox}
-
-Así, una CMTD con periodo \(d\) puede volver a su estado inicial sólo en los instantes \(d, 2d, 3d, ...\). En consecuencia, en las CMTD irreducibles es suficiente encontrar el periodo \(d\) para cualquier estado \(i \in S\), puesto que será el mismo para todos los estados, con lo que encontrar el periodo en CMTD irreducibles será sencillo.
-
-\begin{whitebox}
-Podemos estudiar la periocidad de un sistema mediante la función \texttt{period()} de la librería \texttt{markovchain}.
-
-\end{whitebox}
-
-En particular, si \(p_{ii}>0\) para cualquier \(i\in S\) de una CMTD irreducible, entonces \(d=1\) y la CMTD será aperiódica.
-
-El resultado más relevante es que si tenemos una \(CMTD\) que es irreducible y aperiódica, entonces tiene una única distribución límite, que es la solución de la ecuación de balance y de normalización (Ecuación \eqref{eq:ecuee}).Además, esta será la distribución estacionaria de la CMTD y también la distribución de ocupación.
-
-La distribución límite/estacionaria de una CMTD reducible no es única y depende del estado inicial de la cadena.
-
-\begin{yellowbox}
-
-\begin{definition}
-Si \(i\) es un estado recurrente y existe la distribución estacionaria, entonces el valor esperado del tiempo de recurrencia es el inverso de probabilidad de \(i\) según la distribución estacionaria, es decir,
-
-\[E[T_{jj}|X_0=j] = 1/\pi_j.\]
 \end{definition}
 
 \end{yellowbox}
@@ -7206,40 +7234,78 @@ Utilizamos el resultado que se mostró en la Ecuación \eqref{eq:matriznpasos} p
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{ini }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{final1}\FloatTok{.10} \OtherTok{=}\NormalTok{ ini }\SpecialCharTok{\%*\%}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{10}\NormalTok{; final1}\FloatTok{.10}
+\NormalTok{final1}\FloatTok{.10} \OtherTok{=}\NormalTok{ ini }\SpecialCharTok{\%*\%} \FunctionTok{ptran.n}\NormalTok{(p1,}\DecValTok{10}\NormalTok{); final1}\FloatTok{.10}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##            vocal   consonante
-## [1,] 0.001190424 0.0007979227
+##          vocal consonante
+## [1,] 0.6475107  0.3524893
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{final2}\FloatTok{.10} \OtherTok{=}\NormalTok{ ini }\SpecialCharTok{\%*\%}\NormalTok{ p2}\SpecialCharTok{\^{}}\DecValTok{10}\NormalTok{; final2}\FloatTok{.10}
+\NormalTok{final2}\FloatTok{.10} \OtherTok{=}\NormalTok{ ini }\SpecialCharTok{\%*\%} \FunctionTok{ptran.n}\NormalTok{(p2,}\DecValTok{10}\NormalTok{); final2}\FloatTok{.10}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##             vocal consonante
-## [1,] 9.536743e-07 0.05631351
+##          vocal consonante
+## [1,] 0.2857143  0.7142857
 \end{verbatim}
 
-Las probabilidades ahora se reducen drásticamente, y en el idioma1 resulta de 0.0008, y en el idioma2 de 0.0563.
+Si un texto empieza por voca, tras 10 caracteres encontraremos una consonante con probabilidad 0.35 en el idioma1 y con probabilidad 0.71 en el idioma2.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{2}
 \tightlist
 \item
-  ¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?
+  En cada idioma, en a palabra de 5 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y si la palabra empieza por consonante?
 \end{enumerate}
 
-Nos están preguntando por el tiempo medio de primer paso. Resolvemos con la función \texttt{meanFirstPassageTime()}.
+Nos pregunta por el número de visitas o tiempo de ocupación de cada uno de los estados (vocal/consonante) cuando llegamos a 5 caracteres (en 4 transiciones entre caracteres). Calculamos pues la matriz de tiempos de ocupación hasta el instante \(n=4\) con la Ecuación \eqref{eq:tposocupa}, y para la que utilizamos la función \texttt{mocupa.proceso()} que definimos en la Sección \href{tiemposocupa-sec}{Tiempos de ocupación}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{4}
+\NormalTok{mocupa1}\OtherTok{=}\FunctionTok{mocupa.proceso}\NormalTok{(idioma1,n);mocupa1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               vocal consonante
+## vocal      3.493308   1.506692
+## consonante 2.767393   2.232607
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mocupa2}\OtherTok{=}\FunctionTok{mocupa.proceso}\NormalTok{(idioma2,n);mocupa2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               vocal consonante
+## vocal      2.108844   2.891156
+## consonante 1.156462   3.843537
+\end{verbatim}
+
+Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar 3 vocales y si partimos de una consonante, 2.8 vocales. En el idioma2, si el primer carácter es vocal, encontraré 2.1 vocales y 3 vocales si el texto empieza por consonante.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  ¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?
+\end{enumerate}
+
+Nos están preguntando por el tiempo medio de primer paso por una vocal, partiendo de una consonante. Resolvemos con la función \texttt{meanFirstPassageTime()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# todos los tiempos de primer paso}
 \FunctionTok{meanFirstPassageTime}\NormalTok{(idioma1)}
 \end{Highlighting}
 \end{Shaded}
@@ -7252,7 +7318,8 @@ Nos están preguntando por el tiempo medio de primer paso. Resolvemos con la fun
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{meanFirstPassageTime}\NormalTok{(idioma1,}\StringTok{"vocal"}\NormalTok{)}
+\CommentTok{\# tiempo de primer paso por una vocal}
+\NormalTok{mfpt1}\OtherTok{=}\FunctionTok{meanFirstPassageTime}\NormalTok{(idioma1,}\StringTok{"vocal"}\NormalTok{);mfpt1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7275,7 +7342,7 @@ Nos están preguntando por el tiempo medio de primer paso. Resolvemos con la fun
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{meanFirstPassageTime}\NormalTok{(idioma2,}\StringTok{"vocal"}\NormalTok{)}
+\NormalTok{mfpt2}\OtherTok{=}\FunctionTok{meanFirstPassageTime}\NormalTok{(idioma2,}\StringTok{"vocal"}\NormalTok{);mfpt2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7284,17 +7351,214 @@ Nos están preguntando por el tiempo medio de primer paso. Resolvemos con la fun
 ##   3.333333
 \end{verbatim}
 
-Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1.1, y en el idioma2 de 3.3 (tres veces más).
+Tenemos así que el número medio de caracteres que esperamos encontrar en un texto hasta que aparezca por primera vez una vocal en el idioma 1 (partiendo de una consonante) es de 1, y en el idioma2 de 3.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{3}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  En un texto que se inicia con una vocal, ¿con qué probabilidad encontraremos la primera consonante en los siguientes 3 caracteres? Compara los resultados para los dos idiomas.
+\end{enumerate}
+
+Nos preguntan por la probabilidad de primer paso por el estado ``consonante'' partiendo de una ``vocal'' transcurridos tres caracteres. Utilizamos la función \texttt{firstPassageMultiple()} de la librería \texttt{markovchain}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{=}\DecValTok{3}
+\NormalTok{fpm1}\OtherTok{=}\FunctionTok{firstPassageMultiple}\NormalTok{(idioma1,}\AttributeTok{state=}\StringTok{"vocal"}\NormalTok{,}\AttributeTok{set=}\FunctionTok{c}\NormalTok{(}\StringTok{"consonante"}\NormalTok{),}\AttributeTok{n=}\NormalTok{n);fpm1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        set
+## 1 0.490000
+## 2 0.249900
+## 3 0.127449
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fpm2}\OtherTok{=}\FunctionTok{firstPassageMultiple}\NormalTok{(idioma2,}\AttributeTok{state=}\StringTok{"vocal"}\NormalTok{,}\AttributeTok{set=}\FunctionTok{c}\NormalTok{(}\StringTok{"consonante"}\NormalTok{),}\AttributeTok{n=}\NormalTok{n);fpm2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        set
+## 1 0.750000
+## 2 0.187500
+## 3 0.046875
+\end{verbatim}
+
+Así, tenemos que en el idioma1 la probabilidad de que la primera consonante que encontremos esté tres caracteres después de la vocal de inicio es de 0.127449, mientras que esta probabilidad en el idioma2 es sólo de 0.127449.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
 \tightlist
 \item
   A partir de una consonante, ¿cuántos caracteres, por término medio, tardamos en encontrar otra consonante en cada idioma?
 \end{enumerate}
 
-Nos están pidiendo el tiempo medio de recurrencia, que calculamos con la función \texttt{meanRecurrenceTime()}.
+Nos están pidiendo el tiempo medio de recurrencia, esto es, volver a encontrar otra consonante si partimos de una consonante, que calculamos con la función \texttt{meanRecurrenceTime()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mrt1}\OtherTok{=}\FunctionTok{meanRecurrenceTime}\NormalTok{(idioma1);mrt1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      vocal consonante 
+##   1.544444   2.836735
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mrt2}\OtherTok{=}\FunctionTok{meanRecurrenceTime}\NormalTok{(idioma2);mrt2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      vocal consonante 
+##        3.5        1.4
+\end{verbatim}
+
+Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres hasta encontrar otra consonante, mientras que en el idioma2 sólo 1 por término medio.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  ¿Qué proporción de vocales y consonantes hay en cada idioma? En un texto de 1000 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y consonantes?
+\end{enumerate}
+
+Para contestar la primera pregunta recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles, o lo que es lo mismo, la proporción de vocales y consonantes. Para responder la segunda pregunta, puesto que estamos en un texto muy largo con 1000 caracteres, ya no utilizaremos a la matriz de ocupación hasta un instante \(n=1000\), sino la distribución de ocupación, que coincide con la distribución estacionaria.
+
+Sabemos que una CMTD irreducible y aperiódica tiene una única distribución estacionaria, que coincide con la distribución de ocupación. Que es irreducible ya lo comprobamos anteriormente al definir el sistema; verifiquemos pues que es aperiódica, esto es, que su periodo es 1, con la función \texttt{period()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{period}\NormalTok{(idioma1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{period}\NormalTok{(idioma2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+Así pues, calculamos la distribución estacionaria a continuación con la función \texttt{steadyStates()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pi1}\OtherTok{=}\FunctionTok{steadyStates}\NormalTok{(idioma1); pi1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         vocal consonante
+## [1,] 0.647482   0.352518
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pi2}\OtherTok{=}\FunctionTok{steadyStates}\NormalTok{(idioma2); pi2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          vocal consonante
+## [1,] 0.2857143  0.7142857
+\end{verbatim}
+
+Tenemos que en el idioma1 el 65\% de los caracteres en un texto son vocales, que predominan sobre las consonantes, mientras que en el idioma2 sólo un 29\%, y la supremacía es de las consonantes, con un 71.4\%.
+
+Para calcular el número esperado de vocales y consonantes en un texto de 1000 caracteres, basta multiplicar estas probabilidades por 1000.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{1000}\SpecialCharTok{*}\NormalTok{pi1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      vocal consonante
+## [1,]   647        353
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{1000}\SpecialCharTok{*}\NormalTok{pi2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      vocal consonante
+## [1,]   286        714
+\end{verbatim}
+
+Así, en un texto de 1000 caracteres esperamos 647 vocales en el idioma1 y 286 en el idioma2.
+
+Vamos a comprobar, además, que la distribución estacionaria verifica la ecuación de balance o del estado estacionario que se muestra en la Ecuación \eqref{eq:ecuee}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ecuación de balance para la d.estacionaria del idioma1}
+\NormalTok{pi1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         vocal consonante
+## [1,] 0.647482   0.352518
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# es igual a su producto por la matriz de transición}
+\NormalTok{pi1}\SpecialCharTok{\%*\%}\NormalTok{p1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         vocal consonante
+## [1,] 0.647482   0.352518
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# y sus probabilidades suman 1}
+\FunctionTok{sum}\NormalTok{(pi1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+Con la distribución estacionaria comprobamos que se verifica la Ecuación \eqref{eq:et-piestacionaria} que nos permite calcular los tiempos medios de recurrencia con el inverso de las probabilidades estacionarias. Lo hacemos sólo con el idioma1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{/}\NormalTok{pi1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         vocal consonante
+## [1,] 1.544444   2.836735
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7307,59 +7571,12 @@ Nos están pidiendo el tiempo medio de recurrencia, que calculamos con la funci�
 ##   1.544444   2.836735
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{meanRecurrenceTime}\NormalTok{(idioma2)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      vocal consonante 
-##        3.5        1.4
-\end{verbatim}
-
-Así, en el idioma1, desde la última consonante tendremos aproximadamente 3 caracteres (2.84) hasta encontrar otra consonante, mientras que en el idioma2 sólo 1.4 por término medio.
-
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{4}
+\setcounter{enumi}{7}
 \tightlist
 \item
-  ¿Qué proporción de vocales y consonantes hay en cada idioma?
-\end{enumerate}
-
-Recurrimos a la distribución estacionaria, que nos da la probabilidad estacionaria para cada uno de los estados posibles. La calculamos con la función \texttt{steadyStates()}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{steadyStates}\NormalTok{(idioma1)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##         vocal consonante
-## [1,] 0.647482   0.352518
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{steadyStates}\NormalTok{(idioma2)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##          vocal consonante
-## [1,] 0.2857143  0.7142857
-\end{verbatim}
-
-Así pues, tenemos que en el idioma1 el 65\% de los caracteres en un texto son vocales, mientras que en el idioma2 sólo un 29\%, y la supremacía es de las consonantes, con un 71.4\%.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{5}
-\tightlist
-\item
-  Simula un texto de 1000 caracteres para cada idioma, empezando por una vocal y estima con esas simulaciones las probabilidades de transición. Compara los resultados con las matrices iniciales.
+  Simula un texto de 1000 caracteres para el idioma1, empezando por una vocal y estima con esas simulaciones las probabilidades de transición. Compara los resultados con la matriz inicial.
 \end{enumerate}
 
 Para simular una CMTD recurrimos a la función \texttt{rmarkovchain()}.
@@ -7369,83 +7586,46 @@ Para simular una CMTD recurrimos a la función \texttt{rmarkovchain()}.
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{12}\NormalTok{)}
 \NormalTok{n}\OtherTok{=}\DecValTok{1000}
 \NormalTok{idioma1.sim}\OtherTok{=}\FunctionTok{rmarkovchain}\NormalTok{(n,idioma1,}\AttributeTok{t0=}\StringTok{"vocal"}\NormalTok{,}\AttributeTok{include.t0=}\ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{idioma2.sim}\OtherTok{=}\FunctionTok{rmarkovchain}\NormalTok{(n,idioma2,}\AttributeTok{t0=}\StringTok{"vocal"}\NormalTok{,}\AttributeTok{include.t0=}\ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Para estimar las probabilidades de transición con ellas vamos a seguir dos procedimientos: el artesanal a través de una función que construiremos nosotros para calcular las frecuencias de salto entre vocales y consonantes, y con una función en la librería \texttt{markovchain} que específicamente nos proporciona esa estimación, y que es \texttt{markovchainFit()}.
+Para estimar las probabilidades de transición con los textos simulados vamos a utilizar la librería \texttt{markovchain} que específicamente nos proporciona las frecuencias de salto, así como una estimación (junto con su error), basada en dichas frecuencias, bajo diversos procedimientos de estimación.
 
-Construyamos en primer lugar una función que nos proporcione las frecuencias de salto entre vocales y consonantes, a través de las cuales vamos a estimar las probabilidades de transición, con el fin de comprender bien cómo funcionaría la estimación más simple.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{probtransi.texto}\OtherTok{=}\ControlFlowTok{function}\NormalTok{(texto)\{}
- \CommentTok{\# calcula frecuencias de salto vocal/consonante en un texto}
-  \CommentTok{\# el input (texto) es una sucesión de vocales/consonantes}
-\NormalTok{n}\OtherTok{=}\FunctionTok{length}\NormalTok{(texto)}
-\NormalTok{n.estados}\OtherTok{=}\DecValTok{2}
-\NormalTok{estados}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\StringTok{"vocal"}\NormalTok{,}\StringTok{"consonante"}\NormalTok{)}
-\CommentTok{\# definimos la matriz de probs. transición}
-\NormalTok{pmat}\OtherTok{=}\FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\AttributeTok{ncol=}\NormalTok{n.estados,}\AttributeTok{nrow=}\NormalTok{n.estados,}\AttributeTok{dimnames=}\FunctionTok{list}\NormalTok{(estados,estados))}
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{))\{}
-  \ControlFlowTok{if}\NormalTok{(texto[i]}\SpecialCharTok{==}\StringTok{"vocal"} \SpecialCharTok{\&}\NormalTok{ texto[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}\SpecialCharTok{==}\StringTok{"vocal"}\NormalTok{)}
-\NormalTok{    pmat[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OtherTok{=}\NormalTok{pmat[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{+}\DecValTok{1}
-  \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (texto[i]}\SpecialCharTok{==}\StringTok{"vocal"} \SpecialCharTok{\&}\NormalTok{ texto[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}\SpecialCharTok{==}\StringTok{"consonante"}\NormalTok{)}
-\NormalTok{    pmat[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OtherTok{=}\NormalTok{pmat[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{+}\DecValTok{1}  
-  \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (texto[i]}\SpecialCharTok{==}\StringTok{"consonante"} \SpecialCharTok{\&}\NormalTok{ texto[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}\SpecialCharTok{==}\StringTok{"vocal"}\NormalTok{)}
-\NormalTok{    pmat[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OtherTok{=}\NormalTok{pmat[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{+}\DecValTok{1}
-  \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (texto[i]}\SpecialCharTok{==}\StringTok{"consonante"} \SpecialCharTok{\&}\NormalTok{ texto[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}\SpecialCharTok{==}\StringTok{"consonante"}\NormalTok{)}
-\NormalTok{    pmat[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OtherTok{=}\NormalTok{pmat[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{+}\DecValTok{1}
-\NormalTok{\}}
-\CommentTok{\# una vez tenemos las frecuencias de salto, las convertimos en probabilidades}
-\CommentTok{\# las probabilidades en cada fila han de sumar 1}
-\NormalTok{pmat[}\DecValTok{1}\NormalTok{,]}\OtherTok{=}\NormalTok{pmat[}\DecValTok{1}\NormalTok{,]}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(pmat[}\DecValTok{1}\NormalTok{,])}
-\NormalTok{pmat[}\DecValTok{2}\NormalTok{,]}\OtherTok{=}\NormalTok{pmat[}\DecValTok{2}\NormalTok{,]}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(pmat[}\DecValTok{2}\NormalTok{,])}
-\FunctionTok{return}\NormalTok{(pmat)}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-Y utilizamos esta función para estimar las probabilidades de transición:
+La función \texttt{createSequenceMatrix()} nos proporciona una matriz de frecuencias (absolutas o relativas) de las transiciones entre todos los estados posibles del sistema
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{probtransi.texto}\NormalTok{(idioma1.sim)}
+\CommentTok{\# frecuencias de transiciones o saltos}
+\FunctionTok{createSequenceMatrix}\NormalTok{(idioma1.sim)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                vocal consonante
-## vocal      0.5215385  0.4784615
-## consonante 0.8885714  0.1114286
+##            consonante vocal
+## consonante         39   311
+## vocal             311   339
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{probtransi.texto}\NormalTok{(idioma2.sim)}
+\CommentTok{\# frecuencias relativas de transiciones o saltos}
+\FunctionTok{createSequenceMatrix}\NormalTok{(idioma1.sim,}\AttributeTok{toRowProbs =} \ConstantTok{TRUE}\NormalTok{ )}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                vocal consonante
-## vocal      0.2461538  0.7538462
-## consonante 0.2648649  0.7351351
+##            consonante     vocal
+## consonante  0.1114286 0.8885714
+## vocal       0.4784615 0.5215385
 \end{verbatim}
+
+Utilizamos ahora la función \texttt{markovchainFit()} que, a partir de datos simulados en estado estacionario, estima las probabilidades de transición. Podemos usar varios métodos de optimización alternativos, si bien por defecto se usa la estimación máximo-verosímil, \texttt{method="mle"}. Las alternativas son EMV con suavizado de Laplace (``laplace''), bootstrap (``bootstrap'') y máximo a posteriori (``map'').
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{ Estimación de p1 }\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-##  Estimación de p1
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{markovchainFit}\NormalTok{(idioma1.sim,}\AttributeTok{byrow=}\ConstantTok{TRUE}\NormalTok{);p1}
+\CommentTok{\# Estimación de p1}
+\NormalTok{p1.sim }\OtherTok{=} \FunctionTok{markovchainFit}\NormalTok{(idioma1.sim,}\AttributeTok{byrow=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{p1.sim;p1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7488,100 +7668,180 @@ Y utilizamos esta función para estimar las probabilidades de transición:
 ## consonante  0.90       0.10
 \end{verbatim}
 
+Esta función nos proporciona, además de la estimación de las probabilidades de transición, una estimación del error e intervalos de confianza.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{ Estimación de p2 }\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{estimate }\OtherTok{=} \FunctionTok{as}\NormalTok{(p1.sim}\SpecialCharTok{$}\NormalTok{estimate,}\StringTok{"data.frame"}\NormalTok{)}
+\NormalTok{error }\OtherTok{=} \FunctionTok{as.vector}\NormalTok{(p1.sim}\SpecialCharTok{$}\NormalTok{standardError)}
+\NormalTok{ic.low }\OtherTok{=} \FunctionTok{as.vector}\NormalTok{(p1.sim}\SpecialCharTok{$}\NormalTok{lowerEndpointMatrix)}
+\NormalTok{ic.up }\OtherTok{=} \FunctionTok{as.vector}\NormalTok{(p1.sim}\SpecialCharTok{$}\NormalTok{upperEndpointMatrix)}
+\FunctionTok{cbind}\NormalTok{(estimate,error,ic.low,ic.up)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## 
-##  Estimación de p2
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{markovchainFit}\NormalTok{(idioma2.sim,}\AttributeTok{byrow=}\ConstantTok{TRUE}\NormalTok{);p2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $estimate
-## MLE Fit 
-##  A  2 - dimensional discrete Markov Chain defined by the following states: 
-##  consonante, vocal 
-##  The transition matrix  (by rows)  is defined as follows: 
-##            consonante     vocal
-## consonante  0.7351351 0.2648649
-## vocal       0.7538462 0.2461538
-## 
-## 
-## $standardError
-##            consonante      vocal
-## consonante 0.03151866 0.01891892
-## vocal      0.05384615 0.03076923
-## 
-## $confidenceLevel
-## [1] 0.95
-## 
-## $lowerEndpointMatrix
-##            consonante     vocal
-## consonante  0.6733597 0.2277845
-## vocal       0.6483096 0.1858472
-## 
-## $upperEndpointMatrix
-##            consonante     vocal
-## consonante  0.7969106 0.3019453
-## vocal       0.8593827 0.3064604
-## 
-## $logLikelihood
-## [1] -572.8805
-\end{verbatim}
-
-\begin{verbatim}
-##            vocal consonante
-## vocal       0.25       0.75
-## consonante  0.30       0.70
+##           t0         t1      prob      error     ic.low     ic.up
+## 1 consonante consonante 0.1114286 0.01784285 0.07645722 0.1463999
+## 2 consonante      vocal 0.8885714 0.02713106 0.42528562 0.5316375
+## 3      vocal consonante 0.4784615 0.05038626 0.78981615 0.9873267
+## 4      vocal      vocal 0.5215385 0.02832608 0.46602035 0.5770566
 \end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
 \tightlist
 \item
-  Por cada 100 caracteres en un texto de cada idioma, ¿cuántos son vocales?
+  Supón que accedes a un texto que transformas en una secuencia de vocales y consonantes (disponible para descarga en \href{\%22https://raw.githubusercontent.com/UMH1477/data/f4e4a62533e24a74be27b8984f9fc23eb1b1ff49/textos.csv\%22}{Github}). Verifica, con dicha secuencia que proviene de una CMTD.
 \end{enumerate}
 
-Nos están preguntando por los tiempos de ocupación de las vocales en 100 transiciones. Aplicamos la Ecuación \eqref{eq:tposocupa} para calcular la matriz de ocupación tras 100 transiciones, y la función que definimos en la Sección \href{tiemposocupa-sec}{Tiempos de ocupación}. Para ello hemos de definir como CMTD ambos procesos, con la librería \texttt{markovchain}.
+Para ello podemos utilizar la función \texttt{verifyMarkovProperty()} que resuelve un test de hipótesis basado en la Chi-cuadrado, sobre el cumplimiento de la propiedad de Markov con los datos proporcionados. Obtener un p-valor significativo significa que rechazaríamos esa propiedad y por lo tanto rechazaríamos que se trata de una CMTD.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{idioma1}\OtherTok{=}\FunctionTok{new}\NormalTok{(}\StringTok{"markovchain"}\NormalTok{,}\AttributeTok{states=}\FunctionTok{colnames}\NormalTok{(p1),}\AttributeTok{byrow=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{transitionMatrix=}\NormalTok{p1,}\AttributeTok{name=}\StringTok{"idioma1"}\NormalTok{)}
-\NormalTok{idioma2}\OtherTok{=}\FunctionTok{new}\NormalTok{(}\StringTok{"markovchain"}\NormalTok{,}\AttributeTok{states=}\FunctionTok{colnames}\NormalTok{(p2),}\AttributeTok{byrow=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{transitionMatrix=}\NormalTok{p2,}\AttributeTok{name=}\StringTok{"idioma2"}\NormalTok{)}
-\CommentTok{\# número de transiciones (caracteres)}
-\NormalTok{n}\OtherTok{=}\DecValTok{100}
-\FunctionTok{mocupa.proceso}\NormalTok{(idioma1,}\DecValTok{100}\NormalTok{)}
+\CommentTok{\# leemos los datos de Github}
+\NormalTok{texto}\OtherTok{=}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/UMH1477/data/f4e4a62533e24a74be27b8984f9fc23eb1b1ff49/textos.csv"}\NormalTok{)}
+\CommentTok{\# visualizamos el formato de los datos, con 2 columnas de texto}
+\FunctionTok{head}\NormalTok{(texto)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##               vocal consonante
-## vocal      2.040816   1.960784
-## consonante 9.999761   1.111111
+##       texto1     texto2
+## 1      vocal consonante
+## 2      vocal consonante
+## 3 consonante consonante
+## 4      vocal      vocal
+## 5 consonante consonante
+## 6 consonante consonante
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{mocupa.proceso}\NormalTok{(idioma2,}\DecValTok{100}\NormalTok{)}
+\CommentTok{\# y ejecutamos el test sobre una de las columnas de texto}
+\FunctionTok{verifyMarkovProperty}\NormalTok{(texto}\SpecialCharTok{$}\NormalTok{texto1)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##               vocal consonante
-## vocal      1.333333   4.000000
-## consonante 1.428571   3.333333
+## Testing markovianity property on given data sequence
+## Chi - square statistic is: 2.056533 
+## Degrees of freedom are: 5 
+## And corresponding p-value is: 0.8412687
 \end{verbatim}
 
-Así pues, en el idioma 1, si el texto arranca en una vocal \#\# Ejercicios \{\#ejer-u2\}
+El p-valor es de 0.84, que no permite rechazar la propiedad de Markov.
+
+Por último, para testar la estacionariedad, esto es, si \(p_{ij}(n)=p_{ij}\) para cualquier \(n\), tenemos la función \texttt{assessStationarity()}. Obtener un p-valor significativo significa que rechazaríamos esa propiedad y por lo tanto rechazaríamos que se trata de una CMTD.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{assessStationarity}\NormalTok{(texto}\SpecialCharTok{$}\NormalTok{texto1,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in assessStationarity(texto$texto1, 5): The accuracy of the statistical inference functions
+## has been questioned. It will be thoroughly investigated in future versions of the package.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+
+## Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+\end{verbatim}
+
+\begin{verbatim}
+## The assessStationarity test statistic is:  0.0002538706 
+## The Chi-Square d.f. are:  8 
+## The p-value is:  1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Con los datos utilizados en el apartado anterior, verifica si alguno de los textos que se proporcionan en las columnas de la base de datos, se podría asimilar como perteneciente a alguno de los idiomas presentados, idioma1 o idioma2.
+\end{enumerate}
+
+Para contrastar la similitud entre una secuencia y un proceso teórico que tenemos definido podemos utilizar la función \texttt{verifyEmpiricalToTheoretical()}. Veamos cómo funciona con los procesos idioma1 e idioma2.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# comparamos con el idioma1}
+\FunctionTok{verifyEmpiricalToTheoretical}\NormalTok{(texto}\SpecialCharTok{$}\NormalTok{texto1,idioma1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Testing whether the
+##            vocal consonante
+## vocal      32800      31854
+## consonante 31854       3491
+## transition matrix is compatible with
+##            vocal consonante
+## vocal       0.51       0.49
+## consonante  0.90       0.10
+## [1] "theoretical transition matrix"
+## ChiSq statistic is 2.460873 d.o.f are 2 corresponding p-value is 0.292165
+\end{verbatim}
+
+\begin{verbatim}
+## $statistic
+##    vocal 
+## 2.460873 
+## 
+## $dof
+## [1] 2
+## 
+## $pvalue
+##    vocal 
+## 0.292165
+\end{verbatim}
+
+El p-valor resultante es 0.29, con lo cual no se puede rechazar la hipótesis nula de que la secuencia dada es compatible con el idioma1. Podría ser pues, un texto de dicho idioma
+
+Veamos ahora su compatibilidad con el idioma2:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# comparamos con el idioma2}
+\FunctionTok{verifyEmpiricalToTheoretical}\NormalTok{(texto}\SpecialCharTok{$}\NormalTok{texto1,idioma2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Testing whether the
+##            vocal consonante
+## vocal      32800      31854
+## consonante 31854       3491
+## transition matrix is compatible with
+##            vocal consonante
+## vocal       0.25       0.75
+## consonante  0.30       0.70
+## [1] "theoretical transition matrix"
+## ChiSq statistic is 76057.57 d.o.f are 2 corresponding p-value is 0
+\end{verbatim}
+
+\begin{verbatim}
+## $statistic
+##    vocal 
+## 76057.57 
+## 
+## $dof
+## [1] 2
+## 
+## $pvalue
+## vocal 
+##     0
+\end{verbatim}
+
+En este caso el p-valor es cero, por lo que rechazamos la compatibilidad y claramente aceptamos que este texto no proviene del idioma2.
+
+\hypertarget{ejer-u2}{%
+\section{Ejercicios}\label{ejer-u2}}
 
 \hypertarget{buxe1sicos-1}{%
 \subsection{Básicos}\label{buxe1sicos-1}}
@@ -7596,7 +7856,7 @@ Así pues, en el idioma 1, si el texto arranca en una vocal \#\# Ejercicios \{\#
 
 \[P = 
 \begin{pmatrix}
-0.1 & 0.3 & 0.4\\
+0.3 & 0.3 & 0.4\\
 0.1 & 0.5 & 0.4\\
 0.3 & 0.2 & 0.5\\
 \end{pmatrix}\]
@@ -8593,13 +8853,13 @@ Estima la probabilidad de que la máquina no se pare más de 1 vez durante un tu
 \hypertarget{avanzados-2}{%
 \subsection{Avanzados}\label{avanzados-2}}
 
-\textbf{Ejercicio A3.1} Programa un algoritmo de simulación para la superposición de PP definida en la Sección \protect\hyperlink{superposicion_pp}{Superposición} y resuelve con simulación el Ejemplo @ref(ex\_pp002).
+\textbf{Ejercicio A3.1} Programa un algoritmo de simulación para la superposición de PP definida en la Sección \protect\hyperlink{superposicion_pp}{Superposición} y resuelve con simulación el Ejemplo \ref{ex:pp002}.
 
-\textbf{Ejercicio A3.2} Programa un algoritmo de simulación para la mixtura de PP definida en la Sección \protect\hyperlink{adelgazamiento_pp}{Adelgazamiento con mixtura} y resuelve con simulación el Ejemplo @ref(ex\_pp003).
+\textbf{Ejercicio A3.2} Programa un algoritmo de simulación para la mixtura de PP definida en la Sección \protect\hyperlink{adelgazamiento_pp}{Adelgazamiento con mixtura} y resuelve con simulación el Ejemplo \ref{ex:pp003}.
 
-\textbf{Ejercicio A3.3} Programa un algoritmo de simulación para la composición de PP definida en la Sección \protect\hyperlink{composicion_pp}{Composición} y resuelve con simulación el Ejemplo @ref(ex\_pp004).
+\textbf{Ejercicio A3.3} Programa un algoritmo de simulación para la composición de PP definida en la Sección \protect\hyperlink{composicion_pp}{Composición} y resuelve con simulación el Ejemplo \ref{ex:pp004}.
 
-\textbf{Ejercicio A3.4} Programa un algoritmo de simulación para PP no estacionarios, definidos en la Sección \protect\hyperlink{pp_noestacionarios}{PP no estacionarios} y resuelve con simulación el Ejemplo @ref(ex\_pp005).
+\textbf{Ejercicio A3.4} Programa un algoritmo de simulación para PP no estacionarios, definidos en la Sección \protect\hyperlink{pp_noestacionarios}{PP no estacionarios} y resuelve con simulación el Ejemplo \ref{ex:pp005}.
 
 \textbf{Ejercicio A3.5} Un servicio de venta telefónica recibe llamadas conforme a un PP. Simula el proceso y calcula el volumen esperado (en términos de euros) de las ventas que se realizan durante un intervalo de 15 minutos desde las 12 del mediodía hasta las 12:15pm bajo las diversas condiciones que se proponen a continuación, asumiendo que todos los días son probabilísticamente iguales.
 
@@ -8607,7 +8867,7 @@ Estima la probabilidad de que la máquina no se pare más de 1 vez durante un tu
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  El PP de llegadas ees estacionario con tasa de 50 llamadas por hora. Además, sólo la mitad de las llamadas acaban en compras, el 30\% de las llamadas acaban con una compra de 100€ y el 20\% con compras de 200€.
+  El PP de llegadas es estacionario con tasa de 50 llamadas por hora. Además, sólo la mitad de las llamadas acaban en compras, el 30\% de las llamadas acaban con una compra de 100€ y el 20\% con compras de 200€.
 \item
   Como la mayoría de la gente tiende a llamar en su descanso para almorzar, la tasa de llegadas se incrementa lentamente a partir de mediodía; entre las 12 y las 12:05 la tasa es de 40 llamadas, entre las 12:05pm y las 12:10pm, la tasa es de 45 llamadas por hora, y desde las 12:10pm hasta las 12:50pm la tasa es de 50 llamadas. Las probabilidades y compras son similares a las del apartado 1.
 \item
@@ -8751,8 +9011,7 @@ El proceso \(\{X_t; t \geq 0\}\) con espacio de estados \(\{0, 1, 2\}\) es una C
 \hypertarget{CMTCB}{%
 \section{Descripción del proceso}\label{CMTCB}}
 
-En virtud del teorema \ref{thm:thecmtc001} todas las CMTC con espacios de estado finitos que tienen
-tiempos de permanencia no nulos en cada estado pueden ser descritos a través de las tasas de permanencia y la matriz de saltos. En este punto detallamos este análisis e introducimos todos los conceptos necesarios para el análisis del proceso.
+En virtud del teorema \ref{thm:thecmtc001} todas las CMTC con espacios de estado finitos que tienen tiempos de permanencia no nulos en cada estado pueden ser descritos a través de las tasas de permanencia y la matriz de saltos. En este punto detallamos este análisis e introducimos todos los conceptos necesarios para el análisis del proceso.
 
 De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante de un grafo dirigido, cuyos nodos (o vértices) indican cada uno d elos estados del proceso, y se establece un arco dirigido del nodo \(i\) al nodo \(j\) si \(p_{ij} > 0\). La tasa de transición de \(i\) a \(j\), \(r_{ij} = r_i p_{ij}\) , se escribe junto a este arco. Obsérvese que no hay bucles propios (arcos de \(i\) a \(i\)). Esta representación gráfica se denomina \textbf{diagrama de tasas de la CMTC}.
 
@@ -8760,8 +9019,7 @@ Podemos entender la dinámica de la CMMTC visualizando una partícula que se mue
 
 En esta situación resulta posible obtner los valores de \(r_i\) y \(p_{ij}\) a partir de las tasas \(r_{ij}\) dado que:
 
-\[r_i = \sum_{j=1}^{N} r_{ij}\]
-\[p_{ij} = \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0\]
+\[r_i = \sum_{j=1}^{N} r_{ij}\] \[p_{ij} = \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0\]
 
 Para un mejor manejo de la información resulta conveniente construir la \textbf{matriz de tasas} teniendo en cuenta que \(r_{ii} = 0\) para cualquier valor de \(i\), y por tanto la diagonal de la matriz R es siempre cero. Así tenemos que:
 
@@ -8775,8 +9033,7 @@ r_{N1} & r_{N2} & ... & 0
 
 A partir de la matriz \(R\) se puede obtener la denominada \textbf{matriz generadora} de la CMTC \(Q\), que se define como:
 
-\[q_{ij} = -r_i \text{ si } i = j, \text{ y } q_{ij} = r_{ij} \text{ si } i \neq j\]
-de forma que:
+\[q_{ij} = -r_i \text{ si } i = j, \text{ y } q_{ij} = r_{ij} \text{ si } i \neq j\] de forma que:
 
 \[Q = 
 \begin{pmatrix}
@@ -8857,8 +9114,7 @@ Consideramos un sistema compuesto por una máquina que funciona durante un canti
 
 En esta situación el tiempo de estancia en el estado 0 es el tiempo de reparación, de forma que \(r_0 = \lambda\), mientras que el tiempo en el estado 1 es el tiempo de funcionamiento con \(r_1 = \mu\). Además las probabiliddes de salto de interés son \(p_{01} = 1\) y \(p_{10} = 1\), dado que la máquina siempre es reparada y vuelve a funcionar y porque sabemos que la máquina debe estropearse en algún momento.
 
-El proceso definido de esta forma \(\{X_t; t \geq 0\}\) es una CMTC cuya matriz de tasas y matriz generadora del sietema vienen dadas por:
-:::
+El proceso definido de esta forma \(\{X_t; t \geq 0\}\) es una CMTC cuya matriz de tasas y matriz generadora del sietema vienen dadas por: :::
 
 \[R = 
 \begin{pmatrix}
@@ -9480,8 +9736,7 @@ Si denotamos por \(X_L(t)\) y \(X_R(t)\) el número de motores funcionando en el
 
 \[S = \{ (0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2,2) \}\]
 
-En esta situación el avión sigue funcionando en el subconjunto de estados \[S = \{ (1, 1), (1, 2), (2, 1), (2,2) \}\]
-:::
+En esta situación el avión sigue funcionando en el subconjunto de estados \[S = \{ (1, 1), (1, 2), (2, 1), (2,2) \}\] :::
 
 Vamos a asumir (aunque no es real) que el sistema sigue funcionando, incluso cuando hay posibilidad de un accidente, hasta que llegamos al estado \((0, 0)\). Dado que no hay reparación posible la matriz de tasas entre estados del sistema viene dada por
 
@@ -9511,8 +9766,7 @@ y el diagrama viene dado por:
 
 Para facilitar el algoritmo de simulación en esta situación vamos a asignar un código a cada uno de los posibles estados del sistema:
 
-\[S = \{ 1 = (0, 0), 2 = (0, 1), 3 = (0, 2), 4 = (1, 0), 5 = (1, 1), 6 = (1, 2), 7 = (2, 0), 8 = (2, 1), 9 = (2,2) \}\]
-y asumimos que la media del tiempo hasta que un motor falla cuando esta encendido es de 20 horas, es decir, \(\lambda = 1/20\). A continuación tenemos la función necesaria para simular el sistema descrito:
+\[S = \{ 1 = (0, 0), 2 = (0, 1), 3 = (0, 2), 4 = (1, 0), 5 = (1, 1), 6 = (1, 2), 7 = (2, 0), 8 = (2, 1), 9 = (2,2) \}\] y asumimos que la media del tiempo hasta que un motor falla cuando esta encendido es de 20 horas, es decir, \(\lambda = 1/20\). A continuación tenemos la función necesaria para simular el sistema descrito:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9748,8 +10002,7 @@ Imaginemos que tenemos un cajero bancario al que los clientes acuden de acuerdo 
 
 En esta situación la variable \(X(t)\) que indica el número de sujetos en el sistema en el instante \(t\) es una CMTC denominada cola \(M/M/1/K\), donde \(M\) hace referencia a los tiempos de llegada y servicio exponenciales, el \(1\) hace referencia a la capacidad del servicio, \(K\) el tamaño del sistema, y con espacio de estados \(S = \{0, 1, 2,...K \}\). Este tipo de sistemas son procesos de nacimiento y muerte con:
 
-\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1,\]
-\[\mu_i = \mu, \quad 0 \leq i \leq K,\]\\
+\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1,\] \[\mu_i = \mu, \quad 0 \leq i \leq K,\]\\
 donde el ``nacimiento'' y la ``muerte'' hacen referencia a la llegada al cajero y la salida del cajero respectivamente.
 
 Veamos la descripción del sistema:
@@ -10171,9 +10424,7 @@ El proceso \(\{X(t); t \geq 0\}\) es una CMTC con espacio de estados \(S = \{0, 
 
 El sistema \(\{X(t); t \geq 0\}\) es un proceso de nacimiento y muerte con:
 
-\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1\]
-\[\mu_i = i\mu, \quad 0 \leq i \leq K\]
-que como veremos más adelante se denomina cola \(M/M/K/K\), es decir, llegadas y servicios exponenciales con \(K\) servidores y de capacidad \(K\).
+\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1\] \[\mu_i = i\mu, \quad 0 \leq i \leq K\] que como veremos más adelante se denomina cola \(M/M/K/K\), es decir, llegadas y servicios exponenciales con \(K\) servidores y de capacidad \(K\).
 
 La función de simmer para estudiar este sistema viene dada por:
 
@@ -10207,14 +10458,11 @@ La función de simmer para estudiar este sistema viene dada por:
 \hypertarget{call-center}{%
 \subsection{Call Center}\label{call-center}}
 
-El sistema de reservas telefónicas de una aerolínea es un ``call center'' formado por \(s\) empleados de reservas llamados agentes. Una llamada entrante para una reserva es atendida por un agente si hay uno disponible; de lo contrario, la persona que llama es puesta en espera. El sistema puede poner en espera a un máximo de \(H\) personas.
-Cuando un agente está disponible, las llamadas en espera se atienden por orden de llegada. Cuando todos los agentes están ocupados y hay \(H\) llamadas en espera, cualquier llamada adicional recibe una señal de ocupado y se pierden permanentemente. Sea \(X(t)\) la varaible aleatoria que registra el número de llamadas en el sistema, las atendidas por los agentes más las que están en espera, en el momento \(t\) . Si las llamadas recibidas se comportan como un \(PP(\lambda)\) y los tiempos de procesamiento de las llamadas son variables aleatorias iid \(Exp(\mu)\), el sistema \(\{X(t); t \geq 0\}\) es una CMTC, con espacio de estados \(S = \{0, 1, 2,...,K\}\) donde \(K = s + H\).
+El sistema de reservas telefónicas de una aerolínea es un ``call center'' formado por \(s\) empleados de reservas llamados agentes. Una llamada entrante para una reserva es atendida por un agente si hay uno disponible; de lo contrario, la persona que llama es puesta en espera. El sistema puede poner en espera a un máximo de \(H\) personas. Cuando un agente está disponible, las llamadas en espera se atienden por orden de llegada. Cuando todos los agentes están ocupados y hay \(H\) llamadas en espera, cualquier llamada adicional recibe una señal de ocupado y se pierden permanentemente. Sea \(X(t)\) la varaible aleatoria que registra el número de llamadas en el sistema, las atendidas por los agentes más las que están en espera, en el momento \(t\) . Si las llamadas recibidas se comportan como un \(PP(\lambda)\) y los tiempos de procesamiento de las llamadas son variables aleatorias iid \(Exp(\mu)\), el sistema \(\{X(t); t \geq 0\}\) es una CMTC, con espacio de estados \(S = \{0, 1, 2,...,K\}\) donde \(K = s + H\).
 
 Se puede demostrar fácilmente que este sistema es un proceso de nacimiento y muerte con tasas:
 
-\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1\]
-\[\mu_i = min(i, s)\mu, \quad 0 \leq i \leq K\]
-que en la terminologia habitual se denomina cola \(M/M/s/K\). Para simular este proceso podemos utilizar la función del ejemplo anterior.
+\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1\] \[\mu_i = min(i, s)\mu, \quad 0 \leq i \leq K\] que en la terminologia habitual se denomina cola \(M/M/s/K\). Para simular este proceso podemos utilizar la función del ejemplo anterior.
 
 \hypertarget{CMTCE}{%
 \section{Otros tipos de sistemas}\label{CMTCE}}
@@ -10224,8 +10472,7 @@ Presentamos en este punto otros sistemas que no se corresponden con procesos de 
 \hypertarget{gestiuxf3n-de-inventarios}{%
 \subsection{Gestión de inventarios}\label{gestiuxf3n-de-inventarios}}
 
-Una tienda minorista gestiona el inventario de un tipo de producto, que denominamos \(P\), de la forma siguiente. Cuando el número de elementos de \(P\) disminuye a un número fijo \(l\), se hace un pedido al fabricante de \(m\) repuestos de \(P\). El pedido tarda un tiempo aleatorio en ser entregado al minorista. Si el inventario es como máximo \(l\) cuando se entrega un pedido (incluido el pedido recién entregado), se realiza inmediatamente otro pedido de \(m\) artículos. Supongamos que
-que los plazos de entrega son variables aleatorias iid \(Exp(\lambda)\) y que la demanda se produce según un \(PP(\mu)\). Las demandas que no pueden ser satisfechas inmediatamente se pierden.
+Una tienda minorista gestiona el inventario de un tipo de producto, que denominamos \(P\), de la forma siguiente. Cuando el número de elementos de \(P\) disminuye a un número fijo \(l\), se hace un pedido al fabricante de \(m\) repuestos de \(P\). El pedido tarda un tiempo aleatorio en ser entregado al minorista. Si el inventario es como máximo \(l\) cuando se entrega un pedido (incluido el pedido recién entregado), se realiza inmediatamente otro pedido de \(m\) artículos. Supongamos que que los plazos de entrega son variables aleatorias iid \(Exp(\lambda)\) y que la demanda se produce según un \(PP(\mu)\). Las demandas que no pueden ser satisfechas inmediatamente se pierden.
 
 Sea \(X(t)\) el número de elementos de \(P\) en stock en el momento \(t\). Obsérvese que el número máximo de elemntos de \(P\) en stock es \(K = l + m\), lo que ocurre si el pedido se entrega antes de que se produzca la siguiente demanda. El espacio de estados es, pues, \(S = \{0, 1, 2,...,K\}\). En el estado \(0\), las demandas se pierden, y el stock salta a \(m\) cuando se entrega el pedido pendiente actual (lo que ocurre a la tasa \(\lambda\)). Por tanto, tenemos \(r_{0m} = \lambda\). En el estado \(i\) \((1 \leq i \leq l)\) hay un pedido pendiente. El estado cambia a \(i-1\) si se produce una demanda (lo que ocurre a la tasa \(\mu\)) y a \(i + m\) si se entrega el pedido. Por lo tanto, tenemos \(r_{i i+m} = \lambda\) y \(r_{i i-1} = \mu\). Finalmente, si \(X(t) = i\) (\(l + 1 \leq i \ K\)), no hay pedidos pendientes, y la única transición es de \(i\) a \(i- 1\), y eso ocurre cuando se produce una demanda. Por lo tanto, \(r_{i i-1} = \mu\). El proceso \(X(t), t \geq 0\) definidido de esta forma es una CMTC.
 
@@ -10238,13 +10485,11 @@ Un proceso de de fabricación sencilla consiste en una sola máquina que puede e
 
 \[S = \{(i, 1), 0 \leq i < K\} \cup \{(i, 0), l < i \leq K\}\]
 
-Hay que tener en cuenta que la máquina siempre está encendida si el número de elementos es \(l\) o menos. Por lo tanto, no necesitamos los estados \(\{(i, 0), 0 \leq i \leq l\}\). El análisis habitual de los eventos desencadenantes arroja las
-siguientes tasas de transición:
+Hay que tener en cuenta que la máquina siempre está encendida si el número de elementos es \(l\) o menos. Por lo tanto, no necesitamos los estados \(\{(i, 0), 0 \leq i \leq l\}\). El análisis habitual de los eventos desencadenantes arroja las siguientes tasas de transición:
 
 \[r_{(i, 1)(i+1, 1)} = \lambda, \quad 0 \leq i < K-1,\]
 
-\[r_{(K-1, 1)(K, 0)} = \lambda, \]
-\[r_{(i, 1)(i-1, 1)} = \mu, \quad 1\leq i\leq K-1,\]
+\[r_{(K-1, 1)(K, 0)} = \lambda, \] \[r_{(i, 1)(i-1, 1)} = \mu, \quad 1\leq i\leq K-1,\]
 
 \[r_{(i, 0)(i-1, 0)} = \mu, \quad l+1 < i\leq K,\]
 
@@ -10257,13 +10502,11 @@ El aspecto funcdamental para estudiar el comportamiento de cualquier CMTC es la 
 
 Sea \(X(t), t \geq 0\) una CMTC con espacio de estados \(S = \{1,2,...,N\}\) y con matriz de tasas \(R = [r_{ij}]\). Si asumimos que la distribución de probabilidad en el estado incial, \(X(0)\) es conocida, entonces tenemos que:
 
-\[P(X(t) = j) = \sum_{i=1}^N P(X(t) = j | X_0 = i)P(X_0 = i), \quad 1 \leq j \leq N.\]
-Es necesario obtener \(P(X(t) = j | X_0 = i) = p_{ij}(t)\) para obtener la función de distribución de probabilidad de \(X(t)\). Antes de ver como obtener dichas probabildiades introducimos la notación necesaria.
+\[P(X(t) = j) = \sum_{i=1}^N P(X(t) = j | X_0 = i)P(X_0 = i), \quad 1 \leq j \leq N.\] Es necesario obtener \(P(X(t) = j | X_0 = i) = p_{ij}(t)\) para obtener la función de distribución de probabilidad de \(X(t)\). Antes de ver como obtener dichas probabildiades introducimos la notación necesaria.
 
 ya hemos visto antes que una CMTC permance un tiempo \(Exp(r_i)\) en el estado \(i\) con \(r_i = \sum_{j=1}^N r_{ij}\) y, si \(r_i > 0\) entonces pasamos al estado \(j\) con probabilidad \(p_{ij} = r_{ij}/r_i\). Asumiendo que existe un número finito \(r\) que satisface:
 
-\[r \geq max(r_i), \quad 1\leq i \leq N\]
-podemos definir la matriz \(\hat{P} = [\hat{p}_{ij}]\) como:
+\[r \geq max(r_i), \quad 1\leq i \leq N\] podemos definir la matriz \(\hat{P} = [\hat{p}_{ij}]\) como:
 
 \begin{equation}
 \hat{p}_{ij} = 
@@ -10287,8 +10530,7 @@ Esta forma de obtener \(P\) se denomina \textbf{método de uniformización}, y p
 
 y
 
-\[r = max(r_i), \quad 1\leq i \leq N,\]
-aunque en algunos casos resulta más conveniente utilizar \(r = sum_{i=1}^N r_i\). De hecho, veremos que ambos resultados son muy similares y podremos usar la suma en todos los casos.
+\[r = max(r_i), \quad 1\leq i \leq N,\] aunque en algunos casos resulta más conveniente utilizar \(r = sum_{i=1}^N r_i\). De hecho, veremos que ambos resultados son muy similares y podremos usar la suma en todos los casos.
 
 \begin{silverbox}
 Algoritmo para obtener \(P\):
@@ -10308,9 +10550,7 @@ Algoritmo para obtener \(P\):
   Mientras que \(sum < 1-\epsilon\), calcular:
 \end{enumerate}
 
-\[c = c*(rt)/k; \quad B = B + cA; \quad A = A \hat{P}\]
-\[sum = sum + c; \quad k = k + 1\]
-Al finalizar la matriz \(B\) es una aproximación de \(P(t)\) con error inferior a \(\epsilon\).
+\[c = c*(rt)/k; \quad B = B + cA; \quad A = A \hat{P}\] \[sum = sum + c; \quad k = k + 1\] Al finalizar la matriz \(B\) es una aproximación de \(P(t)\) con error inferior a \(\epsilon\).
 
 \end{silverbox}
 
@@ -10530,9 +10770,7 @@ Algoritmo para obtener \(M(T)\):
   Mientras que \(suma/r < T-\epsilon\), calcular:
 \end{enumerate}
 
-\[k = k + 1; \quad yek = yek*(rT)/k; \quad ygk = ygk - yek\]
-\[B = B + ygk*A; \quad A = A\hat{P}; \quad suma = suma + ygk\]
-Al finalizar la matriz \(B/r\) es una aproximación de \(M(T)\) con error inferior a \(\epsilon\).
+\[k = k + 1; \quad yek = yek*(rT)/k; \quad ygk = ygk - yek\] \[B = B + ygk*A; \quad A = A\hat{P}; \quad suma = suma + ygk\] Al finalizar la matriz \(B/r\) es una aproximación de \(M(T)\) con error inferior a \(\epsilon\).
 
 \end{silverbox}
 
@@ -10654,8 +10892,7 @@ Si existen dichos límites el conjunto \(p = [p_1, p_2,...,p_N]\) se conoce como
 \begin{theorem}
 Una CMTC \(\{X(t), t \geq 0\}\) irreducible con matriz de tasas \(R\) tiene una única distribución límite \(p = [p_1, p_2,...,p_N]\), que se puede obtener como solución de las ecuaciones de balance:
 
-\[p_j r_j = \sum_{i=1}^N p_ir_{ij}, \quad 1 \leq j \leq N\]
-\[\sum_{i=1}^N p_i = 1\]
+\[p_j r_j = \sum_{i=1}^N p_ir_{ij}, \quad 1 \leq j \leq N\] \[\sum_{i=1}^N p_i = 1\]
 \end{theorem}
 
 En este sentido podemos interpretar \(p_jr_j\) como la tasa de la CMTC cuanod deja el estado \(j\), mientras que \(p_jr_{ij}\) es la tasa de entrada de la CMTC a estado \(j\) desde el estado \(i\).
@@ -10663,8 +10900,7 @@ En este sentido podemos interpretar \(p_jr_j\) como la tasa de la CMTC cuanod de
 \begin{theorem}
 Dado una CMTC \(\{X(t), t \geq 0\}\) irreducible con distribución límite \(p\), entonces la distribución estacionaria de la CMTC viene dada por \(p\), es decir:
 
-\[P(X(0) = j) = p_j \text{ para } 1 \leq j leq N\]
-\(P(X(t) = j) = p_j \text{ para } 1 \leq j leq N, t \geq 0\)\$
+\[P(X(0) = j) = p_j \text{ para } 1 \leq j leq N\] \(P(X(t) = j) = p_j \text{ para } 1 \leq j leq N, t \geq 0\)\$
 \end{theorem}
 
 A partir de la distribución límite resulta posible obtener la distribución de ocupación de la CMTC.
@@ -10679,8 +10915,7 @@ A continuación se presenta la solución de la distrbución límite para los pro
 
 Sea \(\{X(t), t \geq 0\}\) un proceso de nacimiento y muerte con espacio de estados \(S = \{0, 1,...,K\}\), y tasas de nacimiento \(\{\lambda_i, 0 \leq i < K\}\) y tasas de muerte \(\{\mu_i, 1 \leq i \leq K\}\). Entonces la CMTC así definida es irreducible y tiene una única distribuión límite con:
 
-\[p_i = \frac{\rho_i}{\sum_{j = 0}^K \rho_j}, \quad 0 \leq i \leq K,\]
-donde \(\rho_0 = 1,\) y
+\[p_i = \frac{\rho_i}{\sum_{j = 0}^K \rho_j}, \quad 0 \leq i \leq K,\] donde \(\rho_0 = 1,\) y
 
 \[\rho_i = \frac{\prod_{j=0}^{i-1}\lambda_j}{\prod_{j=1}^{i}\mu_j}, \quad 1 \leq i \leq K,\]
 
@@ -10821,15 +11056,13 @@ En esta subsección, estudiamos el \textbf{CTE}, el \emph{coste total esperado} 
 
 De esta forma el coste esprado total hasta el instante \(T\), empezando en el estado \(i\), viene dado por:
 
-\[g(i, T) = E\left( \int_0^T c(X(t))dt \mid X(0) = i \right), \quad 1 \leq i \leq N.\]
-::: \{.theorem\}
+\[g(i, T) = E\left( \int_0^T c(X(t))dt \mid X(0) = i \right), \quad 1 \leq i \leq N.\] ::: \{.theorem\}
 
 Si \(M(T) = [m_{ij}(T)]\) es la matriz de ocupación entonces:
 
 \[g(T) = M(T)c,\]
 
-donde \(c = [c(1), c(2),...,c(N-1), c(N)]'\) y \(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.\)
-:::
+donde \(c = [c(1), c(2),...,c(N-1), c(N)]'\) y \(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.\) :::
 
 \begin{example}
 Para el sistema de mantenimiento de máquinas se conoce que que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas si al finalizar todas las máquinas están funcionando. Si \(X(t)\) es el número de máquinas funcionando en el instante \(t\), el espacio de estados para 4 máquinas viene dado por \(S = \{0, 1, 2, 3, 4\}\) y el vector de costes es:
@@ -10843,8 +11076,7 @@ c(2) = & 2*50 - 2*15 - 2*10 = 50,\\
 c(3) = & 3*50 - 1*15 - 1*10 = 125,\\
 c(4) = & 4*50 - 0*15 - 0*10 = 200.
 \end{matrix}
-\]
-El vector de costes para el periodo de 24 horas viene dado por:
+\] El vector de costes para el periodo de 24 horas viene dado por:
 
 \[
 g(24) = M(24)*c =
@@ -10913,8 +11145,7 @@ Si consideramos el sistema de \texttt{vida\ de\ una\ máquina} supongamos que el
 
 Utilizando las tasas definidas anteriormente (\(\lambda = 1, \mu = 0.1\)), la distribución límite del sistema \(p = [0.0909, 0.9091]\), y el vector de costes \(c =[-C, I]\) para el espacio de estados \(S = \{0, 1\}\), la tasa de coste a largo plazo por unidad de tiempo viene dada por la expresión:
 
-\[ g = 0.9091*I - 0.0909*C\]
-de forma que para mantener el sistema en equilibrio, \(g \geq 0\), se debe cumplir que:
+\[ g = 0.9091*I - 0.0909*C\] de forma que para mantener el sistema en equilibrio, \(g \geq 0\), se debe cumplir que:
 
 \[I \geq \frac{0.0909}{0.9091}*C = 0.099989*C \approx 0.1*C\]
 
@@ -10957,14 +11188,13 @@ El beneficio por unidad de tiempo es de 48.82 céntimos. Si no rechazaramos ning
 \hypertarget{CMTCJ}{%
 \section{Tiempos de primer paso}\label{CMTCJ}}
 
-Como ocurría con las CMTD podemos hablar de los tiempos de primer paso en las CMTC. Si \(\{X(t), t \geq 0\}\) es una CMTC con espacio de estados \(\{1, 2,...,N\}\) y matriz de tasas \(R\), entonces se define como el \textbf{tiempo de primer paso al estado \(N\)} como:
+Como ocurría con las CMTD podemos hablar de los tiempos de primer paso en las CMTC. Si \(\{X(t), t \geq 0\}\) es una CMTC con espacio de estados \(\{1, 2,...,N\}\) y matriz de tasas \(R\), entonces se define como el \textbf{tiempo de primer paso al estado} \(N\) como:
 
 \[T = min\{t \geq 0: X(t) = N\}.\]
 
 Más concretamente estudíamos el valor esperado de \(T\), \(E(T)\). Para ello definimos los tiempos esperados a partir de cada uno de los estados del sistema como:
 
-\[m_i = E(T \mid X(0) = i), \quad 1 \leq i \leq N-1\]
-y \(m_N = 0.\)
+\[m_i = E(T \mid X(0) = i), \quad 1 \leq i \leq N-1\] y \(m_N = 0.\)
 
 \begin{theorem}
 Los valores \(\{m_i, 1 \leq i \leq N-1\}\) satisfacen
@@ -11127,8 +11357,7 @@ Los ejercicios que se presentan a continuación se estruturan en dos niveles de 
 
 \textbf{Ejercicio B-12.} Para el sistema del \texttt{vendedor\ por\ ciudades} viajante estamos interesados en conocer a la largo plazo cual es la proporción de tiempo que permanecerá en cada ciudad. En este caso la matriz de tasas debe tener en cuenta las probabilidades de moverse de una ciudad a otra. Si el beneficio que obtiene el vendedor es de 80 euros/día en la ciudad A, 100 euros/día en la ciudad B, 125 euros/día en C, y que además se incurre en un gasto por desplazamiento de 25 céntimos por kilómetro caundo hay 50 kilómetros entre A y B, 65 kilómetros entre A y C, y 80 kilómetros entre B y C ¿cuál es el beneficio total esperado del sistema para un periodo de un mes? ¿Cuál es la tasa de coste a largo plazo? Si el viajante comienza su viaje en la ciudad A ¿cuál es el tiempo esperado hasta que el viajante vuelva a la ciudad A?
 
-\textbf{Ejercicio B-12.} Un taller mecánico consta de dos taladradoras y dos tornos. Los tiempos de vida de las taladradoras son variables aleatorias \(Exp(\mu_b)\) y las de los tornos son variables aleatorias \(Exp(\mu_l)\). El taller mecánico tiene dos reparadores: Al y Bob. Al puede reparar tanto tornos como taladros, mientras que Bob sólo puede reparar tornos. Los tiempos de reparación de las taladradoras son \(Exp(\lambda_b\) y para los tornos \(Exp(\lambda_l)\), independientemente de quién repare las máquinas. Las taladradoras tienen prioridad en las reparaciones. Las reparaciones pueden adelantarse. Haciendo las suposiciones de independencia apropiadas
-independencia, modelar este taller mecánico como un CMTC, considerando el proceso \(A(t) = (b, l)\) que indica el número de taladros y tornos en funcionamiento en el instante \(t\) y obtener la correspondiente matriz de tasas.
+\textbf{Ejercicio B-12.} Un taller mecánico consta de dos taladradoras y dos tornos. Los tiempos de vida de las taladradoras son variables aleatorias \(Exp(\mu_b)\) y las de los tornos son variables aleatorias \(Exp(\mu_l)\). El taller mecánico tiene dos reparadores: Al y Bob. Al puede reparar tanto tornos como taladros, mientras que Bob sólo puede reparar tornos. Los tiempos de reparación de las taladradoras son \(Exp(\lambda_b\) y para los tornos \(Exp(\lambda_l)\), independientemente de quién repare las máquinas. Las taladradoras tienen prioridad en las reparaciones. Las reparaciones pueden adelantarse. Haciendo las suposiciones de independencia apropiadas independencia, modelar este taller mecánico como un CMTC, considerando el proceso \(A(t) = (b, l)\) que indica el número de taladros y tornos en funcionamiento en el instante \(t\) y obtener la correspondiente matriz de tasas.
 
 \textbf{Ejercicio A-1} Un fondo de inversión se clasifica en cuatro estados según los beneficios que produce por unidad de tiempo: altos, medios, bajos, y pérdidas. Además, el movimiento entre estados puede ser visto como una CMTC con matriz de tasas:
 
@@ -11139,8 +11368,7 @@ R = \begin{pmatrix}
 0 & 0 & 0.5 & 0.5\\
 1.5 & 0 & 0  & 0 
 \end{pmatrix}
-\]
-Mientras que el sistema está en cada uno de los estados, el beneficio respectivo estimado es de 500, 250, 100, y -600 euros por unidad de tiempo.
+\] Mientras que el sistema está en cada uno de los estados, el beneficio respectivo estimado es de 500, 250, 100, y -600 euros por unidad de tiempo.
 
 \begin{itemize}
 \tightlist
@@ -11258,8 +11486,7 @@ Los clientes llegan de acuerdo a un \(PP(\lambda)\) con tasa de 20 clientes por 
   Si los costes de los tres servidores son 40, 20 y 10 euros por hora respectivamente ¿cuál el valor de \(c\) más pequeño que hace que el sistema sea rentable a largo plazo?
 \end{itemize}
 
-\textbf{Ejercicio A-7.} Una estación de servicio monoservicio atiende a dos tipos de clientes. Los clientes de tipo \(i, i = 1, 2,\) llegan según un \(PP(\lambda_i)\) independientes. La estación tiene espacio para atender como máximo a \(K\) clientes. Los tiempos de servicio son variables aleatorias iid \(Exp(\mu)\) para ambos tipos de clientes. La política de admisión es la siguiente. Si, en el momento de una llegada, el número total de clientes en el sistema es \(M\) o menos (aquí \(M < K\) es es un número entero fijo), se permite que el cliente que llega se incorpore a la
-cola; en caso contrario sólo si es del tipo 1. Esto crea un trato preferente para los clientes de tipo 1. Sea \(X(t)\) el número de clientes (de ambos tipos) en el sistema en el tiempo \(t\) . Si las tasas de llegadas son de 5 y e minutos, la tasa de servicio es de 4 minutos, \(K = 5\), y \(M = 3\).
+\textbf{Ejercicio A-7.} Una estación de servicio monoservicio atiende a dos tipos de clientes. Los clientes de tipo \(i, i = 1, 2,\) llegan según un \(PP(\lambda_i)\) independientes. La estación tiene espacio para atender como máximo a \(K\) clientes. Los tiempos de servicio son variables aleatorias iid \(Exp(\mu)\) para ambos tipos de clientes. La política de admisión es la siguiente. Si, en el momento de una llegada, el número total de clientes en el sistema es \(M\) o menos (aquí \(M < K\) es es un número entero fijo), se permite que el cliente que llega se incorpore a la cola; en caso contrario sólo si es del tipo 1. Esto crea un trato preferente para los clientes de tipo 1. Sea \(X(t)\) el número de clientes (de ambos tipos) en el sistema en el tiempo \(t\) . Si las tasas de llegadas son de 5 y e minutos, la tasa de servicio es de 4 minutos, \(K = 5\), y \(M = 3\).
 
 \begin{itemize}
 \tightlist
@@ -11287,7 +11514,7 @@ cola; en caso contrario sólo si es del tipo 1. Esto crea un trato preferente pa
   Si al abrir la gasolinera tenemos un cliente ¿cuánto tiempo debe pasar hasta que no tengamos ningún cliente en el sistema? ¿y más de uno?
 \end{itemize}
 
-\textbf{Ejercicio A-9 (Cola \(M^x/M/1/K\)).} Una pequeña tienda de autoservicio 24 horas de carretera tiene espacio para 5 automóviles en el parking. Los vehículos llegan al azar, siendo los tiempos de llegada una variable aleatoria exponencial con una media de 10 vehículos por hora. El número de personas dentro de cada coche es una variable aleatoria, \(N\), donde \(P(N = 1) = 0.1\), \(P(N = 2) = 0.7\) y \(P(N = 3) = 0.2\). La gente de los coches entra en la tienda y permanece en ella un tiempo exponencial. La duración media de la estancia en la tienda es de 10 minutos y cada persona actúa de forma independiente de todas las demás, saliendo de la tienda por separado y esperando en sus coches a los demás. Si llega un coche y la tienda está demasiado llena para que todas las personas del coche entren en ella, el coche saldrá y nadie de ese coche entrará en la tienda. Si \(X(t)\) es el número de individuos en la tienda en el momento \(t\), obtén la matriz de tasas corespondiente a este proceso.
+\textbf{Ejercicio A-9 (Cola} \(M^x/M/1/K\)). Una pequeña tienda de autoservicio 24 horas de carretera tiene espacio para 5 automóviles en el parking. Los vehículos llegan al azar, siendo los tiempos de llegada una variable aleatoria exponencial con una media de 10 vehículos por hora. El número de personas dentro de cada coche es una variable aleatoria, \(N\), donde \(P(N = 1) = 0.1\), \(P(N = 2) = 0.7\) y \(P(N = 3) = 0.2\). La gente de los coches entra en la tienda y permanece en ella un tiempo exponencial. La duración media de la estancia en la tienda es de 10 minutos y cada persona actúa de forma independiente de todas las demás, saliendo de la tienda por separado y esperando en sus coches a los demás. Si llega un coche y la tienda está demasiado llena para que todas las personas del coche entren en ella, el coche saldrá y nadie de ese coche entrará en la tienda. Si \(X(t)\) es el número de individuos en la tienda en el momento \(t\), obtén la matriz de tasas corespondiente a este proceso.
 
 \begin{itemize}
 \tightlist
@@ -11297,8 +11524,7 @@ cola; en caso contrario sólo si es del tipo 1. Esto crea un trato preferente pa
   ¿Cuál es la proporción de tiempo que la estación estará completa en un periodo de 24 horas?
 \end{itemize}
 
-\textbf{Ejercicio A-10.} Un determinado equipo electrónico tiene dos componentes A y B. El tiempo hasta fallo del componente A está descrito por una función de distribución exponencial con un tiempo medio de 100 horas. El componente B tiene una vida media hasta el fallo de 200 horas y también está descrito por una distribución exponencial. Cuando uno de los componentes falla, el equipo se apaga y se realiza el mantenimiento. El tiempo de reparación del componente se distribuye exponencialmente con un tiempo medio de 5 horas si fue A el que falló
-y 4 horas si es B el que falla. Se considera el proceso \(X(t)\) con espacio de estados \(\{1, 2, 3\}\) donde el estado \(1\) denota que el equipo está funcionando, \(2\) denota que el componente A ha fallado, y \(3\) denota que el componente B ha fallado.
+\textbf{Ejercicio A-10.} Un determinado equipo electrónico tiene dos componentes A y B. El tiempo hasta fallo del componente A está descrito por una función de distribución exponencial con un tiempo medio de 100 horas. El componente B tiene una vida media hasta el fallo de 200 horas y también está descrito por una distribución exponencial. Cuando uno de los componentes falla, el equipo se apaga y se realiza el mantenimiento. El tiempo de reparación del componente se distribuye exponencialmente con un tiempo medio de 5 horas si fue A el que falló y 4 horas si es B el que falla. Se considera el proceso \(X(t)\) con espacio de estados \(\{1, 2, 3\}\) donde el estado \(1\) denota que el equipo está funcionando, \(2\) denota que el componente A ha fallado, y \(3\) denota que el componente B ha fallado.
 
 \begin{itemize}
 \tightlist
@@ -11307,13 +11533,10 @@ y 4 horas si es B el que falla. Se considera el proceso \(X(t)\) con espacio de 
 \item
   ¿cuál es la proporción de tiempo esperado que el sistema estará funcionando durante las próximas 500 horas?
 \item
-  Un contratista externo realiza los trabajos de reparación de los componentes cuando se produce un fallo y cobra 100 euros por hora por el tiempo más los gastos de viaje, lo que supone 500 euros más por cada visita. La empresa ha determinado que puede contratar y formar a su propio propio reparador. Si cuentan con su propio empleado para las reparaciones, le costará 40 euros por hora, tanto cuando la máquina esté en funcionamiento como cuando esté parada. Ignorando el coste de la formación inicial y la posibilidad de que un empleado contratado
-  para los trabajos de reparación pueda hacer otras cosas mientras la máquina está en funcionamiento, ¿merece la pena económicamente contratar y formar a su propia persona?
+  Un contratista externo realiza los trabajos de reparación de los componentes cuando se produce un fallo y cobra 100 euros por hora por el tiempo más los gastos de viaje, lo que supone 500 euros más por cada visita. La empresa ha determinado que puede contratar y formar a su propio propio reparador. Si cuentan con su propio empleado para las reparaciones, le costará 40 euros por hora, tanto cuando la máquina esté en funcionamiento como cuando esté parada. Ignorando el coste de la formación inicial y la posibilidad de que un empleado contratado para los trabajos de reparación pueda hacer otras cosas mientras la máquina está en funcionamiento, ¿merece la pena económicamente contratar y formar a su propia persona?
 \end{itemize}
 
-\textbf{Ejercicio A-11.} Una pieza de automóvil necesita tres operaciones de mecanizado realizadas en una determinada
-secuencia. Estas operaciones son realizadas por tres máquinas. La pieza se introduce en la primera máquina, donde la operación de mecanizado dura en media 1 minuto. Una vez finalizada la operación, la pieza pasa a la máquina 2, donde el mecanizado requiere un tiempo medio de 1.2 minutos. A continuación, pasa a la máquina 3, donde la operación dura en promedio 1 minuto. No hay espacio de almacenamiento entre las dos máquinas, por tanto si la máquina 2 esta trabajando, la pieza de la máquina 1 no puede ser retirada aunque la operación en la máquina 1 se haya completado. Decimos que la máquina 1 está bloqueada en este caso. Hay un amplio suministro de piezas sin procesar disponibles de modo que la máquina 1 siempre puede procesar una nueva pieza cuando una pieza terminada se desplaza a la máquina 2. Modele este sistema como un CMTC. (Hint: Tenga en cuenta que la máquina 1 puede estar
-trabajar o estar bloqueada, la máquina 2 puede estar trabajando, bloqueada o inactiva, y la máquina 3 puede estar trabajando o inactiva).
+\textbf{Ejercicio A-11.} Una pieza de automóvil necesita tres operaciones de mecanizado realizadas en una determinada secuencia. Estas operaciones son realizadas por tres máquinas. La pieza se introduce en la primera máquina, donde la operación de mecanizado dura en media 1 minuto. Una vez finalizada la operación, la pieza pasa a la máquina 2, donde el mecanizado requiere un tiempo medio de 1.2 minutos. A continuación, pasa a la máquina 3, donde la operación dura en promedio 1 minuto. No hay espacio de almacenamiento entre las dos máquinas, por tanto si la máquina 2 esta trabajando, la pieza de la máquina 1 no puede ser retirada aunque la operación en la máquina 1 se haya completado. Decimos que la máquina 1 está bloqueada en este caso. Hay un amplio suministro de piezas sin procesar disponibles de modo que la máquina 1 siempre puede procesar una nueva pieza cuando una pieza terminada se desplaza a la máquina 2. Modele este sistema como un CMTC. (Hint: Tenga en cuenta que la máquina 1 puede estar trabajar o estar bloqueada, la máquina 2 puede estar trabajando, bloqueada o inactiva, y la máquina 3 puede estar trabajando o inactiva).
 
 \begin{itemize}
 \tightlist
@@ -11516,11 +11739,9 @@ El tiempo que el sistema esta libre es de \texttt{mean(res)} horas. En este caso
 
 Sea \(X(t)\) el número de artículos en stock en el tiempo \(t\), e \(Y(t)\) el estado de la máquina en el tiempo \(t\). El conjunto de estados de este proceso viene dado por:
 
-\[S = \{1 = (0, 1), 2 = (1, 1), 3 = (2, 1), 4 = (3, 1), 5 = (4, 0), 6 = (3, 0)\}.\]
-En la situación inicial nos encontramos en el estado \(5 = (4, 0) = (X(0), Y(0))\) y estamos interesados en el tiempo en que la máquina estará después de 24 horas en los estados \(1, 2, 3\) o \(4\), es decir:
+\[S = \{1 = (0, 1), 2 = (1, 1), 3 = (2, 1), 4 = (3, 1), 5 = (4, 0), 6 = (3, 0)\}.\] En la situación inicial nos encontramos en el estado \(5 = (4, 0) = (X(0), Y(0))\) y estamos interesados en el tiempo en que la máquina estará después de 24 horas en los estados \(1, 2, 3\) o \(4\), es decir:
 
-\[m_{51}(24) + m_{52}(24) + m_{53}(24) + m_{54}(24)\]
-En esta situación tenemos que la tasa de producción es \(\lambda = 60/10 = 6\) y la de demanda es \(\mu = 5\), de forma que la matriz de tasas viene dada por:
+\[m_{51}(24) + m_{52}(24) + m_{53}(24) + m_{54}(24)\] En esta situación tenemos que la tasa de producción es \(\lambda = 60/10 = 6\) y la de demanda es \(\mu = 5\), de forma que la matriz de tasas viene dada por:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12037,16 +12258,16 @@ Veamos la salida completa:
 ## {
 ##     1 - exp(-t/W)
 ## }
-## <bytecode: 0x7f96b20f9a38>
-## <environment: 0x7f96b20f9370>
+## <bytecode: 0x7ff388a72cb8>
+## <environment: 0x7ff388a725f0>
 ## 
 ## $FWq
 ## function (t) 
 ## {
 ##     1 - (RO * exp(-t/W))
 ## }
-## <bytecode: 0x7f96b20f5f88>
-## <environment: 0x7f96b20f9370>
+## <bytecode: 0x7ff388a6f208>
+## <environment: 0x7ff388a725f0>
 ## 
 ## attr(,"class")
 ## [1] "o_MM1"

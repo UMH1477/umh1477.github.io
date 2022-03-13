@@ -300,16 +300,16 @@ s.MM1
 ## {
 ##     1 - exp(-t/W)
 ## }
-## <bytecode: 0x7f96b20f9a38>
-## <environment: 0x7f96b20f9370>
+## <bytecode: 0x7ff388a72cb8>
+## <environment: 0x7ff388a725f0>
 ## 
 ## $FWq
 ## function (t) 
 ## {
 ##     1 - (RO * exp(-t/W))
 ## }
-## <bytecode: 0x7f96b20f5f88>
-## <environment: 0x7f96b20f9370>
+## <bytecode: 0x7ff388a6f208>
+## <environment: 0x7ff388a725f0>
 ## 
 ## attr(,"class")
 ## [1] "o_MM1"

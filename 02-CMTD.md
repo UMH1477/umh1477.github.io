@@ -77,6 +77,12 @@ con $p_i(0) = Pr(X(0) = i)$ la probabilidad de que en el instante inicial el pro
 
 $$p(0) = \{p_i(0)= Pr[X(0) = i], \ i \in S\}$$ 
 se denomina **distribución inicial de la cadena** e identifica la distribución de probabilidad del proceso en el instante inicial o punto de partida del proceso.
+
+En formato matricial, cuando el espacio de estados es finito, $S=\{1,...,N\}$, la distribución marginal transcurridas $n$ transiciones en el proceso, se obtendrá a partir del vector de probabilidades iniciales $p(0) =(p_1(0),p_2(0),\ldots,p_N(0))$ y la matriz de transición $p=(p_{ij})_{i,j =1,...,N}$,
+
+\begin{equation}
+p(n)=p(0) %*% p
+\end{equation}
 :::
 :::
 
@@ -143,6 +149,28 @@ p(n) = p(0)P^n.
 
 :::
 :::
+
+::: {.whitebox data-latex=""}
+Para calcular la matriz de transición de $n$ pasos en R habrá que utilizar el producto matricial para obtener estas matrices. Definimos entonces una función que nos permitirá calcularla a partir de la matriz de transición de un paso.
+
+
+```r
+# Matriz de probs. transición de n pasos
+ptran.n=function(ptran,n){
+  # ptran es la matriz de transición de 1 paso
+  # n son los pasos a dar
+  i=1
+  p=ptran
+  while(i<n){
+    p=p%*%ptran
+    i=i+1
+  }
+return(p)  
+}
+```
+:::
+
+
 
 ## Librería markovchain {#libMC}
 
@@ -244,9 +272,31 @@ transitionProbability(object = proceso, t0 = "c", t1 = "a")
 # Estado inicial en c
 sini <- c(0, 0, 1)
 # matriz de transición de 3 pasos
-mt3 <- proceso^3
+mt3 <- ptran.n(pmat,3);mt3
+```
+
+```
+##          a       b        c
+## a 0.402250 0.10350 0.494250
+## b 0.356250 0.15450 0.489250
+## c 0.350625 0.10725 0.542125
+```
+
+```r
+# o bien extrayendo la matriz de transición del proceso
+ptran.n(proceso[1:3,1:3],3)
+```
+
+```
+##          a       b        c
+## a 0.402250 0.10350 0.494250
+## b 0.356250 0.15450 0.489250
+## c 0.350625 0.10725 0.542125
+```
+
+```r
 # Situación del proceso dentro de 3 instantes
-sini*mt3
+sini%*%mt3
 ```
 
 ```
@@ -256,9 +306,9 @@ sini*mt3
 
 ```r
 # matriz de transición de 10 pasos
-mt10 <- proceso^10
+mt10 <-ptran.n(pmat,10)
 # Situación del proceso dentro de 10 instantes
-sini*mt10
+sini%*%mt10
 ```
 
 ```
@@ -276,9 +326,9 @@ sini*mt10
 # Distribución de  probabilidad inicial
 dini <- c(0.4, 0.2, 0.4)
 # matriz de transición de 10 pasos
-mt10 <- proceso^10
-# distribución de probabilidad en 10 pasos
-dini*mt10
+mt10 <- ptran.n(pmat,10)
+# distribución de probabilidad marginal en 10 pasos: inicial x condicional
+dini%*%mt10
 ```
 
 ```
@@ -1260,22 +1310,23 @@ nestat <- dim(proceso)
 # Estados
 nombres<- names(proceso)
 # Generamos la matriz de ocupaciones
-mocupa <- matrix(rep(0,nestat*nestat),
-                 nrow = nestat, dimnames = list(nombres, nombres))
+# el primer elemento es la matriz identidad: p^0
+mocupa <- diag(nestat)
+  dimnames(mocupa) <- list(nombres, nombres)
 # Bucle de cálculo de los tiempos de ocupación
 P=proceso[1:nestat,1:nestat] # matriz de transición
-for (i in 0:10)
+for (i in 1:10)
 {
-   mocupa <- mocupa + P^i
+   mocupa <- mocupa + ptran.n(P,i)
 }
 mocupa
 ```
 
 ```
 ##          a        b        c
-## a 1.250000 1.428569 1.999023
-## b 1.111111 1.000000 6.861894
-## c 2.219126 1.000000 1.817903
+## a 4.531739 1.248415 5.219845
+## b 3.555292 1.955489 5.489220
+## c 3.858338 1.046384 6.095278
 ```
 
 Podemos ver cómo el número esperado de visitas al estado $c$ partiendo del estado $b$ en las próximas 10 transiciones es casi de 7 (6.86). Sin embargo, si partimos del estado $b$, en 10 transiciones sólo esperamos volver a dicho estado 1 vez. 
@@ -1287,19 +1338,21 @@ Definamos una función para obtener la matriz de tiempos de ocupación (o númer
 
 
 ```r
-mocupa.proceso <- function(sistema, n)
+mocupa.proceso <- function(proceso, n)
 {
   # Número de estados del proceso
-  nestat <- dim(sistema)
+  nestat <- dim(proceso)
   # Estados
-  nombres<- names(sistema)
+  nombres<- names(proceso)
   # Generamos la matriz de ocupaciones
-  mocupa <- matrix(rep(0, nestat*nestat),
-                 nrow = nestat, dimnames = list(nombres, nombres))
-  # Bucle de calculo de los tiempos de ocupación
-  P=sistema[1:nestat,1:nestat]
-  for (i in 0:n)
-   mocupa <- mocupa + P^i
+  mocupa <- diag(nestat)
+  dimnames(mocupa) <- list(nombres, nombres)
+#  mocupa <- matrix(rep(0, nestat*nestat),
+#                 nrow = nestat, dimnames = list(nombres, nombres))
+  # Bucle de cálculo de los tiempos de ocupación
+  P=proceso[1:nestat,1:nestat]
+  for (i in 1:n)
+   mocupa <- mocupa + ptran.n(P,i)
   
   return(mocupa)
 }
@@ -1402,6 +1455,7 @@ ingresos=250*ez-50*estados;ingresos
 ```
 
 Y obtenemos 
+
 $$\mathbf{c} = 
 \begin{pmatrix}
 337.75 \\
@@ -1424,12 +1478,12 @@ g
 
 ```
 ##           [,1]
-## 2 PCs 5283.122
-## 3 PCs 3459.611
-## 4 PCs 2537.260
-## 5 PCs 2325.253
+## 2 PCs 4736.876
+## 3 PCs 4819.392
+## 4 PCs 4847.637
+## 5 PCs 4842.589
 ```
-y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con $i=5$ PCs en tienda, esto es, como $g(5,10)=4842.59$ euros.
+y que nos permite extraer los ingresos netos totales esperados asumiendo que el periodo inicia con $i=5$ PCs en tienda, esto es, como $g(5,10)=$4842.59 euros.
 
 
 Los valores de $c$ se pueden aproximar mediante simulación sin necesidad de calcularlos de forma teórica. A continuación se presenta el código necesario para realizar la simulación. Concretamente definimos una función que depende del valor del estado inicial $i$.
@@ -1486,10 +1540,10 @@ beneficio
 
 ```
 ##           [,1]
-## 2 PCs 5285.787
-## 3 PCs 3460.827
-## 4 PCs 2537.646
-## 5 PCs 2325.374
+## 2 PCs 4738.291
+## 3 PCs 4820.502
+## 4 PCs 4849.143
+## 5 PCs 4844.266
 ```
 
 Mientras que teóricamente obteníamos unos ingresos esperados de 4842.59€, con la simulación obtenemos una aproximación de 4844.27€.
@@ -2292,24 +2346,23 @@ Utilizamos el resultado que se mostró en la Ecuación \@ref(eq:matriznpasos) pa
 
 ```r
 ini = c(1,0)
-final1.10 = ini %*% p1^10; final1.10
+final1.10 = ini %*% ptran.n(p1,10); final1.10
 ```
 
 ```
-##            vocal   consonante
-## [1,] 0.001190424 0.0007979227
+##          vocal consonante
+## [1,] 0.6475107  0.3524893
 ```
 
 ```r
-final2.10 = ini %*% p2^10; final2.10
+final2.10 = ini %*% ptran.n(p2,10); final2.10
 ```
 
 ```
-##             vocal consonante
-## [1,] 9.536743e-07 0.05631351
+##          vocal consonante
+## [1,] 0.2857143  0.7142857
 ```
-Las probabilidades ahora se reducen drásticamente, y en el idioma1 resulta de 0.0008, y en el idioma2 de 0.0563.
-
+Si un texto empieza por voca, tras 10 caracteres encontraremos una consonante con probabilidad 0.35 en el idioma1 y con probabilidad 0.71 en el idioma2.
 
 3. En cada idioma, en a palabra de 5 caracteres que empieza por vocal, ¿cuántas vocales esperamos encontrar? ¿Y si la palabra empieza por consonante?
 
@@ -2323,8 +2376,8 @@ mocupa1=mocupa.proceso(idioma1,n);mocupa1
 
 ```
 ##               vocal consonante
-## vocal      1.970403   1.905397
-## consonante 4.095100   1.111100
+## vocal      3.493308   1.506692
+## consonante 2.767393   2.232607
 ```
 
 ```r
@@ -2333,11 +2386,11 @@ mocupa2=mocupa.proceso(idioma2,n);mocupa2
 
 ```
 ##               vocal consonante
-## vocal      1.332031   3.050781
-## consonante 1.425100   2.773100
+## vocal      2.108844   2.891156
+## consonante 1.156462   3.843537
 ```
 
-Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar 2 vocales y si partimos de una consonante, 4.1 vocales. En el idioma2, si el primer carácter es vocal, encontraré 1.3 vocales y 4 vocales si el texto empieza por consonante.
+Así, en el idioma1, si partimos de un texto que empieza en vocal, esperamos encontrar 3 vocales y si partimos de una consonante, 2.8 vocales. En el idioma2, si el primer carácter es vocal, encontraré 2.1 vocales y 3 vocales si el texto empieza por consonante.
 
 4. ¿Cuántos caracteres habremos de leer por término medio en un texto (en cada idioma) hasta encontrar la primera vocal?
 

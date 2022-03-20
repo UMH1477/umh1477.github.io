@@ -1118,7 +1118,8 @@ M(n) = \sum_{r=0}^n P^r
 <div class="whitebox">
 <p>Definamos una función para obtener la matriz de tiempos de ocupación (o número esperado de visitas) durante un periodo de duración de <span class="math inline">\(n\)</span> unidades de tiempo.</p>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mocupa.proceso</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">proceso</span>, <span class="va">n</span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># Función para calcular los tiempos de ocupación en un periodo [0,n]</span>
+<span class="va">mocupa.proceso</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">proceso</span>, <span class="va">n</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># Número de estados del proceso</span>
   <span class="va">nestat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">proceso</span><span class="op">)</span>
@@ -2215,6 +2216,29 @@ p2=\left(\begin{matrix}
 <li>Plantea un algoritmo de simulación que permita responder a cuál es el coste medio del proceso de fabricación para los próximos 15 días. ¿Y la variabilidad estimada de dicho coste?</li>
 <li>Si la empresa quiere asegurar un beneficio neto del 5%, ¿a qué precio debe vender las piezas aptas para asegurar dicho beneficio de acuerdo al coste medio estimado del proceso? ¿Cuál sería el rango de venta teniendo en cuenta las fluctuaciones del coste medio?</li>
 </ol>
+<p><strong>Ejercicio A2.4 simplificado</strong>
+Un proceso de fabricación consiste en dos etapas consecutivas mediante el esquema siguiente:</p>
+<ul>
+<li>En la etapa 1, el 20% de las piezas son devueltas para su reelaboración, el 10% son desechadas, y el 70% restante pasan a la etapa 2.</li>
+<li>En la etapa 2, el 5% de las piezas deben ser devueltas a la etapa 1, el 10% deben ser reelaboradas, el 5% son desechadas, y el 80% restantes se consideran adecuadas para la venta.</li>
+<li>Las piezas desechadas se quedan desechadas y las que se ponen a la venta se quedan en el mercado.</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Considerando todos los estados del proceso (e1 = etapa 1; e2 = etapa 2; d = desechado; v = venta) construye la matriz de transición correspondiente a este proceso.</li>
+</ol>
+<p>La estructura de costes del proceso viene dada por:</p>
+<ul>
+<li>Cada paso por la etapa 1 es de 150 euros.</li>
+<li>Cada paso por la etapa 2 es de 300 euros.</li>
+<li>Cada producto desechado debe someterse a un proceso de eliminación especial con un coste de 50 euros por parte.</li>
+<li>Poner a la venta un producto conlleva unos costos de distribución de 10 euros.</li>
+</ul>
+<p>El sistema es capaz de tratar suficiente material para generar 100 partes al cabo de un día (aptas para la venta o desechadas).</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Plantea un algoritmo de simulación que permita reproducir el recorrido de un producto en la cadena de producción, iniciándose en la etapa 1. Evalúa el coste de ese producto.</p></li>
+<li><p>Simula el proceso de producción durante 10 días y con todos los productos procesados da una estimación del coste medio de producción. Calcula el error y un intervalo de confianza. Interpreta el intervalo de confianza.</p></li>
+<li><p>Si la empresa quiere asegurar (con garantías del 95%) un beneficio neto del 5%, ¿a qué precio debe vender cada producto?</p></li>
+</ol>
 <p><strong>Ejercicio A2.5.</strong> Se lanza un misil al que se le envía una secuencia de señales de corrección de rumbo cuando es necesario. Supongamos que el sistema tiene cuatro estados que se etiquetan como sigue:</p>
 <ul>
 <li>Estado 0: en rumbo, sin necesidad de correcciones.</li>
@@ -2348,7 +2372,7 @@ p2=\left(\begin{matrix}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-13.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

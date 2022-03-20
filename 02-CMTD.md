@@ -1338,6 +1338,7 @@ Definamos una función para obtener la matriz de tiempos de ocupación (o númer
 
 
 ```r
+# Función para calcular los tiempos de ocupación en un periodo [0,n]
 mocupa.proceso <- function(proceso, n)
 {
   # Número de estados del proceso
@@ -2956,6 +2957,31 @@ El sistema es capaz de tratar suficiente material para generar 100 partes al cab
 
 2. Plantea un algoritmo de simulación que permita responder a cuál es el coste medio del proceso de fabricación para los próximos 15 días. ¿Y la variabilidad estimada de dicho coste?
 3. Si la empresa quiere asegurar un beneficio neto del 5%, ¿a qué precio debe vender las piezas aptas para asegurar dicho beneficio de acuerdo al coste medio estimado del proceso? ¿Cuál sería el rango de venta teniendo en cuenta las fluctuaciones del coste medio?
+
+
+**Ejercicio A2.4 simplificado** 
+Un proceso de fabricación consiste en dos etapas consecutivas mediante el esquema siguiente:
+
+-   En la etapa 1, el 20% de las piezas son devueltas para su reelaboración, el 10% son desechadas, y el 70% restante pasan a la etapa 2.
+-   En la etapa 2, el 5% de las piezas deben ser devueltas a la etapa 1, el 10% deben ser reelaboradas, el 5% son desechadas, y el 80% restantes se consideran adecuadas para la venta.
+- Las piezas desechadas se quedan desechadas y las que se ponen a la venta se quedan en el mercado.
+
+1. Considerando todos los estados del proceso (e1 = etapa 1; e2 = etapa 2; d = desechado; v = venta) construye la matriz de transición correspondiente a este proceso.
+
+La estructura de costes del proceso viene dada por:
+
+-   Cada paso por la etapa 1 es de 150 euros.
+-   Cada paso por la etapa 2 es de 300 euros.
+-   Cada producto desechado debe someterse a un proceso de eliminación especial con un coste de 50 euros por parte.
+- Poner a la venta un producto conlleva unos costos de distribución de 10 euros.
+
+El sistema es capaz de tratar suficiente material para generar 100 partes al cabo de un día (aptas para la venta o desechadas). 
+
+2. Plantea un algoritmo de simulación que permita reproducir el recorrido de un producto en la cadena de producción, iniciándose en la etapa 1. Evalúa el coste de ese producto.
+
+3. Simula el proceso de producción durante 10 días y con todos los productos procesados da una estimación del coste medio de producción. Calcula el error y un intervalo de confianza. Interpreta el intervalo de confianza.
+
+4. Si la empresa quiere asegurar (con garantías del 95%) un beneficio neto del 5%, ¿a qué precio debe vender cada producto? 
 
 **Ejercicio A2.5.** Se lanza un misil al que se le envía una secuencia de señales de corrección de rumbo cuando es necesario. Supongamos que el sistema tiene cuatro estados que se etiquetan como sigue:
 

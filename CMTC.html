@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Unidad 4 Cadenas de Markov de Tiempo Contínuo | Simulación de Procesos y Sistemas</title>
-<meta name="description" content="En esta unidad, consideramos un sistema que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de las CMTD, a...">
+<meta name="description" content="En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Unidad 4 Cadenas de Markov de Tiempo Contínuo | Simulación de Procesos y Sistemas">
 <meta property="og:type" content="book">
-<meta property="og:description" content="En esta unidad, consideramos un sistema que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de las CMTD, a...">
+<meta property="og:description" content="En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unidad 4 Cadenas de Markov de Tiempo Contínuo | Simulación de Procesos y Sistemas">
-<meta name="twitter:description" content="En esta unidad, consideramos un sistema que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de las CMTD, a...">
+<meta name="twitter:description" content="En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -47,6 +47,7 @@
 <li><a class="active" href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
 <li><a class="" href="COLAS.html"><span class="header-section-number">5</span> Sistemas de colas</a></li>
 <li><a class="" href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></li>
+<li><a class="" href="simmerunidad.html"><span class="header-section-number">7</span> Simulación DES con simmer</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
@@ -59,18 +60,18 @@
 <h1>
 <span class="header-section-number">Unidad 4</span> Cadenas de Markov de Tiempo Contínuo<a class="anchor" aria-label="anchor" href="#CMTC"><i class="fas fa-link"></i></a>
 </h1>
-<p>En esta unidad, consideramos un sistema que se observa continuamente a lo largo del tiempo, siendo <span class="math inline">\(X_t\)</span> el estado en el momento <span class="math inline">\(t\)</span>, con <span class="math inline">\(t \geq 0\)</span>. Siguiendo la definición de las CMTD, a continuación definimos las cadenas de Markov de tiempo continuo (CMTC).</p>
+<p>En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo <span class="math inline">\(X_t\)</span> el estado en el momento <span class="math inline">\(t\)</span>, con <span class="math inline">\(t \geq 0\)</span>. Siguiendo la definición de las CMTD, a continuación definimos las cadenas de Markov de tiempo continuo (CMTC).</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:cmtc001" class="definition"><strong>Definición 4.1  </strong></span>Un proceso estocástico <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S\)</span> se denomina CMTC si, para todo <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> en <span class="math inline">\(S\)</span>, y <span class="math inline">\(t, s \geq 0\)</span>,</p>
-<p><span class="math display">\[P(X(s+t) = j \mid X(s) = i, X(u), 0 \leq u \leq s) = P(X(s+t) = j \mid X(s) = i).\]</span></p>
+<p><span id="def:cmtc001" class="definition"><strong>Definición 4.1  </strong></span>Un proceso estocástico <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S\)</span> es una cadena de Markov de tiempo continuo, CMTC, si para todo <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> en <span class="math inline">\(S\)</span>, y <span class="math inline">\(t, s \geq 0\)</span>, cumple la propiedad de Markov:</p>
+<p><span class="math display">\[P(X_{s+t} = j \mid X_s = i, X_u, 0 \leq u \leq s) = P(X_{s+t} = j \mid X_s = i).\]</span></p>
 </div>
 </div>
-<p>La CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> se denomina homogénea si para <span class="math inline">\(t, s \geq 0\)</span>,</p>
-<p><span class="math display">\[P(X(s+t) = j \mid X(s) = i) = P(X(t) = j \mid X(0) = i).\]</span></p>
-<p>En toda la unidad asumimos que todas las CMTC son homogéneas y tienen espacio de estados finito <span class="math inline">\(\{1, 2,...,N\}\)</span> de forma que podemos definir la probabilidad de pasar del estado <span class="math inline">\(i\)</span> al estado <span class="math inline">\(j\)</span> en un tiempo <span class="math inline">\(t\)</span> como:</p>
-<p><span class="math display">\[p_{ij}(t) = P(X(t) = j \mid X(0) = i), \quad 1 \leq i, j \leq N.\]</span></p>
-<p>La matriz de probabilidad de transición (<span class="math inline">\(P(t)\)</span>) de una CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> viene dada por:</p>
+<p>La CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> se denomina homogénea si el cambio entre dos instantes cualesquiera depende exclusivamente del tiempo transcurrido, esto es para cualquier <span class="math inline">\(t, s \geq 0\)</span>,</p>
+<p><span class="math display">\[P(X_{s+t} = j \mid X_s = i) = P(X_t = j \mid X_0 = i).\]</span></p>
+<p>En toda esta unidad asumimos que las CMTC con las que trabajamos son homogéneas y tienen espacio de estados finito <span class="math inline">\(S=\{1, 2,,...,N\}\)</span> de forma que podemos definir la probabilidad de pasar del estado <span class="math inline">\(i\)</span> al estado <span class="math inline">\(j\)</span> en un periodo de amplitud <span class="math inline">\(t, (0,t],\)</span> como:</p>
+<p><span class="math display">\[p_{ij}(t) = P(X_t = j \mid X_0 = i), \quad 1 \leq i, j \leq N.\]</span></p>
+<p>La matriz de probabilidad de transición <span class="math inline">\(P(t)\)</span> de una CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> viene dada por las distribuciones de probabilidad condicionadas (por filas) de pasar de un estado <span class="math inline">\(i\)</span> a un estado <span class="math inline">\(j\)</span> en un periodo de tiempo de amplitud <span class="math inline">\(t\)</span>:</p>
 <p><span class="math display">\[P(t) = 
 \begin{pmatrix}
 p_{11}(t) &amp; p_{12}(t) &amp; ... &amp; p_{1N}(t)\\
@@ -80,30 +81,36 @@ p_{N1}(t) &amp; p_{N2}(t) &amp; ... &amp; p_{NN}(t)
 \end{pmatrix}\]</span></p>
 <p>Dicha matriz de transición verifica que:</p>
 <ul>
-<li>Probabildiades condicionadas</li>
+<li>Todos sus elementos son probabilidades condicionadas <span class="math inline">\(\{p_{ij}(t); j \in S\}\)</span>
+</li>
 </ul>
-<p><span class="math display">\[p_{ij}(t) \geq 0, \quad  1 \leq i, j \leq N; t \geq 0\]</span></p>
+<p><span class="math display">\[1 \geq p_{ij}(t) \geq 0, \quad  1 \leq i, j \leq N; t \geq 0\]</span></p>
 <ul>
-<li>La suma de las probabilidades de acceder a cualquiera de los estados a partir de un estado <span class="math inline">\(i\)</span> es igual a 1.</li>
+<li>La suma de las probabilidades en cada fila, esto es, de acceder a cualquiera de los estados a partir de un estado <span class="math inline">\(i\)</span> es igual a 1.</li>
 </ul>
 <p><span class="math display">\[\sum_{j=1}^N p_{ij}(t) = 1, \quad  1 \leq i, j \leq N; t \geq 0\]</span></p>
 <ul>
 <li>Ecuaciones de Chapman-Kolmogorov</li>
 </ul>
 <p><span class="math display">\[p_{ij}(s+t) =  \sum_{k=1}^N p_{ik}(s)p_{kj}(t) =  \sum_{k=1}^N p_{ik}(t)p_{kj}(s)   , \quad  1 \leq i, j \leq N; t \geq 0\]</span></p>
-<p>La dificultad principal con <span class="math inline">\(P(t)\)</span> es que resulta díficil de obtener de forma inmediata para la mayoria de las CMTC, al contrario de lo que ocurría con las CMTD. Necesitamos un método simple que nos permta describir de forma rápida el comportamiento del proceso. A continuación, sentamos las bases para el estudio de las CMTC a partir de los tiempos de permanencia en cada uno de los estados del proceso. Dadoq ue la única distribución que verifica la propiedad de pérdida de memoria es la exponencial, la utilizaremos como base para la construcción de la CMTC.</p>
+<p>La dificultad principal con <span class="math inline">\(P(t)\)</span> es que resulta díficil de obtener de forma inmediata para la mayoría de las CMTC, al contrario de lo que ocurría con las CMTD. Necesitamos un método simple que nos permita describir de forma rápida el comportamiento del proceso. A continuación, sentamos las bases para el estudio de las CMTC a partir de los tiempos de permanencia en cada uno de los estados del proceso. Dado que la única distribución que verifica la propiedad de pérdida de memoria es la exponencial, la utilizaremos como base para la construcción de una CMTC.</p>
 <div id="CMTCA" class="section level2" number="4.1">
 <h2>
 <span class="header-section-number">4.1</span> Evolución del proceso<a class="anchor" aria-label="anchor" href="#CMTCA"><i class="fas fa-link"></i></a>
 </h2>
-<p>Sea <span class="math inline">\(X(t)\)</span> el estado de un sistema en el tiempo <span class="math inline">\(t\)</span> . Supongamos que el espacio de estados del proceso estocástico <span class="math inline">\(\{X_t; t \geq 0\}\)</span> es <span class="math inline">\(\{1, 2,...,N\}\)</span>. La evolución aleatoria del sistema se produce de la siguiente manera:</p>
+<p>Sea <span class="math inline">\(X_t\)</span> el estado de un sistema en el instante temporal <span class="math inline">\(t\)</span>. Supongamos que el espacio de estados del proceso estocástico <span class="math inline">\(\{X_t; t \geq 0\}\)</span> es <span class="math inline">\(S=\{1, 2,...,N\}\)</span>. La evolución aleatoria del sistema se produce de la siguiente manera:</p>
 <ul>
-<li><p>Supongamos que el sistema comienza en el estado <span class="math inline">\(i\)</span> y permanece allí durante un tiempo <span class="math inline">\(Exp(r_i)\)</span> que denominamos <strong>tiempo de permanencia</strong> en el estado <span class="math inline">\(i\)</span>, e <span class="math inline">\(r_i\)</span> es la tasa media de permanencia. (Recordemos que en la distribución exponencial las tasas medias son el recíproco de los tiempos medios.)</p></li>
-<li><p>Al final del tiempo de permanencia en el estado <span class="math inline">\(i\)</span>, el sistema realiza una transición repentina al estado <span class="math inline">\(j\)</span> con probabilidad <span class="math inline">\(p_{ij}\)</span>, independientemente del tiempo que el sistema haya estado en el estado <span class="math inline">\(i\)</span>. Una vez en el estado <span class="math inline">\(j\)</span>, permanece allí durante un tiempo <span class="math inline">\(Exp(r_j)\)</span>.</p></li>
-<li><p>A continuación, pasa a un nuevo estado <span class="math inline">\(k\)</span> con una probabilidad <span class="math inline">\(p_{jk}\)</span>, independientemente de la historia del sistema hasta el momento. Y continúa de esta manera hasta que finaliza el tiempo de observación del proceso.</p></li>
+<li><p>Supongamos que el sistema comienza en el estado <span class="math inline">\(i\)</span> y permanece allí durante un tiempo <span class="math inline">\(Exp(r_i)\)</span> que denominamos <strong>tiempo de permanencia</strong> en el estado <span class="math inline">\(i\)</span>, con <span class="math inline">\(r_i\)</span> la tasa media de permanencia (recordemos que en la distribución exponencial las tasas medias son el recíproco de los tiempos medios).</p></li>
+<li><p>Al final del tiempo de permanencia en el estado <span class="math inline">\(i\)</span>, el sistema realiza una transición repentina al estado <span class="math inline">\(j\)</span> con probabilidad <span class="math inline">\(p_{ij}\)</span>, independientemente del tiempo que el sistema haya permanecido en el estado <span class="math inline">\(i\)</span>. Una vez en el estado <span class="math inline">\(j\)</span>, permanece allí durante un tiempo <span class="math inline">\(Exp(r_j)\)</span>.</p></li>
+<li><p>A continuación pasa a un nuevo estado <span class="math inline">\(k\)</span> con una probabilidad <span class="math inline">\(p_{jk}\)</span>, independientemente de la historia del sistema hasta el momento, y repite este comportamiento hasta que finaliza el tiempo de observación del proceso.</p></li>
 </ul>
-<p>Conviene hacer tres observaciones con respecto al funcionaminto del sistema. En primer lugar, las probabilidades de salto <span class="math inline">\(p_{ij}\)</span> no deben deben confundirse con las probabilidades de transición <span class="math inline">\(p_{ij}(t)\)</span>. En este caso, <span class="math inline">\(p_{ij}\)</span> actúa como la probabilidad de que el sistema pase al estado <span class="math inline">\(j\)</span> cuando sale del estado <span class="math inline">\(i\)</span>. En segundo lugar, <span class="math inline">\(p_{ii} = 0\)</span>, dado que por definición el tiempo de permanencia en el estado <span class="math inline">\(i\)</span> es el tiempo que el sistema pasa en el estado <span class="math inline">\(i\)</span> hasta que sale de él. Por lo tanto, no se permite una transición de <span class="math inline">\(i\)</span> a <span class="math inline">\(i\)</span>. En tercer lugar, en caso de que el estado <span class="math inline">\(i\)</span> sea absorbente (es decir el sistema permanece en el estado i para siempre una vez que llega a él), fijamos <span class="math inline">\(r_i = 0\)</span>.</p>
-<p>Como en el caso de la matriz de transición podemos obtner la matriz de probabildiades de salto, <span class="math inline">\(P\)</span> como:</p>
+<p>Conviene hacer tres observaciones con respecto al funcionaminto del sistema:</p>
+<ul>
+<li>En primer lugar, las probabilidades de salto <span class="math inline">\(p_{ij}\)</span> no deben deben confundirse con las probabilidades de transición <span class="math inline">\(p_{ij}(t)\)</span>. En este caso, <span class="math inline">\(p_{ij}\)</span> actúa como la probabilidad de que el sistema pase al estado <span class="math inline">\(j\)</span> cuando sale del estado <span class="math inline">\(i\)</span>.</li>
+<li>En segundo lugar, <span class="math inline">\(p_{ii} = 0\)</span>, dado que por definición el tiempo de permanencia en el estado <span class="math inline">\(i\)</span> es el tiempo que el sistema pasa en el estado <span class="math inline">\(i\)</span> hasta que sale de él. Por lo tanto, no se permite una transición de <span class="math inline">\(i\)</span> a <span class="math inline">\(i\)</span>.</li>
+<li>En tercer lugar, en caso de que el estado <span class="math inline">\(i\)</span> sea absorbente, es decir que el sistema permanece en ese estado para siempre una vez que llega a él, fijamos <span class="math inline">\(r_i = 0\)</span>.</li>
+</ul>
+<p>Con estas premisas podremos obtener la <strong>matriz de probabilidades de salto</strong>, <span class="math inline">\(P\)</span>, que denotaremos como:</p>
 <p><span class="math display">\[P = 
 \begin{pmatrix}
 p_{11} &amp; p_{12} &amp; ... &amp; p_{1N}\\
@@ -114,23 +121,24 @@ p_{N1} &amp; p_{N2} &amp; ... &amp; p_{NN}
 <div class="theorem">
 <p><span id="thm:thecmtc001" class="theorem"><strong>Teorema 4.1  </strong></span>El proceso estocástico <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con parámetros <span class="math inline">\(r_i\)</span>, <span class="math inline">\(1 \leq i \leq N\)</span>, y probabilidades <span class="math inline">\(p_{ij}\)</span>, <span class="math inline">\(1 \leq i,j \leq N\)</span> descrito anteriormente es una CMTC.</p>
 </div>
-<p>A continuación presentamos un par de ejemplos:</p>
-<p>::: {.example #excmtc001 name = “Sistema vida útil satélite”}</p>
-<p>Supongamos que la vida útil de un satélite de gran altitud es una variable aleatoria exponencial de tasa <span class="math inline">\(\mu\)</span> (<span class="math inline">\(Exp(\mu)\)</span>), en meses, de forma que una vez que falla, sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso <span class="math inline">\(X_t = 1\)</span> si el satélite está operativo en el momento <span class="math inline">\(t\)</span> y 0 en caso contrario. En esta situación <span class="math inline">\(r_0 = 0\)</span> y <span class="math inline">\(r_1 = \mu\)</span> pero desconcemos los valores de <span class="math inline">\(P\)</span>, aunque resulta posible obtener la matriz de transición sin más que obtener las probabilidades <span class="math inline">\(p_{00}(t)\)</span> y <span class="math inline">\(p_{11}(t)\)</span> que vienen dadas por:</p>
+<p>A continuación presentamos un par de ejemplos.</p>
+<div class="example">
+<p><span id="exm:excmtc001" class="example"><strong>Ejemplo 4.1  </strong></span><strong>Sistema de vida útil de un satélite</strong>. Supongamos que la vida útil <span class="math inline">\(T\)</span> de un satélite de gran altitud es una variable aleatoria exponencial de tasa <span class="math inline">\(\mu\)</span> en meses, <span class="math inline">\(Exp(\mu)\)</span>, de forma que una vez que falla sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso <span class="math inline">\(X_t = 1\)</span> si el satélite está operativo en el momento <span class="math inline">\(t\)</span>, y 0 en caso contrario. En esta situación <span class="math inline">\(r_0 = 0\)</span> y <span class="math inline">\(r_1 = \mu\)</span>, pero desconocemos los valores de <span class="math inline">\(P\)</span>, aunque podremos obtener la matriz de transición calculando las probabilidades <span class="math inline">\(p_{00}(t)\)</span> y <span class="math inline">\(p_{11}(t)\)</span> que vienen dadas por:</p>
 <p><span class="math display">\[p_{00}(t) = P(\text{satélite no está operativo en t} \mid \text{satélite no está operativo en 0}) = 1\]</span></p>
 <p><span class="math display">\[p_{11}(t) = P(\text{satélite está operativo en t} \mid \text{satélite está operativo en 0}) = P(T &gt;t) = e^{-\mu t}\]</span></p>
-<p>La matriz de transición viene dada por:</p>
+<p>La matriz de transición viene dada pues por:</p>
 <p><span class="math display">\[P(t) = 
 \begin{pmatrix}
 1 &amp; 0\\
 1- e^{-\mu t} &amp; e^{-\mu t} 
 \end{pmatrix}\]</span></p>
-<p>:::</p>
-<p>::: {.example #excmtc002 name = “Sistema del viajante”}</p>
-<p>Un vendedor vive en la ciudad A y es responsable de las ciudades A, B y C. El tiempo que pasa en cada ciudad es aleatorio. Tras un estudio, se ha determinado que la cantidad de tiempo consecutivo que pasa en una ciudad cualquiera sigue una variable aleatoria con distribución exponencial, cuya media de tiempo de estancia depende de la ciudad. En su ciudad natal pasa un tiempo medio de dos semanas, en la ciudad B pasa un tiempo medio de una semana, y en la ciudad C pasa un tiempo medio de una y media. Cuando sale de la ciudad A, lanza una moneda para determinar a qué ciudad va a continuación; cuando sale de la ciudad B o C, lanza dos monedas de manera que hay un 75% de posibilidades de volver a A y un 25% de posibilidades de ir a la otra ciudad. Sea <span class="math inline">\(X_t\)</span> una variable aleatoria que denota la ciudad en la que se encuentra el vendedor en el momento <span class="math inline">\(t\)</span>, de forma que toma el valor 0 si está en A, el valor 1 si está en B, y 2 si está en C.</p>
+</div>
+<div class="example">
+<p><span id="exm:excmtc002" class="example"><strong>Ejemplo 4.2  </strong></span><strong>Sistema del viajante</strong>. Un vendedor vive en la ciudad A y es responsable de las ciudades A, B y C. El tiempo que pasa en cada ciudad es aleatorio. Tras un estudio, se ha determinado que la cantidad de tiempo consecutivo que pasa en una ciudad cualquiera sigue una variable aleatoria con distribución exponencial, cuya media de tiempo de estancia depende de la ciudad. En su ciudad natal pasa un tiempo medio de dos semanas, en la ciudad B pasa un tiempo medio de una semana, y en la ciudad C pasa un tiempo medio de una y media. Cuando sale de la ciudad A, lanza una moneda para determinar a qué ciudad va a continuación; cuando sale de la ciudad B o C, lanza dos monedas de manera que hay un 75% de posibilidades de volver a A y un 25% de posibilidades de ir a la otra ciudad. Sea <span class="math inline">\(X_t\)</span> una variable aleatoria que denota la ciudad en la que se encuentra el vendedor en el momento <span class="math inline">\(t\)</span>, de forma que toma el valor 0 si está en A, el valor 1 si está en B, y 2 si está en C.</p>
+</div>
 <p>El proceso <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(\{0, 1, 2\}\)</span> es una CMTC con:</p>
 <ul>
-<li>tasas de permanecia (en semanas): <span class="math inline">\(r_0 = 1/2, r_1 = 1/1, r_2 = 1/1.5 = 2/3\)</span> , y</li>
+<li>tasas de permanecia (en semanas): <span class="math inline">\(r_0 = 1/2=0.5, r_1 = 1, r_2 = 1/1.5 =0.67\)</span> , y</li>
 <li>matriz de saltos</li>
 </ul>
 <p><span class="math display">\[P = 
@@ -139,18 +147,20 @@ p_{N1} &amp; p_{N2} &amp; ... &amp; p_{NN}
 0.75 &amp; 0 &amp; 0.25\\
 0.75 &amp; 0.25 &amp; 0
 \end{pmatrix}\]</span></p>
-<p>:::</p>
 </div>
 <div id="CMTCB" class="section level2" number="4.2">
 <h2>
 <span class="header-section-number">4.2</span> Descripción del proceso<a class="anchor" aria-label="anchor" href="#CMTCB"><i class="fas fa-link"></i></a>
 </h2>
 <p>En virtud del teorema <a href="CMTC.html#thm:thecmtc001">4.1</a> todas las CMTC con espacios de estado finitos que tienen tiempos de permanencia no nulos en cada estado pueden ser descritos a través de las tasas de permanencia y la matriz de saltos. En este punto detallamos este análisis e introducimos todos los conceptos necesarios para el análisis del proceso.</p>
-<p>De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante de un grafo dirigido, cuyos nodos (o vértices) indican cada uno d elos estados del proceso, y se establece un arco dirigido del nodo <span class="math inline">\(i\)</span> al nodo <span class="math inline">\(j\)</span> si <span class="math inline">\(p_{ij} &gt; 0\)</span>. La tasa de transición de <span class="math inline">\(i\)</span> a <span class="math inline">\(j\)</span>, <span class="math inline">\(r_{ij} = r_i p_{ij}\)</span> , se escribe junto a este arco. Obsérvese que no hay bucles propios (arcos de <span class="math inline">\(i\)</span> a <span class="math inline">\(i\)</span>). Esta representación gráfica se denomina <strong>diagrama de tasas de la CMTC</strong>.</p>
-<p>Podemos entender la dinámica de la CMMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo <span class="math inline">\(i\)</span> durante una cantidad de tiempo <span class="math inline">\(Exp(r_i)/\)</span> y luego elige uno de los arcos de salida del nodo <span class="math inline">\(i\)</span> con probabilidades proporcionales a las tasas de los arcos y se desplaza al nodo del otro extremo del arco. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el tiempo <span class="math inline">\(t\)</span> es el estado de la CMTC en el tiempo t .</p>
-<p>En esta situación resulta posible obtner los valores de <span class="math inline">\(r_i\)</span> y <span class="math inline">\(p_{ij}\)</span> a partir de las tasas <span class="math inline">\(r_{ij}\)</span> dado que:</p>
-<p><span class="math display">\[r_i = \sum_{j=1}^{N} r_{ij}\]</span> <span class="math display">\[p_{ij} = \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0\]</span></p>
-<p>Para un mejor manejo de la información resulta conveniente construir la <strong>matriz de tasas</strong> teniendo en cuenta que <span class="math inline">\(r_{ii} = 0\)</span> para cualquier valor de <span class="math inline">\(i\)</span>, y por tanto la diagonal de la matriz R es siempre cero. Así tenemos que:</p>
+<p>De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante un grafo dirigido cuyos nodos (o vértices) indican cada uno de los estados del proceso, y surge un arco dirigido del nodo <span class="math inline">\(i\)</span> al nodo <span class="math inline">\(j\)</span> si <span class="math inline">\(p_{ij} &gt; 0\)</span>. La tasa de transición de <span class="math inline">\(i\)</span> a <span class="math inline">\(j\)</span>, <span class="math inline">\(r_{ij} = r_i p_{ij}\)</span> , se escribe junto a este arco. Obsérvese que no hay bucles propios (arcos de <span class="math inline">\(i\)</span> a <span class="math inline">\(i\)</span>). Esta representación gráfica se denomina <strong>diagrama de tasas de la CMTC</strong>.</p>
+<p>Podemos entender la dinámica de una CMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo <span class="math inline">\(i\)</span> durante cierto periodo de tiempo de duración <span class="math inline">\(Exp(r_i)\)</span> y luego elige uno de los arcos de salida del nodo <span class="math inline">\(i\)</span> con probabilidades proporcionales a las tasas de los arcos, trasladándose al nodo que conecta dicho arco con el nodo origen <span class="math inline">\(i\)</span>. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el instante <span class="math inline">\(t\)</span> es el estado de la CMTC en el instante t.</p>
+<p>En esta situación resulta posible obtener los valores de <span class="math inline">\(r_i\)</span> y <span class="math inline">\(p_{ij}\)</span> a partir de las tasas <span class="math inline">\(r_{ij}\)</span> dado que:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+r_i &amp;=&amp; \sum_{j=1}^{N} r_{ij}\\
+p_{ij}&amp;=&amp;frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
+\end{eqnarray*}\]</span></p>
+<p>Para un mejor manejo de la información, resulta conveniente construir la <strong>matriz de tasas</strong> teniendo en cuenta que <span class="math inline">\(r_{ii} = 0\)</span> para cualquier valor de <span class="math inline">\(i\)</span>, y por tanto la diagonal de la matriz R es siempre cero. Así tenemos que:</p>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
 0 &amp; r_{12} &amp; ... &amp; r_{1N}\\
@@ -158,8 +168,12 @@ r_{21} &amp; 0 &amp; ... &amp; r_{2N}\\
 ... &amp; ... &amp; ... &amp; ...\\
 r_{N1} &amp; r_{N2} &amp; ... &amp; 0
 \end{pmatrix}\]</span></p>
-<p>A partir de la matriz <span class="math inline">\(R\)</span> se puede obtener la denominada <strong>matriz generadora</strong> de la CMTC <span class="math inline">\(Q\)</span>, que se define como:</p>
-<p><span class="math display">\[q_{ij} = -r_i \text{ si } i = j, \text{ y } q_{ij} = r_{ij} \text{ si } i \neq j\]</span> de forma que:</p>
+<p>A partir de la matriz <span class="math inline">\(R\)</span> se puede obtener la denominada <strong>matriz generadora</strong> <span class="math inline">\(Q\)</span> de la CMTC, que se define como aquella que tiene por elementos <span class="math inline">\(q_{ij}\)</span>, con:</p>
+<p><span class="math display">\[q_{ij} = \begin{cases}
+-r_i, \quad \text{ si } i = j, \\
+r_{ij}, \quad \text{ si } i \neq j.
+\end{cases}\]</span></p>
+<p>de forma que:</p>
 <p><span class="math display">\[Q = 
 \begin{pmatrix}
 -r_1 &amp; r_{12} &amp; ... &amp; r_{1N}\\
@@ -168,7 +182,7 @@ r_{21} &amp; -r_2 &amp; ... &amp; r_{2N}\\
 r_{N1} &amp; r_{N2} &amp; ... &amp; -r_N
 \end{pmatrix}\]</span></p>
 <div class="example">
-<p><span id="exm:excmtc003" class="example"><strong>Ejemplo 4.1  </strong></span>Continuando con el sistema de vida útil del satélite del ejemplo <a href="#exm:excmtc001"><strong>??</strong></a> podemos establecer que <span class="math inline">\(r_0 = 0\)</span> y <span class="math inline">\(r_1 = \mu\)</span>, con <span class="math inline">\(p_{10} = 1\)</span> y <span class="math inline">\(p_{01}\)</span> no definida, de forma que:</p>
+<p><span id="exm:excmtc003" class="example"><strong>Ejemplo 4.3  </strong></span>Continuando con el sistema de vida útil del satélite del ejemplo <a href="CMTC.html#exm:excmtc001">4.1</a>, podemos establecer que <span class="math inline">\(r_0 = 0\)</span> y <span class="math inline">\(r_1 = \mu\)</span>, con <span class="math inline">\(p_{10} = 1\)</span> y <span class="math inline">\(p_{01}\)</span> no definida, de forma que:</p>
 </div>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
@@ -179,7 +193,7 @@ r_{N1} &amp; r_{N2} &amp; ... &amp; -r_N
 0 &amp; 0 \\
 \mu &amp; -\mu
 \end{pmatrix}\]</span></p>
-<p>En esta situación el diagrama de tasas viene dado por:</p>
+<p>En esta situación el diagrama de tasas se construye con la librería <code>diagram</code>:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:05-002"></span>
 <img src="04-CMTC_files/figure-html/05-002-1.png" alt="Diagrama de tasas para el tiempo de vida del Satélite" width="95%"><p class="caption">
@@ -187,9 +201,9 @@ Figura 4.1: Diagrama de tasas para el tiempo de vida del Satélite
 </p>
 </div>
 <div class="example">
-<p><span id="exm:excmtc004" class="example"><strong>Ejemplo 4.2  </strong></span>Continuando con el sistema del viajante descrito en el ejemplo <a href="#exm:excmtc002"><strong>??</strong></a> ya que conocemos las tasas medias y las probabilidades de salto podemos obtener la matriz <span class="math inline">\(R\)</span> de forma inmediata:</p>
+<p><span id="exm:excmtc004" class="example"><strong>Ejemplo 4.4  </strong></span>Continuando con el sistema del viajante descrito en el ejemplo <a href="CMTC.html#exm:excmtc002">4.2</a> ya que conocemos las tasas medias y las probabilidades de salto podemos obtener la matriz <span class="math inline">\(R\)</span> de forma inmediata:</p>
 </div>
-<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"2"</span><span class="op">)</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">estados</span><span class="op">)</span>
 
@@ -213,10 +227,11 @@ Figura 4.2: Diagrama de tasas para el proceso del vendedor
 </p>
 </div>
 <p>El diagrama representa el comportamiento de todo el proceso de viajes y estancias del vendedor.</p>
-<p>::: {.example #excmtc005 name = “Sistema vida útil de una máquina”}</p>
-<p>Consideramos un sistema compuesto por una máquina que funciona durante un cantidad de tiempo que vienee determianda por una variable aleatoria <span class="math inline">\(Exp(\mu)\)</span> hasta que falla. Una vez se detecta la averia la máquina se repara. El tiempo de reparación es una variable aleatoria <span class="math inline">\(Exp(\lambda)\)</span> y es independiente del pasado. La máquina está como nueva después de la reparación. Sea <span class="math inline">\(X(t)\)</span> el estado de la máquina en tiempo <span class="math inline">\(t\)</span>, de forma que toma el valor 1 si está en marcha y 0 si está parada (está siendo reparada).</p>
-<p>En esta situación el tiempo de estancia en el estado 0 es el tiempo de reparación, de forma que <span class="math inline">\(r_0 = \lambda\)</span>, mientras que el tiempo en el estado 1 es el tiempo de funcionamiento con <span class="math inline">\(r_1 = \mu\)</span>. Además las probabiliddes de salto de interés son <span class="math inline">\(p_{01} = 1\)</span> y <span class="math inline">\(p_{10} = 1\)</span>, dado que la máquina siempre es reparada y vuelve a funcionar y porque sabemos que la máquina debe estropearse en algún momento.</p>
-<p>El proceso definido de esta forma <span class="math inline">\(\{X_t; t \geq 0\}\)</span> es una CMTC cuya matriz de tasas y matriz generadora del sietema vienen dadas por: :::</p>
+<div class="example">
+<p><span id="exm:excmtc005" class="example"><strong>Ejemplo 4.5  </strong></span><strong>Sistema vida útil de una máquina</strong>. Consideramos un sistema compuesto por una máquina que funciona durante un cantidad de tiempo que viene determianda por una variable aleatoria <span class="math inline">\(Exp(\mu)\)</span> hasta que falla. Una vez se detecta la avería, la máquina se repara. El tiempo de reparación es una variable aleatoria <span class="math inline">\(Exp(\lambda)\)</span> y es independiente del pasado. La máquina está como nueva después de la reparación. Sea <span class="math inline">\(X(t)\)</span> el estado de la máquina en tiempo <span class="math inline">\(t\)</span>, de forma que toma el valor 1 si está en marcha y 0 si está parada (porque está siendo reparada).</p>
+</div>
+<p>En esta situación el tiempo de estancia en el estado 0 es el tiempo de reparación, de forma que <span class="math inline">\(r_0 = \lambda\)</span>, mientras que el tiempo en el estado 1 es el tiempo de funcionamiento con <span class="math inline">\(r_1 = \mu\)</span>. Además las probabiliddes de salto de interés son <span class="math inline">\(p_{01} = 1\)</span> y <span class="math inline">\(p_{10} = 1\)</span>, dado que la máquina siempre es reparada y vuelve a funcionar, y porque sabemos que la máquina debe estropearse en algún momento.</p>
+<p>El proceso definido de esta forma <span class="math inline">\(\{X_t; t \geq 0\}\)</span> es una CMTC cuya matriz de tasas y matriz generadora del sistema vienen dadas por:</p>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
 0 &amp; \lambda \\
@@ -238,26 +253,31 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 <h2>
 <span class="header-section-number">4.3</span> Análisis preliminar del proceso<a class="anchor" aria-label="anchor" href="#CMTCC"><i class="fas fa-link"></i></a>
 </h2>
-<p>Aunque más adelante estudiaremos los aspectos teóricos para el análisis completo de una CMTC, en este punto utilizamos la simulación del sistema para analizar su comportamiento. Nos centramos en las herramientas de simulación estudiadas hasta este punto para más adelante presentar con detalle la libreria <code>simmer</code> que nos permite simular procesos y sistemas complejos.</p>
-<p>Nos centraremos en los ejemplos <a href="#exm:excmtc002"><strong>??</strong></a> y <a href="#exm:excmtc005"><strong>??</strong></a> dado que le sitema descrito en el ejemplo <a href="#exm:excmtc001"><strong>??</strong></a> se puede analizar sin más que describir la tasa corrrespondiente al tiempo de vida del satélite. Comenzamos con el algoritmo correspondiente al ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>.</p>
+<p>Aunque más adelante estudiaremos los aspectos teóricos para el análisis completo de una CMTC, en este punto utilizamos la simulación del sistema para analizar su comportamiento. Nos centramos en las herramientas de simulación estudiadas hasta este punto para más adelante presentar con detalle la librería <code>simmer</code> que nos permite simular procesos y sistemas complejos.</p>
+<p>Utilizamos los ejemplos <a href="CMTC.html#exm:excmtc002">4.2</a> y <a href="CMTC.html#exm:excmtc005">4.5</a> para mostrar cómo analizar un sistema, dado que el descrito en el ejemplo <a href="CMTC.html#exm:excmtc001">4.1</a> se puede analizar sin más que describir la tasa del tiempo de vida del satélite.</p>
+<div id="sistema-de-vida-útil-de-una-máquina" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Sistema de vida útil de una máquina<a class="anchor" aria-label="anchor" href="#sistema-de-vida-%C3%BAtil-de-una-m%C3%A1quina"><i class="fas fa-link"></i></a>
+</h3>
+<p>Comenzamos con el ejemplo <a href="CMTC.html#exm:excmtc005">4.5</a>, para el que vamos a construir un algoritmo con el que simular el sistema hasta cierto instante de tiempo.</p>
 <div class="silverbox">
-<p>Algoritmo para el sistema de vidad útil de una máquina:</p>
+<p>Algoritmo para el sistema de vida útil de una máquina:</p>
 <ol style="list-style-type: decimal">
 <li>Fijar tasas de funcionamiento <span class="math inline">\(\mu\)</span> y reparación <span class="math inline">\(\lambda\)</span>, así como el tiempo en que el sistema estará funcionando (<span class="math inline">\(tfin\)</span>).</li>
 <li>Fijar el tiempo de funcionamiento <span class="math inline">\(tfun = 0\)</span>, tiempo de reparación <span class="math inline">\(trep = 0\)</span>, y tiempo de funcionamiento del sistema <span class="math inline">\(tsis = tfun + trep\)</span>.</li>
-<li>Fijamos el número de vistas al estado de funcionamiento <span class="math inline">\(nfun = 0\)</span> y al estado de reparación <span class="math inline">\(nrep =0\)</span>.</li>
+<li>Fijar el número de vistas al estado de funcionamiento <span class="math inline">\(nfun = 0\)</span> y al estado de reparación <span class="math inline">\(nrep =0\)</span>.</li>
 </ol>
-<p>Repetir los pasos siguientes hasta que abandonemos el sistema:</p>
+<p>Repetir los pasos siguientes hasta abandonar el sistema:</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Generar <span class="math inline">\(tfun \sim Exp(\mu)\)</span> actualizando <span class="math inline">\(tsis\)</span> y <span class="math inline">\(nfun\)</span>.</li>
-<li>Si <span class="math inline">\(tsis &gt; tfin\)</span> abandonar el sistema.</li>
+<li>Si <span class="math inline">\(tsis &gt; tfin\)</span>, abandonar el sistema.</li>
 <li>Generar <span class="math inline">\(trep \sim Exp(\lambda)\)</span> actualizando <span class="math inline">\(tsis\)</span> y <span class="math inline">\(nrep\)</span>.</li>
-<li>Si <span class="math inline">\(tsis &gt; tfin\)</span> abandonar el sistema.</li>
+<li>Si <span class="math inline">\(tsis &gt; tfin\)</span>, abandonar el sistema.</li>
 </ol>
-<p>Los valores <span class="math inline">\(tfun\)</span>, <span class="math inline">\(trep\)</span>, así como las veces que vistamos los estados de funcionamiento y reparación nos permiten describir el funcionamiento del sistema para un tiempo prefijado.</p>
+<p>Los valores <span class="math inline">\(tfun\)</span>, <span class="math inline">\(trep\)</span>, así como las veces que se visitan los estados de funcionamiento y reparación nos permiten describir el funcionamiento del sistema para un tiempo prefijado.</p>
 </div>
-<p>Para facilitar el análisis establecemos que todos los tiempos del sistema están en días y que deseamos estudiar el sistema durante un año. Creamos una función que nos permite modificar los valores de la tasa del tiempo de funcionamiento (recíproco de la media de tiempo en funcionamiento ), tasa de reparación /recíproco de la media del tiempo de reparación y el tiempo total de funcionamiento del sistema. Almacenamos los resultados de cada paso por el sistema para poder realziar los análisis correspondientes.</p>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<p>Para facilitar el análisis establecemos que todos los tiempos del sistema están en días y que deseamos estudiar el sistema durante un año. Creamos una función que nos permite modificar los valores de la tasa del tiempo de funcionamiento (recíproco de la media de tiempo en funcionamiento ), la tasa de reparación (recíproco de la media del tiempo de reparación) y el tiempo total de funcionamiento del sistema. Almacenamos los resultados de cada paso por el sistema para poder realizar los análisis correspondientes.</p>
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">TSIM_one_machine</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tasafun</span>, <span class="va">tasarep</span>, <span class="va">tfin</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># Parámetros de la función</span>
@@ -306,14 +326,14 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
   <span class="co"># Devolvemos resultados del sistema quitando la fila de inicialización</span>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p>Supongamos que a través de los registros históricos de funcionamiento y reparación de la máquina se sabe que el tiempo medio de funcionamiento es de 60 días (<span class="math inline">\(\mu = 1/60\)</span>) y el tiempo medio de reparación es de cuatro días (<span class="math inline">\(\lambda = 1/4\)</span>). Además se esta interesado en estudiar el funcionamiento del sistema para el próximo año (365 días). Estamos interesados:</p>
+<p>Supongamos que a través de los registros históricos de funcionamiento y reparación de la máquina se sabe que el tiempo medio de funcionamiento es de 60 días (<span class="math inline">\(\mu = 1/60\)</span>) y el tiempo medio de reparación es de cuatro días (<span class="math inline">\(\lambda = 1/4\)</span>). Además se está interesado en estudiar el funcionamiento del sistema para el próximo año (365 días). Queremos pues, estimar:</p>
 <ul>
 <li>Proporción del tiempo que la máquina está funcionando y en reparación.</li>
 <li>Número de ocasiones en que la máquina debe ser reparada.</li>
 <li>Si el beneficio neto es de 100 euros por cada día que la máquina está funcionando y una pérdida de 1500 euros por cada día que está en reparación ¿cuál es el beneficio esperado para el próximo año?</li>
 </ul>
 <p>Obtenemos la simulación del sistema:</p>
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">60</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">4</span>
 <span class="va">simulacion</span> <span class="op">&lt;-</span> <span class="fu">TSIM_one_machine</span><span class="op">(</span><span class="va">mu</span>, <span class="va">lambda</span>, <span class="fl">365</span><span class="op">)</span>
@@ -329,18 +349,23 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 ## 6  44.5      6 0         5 365</code></pre>
 <p>Podemos ver que el número de ciclos en que la máquina esta en fucionamiento es 6 mientras que el número de veces que ha necesitado reparación son 5.</p>
 <p>Calculamos ahora los tiempos totales de funcionamiento y reparación:</p>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tiempos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">simulacion</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span>
 <span class="va">tiempos</span></code></pre></div>
 <pre><code>##       tfun       trep 
 ## 360.603564   4.396436</code></pre>
 <p>Por tanto, la proporción de tiempo que la máquina está en funcionamiento es 0.99, y el beneficio estimado para el próximo año viene dado por:</p>
-<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">beneficio</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">tiempos</span><span class="op">[</span><span class="st">"tfun"</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1500</span> <span class="op">*</span> <span class="va">tiempos</span><span class="op">[</span><span class="st">"trep"</span><span class="op">]</span>
 <span class="va">beneficio</span></code></pre></div>
 <pre><code>##    tfun 
 ## 29465.7</code></pre>
-<p>A continuación analizamos el sistema del viajante correspondiente al ejemplo <a href="#exm:excmtc002"><strong>??</strong></a>. En primer lugar establecemos el algoritmo de simulación del sistema. Para facilitar todas las posibilidades del algoritmo asumimos que el vendedor comienza el recorrido en la ciudad en la que reside.</p>
+</div>
+<div id="sistema-del-viajante" class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Sistema del viajante<a class="anchor" aria-label="anchor" href="#sistema-del-viajante"><i class="fas fa-link"></i></a>
+</h3>
+<p>A continuación analizamos el sistema del viajante correspondiente al ejemplo <a href="CMTC.html#exm:excmtc002">4.2</a>. En primer lugar establecemos el algoritmo de simulación del sistema. Para facilitar todas las posibilidades del algoritmo asumimos que el vendedor comienza el recorrido en la ciudad en la que reside.</p>
 <div class="silverbox">
 <p>Algoritmo para el análisis del sistema del viajante:</p>
 <ol style="list-style-type: decimal">
@@ -356,8 +381,8 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 </ol>
 <p>Los valores <span class="math inline">\(tiempo\)</span>, y <span class="math inline">\(ciudad\)</span> nos permiten describir el funcionamiento del sistema para un tiempo prefijado.</p>
 </div>
-<p>A continuación tenemos la función necesaria para simular el sistema descrito:</p>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<p>A continuación construimos la función para simular el sistema hasta cierto instante de tiempo.</p>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">TSIM_viajante</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tasaA</span>, <span class="va">tasaB</span>, <span class="va">tasaC</span>, <span class="va">tfin</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># Parámetros de la función</span>
@@ -444,8 +469,8 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 <li>Proporción de tiempo que el vendedor pasa en cada ciudad.</li>
 <li>Número de ocasiones en que visita cada ciudad.</li>
 </ul>
-<p>Obtenemos la simulación del sistema y contestamos a las preguntas planteadas:</p>
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<p>Simulamos pues el sistema y contestamos a las preguntas planteadas:</p>
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tasaA</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>
 <span class="va">tasaB</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">1</span>
 <span class="va">tasaC</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span>
@@ -462,115 +487,120 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 ## 1 A          16     30.3      0.583
 ## 2 B           8     10.7      0.206
 ## 3 C          11     11.0      0.211</code></pre>
-<p>Aunque más adelante estudiaremos la librería <code>simmer</code> presentamos aqui el algoritmo necesario para simular los procesos anteriores con el objeto de ver la simplicidad de programación en estos sistemas más sencillos.</p>
+</div>
+<div id="análisis-con-simmer" class="section level3" number="4.3.3">
+<h3>
+<span class="header-section-number">4.3.3</span> Análisis con simmer<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-con-simmer"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si bien dedicamos en este curso un capítulo entero para contar el funcionamiento de la librería <code>simmer</code>, puesto que estos ejemplos son relativamente sencillos, podemos introducir sin demasiada complicación el algoritmo de simulación con <code>simmer</code>.</p>
 <p>La libreria <code>simmer</code> permite simular de sistemas tanto continuos como discretos bajos dos premisas fundamentales:</p>
 <ul>
-<li>Proceso de llegadas (“arrivals”): proceso por el que el sujeto o bien accede al sistema.</li>
-<li>Proceso de servicio (“server”): tareas (denominadas trayectorias) a la que es sometido la persona o bien dentro del sistema a las que les asigna uno o más recursos (“resources”).</li>
+<li>Proceso de llegadas (“arrivals”) al sistema.</li>
+<li>Proceso de servicio (“server”): en el que a cada una de las llegadas se les asigna una serie de actividades a realizar (integradas en ‘trayectorias’) y unos recursos o servidores que resuelven con ellas las actividades.</li>
 </ul>
-<p>Para el sistema descrito en ejemplo <a href="#exm:excmtc005"><strong>??</strong></a> el proceso de llegadas correspondería al momento en que despueés de estar funcionando un timepo la máquina debe ser reparada, mientras que el proceso de servicio es el tiempo dedicado a la reparación de la máquina. En este caso el recurso es el reparador encargado de poner en marcha la máquina de nuevo.</p>
-<p>El primer paso del algoritmo de simulación es cargar las librerías y deifnir la semilla de simulación:</p>
-<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<p>Para el sistema descrito en ejemplo <a href="CMTC.html#exm:excmtc005">4.5</a> el proceso de llegadas viene identificado por las averías que se producen en determinados instantes de tiempo. El proceso de servicio se corresponde con las reparaciones de las máquinas, a las que se dedica cierto tiempo. En este caso el recurso es el reparador encargado de resolver la avería y poner en marcha la máquina de nuevo.</p>
+<p>El primer paso del algoritmo de simulación es cargar las librerías y definir la semilla de simulación:</p>
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer.plot</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-simmer.org">simmer.bricks</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></code></pre></div>
 <p>Definimos ahora el entorno de simulación del sistema:</p>
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tasas de permanencia del sistema</span>
 <span class="co">##################################</span>
-<span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">4</span>  <span class="co"># reparación</span>
-<span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">60</span>     <span class="co"># funcionamiento</span>
+<span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">4</span>  <span class="co"># tasa reparación</span>
+<span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">60</span>     <span class="co"># tasa funcionamiento</span>
 
 <span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">sistema.1m</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span><span class="op">)</span>
 <span class="op">{</span>
-  <span class="co"># tarea dentro de sistema</span>
+  <span class="co"># tarea dentro de sistema: reparación de las averías</span>
   <span class="va">reparar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="co"># Máquina estropeada</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"Off"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>              
-    <span class="co"># Tiempo de reparación</span>
+    <span class="co"># la máquina estropeada se asigna a un reparador</span>
+    <span class="fu"><a href="https://r-simmer.org/reference/seize.html">seize</a></span><span class="op">(</span><span class="st">"reparador"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>              
+    <span class="co"># el tiempo de reparación es aleatorio</span>
     <span class="fu"><a href="https://r-simmer.org/reference/timeout.html">timeout</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">lambda</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>   
-    <span class="co"># Máquina reparada</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/seize.html">release</a></span><span class="op">(</span><span class="st">"Off"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>               
+    <span class="co"># la máquina ya ha sido reparada</span>
+    <span class="fu"><a href="https://r-simmer.org/reference/seize.html">release</a></span><span class="op">(</span><span class="st">"reparador"</span>, amount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>               
 
   <span class="co"># Configuración del sistema </span>
   <span class="co">#################################################</span>
   <span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="co"># Activación del estado de reparación</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"Off"</span>, capacity <span class="op">=</span> <span class="fl">1</span>, queue_size <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           
-    <span class="co"># Tiempo de funcionamiento antes de reparar</span>
-    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"reparando"</span>, <span class="va">reparar</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="co"># Se definen los recursos: un único reparador y cola infinita</span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_resource.html">add_resource</a></span><span class="op">(</span><span class="st">"reparador"</span>, capacity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           
+    <span class="co"># Simulador de los tiempos entre averías, dirigidas a la trayectoria "reparar"</span>
+    <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"averia"</span>, <span class="va">reparar</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">mu</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="co"># Tiempo funcionamiento del sistema</span>
     <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
 <span class="op">}</span>
 
-<span class="co">### Simulación del sistema</span>
+<span class="co">### Simulación del sistema durante 365 días</span>
 <span class="va">operar</span> <span class="op">&lt;-</span> <span class="fu">sistema.1m</span><span class="op">(</span><span class="fl">365</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">60</span><span class="op">)</span></code></pre></div>
-<p>Analizamos ahora los resultados que proporciona el sistema simulado. Podemos acceder a las información de dos formas diferentes mediante las funciones <code><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals()</a></code> y <code><a href="https://r-simmer.org/reference/get_mon.html">get_mon_resources()</a></code>.</p>
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<p>Analizamos ahora los resultados que proporciona el sistema simulado. Podemos acceder a las información de dos formas diferentes mediante las funciones <code><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals()</a></code> para describir las llegadas (averías) y <code><a href="https://r-simmer.org/reference/get_mon.html">get_mon_resources()</a></code> para describir la ocupación de los servidores recursos (técnicos reparadores).</p>
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reparacion</span> <span class="op">=</span> <span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">operar</span><span class="op">)</span>
 <span class="va">reparacion</span></code></pre></div>
-<pre><code>##         name start_time end_time activity_time finished replication
-## 1 reparando0   150.1055 150.1318    0.02632783     TRUE           1
-## 2 reparando1   164.9110 166.4598    1.54873033     TRUE           1
-## 3 reparando2   269.4758 272.7721    3.29632606     TRUE           1
-## 4 reparando3   274.8728 278.2250    3.35216128     TRUE           1
-## 5 reparando4   287.0299 294.5502    7.52030671     TRUE           1
-## 6 reparando5   332.6557 339.2903    6.63464954     TRUE           1</code></pre>
+<pre><code>##      name start_time end_time activity_time finished replication
+## 1 averia0   150.1055 150.1318    0.02632783     TRUE           1
+## 2 averia1   164.9110 166.4598    1.54873033     TRUE           1
+## 3 averia2   269.4758 272.7721    3.29632606     TRUE           1
+## 4 averia3   274.8728 278.2250    3.35216128     TRUE           1
+## 5 averia4   287.0299 294.5502    7.52030671     TRUE           1
+## 6 averia5   332.6557 339.2903    6.63464954     TRUE           1</code></pre>
 <p>El objeto resultante tiene las columnas siguientes:</p>
 <ul>
 <li>
-<code>name</code>: estado del sistema de acuerdo a las tareas que se deben realziar.</li>
+<code>name</code>: nombre de las llegadas (averías), numeradas correlativamente</li>
 <li>
-<code>star_time</code>: instante en el que comienza la tarea definida.</li>
+<code>star_time</code>: instante en el que llega al sistema (se produce la avería)</li>
 <li>
-<code>end_time</code>: instante en el que finaliza la tarea definida.</li>
+<code>end_time</code>: instante en el que sale del sistema (se ha reparado)</li>
 <li>
-<code>activity_time</code>: tiempo dedicado a la tarea.</li>
+<code>activity_time</code>: tiempo dedicado a la tarea (tiempo de reparación)</li>
 <li>
-<code>finished</code>: si la tarea ha finalizado dentro del periodo de tiempo de simualción establecido.</li>
+<code>finished</code>: si la tarea ha finalizado dentro del periodo de tiempo de simulación establecido.</li>
 <li>
-<code>replication</code>: número de replicas del sistema.</li>
+<code>replication</code>: número de replicas del sistema (1 porque sólo hemos lanzado una cadena).</li>
 </ul>
-<p>Con la función <code><a href="https://r-simmer.org/reference/get_mon.html">get_mon_resources()</a></code> tenemos una descripción continua del proceso con las columnas:</p>
-<ul>
-<li>
-<code>resource</code>: recurso</li>
-<li>
-<code>time</code>: instante de tiempo donde el sistema registra actividad</li>
-<li>
-<code>server</code>: variable dicotómica con valor 1 cuando el sistema está en srvicio y 0 cuando no lo esta.</li>
-<li>
-<code>queue</code>: sujetos en la cola</li>
-<li>
-<code>capacity</code>: capacidad del sistema.</li>
-<li>
-<code>queue_size</code>: tamaño de la cola.</li>
-<li>
-<code>system</code>: elementos en el sistema</li>
-<li>
-<code>limit</code>: capacidad límite del sistema</li>
-<li>
-<code>replication</code>: número de replicas del sistema.</li>
-</ul>
-<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">recursos</span> <span class="op">=</span> <span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">operar</span><span class="op">)</span>
 <span class="va">recursos</span></code></pre></div>
-<pre><code>##    resource     time server queue capacity queue_size system limit replication
-## 1       Off 150.1055      1     0        1          0      1     1           1
-## 2       Off 150.1318      0     0        1          0      0     1           1
-## 3       Off 164.9110      1     0        1          0      1     1           1
-## 4       Off 166.4598      0     0        1          0      0     1           1
-## 5       Off 269.4758      1     0        1          0      1     1           1
-## 6       Off 272.7721      0     0        1          0      0     1           1
-## 7       Off 274.8728      1     0        1          0      1     1           1
-## 8       Off 278.2250      0     0        1          0      0     1           1
-## 9       Off 287.0299      1     0        1          0      1     1           1
-## 10      Off 294.5502      0     0        1          0      0     1           1
-## 11      Off 332.6557      1     0        1          0      1     1           1
-## 12      Off 339.2903      0     0        1          0      0     1           1</code></pre>
+<pre><code>##     resource     time server queue capacity queue_size system limit replication
+## 1  reparador 150.1055      1     0        1        Inf      1   Inf           1
+## 2  reparador 150.1318      0     0        1        Inf      0   Inf           1
+## 3  reparador 164.9110      1     0        1        Inf      1   Inf           1
+## 4  reparador 166.4598      0     0        1        Inf      0   Inf           1
+## 5  reparador 269.4758      1     0        1        Inf      1   Inf           1
+## 6  reparador 272.7721      0     0        1        Inf      0   Inf           1
+## 7  reparador 274.8728      1     0        1        Inf      1   Inf           1
+## 8  reparador 278.2250      0     0        1        Inf      0   Inf           1
+## 9  reparador 287.0299      1     0        1        Inf      1   Inf           1
+## 10 reparador 294.5502      0     0        1        Inf      0   Inf           1
+## 11 reparador 332.6557      1     0        1        Inf      1   Inf           1
+## 12 reparador 339.2903      0     0        1        Inf      0   Inf           1</code></pre>
+<p>Con la función <code><a href="https://r-simmer.org/reference/get_mon.html">get_mon_resources()</a></code> tenemos una descripción continua de los recursos del proceso con las columnas:</p>
+<ul>
+<li>
+<code>resource</code>: recurso (numerado correlativamente si hubiera más de uno)</li>
+<li>
+<code>time</code>: instante de tiempo en que se ha registrado alguna actividad (avería, reparación, puesta en marcha)</li>
+<li>
+<code>server</code>: número de servidores (recursos) ocupados (como sólo hay un técnico, es igual a 1)</li>
+<li>
+<code>queue</code>: llegadas en la cola (averías que están esperando ser reparadas porque el técnico está ocupado)</li>
+<li>
+<code>capacity</code>: capacidad del sistema o número de reparadores en el sistema</li>
+<li>
+<code>queue_size</code>: tamaño de la cola de espera (averías en espera para ser reparadas)</li>
+<li>
+<code>system</code>: llegadas en el sistema (número de averías en ese instante, en reparación o en cola)</li>
+<li>
+<code>limit</code>: capacidad + tamaño de la cola</li>
+<li>
+<code>replication</code>: número de replica del sistema (1 porque sólo se ha lanzado una cadena).</li>
+</ul>
 <p>A partir de los resultados podemos responder a las mismas preguntas que ya planteamos antes:</p>
 <ul>
 <li>Proporción del tiempo que la máquina está funcionando y en reparación.</li>
@@ -578,32 +608,36 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 <li>Si el beneficio neto es de 100 euros por cada día que la máquina está funcionando y una pérdida de 1500 euros por cada día que está en reparación ¿cuál es el beneficio esperado para el próximo año?</li>
 </ul>
 <p>Para responder al primer pregunta basta con sumar los tiempos de actividad y calcualr su proporción sobre los 365 días de simulación:</p>
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tiempo_reparacion</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">reparacion</span><span class="op">$</span><span class="va">activity_time</span><span class="op">)</span>
 <span class="va">propor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">tiempo_reparacion</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">propor</span></code></pre></div>
 <pre><code>## [1] 93.87</code></pre>
-<p>La proporción de tiempo en que la máquina está funcionando es del 93.87% y el tiempo que está en repación es del 6.13%.</p>
-<p>El número de ocasiones en que la máquina está en reparación corresponde al número de veces que accedemos a la tarea de repación que en este caso es de 6.</p>
-<p>Para calcular el beneficio utilizamos el tiempo de reparación obtenido:</p>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<p>La proporción de tiempo en que la máquina está funcionando es del 93.87% y el tiempo que está en reparación es del 6.13%.</p>
+<p>El número de ocasiones en que la máquina está en reparación corresponde al número de veces que accedemos a la tarea de reparación, que en este caso es de 6.</p>
+<p>Para calcular el beneficio obtenido a lo largo del año utilizamos el tiempo de reparación obtenido:</p>
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="fl">365</span><span class="op">-</span><span class="va">tiempo_reparacion</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span> <span class="op">-</span> <span class="va">tiempo_reparacion</span><span class="op">*</span><span class="fl">1500</span></code></pre></div>
 <pre><code>## [1] 694.3972</code></pre>
-<p>Como se puede ver los resultados no son muy similares a los obtenidos con el algoritmo anterior, ya que los tiempos de reparación son superiores. Para conseguir resultados más estables deberiamos realizar diferentes replicaciones del sistema y promediar los beneficios obtenidos mediante un estimador Monte-Carlo. Sin embargo, podemos replicar el sistema añadiendo dos líneas de código a la definición del sistema. En este caso establecemos un parámetro para indicar el número de replicas del sistema.</p>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">500</span>
-<span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="op">{</span>
+<p>Como se puede ver, los resultados no son muy similares a los obtenidos con el algoritmo que programamos nosotros. Para conseguir estimaciones estables deberíamos realizar diferentes replicaciones del sistema (lanzar varias cadenas) y promediar los beneficios obtenidos mediante un estimador Monte-Carlo. Podemos replicar fácilmente el sistema añadiendo dos líneas de código. Cada cadena replicada tendrá un distintivo diferente en el argumento ‘replicate’ cuando monitorizamos los resultados.</p>
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># lanzamos 'nreplicas' de la cadena, que se almacenan en una lista</span>
+<span class="va">nreplicas</span> <span class="op">&lt;-</span> <span class="fl">500</span>
+<span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nreplicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="op">{</span>
   <span class="va">operar</span> <span class="op">&lt;-</span> <span class="fu">sistema.1m</span><span class="op">(</span><span class="fl">365</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">60</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
-<p>Ahora almacenamos todas las simulaciones, calculamos el resumen de las simulaciones obtenidas (tiempo total de reparación y número de repraciones dentro de cada simulación), y obtnemmos las medidas descriptivas correspondientes (estimadores Monte-Carlo).</p>
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">simulaciones</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">envs</span><span class="op">)</span><span class="op">)</span>
+<p>Ahora almacenamos todas las simulaciones a modo de matriz, en concreto ‘tibble,’ para poder realizar los cálculos oportunos agrupando por réplicas y con ellos poder calcular las estimaciones Monte-Carlo del tiempo total de reparación y del número de reparaciones.</p>
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># guardamos todas las llegadas en formato 'tibble'</span>
+<span class="va">simulaciones</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">envs</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">salida</span><span class="op">&lt;-</span><span class="va">simulaciones</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<span class="co"># agrupamos por 'replication' para calcular los descriptivos de interés en cada réplica</span>
+<span class="va">salida</span> <span class="op">&lt;-</span> <span class="va">simulaciones</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">replication</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># Resumen de las simualciones</span>
+  <span class="co"># Calculamos los descriptivos por cada réplica</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>nreparaciones <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, 
             tiempoparada <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">activity_time</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="co"># Calculamos las estimaciones Monte-Carlo con los descriptivos de las réplicas</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mmedia_nrepara <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">nreparaciones</span><span class="op">)</span>,
             min_nrepara <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">nreparaciones</span><span class="op">)</span>,
             max_nrepara <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">nreparaciones</span><span class="op">)</span>,
@@ -617,29 +651,35 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 <pre><code>## # A tibble: 1 × 8
 ##   mmedia_nrepara min_nrepara max_nrepara media_taveria q25_taveria q50_taveria q75_taveria
 ##            &lt;dbl&gt;       &lt;int&gt;       &lt;int&gt;         &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1           5.81           1          17          20.8        11.8        18.8        27.4
+## 1           6.12           1          15          23.8        13.4        21.3        31.9
 ## # … with 1 more variable: sd_taveria &lt;dbl&gt;</code></pre>
-<p>Tenemos una media de 21.3 días de máquina en reparación lo que proporciona un beneficio de:</p>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="fl">365</span><span class="op">-</span><span class="va">salida</span><span class="op">$</span><span class="va">media_taveria</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span> <span class="op">-</span> <span class="va">salida</span><span class="op">$</span><span class="va">media_taveria</span><span class="op">*</span><span class="fl">1500</span></code></pre></div>
-<pre><code>## [1] 3299.58</code></pre>
-<p>En la peor situación (mayor número de días con la máquina en reparación = escenario pesismista) podríamos utilizar el cuantil 75 de los tiempos de reparación, mientras que en la mejor situación utilizaríamos el cuantil 25 (escenario optmista), de forma que el beneficio estimado vendrá dado por:</p>
-<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<p>En ‘mmedia_nrepara’ tenemos la estimación del número de reparaciones en un año, en ‘min_nrepara’ y ‘max_nrepara’ el mínimo y el máximo respectivamente; en ‘media_taveria’ tenemos una estimación del tiempo medio acumulado en reparaciones en un año, con sus cuartiles (q25, q50 y q75) y desviación típica (sd).</p>
+<p>Así podemos calcular los beneficios esperados en función del número de días que la máquina funciona y los que está estropeada:</p>
+<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># número de días en funcionamiento vs número de días en reparación</span>
+<span class="op">(</span><span class="fl">365</span><span class="op">-</span><span class="va">salida</span><span class="op">$</span><span class="va">media_taveria</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span> <span class="op">-</span> <span class="va">salida</span><span class="op">$</span><span class="va">media_taveria</span><span class="op">*</span><span class="fl">1500</span></code></pre></div>
+<pre><code>## [1] -1561.395</code></pre>
+<p>Podemos considerar también otros dos escenarios posibles: uno pesimista, con un mayor tiempo acumulado de reparación (cuantil 75), y uno optimisma, con un menor tiempo (con el cuantil 25), y calcular con ellos los beneficios:</p>
+<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="fl">365</span><span class="op">-</span><span class="va">salida</span><span class="op">$</span><span class="va">q75_taveria</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span> <span class="op">-</span> <span class="va">salida</span><span class="op">$</span><span class="va">q75_taveria</span><span class="op">*</span><span class="fl">1500</span></code></pre></div>
 <pre><code>##       75% 
-## -7261.455</code></pre>
-<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
+## -14480.82</code></pre>
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="fl">365</span><span class="op">-</span><span class="va">salida</span><span class="op">$</span><span class="va">q25_taveria</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span> <span class="op">-</span> <span class="va">salida</span><span class="op">$</span><span class="va">q25_taveria</span><span class="op">*</span><span class="fl">1500</span></code></pre></div>
 <pre><code>##      25% 
-## 17559.92</code></pre>
-<p>¿ qué conclusiones podemos extraer de este análisis?</p>
-<p>Pra finalizar este apartado presentamos un nuevo ejemplo donde el espacio de estados está compuesto por una pareja de valores y no por un único valor como en los ejemplso que hemos prsentado hasra ahora.</p>
-<p>::: {.example #excmtc006 name = “Mantenimiento aeronaves”}</p>
-<p>Una empresa de manteniento de aeronaves está interesado en el proceso de avería-repación de cierto tipo de aviones. El tipo de avión de interés es Un avión comercial a reacción con cuatro motores, dos en cada ala. Cuando un motor se enciende el tiempo que se puede mantener en funcionamiento hasta que falla es una variable aleatoria exponencial con parámetro <span class="math inline">\(\lambda\)</span>. Si el fallo se produce en vuelo, no puede haber reparación, pero el avión necesita al menos un motor en cada ala para funcionar correctamente y poder volar con seguridad. En concreto, la empresa está interesada en poder predecir la probabilidad de un vuelo sin problemas.</p>
-<p>Si denotamos por <span class="math inline">\(X_L(t)\)</span> y <span class="math inline">\(X_R(t)\)</span> el número de motores funcionando en el instante <span class="math inline">\(t\)</span> en el ala izquierada y el ala derecha respectivamente, podemos considerar el estado del sistema en el instante <span class="math inline">\(t\)</span> como <span class="math inline">\(X(t) = (X_L(t), X_R(t))\)</span>. Si asumimos que los fallos en los motores son independientes entre si podemos ver que el proceo <span class="math inline">\(\{X(t), t \geq 0\}\)</span> es una CMTC con espacio de estados:</p>
+## 15047.35</code></pre>
+<p>¿Qué conclusiones podemos extraer de este análisis?</p>
+<p>Para finalizar este apartado presentamos un nuevo ejemplo donde el espacio de estados está compuesto por una pareja de valores y no por un único valor como en los ejemplos que hemos presentado hasta ahora.</p>
+</div>
+<div id="mantenimiento-de-aronaves" class="section level3" number="4.3.4">
+<h3>
+<span class="header-section-number">4.3.4</span> Mantenimiento de aronaves<a class="anchor" aria-label="anchor" href="#mantenimiento-de-aronaves"><i class="fas fa-link"></i></a>
+</h3>
+<p>Una empresa de mantenimiento de aeronaves está interesada en el proceso de avería-reparación de cierto tipo de aviones. El tipo de avión de interés es un avión comercial a reacción con cuatro motores, dos en cada ala. Cuando un motor se enciende, el tiempo que se puede mantener en funcionamiento hasta que falla es una variable aleatoria exponencial con parámetro <span class="math inline">\(\lambda\)</span>. Si el fallo se produce en vuelo, no puede haber reparación, pero el avión necesita al menos un motor en cada ala para funcionar correctamente y poder volar con seguridad. En concreto, la empresa está interesada en poder predecir la probabilidad de un vuelo sin problemas.</p>
+<p>Si denotamos por <span class="math inline">\(X_L(t)\)</span> y <span class="math inline">\(X_R(t)\)</span> el número de motores funcionando en el instante <span class="math inline">\(t\)</span> en el ala izquierda y el ala derecha respectivamente, podemos considerar el estado del sistema en el instante <span class="math inline">\(t\)</span> como <span class="math inline">\(X(t) = (X_L(t), X_R(t))\)</span>. Si asumimos que los fallos en los motores son independientes entre sí, podemos ver que el proceo <span class="math inline">\(\{X(t), t \geq 0\}\)</span> es una CMTC con espacio de estados:</p>
 <p><span class="math display">\[S = \{ (0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2,2) \}\]</span></p>
-<p>En esta situación el avión sigue funcionando en el subconjunto de estados <span class="math display">\[S = \{ (1, 1), (1, 2), (2, 1), (2,2) \}\]</span> :::</p>
-<p>Vamos a asumir (aunque no es real) que el sistema sigue funcionando, incluso cuando hay posibilidad de un accidente, hasta que llegamos al estado <span class="math inline">\((0, 0)\)</span>. Dado que no hay reparación posible la matriz de tasas entre estados del sistema viene dada por</p>
+<p>En esta situación, el avión sigue funcionando en el subconjunto de estados <span class="math inline">\(S = \{ (1, 1), (1, 2), (2, 1), (2,2) \}\)</span>.</p>
+<p>Vamos a asumir (aunque no es real) que el sistema sigue funcionando, incluso cuando hay posibilidad de un accidente, hasta que llegamos al estado <span class="math inline">\((0, 0)\)</span>. Dado que no hay reparación posible, la matriz de tasas entre estados del sistema viene dada por</p>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
@@ -652,16 +692,17 @@ Figura 4.3: Diagrama de tasas para el sistema de una máquina
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2\lambda &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2\lambda &amp; 0 &amp; 2\lambda &amp; 0
 \end{pmatrix} \]</span></p>
-<p>y el diagrama viene dado por:</p>
+<p>y el diagrama que representa el sistema resulta:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:05-022"></span>
 <img src="04-CMTC_files/figure-html/05-022-1.png" alt="Diagrama de tasas para el sistema motores de aviones" width="95%"><p class="caption">
 Figura 4.4: Diagrama de tasas para el sistema motores de aviones
 </p>
 </div>
-<p>Para facilitar el algoritmo de simulación en esta situación vamos a asignar un código a cada uno de los posibles estados del sistema:</p>
-<p><span class="math display">\[S = \{ 1 = (0, 0), 2 = (0, 1), 3 = (0, 2), 4 = (1, 0), 5 = (1, 1), 6 = (1, 2), 7 = (2, 0), 8 = (2, 1), 9 = (2,2) \}\]</span> y asumimos que la media del tiempo hasta que un motor falla cuando esta encendido es de 20 horas, es decir, <span class="math inline">\(\lambda = 1/20\)</span>. A continuación tenemos la función necesaria para simular el sistema descrito:</p>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<p>Para facilitar el algoritmo de simulación en esta situación, vamos a asignar un código a cada uno de los posibles estados del sistema:</p>
+<p><span class="math display">\[S = \{ 1 = (0, 0), 2 = (0, 1), 3 = (0, 2), 4 = (1, 0), 5 = (1, 1), 6 = (1, 2), 7 = (2, 0), 8 = (2, 1), 9 = (2,2) \}\]</span></p>
+<p>y asumimos que la media del tiempo hasta que un motor falla cuando está encendido es de 20 horas, es decir, <span class="math inline">\(\lambda = 1/20\)</span>. A continuación hemos construido una función para simular el sistema descrito:</p>
+<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">TSIM_aviones</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tasa</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># Parámetros de la función</span>
@@ -752,7 +793,7 @@ Figura 4.4: Diagrama de tasas para el sistema motores de aviones
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Veamos una simulación del sistema:</p>
-<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>
 <span class="va">tasa</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">20</span>
 <span class="va">sistema</span> <span class="op">&lt;-</span> <span class="fu">TSIM_aviones</span><span class="op">(</span><span class="va">tasa</span><span class="op">)</span>
@@ -764,9 +805,11 @@ Figura 4.4: Diagrama de tasas para el sistema motores de aviones
 ## 2      7   2.35      2
 ## 3      2  18.2       3
 ## 4      1   5.67      4</code></pre>
-<p>El resultado obtenido es el estado en cada paso del algoritmo hasta llegar a la parada total, los tiempos para alcanzar cada estado, y el número de motores con fallo. Podemos operar los tiempos para saber cuando alcanzaremos más de dos motores con fallo (últimas dos filas de la simulación). Si el vuelo que acabamos de empezar es de x horas ¿cómo podemos estimar la probabilidad de no poder terminar el vuelo de forma segura? En este caso podemos calcular la proporción de tiempo que corresponde con un fallo leve (1 o 2 motores con fallo) con respecto a las x horas de duración del vuelo.</p>
-<p>Calculamos el tiempo de fallo del sistema y evaluamos la probabildiad para diferentes tiempos de duración de vuelo</p>
-<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
+<p>El resultado obtenido es el estado en cada paso del algoritmo hasta llegar a la parada total, los tiempos para alcanzar cada estado, y el número de motores con fallo.</p>
+<p>Podemos operar los tiempos para saber cuándo tendremos más de dos motores con fallo (últimas dos filas de la simulación).</p>
+<p>Si el vuelo que acabamos de empezar es de <span class="math inline">\(x\)</span> horas ¿cómo podemos estimar la probabilidad de no poder terminar el vuelo de forma segura? Para responder esta pregunta podremos calcular la proporción de tiempo que corresponde con un fallo leve (1 o 2 motores con fallo) con respecto a las <span class="math inline">\(x\)</span> horas de duración del vuelo.</p>
+<p>Calculamos a continuación el tiempo de fallo del sistema y evaluamos la probabilidad para diferentes tiempos de duración de vuelo.</p>
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo de fallo</span>
 <span class="va">Tfallo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sistema</span><span class="op">$</span><span class="va">tiempo</span><span class="op">[</span><span class="va">sistema</span><span class="op">$</span><span class="va">fallos</span> <span class="op">&lt;=</span> <span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co"># Duración del vuelo</span>
@@ -781,9 +824,9 @@ Figura 4.4: Diagrama de tasas para el sistema motores de aviones
 <span class="va">limite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">td</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">prob</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="va">limite</span></code></pre></div>
 <pre><code>## [1] 8.8</code></pre>
-<p>Cualquier viaje inferior a 8.8 horas será un viaje seguro, mientras que si el tiempo es susperior la probabilidad de no tener un viaje seguro va aumentando.</p>
-<p>Para estudiar la estabildiad de dichas probabilidades realizamos 1000 simulaciones del sistema y estimamos dichas probabilidades mediante estimadores Monte-Carlo de los tiempos de fallo.</p>
-<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
+<p>Cualquier viaje inferior a 8.8 horas será un viaje seguro, mientras que si el tiempo es superior, la probabilidad de no tener un viaje seguro aumenta.</p>
+<p>Para estudiar la estabilidad de dichas probabilidades realizamos 1000 simulaciones del sistema y estimamos las probabilidades mediante estimadores Monte-Carlo de los tiempos de fallo.</p>
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nsim</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
 <span class="va">Tfallo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># Repetición del sistema y calculo de tiempo </span>
@@ -806,7 +849,7 @@ Figura 4.4: Diagrama de tasas para el sistema motores de aviones
 <span class="va">limite</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">td</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">prob</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="va">limite</span></code></pre></div>
 <pre><code>## [1] 11.9</code></pre>
-<p>Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el tiempo es susperior la probabilidad de no tener un viaje seguro va aumentando. Podemos representar el gráfico de probabilidad de un viaje seguro:</p>
+<p>Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el tiempo es superior, la probabilidad de no tener un viaje seguro aumenta. Podemos representar el gráfico de probabilidad de un viaje seguro:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:05-027"></span>
 <img src="04-CMTC_files/figure-html/05-027-1.png" alt="Probabilidad de un viaje seguro" width="95%"><p class="caption">
@@ -814,14 +857,15 @@ Figura 4.5: Probabilidad de un viaje seguro
 </p>
 </div>
 </div>
+</div>
 <div id="CMTCD" class="section level2" number="4.4">
 <h2>
 <span class="header-section-number">4.4</span> Procesos de nacimiento y muerte<a class="anchor" aria-label="anchor" href="#CMTCD"><i class="fas fa-link"></i></a>
 </h2>
-<p>Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un pael muy importante dentro de las CMTC ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.</p>
+<p>Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un pael muy importante dentro de las CMTC, ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.</p>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:cmtc002" class="definition"><strong>Definición 4.2  </strong></span>Una CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{0, 1, 2,...,K\}\)</span> y matriz de tasas dad por:</p>
+<p><span id="def:cmtc002" class="definition"><strong>Definición 4.2  </strong></span>Una CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{0, 1, 2,...,K\}\)</span> y matriz de tasas dada por:</p>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
 0 &amp; \lambda_0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
@@ -878,7 +922,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 </p>
 </div>
 <p>Este sistema puede implementarse fácilmente en <code>simmer</code> si entendemos como “resource” al servicio del cajero y como “generator” la llegada al cajero. Escribimos el algoritmo de forma general para cualquier valor de <span class="math inline">\(K\)</span>.</p>
-<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">cola.MM1K</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">servidores</span>, <span class="va">usuarios</span><span class="op">)</span>
@@ -902,7 +946,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
     <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
 <span class="op">}</span></code></pre></div>
 <p>Imaginemos que por la mañanas (de 8 a 15) las llegadas de clientes se producen con una tasa de 15 clientes/hora, mientras que el tiempo medio que el cliente permanece en el cajero es de 6 minutos. Expresando en minutos tendríamos una tasa de llegadas <span class="math inline">\(\lambda = 15/60\)</span>, y una tasa de servicio <span class="math inline">\(\mu = 1/6\)</span>. Se ha observado además que cuando la cola de espera es de tres clientes nadie más espera para hacer cola (<span class="math inline">\(K = 4\)</span>). Analizamos el sistema de forma básica para una mañana cualquiera, es decir para un periodo de 7 horas (420 minutos).</p>
-<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>
 <span class="co">### Simulación del sistema</span>
 <span class="va">cajero</span> <span class="op">&lt;-</span> <span class="fu">cola.MM1K</span><span class="op">(</span><span class="fl">420</span>, <span class="fl">15</span><span class="op">/</span><span class="fl">60</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>
@@ -910,7 +954,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 <span class="va">cajero.df.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_resources</a></span><span class="op">(</span><span class="va">cajero</span><span class="op">)</span>
 <span class="va">cajero.df.arr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">cajero</span><span class="op">)</span></code></pre></div>
 <p>Veamos con un poco de detalle las salidas que porporciona el sistema. Comenzamos con el proceso de llegadas al sistema viendo las primeras 10 llegadas al sistema:</p>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cajero.df.arr</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>##         name start_time  end_time activity_time finished replication
 ## 1   llegada0   8.756865  9.461164      0.704299     TRUE           1
@@ -924,7 +968,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 ## 9  llegada12  74.418248 74.418248      0.000000    FALSE           1
 ## 10  llegada5  45.814971 75.428935     15.870541     TRUE           1</code></pre>
 <p>En la columna <code>name</code> tenemos el identificador de la llegada a sistema, en las columnas <code>star_time</code> y <code>end_time</code> tenemos el instante de tiempo de acceso al cajero y el tiempo en que salimos del sistema (abandonamos el cajero). En la columna <code>activity_time</code> tenemos el tiempo de servicio, donde le valor 0 son los clientes que han llegado al cajero pero no ha sido atendidos porque se ha sobrepasado la capacidad del sistema. Estos coinciden con los valores <code>FALSE</code> de la columna <code>finished</code>, que indica los clientes que no han podido ser atendidos por el sistema. Con estas salida resulta muy fácil calcular el tiempo de servicio del sistema así como el porcentaje de clientes rechazados, y el tiempo esperando en la cola.</p>
-<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># llegadas al sistema</span>
 <span class="va">nsis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">cajero.df.arr</span><span class="op">)</span>
 <span class="co"># tiempo total de servicio</span>
@@ -932,18 +976,18 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 <span class="co"># propoción de tiempo que el sistema está ocupado (atendiendo o en espera)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">tserver</span><span class="op">/</span><span class="fl">420</span>,<span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 97.14</code></pre>
-<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># porcentaje de clientes rechazados</span>
 <span class="va">rechazados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">cajero.df.arr</span><span class="op">[</span><span class="va">cajero.df.arr</span><span class="op">$</span><span class="va">finished</span> <span class="op">==</span> <span class="cn">FALSE</span>,<span class="op">]</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">rechazados</span><span class="op">/</span><span class="va">nsis</span>,<span class="fl">2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 48.15</code></pre>
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Tiempo medio de espera</span>
 <span class="va">tespera</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cajero.df.arr</span><span class="op">$</span><span class="va">end_time</span> <span class="op">-</span> <span class="va">cajero.df.arr</span><span class="op">$</span><span class="va">start_time</span> <span class="op">-</span> <span class="va">cajero.df.arr</span><span class="op">$</span><span class="va">activity_time</span><span class="op">)</span>
 <span class="va">tespera</span></code></pre></div>
 <pre><code>## [1] 8.280251</code></pre>
 <p>Para ser más sofisticados podríamos calcular el tiempo medio en espera en función de los clientes en la cola, o lo que sería más fácil estudiar dichas cantidades mediante un gráfico, pero para ello necesitamos trabajar con el comportamiento de la cola. Veamos dicho comportamiento:</p>
-<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cajero.df.res</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <pre><code>##      resource      time server queue capacity queue_size system limit replication
 ## 1  atendiendo  8.756865      1     0        1          3      1     4           1
@@ -958,14 +1002,14 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 ## 10 atendiendo 48.326016      1     3        1          3      4     4           1</code></pre>
 <p>En este caso las variables nos indican el tiempo en el que se produce alguna actividad en el sistema (columna <code>time</code>), si el usuario está en el sistema (valores 0-1 indicando si esta fuera o dentro) en la variable <code>server</code>, el número de clientes en la cola de espera (columna <code>queue</code>), la capacidad de servicio del sistema (columna <code>capacity</code>), el tamaño máximo de la cola (columna <code>queue_size</code>), el número de clientes en el sistema (columna <code>system</code>), la capacidad total de sistema (columna <code>limit</code>), y un indicador de la replicación del sistema.</p>
 <p>Con estas salidas podemos describir fácilmente el comportamiento de la cola del sistema ya que podemos estudiar el número de clientes en cola a lo largo del tiempo.</p>
-<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Evolución del tamaño de la cola</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cajero.df.res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">queue</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_step</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">420</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Tiempo (en minutos)"</span>, y <span class="op">=</span> <span class="st">"Tamaño de la cola"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="04-CMTC_files/figure-html/05-034-1.png" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Porcentaje de clientes en cola</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cajero.df.res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">queue</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">..prop..</span> , group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -973,7 +1017,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Clientes en la cola"</span>, y <span class="op">=</span> <span class="st">"Porcentaje"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="04-CMTC_files/figure-html/05-034-2.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Simulamos ahora el sistema en 500 ocasiones para estudiar la estabildiad de los descriptivos obtenidos.</p>
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Réplicas del sistema</span>
 <span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">500</span>
 <span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="op">{</span>
@@ -1003,15 +1047,15 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 ## 1           102.          387.           92.2             36.0              34.9</code></pre>
 <p>¿Qué conclusiones extraemos del análsis realizado? ¿cómo valorarías la ocupación del sistema? ¿qué ocuriría si añadimos un nuevo cajero y ampliamos la capacidad del sistema a 8 clientes?</p>
 </div>
-<div id="mantenimiento-de-máquinas" class="section level3" number="4.4.2">
+<div id="excmtc007" class="section level3" number="4.4.2">
 <h3>
-<span class="header-section-number">4.4.2</span> Mantenimiento de máquinas<a class="anchor" aria-label="anchor" href="#mantenimiento-de-m%C3%A1quinas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.2</span> Mantenimiento de máquinas<a class="anchor" aria-label="anchor" href="#excmtc007"><i class="fas fa-link"></i></a>
 </h3>
 <p>El problema de mantenimiento de máquinas es muy habitual dentro de las CMTC. Supongamos que disponemos de <span class="math inline">\(N\)</span> máquinas que funcionana durante 24 horas seguidas y <span class="math inline">\(M\)</span> personas que pueden reparalas (<span class="math inline">\(M \leq N\)</span>). Las máquinas son idénticas, y los tiempos de vida de las máquinas (necesitan reparación o mantenimiento) son variables aleatorias independientes <span class="math inline">\(Exp(\mu)\)</span>. Cuando las máquinas fallan, son reparadas en el orden de fallo por los <span class="math inline">\(M\)</span> reparadores. Cada máquina averiada necesita una y sólo una persona de reparación, y los tiempos de reparación son variables aleatorias independientes <span class="math inline">\(Exp(\lambda)\)</span>, de forma que Una máquina reparada se comporta como una máquina nueva. Si <span class="math inline">\(X(t)\)</span> el número de máquinas que funcionan en el momento <span class="math inline">\(t\)</span>, el proceso <span class="math inline">\(\{X(t), t \geq 0\}\)</span> es un proceso de nacimiento y muerte con parámetros:</p>
 <p><span class="math display">\[\lambda_i = min(N-i, M)\lambda, \quad 0 \leq i \leq N,\]</span></p>
 <p><span class="math display">\[\mu_i = i\mu, \quad 0 \leq i \leq N,\]</span></p>
 <p>donde el “nacimiento” y la “muerte” hacen referencia a la reparación y al funcionamiento de cada máquina respectivamente.</p>
-<p>Imaginemos un problema sencillo, que se puede generalizar fácilmente, donde tenemos 4 máquinas y 2 reparador, de forma que el espacio de estados (número de máquinas en funcionamiento) viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span>. En este ejemplo vamos a ver como los parámetros de nacimiento y muerte corresponden con los definidos en el ejemplo <a href="#exm:excmtc007"><strong>??</strong></a>. Descripción del sistema:</p>
+<p>Imaginemos un problema sencillo, que se puede generalizar fácilmente, donde tenemos 4 máquinas y 2 reparador, de forma que el espacio de estados (número de máquinas en funcionamiento) viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span>. En este ejemplo vamos a ver como los parámetros de nacimiento y muerte corresponden con los definidos en la sección <a href="CMTC.html#excmtc007">Mantenimiento de máquinas</a>. Descripción del sistema:</p>
 <ul>
 <li><p>En el estado 0, todas las máquinas están estropeadas, dos se encuentran en reparación y dos esperando a ser reparadas, Los tiempos de reparación son iid <span class="math inline">\(Exp(\lambda)\)</span> y un vez se complete cualquiera de las dos repaciones el sistema cambiará al estado 1. De esta forma, <span class="math inline">\(r_{01} = \lambda_0 = \lambda + \lambda = 2\lambda\)</span>.</p></li>
 <li><p>En el estado 1, una máquina está en funcionamiento, hay dos en reparación y otra está en espera. Cuando una de las dos máquinas es reparada pasamos al estado 2. De esta forma, <span class="math inline">\(r_{12} = \lambda_1 = 2\lambda\)</span>. Además, en este estado la máquina que está funcionando puede fallar después de mantenerse en funcionamiento un tiempo <span class="math inline">\(Exp(\mu)\)</span> volviendo al estado 0, de forma que, <span class="math inline">\(r_{10} = \mu_1 = \mu\)</span>.</p></li>
@@ -1031,7 +1075,7 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 <li>¿Cuántas máquinas estarán en funcionamiento después de 3 días?</li>
 <li>¿cuál es el porcentaje de tiempo en esos tres días que las cuatro máquinas están funcionando?</li>
 </ul>
-<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">mantenimiento</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">capacidad</span><span class="op">)</span>
@@ -1063,7 +1107,7 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
     <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until <span class="op">=</span> <span class="va">t</span><span class="op">)</span>     
 <span class="op">}</span></code></pre></div>
 <p>Simulamos el sistema y analizamos un poco la salida. Dado que en este sistema no hay llegadas solo podemos estudiar los recursos.</p>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Simulación del sistema</span>
 <span class="va">maquinas</span> <span class="op">&lt;-</span> <span class="fu">mantenimiento</span><span class="op">(</span><span class="fl">72</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">72</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">### Salidas del sistema</span>
@@ -1081,13 +1125,13 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 ## 9  funcionando 16.85568      3     0      Inf        Inf      3   Inf           1
 ## 10   reparando 16.85568      1     0        2        Inf      1   Inf           1</code></pre>
 <p>Respondemos en primer lugar al número de máquinas en funcionamiento a los tres días</p>
-<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># última iteración del sistema</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">maquinas.df.res</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>##       resource     time server queue capacity queue_size system limit replication
 ## 20 funcionando 25.30087      4     0      Inf        Inf      4   Inf           1</code></pre>
 <p>A las 72 horas el número de máquinas funcionando se corresponde con el valor de <code>server</code>. Para conocer el tiempo que las cuatro máquinas han estado funcionando debemos manipular los resultados obtenidos en el proceso de simulación.</p>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### Seleccionamos todos los recursos cuando las máquinas están funcionando</span>
 <span class="va">maquinas.df.sel</span> <span class="op">&lt;-</span> <span class="va">maquinas.df.res</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">resource</span> <span class="op">==</span> <span class="st">"funcionando"</span><span class="op">)</span>
@@ -1099,7 +1143,7 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 <span class="co">### Caculamos la proporción de tiempo</span>
 <span class="va">res</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">t_both_working_4</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">maquinas.df.sel</span><span class="op">$</span><span class="va">time</span><span class="op">)</span></code></pre></div>
 <p>La proporción de tiempo en que las cuatro máquinas están funcionando simultáneamente es 74. Estudiamos la estabilidad del sistema realizando 500 simulaciones del sistema y estimando las cantidades de interés para la empresa.</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Réplicas del sistema</span>
 <span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">500</span>
 <span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="op">{</span>
@@ -1142,7 +1186,7 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 <p>El sistema <span class="math inline">\(\{X(t); t \geq 0\}\)</span> es un proceso de nacimiento y muerte con:</p>
 <p><span class="math display">\[\lambda_i = \lambda, \quad 0 \leq i \leq K-1\]</span> <span class="math display">\[\mu_i = i\mu, \quad 0 \leq i \leq K\]</span> que como veremos más adelante se denomina cola <span class="math inline">\(M/M/K/K\)</span>, es decir, llegadas y servicios exponenciales con <span class="math inline">\(K\)</span> servidores y de capacidad <span class="math inline">\(K\)</span>.</p>
 <p>La función de simmer para estudiar este sistema viene dada por:</p>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
 <span class="va">cola.MMKK</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">lambda</span>, <span class="va">mu</span>, <span class="va">servidores</span>, <span class="va">usuarios</span><span class="op">)</span>
@@ -1219,7 +1263,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 \end{equation}\]</span>
 <p>que es una matriz estocástica.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-36" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de tarnsición de probabilidades, <span class="math inline">\(P\)</span>, de una CMTC viene dada por:</p>
+<p><span id="thm:unlabeled-div-38" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de tarnsición de probabilidades, <span class="math inline">\(P\)</span>, de una CMTC viene dada por:</p>
 <p><span class="math display">\[P(t) = \sum_{k=0}^{\infty} e^{-rt}\frac{(rt)^k}{k!} \hat{P}^k\]</span></p>
 </div>
 <p>Esta forma de obtener <span class="math inline">\(P\)</span> se denomina <strong>método de uniformización</strong>, y proporciona un método numérico para obtener las probabilidades de transición deseadas, sin más que usar los <span class="math inline">\(m\)</span> primeros términos de la serie infinita definida. Para asegurar la convergencia de dichas probabilidades se usan como reglas habituales:</p>
@@ -1239,7 +1283,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <p><span class="math display">\[c = c*(rt)/k; \quad B = B + cA; \quad A = A \hat{P}\]</span> <span class="math display">\[sum = sum + c; \quad k = k + 1\]</span> Al finalizar la matriz <span class="math inline">\(B\)</span> es una aproximación de <span class="math inline">\(P(t)\)</span> con error inferior a <span class="math inline">\(\epsilon\)</span>.</p>
 </div>
 <p>En realidad en nuestro algoritmo añadiremos un parámetro extra para indicar como se debe calcular el valor de <span class="math inline">\(r\)</span>, bien como el máximo los elementos por filas de <span class="math inline">\(R\)</span> o como la suma de todos ellos.</p>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">matriz.prob.trans</span><span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Rmat</span>, <span class="va">ts</span>, <span class="va">cal</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># Algortimo de uniformización para obtener P(t)</span>
@@ -1277,17 +1321,17 @@ r_{ij}/r &amp; \text{ si } i \neq j
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">B</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Veamos un ejemplo donde la matriz de tasas viene dada por:</p>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">R</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>Si estamos interesados en las probabilidades de transición entre estados cuando han transcurrido 2 unidades de tiempo podemos calcular (ambas versiones):</p>
-<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Pmat1</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>; <span class="va">Pmat1</span></code></pre></div>
 <pre><code>##        [,1]   [,2] [,3]   [,4]
 ## [1,] 0.2001 0.2001  0.4 0.1998
 ## [2,] 0.2002 0.2001  0.4 0.1997
 ## [3,] 0.1999 0.2000  0.4 0.2001
 ## [4,] 0.1998 0.1999  0.4 0.2003</code></pre>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Pmat2</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>; <span class="va">Pmat2</span></code></pre></div>
 <pre><code>##        [,1]   [,2] [,3]   [,4]
 ## [1,] 0.2001 0.2001  0.4 0.1998
@@ -1295,16 +1339,16 @@ r_{ij}/r &amp; \text{ si } i \neq j
 ## [3,] 0.1999 0.2000  0.4 0.2001
 ## [4,] 0.1998 0.1999  0.4 0.2003</code></pre>
 <p>Ambas matrices proporciona un resultado prácticamente idéntico. Estas matrices nos permiten obtener las probabildiades de pasar del estado 1 a cualquiera de los otros estados en dos unidades de tiempo, sin más que tomar los elementos de la fila 1 de la matriz obtenida.</p>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Pmat1</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>; <span class="va">Pmat2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.2001 0.2001 0.4000 0.1998</code></pre>
 <pre><code>## [1] 0.2001 0.2001 0.4000 0.1998</code></pre>
 <p>¿Cómo interpretamos esas probabilidades?</p>
 <p>Veamos ahora la aplicación de este algoritmo a alguno de los ejemplos con los que hemos ido trabajando en esta unidad.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-37" class="example"><strong>Ejemplo 4.3  </strong></span>Para los datos correspondientes al cajero bancario estamos interesados en conocer la probabilidad de que después de 50 minutos de funcionamiento el sistema este completamente ocupado (1 usuario atendido y tres en cola), cuando partímos de <span class="math inline">\(0\)</span> clientes en el sistema (<span class="math inline">\(p_{04}(4)\)</span>). La matriz de tasas viene dada por:</p>
+<p><span id="exm:unlabeled-div-39" class="example"><strong>Ejemplo 4.6  </strong></span>Para los datos correspondientes al cajero bancario estamos interesados en conocer la probabilidad de que después de 50 minutos de funcionamiento el sistema este completamente ocupado (1 usuario atendido y tres en cola), cuando partímos de <span class="math inline">\(0\)</span> clientes en el sistema (<span class="math inline">\(p_{04}(4)\)</span>). La matriz de tasas viene dada por:</p>
 </div>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">estados</span><span class="op">)</span>
 
@@ -1321,7 +1365,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <span class="va">R</span><span class="op">[</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">lambda</span>
 <span class="va">R</span><span class="op">[</span><span class="fl">5</span>,<span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mu</span></code></pre></div>
 <p>Obtenemos la distribución de probabilidad asociada al estado 4 para <span class="math inline">\(t = 50\)</span>:</p>
-<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de probabilidades de transición</span>
 <span class="va">Pmat</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">50</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="va">Pmat</span></code></pre></div>
@@ -1333,7 +1377,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 ## [5,] 0.0739 0.1118 0.1698 0.2571 0.3874</code></pre>
 <p>La probabilidad de interés es 0.3741 (<span class="math inline">\(p_{15}(50)\)</span>) lo que demuestra que es factible que el sistema llegue al estado 4 partiendo del estado 0 después de 4 horas.</p>
 <p>Aunque el cálculo teórico es muy preciso hay situaciones donde los sistemas reales con los que estamos trabajndo hacen bastante costoso obtener la matriz <span class="math inline">\(R\)</span>, y resulta más sencillo tratar de aproximar las probabilidades de transición mediante simulación. Para ello basta con replicar el sistema de simulación un número los suficientemente grande ya aproximar mediante Monte-Carlo. En este caso deberíamos obtner el estado dle sistema después de 50 minutos y aproximar la probabilidad como el número de veces que se alcanza el estado de interés dividido por las réplicas realizadas. la precisión de esta aproximación depende en gran medida del número de réplicas.</p>
-<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">2500</span>
 <span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">repcajero</span> <span class="op">&lt;-</span> <span class="fu">cola.MM1K</span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span><span class="op">/</span><span class="fl">60</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>
@@ -1358,12 +1402,12 @@ r_{ij}/r &amp; \text{ si } i \neq j
 </h2>
 <p>En esta sección, nos concentramos en el análisis de los tiempos de ocupación de un estado determinado en un intervalo de tiempo finito <span class="math inline">\([0, T]\)</span>, es decir, la duración esperada de tiempo que el sistema pasa en ese estado. Como ocurre con las probabildiades de trasnsición presentamos un algortimo para obtener las cantidades de interés a partir de la matriz de tasas, y veremos como la simulación del proceso nos puede ayudar a dar respuesta a las mismas cuestiones.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-38" class="theorem"><strong>Teorema 4.3  </strong></span>Si <span class="math inline">\(P(t)\)</span> es la matriz de transiciones de probabilidad del proceso <span class="math inline">\(\{X(t), t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, se define la cantidad <span class="math inline">\(m_{ij}(T)\)</span> como el tiempo de ocupación del estado <span class="math inline">\(j\)</span> hasta el tiempo <span class="math inline">\(T\)</span> partiendo del estado <span class="math inline">\(i\)</span> como:</p>
+<p><span id="thm:unlabeled-div-40" class="theorem"><strong>Teorema 4.3  </strong></span>Si <span class="math inline">\(P(t)\)</span> es la matriz de transiciones de probabilidad del proceso <span class="math inline">\(\{X(t), t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, se define la cantidad <span class="math inline">\(m_{ij}(T)\)</span> como el tiempo de ocupación del estado <span class="math inline">\(j\)</span> hasta el tiempo <span class="math inline">\(T\)</span> partiendo del estado <span class="math inline">\(i\)</span> como:</p>
 <p><span class="math display">\[m_{ij}(T) = \int_0^T p_{ij}(t)dt, \quad 1 \leq i, j \leq N.\]</span></p>
 </div>
 <p>Cuando tenemos formas explicitas para cada uno de los elemntos de <span class="math inline">\(P(t)\)</span> (este es el caso para la mayoría de los sistemas de colas de espera) este probelma se puede resolver teóricamente, pero en la mayoria de ocasiones es necesario un algoritmo de computación para aproximar estas cantidades. A continuación se presenta el algoritmo necesario, pero antes veamos la aproximación mediante series de la matriz <span class="math inline">\(M(T) = [m_{ij}(t)]\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-39" class="theorem"><strong>Teorema 4.4  </strong></span>Si <span class="math inline">\(Y\)</span> es una variable aletoria Poisson de parámetro <span class="math inline">\(r*t\)</span> entonces:</p>
+<p><span id="thm:unlabeled-div-41" class="theorem"><strong>Teorema 4.4  </strong></span>Si <span class="math inline">\(Y\)</span> es una variable aletoria Poisson de parámetro <span class="math inline">\(r*t\)</span> entonces:</p>
 <p><span class="math display">\[M(T) = \frac{1}{r} \sum_{k = 0}^{\infty} P(Y &gt; k) \hat{P}^k, \quad T \geq 0.\]</span></p>
 </div>
 <div class="silverbox">
@@ -1383,7 +1427,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <p><span class="math display">\[k = k + 1; \quad yek = yek*(rT)/k; \quad ygk = ygk - yek\]</span> <span class="math display">\[B = B + ygk*A; \quad A = A\hat{P}; \quad suma = suma + ygk\]</span> Al finalizar la matriz <span class="math inline">\(B/r\)</span> es una aproximación de <span class="math inline">\(M(T)\)</span> con error inferior a <span class="math inline">\(\epsilon\)</span>.</p>
 </div>
 <p>En realidad en nuestro algoritmo añadiremos un parámetro extra para indicar como se debe calcular el valor de <span class="math inline">\(r\)</span>, bien como el máximo los elementos por filas de <span class="math inline">\(R\)</span> o como la suma de todos ellos.</p>
-<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tiempos.ocupacion</span><span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Rmat</span>, <span class="va">Ts</span>, <span class="va">cal</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="co"># Algortimo de uniformización para obtener M(T)</span>
@@ -1424,9 +1468,9 @@ r_{ij}/r &amp; \text{ si } i \neq j
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">B</span><span class="op">/</span><span class="va">rlimit</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-40" class="example"><strong>Ejemplo 4.4  </strong></span>Retomamdo el sistema sobre el tiempo de vida de una máquina descrito en el ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es el tiempo total esperado de funcionamiento de la máquina al finalizar el mes de enero? Dado que el proceso sólo tiene espacio de estados <span class="math inline">\(S = \{0, 1\}\)</span>, la cantidad de interés es <span class="math inline">\(m_{11}(31)\)</span>. Con <span class="math inline">\(\lambda = 1\)</span> y <span class="math inline">\(\mu = 0.1\)</span>, la matriz de tasas del proceso viene dada por:</p>
+<p><span id="exm:unlabeled-div-42" class="example"><strong>Ejemplo 4.7  </strong></span>Retomamdo el sistema sobre el tiempo de vida de una máquina descrito en el ejemplo <a href="CMTC.html#exm:excmtc005">4.5</a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es el tiempo total esperado de funcionamiento de la máquina al finalizar el mes de enero? Dado que el proceso sólo tiene espacio de estados <span class="math inline">\(S = \{0, 1\}\)</span>, la cantidad de interés es <span class="math inline">\(m_{11}(31)\)</span>. Con <span class="math inline">\(\lambda = 1\)</span> y <span class="math inline">\(\mu = 0.1\)</span>, la matriz de tasas del proceso viene dada por:</p>
 </div>
-<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">2</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">0.1</span>
@@ -1435,13 +1479,13 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <span class="va">R</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">lambda</span> 
 <span class="va">R</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mu</span> </code></pre></div>
 <p>Obtenemos ahora la matriz <span class="math inline">\(M(31)\)</span> correspondiente a la cantidad de interés, teniendo en cuenta que partimos de que la máquina está en marcha (primera fila de <span class="math inline">\(M\)</span>) al inicio:</p>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tiempos.ocupacion</span><span class="op">(</span><span class="va">R</span>, <span class="fl">31</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>##        [,1]    [,2]
 ## [1,] 3.6446 27.3554
 ## [2,] 2.7355 28.2645</code></pre>
 <p>Por tanto, el tiempo esperado de funcionamiento es de 28.26 días, mientras que el tiempo de reparación es de <span class="math inline">\(2.74\)</span> días. Utilizando el simulador del proceso podemos ver que el resultado obtenido es similar.</p>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Réplicas del proceso</span>
 <span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">2500</span>
 <span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
@@ -1459,7 +1503,7 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <pre><code>## # A tibble: 1 × 2
 ##    mOFF   mON
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.85  28.2</code></pre>
+## 1  3.30  27.7</code></pre>
 <p><em>Para practicar este apartado puedes resolver los ejercicios B-5 a B-8 de la colección al final de la unidad.</em></p>
 </div>
 <div id="CMTCH" class="section level2" number="4.8">
@@ -1470,27 +1514,27 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <p><span class="math display">\[\lim_{t \rightarrow \infty} P(X(t) = j, \quad 1 \leq j \leq N\]</span></p>
 <p>Si existen dichos límites el conjunto <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span> se conoce como distribución límite de la CMTC.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-41" class="theorem"><strong>Teorema 4.5  </strong></span>Una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con matriz de tasas <span class="math inline">\(R\)</span> tiene una única distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span>, que se puede obtener como solución de las ecuaciones de balance:</p>
+<p><span id="thm:unlabeled-div-43" class="theorem"><strong>Teorema 4.5  </strong></span>Una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con matriz de tasas <span class="math inline">\(R\)</span> tiene una única distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span>, que se puede obtener como solución de las ecuaciones de balance:</p>
 <p><span class="math display">\[p_j r_j = \sum_{i=1}^N p_ir_{ij}, \quad 1 \leq j \leq N\]</span> <span class="math display">\[\sum_{i=1}^N p_i = 1\]</span></p>
 </div>
 <p>En este sentido podemos interpretar <span class="math inline">\(p_jr_j\)</span> como la tasa de la CMTC cuanod deja el estado <span class="math inline">\(j\)</span>, mientras que <span class="math inline">\(p_jr_{ij}\)</span> es la tasa de entrada de la CMTC a estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-42" class="theorem"><strong>Teorema 4.6  </strong></span>Dado una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con distribución límite <span class="math inline">\(p\)</span>, entonces la distribución estacionaria de la CMTC viene dada por <span class="math inline">\(p\)</span>, es decir:</p>
+<p><span id="thm:unlabeled-div-44" class="theorem"><strong>Teorema 4.6  </strong></span>Dado una CMTC <span class="math inline">\(\{X(t), t \geq 0\}\)</span> irreducible con distribución límite <span class="math inline">\(p\)</span>, entonces la distribución estacionaria de la CMTC viene dada por <span class="math inline">\(p\)</span>, es decir:</p>
 <p><span class="math display">\[P(X(0) = j) = p_j \text{ para } 1 \leq j leq N\]</span> <span class="math inline">\(P(X(t) = j) = p_j \text{ para } 1 \leq j leq N, t \geq 0\)</span>$</p>
 </div>
 <p>A partir de la distribución límite resulta posible obtener la distribución de ocupación de la CMTC.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-43" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado hata el tiempo <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces:</p>
+<p><span id="thm:unlabeled-div-45" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado hata el tiempo <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces:</p>
 <p><span class="math display">\[\lim_{T \rightarrow \infty} \frac{m_{ij}(T)}{T} = p_j\]</span></p>
 </div>
-<p>A continuación se presenta la solución de la distrbución límite para los procesos de nacimiento y muerte. En el resto de sistemas se deberan plantear las ecuaciones de balance y resorverlas. En ambas situaciones presentamos las correspondientes funciones que nos permiten obtener las cantidades de interés.</p>
+<p>A continuación se presenta la solución de la distribución límite para los procesos de nacimiento y muerte. En el resto de sistemas se deberan plantear las ecuaciones de balance y resorverlas. En ambas situaciones presentamos las correspondientes funciones que nos permiten obtener las cantidades de interés.</p>
 <div class="bluebox">
 <p>Sea <span class="math inline">\(\{X(t), t \geq 0\}\)</span> un proceso de nacimiento y muerte con espacio de estados <span class="math inline">\(S = \{0, 1,...,K\}\)</span>, y tasas de nacimiento <span class="math inline">\(\{\lambda_i, 0 \leq i &lt; K\}\)</span> y tasas de muerte <span class="math inline">\(\{\mu_i, 1 \leq i \leq K\}\)</span>. Entonces la CMTC así definida es irreducible y tiene una única distribuión límite con:</p>
 <p><span class="math display">\[p_i = \frac{\rho_i}{\sum_{j = 0}^K \rho_j}, \quad 0 \leq i \leq K,\]</span> donde <span class="math inline">\(\rho_0 = 1,\)</span> y</p>
 <p><span class="math display">\[\rho_i = \frac{\prod_{j=0}^{i-1}\lambda_j}{\prod_{j=1}^{i}\mu_j}, \quad 1 \leq i \leq K,\]</span></p>
 </div>
 <p>Antes de comenzar con los ejemplos vamos a crear una función que permita obtener la distibución límite y la distribución de ocupación para los procesos de nacimiento y muerte.</p>
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Obtención de distribuciones límite </span>
 <span class="va">distr.lim.nm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">estados</span>, <span class="va">lambdas</span>, <span class="va">mus</span><span class="op">)</span>
 <span class="op">{</span>
@@ -1514,19 +1558,19 @@ r_{ij}/r &amp; \text{ si } i \neq j
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-44" class="example"><strong>Ejemplo 4.5  </strong></span>Retomamdo el sistema descrito en el ejemplo <a href="#exm:excmtc005"><strong>??</strong></a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es la distribución límite del proceso?</p>
+<p><span id="exm:unlabeled-div-46" class="example"><strong>Ejemplo 4.8  </strong></span>Retomamdo el sistema descrito en el ejemplo <a href="CMTC.html#exm:excmtc005">4.5</a>, supongamos que el tiempo esperado hasta que falla una máquina son 10 días, mientras que el tiempo esperado de reparación es de 1 día. Si la máquina funciona el primer día de enero ¿cuál es la distribución límite del proceso?</p>
 <p>Este sistema es un proceso de nacimiento y muerte donde podemos aplicar la función anterior para obtener la distribución límite con dos estados y tasas <span class="math inline">\(\lambda = 1\)</span>, <span class="math inline">\(\mu = 1/10\)</span> (expresadas en periodos de diez días).</p>
 </div>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">probs</span> <span class="op">&lt;-</span> <span class="fu">distr.lim.nm</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>
 <span class="va">probs</span></code></pre></div>
 <pre><code>## [1] 0.09090909 0.90909091</code></pre>
 <p>El comportamiento límite nos indica que la máquina está el 90.9% del tiempo en funcionamiento, mientras que sólo el 9.1% en reparación. Para un periodo de un año tendríamos que los díass esperados de reparación y funcionamiento son:</p>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">365</span><span class="op">*</span><span class="va">probs</span></code></pre></div>
 <pre><code>## [1]  33.18182 331.81818</code></pre>
 <p>Veamos ahora como obtener la distribución límite para procesos más generales. Definimos una función que nos permite obtener la distribución límite de un CMTC a partir de cualquier matriz de tasas resolviendo las ecuaciones de balance.</p>
-<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Función para la resolución numérica de las ecuaciones de balance</span>
 <span class="va">distr.lim.general</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">Rmat</span><span class="op">)</span>
 <span class="op">{</span>
@@ -1549,10 +1593,10 @@ r_{ij}/r &amp; \text{ si } i \neq j
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-45" class="example"><strong>Ejemplo 4.6  </strong></span>Para el sistema de proceso de fabricación se está interesado en conocer cuando la máquina estará parada a largo plazo. Dado que el espacio de estados es <span class="math inline">\(S = \{1, 2,...,6\}.\)</span> la máquina está aprada cuando nos encontramos en los estados <span class="math inline">\(5 = (4, 0)\)</span> y <span class="math inline">\(6 = (3, 0)\)</span>. A partir de la información del sistema podemos obtener la distribución límite del proceso, pero en este caso como no se trata de un proceso de nacimiento y muerte debemos plantear las ecuaciones de balance, a partir de la matriz de tasas, y resolver el sistema numéricamente.</p>
+<p><span id="exm:unlabeled-div-47" class="example"><strong>Ejemplo 4.9  </strong></span>Para el sistema de proceso de fabricación se está interesado en conocer cuando la máquina estará parada a largo plazo. Dado que el espacio de estados es <span class="math inline">\(S = \{1, 2,...,6\}.\)</span> la máquina está aprada cuando nos encontramos en los estados <span class="math inline">\(5 = (4, 0)\)</span> y <span class="math inline">\(6 = (3, 0)\)</span>. A partir de la información del sistema podemos obtener la distribución límite del proceso, pero en este caso como no se trata de un proceso de nacimiento y muerte debemos plantear las ecuaciones de balance, a partir de la matriz de tasas, y resolver el sistema numéricamente.</p>
 </div>
 <p>Resolvemos las ecuaciones de balance para el sistema del proceso de fabricación. Definimos la matriz de tasas y ejecutamos la función anterior para obtener las probabilidades límite del proceso:</p>
-<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Estados del sistema</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="co"># Matriz de tasas</span>
@@ -1587,12 +1631,14 @@ r_{ij}/r &amp; \text{ si } i \neq j
 <p>En esta subsección, estudiamos el <strong>CTE</strong>, el <em>coste total esperado</em> hasta un tiempo finito <span class="math inline">\(T\)</span>, llamado horizonte. Nótese que la tasa de coste en el tiempo <span class="math inline">\(t\)</span> es <span class="math inline">\(c(X(t))\)</span>. Por lo tanto, el coste total hasta el tiempo <span class="math inline">\(T\)</span> viene dado por:</p>
 <p><span class="math display">\[\int_0^T c(X(t))dt.\]</span></p>
 <p>De esta forma el coste esprado total hasta el instante <span class="math inline">\(T\)</span>, empezando en el estado <span class="math inline">\(i\)</span>, viene dado por:</p>
-<p><span class="math display">\[g(i, T) = E\left( \int_0^T c(X(t))dt \mid X(0) = i \right), \quad 1 \leq i \leq N.\]</span> ::: {.theorem}</p>
-<p>Si <span class="math inline">\(M(T) = [m_{ij}(T)]\)</span> es la matriz de ocupación entonces:</p>
+<p><span class="math display">\[g(i, T) = E\left( \int_0^T c(X(t))dt \mid X(0) = i \right), \quad 1 \leq i \leq N.\]</span></p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-48" class="theorem"><strong>Teorema 4.8  </strong></span>Si <span class="math inline">\(M(T) = [m_{ij}(T)]\)</span> es la matriz de ocupación entonces:</p>
 <p><span class="math display">\[g(T) = M(T)c,\]</span></p>
-<p>donde <span class="math inline">\(c = [c(1), c(2),...,c(N-1), c(N)]'\)</span> y <span class="math inline">\(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.\)</span> :::</p>
+<p>donde <span class="math inline">\(c = [c(1), c(2),...,c(N-1), c(N)]'\)</span> y <span class="math inline">\(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.\)</span></p>
+</div>
 <div class="example">
-<p><span id="exm:unlabeled-div-46" class="example"><strong>Ejemplo 4.7  </strong></span>Para el sistema de mantenimiento de máquinas se conoce que que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas si al finalizar todas las máquinas están funcionando. Si <span class="math inline">\(X(t)\)</span> es el número de máquinas funcionando en el instante <span class="math inline">\(t\)</span>, el espacio de estados para 4 máquinas viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span> y el vector de costes es:</p>
+<p><span id="exm:unlabeled-div-49" class="example"><strong>Ejemplo 4.10  </strong></span>Para el sistema de mantenimiento de máquinas se conoce que que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas si al finalizar todas las máquinas están funcionando. Si <span class="math inline">\(X(t)\)</span> es el número de máquinas funcionando en el instante <span class="math inline">\(t\)</span>, el espacio de estados para 4 máquinas viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span> y el vector de costes es:</p>
 </div>
 <p><span class="math display">\[
 \begin{matrix}
@@ -1614,7 +1660,7 @@ g(24) = M(24)*c =
 \end{bmatrix}
 \]</span></p>
 <p>de forma que la cantidad de interés, <span class="math inline">\(g(4, 24)\)</span> que corresponde con el elemento <span class="math inline">\((5,1)\)</span> de la matriz, establece un beneficio de 4621.05 euros. Veamos como obtener esta cantidad utilizando el código correspondiente.</p>
-<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de tasas</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">5</span>
 <span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="va">nestados</span>, ncol <span class="op">=</span> <span class="va">nestados</span>, data <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
@@ -1650,21 +1696,21 @@ g(24) = M(24)*c =
 </h3>
 <p>Para el sistema de <code>vida de una máquina</code>, supongamos que se da el coste <span class="math inline">\(C\)</span> del tiempo de inactividad. Queremos saber a cuánto debe ser la tasa de ingresos durante el tiempo de actividad para que sea económicamente rentable operar la máquina. Si nos guiamos por el coste total, la respuesta dependerá de del horizonte de planificación <span class="math inline">\(T\)</span> y también del estado inicial de la máquina. Una alternativa es calcular los ingresos netos a largo plazo por unidad de tiempo para esta máquina e insistir en que sea positivo para la rentabilidad. Esta respuesta no dependerá de <span class="math inline">\(T\)</span>, y, como veremos ni siquiera del estado inicial de la máquina. Por lo tanto, el cálculo de estos índices de costes o ingresos a largo plazo es muy útil. En esta subsección mostraremos cómo calcular estas cantidades.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-47" class="theorem"><strong>Teorema 4.8  </strong></span>Sea <span class="math inline">\(\{X(t), t \ geq 0\}\)</span> una CMTC irreducible con estados <span class="math inline">\(\{1, 2,...,N\}\)</span>, distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span> y vector de costes <span class="math inline">\(c = [c_1, c_2,..., c_N]\)</span>, entonces la tasa de coste a largo plazo viene dada por:</p>
+<p><span id="thm:unlabeled-div-50" class="theorem"><strong>Teorema 4.9  </strong></span>Sea <span class="math inline">\(\{X(t), t \ geq 0\}\)</span> una CMTC irreducible con estados <span class="math inline">\(\{1, 2,...,N\}\)</span>, distribución límite <span class="math inline">\(p = [p_1, p_2,...,p_N]\)</span> y vector de costes <span class="math inline">\(c = [c_1, c_2,..., c_N]\)</span>, entonces la tasa de coste a largo plazo viene dada por:</p>
 <p><span class="math display">\[g(i) = \sum_{j = 1}^N p_jc(j), \quad 1 \leq i \leq N\]</span></p>
 </div>
 <div class="example">
-<p><span id="exm:unlabeled-div-48" class="example"><strong>Ejemplo 4.8  </strong></span>Si consideramos el sistema de <code>vida de una máquina</code> supongamos que el coste por unidad de tiempo de que la máquina este apagado es <span class="math inline">\(C\)</span>. ¿Cuál es el la tasa mínima de ingresos <span class="math inline">\(I\)</span> necesaria durante el tiempo de actividad para alcanzar el punto de equilibrio a largo plazo?</p>
+<p><span id="exm:unlabeled-div-51" class="example"><strong>Ejemplo 4.11  </strong></span>Si consideramos el sistema de <code>vida de una máquina</code> supongamos que el coste por unidad de tiempo de que la máquina este apagado es <span class="math inline">\(C\)</span>. ¿Cuál es el la tasa mínima de ingresos <span class="math inline">\(I\)</span> necesaria durante el tiempo de actividad para alcanzar el punto de equilibrio a largo plazo?</p>
 </div>
 <p>Utilizando las tasas definidas anteriormente (<span class="math inline">\(\lambda = 1, \mu = 0.1\)</span>), la distribución límite del sistema <span class="math inline">\(p = [0.0909, 0.9091]\)</span>, y el vector de costes <span class="math inline">\(c =[-C, I]\)</span> para el espacio de estados <span class="math inline">\(S = \{0, 1\}\)</span>, la tasa de coste a largo plazo por unidad de tiempo viene dada por la expresión:</p>
 <p><span class="math display">\[ g = 0.9091*I - 0.0909*C\]</span> de forma que para mantener el sistema en equilibrio, <span class="math inline">\(g \geq 0\)</span>, se debe cumplir que:</p>
 <p><span class="math display">\[I \geq \frac{0.0909}{0.9091}*C = 0.099989*C \approx 0.1*C\]</span></p>
 <p>Así, los ingresos por unidad de tiempo superiores a 0.1 veces por el coste de que la máquina este parada por unidad de tiempo resulta rentable. Si la empresa ha establecido un ingreso por hora de 50 euros, cuando sabe que el coste por hora es de 10 euros cuando está apagada, se desea saber si se cumple la condición de equilibrio para los costes.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-49" class="example"><strong>Ejemplo 4.9  </strong></span>Consideramos el sistema de la <code>central telefónica</code> donde la capacidad máxima de la centralita es de seis llamadas. Las llamadas llegan según un <span class="math inline">\(PP\)</span> con una tasa de 4/minuto, y la duración media de cada llamada exponencial de media 2 minutos. En primer lugar deseamos conocer le beneficio por unidad de tiempo si la facturación por minuto de cada llamada es de 10 céntimos. En segundo lugar deseamos estimar la pérdida que sufrimos por todas las llamadas que no pueden ser atendidas. Consideramos como <span class="math inline">\(X(t)\)</span> al número de llamadas que están siendo atendidas en el instante <span class="math inline">\(t\)</span>.</p>
+<p><span id="exm:unlabeled-div-52" class="example"><strong>Ejemplo 4.12  </strong></span>Consideramos el sistema de la <code>central telefónica</code> donde la capacidad máxima de la centralita es de seis llamadas. Las llamadas llegan según un <span class="math inline">\(PP\)</span> con una tasa de 4/minuto, y la duración media de cada llamada exponencial de media 2 minutos. En primer lugar deseamos conocer le beneficio por unidad de tiempo si la facturación por minuto de cada llamada es de 10 céntimos. En segundo lugar deseamos estimar la pérdida que sufrimos por todas las llamadas que no pueden ser atendidas. Consideramos como <span class="math inline">\(X(t)\)</span> al número de llamadas que están siendo atendidas en el instante <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>En primer lugar calculamos la distribución límite del proceso. Dado que se trata de un proceso de nacimeinto y muerte utilizamos la función correspondiente.</p>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de tasas</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">7</span>
 <span class="va">lambdas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span> 
@@ -1672,7 +1718,7 @@ g(24) = M(24)*c =
 <span class="co"># Probabilidades del sistema</span>
 <span class="va">probs</span> <span class="op">&lt;-</span> <span class="fu">distr.lim.nm</span><span class="op">(</span><span class="va">nestados</span>, <span class="va">lambdas</span>, <span class="va">mus</span><span class="op">)</span></code></pre></div>
 <p>Establecemos los beneficios <span class="math inline">\(c(i) = 10i\)</span> y calculamos el global por unidad de tiempo</p>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># vector de beneficios</span>
 <span class="va">beneficio</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">*</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> 
 <span class="co"># beneficio por unidad de tiempo</span>
@@ -1690,13 +1736,13 @@ g(24) = M(24)*c =
 <p>Más concretamente estudíamos el valor esperado de <span class="math inline">\(T\)</span>, <span class="math inline">\(E(T)\)</span>. Para ello definimos los tiempos esperados a partir de cada uno de los estados del sistema como:</p>
 <p><span class="math display">\[m_i = E(T \mid X(0) = i), \quad 1 \leq i \leq N-1\]</span> y <span class="math inline">\(m_N = 0.\)</span></p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-50" class="theorem"><strong>Teorema 4.9  </strong></span>Los valores <span class="math inline">\(\{m_i, 1 \leq i \leq N-1\}\)</span> satisfacen</p>
+<p><span id="thm:unlabeled-div-53" class="theorem"><strong>Teorema 4.10  </strong></span>Los valores <span class="math inline">\(\{m_i, 1 \leq i \leq N-1\}\)</span> satisfacen</p>
 <p><span class="math display">\[r_im_i = 1 + \sum_{j=1}^{N-1} r_{ij}m_j, \quad 1\leq i \leq N-1.\]</span></p>
 </div>
 <p>Si deseamos calcular los tiempos de primer paso a un subconjunto de estados, <span class="math inline">\(A\)</span> se puede adaptar el teorema anterior ya que sólo debemos resolver el sistema:</p>
 <p><span class="math display">\[r_im_i(A) = 1 + \sum_{j \notin A} r_{ij}m_j(A), \quad 1\leq i \leq N-1.\]</span></p>
 <p>A continuación presentamos un algoritmo para calcular los valores de <span class="math inline">\(m_i\)</span> a partir de la matriz de tasas del sistema, donde debemos indicar el estado o estados desde los que partimos al inicio.</p>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Función para la resolución numérica de las ecuaciones de balance</span>
 <span class="va">tiempos.primer.paso</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">Rmat</span>, <span class="va">A</span>, <span class="va">estados</span><span class="op">)</span>
 <span class="op">{</span>
@@ -1727,9 +1773,9 @@ g(24) = M(24)*c =
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <div class="example">
-<p><span id="exm:unlabeled-div-51" class="example"><strong>Ejemplo 4.10  </strong></span>En las condiciones del sistema <span class="math inline">\(M/M/1/K\)</span> del <code>cajero bancario</code> descrito anteriormente, estamos interesados en conocer el tiempo quen debe trasncurrir hasta que la cola esta vacia si ahora mismo hay un cliente en el sistema y cero en la cola (<span class="math inline">\(X(0) = 0\)</span>). Recordemos que el esapcio de estados hace referencia al número de clientes en la cola y viene dado por <span class="math inline">\(\{0, 1, 2, 3, 4, 5\}.\)</span></p>
+<p><span id="exm:unlabeled-div-54" class="example"><strong>Ejemplo 4.13  </strong></span>En las condiciones del sistema <span class="math inline">\(M/M/1/K\)</span> del <code>cajero bancario</code> descrito anteriormente, estamos interesados en conocer el tiempo quen debe trasncurrir hasta que la cola esta vacia si ahora mismo hay un cliente en el sistema y cero en la cola (<span class="math inline">\(X(0) = 0\)</span>). Recordemos que el esapcio de estados hace referencia al número de clientes en la cola y viene dado por <span class="math inline">\(\{0, 1, 2, 3, 4, 5\}.\)</span></p>
 </div>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Definición matriz de tasas</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="va">nestados</span>, ncol <span class="op">=</span> <span class="va">nestados</span>, data <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
@@ -1754,10 +1800,10 @@ g(24) = M(24)*c =
 ## estado 5 0.6526749</code></pre>
 <p>El tiempo esperado hasta que la cola este vacia de nuevo son 0.1736 horas o 10.42 minutos.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-52" class="example"><strong>Ejemplo 4.11  </strong></span>En las condiciones del sistema de <code>mantenimiento de areonaves</code> descrito anteriormente. Supongamos que en un experimento de prueba el avión despega con cuatro motores motores que funcionan correctamente y sigue volando hasta que se estrella. Estamos interesados en conocer el tiempo esperado del accidente.</p>
+<p><span id="exm:unlabeled-div-55" class="example"><strong>Ejemplo 4.14  </strong></span>En las condiciones del sistema de <code>mantenimiento de areonaves</code> descrito anteriormente. Supongamos que en un experimento de prueba el avión despega con cuatro motores motores que funcionan correctamente y sigue volando hasta que se estrella. Estamos interesados en conocer el tiempo esperado del accidente.</p>
 <p>Recordemos que el espacio de estados del sistema es <span class="math inline">\(\{1, 2,...,,9\}\)</span>, y sabemos que el avión se estrallará si en algún momento accedemos al subconjunto de estados <span class="math inline">\(\{1, 2, 3, 4, 7\}.\)</span> Calculamos los tiempos de primer paso cuando <span class="math inline">\(X(0) = \{5, 6, 8, 9\}\)</span>, aunque como el avión está en condiciones çoptimas para despegar nos debermeos fijar en el valor correspondiente al estado 9. Recordemos que el tiempo medio hasta que falla un motor es de 200 horas, de forma que <span class="math inline">\(\lambda = 1/200 = 0.005.\)</span></p>
 </div>
-<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Definición matriz de tasas</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">9</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">0.005</span>
@@ -1921,7 +1967,7 @@ R = \begin{pmatrix}
 <span class="header-section-number">4.12</span> Soluciones<a class="anchor" aria-label="anchor" href="#CMTCL"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Ejercicio B-1.</strong></p>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de tasas</span>
 <span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">estados</span><span class="op">)</span>
@@ -1939,17 +1985,17 @@ R = \begin{pmatrix}
 <span class="va">R</span><span class="op">[</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">lambda</span>
 <span class="va">R</span><span class="op">[</span><span class="fl">5</span>,<span class="fl">4</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">*</span><span class="va">mu</span></code></pre></div>
 <p>Distribución de probabilidad asociada al evento de interés:</p>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de probabilidades de transición</span>
 <span class="va">Pmat</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">9</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co"># Distribución de probabildiad buscada</span>
 <span class="va">Pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></code></pre></div>
 <pre><code>## [1] 0.0002 0.0020 0.0136 0.1547 0.8295</code></pre>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># valor esperado</span>
 <span class="va">esperanza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">estados</span><span class="op">*</span><span class="va">Pmat</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>Solución con simmer:</p>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">2500</span>
 <span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">maquinas</span> <span class="op">&lt;-</span> <span class="fu">mantenimiento</span><span class="op">(</span><span class="fl">9</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">72</span>, <span class="fl">2</span><span class="op">)</span>
@@ -1965,9 +2011,9 @@ R = \begin{pmatrix}
 <span class="va">distrprob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">salida</span><span class="op">$</span><span class="va">estado</span><span class="op">)</span><span class="op">/</span><span class="va">replicas</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">esperanza</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">distrprob</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="va">distrprob</span><span class="op">)</span>
 <span class="va">esperanza</span></code></pre></div>
-<pre><code>## [1] 3.895</code></pre>
+<pre><code>## [1] 3.892</code></pre>
 <p><strong>Ejercicio B-2.</strong></p>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de tasas</span>
 <span class="va">estados</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"(0, 0)"</span>, <span class="st">"(0, 1)"</span>, <span class="st">"(0, 2)"</span>, <span class="st">"(1, 0)"</span>, 
              <span class="st">"(1, 1)"</span>, <span class="st">"(1, 2)"</span>, <span class="st">"(2, 0)"</span>, <span class="st">"(2, 1)"</span>, <span class="st">"(2,2)"</span><span class="op">)</span>
@@ -1989,7 +2035,7 @@ R = \begin{pmatrix}
 <span class="va">R</span><span class="op">[</span><span class="fl">9</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">lambda</span>
 <span class="va">R</span><span class="op">[</span><span class="fl">9</span>,<span class="fl">8</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">lambda</span></code></pre></div>
 <p>Probabilidades de transición para el evento de interés:</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de probabilidades de transición</span>
 <span class="va">Pmat</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">6</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co"># Calculamos la probabilidad buscada</span>
@@ -1998,7 +2044,7 @@ R = \begin{pmatrix}
 <pre><code>## [1] 0.9982</code></pre>
 <p>Por tanto, la probabilidad de un fallo que le impida al avión finalizar el viaje es 0.0018.</p>
 <p><strong>Ejercicio B-5.</strong></p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Matriz de tasas</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">10</span>
@@ -2016,7 +2062,7 @@ R = \begin{pmatrix}
 <span class="va">R</span><span class="op">[</span><span class="fl">5</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">lambda</span>
 <span class="va">R</span><span class="op">[</span><span class="fl">6</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mu</span></code></pre></div>
 <p>Obtenemos ahora la matriz <span class="math inline">\(M(1)\)</span>:</p>
-<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tiempos.ocupacion</span><span class="op">(</span><span class="va">R</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>##        [,1]   [,2]   [,3]   [,4]   [,5]   [,6]
 ## [1,] 0.4451 0.2548 0.1442 0.0814 0.0465 0.0280
@@ -2026,7 +2072,7 @@ R = \begin{pmatrix}
 ## [5,] 0.2356 0.1806 0.1598 0.1569 0.1624 0.1047
 ## [6,] 0.2124 0.1648 0.1489 0.1492 0.1571 0.1677</code></pre>
 <p>Estamos interesados en la transición <span class="math inline">\(X(0) = 0\)</span> a <span class="math inline">\(X(1) = 0\)</span> que corresponde con el elemento <span class="math inline">\([1,1]\)</span> de la matriz obtenida. Utilizando <code>simmer</code>:</p>
-<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Réplicas del proceso</span>
 <span class="va">replicas</span> <span class="op">&lt;-</span> <span class="fl">2500</span>
 <span class="va">envs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">replicas</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
@@ -2050,7 +2096,7 @@ R = \begin{pmatrix}
 <p>Sea <span class="math inline">\(X(t)\)</span> el número de artículos en stock en el tiempo <span class="math inline">\(t\)</span>, e <span class="math inline">\(Y(t)\)</span> el estado de la máquina en el tiempo <span class="math inline">\(t\)</span>. El conjunto de estados de este proceso viene dado por:</p>
 <p><span class="math display">\[S = \{1 = (0, 1), 2 = (1, 1), 3 = (2, 1), 4 = (3, 1), 5 = (4, 0), 6 = (3, 0)\}.\]</span> En la situación inicial nos encontramos en el estado <span class="math inline">\(5 = (4, 0) = (X(0), Y(0))\)</span> y estamos interesados en el tiempo en que la máquina estará después de 24 horas en los estados <span class="math inline">\(1, 2, 3\)</span> o <span class="math inline">\(4\)</span>, es decir:</p>
 <p><span class="math display">\[m_{51}(24) + m_{52}(24) + m_{53}(24) + m_{54}(24)\]</span> En esta situación tenemos que la tasa de producción es <span class="math inline">\(\lambda = 60/10 = 6\)</span> y la de demanda es <span class="math inline">\(\mu = 5\)</span>, de forma que la matriz de tasas viene dada por:</p>
-<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 <span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">5</span>
@@ -2066,7 +2112,7 @@ R = \begin{pmatrix}
 <span class="va">R</span><span class="op">[</span><span class="fl">5</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mu</span>
 <span class="va">R</span><span class="op">[</span><span class="fl">6</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mu</span></code></pre></div>
 <p>Obtenemos ahora la matriz <span class="math inline">\(M(24)\)</span>:</p>
-<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mmat</span><span class="op">&lt;-</span><span class="fu">tiempos.ocupacion</span><span class="op">(</span><span class="va">R</span>, <span class="fl">24</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="va">mmat</span></code></pre></div>
 <pre><code>##        [,1]   [,2]   [,3]   [,4]   [,5]   [,6]
@@ -2077,11 +2123,11 @@ R = \begin{pmatrix}
 ## [5,] 3.7063 4.4793 5.4448 2.9586 3.7204 3.6906
 ## [6,] 3.7380 4.5173 5.4905 2.9835 3.5503 3.7204</code></pre>
 <p>La cantidad buscada viene dada por:</p>
-<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mmat</span><span class="op">[</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 16.589</code></pre>
 <p><strong>Ejercicio B-9.</strong></p>
-<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">maquinas</span> <span class="op">&lt;-</span> <span class="fl">4</span>
 <span class="va">estados</span> <span class="op">&lt;-</span> <span class="va">maquinas</span> <span class="op">+</span> <span class="fl">1</span>
 <span class="va">operarios</span> <span class="op">&lt;-</span> <span class="fl">2</span>
@@ -2092,15 +2138,15 @@ R = \begin{pmatrix}
 <span class="co"># Debemos quitar el último elemento de lambda y el primero de mu para usar la función definida</span>
 <span class="va">probs</span> <span class="op">&lt;-</span> <span class="fu">distr.lim.nm</span><span class="op">(</span><span class="va">estados</span>, <span class="va">lambdas</span>, <span class="va">mus</span><span class="op">)</span></code></pre></div>
 <pre><code>## Warning in prl/prm: longitud de objeto mayor no es múltiplo de la longitud de uno menor</code></pre>
-<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">probs</span></code></pre></div>
 <pre><code>## [1] 1.540618e-05 1.109245e-03 3.993283e-02 9.583879e-01 5.546226e-04</code></pre>
 <p>Así, a largo plazo, todas las máquinas funcionan el 89,6% del tiempo (<span class="math inline">\(p_4 = p[5]\)</span>). Ambos operarios están ocupados siempre que el sistema está en el estado <span class="math inline">\(0\)</span>, <span class="math inline">\(1\)</span> o <span class="math inline">\(2\)</span>. Por lo tanto, la fracción de tiempo a largo plazo en que ambos reparadores están ocupados viene dada por <span class="math inline">\(p_0 + p_1 + p_2\)</span>:</p>
-<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">probs</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.04105748</code></pre>
 <p><strong>Ejercicio B-10.</strong></p>
-<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">maxcola</span> <span class="op">&lt;-</span> <span class="fl">5</span>
 <span class="va">estados</span> <span class="op">&lt;-</span> <span class="va">maxcola</span> <span class="op">+</span> <span class="fl">1</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">10</span>
@@ -2113,7 +2159,7 @@ R = \begin{pmatrix}
 <pre><code>## [1] 0.36541353 0.24360902 0.16240602 0.10827068 0.07218045 0.04812030</code></pre>
 <p><strong>Ejercicio B-11.</strong></p>
 <p>Recordemos que el espacio de estados es <span class="math inline">\(\{1, 2,...,9\}\)</span> y nos intersa obtener la probabilidad del sujconjunto <span class="math inline">\(\{1, 2, 3, 4, 7\}\)</span>. Obtenemos en primer lugar la matriz de tasas:</p>
-<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Estados del sistema</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">9</span>
 <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">20</span>
@@ -2136,7 +2182,7 @@ R = \begin{pmatrix}
 <span class="va">ps</span></code></pre></div>
 <pre><code>## [1] 1 0 0 0 0 0 0 0 0</code></pre>
 <p><strong>Ejercicio B-12.</strong></p>
-<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Estados del sistema</span>
 <span class="va">nestados</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="co"># Matriz de tasas</span>
@@ -2167,11 +2213,18 @@ R = \begin{pmatrix}
 <li><a class="nav-link" href="#CMTC"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
 <li><a class="nav-link" href="#CMTCA"><span class="header-section-number">4.1</span> Evolución del proceso</a></li>
 <li><a class="nav-link" href="#CMTCB"><span class="header-section-number">4.2</span> Descripción del proceso</a></li>
-<li><a class="nav-link" href="#CMTCC"><span class="header-section-number">4.3</span> Análisis preliminar del proceso</a></li>
+<li>
+<a class="nav-link" href="#CMTCC"><span class="header-section-number">4.3</span> Análisis preliminar del proceso</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sistema-de-vida-%C3%BAtil-de-una-m%C3%A1quina"><span class="header-section-number">4.3.1</span> Sistema de vida útil de una máquina</a></li>
+<li><a class="nav-link" href="#sistema-del-viajante"><span class="header-section-number">4.3.2</span> Sistema del viajante</a></li>
+<li><a class="nav-link" href="#an%C3%A1lisis-con-simmer"><span class="header-section-number">4.3.3</span> Análisis con simmer</a></li>
+<li><a class="nav-link" href="#mantenimiento-de-aronaves"><span class="header-section-number">4.3.4</span> Mantenimiento de aronaves</a></li>
+</ul>
+</li>
 <li>
 <a class="nav-link" href="#CMTCD"><span class="header-section-number">4.4</span> Procesos de nacimiento y muerte</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#colas-de-espera-de-capacidad-finita-con-un-servidor"><span class="header-section-number">4.4.1</span> Colas de espera de capacidad finita con un servidor</a></li>
-<li><a class="nav-link" href="#mantenimiento-de-m%C3%A1quinas"><span class="header-section-number">4.4.2</span> Mantenimiento de máquinas</a></li>
+<li><a class="nav-link" href="#excmtc007"><span class="header-section-number">4.4.2</span> Mantenimiento de máquinas</a></li>
 <li><a class="nav-link" href="#central-telef%C3%B3nica"><span class="header-section-number">4.4.3</span> Central telefónica</a></li>
 <li><a class="nav-link" href="#call-center"><span class="header-section-number">4.4.4</span> Call Center</a></li>
 </ul>
@@ -2210,7 +2263,7 @@ R = \begin{pmatrix}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-13.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

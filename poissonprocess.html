@@ -47,6 +47,7 @@
 <li><a class="" href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></li>
 <li><a class="" href="COLAS.html"><span class="header-section-number">5</span> Sistemas de colas</a></li>
 <li><a class="" href="SIMSIST.html"><span class="header-section-number">6</span> Aplicaciones prácticas</a></li>
+<li><a class="" href="simmerunidad.html"><span class="header-section-number">7</span> Simulación DES con simmer</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
@@ -62,7 +63,7 @@
 <p>En esta unidad se presentan se presentan los Procesos de Poisson que son la base de muchos de los sistemas de Cadenas de Markov de Tiempo Continuo que estudiaremos con más detalle más adelante. Este tipo de procesos estocásticos se utilizan para modelizar el número de ocurrencias de un evento en un periodo de tiempo determinado y nos sirven para modelizar situaciones bastante comunes como las llegadas de clientes a una cola, el número de fallos que se producen en una cadena de producción, el número de reclamaciones que recibe una compañía de seguros, el número de accidentes de tráfico en una carretera, el número de pedidos en un sistema de inventarios,…</p>
 <p>Veamos a continuación un ejemplo sencillo de utilización de este tipo de procesos.</p>
 <div class="example">
-<p><span id="exm:pp001" class="example"><strong>Ejemplo 3.1  </strong></span>Estamos interesados en estudiar la dinámica de la llegada de llamadas telefónicas a un centro de llamadas. Para describir este proceso consideremos una colección de variables aleatorias <span class="math inline">\(\{N_t; t ≥ 0\}\)</span>, donde cada variable aleatoria <span class="math inline">\(N_t\)</span>, para un <span class="math inline">\(t\)</span> dado, denota el número acumulado de llamadas que llegan al centro hasta el momento <span class="math inline">\(t\)</span>. Como estas llamadas registran un recuento, el espacio de estado es el conjunto de números naturales con el cero, <span class="math inline">\(S= \{0,1,2,...\}\)</span>. En otras palabras, la llegada de llamadas telefónicas puede modelarse como un proceso estocástico de tiempos (parámetros) continuos con un espacio de estados contable.</p>
+<p><span id="exm:pp001" class="example"><strong>Ejemplo 3.1  </strong></span>Estamos interesados en estudiar la dinámica de la llegada de llamadas telefónicas a un centro de llamadas. Para describir este proceso consideremos una colección de variables aleatorias <span class="math inline">\(\{N_t; t ≥ 0\}\)</span>, donde cada variable aleatoria <span class="math inline">\(N_t\)</span>, para un <span class="math inline">\(t\)</span> dado, denota el número acumulado de llamadas que llegan al centro hasta el momento <span class="math inline">\(t\)</span>. Como estas llamadas registran un recuento, el espacio de estados es el conjunto de números naturales con el cero <span class="math inline">\(S= \{0,1,2,...\}\)</span>. En otras palabras, la llegada de llamadas telefónicas puede modelarse como un proceso estocástico de tiempos (parámetros) continuos con un espacio de estados contable.</p>
 </div>
 <div id="definición-y-propiedades" class="section level2" number="3.1">
 <h2>
@@ -70,17 +71,17 @@
 </h2>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-33" class="definition"><strong>Definición 3.1  </strong></span>Sea un proceso estocástico de parámetro continuo <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con <span class="math inline">\(N_0 = 0\)</span> y espacio de estados el de los enteros no negativos, <span class="math inline">\(S=\{0,1,2,...\}\)</span>. Dicho proceso se denomina <strong>Proceso de Poisson (PP) de tasa</strong> <span class="math inline">\(\lambda\)</span> si:</p>
-<ol style="list-style-type: decimal">
-<li>
-<span class="math inline">\(P(N_t = k) = e^{\lambda t}(\lambda t)^k/k!\)</span> para <span class="math inline">\(k=\{0,1,2,...\}, t \geq 0\)</span>, esto es, <span class="math inline">\(N_t \sim Po(\lambda)\)</span>.</li>
-<li>El evento <span class="math inline">\(\{N_{s+u} - N_s = i\}\)</span> es independiente del evento <span class="math inline">\(\{N_t = j\}\)</span> si <span class="math inline">\(t&lt;s\)</span> (propiedad e Markov).</li>
-<li>La probabilidad <span class="math inline">\(P(N_{s+u} - N_s = i)\)</span> sólo depende del valor de <span class="math inline">\(u\)</span>, y <span class="math inline">\(N_{s+u} - N_s \sim P(\lambda u)\)</span>.</li>
-</ol>
+<p><span id="def:unlabeled-div-33" class="definition"><strong>Definición 3.1  </strong></span>Sea un proceso estocástico de parámetro continuo <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con <span class="math inline">\(N_0 = 0\)</span>, <span class="math inline">\(N_t\)</span> representando el número de eventos que acontecen en el periodo <span class="math inline">\((0,t]\)</span> y espacio de estados el de los enteros no negativos, <span class="math inline">\(S=\{0,1,2,...\}\)</span>. Dicho proceso se denomina <strong>Proceso de Poisson (PP) de tasa</strong> <span class="math inline">\(\lambda\)</span> si:</p>
+<p><span class="math inline">\(P(N_t = k) = e^{\lambda t}(\lambda t)^k/k!\)</span> para <span class="math inline">\(k=\{0,1,2,...\}, t \geq 0\)</span>, esto es, <span class="math inline">\(N_t \sim Po(\lambda t)\)</span>.</p>
+<p>Además, un PP verifica las siguientes propiedades:</p>
+<ul>
+<li>Propiedad de Markov: <span class="math inline">\(P(N_{t+s} = j|N_s=i, N_u, 0\leq u \leq s)=P(N_{t+s} = j|N_s=i)\)</span>. Lo que ocurre hasta cierto instante cuando se sabe lo que ocurrió hasta cierto instante anterior, no depende de lo que ocurrió en instantes previos a dicho instante anterior.</li>
+<li>Un proceso de Poisson tiene incrementos independientes. En otras palabras, lo que ocurre en un periodo de tiempo es independiente de lo que ocurre en otro, siempre que no se solapen los dos periodos: <span class="math inline">\(\{N_{s+u} - N_s = i\}\)</span> es independiente del evento <span class="math inline">\(\{N_t = j\}\)</span> si <span class="math inline">\(t&lt;s\)</span>.</li>
+<li>Un proceso de Poisson tiene incrementos estacionarios, es decir, lo que sucede en un periodo de tiempo sólo depende de la amplitud de dicho periodo, y no de cuándo empezó. La probabilidad <span class="math inline">\(P(N_{s+u} - N_s = i)\)</span> sólo depende del valor de <span class="math inline">\(u\)</span>, y <span class="math inline">\(N_{s+u} - N_s \sim P(\lambda u)\)</span>.</li>
+</ul>
 </div>
 </div>
-<p>La primera condición de la definición es la característica que define el proceso de Poisson y es la razón del nombre del proceso, ya que establece que el proceso se distribuye según una distribución de Poisson. La segunda condición indica que un proceso de Poisson tiene incrementos independientes. En otras palabras, lo que ocurre en un periodo de tiempo es independiente de lo que ocurre en otro, siempre que no se solapen los dos periodos. La tercera condición implica que un proceso de Poisson tiene incrementos estacionarios, es decir, lo que sucede en un periodo de tiempo sólo depende de la amplitud de dicho periodo, y no de cuándo empezó.</p>
-<p>Usando la definición de una variable aleatoria Poisson, es claro que</p>
+<p>Usando la definición de una variable aleatoria Poisson, es claro que para un proceso de Poisson</p>
 <p><span class="math display">\[E(N_t) = \lambda t\]</span></p>
 <p>de forma que <span class="math inline">\(\lambda\)</span> proporciona la tasa media de llegadas por unidad de tiempo para un proceso de llegadas que está descrito por un PP con tasa <span class="math inline">\(\lambda\)</span>.</p>
 <div class="example">
@@ -89,7 +90,7 @@
 <ol style="list-style-type: decimal">
 <li>¿Cuál es el número medio de operaciones que se realizan en un turno de 8 horas?</li>
 </ol>
-<p>Puesto que un turno de 8 horas representa <span class="math inline">\(8/24=1/3\)</span> de un día, y <span class="math inline">\(N(t)\sim Po(24)\)</span>, tendremos que <span class="math inline">\(N(1/3)\sim Po(24/3)\)</span>, luego se esperan en torno a <span class="math inline">\(24/3=8\)</span> operaciones por turno.</p>
+<p>Puesto que un turno de 8 horas representa <span class="math inline">\(8/24=1/3\)</span> de un día, y <span class="math inline">\(N(t)\sim Po(24t)\)</span>, tendremos que <span class="math inline">\(N(1/3)\sim Po(24/3)\)</span>, luego se esperan en torno a <span class="math inline">\(24/3=8\)</span> operaciones por turno.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>¿Cuál es la probabilidad de que no haya operaciones entre las 12 de la noche y la 1 de la madrugada?</li>
 </ol>
@@ -105,16 +106,22 @@
 <li>¿Cuál es la probabilidad de que haya tres operaciones entre las 8 a.m. y las 12 del mediodía, y 4 operaciones entre las 12 del mediodía y las 5 p.m.?</li>
 </ol>
 <p>Si asumimos que <span class="math inline">\(t=0\)</span> se corresponde con las 8,a.m., a las 12 del mediodía han transcurrido 4 horas, y hasta las 5 p.m. han transcurrido 9 horas. La probabilidad que nos piden se refiere a una probabilidad conjunta de dos franjas horarias que no se solapan, por lo que se trata de sucesos independientes y la probabilidad conjunta es el producto de las probabilidades individuales:</p>
-<p><span class="math display">\[Pr[N(4/24)-N(0)=3, N(9/24)-N(4/24)=4]=Pr[N(4/24)-N(0)=3] \cdot Pr[N(9/24)-N(4/24)=4] \]</span> ahora por la estacionariedad de los incrementos, tendremos que esa probabilidad la podemos escribir como</p>
+<p><span class="math display">\[\begin{eqnarray*}
+&amp; Pr[N(4/24)-N(0)=3, N(9/24)-N(4/24)=4]= \\
+&amp; \qquad = Pr[N(4/24)-N(0)=3] \cdot Pr[N(9/24)-N(4/24)=4]
+\end{eqnarray*}\]</span></p>
+<p>Ahora por la estacionariedad de los incrementos, tendremos que esa probabilidad la podemos escribir como</p>
 <p><span class="math display">\[Pr[N(4/24)=3]\cdot Pr[N(5/24)=4]\]</span></p>
-<p>con las distribuciones <span class="math inline">\(Po(24 \cdot 4/24)\)</span> y <span class="math inline">\(Po(24 \cdot 5/24)\)</span>.</p>
+<p>con las distribuciones <span class="math inline">\(Po(24 \cdot 4/24)=Po(4)\)</span> y <span class="math inline">\(Po(24 \cdot 5/24)=Po(5)\)</span>.</p>
 <div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">ppois</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.0342805</code></pre>
-<p>Debido a las propiedades de incrementos independientes y estacionariedad de un proceso de Poisson, la distribución de los tiempos entre llegadas puede determinarse fácilmente.</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-34" class="proposition"><strong>Proposición 3.1  </strong></span>Debido a las propiedades de incrementos independientes y estacionariedad de un proceso de Poisson, la distribución de los tiempos entre llegadas consecutivas puede determinarse fácilmente.</p>
 <p>Sea <span class="math inline">\(T_n\)</span> una v.a. que identifica el tiempo que transcurre entre dos llegadas consecutivas <span class="math inline">\(n\)</span> y <span class="math inline">\(n-1\)</span>. La probabilidad de que no se produzca ninguna llegada en un intervalo de tiempo de amplitud <span class="math inline">\(t\)</span>, implica que <span class="math inline">\(T_n&gt;t\)</span> y viene dada por:</p>
 <p><span class="math display">\[Pr(T_n &gt; t)=Pr(N_t = 0) = e^{\lambda t}.\]</span> Por lo tanto, <span class="math inline">\(P(T_n \leq 0) = 1 - P(T_n &gt; 0) = 1 - e^{-\lambda t}\)</span> para <span class="math inline">\(t ≥ 0\)</span>, que es la función de distribución <a href="intro.html#exponencial">Exponencial</a>.</p>
 <p>Concluimos pues, que si las llegadas a un sistema se producen según un PP de tasa <span class="math inline">\(\lambda\)</span>, entonces los tiempos entre llegadas responden a una distribución exponencial de parámetro <span class="math inline">\(\lambda\)</span>.</p>
+</div>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:tpollegadas" class="definition"><strong>Definición 3.2  </strong></span>Para un PP con tasa <span class="math inline">\(\lambda\)</span>, la distribución del tiempo entre dos llegadas consecutivas es exponencial de media <span class="math inline">\(1/\lambda\)</span>.</p>
@@ -122,8 +129,8 @@
 <p>Lo contrario también es cierto, es decir, un proceso de llegadas con tiempos entre llegadas que son exponenciales, es un PP.</p>
 </div>
 </div>
-<div class="bluebox">
-<p>Propiedad. Si <span class="math inline">\(S_n\)</span> denota el tiempo que transcurre hasta la n-ésima llegada en un PP de tasa <span class="math inline">\(\lambda\)</span>, entonces <span class="math inline">\(S_n\)</span> se distribuye según una distribución Erlang <span class="math inline">\(Erl(n,\lambda)\)</span>, con función de densidad dada por:</p>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-35" class="proposition"><strong>Proposición 3.2  </strong></span>Si <span class="math inline">\(S_n\)</span> denota el tiempo que transcurre hasta la n-ésima llegada en un PP de tasa <span class="math inline">\(\lambda\)</span>, entonces <span class="math inline">\(S_n\)</span> se distribuye según una distribución Erlang <span class="math inline">\(Erl(n,\lambda)\)</span>, con función de densidad dada por:</p>
 <p><span class="math display">\[f(s) = \frac{\lambda(\lambda s)^{k-1}e^{-\lambda s}}{(k-1)!}, \quad \text{para } s \geq 0\]</span> Esta propiedad es consecuencia de que la distribución Erlang <span class="math inline">\(Erl(n,\lambda)\)</span> surge de la suma de <span class="math inline">\(n\)</span> v.a. iid <span class="math inline">\(Exp(\lambda)\)</span>.</p>
 </div>
 </div>
@@ -140,7 +147,7 @@
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-34" class="definition"><strong>Definición 3.3  </strong></span>Sean <span class="math inline">\(\{N_t; t \geq 0\}\)</span> y <span class="math inline">\(\{M_t; t \geq 0\}\)</span> dos PP independientes con tasas <span class="math inline">\(\lambda_1\)</span> y <span class="math inline">\(\lambda_2\)</span> respectivamente. Entonces el proceso <span class="math inline">\(\{Y_t = N_t + M_t, t \geq 0\}\)</span> es un PP con tasa <span class="math inline">\(\lambda_1 + \lambda_2\)</span>, que se obtiene de la superposición de los dos PP.</p>
+<p><span id="def:unlabeled-div-36" class="definition"><strong>Definición 3.3  </strong></span>Sean <span class="math inline">\(\{N_t; t \geq 0\}\)</span> y <span class="math inline">\(\{M_t; t \geq 0\}\)</span> dos PP independientes con tasas <span class="math inline">\(\lambda_1\)</span> y <span class="math inline">\(\lambda_2\)</span> respectivamente. Entonces el proceso <span class="math inline">\(\{Y_t = N_t + M_t, t \geq 0\}\)</span> es un PP con tasa <span class="math inline">\(\lambda_1 + \lambda_2\)</span>, que se obtiene de la superposición de los dos PP.</p>
 </div>
 </div>
 <p>La solución al Ejemplo <a href="poissonprocess.html#exm:pp002">3.3</a> para el proceso de salidas de la autovía viene dada por la superposición de los dos procesos de entradas, <span class="math inline">\(C=A+B\)</span>, de modo que responderá a un PP de tasa <span class="math inline">\(14=8+6\)</span>.</p>
@@ -154,10 +161,10 @@
 </div>
 <div class="yellowbox">
 <div class="definition">
-<p><span id="def:unlabeled-div-35" class="definition"><strong>Definición 3.4  </strong></span>Sea <span class="math inline">\(\{N_t; t \geq 0\}\)</span> un PP con tasa <span class="math inline">\(\lambda\)</span> y sea <span class="math inline">\(\{X1,X2,...\}\)</span> una secuencia de variables aleatorias iid Bernoulli <span class="math inline">\(Ber(p)\)</span>, independientes del proceso de Poisson. Sea <span class="math inline">\(M = \{M_t ;t \geq 0 \}\)</span> un nuevo proceso que registra las llegadas de <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con probabilidad <span class="math inline">\(p\)</span>, esto es, si <span class="math inline">\(X_n=1\)</span> la llegada n-ésima se registra, y si <span class="math inline">\(X_n=0\)</span> no se registra. Entonces el proceso <span class="math inline">\(\{M_t; t \geq 0\}\)</span> resultante, que supone un “adelgazamiento” o encogimiento del proceso original <span class="math inline">\(N_t\)</span>, es un PP con tasa <span class="math inline">\(\lambda p\)</span>.</p>
+<p><span id="def:unlabeled-div-37" class="definition"><strong>Definición 3.4  </strong></span>Sea <span class="math inline">\(\{N_t; t \geq 0\}\)</span> un PP con tasa <span class="math inline">\(\lambda\)</span> y sea <span class="math inline">\(\{X_1,X_2,...\}\)</span> una secuencia de variables aleatorias iid Bernoulli <span class="math inline">\(Ber(p)\)</span>, independientes del proceso de Poisson. Sea <span class="math inline">\(M = \{M_t ;t \geq 0 \}\)</span> un nuevo proceso que registra las llegadas de <span class="math inline">\(\{N_t; t \geq 0\}\)</span> con probabilidad <span class="math inline">\(p\)</span>, esto es, si <span class="math inline">\(X_n=1\)</span> la llegada n-ésima se registra, y si <span class="math inline">\(X_n=0\)</span> no se registra. Entonces el proceso <span class="math inline">\(\{M_t; t \geq 0\}\)</span> resultante, que supone un “adelgazamiento” o encogimiento del proceso original <span class="math inline">\(N_t\)</span>, es un PP con tasa <span class="math inline">\(\lambda p\)</span>.</p>
 </div>
 </div>
-<p>Aplicando este resultado al Ejemplo <a href="poissonprocess.html#exm:pp003">3.4</a>, y suponiendo que todos los coches actúan de forma independiente, el flujo de giros por la bifurcación de la izquierda forma un PP con una tasa de <span class="math inline">\(0.6=0.3\cdot 2\)</span> por minuto, y el flujo de giros por la bifurcación de la derecha forma un PP con una tasa de <span class="math inline">\(1.4=0.7\cdot 2\)</span> coches por minuto.</p>
+<p>Aplicando este resultado al Ejemplo <a href="poissonprocess.html#exm:pp003">3.4</a>, y suponiendo que todos los coches actúan de forma independiente, el flujo de giros por la bifurcación de la izquierda forma un PP con una tasa de <span class="math inline">\(0.6=0.3\times 2\)</span> por minuto, y el flujo de giros por la bifurcación de la derecha forma un PP con una tasa de <span class="math inline">\(1.4=0.7\times 2\)</span> coches por minuto.</p>
 </div>
 <div id="composicion_pp" class="section level3" number="3.2.3">
 <h3>
@@ -177,17 +184,23 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 \tag{3.1}
 \end{equation}\]</span>
 <p>se denomina <strong>Proceso de Poisson compuesto</strong> (PPC).</p>
+<p>Si las v.a. <span class="math inline">\(\{X_i, i=1,...,N_t\}\)</span> independientes de <span class="math inline">\(N_t\)</span> se distribuyen iid con media <span class="math inline">\(\mu=E(X_i)\)</span> y varianza <span class="math inline">\(\sigma^2=Var(X_i)\)</span>, entonces la esperanza y varianza del número total de llegadas/eventos para cada valor de <span class="math inline">\(t \geq 0\)</span> se obtiene como:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+E(Y_t) &amp;=&amp; \mu \lambda t \\
+V(Y_t) &amp;=&amp; (\sigma^2+\mu^2) \lambda t
+\end{eqnarray*}\]</span></p>
+<p>Nótese que <span class="math inline">\(\sigma^2+\mu^2=E(X_i^2)\)</span> es el momento de orden 2 para la v.a. <span class="math inline">\(X_i\)</span>.</p>
 </div>
 </div>
-<p>La respuesta a la cuestión planteada en el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a> se obtiene de plantear que el número total de pasajeros que llegan a la estación, denotado por <span class="math inline">\(\{Y_t; t &gt; 0 \}\)</span> será un PP compuesto, definido por: <span class="math display">\[Y_t=\sum_{i=1}^{N_t} X_i.\]</span> :::</p>
-<div class="bluebox">
-<p>Sea <span class="math inline">\(\{Y_t; t \geq 0\}\)</span> un PPC expresado según la Ecuación <a href="poissonprocess.html#eq:ppc-ecu">(3.1)</a>, que proviene de un PP de llegadas/eventos que se producen en lotes, <span class="math inline">\(\{N_t; t \geq 0\}\)</span> de tasa <span class="math inline">\(\lambda\)</span> y se conforma a partir de la suma de las v.a. <span class="math inline">\(\{X_i, i=1,...,N_t\}\)</span> independientes de <span class="math inline">\(N_t\)</span>, que representan el tamaño de los lotes, y que se distribuyen iid con media <span class="math inline">\(\mu=E(X_i)\)</span> y varianza <span class="math inline">\(\sigma^2=Var(X_i)\)</span>. Entonces la esperanza y varianza del número total de llegadas/eventos (totales) para cada valor de <span class="math inline">\(t \geq 0\)</span> se obtiene como:</p>
-<p><span class="math display">\[E(Y_t) = \mu \lambda t\]</span> <span class="math display">\[V(Y_t) = (\sigma^2+\mu^2) \lambda t\]</span> La varianza de <span class="math inline">\(Y_t\)</span> se obtiene pues, del momento de orden 2 de <span class="math inline">\(X_n\)</span>, <span class="math inline">\(E(X_n^2)=Var(X_n)+E(X_n)^2\)</span>.</p>
-</div>
-<p>Continuando con el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a>), calculemos el número esperado de pasajeros (y su error) que llegarán a la estación en un periodo de 8 horas. Para ello habremos de calcular en primer lugar la media y varianza del número de viajeros por coche (tamaño del lote):</p>
+<p>La respuesta a la cuestión planteada en el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a> se obtiene al plantear que el número total de pasajeros que llegan a la estación, denotado por <span class="math inline">\(\{Y_t; t &gt; 0 \}\)</span>, será un PP compuesto, definido por: <span class="math display">\[Y_t=\sum_{i=1}^{N_t} X_i.\]</span></p>
+<p>Calculemos ahora el número esperado de pasajeros (y su error) que llegarán a la estación en un periodo de 8 horas. Para ello habremos de calcular en primer lugar la media y varianza del número de viajeros por coche (tamaño del lote):</p>
 <div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># Para el número de pasajeros por coche</span>
+<span class="co"># sucesos posibles</span>
 <span class="va">x</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>
+<span class="co"># probabilidades asociadas</span>
+<span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span><span class="op">)</span>
+
 <span class="co"># valor esperado</span>
 <span class="va">mu</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">p</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">x</span><span class="op">)</span>;<span class="va">mu</span></code></pre></div>
 <pre><code>## [1] 1.8</code></pre>
@@ -205,13 +218,13 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <span class="va">vy</span><span class="op">=</span><span class="va">m2</span><span class="op">*</span><span class="va">lambda</span><span class="op">*</span><span class="va">t</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"E(Y_8)="</span>,<span class="va">ey</span>,<span class="st">", V(Y_8)="</span>,<span class="va">vy</span><span class="op">)</span></code></pre></div>
 <pre><code>## E(Y_8)= 72 , V(Y_8)= 160</code></pre>
-<p>Por lo tanto, esperamos que lleguen a la estación en 8 horas alrededor de 72 pasajeros, con un error de 12.65.</p>
+<p>Por lo tanto, esperamos que lleguen a la estación en 8 horas alrededor de 72 pasajeros, con una desviación típica de 12.65.</p>
 </div>
 <div id="pp_noestacionarios" class="section level3" number="3.2.4">
 <h3>
 <span class="header-section-number">3.2.4</span> PP no estacionarios<a class="anchor" aria-label="anchor" href="#pp_noestacionarios"><i class="fas fa-link"></i></a>
 </h3>
-<p>Muchos procesos físicos que a primera vista parecen candidatos a ser modelados como un proceso de Poisson, fallan debido a la suposición de estacionariedad. Por ejemplo, consideremos el análisis de tráfico: estamos interesados en modelar los tiempos de llegada de los coches a una intersección. En la mayoría de los lugares es poco probable que la tasa media de llegada de coches a las 2p.m. sea la misma que a las 2a.m., lo que significa que el proceso no es estacionario y, por lo tanto, el supuesto de estacionariedad exigido a los procesos de PP no se cumple.</p>
+<p>Muchos procesos físicos que a primera vista parecen candidatos a ser modelados como un proceso de Poisson, fallan debido a la suposición de estacionariedad. Por ejemplo, consideremos el análisis de tráfico en el que estamos interesados en modelar los tiempos de llegada de los coches a una intersección. En la mayoría de los lugares es poco probable que la tasa media de llegada de coches a las 2p.m. sea la misma que a las 2a.m., lo que significa que el proceso no es estacionario y, por lo tanto, el supuesto de estacionariedad exigido a los procesos de PP no se cumple.</p>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:ppnohomogeneo" class="definition"><strong>Definición 3.6  </strong></span>Sea <span class="math inline">\(\{N_t; t \geq 0\}\)</span> un proceso estocástico de parámetro contínuo con <span class="math inline">\(N_0 = 0\)</span>. Si asumimos que existe un función continua <span class="math inline">\(m()\)</span> definida con la integral de la tasa del proceso <span class="math inline">\(\lambda()\)</span>,</p>
@@ -219,19 +232,20 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <p>entonces el proceso <span class="math inline">\(N_t\)</span> se dice que es un <strong>PP no estacionario</strong> si:</p>
 <ol style="list-style-type: decimal">
 <li>
-<span class="math inline">\(P(N_t = k) = e^{-m(t)}(m(t)^k)/k!\)</span> para <span class="math inline">\(k, t \geq 0\)</span>,</li>
+<span class="math inline">\(P(N_t = k) = e^{-m(t)}(m(t)^k)/k!\)</span> para <span class="math inline">\(k, t \geq 0\)</span>, es decir, <span class="math inline">\(N_t \sim Po(m(t))\)</span>.</li>
 <li>El evento <span class="math inline">\(\{N_{s+u} - N_s = i\}\)</span> es independiente del evento <span class="math inline">\(\{N_t = j\}\)</span> si <span class="math inline">\(t&lt;s\)</span>.</li>
 </ol>
 <p>Estos procesos se denominan también <strong>PP no homogéneos</strong>.</p>
 </div>
 </div>
 <div class="example">
-<p><span id="exm:pp005" class="example"><strong>Ejemplo 3.6  </strong></span>Un banco ha decidido aumentar la capacidad de su ventanilla, y desea modelar dicho proceso. Un primer paso en la modelización de la ventanilla es analizar el proceso de llegada. Las ventanillas abren a las 7:30 de la mañana durante los días laborables. Se ha determinado que el proceso de llegada es un PP no estacionario en el que la tasa media de llegadas aumenta lentamente de forma lineal de 10 clientes por hora a 12 durante los primeros 60 minutos. Así, tenemos una función de tasa definida (en horas como unidad de tiempo) por:</p>
-<p><span class="math display">\[\lambda(t) = 10 + 2t, t \in [0,1]\]</span></p>
+<p><span id="exm:pp005" class="example"><strong>Ejemplo 3.6  </strong></span>Un banco ha decidido aumentar la capacidad de su ventanilla, y desea modelar dicho proceso. Un primer paso en la modelización de la ventanilla es analizar el proceso de llegadas de clientes. Las ventanillas abren a las 7:30 de la mañana durante los días laborables. Se ha determinado que el proceso de llegadas es un PP no estacionario en el que la tasa media de llegadas aumenta lentamente de forma lineal de 10 clientes por hora a 12 durante los primeros 60 minutos.</p>
+<p>Tenemos pues, una tasa de llegadas que varía de modo continuo con <span class="math inline">\(t\)</span> (horas) entre las 7:30 y las 8:30 según la recta:</p>
+<p><span class="math display">\[\lambda(t) = 10 + 2t, \qquad t \in [0,1]\]</span></p>
 <p>La integral de la tasa del proceso <span class="math inline">\(\lambda(t)\)</span> es:</p>
 <p><span class="math display">\[m(t) = \int_0^t (10+2s)ds = 10t + t^2, \quad \text{ para } t \leq 1.\]</span></p>
 <p>De esta forma el número esperado de llegadas al banco desde las 8.00 a las 8.30 (dado que abre a las 7:30) viene dado por:</p>
-<p><span class="math display">\[E(N_1 - N_{0.5}) = m(1) - m(0.5)\]</span></p>
+<p><span class="math display">\[E(N_1 - N_{0.5}) = m(1) - m(0.5), \quad \text{ pues } N_1 - N_{0.5} \sim Po(m(1) - m(0.5))\]</span></p>
 <div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">m</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">t</span><span class="op">)</span><span class="op">{</span><span class="fl">10</span><span class="op">*</span><span class="va">t</span><span class="op">+</span><span class="va">t</span><span class="op">^</span><span class="fl">2</span><span class="op">}</span>
 <span class="fu">m</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">-</span><span class="fu">m</span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></code></pre></div>
@@ -246,7 +260,7 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 </h2>
 <p>Para simular procesos de Poisson vamos a utilizar la propiedad que relaciona el número de llegadas con el tiempo entre llegadas consecutivas en la Definición <a href="poissonprocess.html#def:tpollegadas">3.2</a>. Planteemos el algoritmo de simulación</p>
 <div class="silverbox">
-<p>Algoritmo de simulación de un Proceso de Poisson de tasa <span class="math inline">\(\lambda\)</span>.</p>
+<p><strong>Algoritmo de simulación de un Proceso de Poisson de tasa <span class="math inline">\(\lambda\)</span></strong></p>
 <ol style="list-style-type: decimal">
 <li>Fijar condiciones de simulación (número de eventos o tiempo máximo de simulación).</li>
 <li>Simular tiempos entre eventos consecutivos <span class="math inline">\(t \sim Exp(\lambda)\)</span>.</li>
@@ -259,12 +273,16 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simula.pp</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">lambda</span>,<span class="va">neventos</span><span class="op">=</span><span class="cn">NULL</span>,<span class="va">tmax</span><span class="op">=</span><span class="cn">NULL</span><span class="op">)</span><span class="op">{</span>
   <span class="co"># se lanza la simulación hasta conseguir neventos o hasta un instante tmax</span>
+  <span class="co"># mensaje de error si no se introduce la regla de parada</span>
   <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">tmax</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">neventos</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Introduce neventos o tmax"</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
+  <span class="co"># si no se introduce tmax, la regla de parada es neventos</span>
   <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">tmax</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="co"># simulación de los tiempos entre eventos sucesivos</span>
     <span class="va">t</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="va">neventos</span>,<span class="va">lambda</span><span class="op">)</span>
   <span class="op">}</span>
+  <span class="co"># si no se introduce neventos, la regla de parada es tmax</span>
   <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">neventos</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
     <span class="va">t</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
     <span class="va">tt</span><span class="op">=</span><span class="fl">0</span>
@@ -332,15 +350,15 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <span class="va">noperaciones</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">simulacion</span><span class="op">$</span><span class="va">eventos</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="va">m</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">noperaciones</span><span class="op">)</span>
-<span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">noperaciones</span><span class="op">)</span>
+<span class="va">error</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">noperaciones</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">nsim</span><span class="op">)</span>
 <span class="co"># calculamos la media y el error</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"E(operaciones en 8 horas)="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m</span>,<span class="fl">2</span><span class="op">)</span>, <span class="st">", Error="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">s</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## E(operaciones en 8 horas)= 7.97 , Error= 2.83</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"E(operaciones en 8 horas)="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m</span>,<span class="fl">2</span><span class="op">)</span>, <span class="st">", Error="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">error</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## E(operaciones en 8 horas)= 7.97 , Error= 0.04</code></pre>
 <div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n IC(operaciones en 8 horas)=["</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">s</span>,<span class="fl">2</span><span class="op">)</span>,
-    <span class="st">","</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">s</span>,<span class="fl">2</span><span class="op">)</span>,<span class="st">"]"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n IC(operaciones en 8 horas)=["</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">2</span><span class="op">)</span>,
+    <span class="st">","</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">2</span><span class="op">)</span>,<span class="st">"]"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
-##  IC(operaciones en 8 horas)=[ 2.43 , 13.5 ]</code></pre>
+##  IC(operaciones en 8 horas)=[ 7.89 , 8.04 ]</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Probabilidad de que no haya intervenciones en un periodo de 1 hora.</li>
 </ol>
@@ -359,12 +377,12 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <span class="op">}</span>
 <span class="va">favorables</span><span class="op">=</span><span class="op">(</span><span class="va">noperaciones</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">*</span><span class="fl">1</span>
 <span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">favorables</span><span class="op">)</span>
-<span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">favorables</span><span class="op">-</span><span class="va">p</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">nsim</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">error</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">favorables</span><span class="op">-</span><span class="va">p</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">nsim</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># calculamos la media y el error</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Pr(sin operaciones en 1 hora)="</span>,<span class="va">p</span>, <span class="st">", Error="</span>,<span class="va">s</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Pr(sin operaciones en 1 hora)="</span>,<span class="va">p</span>, <span class="st">", Error="</span>,<span class="va">error</span><span class="op">)</span></code></pre></div>
 <pre><code>## Pr(sin operaciones en 1 hora)= 0.3688 , Error= 0.006823292</code></pre>
 <div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n IC(Pr(sin operaciones en 1 hora))=["</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">s</span>,<span class="fl">3</span><span class="op">)</span>, <span class="st">","</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">s</span>,<span class="fl">3</span><span class="op">)</span>,<span class="st">"]"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n IC(Pr(sin operaciones en 1 hora))=["</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">3</span><span class="op">)</span>, <span class="st">","</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">3</span><span class="op">)</span>,<span class="st">"]"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  IC(Pr(sin operaciones en 1 hora))=[ 0.355 , 0.382 ]</code></pre>
 <ol start="3" style="list-style-type: decimal">
@@ -388,15 +406,99 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <span class="co"># identificamos las cadenas en las que se dan simultaneamente ambos sucesos</span>
 <span class="va">favorables</span><span class="op">=</span><span class="op">(</span><span class="op">(</span><span class="va">noper1</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span><span class="op">&amp;</span><span class="op">(</span><span class="va">noper2</span><span class="op">==</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">1</span>
 <span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">favorables</span><span class="op">)</span>
-<span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">favorables</span><span class="op">-</span><span class="va">p</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">nsim</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">error</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">favorables</span><span class="op">-</span><span class="va">p</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">nsim</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># calculamos la media y el error</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Pr(suceso)="</span>,<span class="va">p</span>, <span class="st">", Error="</span>,<span class="va">s</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Pr(suceso)="</span>,<span class="va">p</span>, <span class="st">", Error="</span>,<span class="va">error</span><span class="op">)</span></code></pre></div>
 <pre><code>## Pr(suceso)= 0.032 , Error= 0.002489016</code></pre>
 <div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n IC(Pr(ssuceso))=["</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">s</span>,<span class="fl">3</span><span class="op">)</span>, <span class="st">","</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">s</span>,<span class="fl">3</span><span class="op">)</span>,<span class="st">"]"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n IC(Pr(ssuceso))=["</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">3</span><span class="op">)</span>, <span class="st">","</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>,<span class="fl">3</span><span class="op">)</span>,<span class="st">"]"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  IC(Pr(ssuceso))=[ 0.027 , 0.037 ]</code></pre>
 <p>La simulación para extensiones del PP se deriva de las definiciones dadas en la Sección <a href="extensiones_pp">Extensiones</a>.</p>
+<div id="simulación-con-simmer" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Simulación con simmer<a class="anchor" aria-label="anchor" href="#simulaci%C3%B3n-con-simmer"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>simmer</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="bibliograf%C3%ADa.html#ref-R-simmer" role="doc-biblioref"&gt;Ucar and Smeets, &lt;em&gt;Simmer&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>31</sup></a></span> es una librería de R que permite la simulación eventos discretos y que desarrollamos con detalle en la Unidad <a href="#simmer-unidad">Simulación DES con simmer</a>.</p>
+<p>Simular un proceso de Poisson con <code>simmer</code> es bastante sencillo. En primer lugar, contamos muy brevemente la dinámica de simulación del Ejemplo <a href="poissonprocess.html#exm:pp006">3.7</a> con esta librería:</p>
+<ol style="list-style-type: decimal">
+<li>Se carga la librería y se define un entorno de simulación con el comando <code>env=simmer()</code>
+</li>
+<li>Se define el evento: operación.</li>
+<li>Se definen las acciones realizan cada uno de los eventos en una trayectoria (quirófano): comenzar la operación.</li>
+<li>Se generan eventos en función de la distribución para el tiempo entre eventos, y son dirigidas a la trayectoria (quirófano).</li>
+<li>Se corre el sistema durante el tiempo deseado.</li>
+</ol>
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Función para simular un PP(lambda) hasta t con simmer</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-simmer.org">simmer</a></span><span class="op">)</span>
+
+<span class="va">simula.pp.simmer</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">t</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">{</span>
+<span class="va">env</span><span class="op">=</span><span class="fu"><a href="https://r-simmer.org/reference/simmer.html">simmer</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># Cada evento es una entrada a quirófano</span>
+<span class="va">quirofano</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-simmer.org/reference/trajectory.html">trajectory</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/log_.html">log_</a></span><span class="op">(</span><span class="st">"Comienza la operación"</span><span class="op">)</span>
+ 
+<span class="va">env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="co"># los tiempos entre llegadas se simulan exponenciales</span>
+  <span class="fu"><a href="https://r-simmer.org/reference/add_generator.html">add_generator</a></span><span class="op">(</span><span class="st">"operacion"</span>, <span class="va">quirofano</span>, <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://r-simmer.org/reference/run.html">run</a></span><span class="op">(</span>until<span class="op">=</span><span class="va">t</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p>Si queremos calcular el número esperado de operaciones que se realizan durante 8 horas, simulamos el sistema durante 8 horas, utilizando en lugar del proceso original de número de operaciones en un día, con tasa <span class="math inline">\(\lambda=24\)</span>, el de número de operaciones en una hora, con tasa <span class="math inline">\(\lambda=1\)</span>.</p>
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lambda</span><span class="op">=</span><span class="fl">1</span>
+<span class="va">tmax</span><span class="op">=</span><span class="fl">8</span>
+<span class="co">#set.seed(1477)</span>
+<span class="va">operaciones</span> <span class="op">=</span> <span class="fu">simula.pp.simmer</span><span class="op">(</span><span class="va">tmax</span>,<span class="va">lambda</span><span class="op">)</span></code></pre></div>
+<pre><code>## 0.162028: operacion0: Comienza la operación
+## 2.26948: operacion1: Comienza la operación
+## 2.53613: operacion2: Comienza la operación
+## 3.82422: operacion3: Comienza la operación
+## 5.772: operacion4: Comienza la operación
+## 6.02077: operacion5: Comienza la operación
+## 6.25954: operacion6: Comienza la operación
+## 6.63566: operacion7: Comienza la operación
+## 7.28285: operacion8: Comienza la operación
+## 7.56707: operacion9: Comienza la operación
+## 7.94946: operacion10: Comienza la operación</code></pre>
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># y obtenemos el número de simulaciones en esa franja con</span>
+<span class="fu"><a href="https://r-simmer.org/reference/get_n_generated.html">get_n_generated</a></span><span class="op">(</span><span class="va">operaciones</span>,<span class="st">"operacion"</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://r-simmer.org/reference/get_mon.html">get_mon_arrivals</a></span><span class="op">(</span><span class="va">operaciones</span><span class="op">)</span></code></pre></div>
+<pre><code>##           name start_time  end_time activity_time finished replication
+## 1   operacion0  0.1620284 0.1620284             0     TRUE           1
+## 2   operacion1  2.2694828 2.2694828             0     TRUE           1
+## 3   operacion2  2.5361340 2.5361340             0     TRUE           1
+## 4   operacion3  3.8242185 3.8242185             0     TRUE           1
+## 5   operacion4  5.7720047 5.7720047             0     TRUE           1
+## 6   operacion5  6.0207667 6.0207667             0     TRUE           1
+## 7   operacion6  6.2595419 6.2595419             0     TRUE           1
+## 8   operacion7  6.6356628 6.6356628             0     TRUE           1
+## 9   operacion8  7.2828499 7.2828499             0     TRUE           1
+## 10  operacion9  7.5670702 7.5670702             0     TRUE           1
+## 11 operacion10  7.9494570 7.9494570             0     TRUE           1</code></pre>
+<p>Para obtener una estimación de lo que ocurre en un periodo de 8 horas, hemos de simular varias veces ese periodo y conseguir una estimación Monte-Carlo con el número de operaciones efectuadas.</p>
+<pre><code>lambda=1
+tmax=8
+nsim=500
+# guardamos en un vector el número de operaciones en cada franja simulada
+franja=c()
+for(i in 1:nsim)
+franja[i] = get_n_generated(simula.pp.simmer(tmax,lambda),"operacion")</code></pre>
+<p>Promediamos el número de operaciones que se han producido en cada franja para obtener la estimación Monte-Carlo y su error.</p>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">franja</span><span class="op">)</span>
+<span class="va">error</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">franja</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">nsim</span><span class="op">)</span>
+<span class="va">ic.low</span><span class="op">=</span><span class="va">m</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>
+<span class="va">ic.up</span><span class="op">=</span><span class="va">m</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">*</span><span class="va">error</span>
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"E="</span>,<span class="va">m</span>,<span class="st">", error="</span>,<span class="va">error</span>,<span class="st">", IC95%=("</span>,<span class="va">ic.low</span>,<span class="st">","</span>,<span class="va">ic.up</span>,<span class="st">")"</span><span class="op">)</span></code></pre></div>
+<pre><code>## E= 8.208 , error= 0.1240655 , IC95%=( 7.964836 , 8.451164 )</code></pre>
+<p>Procederíamos de modo similar para resolver las otras cuestiones. Inténtalo tú mismo/a.</p>
+</div>
 </div>
 <div id="ejer-u3" class="section level2" number="3.4">
 <h2>
@@ -460,10 +562,10 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <h3>
 <span class="header-section-number">3.4.2</span> Avanzados<a class="anchor" aria-label="anchor" href="#avanzados-2"><i class="fas fa-link"></i></a>
 </h3>
-<p><strong>Ejercicio A3.1</strong> Programa un algoritmo de simulación para la superposición de PP definida en la Sección <a href="poissonprocess.html#superposicion_pp">Superposición</a> y resuelve con simulación el Ejemplo <a href="#ex:pp002"><strong>??</strong></a>.</p>
-<p><strong>Ejercicio A3.2</strong> Programa un algoritmo de simulación para la mixtura de PP definida en la Sección <a href="poissonprocess.html#adelgazamiento_pp">Adelgazamiento con mixtura</a> y resuelve con simulación el Ejemplo <a href="#ex:pp003"><strong>??</strong></a>.</p>
-<p><strong>Ejercicio A3.3</strong> Programa un algoritmo de simulación para la composición de PP definida en la Sección <a href="poissonprocess.html#composicion_pp">Composición</a> y resuelve con simulación el Ejemplo <a href="#ex:pp004"><strong>??</strong></a>.</p>
-<p><strong>Ejercicio A3.4</strong> Programa un algoritmo de simulación para PP no estacionarios, definidos en la Sección <a href="poissonprocess.html#pp_noestacionarios">PP no estacionarios</a> y resuelve con simulación el Ejemplo <a href="#ex:pp005"><strong>??</strong></a>.</p>
+<p><strong>Ejercicio A3.1</strong> Programa un algoritmo de simulación para la superposición de PP definida en la Sección <a href="poissonprocess.html#superposicion_pp">Superposición</a> y resuelve con simulación el Ejemplo <a href="poissonprocess.html#exm:pp002">3.3</a>.</p>
+<p><strong>Ejercicio A3.2</strong> Programa un algoritmo de simulación para la mixtura de PP definida en la Sección <a href="poissonprocess.html#adelgazamiento_pp">Adelgazamiento con mixtura</a> y resuelve con simulación el Ejemplo <a href="poissonprocess.html#exm:pp003">3.4</a>.</p>
+<p><strong>Ejercicio A3.3</strong> Programa un algoritmo de simulación para la composición de PP definida en la Sección <a href="poissonprocess.html#composicion_pp">Composición</a> y resuelve con simulación el Ejemplo <a href="poissonprocess.html#exm:pp004">3.5</a>.</p>
+<p><strong>Ejercicio A3.4</strong> Programa un algoritmo de simulación para PP no estacionario, definido en la Sección <a href="poissonprocess.html#pp_noestacionarios">PP no estacionarios</a> y resuelve con simulación el Ejemplo <a href="poissonprocess.html#exm:pp005">3.6</a>.</p>
 <p><strong>Ejercicio A3.5</strong> Un servicio de venta telefónica recibe llamadas conforme a un PP. Simula el proceso y calcula el volumen esperado (en términos de euros) de las ventas que se realizan durante un intervalo de 15 minutos desde las 12 del mediodía hasta las 12:15pm bajo las diversas condiciones que se proponen a continuación, asumiendo que todos los días son probabilísticamente iguales.</p>
 <ol style="list-style-type: decimal">
 <li>El PP de llegadas es estacionario con tasa de 50 llamadas por hora. Además, sólo la mitad de las llamadas acaban en compras, el 30% de las llamadas acaban con una compra de 100€ y el 20% con compras de 200€.</li>
@@ -473,6 +575,7 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 </div>
 </div>
 </div>
+
   <div class="chapter-nav">
 <div class="prev"><a href="cmtd.html"><span class="header-section-number">2</span> Cadenas de Markov de Tiempo Discreto</a></div>
 <div class="next"><a href="CMTC.html"><span class="header-section-number">4</span> Cadenas de Markov de Tiempo Contínuo</a></div>
@@ -489,7 +592,9 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <li><a class="nav-link" href="#pp_noestacionarios"><span class="header-section-number">3.2.4</span> PP no estacionarios</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#simulaci%C3%B3n"><span class="header-section-number">3.3</span> Simulación</a></li>
+<li>
+<a class="nav-link" href="#simulaci%C3%B3n"><span class="header-section-number">3.3</span> Simulación</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#simulaci%C3%B3n-con-simmer"><span class="header-section-number">3.3.1</span> Simulación con simmer</a></li></ul>
+</li>
 <li>
 <a class="nav-link" href="#ejer-u3"><span class="header-section-number">3.4</span> Ejercicios</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#b%C3%A1sicos-2"><span class="header-section-number">3.4.1</span> Básicos</a></li>
@@ -512,7 +617,7 @@ Y_t = \sum_{k=1}^{N_t} X_k, \qquad N_t=1,2,...; \quad t\geq 0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-13.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

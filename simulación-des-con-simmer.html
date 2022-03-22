@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Unidad 7 Simulación DES con simmer | Simulación de Procesos y Sistemas</title>
+
+  
+   <meta name="description" content="Manual práctico sobre simulación de procesos y sistemas" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Unidad 7 Simulación DES con simmer | Simulación de Procesos y Sistemas" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Manual práctico sobre simulación de procesos y sistemas" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unidad 7 Simulación DES con simmer | Simulación de Procesos y Sistemas" />
+  
+  <meta name="twitter:description" content="Manual práctico sobre simulación de procesos y sistemas" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+    <link rel="stylesheet" href="bs4_style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Simulación de Procesos y Sistemas</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="simulación-des-con-simmer" class="section level1" number="7">
+<h1><span class="header-section-number">Unidad 7</span> Simulación DES con simmer</h1>
+<p><strong>Nota</strong>: Este documento está basado fundamentalmente en el artículo de.<span class="citation"><a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></span></p>
+<div id="simulación-1" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Simulación</h2>
+<p>Algunos sistemas del mundo real contienen tal complejidad que es inviable representarlos íntegramente y de modo preciso a través de modelos analíticos; para estudiarlos sin embargo, podemos recurrir a la <strong>simulación</strong>. <span class="citation"><a href="bibliografía.html#ref-shannon" role="doc-biblioref">Robert E. Shannon</a><a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></span> define simulación como el proceso de diseñar un modelo de un sistema real y realizar experimentos con este modelo, con el propósito de comprender su comportamiento o de evaluar diversas estrategias para que el sistema opere (dentro de los límites impuestos por un criterio o conjunto de criterios).
+Dependiendo de la naturaleza del sistema a representar, hay varios tipos de simulación. Una taxonomía habitual común para clasificar los problemas de simulación lo hace considerando tres dimensiones:<span class="citation"><a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></span></p>
+<ol style="list-style-type: decimal">
+<li>Variación aleatoria: <strong>determinística vs. estocástica</strong>, es decir, bien se utilizan fórmulas determinísticas o bien se incorpora variabilidad estocástica.</li>
+<li>Variación en el tiempo: <strong>estática vs. dinámica</strong>, esto es, se simula un proceso estático que no varía a lo largo del tiempo, o uno dinámico que sí lo hace.</li>
+<li>Variación en la medida: <strong>continua vs. discreta</strong>, es decir, el resultado o <em>output</em> medible del proceso varía de modo continuo o lo hace a saltos discretos.</li>
+</ol>
+</div>
+<div id="simulación-des" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Simulación DES</h2>
+<p>La simulación de eventos discretos (Discrete Event Simulation -DES-) es una técnica específica para modelar sistemas <strong>estocásticos</strong> que evolucionan en el tiempo (son <strong>dinámicos</strong>) a saltos <strong>discretos</strong>, esto es, su estado cambia de forma discreta en instantes concretos a lo largo de instantes de tiempo que se secuencian según alguna ley de probabilidad.</p>
+<p>Son ejemplos de procesos DES las colas de espera, los productos en una cadena de producción, e incluso los objetos digitales que se mueven en una red social. Su naturaleza discreta permite describir su comportamiento en términos de <strong>eventos</strong>, esto es, de una ocurrencia instantánea que puede cambiar el estado del sistema, mientras que entre eventos consecutivos todas las variables de estado van a permanecer invariables.</p>
+<p>Las aplicaciones DES son muy numerosas: sistema de fabricación, ingeniería de la construcción, gestión de proyectos, logística, sistemas de transporte, procesos de negocios, salud, redes de comunicaciones, ….<span class="citation"><a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></span> La simulación de tales sistemas nos proporciona información sobre el riesgo, eficiencia y efectividad de los procesos, e incluso nos permite estudiar los efectos de introducir cambios en el sistema. En servicios públicos nos permite estudiar cuellos de botella en colas, optimizar flujos de pacientes en los hospitales, testar la robustez de una cadena de producción o predecir el funcionamiento de un nuevo protocolo o configuración en una red de telecomunicaciones.</p>
+<p>Existen tres aproximaciones básicas para proceder en la simulación DES:<span class="citation"><a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></span></p>
+<ul>
+<li>Orientada a la actividad (<em>activity-oriented</em>): el modelo consiste en secuencias de actividades que esperan a ser ejecutadas dependiendo de ciertas condiciones; el reloj de simulación avanza a incrementos fijos de tiempo. En cada paso se escanea toda la lista de actividades y se verifican sus condiciones de ejecución. Este modo de simular es demasiado sensible a la elección del incremento de tiempos, dada la aleatoriedad de los tiempos en que suceden los eventos.</li>
+<li>Orientada a los eventos (<em>event-oriented</em>): mantiene una lista de eventos programados y ordenados por el tiempo en el que van a ocurrir. La simulación consiste en saltar de evento a evento, ejecutando secuencialmente las rutinas asociadas.</li>
+<li>Orientada a los procesos (<em>process-oriented</em>): refina la simulación orientada a eventos añadiendo procesos que interactúan y cuya activación es desencadenada por eventos. En este caso, el modelizador define un conjunto de procesos que corresponden a entidades u objetos del sistema real y su ciclo de vida.</li>
+</ul>
+</div>
+<div id="software-1" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Software</h2>
+<p>La librería <strong>simmer</strong><span class="citation"><a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></span> es un paquete de R para simulación DES que permite una <strong>modelización orientada a procesos</strong> de alto nivel. Además, explota el novedoso concepto de <em>trayectoria</em>: un camino común (o modo de comportamiento único) en el modelo de simulación para entidades (procesos) del mismo tipo (equivalentes). Aprovecha además la definición de flujos de trabajo en cadena (<em>pipe</em>) del paquete <strong>magrittr</strong>.<span class="citation"><a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a></span></p>
+<p>La librería <strong>simmer</strong> se empezó a desarrollar en 2014 para resolver un problema de optimización de facilidades en servicios sanitarios, basada en la simulación de eventos discretos <em>DES</em>. Está implementada en C++ y de ahí su eficiencia.</p>
+<p>´simmer` no es la única librería de simulación de procesos en R, donde contamos también con las librerías:</p>
+<ul>
+<li><code>SpaDES</code>,<span class="citation"><a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></span> que se centra en modelos discretos espaciales;</li>
+<li><code>queuecomputer</code><span class="citation"><a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></span> implementa un método eficiente para simular colas con llegadas y tiempos de servicio arbitrarios;</li>
+<li><code>queueing</code><span class="citation"><a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></span> contiene múltiples funciones para analizar sistemas de colas.</li>
+</ul>
+<p>Más allá del lenguaje R, los competidores directos de <code>simmer</code> son <code>SimPy</code><span class="citation"><a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a></span> y <code>SimJulia</code>,<span class="citation"><a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a></span> construidos, respectivamente, bajo los lenguajes Python y Julia.</p>
+<p>Instalamos y cargamos pues, las librerías vinculadas a <code>simmer</code> y otras generales básicas en R:</p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="simulación-des-con-simmer.html#cb615-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer)</span>
+<span id="cb615-2"><a href="simulación-des-con-simmer.html#cb615-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer.bricks)</span>
+<span id="cb615-3"><a href="simulación-des-con-simmer.html#cb615-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer.plot)</span>
+<span id="cb615-4"><a href="simulación-des-con-simmer.html#cb615-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb615-5"><a href="simulación-des-con-simmer.html#cb615-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb615-6"><a href="simulación-des-con-simmer.html#cb615-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+</div>
+<div id="simulación-con-simmer" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Simulación con <code>simmer</code></h2>
+<div id="conceptos-clave" class="section level3" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Conceptos clave</h3>
+<p>Para entender la Simulación de Eventos Discretos (DES), es preciso controlar cierta terminología específica, que se muestra a continuación:</p>
+<ul>
+<li><p><strong>Recurso (<em>resource</em>)</strong>. Se trata de una entidad pasiva que no se mueve pero proporciona un servicio o realiza una actividad dirigida a las llegadas que se producen en el sistema. Todo recurso en <code>simmer</code> contiene dos elementos auto-gestionados:</p>
+<ul>
+<li>Servidor, que representa el recurso que da servicio o realiza la actividad, con una determinada capacidad y que puede ser accedido (<em>seized</em>) y abandonado (<em>released</em>).</li>
+<li>Cola: una cola priorizada de cierto tamaño (puede ser infinita), que se llena cuando el servidor está a plena capacidad.</li>
+</ul></li>
+<li><p><strong>Gestor (<em>manager</em>)</strong>. Es una entidad activa, esto es, se trata de un proceso que tiene la habilidad de reajustar las propiedades de un recurso (como su capacidad y tamaño de la cola) a medida que transcurre el tiempo (<em>run-time</em>).</p></li>
+<li><p><strong>Fuente (<em>source</em>)</strong> es el proceso responsable de generar nuevas llegadas según un patrón de tiempos entre llegadas, y de integrarlas en el modelo de simulación.</p></li>
+<li><p><strong>Llegada (<em>arrival</em>)</strong>. Es un proceso capaz de interaccionar con los recursos o con otras entidades del modelo de simulación. Puede tener atributos y valores de priorización asociados, y en general, tiene un tiempo de vida limitado. Tras su creación, cada llegada es integrada en una trayectoria dada.</p></li>
+<li><p><strong>Trayectoria (<em>trajectory</em>)</strong>. Se trata de la secuenciación de actividades que definen el camino a seguir de cada una de las llegadas que acceden a ella. El modelo de simulación se representa por un conjunto de trayectorias.</p></li>
+<li><p><strong>Actividad (<em>activity</em>)</strong> es la unidad individual de acción que permite que las llegadas interactúen con los recursos y otras entidades, realicen rutinas mientras están en el sistema, retrocedan y avancen a lo largo de la trayectoria de forma dinámica, etc.</p></li>
+</ul>
+<p>Todos los procesos son susceptibles de ser representados a través de diagramas de flujo. Es conveniente siempre representarlos, con el fin de ordenar y mostrar con claridad los caminos y secuenciaciones involucradas. Para crear diagramas de flujo disponemos de la simbología estándar <a href="https://docs.google.com/document/d/1F7urSCA-82umRB8a85P67yOiS35HNmbuL1FpLjemQ8Q/edit?usp=sharing">ANSI para diagramas de flujo</a>).</p>
+</div>
+<div id="entornos-y-trayectorias" class="section level3" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Entornos y trayectorias</h3>
+<p>La simulación con <code>simmer</code>, aunque se puede basar en los eventos, funciona mejor orientada a los procesos, esto es, enfocada a la identificación de fuentes y procesos y a las interacciones entre ellos. Utiliza dos elementos básicos:</p>
+<ul>
+<li>El <strong>entorno de simulación</strong> se almacena en un objeto simmer definido por el comando <code>env()</code>, gestiona los recursos (<em>resources</em>) y las fuentes de llegadas (<em>generators</em>), controla la ejecución de la simulación y contiene los resultados de la simulación.</li>
+<li>Las <strong>trayectorias</strong>, definidas con el comando <code>trajectory()</code>, que contienen las secuencias de acciones o actividades que van a experimentar las llegadas. Cada actividad viene descrita por un verbo que representa una funcionalidad concreta (bloque funcional). El conjunto de acciones disponibles en <code>simmer</code> lo estudiaremos en la sección <a href="@acciones">Acciones</a>.</li>
+</ul>
+<p>Simular con <code>simmer</code> consiste, simplemente, en construir un entorno de simulación en el que se añaden recursos que dan servicios y se generan llegadas que acceden a trayectorias en las que desarrollan ciertas actividades y son atendidas por los recursos. Toda la sintaxis se encadena con el comando pipe <code>%&gt;%</code>.</p>
+<p>La Figura <a href="simulación-des-con-simmer.html#fig:simmerentorno">7.1</a> ilustra de un modo sencillo la dinámica de simulación con <code>simmer</code> a partir de entornos y trayectorias: el simulador es inicializado con <code>simmer</code> y monitorizado con <code>monitor</code>. Cada simulador contiene entidades constituidas por procesos y recursos. A los procesos acceden las llegadas, provenientes de fuentes y reguladas por gestores, que realizan una serie de actividades que definen trayectorias y son ejecutadas por los recursos. Así mismo, los gestores pueden interaccionar con los recursos.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:simmerentorno"></span>
+<img src="images/simmer_entorno.png" alt="Figura 2. Entorno de simulación en `simmer` [Fte: IBiDat](https://ibidat.es/portfolio-items/simmer-discrete-event-simulation-for-r/)" width="80%" />
+<p class="caption">
+Figura 7.1: Figura 2. Entorno de simulación en <code>simmer</code> <a href="https://ibidat.es/portfolio-items/simmer-discrete-event-simulation-for-r/">Fte: IBiDat</a>
+</p>
+</div>
+<p>Aunque las trayectorias se definen de modo independiente a los entornos de simulación, se recomienda definir siempre el entorno en primer lugar (pues nombra recursos y llegadas), <code>env=simmer()</code>, para luego definir las trayectorias y completar el entorno con los recursos y las fuentes. Hay que tener en cuenta que las trayectorias y los entornos van a usar elementos comunes, con lo que la sintaxis ha se ser construida y revisada en paralelo.</p>
+<p>Para hacer correr la simulación utilizamos el comando <code>run()</code>, con el que podemos especificar cuándo parar. El comando <code>reset()</code> nos permite resetear una simulación.</p>
+<p>Las trajectorias se pueden seccionar con el operador de selección <code>[]</code>, juntar con <code>join()</code> y modificar con el operador <code>=</code>. Hay muchas actividades disponibles en simmer para incorporar en trayectorias y que presentaremos categorizadas más adelante, según su funcionalidad.</p>
+<p>Veamos un ejemplo de un modelo de simulación sencillo en el que llegan clientes a una tienda cada minuto (durante 3 minutos), miran los productos durante 5 minutos y se van.</p>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="simulación-des-con-simmer.html#cb616-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb616-2"><a href="simulación-des-con-simmer.html#cb616-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Se define la trayectoria &quot;tienda&quot; con la actividad que realizan los clientes</span></span>
+<span id="cb616-3"><a href="simulación-des-con-simmer.html#cb616-3" aria-hidden="true" tabindex="-1"></a>tienda<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb616-4"><a href="simulación-des-con-simmer.html#cb616-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Lanza un mensaje de aviso de llegada</span></span>
+<span id="cb616-5"><a href="simulación-des-con-simmer.html#cb616-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Llega a la tienda&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb616-6"><a href="simulación-des-con-simmer.html#cb616-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mira productos 5min</span></span>
+<span id="cb616-7"><a href="simulación-des-con-simmer.html#cb616-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb616-8"><a href="simulación-des-con-simmer.html#cb616-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Lanza un mensaje de aviso de llegada</span></span>
+<span id="cb616-9"><a href="simulación-des-con-simmer.html#cb616-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Sale de la tienda&quot;</span>)</span>
+<span id="cb616-10"><a href="simulación-des-con-simmer.html#cb616-10" aria-hidden="true" tabindex="-1"></a><span class="co"># se lanza el entorno de simulación incluyendo el generador de llegadas </span></span>
+<span id="cb616-11"><a href="simulación-des-con-simmer.html#cb616-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (clientes), que aparecen en tres instantes de tiempo,</span></span>
+<span id="cb616-12"><a href="simulación-des-con-simmer.html#cb616-12" aria-hidden="true" tabindex="-1"></a><span class="co"># y que son dirigidos a la trayectoria &quot;tienda&quot;</span></span>
+<span id="cb616-13"><a href="simulación-des-con-simmer.html#cb616-13" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb616-14"><a href="simulación-des-con-simmer.html#cb616-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>, tienda,<span class="fu">at</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb616-15"><a href="simulación-des-con-simmer.html#cb616-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># se muestran los resultados en pantalla</span></span>
+<span id="cb616-16"><a href="simulación-des-con-simmer.html#cb616-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb616-17"><a href="simulación-des-con-simmer.html#cb616-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># se lanza el sistema</span></span>
+<span id="cb616-18"><a href="simulación-des-con-simmer.html#cb616-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>()</span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Source: cliente | monitored: 1 | n_generated: 0 }
+## 1: cliente0: Llega a la tienda
+## 2: cliente1: Llega a la tienda
+## 3: cliente2: Llega a la tienda
+## 6: cliente0: Sale de la tienda
+## 7: cliente1: Sale de la tienda
+## 8: cliente2: Sale de la tienda</code></pre>
+<p>Al visualizar el output, apreciamos que llegan tres clientes en los instantes 1,2,3. Cada cliente permanece en la tienda durante 5 minutos inspeccionando la mercancía, y después sale en los instantes 6, 7 y 8 respectivamente. En las actividades y generadores de llegadas hemos utilizado parámetros fijos, pero los podemos hacer aleatorios. Adaptemos el ejemplo anterior a tiempos aleatorios uniformes entre llegadas y tiempos de permanencia aleatorios normales.</p>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="simulación-des-con-simmer.html#cb618-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb618-2"><a href="simulación-des-con-simmer.html#cb618-2" aria-hidden="true" tabindex="-1"></a>tienda<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb618-3"><a href="simulación-des-con-simmer.html#cb618-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Llega a la tienda&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb618-4"><a href="simulación-des-con-simmer.html#cb618-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cada cliente permanece en la tienda mirando productos aprox. 5min</span></span>
+<span id="cb618-5"><a href="simulación-des-con-simmer.html#cb618-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb618-6"><a href="simulación-des-con-simmer.html#cb618-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Sale de la tienda&quot;</span>)</span>
+<span id="cb618-7"><a href="simulación-des-con-simmer.html#cb618-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb618-8"><a href="simulación-des-con-simmer.html#cb618-8" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb618-9"><a href="simulación-des-con-simmer.html#cb618-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># el tiempo entre llegadas de los clientes es aleatorio entre 0 y 2 min.</span></span>
+<span id="cb618-10"><a href="simulación-des-con-simmer.html#cb618-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>, tienda,<span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb618-11"><a href="simulación-des-con-simmer.html#cb618-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb618-12"><a href="simulación-des-con-simmer.html#cb618-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># simulamos hasta el instante 10</span></span>
+<span id="cb618-13"><a href="simulación-des-con-simmer.html#cb618-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">10</span>) </span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Source: cliente | monitored: 1 | n_generated: 0 }
+## 1.20152: cliente0: Llega a la tienda
+## 1.51594: cliente1: Llega a la tienda
+## 2.51149: cliente2: Llega a la tienda
+## 3.76426: cliente0: Sale de la tienda
+## 4.05654: cliente3: Llega a la tienda
+## 4.12502: cliente4: Llega a la tienda
+## 4.51636: cliente5: Llega a la tienda
+## 5.29376: cliente6: Llega a la tienda
+## 5.96187: cliente1: Sale de la tienda
+## 6.65052: cliente7: Llega a la tienda
+## 8.58992: cliente3: Sale de la tienda
+## 8.6116: cliente8: Llega a la tienda
+## 8.65991: cliente2: Sale de la tienda
+## 8.88082: cliente4: Sale de la tienda
+## 9.67203: cliente9: Llega a la tienda
+## 9.73449: cliente10: Llega a la tienda</code></pre>
+<p>Ahora vemos en la primera columna los instantes de tiempo en que llegan y se van los clientes.</p>
+</div>
+<div id="recursos" class="section level3" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Recursos</h3>
+<p>Recordemos que un recurso, que proporciona servicio a las llegadas, en la simulación DES tiene dos componentes internos: un servidor y una cola. Todo recurso va a ser definido por tres parámetros:</p>
+<ul>
+<li>el nombre (<em>name</em>) del recurso o servidor,</li>
+<li>la capacidad (<em>capacity</em>) del recurso, y</li>
+<li>el tamaño de la cola (<em>queue_size</em>) en la que esperan las llegadas a que haya algún recurso disponible; representa el aforo de la sala de espera; cuando es cero significa que no hay posibilidad de cola.</li>
+</ul>
+<p>Los recursos se definen con la sintaxis:</p>
+<pre><code>add_resource(.env, name, capacity = 1, queue_size = Inf, mon = TRUE,
+  preemptive = FALSE, preempt_order = c(&quot;fifo&quot;, &quot;lifo&quot;),
+  queue_size_strict = FALSE, queue_priority = c(0, Inf))</code></pre>
+<p>El argumento <code>capacity</code> indica cuántos servidores hay en el sistema, y <code>queue_size</code> el tamaño de la cola de espera. Por defecto, los recursos son monitorizados (<code>mon=TRUE</code>) y no preferentes (<code>preemptive = FALSE</code>). La preferencia significa que si aparece una llegada con prioridad alta, el recurso detendrá temporalmente el procesado de las llegadas que esté atendiendo y tengan menos prioridad, y atenderá la preferente. En los recursos preferentes, <code>preemptive = TRUE</code> el parámetro <code>preempt_order</code> define qué llegada debe priorizarse según una política FIFO (<em>First in, first out</em>)o LIFO (<em>Last in, first out</em>). Todas las llegadas con mayor preferencia son ubicadas en una cola especial que tiene mayor prioridad que la cola principal, y en consecuencia se atienden antes. Además, el parámetro <code>queue_size_strict</code> controla si esta cola especial de llegadas preferentes debe ser tenida en cuenta para calcular el tamaño límite de la cola; si este parámetro impone el límite, entonces los rechazos se producirán en la cola principal.</p>
+<p>Para ampliar información, consultar el Manual de Referencia sobre <a href="https://r-simmer.org/reference/add_resource.html"><code>add_resource</code></a>.</p>
+<p>Cuando tenemos recursos en el sistema que dan un servicio, surgen dos acciones básicas que son: <code>seize</code> o asignación a un recurso, y <code>release</code> o desocupación del recurso. Por supuesto, si una llegada no puede ser atendida por un servidor (recurso) libre, puede esperar en cola si hay hueco en la cola, o ser rechazada si no lo hay.</p>
+<p>Transformemos el ejemplo anterior en clientes que llegan aleatoriamente a una tienda. Ahora al llegar, cada cliente mira productos alrededor de 5 minutos, luego busca a un dependiente para ser atendido o espera hasta que uno esté desocupado, este lo atiende por aproximadamente 10 minutos y luego se va. Supongamos que hay 2 dependientes en la tienda.</p>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="simulación-des-con-simmer.html#cb621-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">999</span>)</span>
+<span id="cb621-2"><a href="simulación-des-con-simmer.html#cb621-2" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb621-3"><a href="simulación-des-con-simmer.html#cb621-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb621-4"><a href="simulación-des-con-simmer.html#cb621-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Actividades que se desarrollan en la tienda</span></span>
+<span id="cb621-5"><a href="simulación-des-con-simmer.html#cb621-5" aria-hidden="true" tabindex="-1"></a>tienda<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb621-6"><a href="simulación-des-con-simmer.html#cb621-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>()  <span class="st">&quot;Llega a la tienda&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb621-7"><a href="simulación-des-con-simmer.html#cb621-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mira productos aprox. 5min</span></span>
+<span id="cb621-8"><a href="simulación-des-con-simmer.html#cb621-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb621-9"><a href="simulación-des-con-simmer.html#cb621-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># es asignado a un dependiente </span></span>
+<span id="cb621-10"><a href="simulación-des-con-simmer.html#cb621-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Busca un dependiente&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb621-11"><a href="simulación-des-con-simmer.html#cb621-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb621-12"><a href="simulación-des-con-simmer.html#cb621-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># que lo antiende aprox. 10min.</span></span>
+<span id="cb621-13"><a href="simulación-des-con-simmer.html#cb621-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Es atendido&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb621-14"><a href="simulación-des-con-simmer.html#cb621-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb621-15"><a href="simulación-des-con-simmer.html#cb621-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># desocupa al dependiente</span></span>
+<span id="cb621-16"><a href="simulación-des-con-simmer.html#cb621-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb621-17"><a href="simulación-des-con-simmer.html#cb621-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sale de la tienda</span></span>
+<span id="cb621-18"><a href="simulación-des-con-simmer.html#cb621-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Sale de la tienda&quot;</span>)</span>
+<span id="cb621-19"><a href="simulación-des-con-simmer.html#cb621-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb621-20"><a href="simulación-des-con-simmer.html#cb621-20" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb621-21"><a href="simulación-des-con-simmer.html#cb621-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># simulación (uniforme(0,5) del tiempo entre llegadas de clientes</span></span>
+<span id="cb621-22"><a href="simulación-des-con-simmer.html#cb621-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>, tienda,<span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb621-23"><a href="simulación-des-con-simmer.html#cb621-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dimensionamiento de recursos: dos dependientes</span></span>
+<span id="cb621-24"><a href="simulación-des-con-simmer.html#cb621-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">2</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb621-25"><a href="simulación-des-con-simmer.html#cb621-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb621-26"><a href="simulación-des-con-simmer.html#cb621-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="co"># simulamos hasta ese instante</span></span>
+<span id="cb621-27"><a href="simulación-des-con-simmer.html#cb621-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monitorizamos los recursos (dependientes)</span></span>
+<span id="cb621-28"><a href="simulación-des-con-simmer.html#cb621-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_mon_resources</span>()</span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Resource: dependiente | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }
+## { Source: cliente | monitored: 1 | n_generated: 0 }
+## 1.94536: cliente0: Llega a la tienda
+## 4.86066: cliente1: Llega a la tienda
+## 5.6328: cliente0: Busca un dependiente
+## 5.6328: cliente0: Es atendido
+## 8.68238: cliente1: Busca un dependiente
+## 8.68238: cliente1: Es atendido
+## 8.79439: cliente2: Llega a la tienda
+## 11.55: cliente3: Llega a la tienda
+## 11.9157: cliente2: Busca un dependiente
+## 12.0631: cliente4: Llega a la tienda
+## 14.2341: cliente0: Sale de la tienda
+## 14.2341: cliente2: Es atendido
+## 15.9421: cliente4: Busca un dependiente
+## 16.1694: cliente5: Llega a la tienda
+## 17.3468: cliente3: Busca un dependiente
+## 18.9358: cliente6: Llega a la tienda
+## 18.9865: cliente1: Sale de la tienda
+## 18.9865: cliente4: Es atendido</code></pre>
+<p>Visualizamos a los clientes: cuándo llegan, cuándo son atendidos por un dependiente y cuándo se van de la tienda. Para los dependientes (recursos) vemos los instantes de tiempo (time) en los que inician un servicio o se les añade algún cliente en cola, el número de dependientes ocupados (server) y el número de clientes esperando ser atendidos (queue).</p>
+</div>
+<div id="fuentes" class="section level3" number="7.4.4">
+<h3><span class="header-section-number">7.4.4</span> Fuentes</h3>
+<p>Una fuente de llegadas, clientes o productos de un sistema de simulación es definida con tres parámetros principales:</p>
+<ul>
+<li><em>name_prefix</em>, el nombre con el que identificamos cada llegada que se genera</li>
+<li><em>trajectory</em>, la trayectoria a la que accede</li>
+<li><em>distribution</em>, la distribución de los tiempos entre llegadas.</li>
+</ul>
+<p>Hay dos tipos de fuentes: generadores y fuentes de datos (<em>dataframes</em>), a las que accedemos respectivamente con los comandos <code>add_generator()</code> y <code>add_dataframe()</code>.</p>
+<ul>
+<li><strong>Generadores</strong>, proporcionados con el comando <code>add_generator()</code>, que genera tiempos dinámicos entre llegadas a partir de una función (distribución) que define el usuario.</li>
+</ul>
+<p>Ejemplifiquemos las posibilidades de generación de tiempos de llegadas con el ejemplo anterior que ya realizamos, en el que al entrar cada cliente, pasa 5 minutos en el sistema y luego se marcha.</p>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="simulación-des-con-simmer.html#cb623-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb623-2"><a href="simulación-des-con-simmer.html#cb623-2" aria-hidden="true" tabindex="-1"></a><span class="co"># defino la función de los tiempos entre llegadas, U(0,2)</span></span>
+<span id="cb623-3"><a href="simulación-des-con-simmer.html#cb623-3" aria-hidden="true" tabindex="-1"></a>distr <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb623-4"><a href="simulación-des-con-simmer.html#cb623-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb623-5"><a href="simulación-des-con-simmer.html#cb623-5" aria-hidden="true" tabindex="-1"></a><span class="co"># definimos laa acciones que hace el cliente en la tienda</span></span>
+<span id="cb623-6"><a href="simulación-des-con-simmer.html#cb623-6" aria-hidden="true" tabindex="-1"></a>tienda <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb623-7"><a href="simulación-des-con-simmer.html#cb623-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">5</span>)</span>
+<span id="cb623-8"><a href="simulación-des-con-simmer.html#cb623-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb623-9"><a href="simulación-des-con-simmer.html#cb623-9" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb623-10"><a href="simulación-des-con-simmer.html#cb623-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># los tiempos entre llegadas se simulan de &quot;distr&quot;</span></span>
+<span id="cb623-11"><a href="simulación-des-con-simmer.html#cb623-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada_random&quot;</span>, tienda, distr) <span class="sc">%&gt;%</span></span>
+<span id="cb623-12"><a href="simulación-des-con-simmer.html#cb623-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># las llegadas ocurren en los instantes 0, 1, 10, 30, 40 y 43</span></span>
+<span id="cb623-13"><a href="simulación-des-con-simmer.html#cb623-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada_at&quot;</span>, tienda, <span class="fu">at</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">43</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb623-14"><a href="simulación-des-con-simmer.html#cb623-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># los tiempos entre llegadas se simulan de &quot;distr&quot;, empezando en el instante 1</span></span>
+<span id="cb623-15"><a href="simulación-des-con-simmer.html#cb623-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada_from&quot;</span>, tienda, <span class="fu">from</span>(<span class="dv">1</span>, distr)) <span class="sc">%&gt;%</span></span>
+<span id="cb623-16"><a href="simulación-des-con-simmer.html#cb623-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># los tiempos entre llegadas se simulan de &quot;distr&quot;, acabando en el instante 5</span></span>
+<span id="cb623-17"><a href="simulación-des-con-simmer.html#cb623-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada_to&quot;</span>, tienda, <span class="fu">to</span>(<span class="dv">5</span>, distr)) <span class="sc">%&gt;%</span></span>
+<span id="cb623-18"><a href="simulación-des-con-simmer.html#cb623-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># los tiempos entre llegadas se simulan de &quot;distr&quot;, empezando en 1 y acabando en 5</span></span>
+<span id="cb623-19"><a href="simulación-des-con-simmer.html#cb623-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada_from_to&quot;</span>, tienda, <span class="fu">from_to</span>(<span class="dv">1</span>, <span class="dv">5</span>, distr, <span class="at">every=</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb623-20"><a href="simulación-des-con-simmer.html#cb623-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb623-21"><a href="simulación-des-con-simmer.html#cb623-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monitorizamos todas las llegadas</span></span>
+<span id="cb623-22"><a href="simulación-des-con-simmer.html#cb623-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_mon_arrivals</span>()</span></code></pre></div>
+<pre><code>##                name start_time  end_time activity_time finished replication
+## 1       llegada_at0  0.0000000  5.000000             5     TRUE           1
+## 2   llegada_random0  0.1729814  5.172981             5     TRUE           1
+## 3       llegada_to0  0.4509553  5.450955             5     TRUE           1
+## 4       llegada_at1  1.0000000  6.000000             5     TRUE           1
+## 5     llegada_from0  1.0000000  6.000000             5     TRUE           1
+## 6  llegada_from_to0  1.0000000  6.000000             5     TRUE           1
+## 7   llegada_random1  1.2274626  6.227463             5     TRUE           1
+## 8       llegada_to1  1.6187369  6.618737             5     TRUE           1
+## 9     llegada_from1  2.0801778  7.080178             5     TRUE           1
+## 10    llegada_from2  2.1182239  7.118224             5     TRUE           1
+## 11 llegada_from_to1  2.7380298  7.738030             5     TRUE           1
+## 12  llegada_random2  2.8600575  7.860058             5     TRUE           1
+## 13 llegada_from_to2  2.9572654  7.957265             5     TRUE           1
+## 14    llegada_from3  2.9890172  7.989017             5     TRUE           1
+## 15      llegada_to2  3.1719196  8.171920             5     TRUE           1
+## 16      llegada_to3  3.8909441  8.890944             5     TRUE           1
+## 17    llegada_from4  3.9343827  8.934383             5     TRUE           1
+## 18 llegada_from_to3  4.4370700  9.437070             5     TRUE           1
+## 19      llegada_to4  4.4642147  9.464215             5     TRUE           1
+## 20  llegada_random3  4.4702904  9.470290             5     TRUE           1
+## 21  llegada_random4  4.5808807  9.580881             5     TRUE           1
+## 22      llegada_to5  4.7246900  9.724690             5     TRUE           1
+## 23 llegada_from_to4  4.9288147  9.928815             5     TRUE           1
+## 24 llegada_from_to5  5.0000000 10.000000             5     TRUE           1
+## 25    llegada_from5  5.1656520 10.165652             5     TRUE           1
+## 26    llegada_from6  5.5418947 10.541895             5     TRUE           1
+## 27  llegada_random5  6.0601800 11.060180             5     TRUE           1
+## 28  llegada_random6  6.1803417 11.180342             5     TRUE           1
+## 29    llegada_from7  6.7354383 11.735438             5     TRUE           1
+## 30 llegada_from_to6  6.7442407 11.744241             5     TRUE           1
+## 31    llegada_from8  7.6346328 12.634633             5     TRUE           1
+## 32  llegada_random7  7.6924460 12.692446             5     TRUE           1
+## 33 llegada_from_to7  8.4122507 13.412251             5     TRUE           1
+## 34 llegada_from_to8  9.0000000 14.000000             5     TRUE           1
+## 35  llegada_random8  9.2487709 14.248771             5     TRUE           1
+## 36    llegada_from9  9.6174449 14.617445             5     TRUE           1</code></pre>
+<p>También podemos desencadenar llegadas a demanda desde otra trayectoria. Sería el ejemplo de un operador, que en el momento en que ficha digitalmente como trabajador de la empresa, se incorpora a trabajar durante una jornada parcial de 3 horas:</p>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="simulación-des-con-simmer.html#cb625-1" aria-hidden="true" tabindex="-1"></a><span class="co"># jornada de trabajo</span></span>
+<span id="cb625-2"><a href="simulación-des-con-simmer.html#cb625-2" aria-hidden="true" tabindex="-1"></a>t0 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb625-3"><a href="simulación-des-con-simmer.html#cb625-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">3</span>)</span>
+<span id="cb625-4"><a href="simulación-des-con-simmer.html#cb625-4" aria-hidden="true" tabindex="-1"></a><span class="co"># activa &quot;Trabajar&quot;: la jornada de trabajo</span></span>
+<span id="cb625-5"><a href="simulación-des-con-simmer.html#cb625-5" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb625-6"><a href="simulación-des-con-simmer.html#cb625-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(<span class="st">&quot;Trabajar&quot;</span>)</span>
+<span id="cb625-7"><a href="simulación-des-con-simmer.html#cb625-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb625-8"><a href="simulación-des-con-simmer.html#cb625-8" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb625-9"><a href="simulación-des-con-simmer.html#cb625-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># simula llegadas al trabajo cuando &quot;Trabajar&quot; esté activado</span></span>
+<span id="cb625-10"><a href="simulación-des-con-simmer.html#cb625-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;Trabajar&quot;</span>, t0, <span class="fu">when_activated</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb625-11"><a href="simulación-des-con-simmer.html#cb625-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># simula una llegada a fichar</span></span>
+<span id="cb625-12"><a href="simulación-des-con-simmer.html#cb625-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;Fichado digital&quot;</span>, t1, <span class="fu">at</span>(<span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb625-13"><a href="simulación-des-con-simmer.html#cb625-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb625-14"><a href="simulación-des-con-simmer.html#cb625-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_mon_arrivals</span>()</span></code></pre></div>
+<pre><code>##               name start_time end_time activity_time finished replication
+## 1 Fichado digital0          8        8             0     TRUE           1
+## 2        Trabajar0          8       11             3     TRUE           1</code></pre>
+<p>La sintaxis que se utiliza para generar llegadas es:</p>
+<pre><code>add_generator(.env, name_prefix, trajectory, distribution, mon = 1,
+  priority = 0, preemptible = priority, restart = FALSE)</code></pre>
+<p>El argumento <code>mon</code> permite especificar si queremos que el simulador monitoree las llegadas: 0 = sin monitoreo, 1 = monitoreo simple de llegadas simple, 2 = monitoreo simple y de atributos de las llegadas. Por defecto tendremos <code>mon=1</code>. En el argumento <code>distribution</code> se pueden utilizar funciones definidas por el usuario para los tiempos entre llegadas y también, como hemos visto, <code>at()</code>, <code>from()</code>, <code>to()</code> y <code>from_to()</code>. Si hay un sistema de prioridades, se especificaría con <code>priority=1</code>, y qué hacer para las llegadas preferentes o prioritarias, en los argumentos <code>preemptible</code> y <code>restart</code>.</p>
+<p>Para ampliar información, consultar el Manual de Referencia sobre <a href="https://r-simmer.org/reference/generators.html"><code>add_generator</code></a>.</p>
+<ul>
+<li><strong>Fuentes de datos</strong> con tiempos entre llegadas, provenientes de un data frame que vincula el usuario con el comando <code>add_dataframe()</code>:</li>
+</ul>
+<pre><code>add_dataframe(.env, name_prefix, trajectory, data, mon = 1, batch = 50,
+  col_time = &quot;time&quot;, time = c(&quot;interarrival&quot;, &quot;absolute&quot;),
+  col_attributes = NULL, col_priority = &quot;priority&quot;,
+  col_preemptible = col_priority, col_restart = &quot;restart&quot;)</code></pre>
+<p>Ambos generadores o fuentes de llegadas se reprograman a sí mismos para ciclarse hasta agotar el tiempo de simulación, en el caso de que este supere el rango inicial.</p>
+<p>Para ampliar información, consultar el Manual de Referencia sobre <a href="https://r-simmer.org/reference/add_generator.html"><code>add_generator</code></a> y <a href="https://r-simmer.org/reference/add_dataframe.html"><code>add_dataframe</code></a>.</p>
+</div>
+<div id="atributos" class="section level3" number="7.4.5">
+<h3><span class="header-section-number">7.4.5</span> Atributos</h3>
+<p>Falta por completar información.</p>
+</div>
+<div id="monitoreo" class="section level3" number="7.4.6">
+<h3><span class="header-section-number">7.4.6</span> Monitoreo</h3>
+<p>Al ejecutar un entorno de simulación, si no incluimos ninguna opción de visualización de mensajes en la trayectoria, obtenemos en pantalla un resumen escrito básico sobre recursos y llegadas.</p>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="simulación-des-con-simmer.html#cb629-1" aria-hidden="true" tabindex="-1"></a>trayectoria<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb629-2"><a href="simulación-des-con-simmer.html#cb629-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">timeout</span>(<span class="dv">3</span>)</span>
+<span id="cb629-3"><a href="simulación-des-con-simmer.html#cb629-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb629-4"><a href="simulación-des-con-simmer.html#cb629-4" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb629-5"><a href="simulación-des-con-simmer.html#cb629-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada&quot;</span>,trayectoria,<span class="fu">at</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb629-6"><a href="simulación-des-con-simmer.html#cb629-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() </span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 5 | next: 
+## { Monitor: in memory }
+## { Source: llegada | monitored: 1 | n_generated: 3 }</code></pre>
+<p>Al añadir en la ejecución del entorno el comando <code>print()</code> (antes de <code>run()</code>), se monitorizan los eventos que se van sucediendo en la simulación y dónde se almacenan (Monitor).</p>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="simulación-des-con-simmer.html#cb631-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb631-2"><a href="simulación-des-con-simmer.html#cb631-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada&quot;</span>,trayectoria,<span class="fu">at</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb631-3"><a href="simulación-des-con-simmer.html#cb631-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb631-4"><a href="simulación-des-con-simmer.html#cb631-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() </span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Source: llegada | monitored: 1 | n_generated: 0 }</code></pre>
+<pre><code>## simmer environment: anonymous | now: 5 | next: 
+## { Monitor: in memory }
+## { Source: llegada | monitored: 1 | n_generated: 3 }</code></pre>
+<p>El comando <code>invisible</code> (después de <code>run()</code>) depura la salida para no visualizar nada (salvo que hayamos incorporado mensajes en las trayectorias).</p>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="simulación-des-con-simmer.html#cb634-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb634-2"><a href="simulación-des-con-simmer.html#cb634-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada&quot;</span>,trayectoria,<span class="fu">at</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb634-3"><a href="simulación-des-con-simmer.html#cb634-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb634-4"><a href="simulación-des-con-simmer.html#cb634-4" aria-hidden="true" tabindex="-1"></a>  invisible</span></code></pre></div>
+<p>Si queremos visualizar mensajes específicos vinculados a las llegadas y actividades conforme se suceden, habremos de incluir mensajes en las trayectorias a través del comando <code>log_()</code>.</p>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="simulación-des-con-simmer.html#cb635-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb635-2"><a href="simulación-des-con-simmer.html#cb635-2" aria-hidden="true" tabindex="-1"></a>trayectoria<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb635-3"><a href="simulación-des-con-simmer.html#cb635-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Llegada contabilizada.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb635-4"><a href="simulación-des-con-simmer.html#cb635-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">3</span>)</span>
+<span id="cb635-5"><a href="simulación-des-con-simmer.html#cb635-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb635-6"><a href="simulación-des-con-simmer.html#cb635-6" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb635-7"><a href="simulación-des-con-simmer.html#cb635-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llegada&quot;</span>,trayectoria,<span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb635-8"><a href="simulación-des-con-simmer.html#cb635-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb635-9"><a href="simulación-des-con-simmer.html#cb635-9" aria-hidden="true" tabindex="-1"></a>  invisible</span></code></pre></div>
+<p>Una vez lanzamos un sistema de simulación, disponemos de diversos métodos para extraer información de él y monitorizarla por ejemplo con el comando <code>log_()</code>:</p>
+<ul>
+<li><code>now()</code> el tiempo de simulación actual</li>
+<li><code>peek(n)</code> instantes de tiempo en los que acontecerán los siguientes <span class="math inline">\(n\)</span> eventos</li>
+<li><code>get_*()</code> para obtener información de recursos, atributos y fuentes: <code>attribute</code>, <code>capacity</code>, <code>global</code>, <code>name</code>, <code>n_activities</code>, <code>n_generated</code>, <code>prioritization</code>, <code>queue_count</code>, <code>queue_size</code>, <code>resources</code>, <code>seized</code>, <code>server_count</code>, <code>sources</code>, <code>trajectory</code>.</li>
+</ul>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="simulación-des-con-simmer.html#cb636-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb636-2"><a href="simulación-des-con-simmer.html#cb636-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">peek</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 5.35573 5.35573</code></pre>
+<p>Con el comando <code>stepn()</code> podemos hacer correr el sistema durante una única simulación adicional, que no se almacena en el objeto de simulación salvo que lo asignemos a él.</p>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="simulación-des-con-simmer.html#cb638-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb638-2"><a href="simulación-des-con-simmer.html#cb638-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stepn</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb638-3"><a href="simulación-des-con-simmer.html#cb638-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code></pre></div>
+<pre><code>## 5.35573: llegada0: Llegada contabilizada.
+## simmer environment: anonymous | now: 5.35572961320109 | next: 5.35572961320109
+## { Monitor: in memory }
+## { Source: llegada | monitored: 1 | n_generated: 1 }</code></pre>
+<p>Los comandos para monitorizar se pueden aplicar a un único entorno de simulación o a una lista de entornos, y el objeto de retorno es siempre un data frame, incluso si no se encuentran datos. Cada entorno de simulación procesado se trata como una replicación diferente, y se identifica como tal en una columna numérica denominada <em>replication</em> en el dataframe de retorno, con los índices de los entornos como valores. Recuperamos llegadas, recursos y atributos del sistema con los comandos:</p>
+<ul>
+<li><p><code>get_mon_arrivals()</code> devuelve la información temporal por llegada: nombre (<em>name</em>) de la llegada, tiempo de llegada (<em>start_time</em>), tiempo de salida (<em>end_time</em>), tiempo en la actividad sin estar en la cola (<em>activity_time</em>) y una etiqueta <em>finished</em> que indica si la llegada finalizó sus actividades. Por defecto esta información se refiere al tiempo de vida completo de las llegadas, pero se puede obtener por recurso con el argumento <code>per_resource=TRUE</code>.</p></li>
+<li><p><code>get_mon_resources()</code> devuelve los cambios de estado en los recursos: nombre del recurso (<em>resource</em>), instante (<em>time</em>) del evento que desencadenó el cambio de estado, contador de unidades en servicio (<em>server</em>), contador de unidades en la cola (<em>queue</em>), capacidad (<em>capacity</em>), tamaño de la cola (<em>queue_size</em>), contador del sistema (<em>system=server+queue</em>), y límite del sistema (<em>limit=capacity+queue_size</em>).</p></li>
+<li><p><code>get_mon_atributes()</code> devuelve los cambios de estado en los atributos: nombre (<em>name</em>) del atributo, instante (<em>time</em>) del evento que desencadenó el cambio de estado, nombre (<em>key</em>) que identifica el atributo y valor (<em>value</em>).</p></li>
+</ul>
+<pre><code>llegadas=get_mon_arrivals(env) 
+llegadas
+atributos=get_mon_attributes(env)
+atributos
+recursos=get_mon_resources(env)
+recursos</code></pre>
+<p>Ejemplifiquemos su funcionamiento sobre el sistema sencillo de la tienda que ya vimos anteriormente, con tiempos para mirar al llegar a la tienda, seguidos de atención por dependientes.</p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="simulación-des-con-simmer.html#cb641-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb641-2"><a href="simulación-des-con-simmer.html#cb641-2" aria-hidden="true" tabindex="-1"></a>tienda<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb641-3"><a href="simulación-des-con-simmer.html#cb641-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>()  <span class="st">&quot;Llega a la tienda&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb641-4"><a href="simulación-des-con-simmer.html#cb641-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="co"># mira productos aprox. 5min</span></span>
+<span id="cb641-5"><a href="simulación-des-con-simmer.html#cb641-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb641-6"><a href="simulación-des-con-simmer.html#cb641-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Es atendido&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb641-7"><a href="simulación-des-con-simmer.html#cb641-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb641-8"><a href="simulación-des-con-simmer.html#cb641-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb641-9"><a href="simulación-des-con-simmer.html#cb641-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Sale de la tienda&quot;</span>)</span>
+<span id="cb641-10"><a href="simulación-des-con-simmer.html#cb641-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb641-11"><a href="simulación-des-con-simmer.html#cb641-11" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb641-12"><a href="simulación-des-con-simmer.html#cb641-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>, tienda,<span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span> <span class="co"># tiempo entre llegadas </span></span>
+<span id="cb641-13"><a href="simulación-des-con-simmer.html#cb641-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># hay dos dependientes</span></span>
+<span id="cb641-14"><a href="simulación-des-con-simmer.html#cb641-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb641-15"><a href="simulación-des-con-simmer.html#cb641-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">20</span>) <span class="co"># simulamos hasta ese instante</span></span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Resource: dependiente | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }
+## { Source: cliente | monitored: 1 | n_generated: 0 }
+## 1.13087: cliente0: Llega a la tienda
+## 1.79667: cliente1: Llega a la tienda
+## 4.27508: cliente2: Llega a la tienda
+## 4.37577: cliente3: Llega a la tienda
+## 5.20351: cliente4: Llega a la tienda
+## 7.07315: cliente1: Es atendido
+## 7.63425: cliente5: Llega a la tienda
+## 7.96535: cliente0: Es atendido
+## 12.2561: cliente6: Llega a la tienda
+## 14.623: cliente7: Llega a la tienda
+## 15.7281: cliente8: Llega a la tienda
+## 16.2301: cliente9: Llega a la tienda
+## 16.297: cliente10: Llega a la tienda
+## 17.1866: cliente11: Llega a la tienda
+## 17.6022: cliente12: Llega a la tienda
+## 18.3314: cliente0: Sale de la tienda
+## 18.3314: cliente2: Es atendido
+## 18.7997: cliente1: Sale de la tienda
+## 18.7997: cliente3: Es atendido</code></pre>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="simulación-des-con-simmer.html#cb643-1" aria-hidden="true" tabindex="-1"></a>llegadas<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(env) </span>
+<span id="cb643-2"><a href="simulación-des-con-simmer.html#cb643-2" aria-hidden="true" tabindex="-1"></a>llegadas</span></code></pre></div>
+<pre><code>##       name start_time end_time activity_time finished replication
+## 1 cliente0   1.130873 18.33144      17.20057     TRUE           1
+## 2 cliente1   1.796671 18.79968      17.00301     TRUE           1</code></pre>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="simulación-des-con-simmer.html#cb645-1" aria-hidden="true" tabindex="-1"></a>atributos<span class="ot">=</span><span class="fu">get_mon_attributes</span>(env)</span>
+<span id="cb645-2"><a href="simulación-des-con-simmer.html#cb645-2" aria-hidden="true" tabindex="-1"></a>atributos</span></code></pre></div>
+<pre><code>## [1] time  name  key   value
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="simulación-des-con-simmer.html#cb647-1" aria-hidden="true" tabindex="-1"></a>recursos<span class="ot">=</span><span class="fu">get_mon_resources</span>(env)</span>
+<span id="cb647-2"><a href="simulación-des-con-simmer.html#cb647-2" aria-hidden="true" tabindex="-1"></a>recursos</span></code></pre></div>
+<pre><code>##      resource      time server queue capacity queue_size system limit replication
+## 1 dependiente  7.073150      1     0        2        Inf      1   Inf           1
+## 2 dependiente  7.965346      2     0        2        Inf      2   Inf           1
+## 3 dependiente  9.788494      2     1        2        Inf      3   Inf           1
+## 4 dependiente  9.958040      2     2        2        Inf      4   Inf           1
+## 5 dependiente 11.436010      2     3        2        Inf      5   Inf           1
+## 6 dependiente 14.378664      2     4        2        Inf      6   Inf           1
+## 7 dependiente 17.431417      2     5        2        Inf      7   Inf           1
+## 8 dependiente 18.331441      2     4        2        Inf      6   Inf           1
+## 9 dependiente 18.799679      2     3        2        Inf      5   Inf           1</code></pre>
+<p>También podemos derivar el output de un entorno de simulación a ficheros ‘csv’ (con <code>monitor_csv</code>) o de otro tipo, como ‘.txt’ especificando los delimitadores (con <code>monitor_delim</code>), con todas las llegadas (<em>arrivals</em>), atributos (<em>attributes</em>), salidas (<em>releases</em>) y recursos (<em>resources</em>), almacenándolas en el directorio temporal <code>tempdir()</code> o en nuestro propio directorio de trabajo.</p>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="simulación-des-con-simmer.html#cb649-1" aria-hidden="true" tabindex="-1"></a>mon <span class="ot">&lt;-</span> <span class="fu">monitor_csv</span>(<span class="at">path=</span><span class="fu">tempdir</span>()) <span class="co"># tempdir() lo podemos sustituir por nuestro directorio de trabajo</span></span>
+<span id="cb649-2"><a href="simulación-des-con-simmer.html#cb649-2" aria-hidden="true" tabindex="-1"></a>mon   <span class="co"># nos muestra la ubicación y nombre de los ficheros</span></span></code></pre></div>
+<pre><code>## simmer monitor: to disk (delimited files)
+## { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_arrivals.csv }
+## { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_releases.csv }
+## { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_attributes.csv }
+## { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_resources.csv }</code></pre>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="simulación-des-con-simmer.html#cb651-1" aria-hidden="true" tabindex="-1"></a>env_mon<span class="ot">=</span><span class="fu">simmer</span>(<span class="at">mon=</span>mon)</span>
+<span id="cb651-2"><a href="simulación-des-con-simmer.html#cb651-2" aria-hidden="true" tabindex="-1"></a>tienda<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb651-3"><a href="simulación-des-con-simmer.html#cb651-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>()  <span class="st">&quot;Llega a la tienda&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb651-4"><a href="simulación-des-con-simmer.html#cb651-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="co"># mira productos aprox. 5min</span></span>
+<span id="cb651-5"><a href="simulación-des-con-simmer.html#cb651-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb651-6"><a href="simulación-des-con-simmer.html#cb651-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Es atendido&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb651-7"><a href="simulación-des-con-simmer.html#cb651-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb651-8"><a href="simulación-des-con-simmer.html#cb651-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb651-9"><a href="simulación-des-con-simmer.html#cb651-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Sale de la tienda&quot;</span>)</span>
+<span id="cb651-10"><a href="simulación-des-con-simmer.html#cb651-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb651-11"><a href="simulación-des-con-simmer.html#cb651-11" aria-hidden="true" tabindex="-1"></a>env_mon<span class="ot">=</span>env_mon <span class="sc">%&gt;%</span></span>
+<span id="cb651-12"><a href="simulación-des-con-simmer.html#cb651-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>, tienda,<span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span> <span class="co"># tiempo entre llegadas </span></span>
+<span id="cb651-13"><a href="simulación-des-con-simmer.html#cb651-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;dependiente&quot;</span>,<span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># hay dos dependientes</span></span>
+<span id="cb651-14"><a href="simulación-des-con-simmer.html#cb651-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb651-15"><a href="simulación-des-con-simmer.html#cb651-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">20</span>) <span class="co"># simulamos hasta ese instante</span></span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: to disk (delimited files) }
+##   { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_arrivals.csv }
+##   { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_releases.csv }
+##   { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_attributes.csv }
+##   { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpIgHXcP/file12361183a463_resources.csv }
+## { Resource: dependiente | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }
+## { Source: cliente | monitored: 1 | n_generated: 0 }
+## 2.12099: cliente0: Llega a la tienda
+## 4.06522: cliente1: Llega a la tienda
+## 4.31647: cliente2: Llega a la tienda
+## 6.60486: cliente3: Llega a la tienda
+## 6.66412: cliente0: Es atendido
+## 9.19662: cliente2: Es atendido
+## 11.5799: cliente4: Llega a la tienda
+## 14.204: cliente5: Llega a la tienda
+## 16.2476: cliente0: Sale de la tienda
+## 16.2476: cliente1: Es atendido
+## 18.7205: cliente6: Llega a la tienda</code></pre>
+<p>para a continuación cargar los datos de estos ficheros y trabajar sobre ellos,</p>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="simulación-des-con-simmer.html#cb653-1" aria-hidden="true" tabindex="-1"></a>llegadas<span class="ot">=</span><span class="fu">read.csv</span>(mon<span class="sc">$</span>handlers<span class="sc">$</span>arrivals)</span>
+<span id="cb653-2"><a href="simulación-des-con-simmer.html#cb653-2" aria-hidden="true" tabindex="-1"></a>llegadas</span></code></pre></div>
+<pre><code>##       name start_time end_time activity_time finished
+## 1 cliente0   2.120993 16.24759      14.12659        1</code></pre>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="simulación-des-con-simmer.html#cb655-1" aria-hidden="true" tabindex="-1"></a><span class="co"># que contiene la misma información (salvo &quot;replication&quot;) que</span></span>
+<span id="cb655-2"><a href="simulación-des-con-simmer.html#cb655-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mon_arrivals</span>(env_mon)</span></code></pre></div>
+<pre><code>##       name start_time end_time activity_time finished replication
+## 1 cliente0   2.120993 16.24759      14.12659        1           1</code></pre>
+<p>Una vez extraída la información simulada para monitorizar el proceso y realizar análisis, con el paquete <code>simmer.plot</code> (Ucar and Smeets, 2019b) tenemos métodos de graficado para visualizar rápidamente el uso de un recurso o una llegada a lo largo del tiempo.</p>
+<p>Para las <strong>llegadas</strong> se pintan gráficos de líneas, con tres opciones o métricas posibles:</p>
+<ul>
+<li><em>activity_time</em> es la cantidad de tiempo que consume en actividades cada llegada;</li>
+<li><em>flow_time</em> es la cantidad de tiempo que consume cada llegada en el sistema, y se calcula con: ‘<em>flow = end_time - start_time</em>.’</li>
+<li><em>waiting_time</em> es la cantidad de tiempo que una llegada espera a ser atendida o ejecutada, y se calcula con: ‘<em>waiting_time = flow_time - activity_time</em>.’</li>
+</ul>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="simulación-des-con-simmer.html#cb657-1" aria-hidden="true" tabindex="-1"></a>arrivals<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(env_mon)</span>
+<span id="cb657-2"><a href="simulación-des-con-simmer.html#cb657-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric=</span><span class="st">&quot;waiting_time&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="simulación-des-con-simmer.html#cb660-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric=</span><span class="st">&quot;activity_time&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
+## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-16-2.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="simulación-des-con-simmer.html#cb662-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric=</span><span class="st">&quot;flow_time&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
+## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-16-3.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>Para los <strong>recursos</strong>, tenemos dos métricas de graficado:</p>
+<ul>
+<li><em>usage</em> muestra un gráfico de líneas con el tiempo promedio de uso (acumulado) de cada recurso, replication e item (por defecto queue, server y system, que es la suma de servidor y cola). Si <em>steps=TRUE</em>, se pinta un gráfico de escaleras con los valores instantáneos.</li>
+<li><em>utilization</em> muestra un gráfico de barras con el promedio de uso del recurso (tiempo total en uso, dividido por el tiempo total de simulación). Para replicaciones múltiples, la barra representa la mediana y las barras de error los cuartiles. Si se proporciona una única replicación, la barra y la barra de error coinciden.</li>
+</ul>
+<p>Teniendo en cuenta que <code>get_mon</code> proporciona objetos data.frame, podemos utilizar cualquier otro tipo de gráfico específico y personalizado con las funciones gráficas habituales de R, y en particular de ‘ggplot2.’</p>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="simulación-des-con-simmer.html#cb664-1" aria-hidden="true" tabindex="-1"></a>arrivals<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(env_mon)</span>
+<span id="cb664-2"><a href="simulación-des-con-simmer.html#cb664-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(arrivals,<span class="fu">aes</span>(<span class="at">x=</span>activity_time))<span class="sc">+</span></span>
+<span id="cb664-3"><a href="simulación-des-con-simmer.html#cb664-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;Skyblue&quot;</span>,<span class="at">color=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-18-1.png" width="95%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="acciones" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> Acciones</h2>
+<p>Las acciones posibles para definir trayectorias las presentamos a continuación, categorizadas según su funcionalidad:</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Funciones</th>
+<th>comandos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>atributos en llegadas</td>
+<td>set_attribute, get_attribute, set_prioritization, get_prioritization</td>
+</tr>
+<tr class="even">
+<td>interacción con recursos</td>
+<td>seize, release, set_capacity, set_queue_size, set_seize_selected, set_capacity_selected</td>
+</tr>
+<tr class="odd">
+<td>interacción con fuentes</td>
+<td>activate, deactivate, set_trajectory, set_source</td>
+</tr>
+<tr class="even">
+<td>ramificación</td>
+<td>branch, clone</td>
+</tr>
+<tr class="odd">
+<td>bucles</td>
+<td>rollback</td>
+</tr>
+<tr class="even">
+<td>ejecución en lotes</td>
+<td>batch</td>
+</tr>
+<tr class="odd">
+<td>programación asíncrona</td>
+<td>send, wait, trap, untrap</td>
+</tr>
+<tr class="even">
+<td>renuncias</td>
+<td>leave, renege_in, renege_if, renege_abort</td>
+</tr>
+</tbody>
+</table>
+La Figura 3 muestra con mucha claridad las principales acciones disponibles en <code>simmer</code>.
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:simmertray"></span>
+<img src="images/simmer_trajectory.png" alt="Figura 3. Principales acciones en trayectorias `simmer`. [Fte: IBiDat](https://ibidat.es/portfolio-items/simmer-discrete-event-simulation-for-r/)" width="100%" />
+<p class="caption">
+Figura 7.2: Figura 3. Principales acciones en trayectorias <code>simmer</code>. <a href="https://ibidat.es/portfolio-items/simmer-discrete-event-simulation-for-r/">Fte: IBiDat</a>
+</p>
+</div>
+</div>
+<div id="atributos-en-llegadas" class="section level2" number="7.6">
+<h2><span class="header-section-number">7.6</span> Atributos en llegadas</h2>
+<p>Las llegadas pueden almacenar y modificar atributos con el comando <code>set_attribute()</code>. Los atributos consisten en pares <code>(key,value)</code> que por defecto se asignan por llegada, salvo que se definan globalmente.</p>
+<p>proporcionan el nombre (carácter) de la llegada (<em>key</em>) que, y el valor que toma (<em>value</em>). Estos atributos pueden ser definidos de modo particular a cada llegada, o de modo global. Los atributos <em>keys</em> y <em>values</em> pueden ser vectores o funciones que devuelvan vectores.</p>
+<p>Se especifica con el comando <code>set_attribute</code>:</p>
+<pre><code>set_attribute(keys, values, mod = c(NA, &quot;+&quot;, &quot;*&quot;), init = 0)</code></pre>
+<p>que incluye o modifica unos atributos numéricos (<em>values</em>) a una llegada o un conjunto de llegadas especificados en el vector <em>keys</em>. Las modificaciones se gestionan a través del parámetro <code>mod</code>, que incluye las operaciones más habituales (suma y producto).</p>
+<p>Los atributos se pueden recuperar con el comando <code>get_attribute(.env, keys)</code>, siempre que se haya definido previamente un objeto <code>simmer</code> (.env).</p>
+<p>Por ejemplo, el siguiente modelo define una entrada en la que se da el valor 60 a peso, luego le suma 1 y visualiza el resultado, que es “<em>Mi peso es 61</em>”:</p>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="simulación-des-con-simmer.html#cb667-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb667-2"><a href="simulación-des-con-simmer.html#cb667-2" aria-hidden="true" tabindex="-1"></a>traj<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb667-3"><a href="simulación-des-con-simmer.html#cb667-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># asignamos el atributo numérico a peso</span></span>
+<span id="cb667-4"><a href="simulación-des-con-simmer.html#cb667-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_attribute</span>(<span class="st">&quot;peso&quot;</span>,<span class="dv">60</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb667-5"><a href="simulación-des-con-simmer.html#cb667-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a continuación lo modificamos</span></span>
+<span id="cb667-6"><a href="simulación-des-con-simmer.html#cb667-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_attribute</span>(<span class="st">&quot;peso&quot;</span>,<span class="dv">1</span>,<span class="at">mod=</span><span class="st">&quot;+&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb667-7"><a href="simulación-des-con-simmer.html#cb667-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># y por último lo visualizamos</span></span>
+<span id="cb667-8"><a href="simulación-des-con-simmer.html#cb667-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="fu">paste</span>(<span class="st">&quot;Mi peso es&quot;</span>,<span class="fu">get_attribute</span>(env,<span class="st">&quot;peso&quot;</span>)))</span>
+<span id="cb667-9"><a href="simulación-des-con-simmer.html#cb667-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb667-10"><a href="simulación-des-con-simmer.html#cb667-10" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb667-11"><a href="simulación-des-con-simmer.html#cb667-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;peso&quot;</span>,traj,<span class="fu">at</span>(<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb667-12"><a href="simulación-des-con-simmer.html#cb667-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb667-13"><a href="simulación-des-con-simmer.html#cb667-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>()</span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Source: peso | monitored: 1 | n_generated: 0 }
+## 1: peso0: Mi peso es 61</code></pre>
+<p>Las llegadas además, están sujetas a tres posibles valores de prioridad para acceder a los recursos y que son definidas a través del comando <code>set_prioritization</code>,</p>
+<pre><code>set_prioritization(.trj, values, mod = c(NA, &quot;+&quot;, &quot;*&quot;))</code></pre>
+<p>a través del argumento <code>values=c(priority,preemptible,restart)</code> para todas las llegadas que se crean provenientes de cualquier fuente. El significado de estos argumentos es es siguiente:</p>
+<ul>
+<li><strong>prioridad</strong> (<em>priority</em>); un valor más alto implica mayor prioridad. El valor por defecto es la mínima prioridad, representada por el 0.</li>
+<li><strong>prevención</strong> (<em>preemptible</em>); si un recurso es accedido, este valor establece la mínima prioridad de acceso que puede prevenir una llegada, es decir, el acceso al recurso. Si un recurso tiene ‘prevencion=2’ y se produce una llegada con ‘prioridad=3,’ la actividad previa se interrumpe y accede al recurso esta llegada, puesto que su orden de prioridad es mayor al de prevención.</li>
+</ul>
+<p>En cualquier caso, <em>preemtible</em> debe ser mayor o igual que <em>priority</em>, y por lo tanto sólo las llegadas con prioridad más alta pueden desencadenar una prevención o suspensión inesperada por tener llegadas con mayor prioridad.</p>
+<ul>
+<li><strong>reinicio</strong> (<em>restart</em>), cuando se ha producido una prevención, indica si al finalizar la actividad con la llegada preferente, el recurso ha de reanudar (TRUE) la actividad previa que hubo de suspender o no (0).</li>
+</ul>
+<p>El argumento <code>mod</code> permite modificar y cambiar de forma dinámica por llegada. Con <code>get_prioritization(.env)</code> se obtienen los valores de priorización para acceder a los recursos.</p>
+</div>
+<div id="interacción-con-recursos" class="section level2" number="7.7">
+<h2><span class="header-section-number">7.7</span> Interacción con recursos</h2>
+<p>Las dos actividades principales para interaccionar con recursos son <code>seize()</code> -acceso- y <code>release()</code> -salida-. Un recurso o conjunto de recursos (<em>amount</em>) entran en funcionamiento con <code>seize()</code> y dejan de funcionar con <code>release()</code>.</p>
+<pre><code>seize(.trj, resource, amount = 1, continue = NULL, post.seize = NULL,reject = NULL)
+release(.trj, resource, amount = 1)</code></pre>
+<p>La actividad <code>seize()</code> es especial en el sentido de que el resultado o salida depende del estado del recurso. Una llegada, cuando accede a un recurso, puede aprovecharlo con éxito desde el momento en que accede y continuar su camino en la trayectoria, pero también puede ponerse en cola (si el recurso está ocupado) o ser rechazada y despedida de la trayectoria. Para manejar estos casos especiales con total flexibilidad, <code>seize()</code> soporta la especificación de dos sub-trayectorias opcionales:</p>
+<ul>
+<li><code>post.seize</code>, que es la actividad que sigue despues de un <em>seize</em> exitoso, y</li>
+<li><code>reject</code>, que es la actividad que sigue si la llegada ha sido rechazada.</li>
+</ul>
+<p>Como en todas las actividades que soportan la definición de sub-trayectorias, hay un parámetro booleano llamado <em>continue</em>. Para cada sub-trayectoria, este parámetro controla si las llegadas deberían continuar a la actividad que sigue a <code>seize()</code> en la trayectoria principal después de ejecutar la sub-trayectoria.</p>
+<p>Para ejemplificar su uso consideramos un ambulatorio médico al que llegan pacientes. Si al llegar el paciente, el doctor está disponible, es atendido por este durante 5 minutos. Si no está disponible, es rechazado y derivado a consulta de enfermería, donde es atendido siempre 8 minutos, al haber 10 enfermeras disponibles. En ambos casos el paciente se va del ambulatorio al terminar la consulta a la que haya entrado.</p>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="simulación-des-con-simmer.html#cb671-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb671-2"><a href="simulación-des-con-simmer.html#cb671-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb671-3"><a href="simulación-des-con-simmer.html#cb671-3" aria-hidden="true" tabindex="-1"></a>traj<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb671-4"><a href="simulación-des-con-simmer.html#cb671-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="fu">paste</span>(<span class="st">&quot;Llega el &quot;</span>,<span class="fu">get_name</span>(env))) <span class="sc">%&gt;%</span></span>
+<span id="cb671-5"><a href="simulación-des-con-simmer.html#cb671-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(</span>
+<span id="cb671-6"><a href="simulación-des-con-simmer.html#cb671-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;doctor&quot;</span>,<span class="dv">1</span>,<span class="at">continue=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>),</span>
+<span id="cb671-7"><a href="simulación-des-con-simmer.html#cb671-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">post.seize=</span><span class="fu">trajectory</span>(<span class="st">&quot;Paciente aceptado&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-8"><a href="simulación-des-con-simmer.html#cb671-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">log_</span>(<span class="st">&quot;Pasa a consulta con el doctor&quot;</span>), </span>
+<span id="cb671-9"><a href="simulación-des-con-simmer.html#cb671-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">reject=</span><span class="fu">trajectory</span>(<span class="st">&quot;Paciente rechazado&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-10"><a href="simulación-des-con-simmer.html#cb671-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">log_</span>(<span class="st">&quot;El doctor está ocupado y es derivado a enfermería&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-11"><a href="simulación-des-con-simmer.html#cb671-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">seize</span>(<span class="st">&quot;nurse&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb671-12"><a href="simulación-des-con-simmer.html#cb671-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">log_</span>(<span class="st">&quot;Pasa a consulta con la enfermera&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb671-13"><a href="simulación-des-con-simmer.html#cb671-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">timeout</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb671-14"><a href="simulación-des-con-simmer.html#cb671-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">release</span>(<span class="st">&quot;nurse&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb671-15"><a href="simulación-des-con-simmer.html#cb671-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">log_</span>(<span class="cf">function</span>() <span class="fu">paste</span>(<span class="st">&quot;El&quot;</span>,<span class="fu">get_name</span>(env), <span class="st">&quot;sale de enfermería&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb671-16"><a href="simulación-des-con-simmer.html#cb671-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-17"><a href="simulación-des-con-simmer.html#cb671-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;doctor&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-18"><a href="simulación-des-con-simmer.html#cb671-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;El doctor ya está libre&quot;</span>)</span>
+<span id="cb671-19"><a href="simulación-des-con-simmer.html#cb671-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb671-20"><a href="simulación-des-con-simmer.html#cb671-20" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb671-21"><a href="simulación-des-con-simmer.html#cb671-21" aria-hidden="true" tabindex="-1"></a>   <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>,<span class="at">capacity=</span><span class="dv">1</span>,<span class="at">queue_size=</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-22"><a href="simulación-des-con-simmer.html#cb671-22" aria-hidden="true" tabindex="-1"></a>   <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>,<span class="at">capacity=</span><span class="dv">10</span>,<span class="at">queue_size=</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb671-23"><a href="simulación-des-con-simmer.html#cb671-23" aria-hidden="true" tabindex="-1"></a>   <span class="fu">add_generator</span>(<span class="st">&quot;paciente&quot;</span>,traj,<span class="fu">at</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb671-24"><a href="simulación-des-con-simmer.html#cb671-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">run</span>()</span></code></pre></div>
+<pre><code>## 0: paciente0: Llega el  paciente0
+## 0: paciente0: Pasa a consulta con el doctor
+## 1: paciente1: Llega el  paciente1
+## 1: paciente1: El doctor está ocupado y es derivado a enfermería
+## 1: paciente1: Pasa a consulta con la enfermera
+## 5: paciente0: El doctor ya está libre
+## 5: paciente2: Llega el  paciente2
+## 5: paciente2: Pasa a consulta con el doctor
+## 8: paciente3: Llega el  paciente3
+## 8: paciente3: El doctor está ocupado y es derivado a enfermería
+## 8: paciente3: Pasa a consulta con la enfermera
+## 9: paciente1: El paciente1 sale de enfermería
+## 10: paciente2: El doctor ya está libre
+## 16: paciente3: El paciente3 sale de enfermería</code></pre>
+<p>A la hora de asignar un recurso, podemos hacerlo especificando explícitamente el nombre del recurso (si tenemos varios), o hacerlo de forma dinámica especificando la política a seguir. Esto lo podemos hacer con la actividad <code>select()</code>, a través de los argumentos <em>resources</em> y <em>policy</em>.</p>
+<pre><code>select(.trj, resources, policy = c(&quot;shortest-queue&quot;,
+  &quot;shortest-queue-available&quot;, &quot;round-robin&quot;, &quot;round-robin-available&quot;,
+  &quot;first-available&quot;, &quot;random&quot;, &quot;random-available&quot;), id = 0)</code></pre>
+<p>Hay varias políticas implementadas internamente a las que se puede acceder por su nombre:</p>
+<ul>
+<li>‘shortest-queue’: se selecciona el recurso con la cola más corta</li>
+<li>‘round-robin’: se seleccionarán los recursos de una forma cíclica</li>
+<li>‘first-available’: se selecciona el recurso que queda disponible el primero</li>
+<li>‘random’: se selecciona un recurso aleatoriamente.</li>
+</ul>
+<p>El parámetro <em>resources</em> también puede ser dinámico e incluso existe la posibilidad de definir políticas específicas. Una vez que un recurso es seleccionado, hay versiones especiales de las actividades mencionadas para interaccionar con los recursos sin especificar su nombre, como son <code>seize_selected()</code>, <code>set_capacity_selected()</code>, etc.</p>
+<p>Pongamos como ejemplo una consulta médica con 3 doctores, que atienden a los pacientes de un modo ordenado secuencial conforme llegan a la consulta.</p>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="simulación-des-con-simmer.html#cb674-1" aria-hidden="true" tabindex="-1"></a>traj <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb674-2"><a href="simulación-des-con-simmer.html#cb674-2" aria-hidden="true" tabindex="-1"></a>  simmer<span class="sc">::</span><span class="fu">select</span>(<span class="fu">paste0</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="st">&quot;round-robin&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-3"><a href="simulación-des-con-simmer.html#cb674-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize_selected</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-4"><a href="simulación-des-con-simmer.html#cb674-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-5"><a href="simulación-des-con-simmer.html#cb674-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release_selected</span>(<span class="dv">1</span>)</span>
+<span id="cb674-6"><a href="simulación-des-con-simmer.html#cb674-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb674-7"><a href="simulación-des-con-simmer.html#cb674-7" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb674-8"><a href="simulación-des-con-simmer.html#cb674-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;doctor1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-9"><a href="simulación-des-con-simmer.html#cb674-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;doctor2&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-10"><a href="simulación-des-con-simmer.html#cb674-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;doctor3&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-11"><a href="simulación-des-con-simmer.html#cb674-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, traj, <span class="fu">at</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb674-12"><a href="simulación-des-con-simmer.html#cb674-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb674-13"><a href="simulación-des-con-simmer.html#cb674-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_mon_resources</span>()</span></code></pre></div>
+<pre><code>##   resource time server queue capacity queue_size system limit replication
+## 1  doctor1    0      1     0        1        Inf      1   Inf           1
+## 2  doctor2    1      1     0        1        Inf      1   Inf           1
+## 3  doctor3    2      1     0        1        Inf      1   Inf           1
+## 4  doctor1    5      0     0        1        Inf      0   Inf           1
+## 5  doctor2    6      0     0        1        Inf      0   Inf           1
+## 6  doctor3    7      0     0        1        Inf      0   Inf           1</code></pre>
+</div>
+<div id="interacción-con-fuentes" class="section level2" number="7.8">
+<h2><span class="header-section-number">7.8</span> Interacción con fuentes</h2>
+<p>Hay cuatro actividades específicas para modificar las fuentes de llegadas. Una llegada puede activar <code>activate()</code> o desactivar <code>deactivate()</code> una fuente, pero también puede modificar la trayectoria a la que se adhieren las llegadas que aparecen (derivarlas a otras trayectorias), con <code>set_trajectory()</code>, o especificar una nueva distribución entre-llegadas con <code>set_source()</code>. Para seleccionar dinámicamente una fuente, el parámetro que especifica el nombre de la fuente en todos estos métodos puede ser dinámico.</p>
+<pre><code>activate(.trj, sources)
+deactivate(.trj, sources)
+set_trajectory(.trj, sources, trajectory)
+set_source(.trj, sources, object)  </code></pre>
+<p>En el ejemplo a continuación, una llegada, al acceder a la trayectoria, desactiva la fuente que genera llegadas cada segundo, deja transcurrir 1 segundo y después vuelve a activarla.</p>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="simulación-des-con-simmer.html#cb677-1" aria-hidden="true" tabindex="-1"></a>traj<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb677-2"><a href="simulación-des-con-simmer.html#cb677-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">deactivate</span>(<span class="st">&quot;dummy&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-3"><a href="simulación-des-con-simmer.html#cb677-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-4"><a href="simulación-des-con-simmer.html#cb677-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(<span class="st">&quot;dummy&quot;</span>) </span>
+<span id="cb677-5"><a href="simulación-des-con-simmer.html#cb677-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb677-6"><a href="simulación-des-con-simmer.html#cb677-6" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb677-7"><a href="simulación-des-con-simmer.html#cb677-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;dummy&quot;</span>,traj,<span class="cf">function</span>() <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-8"><a href="simulación-des-con-simmer.html#cb677-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-9"><a href="simulación-des-con-simmer.html#cb677-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_mon_arrivals</span>()</span></code></pre></div>
+<pre><code>##     name start_time end_time activity_time finished replication
+## 1 dummy0          1        2             1     TRUE           1
+## 2 dummy1          3        4             1     TRUE           1
+## 3 dummy2          5        6             1     TRUE           1
+## 4 dummy3          7        8             1     TRUE           1</code></pre>
+<p>En este otro ejemplo se define un simulador que genera llamadas cada 2 segundos y las redirige a la trayectoria ‘traj2.’ Una vez allí, la fuente de llamadas se modifica para que a partir de que la primera llamada finalice (estando 2 segundos en ‘traj2’), se generen llamadas cada segundo y se redirijan estas a la trayectoria ‘traj1.’</p>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="simulación-des-con-simmer.html#cb679-1" aria-hidden="true" tabindex="-1"></a>traj1 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb679-2"><a href="simulación-des-con-simmer.html#cb679-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">1</span>)</span>
+<span id="cb679-3"><a href="simulación-des-con-simmer.html#cb679-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb679-4"><a href="simulación-des-con-simmer.html#cb679-4" aria-hidden="true" tabindex="-1"></a>traj2 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb679-5"><a href="simulación-des-con-simmer.html#cb679-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_source</span>(<span class="st">&quot;llamada&quot;</span>, <span class="cf">function</span>() <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb679-6"><a href="simulación-des-con-simmer.html#cb679-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_trajectory</span>(<span class="st">&quot;llamada&quot;</span>, traj1) <span class="sc">%&gt;%</span></span>
+<span id="cb679-7"><a href="simulación-des-con-simmer.html#cb679-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">2</span>)</span>
+<span id="cb679-8"><a href="simulación-des-con-simmer.html#cb679-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb679-9"><a href="simulación-des-con-simmer.html#cb679-9" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb679-10"><a href="simulación-des-con-simmer.html#cb679-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;llamada&quot;</span>, traj2, <span class="cf">function</span>() <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb679-11"><a href="simulación-des-con-simmer.html#cb679-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb679-12"><a href="simulación-des-con-simmer.html#cb679-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_mon_arrivals</span>()</span></code></pre></div>
+<pre><code>##       name start_time end_time activity_time finished replication
+## 1 llamada0          2        4             2     TRUE           1
+## 2 llamada1          3        4             1     TRUE           1
+## 3 llamada2          4        5             1     TRUE           1</code></pre>
+</div>
+<div id="ramificación" class="section level2" number="7.9">
+<h2><span class="header-section-number">7.9</span> Ramificación</h2>
+<p>Una rama (branch) es un punto en una trayectoria en el cual se pueden seguir una o más sub-trayectorias. <code>simmer</code> soporta dos tipos de ramificación:</p>
+<ul>
+<li><p>La actividad <code>branch()</code> coloca la llegada en una de las sub-trayectorias que dependen de alguna condición evaluada en un parámetro dinámico llamado <em>option</em>. Es el equivalente de una condición <em>if/else</em>, es decir, si el valor de <em>option</em> es ‘i,’ entonces se ejecutará la sub-trayectoria ‘i.’</p></li>
+<li><p>Por otro lado, la actividad <code>clone()</code> genera n ramas paralelas (clonadas) y replica la llegada n-1 veces, colocando cada una de ellas en las n sub-trayectorias creadas. <code>clone()</code> es la única actividad de sub-trayectorias que no acepta un parámetro <em>continue</em>. Por defecto todos los clones continúan en la trayectoria principal después de esta actividad. Para borrar todos los clones excepto uno, se utiliza la actividad <code>synchronize()</code>.</p></li>
+</ul>
+<pre><code>branch(.trj, option, continue, ...)
+clone(.trj, n, ...)
+synchronize(.trj, wait = TRUE, mon_all = FALSE)</code></pre>
+<p>En el ejemplo a continuación simulamos un juego en el que el jugador lanza una moneda. Si llega durante la primera hora (<em>now(env)=1</em>), gana un caramelo y se va, y si no, pierde dos caramelos que ha de regalar a María y a José.</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="simulación-des-con-simmer.html#cb682-1" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb682-2"><a href="simulación-des-con-simmer.html#cb682-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb682-3"><a href="simulación-des-con-simmer.html#cb682-3" aria-hidden="true" tabindex="-1"></a>traj<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb682-4"><a href="simulación-des-con-simmer.html#cb682-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">branch</span>(</span>
+<span id="cb682-5"><a href="simulación-des-con-simmer.html#cb682-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">option=</span><span class="cf">function</span>() <span class="fu">now</span>(env), <span class="at">continue=</span><span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>), <span class="co">#si 1 la 1ª trayectoria y se va; si 2 la 2ª trayectoria y sigue</span></span>
+<span id="cb682-6"><a href="simulación-des-con-simmer.html#cb682-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span> <span class="fu">log_</span>(<span class="cf">function</span>() <span class="fu">paste</span>(<span class="fu">get_name</span>(env),<span class="st">&quot;Ha llegado el instante&quot;</span>,<span class="fu">now</span>(env),<span class="st">&quot;, gana un caramelo y se va.&quot;</span>)), </span>
+<span id="cb682-7"><a href="simulación-des-con-simmer.html#cb682-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span> <span class="fu">log_</span>(<span class="cf">function</span>() <span class="fu">paste</span>(<span class="fu">get_name</span>(env),<span class="st">&quot;Ha llegado el instante&quot;</span>,<span class="fu">now</span>(env),<span class="st">&quot;y regala dos caramelos&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb682-8"><a href="simulación-des-con-simmer.html#cb682-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clone</span>(<span class="at">n=</span><span class="dv">2</span>, </span>
+<span id="cb682-9"><a href="simulación-des-con-simmer.html#cb682-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span> <span class="fu">log_</span>(<span class="st">&quot;uno a María&quot;</span>), </span>
+<span id="cb682-10"><a href="simulación-des-con-simmer.html#cb682-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span> <span class="fu">log_</span>(<span class="st">&quot;otro a José&quot;</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb682-11"><a href="simulación-des-con-simmer.html#cb682-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">synchronize</span>() </span>
+<span id="cb682-12"><a href="simulación-des-con-simmer.html#cb682-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb682-13"><a href="simulación-des-con-simmer.html#cb682-13" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb682-14"><a href="simulación-des-con-simmer.html#cb682-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;Jugador&quot;</span>,traj,<span class="fu">at</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb682-15"><a href="simulación-des-con-simmer.html#cb682-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb682-16"><a href="simulación-des-con-simmer.html#cb682-16" aria-hidden="true" tabindex="-1"></a>  invisible</span></code></pre></div>
+<pre><code>## 1: Jugador0: Jugador0 Ha llegado el instante 1 , gana un caramelo y se va.
+## 2: Jugador1: Jugador1 Ha llegado el instante 2 y regala dos caramelos
+## 2: Jugador1: uno a María
+## 2: Jugador1: otro a José</code></pre>
+</div>
+<div id="bucles" class="section level2" number="7.10">
+<h2><span class="header-section-number">7.10</span> Bucles</h2>
+<p>Hay un comando llamado <code>rollback()</code> útil para moverse hacia atrás en una trayectoria y ejecutar bucles sobre una serie de actividades. Esta actividad provoca que la llegada retroceda un cierto número de actividades <em>amount</em> (que pueden ser dinámicas) un cierto número de veces <em>times</em>. Si se utiliza una función de chequeo <em>check</em>, el parámetro <em>times</em> es ignorado y la llegada determina si debe retroceder cada vez que choca con <em>rollback</em>.</p>
+<pre><code>rollback(.trj, amount, times = Inf, check = NULL)</code></pre>
+<p>En el siguiente ejemplo, un jugador accede a un reto de resistencia en el que ha de levantar pesas y mantenerlas. Por cada 5 minutos que aguante, recibirá una recompensa de 25€. El jugador es capaz de aguantar 30 minutos, pero la máxima recompensa a recibir es de 100€, por lo que se detendrá cuando consiga a esa cantidad.</p>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="simulación-des-con-simmer.html#cb685-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span> <span class="fu">simmer</span>()</span>
+<span id="cb685-2"><a href="simulación-des-con-simmer.html#cb685-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb685-3"><a href="simulación-des-con-simmer.html#cb685-3" aria-hidden="true" tabindex="-1"></a>traj <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb685-4"><a href="simulación-des-con-simmer.html#cb685-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_attribute</span>(<span class="st">&quot;var&quot;</span>, <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb685-5"><a href="simulación-des-con-simmer.html#cb685-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>()</span>
+<span id="cb685-6"><a href="simulación-des-con-simmer.html#cb685-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">&quot;Tiempo de resistencia:&quot;</span>,<span class="fu">now</span>(env),<span class="st">&quot;. Ganancia=&quot;</span>, <span class="fu">get_attribute</span>(env, <span class="st">&quot;var&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb685-7"><a href="simulación-des-con-simmer.html#cb685-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_attribute</span>(<span class="st">&quot;var&quot;</span>, <span class="dv">25</span>, <span class="at">mod=</span><span class="st">&quot;+&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb685-8"><a href="simulación-des-con-simmer.html#cb685-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">5</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb685-9"><a href="simulación-des-con-simmer.html#cb685-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rollback</span>(<span class="dv">3</span>, <span class="at">check=</span><span class="cf">function</span>() <span class="fu">get_attribute</span>(env, <span class="st">&quot;var&quot;</span>) <span class="sc">&lt;=</span> <span class="dv">100</span>) </span>
+<span id="cb685-10"><a href="simulación-des-con-simmer.html#cb685-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb685-11"><a href="simulación-des-con-simmer.html#cb685-11" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb685-12"><a href="simulación-des-con-simmer.html#cb685-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;dummy&quot;</span>, traj, <span class="fu">at</span>(<span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb685-13"><a href="simulación-des-con-simmer.html#cb685-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span> invisible</span></code></pre></div>
+<pre><code>## 0: dummy0: Tiempo de resistencia: 0 . Ganancia= 0
+## 5: dummy0: Tiempo de resistencia: 5 . Ganancia= 25
+## 10: dummy0: Tiempo de resistencia: 10 . Ganancia= 50
+## 15: dummy0: Tiempo de resistencia: 15 . Ganancia= 75
+## 20: dummy0: Tiempo de resistencia: 20 . Ganancia= 100</code></pre>
+</div>
+<div id="ejecución-en-lotes" class="section level2" number="7.11">
+<h2><span class="header-section-number">7.11</span> Ejecución en lotes</h2>
+<p>La ejecución en lotes o <em>batching</em> consiste en acumular varias llegadas antes de que puedan continuar su camino en la trayectoria de modo unitario. Esto significa, por ejemplo, que si 10 llegadas en un lote intenta acceder a una unidad de cierto recurso, sólo una unidad puede ser asignada, y no las 10. Un lote se puede descomponer con <code>separate()</code>, salvo que se marque como <code>permanent=TRUE</code>.</p>
+<p>Por defecto todas las llegadas que acceden a un lote se juntan en él, y esperan hasta que se consigue el número esperado de llegadas <em>n</em>. Sin embargo, las llegadas pueden evitar unirse al lote bajo alguna restricción si se proporciona una función booleana opcional, <em>rule</em>. También un lote se puede agrupar para acceder a un recurso antes de acumular el tamaño del lote, si se especifica un tiempo límite para acceder con <em>timeout</em>. Los lotes se comparten sólo por llegadas que se añaden a la misma trayectoria directamente. Siempre que se necesite un lote compartido globalmente, se ha de especificar un nombre con <em>name</em>.</p>
+<pre><code>batch(.trj, n, timeout = 0, permanent = FALSE, name = &quot;&quot;, rule = NULL)
+separate(.trj)</code></pre>
+<p>Un ejemplo de sistema en el que puede tener sentido la ejecución por lotes es la visita guiada a un museo, en la que son precisos 5 visitantes para asignar un guía e iniciar la visita. Si en 10 minutos no se han conseguido los visitantes, se iniciará la visita igualmente con los visitantes disponibles. La visita dura 5 minutos y, puesto que hay un único guía, será preciso esperar a su finalización para empezar la siguiente. Los tiempos entre llegadas provienen de una distribución exponencial de media 5.</p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="simulación-des-con-simmer.html#cb688-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb688-2"><a href="simulación-des-con-simmer.html#cb688-2" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>()</span>
+<span id="cb688-3"><a href="simulación-des-con-simmer.html#cb688-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-4"><a href="simulación-des-con-simmer.html#cb688-4" aria-hidden="true" tabindex="-1"></a>visita<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb688-5"><a href="simulación-des-con-simmer.html#cb688-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">batch</span>(<span class="at">n=</span><span class="dv">5</span>,<span class="at">timeout=</span><span class="dv">10</span>,<span class="at">name=</span><span class="st">&quot;visitaguiada&quot;</span>,<span class="at">permanent=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb688-6"><a href="simulación-des-con-simmer.html#cb688-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;guia&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb688-7"><a href="simulación-des-con-simmer.html#cb688-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Comienza la visita con el guía&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb688-8"><a href="simulación-des-con-simmer.html#cb688-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb688-9"><a href="simulación-des-con-simmer.html#cb688-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;guia&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb688-10"><a href="simulación-des-con-simmer.html#cb688-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Visita terminada&quot;</span>) </span>
+<span id="cb688-11"><a href="simulación-des-con-simmer.html#cb688-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb688-12"><a href="simulación-des-con-simmer.html#cb688-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-13"><a href="simulación-des-con-simmer.html#cb688-13" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span>env <span class="sc">%&gt;%</span></span>
+<span id="cb688-14"><a href="simulación-des-con-simmer.html#cb688-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;guia&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb688-15"><a href="simulación-des-con-simmer.html#cb688-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;visitante&quot;</span>, visita,<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb688-16"><a href="simulación-des-con-simmer.html#cb688-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb688-17"><a href="simulación-des-con-simmer.html#cb688-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="at">until=</span><span class="dv">50</span>) </span></code></pre></div>
+<pre><code>## simmer environment: anonymous | now: 0 | next: 0
+## { Monitor: in memory }
+## { Resource: guia | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }
+## { Source: visitante | monitored: 1 | n_generated: 0 }
+## 14.3965: batch_visitaguiada: Comienza la visita con el guía
+## 19.3965: batch_visitaguiada: Visita terminada
+## 25.0774: batch_visitaguiada: Comienza la visita con el guía
+## 30.0774: batch_visitaguiada: Visita terminada
+## 39.3721: batch_visitaguiada: Comienza la visita con el guía
+## 44.3721: batch_visitaguiada: Visita terminada</code></pre>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="simulación-des-con-simmer.html#cb690-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mon_arrivals</span>(env)</span></code></pre></div>
+<pre><code>##         name start_time end_time activity_time finished replication
+## 1 visitante0   4.396467 19.39647             5     TRUE           1
+## 2 visitante1   9.535182 19.39647             5     TRUE           1
+## 3 visitante2  15.077402 30.07740             5     TRUE           1
+## 4 visitante3  18.904553 30.07740             5     TRUE           1
+## 5 visitante4  24.119116 30.07740             5     TRUE           1
+## 6 visitante5  29.372144 44.37214             5     TRUE           1
+## 7 visitante6  34.084774 44.37214             5     TRUE           1
+## 8 visitante7  38.811458 44.37214             5     TRUE           1</code></pre>
+</div>
+<div id="programación-asíncrona" class="section level2" number="7.12">
+<h2><span class="header-section-number">7.12</span> Programación asíncrona</h2>
+<p>Hay ciertos métodos que permiten eventos asíncronos:</p>
+<ul>
+<li><p>La actividad <code>send()</code> emite una o más señales (<em>signals</em>) a todas las llegadas que se suscriben a ellas. Las señales se pueden desencadenar inmediatamente o después de cierto retraso (<em>delay</em>). En ese caso, los dos parámetros, <em>signals</em> y <em>delay</em>, pueden ser dinámicos.</p></li>
+<li><p>Las llegadas pueden bloquearse y esperar con <code>wait()</code> hasta que se recibe cierta señal.</p></li>
+<li><p>Con <code>trap()</code> las llegadas pueden suscribirse a señales (<em>signals</em>) y (opcionalmente) asignar un manipulador (de señales) <em>handler</em>. Si se proporciona el <em>handler</em>, la llegada detiene la atividad actual hasta que recibe la señal. Después, la actividad continúa desde el punto de interrupción. Sin embargo, si la llegada está esperando en un recurso de cola, las señales atrapadas se ignoran. Lo mismo ocurre con un lote: todas las señales suscritas antes de entrar a un lote son ignoradas.</p></li>
+<li><p>Finalmente la actividad <code>untrap()</code>se puede utilizar para cancelar la suscripción a <em>signals</em>.</p></li>
+</ul>
+<pre><code>send(.trj, signals, delay = 0)
+wait(.trj)
+trap(.trj, signals, handler = NULL, interruptible = TRUE)
+untrap(.trj, signals)</code></pre>
+<p>Por defecto los manipuladores de señales (<em>signal handlers</em>) pueden ser interrumpidos también por otras señales, lo que significa que un manipulador (<em>handler</em>) puede permanecer reiniciándose si se están emitiendo suficientes señales. Si se necesita un manipulador que no pueda ser interrumpido, hay que utilizar el parámetro <code>interruptible=FALSE</code> en <code>trap()</code>.</p>
+<p>En el ejemplo a continuación, una inteligencia artificial reclama una clave de acceso al usuario para desbloquear un recurso digital y permitirle el acceso. El usuario proporciona la clave de acceso al cabo de 5 segundos. La IA recibe la clave y desbloquea el recurso.</p>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="simulación-des-con-simmer.html#cb693-1" aria-hidden="true" tabindex="-1"></a>ia.acceso<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb693-2"><a href="simulación-des-con-simmer.html#cb693-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Solicito clave de acceso&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb693-3"><a href="simulación-des-con-simmer.html#cb693-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trap</span>(<span class="st">&quot;clave&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb693-4"><a href="simulación-des-con-simmer.html#cb693-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wait</span>() <span class="sc">%&gt;%</span>  </span>
+<span id="cb693-5"><a href="simulación-des-con-simmer.html#cb693-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Clave recibida y acceso permitido&quot;</span>)</span>
+<span id="cb693-6"><a href="simulación-des-con-simmer.html#cb693-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb693-7"><a href="simulación-des-con-simmer.html#cb693-7" aria-hidden="true" tabindex="-1"></a>usuario<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb693-8"><a href="simulación-des-con-simmer.html#cb693-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Clave enviada&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb693-9"><a href="simulación-des-con-simmer.html#cb693-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">send</span>(<span class="st">&quot;clave&quot;</span>) </span>
+<span id="cb693-10"><a href="simulación-des-con-simmer.html#cb693-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb693-11"><a href="simulación-des-con-simmer.html#cb693-11" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb693-12"><a href="simulación-des-con-simmer.html#cb693-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;ia.acceso&quot;</span>,ia.acceso,<span class="fu">at</span>(<span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb693-13"><a href="simulación-des-con-simmer.html#cb693-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;usuario&quot;</span>,usuario,<span class="fu">at</span>(<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb693-14"><a href="simulación-des-con-simmer.html#cb693-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb693-15"><a href="simulación-des-con-simmer.html#cb693-15" aria-hidden="true" tabindex="-1"></a>  invisible</span></code></pre></div>
+<pre><code>## 0: ia.acceso0: Solicito clave de acceso
+## 5: usuario0: Clave enviada
+## 5: ia.acceso0: Clave recibida y acceso permitido</code></pre>
+</div>
+<div id="renuncias" class="section level2" number="7.13">
+<h2><span class="header-section-number">7.13</span> Renuncias</h2>
+<p>Además de ser rechazadas cuando tratan de acceder a un recurso, las llegadas pueden dejar una trayectoria en cualquier momento, síncrona o asíncronamente. En principio, renunciar significa que una llegada abandona la trayectoria en un momento dado. La actividad más simple que permite esto es <code>leave()</code>, que inmediatamente desencadena la acción dada alguna probabilidad. Además, <code>renege_in()</code> y <code>renege_if()</code> desencadena la renuncia asíncronamente después de algún tiempo <em>timeout=t</em> o si se recibe una señal, respectivamente, salvo que la acción sea abortada con <code>renege_abort()</code>. Los dos métodos <code>renege_in()</code> y <code>renege_if()</code> aceptan una subtrayectoria opcional, <em>out</em>, que se ejecuta directamente antes de abandonar la trayectoria.</p>
+<pre><code>leave(.trj, prob, out = NULL, keep_seized = TRUE)
+renege_in(.trj, t, out = NULL, keep_seized = FALSE)
+renege_if(.trj, signal, out = NULL, keep_seized = FALSE)
+renege_abort(.trj)</code></pre>
+<p>En el ejemplo siguiente los clientes llegan a un banco con un solo empleado, del que se</p>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="simulación-des-con-simmer.html#cb696-1" aria-hidden="true" tabindex="-1"></a>banco<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb696-2"><a href="simulación-des-con-simmer.html#cb696-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;He llegado al banco&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-3"><a href="simulación-des-con-simmer.html#cb696-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># se marcha si no es atendido en 5 minutos</span></span>
+<span id="cb696-4"><a href="simulación-des-con-simmer.html#cb696-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">renege_in</span>(</span>
+<span id="cb696-5"><a href="simulación-des-con-simmer.html#cb696-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,</span>
+<span id="cb696-6"><a href="simulación-des-con-simmer.html#cb696-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">out=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb696-7"><a href="simulación-des-con-simmer.html#cb696-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">log_</span>(<span class="st">&quot;He colmado mi paciencia. Me voy...&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb696-8"><a href="simulación-des-con-simmer.html#cb696-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;empleado&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-9"><a href="simulación-des-con-simmer.html#cb696-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># me quedo si soy atendido en 5 minutos</span></span>
+<span id="cb696-10"><a href="simulación-des-con-simmer.html#cb696-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">renege_abort</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb696-11"><a href="simulación-des-con-simmer.html#cb696-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Me están atendiendo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-12"><a href="simulación-des-con-simmer.html#cb696-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-13"><a href="simulación-des-con-simmer.html#cb696-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;empleado&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-14"><a href="simulación-des-con-simmer.html#cb696-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;He terminado&quot;</span>)</span>
+<span id="cb696-15"><a href="simulación-des-con-simmer.html#cb696-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb696-16"><a href="simulación-des-con-simmer.html#cb696-16" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb696-17"><a href="simulación-des-con-simmer.html#cb696-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;empleado&quot;</span>,<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-18"><a href="simulación-des-con-simmer.html#cb696-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>,banco,<span class="fu">at</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb696-19"><a href="simulación-des-con-simmer.html#cb696-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb696-20"><a href="simulación-des-con-simmer.html#cb696-20" aria-hidden="true" tabindex="-1"></a>  invisible</span></code></pre></div>
+<pre><code>## 0: cliente0: He llegado al banco
+## 0: cliente0: Me están atendiendo
+## 1: cliente1: He llegado al banco
+## 6: cliente1: He colmado mi paciencia. Me voy...
+## 10: cliente0: He terminado</code></pre>
+</div>
+<div id="ejemplos" class="section level2" number="7.14">
+<h2><span class="header-section-number">7.14</span> Ejemplos</h2>
+<p>El concepto de trayectoria desarrollado en <code>simmer</code> da lugar a un modo natural de simular una amplia variedad de problemas relacionados con Cadenas de Markov continuas en el tiempo (CTMC), procesos de nacimiento-muerte y sistemas de colas.</p>
+<div id="proceso-industrial" class="section level3" number="7.14.1">
+<h3><span class="header-section-number">7.14.1</span> Proceso industrial</h3>
+<p>Utilizamos la ilustración de un proceso industrial de Pidd (1988), Section 5.3.1, base de la introducción del artículo de Ucar et al (2019), en el que describe de modo completo la simulación del proceso con <code>simmer</code>, y que traducimos y comentamos a continuación.</p>
+<p>Consideramos un negocio de trabajos de ingeniería, en la que hay varias máquinas idénticas. Cada máquina es capaz de procesar cualquier trabajo que llegue. Hay un suministro de trabajos sin perspectivas de escasez. Los trabajos se asignan a la primera máquina disponible. El tiempo en completar un trabajo es variable, pero depende de la máquina que se utilice. Las máquinas están a cargo de los operarios, que las revisa y realizan una serie de tareas sobre ellas.</p>
+<p>El proceso está pues constituido por dos tipos de recursos:</p>
+<ul>
+<li>máquinas, a las que llegan trabajos (jobs)</li>
+<li>operarios, a los que llegan tareas (tasks)</li>
+</ul>
+<p>Respecto a cómo ocupan su tiempo de operatividad, distinguimos entre <strong>estados</strong> y <strong>actividades</strong>. Estas últimas se refieren a tareas que conllevan cierto tiempo para ser completadas. En la Figura</p>
+<p>Las actividades que realizan los operarios son:</p>
+<ul>
+<li>RESET: resetear/reinicializar la máquina, si no muestra desgaste que afecte a su funcionalidad</li>
+<li>RETOOL: reparar la máguina si aprecia algún desgaste que afecta al funcionamiento.
+Después de una reparación (RETOOL) y antes de reiniciar el trabajo, toda máquina ha de ser reinicializada (RESET).</li>
+<li>AWAY: salir un rato para atender sus necesidades personales.</li>
+</ul>
+<p>La actividad que llevan a cabo las máquinas es la propia realización del trabajo (RUNNING).</p>
+<p>Se pueden identificar dos clases de procesos o fuentes de llegadas, que generan:</p>
+<ul>
+<li>los <em>trabajos de tienda</em> (shop jobs), que usan las máquinas y las desgastan,</li>
+<li>las <em>tareas personales</em> que realizan los operarios que se ausentan (AWAY).</li>
+</ul>
+<p>En la Figura 1 está representado el flujo de trabajo de este sistema basado en máquinas (a la izquierda) y operarios (a la derecha). En círculos los estados posibles de los recursos y en rectángulos las actividades a completar.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:job-cycle"></span>
+<img src="images/job-cycle.png" alt="Figura 1. Ciclo de trabajo del sistema descrito en Pidd (1988)" width="80%" />
+<p class="caption">
+Figura 7.3: Figura 1. Ciclo de trabajo del sistema descrito en Pidd (1988)
+</p>
+</div>
+<p>La forma de simular este sistema con <code>simmer</code> consiste en considerar las máquinas y operarios como recursos y describir como trayectorias los ciclos de los trabajos de tienda y de las tareas personales.</p>
+<p>En primer lugar inicializamos un nuevo entorno de simulación y definimos el tiempo de compleción de las diferentes actividades, que vamos a definir según distribuciones exponenciales. Asímismo, se definen los tiempos entre llegadas para los trabajos y las tareas, con NEW_JOB y NEW_TASK respectivamente. Consideraremos también una probabilidad 0.2 para que una máquina haya de ser reparada después de hacer un trabajo (CHECK_WORN).</p>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="simulación-des-con-simmer.html#cb698-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inicializamos una semilla para reproducir siempre las mismas simulaciones</span></span>
+<span id="cb698-2"><a href="simulación-des-con-simmer.html#cb698-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb698-3"><a href="simulación-des-con-simmer.html#cb698-3" aria-hidden="true" tabindex="-1"></a><span class="co"># e inicializamos el entorno de simulación</span></span>
+<span id="cb698-4"><a href="simulación-des-con-simmer.html#cb698-4" aria-hidden="true" tabindex="-1"></a>env<span class="ot">=</span><span class="fu">simmer</span>(<span class="st">&quot;JobShop&quot;</span>)</span>
+<span id="cb698-5"><a href="simulación-des-con-simmer.html#cb698-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb698-6"><a href="simulación-des-con-simmer.html#cb698-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos cómo se simularán los tiempos de las actividades</span></span>
+<span id="cb698-7"><a href="simulación-des-con-simmer.html#cb698-7" aria-hidden="true" tabindex="-1"></a>RUNNING<span class="ot">=</span><span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb698-8"><a href="simulación-des-con-simmer.html#cb698-8" aria-hidden="true" tabindex="-1"></a>RETOOL<span class="ot">=</span> <span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb698-9"><a href="simulación-des-con-simmer.html#cb698-9" aria-hidden="true" tabindex="-1"></a>RESET<span class="ot">=</span> <span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb698-10"><a href="simulación-des-con-simmer.html#cb698-10" aria-hidden="true" tabindex="-1"></a>AWAY<span class="ot">=</span> <span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb698-11"><a href="simulación-des-con-simmer.html#cb698-11" aria-hidden="true" tabindex="-1"></a><span class="co"># chequeo de desgaste y necesidad de reparación</span></span>
+<span id="cb698-12"><a href="simulación-des-con-simmer.html#cb698-12" aria-hidden="true" tabindex="-1"></a>CHECK_WORN<span class="ot">=</span><span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>)<span class="sc">&lt;</span><span class="fl">0.2</span> <span class="co"># da FALSE/TRUE</span></span>
+<span id="cb698-13"><a href="simulación-des-con-simmer.html#cb698-13" aria-hidden="true" tabindex="-1"></a><span class="co"># y las llegadas de trabajos y tareas personales</span></span>
+<span id="cb698-14"><a href="simulación-des-con-simmer.html#cb698-14" aria-hidden="true" tabindex="-1"></a>NEW_JOB<span class="ot">=</span><span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb698-15"><a href="simulación-des-con-simmer.html#cb698-15" aria-hidden="true" tabindex="-1"></a>NEW_TASK<span class="ot">=</span><span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
+<p>La trayectoria de un trabajo (‘job’) que llega a la tienda, empieza por ocupar (seize) una máquina que está preparada (estado READY). La máquina opera durante cierto tiempo aleatorio (RUNNING) en el que está resolviendo un trabajo. Cuando la máquina finaliza este tiempo, se chequea (CHECK_WORN) para comprobar si hay que cambiar piezas o no. El chequeo se realiza a través de una ramificación en la que si hay que reparar (con probabilidad 0.2), la máquina accede a la reparación que lleva a cabo el operario durante un tiempo RETOOL; si no, continua con la reinicialización durante un tiempo RESET, también desarrollada por el operario. Finaliza el servicio con la compleción del trabajo del operario y del trabajo de la máquina.</p>
+<p>Por otro lado, las tareas personales que realizan los operadores, los mantienen ocupados durante un tiempo AWAY.</p>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="simulación-des-con-simmer.html#cb699-1" aria-hidden="true" tabindex="-1"></a>job<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb699-2"><a href="simulación-des-con-simmer.html#cb699-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;máquina&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb699-3"><a href="simulación-des-con-simmer.html#cb699-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(RUNNING) <span class="sc">%&gt;%</span></span>
+<span id="cb699-4"><a href="simulación-des-con-simmer.html#cb699-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">branch</span>(</span>
+<span id="cb699-5"><a href="simulación-des-con-simmer.html#cb699-5" aria-hidden="true" tabindex="-1"></a>    CHECK_WORN, <span class="at">continue=</span><span class="cn">TRUE</span>, </span>
+<span id="cb699-6"><a href="simulación-des-con-simmer.html#cb699-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb699-7"><a href="simulación-des-con-simmer.html#cb699-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">seize</span>(<span class="st">&quot;operario&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb699-8"><a href="simulación-des-con-simmer.html#cb699-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">timeout</span>(RETOOL) <span class="sc">%&gt;%</span></span>
+<span id="cb699-9"><a href="simulación-des-con-simmer.html#cb699-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">release</span>(<span class="st">&quot;operario&quot;</span>)</span>
+<span id="cb699-10"><a href="simulación-des-con-simmer.html#cb699-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb699-11"><a href="simulación-des-con-simmer.html#cb699-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;operario&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb699-12"><a href="simulación-des-con-simmer.html#cb699-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(RESET) <span class="sc">%&gt;%</span></span>
+<span id="cb699-13"><a href="simulación-des-con-simmer.html#cb699-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;operario&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb699-14"><a href="simulación-des-con-simmer.html#cb699-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;máquina&quot;</span>)</span>
+<span id="cb699-15"><a href="simulación-des-con-simmer.html#cb699-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb699-16"><a href="simulación-des-con-simmer.html#cb699-16" aria-hidden="true" tabindex="-1"></a>task<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb699-17"><a href="simulación-des-con-simmer.html#cb699-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;operario&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb699-18"><a href="simulación-des-con-simmer.html#cb699-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(AWAY) <span class="sc">%&gt;%</span></span>
+<span id="cb699-19"><a href="simulación-des-con-simmer.html#cb699-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;operario&quot;</span>)</span></code></pre></div>
+<p>Una vez que han sido definidas las trayectorias de los procesos, de las máquinas y de los operarios, dimensionamos el sistema con 10 máquinas idénticas y 5 operarios, y creamos también un generador de trabajos (jobs) y otro de tareas personales (tasks). Dejamos correr el sistema durante 1000 unidades de tiempo.</p>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="simulación-des-con-simmer.html#cb700-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb700-2"><a href="simulación-des-con-simmer.html#cb700-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;máquina&quot;</span>,<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb700-3"><a href="simulación-des-con-simmer.html#cb700-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;operario&quot;</span>,<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb700-4"><a href="simulación-des-con-simmer.html#cb700-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;job&quot;</span>,job,NEW_JOB)<span class="sc">%&gt;%</span></span>
+<span id="cb700-5"><a href="simulación-des-con-simmer.html#cb700-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;task&quot;</span>,task,NEW_TASK) <span class="sc">%&gt;%</span></span>
+<span id="cb700-6"><a href="simulación-des-con-simmer.html#cb700-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="at">until=</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb700-7"><a href="simulación-des-con-simmer.html#cb700-7" aria-hidden="true" tabindex="-1"></a>  invisible</span></code></pre></div>
+<p>El simulador monitoriza en pantalla todos los cambios de estado y tiempos de vida de todos los procesos, lo que nos permite realizar cualquier tipo de análisis sin demasiado esfuerzo adicional.
+Por ejemplo, podríamos extraer el histórico de los estados de los recursos para analizar el número medio de máquinas/operarios utilizados, así como el número de trabajos/tareas esperando ser asignados.</p>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="simulación-des-con-simmer.html#cb701-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(server,queue)<span class="sc">~</span>resource, <span class="fu">get_mon_resources</span>(env),mean)</span></code></pre></div>
+<pre><code>##   resource   server     queue
+## 1  máquina 7.987438 1.0355590
+## 2 operario 3.505732 0.4441298</code></pre>
+</div>
+<div id="sistemas-de-colas" class="section level3" number="7.14.2">
+<h3><span class="header-section-number">7.14.2</span> Sistemas de colas</h3>
+<p>Veamos cómo implementar con <code>simmer</code> una cola M/M/1 según el ejemplo mostrado en <a href="https://www.r-bloggers.com/2016/04/simulating-queueing-systems-with-simmer/">FishyOperations, 2016</a>. Las viñetas de simmer incluyen más ejemplos de sistemas M/M/c/k (<a href="https://r-simmer.org/articles/simmer-06-queueing.html">Ucar, 2020a</a>), redes de colas y modelos de Markov de tiempo continuo CTMC (<a href="https://r-simmer.org/articles/simmer-07-ctmc.html">Ucar, 2020b</a>).</p>
+<p>En la notación de Kendall (Kendall, 1953), un sistema M/M/1 tiene una distribución de llegadas exponencial con media <span class="math inline">\(\lambda\)</span>, (<strong>M</strong>/M/1), un único servidor (M/M/<strong>1</strong>), y un tiempo de servicio exponencial de media <span class="math inline">\(\mu\)</span>, (M/<strong>M</strong>/1). Por ejemplo, la gente llega a un cajero automático aproximadamente cada <span class="math inline">\(\lambda\)</span> minutos, espera su turno en la calle y saca dinero durante aproximadamente <span class="math inline">\(\mu\)</span> minutos. Se definen entonces los parámetros básicos del sistema cuando <span class="math inline">\(\rho&lt;1\)</span> (para que no se sature el sistema):</p>
+<ul>
+<li>utilización del servidor, <span class="math inline">\(\rho=\lambda/\mu\)</span></li>
+<li>promedio de clientes en el sistema (cola y cajero), <span class="math inline">\(N=\rho/(1-\rho)\)</span></li>
+<li>tiempo medio en el sistema (ley de Little), <span class="math inline">\(T=N/\lambda\)</span>.</li>
+</ul>
+<p>Si <span class="math inline">\(\rho&gt;1\)</span>, el sistema es inestable pues hay más llegadas de las que el servidor es capaz de gestionar y la cola crecerá indefinidamente.</p>
+<p>La simulación de este sistema con simmer es muy sencilla.</p>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="simulación-des-con-simmer.html#cb703-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb703-2"><a href="simulación-des-con-simmer.html#cb703-2" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">=</span><span class="dv">2</span></span>
+<span id="cb703-3"><a href="simulación-des-con-simmer.html#cb703-3" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">=</span><span class="dv">4</span></span>
+<span id="cb703-4"><a href="simulación-des-con-simmer.html#cb703-4" aria-hidden="true" tabindex="-1"></a>rho<span class="ot">=</span>lambda<span class="sc">/</span>mu</span>
+<span id="cb703-5"><a href="simulación-des-con-simmer.html#cb703-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb703-6"><a href="simulación-des-con-simmer.html#cb703-6" aria-hidden="true" tabindex="-1"></a>mm1.cajero<span class="ot">=</span><span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb703-7"><a href="simulación-des-con-simmer.html#cb703-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;cajero&quot;</span>,<span class="at">amount=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb703-8"><a href="simulación-des-con-simmer.html#cb703-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,mu)) <span class="sc">%&gt;%</span></span>
+<span id="cb703-9"><a href="simulación-des-con-simmer.html#cb703-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;cajero&quot;</span>,<span class="at">amount=</span><span class="dv">1</span>)</span>
+<span id="cb703-10"><a href="simulación-des-con-simmer.html#cb703-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb703-11"><a href="simulación-des-con-simmer.html#cb703-11" aria-hidden="true" tabindex="-1"></a>mm1.env<span class="ot">=</span><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb703-12"><a href="simulación-des-con-simmer.html#cb703-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;cajero&quot;</span>,<span class="at">capacity=</span><span class="dv">1</span>,<span class="at">queue_size=</span><span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb703-13"><a href="simulación-des-con-simmer.html#cb703-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>,mm1.cajero,<span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,lambda)) <span class="sc">%&gt;%</span></span>
+<span id="cb703-14"><a href="simulación-des-con-simmer.html#cb703-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="at">until=</span><span class="dv">2000</span>) </span></code></pre></div>
+<p>Después de la especificación de los parámetros (<span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\mu\)</span>), el primer bloque de código define la trayectoria: cada llegada será asignada al recurso, sacará dinero durante un tiempo variable que responderá a una distribución exponencial con media <span class="math inline">\(\mu\)</span> y dejará el cajero.</p>
+<p>El segundo bloque de código hace una instancia al entorno de simulación, crea el recurso, define el generador de llegadas de clientes y lanza la simulación durante 2000 unidades de tiempo.</p>
+<p>A continuación visualizamos los datos simulados de funcionamiento del sistema. En el primer gráfico, la evolución temporal de los recursos: cola y servidor. En el segundo gráfico el tiempo de espera a lo largo del periodo de simulación, y en el tercer gráfico el tiempo de servicio a lo largo del periodo de simulación.</p>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="simulación-des-con-simmer.html#cb704-1" aria-hidden="true" tabindex="-1"></a>resources<span class="ot">=</span><span class="fu">get_mon_resources</span>(mm1.env)</span>
+<span id="cb704-2"><a href="simulación-des-con-simmer.html#cb704-2" aria-hidden="true" tabindex="-1"></a>arrivals<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(mm1.env)</span>
+<span id="cb704-3"><a href="simulación-des-con-simmer.html#cb704-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resources, <span class="at">metric=</span><span class="st">&quot;usage&quot;</span>, <span class="st">&quot;cajero&quot;</span>, <span class="at">items =</span> <span class="fu">c</span>(<span class="st">&quot;server&quot;</span>,<span class="st">&quot;queue&quot;</span>))</span></code></pre></div>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-34-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb705"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb705-1"><a href="simulación-des-con-simmer.html#cb705-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric=</span><span class="st">&quot;waiting_time&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-34-2.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="simulación-des-con-simmer.html#cb707-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric=</span><span class="st">&quot;activity_time&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-34-3.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>Si queremos inferir sobre el funcionamiento del sistema a largo plazo, necesitaremos muestras, obtenidas de varias réplicas. La replicación es recomendable llevarla a cabo con la librería <em>parallel</em>, que permite lanzar en paralelo varias réplicas simultáneas.</p>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="simulación-des-con-simmer.html#cb709-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(parallel)</span></span>
+<span id="cb709-2"><a href="simulación-des-con-simmer.html#cb709-2" aria-hidden="true" tabindex="-1"></a>mm1.envs<span class="ot">=</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="cf">function</span>(i) { </span>
+<span id="cb709-3"><a href="simulación-des-con-simmer.html#cb709-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb709-4"><a href="simulación-des-con-simmer.html#cb709-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">add_resource</span>(<span class="st">&quot;cajero&quot;</span>,<span class="at">capacity=</span><span class="dv">1</span>,<span class="at">queue_size=</span><span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb709-5"><a href="simulación-des-con-simmer.html#cb709-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">add_generator</span>(<span class="st">&quot;cliente&quot;</span>,mm1.cajero,<span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">100</span>,lambda)) <span class="sc">%&gt;%</span></span>
+<span id="cb709-6"><a href="simulación-des-con-simmer.html#cb709-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">run</span>(<span class="at">until=</span><span class="dv">1000</span><span class="sc">/</span>lambda) <span class="sc">%&gt;%</span></span>
+<span id="cb709-7"><a href="simulación-des-con-simmer.html#cb709-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">wrap</span>()</span>
+<span id="cb709-8"><a href="simulación-des-con-simmer.html#cb709-8" aria-hidden="true" tabindex="-1"></a>     }, <span class="at">mc.set.seed=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Al recuperar las llegadas con <code>get_mon_arrivals</code>, obtenemos un data.frame con todas las llegadas, el instante de llegada (<em>start_time</em>) y salida (<em>end_time</em>), así como el tiempo en servicio -sin contar espera- (<em>activity_time</em>), un indicador de si ha finalizado la actividad (<em>finished</em>) y un índice de replicación (<em>replication</em>).</p>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="simulación-des-con-simmer.html#cb710-1" aria-hidden="true" tabindex="-1"></a>mm1.arrivals<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(mm1.envs) </span>
+<span id="cb710-2"><a href="simulación-des-con-simmer.html#cb710-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mm1.arrivals)</span></code></pre></div>
+<pre><code>##       name start_time  end_time activity_time finished replication
+## 1 cliente0  0.3373840 0.3988817    0.06149772     TRUE           1
+## 2 cliente1  0.8873295 1.0936262    0.20629668     TRUE           1
+## 3 cliente2  1.0175261 1.3095587    0.21593254     TRUE           1
+## 4 cliente3  1.2768201 1.7538044    0.44424568     TRUE           1
+## 5 cliente4  1.6875986 1.9712527    0.21744829     TRUE           1
+## 6 cliente5  1.8805297 2.1871458    0.21589316     TRUE           1</code></pre>
+<p>Con varias réplicas podríamos, por ejemplo, calcular el tiempo medio en el sistema (<em>end_time-start_time</em>), y con todas las medias, testar si el tiempo medio es superior o inferior a cualquier valor que marquemos, utilizando en este caso un test t-Student:</p>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="simulación-des-con-simmer.html#cb712-1" aria-hidden="true" tabindex="-1"></a>mm1.data<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(mm1.envs) <span class="sc">%&gt;%</span></span>
+<span id="cb712-2"><a href="simulación-des-con-simmer.html#cb712-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replication) <span class="sc">%&gt;%</span></span>
+<span id="cb712-3"><a href="simulación-des-con-simmer.html#cb712-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m=</span><span class="fu">mean</span>(end_time<span class="sc">-</span>start_time))</span>
+<span id="cb712-4"><a href="simulación-des-con-simmer.html#cb712-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mm1.data,<span class="fu">aes</span>(<span class="at">x=</span>replication,<span class="at">y=</span>m))<span class="sc">+</span></span>
+<span id="cb712-5"><a href="simulación-des-con-simmer.html#cb712-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb712-6"><a href="simulación-des-con-simmer.html#cb712-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-37-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb713-1"><a href="simulación-des-con-simmer.html#cb713-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(mm1.data<span class="sc">$</span>m,<span class="at">mu=</span><span class="fl">0.5</span>,<span class="at">alternative =</span><span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  mm1.data$m
+## t = -0.51444, df = 99, p-value = 0.696
+## alternative hypothesis: true mean is greater than 0.5
+## 95 percent confidence interval:
+##  0.4906473       Inf
+## sample estimates:
+## mean of x 
+## 0.4977877</code></pre>
+<p>O estudiar la utilización de los recursos,</p>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="simulación-des-con-simmer.html#cb715-1" aria-hidden="true" tabindex="-1"></a>mm1.resources<span class="ot">=</span><span class="fu">get_mon_resources</span>(mm1.envs)</span>
+<span id="cb715-2"><a href="simulación-des-con-simmer.html#cb715-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mm1.resources, <span class="at">metric=</span><span class="st">&quot;utilization&quot;</span>)</span></code></pre></div>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-38-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>O incluso testar si el tamaño de la cola (o de sujetos en el sistema) ha sido cero (o cualquier otro valor),</p>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="simulación-des-con-simmer.html#cb716-1" aria-hidden="true" tabindex="-1"></a>mm1.data<span class="ot">=</span><span class="fu">get_mon_resources</span>(mm1.envs) <span class="sc">%&gt;%</span></span>
+<span id="cb716-2"><a href="simulación-des-con-simmer.html#cb716-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replication) <span class="sc">%&gt;%</span></span>
+<span id="cb716-3"><a href="simulación-des-con-simmer.html#cb716-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n.cola=</span><span class="fu">mean</span>(queue),<span class="at">n.sistema=</span><span class="fu">mean</span>(system))</span>
+<span id="cb716-4"><a href="simulación-des-con-simmer.html#cb716-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mm1.data,<span class="fu">aes</span>(<span class="at">x=</span>replication,<span class="at">y=</span>n.cola))<span class="sc">+</span></span>
+<span id="cb716-5"><a href="simulación-des-con-simmer.html#cb716-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb716-6"><a href="simulación-des-con-simmer.html#cb716-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb716-7"><a href="simulación-des-con-simmer.html#cb716-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>n.sistema),<span class="at">color=</span><span class="st">&quot;blue&quot;</span>)<span class="sc">+</span></span>
+<span id="cb716-8"><a href="simulación-des-con-simmer.html#cb716-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>n.sistema),<span class="at">color=</span><span class="st">&quot;blue&quot;</span>)<span class="sc">+</span></span>
+<span id="cb716-9"><a href="simulación-des-con-simmer.html#cb716-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Replicación&quot;</span>,<span class="at">y=</span><span class="st">&quot;Usuarios&quot;</span>,<span class="at">caption=</span><span class="st">&quot;Figura x. Usuarios en cola (negro) y en el sistema (azul).&quot;</span>)</span></code></pre></div>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-39-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="simulación-des-con-simmer.html#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(mm1.data<span class="sc">$</span>n.cola,<span class="at">mu=</span><span class="dv">0</span>,<span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  mm1.data$n.cola
+## t = 72.742, df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is greater than 0
+## 95 percent confidence interval:
+##  0.7300316       Inf
+## sample estimates:
+## mean of x 
+## 0.7470844</code></pre>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="simulación-des-con-simmer.html#cb719-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(mm1.data<span class="sc">$</span>n.sistema,<span class="at">mu=</span><span class="dv">1</span>,<span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  mm1.data$n.sistema
+## t = 44.214, df = 99, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is greater than 1
+## 95 percent confidence interval:
+##  1.477677      Inf
+## sample estimates:
+## mean of x 
+##  1.496315</code></pre>
+</div>
+<div id="gasolinera" class="section level3" number="7.14.3">
+<h3><span class="header-section-number">7.14.3</span> Gasolinera</h3>
+<p>El ejemplo de la gasolinera es ofrecido en <a href="https://r-simmer.org/articles/simmer-07-ctmc.html">Ucar (2020b)</a> como una ejemplificación de un proceso de cadena de markov continuo en el tiempo.
+Una gasolinera tiene un único surtidor y no dispone de espacio de espera para los vehículos (si un vehículo llega mientras otro está utilizando el surtidor, ha de marcharse). Los vehículos llegan a la gasolinera según un proceso de Poisson de razón <span class="math inline">\(\lambda=3/20\)</span> vehículos por minuto. De los vehículos que llegan, el 75% son coches y el resto motocicletas. El tiempo de carga de combustible responde a una distribución exponencial con media 8 minutos para los coches y 3 para las motocicletas.</p>
+<p>Recordemos que un proceso de Poisson de parámetro <span class="math inline">\(\lambda\)</span> implica una distribución de Poisson <span class="math inline">\(Po(\lambda t)\)</span> para el número de usuarios del sistema transcurrido un tiempo <span class="math inline">\(t\)</span> y una distribución <span class="math inline">\(Exp(\lambda)\)</span> para los tiempos entre llegadas de los usuarios.</p>
+<p>Puesto que se trata de un proceso continuo en el tiempo, definimos una función que ejecuta el proceso hasta un instante <span class="math inline">\(t\)</span>. El único surtidor de la gasolinera constituye el recurso del proceso, con capacidad 1 y tamaño de la cola 0, y las llegadas de vehículos se generan según una distribución <span class="math inline">\(Exp(\lambda)\)</span>. Al producirse una llegada, se deriva al surtidor, especificando <code>amount=1</code> para provocar que si está ocupado, el vehículo se marcha (es rechazado). Puesto que el tiempo de recarga de combustible depende de si el vehículo es coche o motocicleta, y estos llegan en una proporción 3 a 1 (75% coches-25% motos), el tiempo de permanencia en el surtidor especificado con <code>timeout</code> se genera con probabilidad 0.75 con una <span class="math inline">\(Exp(1/8)\)</span> y con probabilidad 0.25 con una <span class="math inline">\(Exp(1/3)\)</span>. Transcurrido ese tiempo, el vehículo abandona el sistema.</p>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="simulación-des-con-simmer.html#cb721-1" aria-hidden="true" tabindex="-1"></a> recarga<span class="ot">&lt;-</span> <span class="cf">function</span>(t) {</span>
+<span id="cb721-2"><a href="simulación-des-con-simmer.html#cb721-2" aria-hidden="true" tabindex="-1"></a>  vehiculo <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb721-3"><a href="simulación-des-con-simmer.html#cb721-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">seize</span>(<span class="st">&quot;surtidor&quot;</span>, <span class="at">amount=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb721-4"><a href="simulación-des-con-simmer.html#cb721-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">timeout</span>(<span class="cf">function</span>() {</span>
+<span id="cb721-5"><a href="simulación-des-con-simmer.html#cb721-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> p) <span class="fu">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">1</span>])  <span class="co"># coche</span></span>
+<span id="cb721-6"><a href="simulación-des-con-simmer.html#cb721-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">else</span> <span class="fu">rexp</span>(<span class="dv">1</span>, mu[<span class="dv">2</span>])               <span class="co"># moto</span></span>
+<span id="cb721-7"><a href="simulación-des-con-simmer.html#cb721-7" aria-hidden="true" tabindex="-1"></a>    }) <span class="sc">%&gt;%</span></span>
+<span id="cb721-8"><a href="simulación-des-con-simmer.html#cb721-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">release</span>(<span class="st">&quot;surtidor&quot;</span>, <span class="at">amount=</span><span class="dv">1</span>)</span>
+<span id="cb721-9"><a href="simulación-des-con-simmer.html#cb721-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb721-10"><a href="simulación-des-con-simmer.html#cb721-10" aria-hidden="true" tabindex="-1"></a><span class="fu">simmer</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb721-11"><a href="simulación-des-con-simmer.html#cb721-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;surtidor&quot;</span>, <span class="at">capacity=</span><span class="dv">1</span>, <span class="at">queue_size=</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb721-12"><a href="simulación-des-con-simmer.html#cb721-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;vehiculo&quot;</span>, vehiculo, <span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>, lambda)) <span class="sc">%&gt;%</span></span>
+<span id="cb721-13"><a href="simulación-des-con-simmer.html#cb721-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="at">until=</span>t)</span>
+<span id="cb721-14"><a href="simulación-des-con-simmer.html#cb721-14" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
+<p>Definiendo los valores de los parámetros, hacemos correr el sistema hasta el instante <span class="math inline">\(t=5000\)</span>, y visualizamos llegadas y recurso.</p>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="simulación-des-con-simmer.html#cb722-1" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="dv">5000</span></span>
+<span id="cb722-2"><a href="simulación-des-con-simmer.html#cb722-2" aria-hidden="true" tabindex="-1"></a>lambda<span class="ot">=</span><span class="dv">3</span><span class="sc">/</span><span class="dv">20</span></span>
+<span id="cb722-3"><a href="simulación-des-con-simmer.html#cb722-3" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">8</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb722-4"><a href="simulación-des-con-simmer.html#cb722-4" aria-hidden="true" tabindex="-1"></a>p<span class="ot">=</span><span class="fl">0.75</span></span>
+<span id="cb722-5"><a href="simulación-des-con-simmer.html#cb722-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb722-6"><a href="simulación-des-con-simmer.html#cb722-6" aria-hidden="true" tabindex="-1"></a>gasolinera<span class="ot">=</span><span class="fu">recarga</span>(t) </span>
+<span id="cb722-7"><a href="simulación-des-con-simmer.html#cb722-7" aria-hidden="true" tabindex="-1"></a>llegadas<span class="ot">=</span><span class="fu">get_mon_arrivals</span>(gasolinera)</span>
+<span id="cb722-8"><a href="simulación-des-con-simmer.html#cb722-8" aria-hidden="true" tabindex="-1"></a>surtidor<span class="ot">=</span><span class="fu">get_mon_resources</span>(gasolinera)</span>
+<span id="cb722-9"><a href="simulación-des-con-simmer.html#cb722-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(llegadas, <span class="at">metric=</span><span class="st">&quot;activity_time&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-41-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="simulación-des-con-simmer.html#cb724-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(surtidor, <span class="st">&quot;usage&quot;</span>,<span class="st">&quot;surtidor&quot;</span>,<span class="at">items=</span><span class="st">&quot;system&quot;</span>)<span class="sc">+</span></span>
+<span id="cb724-2"><a href="simulación-des-con-simmer.html#cb724-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="07-simmer_files/figure-html/unnamed-chunk-41-2.png" width="95%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="referencias" class="section level2" number="7.15">
+<h2><span class="header-section-number">7.15</span> Referencias</h2>
+<p>Bache SM, Wickham H (2014). magrittr: A Forward-Pipe Operator for R. R package version 1.5. Available at <a href="https://CRAN.R-project.org/package=magrittr" class="uri">https://CRAN.R-project.org/package=magrittr</a>.</p>
+<p>Banks J (2005). Discrete-Event System Simulation. Prentice-Hall International Series in Industrial and Systems Engineering. Pearson Prentice Hall.</p>
+<p>Canadilla, P. (2019). Analysis of Queueing Networks and Models. Package ‘queueing.’ Available at <a href="https://cran.r-project.org/web/packages/queueing/" class="uri">https://cran.r-project.org/web/packages/queueing/</a>.</p>
+<p>Chubaty AM, McIntire EJB (2019). SpaDES: Develop and Run Spatially Explicit Discrete Event Simulation Models. R package version 2.0.3. Available at <a href="https://CRAN.R-project.org/package=SpaDES" class="uri">https://CRAN.R-project.org/package=SpaDES</a>.</p>
+<p>Ebert A (2018). queuecomputer: Computationally Efficient Queue Simulation. R package version 0.8.3. Available at <a href="https://CRAN.R-project.org/package=queuecomputer" class="uri">https://CRAN.R-project.org/package=queuecomputer</a>.</p>
+<p>Ebert A, Wu P, Mengersen K, Ruggeri F (2017). Computationally Efficient Simulation of Queues: The R Package queuecomputer.” arXiv:1703.02151. ArXiv.org E-Print Archive. Available at <a href="http://arxiv.org/abs/1703.02151" class="uri">http://arxiv.org/abs/1703.02151</a>.</p>
+<p>FishyOperations in R-Bloggers (2016). Simulating queueing systems with simmer. Available at <a href="https://www.r-bloggers.com/2016/04/simulating-queueing-systems-with-simmer/" class="uri">https://www.r-bloggers.com/2016/04/simulating-queueing-systems-with-simmer/</a>.</p>
+<p>Kendall DG (1953). Stochastic Processes Occurring in the Theory of Queues and their Analysis by the Method of the Imbedded Markov Chain.” The Annals of Mathematical Statistics, 24(3), 338-354. Available at <a href="https://doi.org/10.1214/aoms/1177728975" class="uri">https://doi.org/10.1214/aoms/1177728975</a>.</p>
+<p>Lauwens B (2017). SimJulia.jl: Combined Continuous-Time / Discrete-Event Process Ori-ented Simulation Framework Written in Julia. Julia package version 0.5. Available at <a href="https://github.com/BenLauwens/SimJulia.jl" class="uri">https://github.com/BenLauwens/SimJulia.jl</a>.</p>
+<p>Law AM, Kelton WD (2000). Simulation Modeling and Analysis. McGraw-Hill Series in
+Industrial Engineering and Management Science. McGraw-Hill.</p>
+<p>Pidd M (1988). Computer Simulation in Management Science. John Wiley &amp; Sons.</p>
+<p>Shannon RE (1975). Systems Simulation: The Art and Science. Prentice-Hall.</p>
+<p>Team SimPy (2017). SimPy: Discrete-Event Simulation for Python. Python package version
+3.0.9. Available at <a href="https://simpy.readthedocs.io/en/stable" class="uri">https://simpy.readthedocs.io/en/stable</a>.</p>
+<p>Ucar, I., Smeets, B., Azcorra, A. (2019). “simmer: Discrete-Event
+Simulation for R.” <em>Journal of Statistical Software</em>, <em>90</em>(2), 1-30.
+Available at <a href="https://doi.org/10.18637/jss.v090.i02" class="uri">https://doi.org/10.18637/jss.v090.i02</a>.</p>
+<p>Ucar, I., Smeets, B. (2019a). simmer: Discrete-Event Simulation for R. R package version 4.3.0. Available at <a href="https://CRAN.R-project.org/package=simmer" class="uri">https://CRAN.R-project.org/package=simmer</a>.</p>
+<p>Ucar, I., Smeets, B. (2019b). simmer.plot: Plotting Methods for simmer. R package version 0.1.15. Available at <a href="https://CRAN.R-project.org/package=simmer.plot" class="uri">https://CRAN.R-project.org/package=simmer.plot</a>.</p>
+<p>Ucar, I., Smeets, B. (2020c) simmer: DES for R. Available at <a href="https://r-simmer.org/" class="uri">https://r-simmer.org/</a>. Documentation is available at <a href="https://r-simmer.org/reference/" class="uri">https://r-simmer.org/reference/</a>.</p>
+<p>Ucar, I. (2020a). Queueing systems, in simmer: DES for R. Available at <a href="https://r-simmer.org/articles/simmer-06-queueing.html" class="uri">https://r-simmer.org/articles/simmer-06-queueing.html</a>.</p>
+<p>Ucar, I. (2020b). Continuous-Time Markov Chains, in simmer: DES for R. Available at <a href="https://r-simmer.org/articles/simmer-07-ctmc.html" class="uri">https://r-simmer.org/articles/simmer-07-ctmc.html</a>.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="31">
+<li id="fn31"><p><a href="#ref-ucar_jstatsoft19" role="doc-biblioref"><strong>Ucar_jstatsoft19?</strong></a><a href="simulación-des-con-simmer.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p><a href="bibliografía.html#ref-shannon" role="doc-biblioref"><em>Systems Simulation: The Art and Science</em> (Prentice Hall, 1975)</a>.<a href="simulación-des-con-simmer.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p><a href="bibliografía.html#ref-lawkelton" role="doc-biblioref">Averill M. Law and W. David Kelton, <em>Simulation Modeling and Analysis, 3rd Edition</em> (McGraw-Hill Education, 2000)</a>.<a href="simulación-des-con-simmer.html#fnref33" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p><a href="bibliografía.html#ref-banks" role="doc-biblioref">Barry Nelson Jerry Banks John Carson and David Nicol, <em>Discrete-Event System Simulation, Fifth Edition</em> (Pearson, 2009), <a href="https://ggplot2.tidyverse.org" role="doc-biblioref">https://ggplot2.tidyverse.org</a></a>.<a href="simulación-des-con-simmer.html#fnref34" class="footnote-back">↩︎</a></p></li>
+<li id="fn35"><p><a href="bibliografía.html#ref-banks" role="doc-biblioref">Jerry Banks and Nicol</a>.<a href="simulación-des-con-simmer.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn36"><p><a href="bibliografía.html#ref-R-simmer" role="doc-biblioref">Ucar and Smeets, <em>Simmer</em></a>.<a href="simulación-des-con-simmer.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<li id="fn37"><p><a href="bibliografía.html#ref-R-magrittr" role="doc-biblioref">Bache and Wickham, <em>Magrittr</em></a>.<a href="simulación-des-con-simmer.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p><a href="bibliografía.html#ref-spades" role="doc-biblioref">Yong Luo Alex M Chubaty Eliot J B McIntire and Steve Cumming, <em>SpaDES: Develop and Run Spatially Explicit Discrete Event Simulation Models, Vs. 2.0.7</em>, 2021, <a href="https://cran.r-project.org/web/packages/SpaDES/index.html" role="doc-biblioref">https://cran.r-project.org/web/packages/SpaDES/index.html</a></a>.<a href="simulación-des-con-simmer.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn39"><p><a href="bibliografía.html#ref-R-queuecomputer" role="doc-biblioref">Ebert, <em>Queuecomputer</em></a>.<a href="simulación-des-con-simmer.html#fnref39" class="footnote-back">↩︎</a></p></li>
+<li id="fn40"><p><a href="bibliografía.html#ref-R-queueing" role="doc-biblioref">Canadilla, <em>Queueing</em></a>.<a href="simulación-des-con-simmer.html#fnref40" class="footnote-back">↩︎</a></p></li>
+<li id="fn41"><p><a href="bibliografía.html#ref-simpy" role="doc-biblioref">Team SimPy, <span>“SimPy: Discrete-Event Simulation for Python. Python Package”</span> (Web, 2017), <a href="https://simpy.readthedocs.io/en/stable" role="doc-biblioref">https://simpy.readthedocs.io/en/stable</a></a>.<a href="simulación-des-con-simmer.html#fnref41" class="footnote-back">↩︎</a></p></li>
+<li id="fn42"><p><a href="bibliografía.html#ref-simjulia" role="doc-biblioref">Ben Lauwens, <span>“SimJulia.jl: Combined Continuous-Time / Discrete-Event Process Oriented Simulation Framework Written in Julia. Julia Package”</span> (Web, 2021), <a href="https://github.com/BenLauwens/SimJulia.jl" role="doc-biblioref">https://github.com/BenLauwens/SimJulia.jl</a></a>.<a href="simulación-des-con-simmer.html#fnref42" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-03-21.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>

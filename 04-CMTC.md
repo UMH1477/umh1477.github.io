@@ -1,24 +1,24 @@
 # Cadenas de Markov de Tiempo Contínuo {#CMTC}
 
-En esta unidad, consideramos un sistema que se observa continuamente a lo largo del tiempo, siendo $X_t$ el estado en el momento $t$, con $t \geq 0$. Siguiendo la definición de las CMTD, a continuación definimos las cadenas de Markov de tiempo continuo (CMTC).
+En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo $X_t$ el estado en el momento $t$, con $t \geq 0$. Siguiendo la definición de las CMTD, a continuación definimos las cadenas de Markov de tiempo continuo (CMTC).
 
 ::: {.yellowbox data-latex=""}
 ::: {#cmtc001 .definition}
-Un proceso estocástico $\{X_t; t \geq 0\}$ con espacio de estados $S$ se denomina CMTC si, para todo $i$ y $j$ en $S$, y $t, s \geq 0$,
+Un proceso estocástico $\{X_t; t \geq 0\}$ con espacio de estados $S$ es una cadena de Markov de tiempo continuo, CMTC, si para todo $i$ y $j$ en $S$, y $t, s \geq 0$, cumple la propiedad de Markov:
 
-$$P(X(s+t) = j \mid X(s) = i, X(u), 0 \leq u \leq s) = P(X(s+t) = j \mid X(s) = i).$$
+$$P(X_{s+t} = j \mid X_s = i, X_u, 0 \leq u \leq s) = P(X_{s+t} = j \mid X_s = i).$$
 :::
 :::
 
-La CMTC $\{X_t; t \geq 0\}$ se denomina homogénea si para $t, s \geq 0$,
+La CMTC $\{X_t; t \geq 0\}$ se denomina homogénea si el cambio entre dos instantes cualesquiera depende exclusivamente del tiempo transcurrido, esto es para cualquier $t, s \geq 0$,
 
-$$P(X(s+t) = j \mid X(s) = i) = P(X(t) = j \mid X(0) = i).$$
+$$P(X_{s+t} = j \mid X_s = i) = P(X_t = j \mid X_0 = i).$$
 
-En toda la unidad asumimos que todas las CMTC son homogéneas y tienen espacio de estados finito $\{1, 2,...,N\}$ de forma que podemos definir la probabilidad de pasar del estado $i$ al estado $j$ en un tiempo $t$ como:
+En toda esta unidad asumimos que las CMTC con las que trabajamos son homogéneas y tienen espacio de estados finito $S=\{1, 2,,...,N\}$ de forma que podemos definir la probabilidad de pasar del estado $i$ al estado $j$ en un periodo de amplitud $t, (0,t],$ como:
 
-$$p_{ij}(t) = P(X(t) = j \mid X(0) = i), \quad 1 \leq i, j \leq N.$$
+$$p_{ij}(t) = P(X_t = j \mid X_0 = i), \quad 1 \leq i, j \leq N.$$
 
-La matriz de probabilidad de transición ($P(t)$) de una CMTC $\{X_t; t \geq 0\}$ viene dada por:
+La matriz de probabilidad de transición $P(t)$ de una CMTC $\{X_t; t \geq 0\}$ viene dada por las distribuciones de probabilidad condicionadas (por filas) de pasar de un estado $i$ a un estado $j$ en un periodo de tiempo de amplitud $t$:
 
 $$P(t) = 
 \begin{pmatrix}
@@ -30,11 +30,11 @@ p_{N1}(t) & p_{N2}(t) & ... & p_{NN}(t)
 
 Dicha matriz de transición verifica que:
 
--   Probabildiades condicionadas
+-   Todos sus elementos son probabilidades condicionadas $\{p_{ij}(t); j \in S\}$
 
-$$p_{ij}(t) \geq 0, \quad  1 \leq i, j \leq N; t \geq 0$$
+$$1 \geq p_{ij}(t) \geq 0, \quad  1 \leq i, j \leq N; t \geq 0$$
 
--   La suma de las probabilidades de acceder a cualquiera de los estados a partir de un estado $i$ es igual a 1.
+-   La suma de las probabilidades en cada fila, esto es, de acceder a cualquiera de los estados a partir de un estado $i$ es igual a 1.
 
 $$\sum_{j=1}^N p_{ij}(t) = 1, \quad  1 \leq i, j \leq N; t \geq 0$$
 
@@ -42,21 +42,26 @@ $$\sum_{j=1}^N p_{ij}(t) = 1, \quad  1 \leq i, j \leq N; t \geq 0$$
 
 $$p_{ij}(s+t) =  \sum_{k=1}^N p_{ik}(s)p_{kj}(t) =  \sum_{k=1}^N p_{ik}(t)p_{kj}(s)   , \quad  1 \leq i, j \leq N; t \geq 0$$
 
-La dificultad principal con $P(t)$ es que resulta díficil de obtener de forma inmediata para la mayoria de las CMTC, al contrario de lo que ocurría con las CMTD. Necesitamos un método simple que nos permta describir de forma rápida el comportamiento del proceso. A continuación, sentamos las bases para el estudio de las CMTC a partir de los tiempos de permanencia en cada uno de los estados del proceso. Dadoq ue la única distribución que verifica la propiedad de pérdida de memoria es la exponencial, la utilizaremos como base para la construcción de la CMTC.
+
+La dificultad principal con $P(t)$ es que resulta díficil de obtener de forma inmediata para la mayoría de las CMTC, al contrario de lo que ocurría con las CMTD. Necesitamos un método simple que nos permita describir de forma rápida el comportamiento del proceso. A continuación, sentamos las bases para el estudio de las CMTC a partir de los tiempos de permanencia en cada uno de los estados del proceso. Dado que la única distribución que verifica la propiedad de pérdida de memoria es la exponencial, la utilizaremos como base para la construcción de una CMTC.
 
 ## Evolución del proceso {#CMTCA}
 
-Sea $X(t)$ el estado de un sistema en el tiempo $t$ . Supongamos que el espacio de estados del proceso estocástico $\{X_t; t \geq 0\}$ es $\{1, 2,...,N\}$. La evolución aleatoria del sistema se produce de la siguiente manera:
+Sea $X_t$ el estado de un sistema en el instante temporal $t$. Supongamos que el espacio de estados del proceso estocástico $\{X_t; t \geq 0\}$ es $S=\{1, 2,...,N\}$. La evolución aleatoria del sistema se produce de la siguiente manera:
 
--   Supongamos que el sistema comienza en el estado $i$ y permanece allí durante un tiempo $Exp(r_i)$ que denominamos **tiempo de permanencia** en el estado $i$, e $r_i$ es la tasa media de permanencia. (Recordemos que en la distribución exponencial las tasas medias son el recíproco de los tiempos medios.)
+-   Supongamos que el sistema comienza en el estado $i$ y permanece allí durante un tiempo $Exp(r_i)$ que denominamos **tiempo de permanencia** en el estado $i$, con $r_i$ la tasa media de permanencia (recordemos que en la distribución exponencial las tasas medias son el recíproco de los tiempos medios).
 
--   Al final del tiempo de permanencia en el estado $i$, el sistema realiza una transición repentina al estado $j$ con probabilidad $p_{ij}$, independientemente del tiempo que el sistema haya estado en el estado $i$. Una vez en el estado $j$, permanece allí durante un tiempo $Exp(r_j)$.
+-   Al final del tiempo de permanencia en el estado $i$, el sistema realiza una transición repentina al estado $j$ con probabilidad $p_{ij}$, independientemente del tiempo que el sistema haya permanecido en el estado $i$. Una vez en el estado $j$, permanece allí durante un tiempo $Exp(r_j)$.
 
--   A continuación, pasa a un nuevo estado $k$ con una probabilidad $p_{jk}$, independientemente de la historia del sistema hasta el momento. Y continúa de esta manera hasta que finaliza el tiempo de observación del proceso.
+-   A continuación pasa a un nuevo estado $k$ con una probabilidad $p_{jk}$, independientemente de la historia del sistema hasta el momento, y repite este comportamiento hasta que finaliza el tiempo de observación del proceso.
 
-Conviene hacer tres observaciones con respecto al funcionaminto del sistema. En primer lugar, las probabilidades de salto $p_{ij}$ no deben deben confundirse con las probabilidades de transición $p_{ij}(t)$. En este caso, $p_{ij}$ actúa como la probabilidad de que el sistema pase al estado $j$ cuando sale del estado $i$. En segundo lugar, $p_{ii} = 0$, dado que por definición el tiempo de permanencia en el estado $i$ es el tiempo que el sistema pasa en el estado $i$ hasta que sale de él. Por lo tanto, no se permite una transición de $i$ a $i$. En tercer lugar, en caso de que el estado $i$ sea absorbente (es decir el sistema permanece en el estado i para siempre una vez que llega a él), fijamos $r_i = 0$.
+Conviene hacer tres observaciones con respecto al funcionaminto del sistema:
 
-Como en el caso de la matriz de transición podemos obtner la matriz de probabildiades de salto, $P$ como:
+- En primer lugar, las probabilidades de salto $p_{ij}$ no deben deben confundirse con las probabilidades de transición $p_{ij}(t)$. En este caso, $p_{ij}$ actúa como la probabilidad de que el sistema pase al estado $j$ cuando sale del estado $i$. 
+- En segundo lugar, $p_{ii} = 0$, dado que por definición el tiempo de permanencia en el estado $i$ es el tiempo que el sistema pasa en el estado $i$ hasta que sale de él. Por lo tanto, no se permite una transición de $i$ a $i$. 
+- En tercer lugar, en caso de que el estado $i$ sea absorbente, es decir que el sistema permanece en ese estado para siempre una vez que llega a él, fijamos $r_i = 0$.
+
+Con estas premisas podremos obtener la **matriz de probabilidades de salto**, $P$, que denotaremos como:
 
 $$P = 
 \begin{pmatrix}
@@ -70,33 +75,32 @@ p_{N1} & p_{N2} & ... & p_{NN}
 El proceso estocástico $\{X_t; t \geq 0\}$ con parámetros $r_i$, $1 \leq i \leq N$, y probabilidades $p_{ij}$, $1 \leq i,j \leq N$ descrito anteriormente es una CMTC.
 :::
 
-A continuación presentamos un par de ejemplos:
+A continuación presentamos un par de ejemplos.
 
-::: {.example #excmtc001 name = "Sistema vida útil satélite"}
-
-Supongamos que la vida útil de un satélite de gran altitud es una variable aleatoria exponencial de tasa $\mu$ ($Exp(\mu)$), en meses, de forma que una vez que falla, sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso $X_t = 1$ si el satélite está operativo en el momento $t$ y 0 en caso contrario. En esta situación $r_0 = 0$ y $r_1 = \mu$ pero desconcemos los valores de $P$, aunque resulta posible obtener la matriz de transición sin más que obtener las probabilidades $p_{00}(t)$ y $p_{11}(t)$ que vienen dadas por:
+::: {.example #excmtc001}
+**Sistema de vida útil de un satélite**. Supongamos que la vida útil $T$ de un satélite de gran altitud es una variable aleatoria exponencial de tasa $\mu$ en meses, $Exp(\mu)$, de forma que una vez que falla sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso $X_t = 1$ si el satélite está operativo en el momento $t$, y 0 en caso contrario. En esta situación $r_0 = 0$ y $r_1 = \mu$, pero desconocemos los valores de $P$, aunque podremos obtener la matriz de transición calculando las probabilidades $p_{00}(t)$ y $p_{11}(t)$ que vienen dadas por:
 
 $$p_{00}(t) = P(\text{satélite no está operativo en t} \mid \text{satélite no está operativo en 0}) = 1$$
 
 $$p_{11}(t) = P(\text{satélite está operativo en t} \mid \text{satélite está operativo en 0}) = P(T >t) = e^{-\mu t}$$
 
-La matriz de transición viene dada por:
+La matriz de transición viene dada pues por:
 
 $$P(t) = 
 \begin{pmatrix}
 1 & 0\\
 1- e^{-\mu t} & e^{-\mu t} 
 \end{pmatrix}$$
-
 :::
 
-::: {.example #excmtc002 name = "Sistema del viajante"}
 
-Un vendedor vive en la ciudad A y es responsable de las ciudades A, B y C. El tiempo que pasa en cada ciudad es aleatorio. Tras un estudio, se ha determinado que la cantidad de tiempo consecutivo que pasa en una ciudad cualquiera sigue una variable aleatoria con distribución exponencial, cuya media de tiempo de estancia depende de la ciudad. En su ciudad natal pasa un tiempo medio de dos semanas, en la ciudad B pasa un tiempo medio de una semana, y en la ciudad C pasa un tiempo medio de una y media. Cuando sale de la ciudad A, lanza una moneda para determinar a qué ciudad va a continuación; cuando sale de la ciudad B o C, lanza dos monedas de manera que hay un 75% de posibilidades de volver a A y un 25% de posibilidades de ir a la otra ciudad. Sea $X_t$ una variable aleatoria que denota la ciudad en la que se encuentra el vendedor en el momento $t$, de forma que toma el valor 0 si está en A, el valor 1 si está en B, y 2 si está en C.
+::: {.example #excmtc002}
+**Sistema del viajante**. Un vendedor vive en la ciudad A y es responsable de las ciudades A, B y C. El tiempo que pasa en cada ciudad es aleatorio. Tras un estudio, se ha determinado que la cantidad de tiempo consecutivo que pasa en una ciudad cualquiera sigue una variable aleatoria con distribución exponencial, cuya media de tiempo de estancia depende de la ciudad. En su ciudad natal pasa un tiempo medio de dos semanas, en la ciudad B pasa un tiempo medio de una semana, y en la ciudad C pasa un tiempo medio de una y media. Cuando sale de la ciudad A, lanza una moneda para determinar a qué ciudad va a continuación; cuando sale de la ciudad B o C, lanza dos monedas de manera que hay un 75% de posibilidades de volver a A y un 25% de posibilidades de ir a la otra ciudad. Sea $X_t$ una variable aleatoria que denota la ciudad en la que se encuentra el vendedor en el momento $t$, de forma que toma el valor 0 si está en A, el valor 1 si está en B, y 2 si está en C.
+:::
 
 El proceso $\{X_t; t \geq 0\}$ con espacio de estados $\{0, 1, 2\}$ es una CMTC con:
 
--   tasas de permanecia (en semanas): $r_0 = 1/2, r_1 = 1/1, r_2 = 1/1.5 = 2/3$ , y
+-   tasas de permanecia (en semanas): $r_0 = 1/2=0.5, r_1 = 1, r_2 = 1/1.5 =0.67$ , y
 -   matriz de saltos
 
 $$P = 
@@ -106,21 +110,24 @@ $$P =
 0.75 & 0.25 & 0
 \end{pmatrix}$$
 
-:::
+
 
 ## Descripción del proceso {#CMTCB}
 
 En virtud del teorema \@ref(thm:thecmtc001) todas las CMTC con espacios de estado finitos que tienen tiempos de permanencia no nulos en cada estado pueden ser descritos a través de las tasas de permanencia y la matriz de saltos. En este punto detallamos este análisis e introducimos todos los conceptos necesarios para el análisis del proceso.
 
-De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante de un grafo dirigido, cuyos nodos (o vértices) indican cada uno d elos estados del proceso, y se establece un arco dirigido del nodo $i$ al nodo $j$ si $p_{ij} > 0$. La tasa de transición de $i$ a $j$, $r_{ij} = r_i p_{ij}$ , se escribe junto a este arco. Obsérvese que no hay bucles propios (arcos de $i$ a $i$). Esta representación gráfica se denomina **diagrama de tasas de la CMTC**.
+De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante un grafo dirigido cuyos nodos (o vértices) indican cada uno de los estados del proceso, y surge un arco dirigido del nodo $i$ al nodo $j$ si $p_{ij} > 0$. La tasa de transición de $i$ a $j$, $r_{ij} = r_i p_{ij}$ , se escribe junto a este arco. Obsérvese que no hay bucles propios (arcos de $i$ a $i$). Esta representación gráfica se denomina **diagrama de tasas de la CMTC**.
 
-Podemos entender la dinámica de la CMMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo $i$ durante una cantidad de tiempo $Exp(r_i)/$ y luego elige uno de los arcos de salida del nodo $i$ con probabilidades proporcionales a las tasas de los arcos y se desplaza al nodo del otro extremo del arco. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el tiempo $t$ es el estado de la CMTC en el tiempo t .
+Podemos entender la dinámica de una CMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo $i$ durante cierto periodo de tiempo de duración $Exp(r_i)$ y luego elige uno de los arcos de salida del nodo $i$ con probabilidades proporcionales a las tasas de los arcos, trasladándose al nodo que conecta dicho arco con el nodo origen $i$. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el instante $t$ es el estado de la CMTC en el instante t.
 
-En esta situación resulta posible obtner los valores de $r_i$ y $p_{ij}$ a partir de las tasas $r_{ij}$ dado que:
+En esta situación resulta posible obtener los valores de $r_i$ y $p_{ij}$ a partir de las tasas $r_{ij}$ dado que:
 
-$$r_i = \sum_{j=1}^{N} r_{ij}$$ $$p_{ij} = \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0$$
+\begin{eqnarray*}
+r_i &=& \sum_{j=1}^{N} r_{ij}\\
+p_{ij}&=&frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
+\end{eqnarray*}
 
-Para un mejor manejo de la información resulta conveniente construir la **matriz de tasas** teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz R es siempre cero. Así tenemos que:
+Para un mejor manejo de la información, resulta conveniente construir la **matriz de tasas** teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz R es siempre cero. Así tenemos que:
 
 $$R = 
 \begin{pmatrix}
@@ -130,9 +137,16 @@ r_{21} & 0 & ... & r_{2N}\\
 r_{N1} & r_{N2} & ... & 0
 \end{pmatrix}$$
 
-A partir de la matriz $R$ se puede obtener la denominada **matriz generadora** de la CMTC $Q$, que se define como:
 
-$$q_{ij} = -r_i \text{ si } i = j, \text{ y } q_{ij} = r_{ij} \text{ si } i \neq j$$ de forma que:
+A partir de la matriz $R$ se puede obtener la denominada **matriz generadora** $Q$ de la CMTC, que se define como aquella que tiene por elementos $q_{ij}$, con:
+
+$$q_{ij} = \begin{cases}
+-r_i, \quad \text{ si } i = j, \\
+r_{ij}, \quad \text{ si } i \neq j.
+\end{cases}$$ 
+
+
+de forma que:
 
 $$Q = 
 \begin{pmatrix}
@@ -143,7 +157,7 @@ r_{N1} & r_{N2} & ... & -r_N
 \end{pmatrix}$$
 
 ::: {#excmtc003 .example}
-Continuando con el sistema de vida útil del satélite del ejemplo \@ref(exm:excmtc001) podemos establecer que $r_0 = 0$ y $r_1 = \mu$, con $p_{10} = 1$ y $p_{01}$ no definida, de forma que:
+Continuando con el sistema de vida útil del satélite del ejemplo \@ref(exm:excmtc001), podemos establecer que $r_0 = 0$ y $r_1 = \mu$, con $p_{10} = 1$ y $p_{01}$ no definida, de forma que:
 :::
 
 $$R = 
@@ -156,9 +170,7 @@ $$R =
 \mu & -\mu
 \end{pmatrix}$$
 
-En esta situación el diagrama de tasas viene dado por:
-
-
+En esta situación el diagrama de tasas se construye con la librería `diagram`:
 
 \begin{figure}
 
@@ -168,6 +180,8 @@ En esta situación el diagrama de tasas viene dado por:
 
 \caption{Diagrama de tasas para el tiempo de vida del Satélite}(\#fig:05-002)
 \end{figure}
+
+
 
 ::: {#excmtc004 .example}
 Continuando con el sistema del viajante descrito en el ejemplo \@ref(exm:excmtc002) ya que conocemos las tasas medias y las probabilidades de salto podemos obtener la matriz $R$ de forma inmediata:
@@ -208,13 +222,15 @@ de forma que el diagrama de tasas viene dado por (asignamos el valor de la ciuda
 
 El diagrama representa el comportamiento de todo el proceso de viajes y estancias del vendedor.
 
-::: {.example #excmtc005 name = "Sistema vida útil de una máquina"}
 
-Consideramos un sistema compuesto por una máquina que funciona durante un cantidad de tiempo que vienee determianda por una variable aleatoria $Exp(\mu)$ hasta que falla. Una vez se detecta la averia la máquina se repara. El tiempo de reparación es una variable aleatoria $Exp(\lambda)$ y es independiente del pasado. La máquina está como nueva después de la reparación. Sea $X(t)$ el estado de la máquina en tiempo $t$, de forma que toma el valor 1 si está en marcha y 0 si está parada (está siendo reparada).
 
-En esta situación el tiempo de estancia en el estado 0 es el tiempo de reparación, de forma que $r_0 = \lambda$, mientras que el tiempo en el estado 1 es el tiempo de funcionamiento con $r_1 = \mu$. Además las probabiliddes de salto de interés son $p_{01} = 1$ y $p_{10} = 1$, dado que la máquina siempre es reparada y vuelve a funcionar y porque sabemos que la máquina debe estropearse en algún momento.
+::: {.example #excmtc005}
+**Sistema vida útil de una máquina**. Consideramos un sistema compuesto por una máquina que funciona durante un cantidad de tiempo que viene determianda por una variable aleatoria $Exp(\mu)$ hasta que falla. Una vez se detecta la avería, la máquina se repara. El tiempo de reparación es una variable aleatoria $Exp(\lambda)$ y es independiente del pasado. La máquina está como nueva después de la reparación. Sea $X(t)$ el estado de la máquina en tiempo $t$, de forma que toma el valor 1 si está en marcha y 0 si está parada (porque está siendo reparada).
+:::
 
-El proceso definido de esta forma $\{X_t; t \geq 0\}$ es una CMTC cuya matriz de tasas y matriz generadora del sietema vienen dadas por: :::
+En esta situación el tiempo de estancia en el estado 0 es el tiempo de reparación, de forma que $r_0 = \lambda$, mientras que el tiempo en el estado 1 es el tiempo de funcionamiento con $r_1 = \mu$. Además las probabiliddes de salto de interés son $p_{01} = 1$ y $p_{10} = 1$, dado que la máquina siempre es reparada y vuelve a funcionar, y porque sabemos que la máquina debe estropearse en algún momento.
+
+El proceso definido de esta forma $\{X_t; t \geq 0\}$ es una CMTC cuya matriz de tasas y matriz generadora del sistema vienen dadas por:
 
 $$R = 
 \begin{pmatrix}
@@ -237,30 +253,37 @@ El diagrama del sistema viene dado por:
 \caption{Diagrama de tasas para el sistema de una máquina}(\#fig:05-005)
 \end{figure}
 
+
+
 ## Análisis preliminar del proceso {#CMTCC}
 
-Aunque más adelante estudiaremos los aspectos teóricos para el análisis completo de una CMTC, en este punto utilizamos la simulación del sistema para analizar su comportamiento. Nos centramos en las herramientas de simulación estudiadas hasta este punto para más adelante presentar con detalle la libreria `simmer` que nos permite simular procesos y sistemas complejos.
+Aunque más adelante estudiaremos los aspectos teóricos para el análisis completo de una CMTC, en este punto utilizamos la simulación del sistema para analizar su comportamiento. Nos centramos en las herramientas de simulación estudiadas hasta este punto para más adelante presentar con detalle la librería `simmer` que nos permite simular procesos y sistemas complejos.
 
-Nos centraremos en los ejemplos \@ref(exm:excmtc002) y \@ref(exm:excmtc005) dado que le sitema descrito en el ejemplo \@ref(exm:excmtc001) se puede analizar sin más que describir la tasa corrrespondiente al tiempo de vida del satélite. Comenzamos con el algoritmo correspondiente al ejemplo \@ref(exm:excmtc005).
+Utilizamos los ejemplos \@ref(exm:excmtc002) y \@ref(exm:excmtc005) para mostrar cómo analizar un sistema, dado que el descrito en el ejemplo \@ref(exm:excmtc001) se puede analizar sin más que describir la tasa del tiempo de vida del satélite. 
+
+### Sistema de vida útil de una máquina
+
+Comenzamos con el ejemplo \@ref(exm:excmtc005), para el que vamos a construir un algoritmo con el que simular el sistema hasta cierto instante de tiempo.
+
 
 ::: {.silverbox data-latex=""}
-Algoritmo para el sistema de vidad útil de una máquina:
+Algoritmo para el sistema de vida útil de una máquina:
 
 1.  Fijar tasas de funcionamiento $\mu$ y reparación $\lambda$, así como el tiempo en que el sistema estará funcionando ($tfin$).
 2.  Fijar el tiempo de funcionamiento $tfun = 0$, tiempo de reparación $trep = 0$, y tiempo de funcionamiento del sistema $tsis = tfun + trep$.
-3.  Fijamos el número de vistas al estado de funcionamiento $nfun = 0$ y al estado de reparación $nrep =0$.
+3.  Fijar el número de vistas al estado de funcionamiento $nfun = 0$ y al estado de reparación $nrep =0$.
 
-Repetir los pasos siguientes hasta que abandonemos el sistema:
+Repetir los pasos siguientes hasta abandonar el sistema:
 
 3.  Generar $tfun \sim Exp(\mu)$ actualizando $tsis$ y $nfun$.
-4.  Si $tsis > tfin$ abandonar el sistema.
+4.  Si $tsis > tfin$, abandonar el sistema.
 5.  Generar $trep \sim Exp(\lambda)$ actualizando $tsis$ y $nrep$.
-6.  Si $tsis > tfin$ abandonar el sistema.
+6.  Si $tsis > tfin$, abandonar el sistema.
 
-Los valores $tfun$, $trep$, así como las veces que vistamos los estados de funcionamiento y reparación nos permiten describir el funcionamiento del sistema para un tiempo prefijado.
+Los valores $tfun$, $trep$, así como las veces que se visitan los estados de funcionamiento y reparación nos permiten describir el funcionamiento del sistema para un tiempo prefijado.
 :::
 
-Para facilitar el análisis establecemos que todos los tiempos del sistema están en días y que deseamos estudiar el sistema durante un año. Creamos una función que nos permite modificar los valores de la tasa del tiempo de funcionamiento (recíproco de la media de tiempo en funcionamiento ), tasa de reparación /recíproco de la media del tiempo de reparación y el tiempo total de funcionamiento del sistema. Almacenamos los resultados de cada paso por el sistema para poder realziar los análisis correspondientes.
+Para facilitar el análisis establecemos que todos los tiempos del sistema están en días y que deseamos estudiar el sistema durante un año. Creamos una función que nos permite modificar los valores de la tasa del tiempo de funcionamiento (recíproco de la media de tiempo en funcionamiento ), la tasa de reparación (recíproco de la media del tiempo de reparación) y el tiempo total de funcionamiento del sistema. Almacenamos los resultados de cada paso por el sistema para poder realizar los análisis correspondientes.
 
 
 ```r
@@ -314,7 +337,7 @@ TSIM_one_machine <- function(tasafun, tasarep, tfin)
 }
 ```
 
-Supongamos que a través de los registros históricos de funcionamiento y reparación de la máquina se sabe que el tiempo medio de funcionamiento es de 60 días ($\mu = 1/60$) y el tiempo medio de reparación es de cuatro días ($\lambda = 1/4$). Además se esta interesado en estudiar el funcionamiento del sistema para el próximo año (365 días). Estamos interesados:
+Supongamos que a través de los registros históricos de funcionamiento y reparación de la máquina se sabe que el tiempo medio de funcionamiento es de 60 días ($\mu = 1/60$) y el tiempo medio de reparación es de cuatro días ($\lambda = 1/4$). Además se está interesado en estudiar el funcionamiento del sistema para el próximo año (365 días). Queremos pues, estimar:
 
 -   Proporción del tiempo que la máquina está funcionando y en reparación.
 -   Número de ocasiones en que la máquina debe ser reparada.
@@ -370,7 +393,10 @@ beneficio
 ## 29465.7
 ```
 
+### Sistema del viajante 
+
 A continuación analizamos el sistema del viajante correspondiente al ejemplo \@ref(exm:excmtc002). En primer lugar establecemos el algoritmo de simulación del sistema. Para facilitar todas las posibilidades del algoritmo asumimos que el vendedor comienza el recorrido en la ciudad en la que reside.
+
 
 ::: {.silverbox data-latex=""}
 Algoritmo para el análisis del sistema del viajante:
@@ -388,7 +414,7 @@ Repetir los pasos siguientes hasta que el tiempo en el sistema supere el tiempo 
 Los valores $tiempo$, y $ciudad$ nos permiten describir el funcionamiento del sistema para un tiempo prefijado.
 :::
 
-A continuación tenemos la función necesaria para simular el sistema descrito:
+A continuación construimos la función para simular el sistema hasta cierto instante de tiempo.
 
 
 ```r
@@ -480,7 +506,7 @@ Supongamos que estamos interesados en aproximar el comportamiento del vendedor d
 -   Proporción de tiempo que el vendedor pasa en cada ciudad.
 -   Número de ocasiones en que visita cada ciudad.
 
-Obtenemos la simulación del sistema y contestamos a las preguntas planteadas:
+Simulamos pues el sistema y contestamos a las preguntas planteadas:
 
 
 ```r
@@ -504,17 +530,18 @@ simulacion %>%
 ## 2 B           8     10.7      0.206
 ## 3 C          11     11.0      0.211
 ```
+### Análisis con simmer
 
-Aunque más adelante estudiaremos la librería `simmer` presentamos aqui el algoritmo necesario para simular los procesos anteriores con el objeto de ver la simplicidad de programación en estos sistemas más sencillos.
+Si bien dedicamos en este curso un capítulo entero para contar el funcionamiento de la librería `simmer`, puesto que estos ejemplos son relativamente sencillos, podemos introducir sin demasiada complicación el algoritmo de simulación con `simmer`. 
 
 La libreria `simmer` permite simular de sistemas tanto continuos como discretos bajos dos premisas fundamentales:
 
--   Proceso de llegadas ("arrivals"): proceso por el que el sujeto o bien accede al sistema.
--   Proceso de servicio ("server"): tareas (denominadas trayectorias) a la que es sometido la persona o bien dentro del sistema a las que les asigna uno o más recursos ("resources").
+-   Proceso de llegadas ("arrivals") al sistema.
+-   Proceso de servicio ("server"): en el que a cada una de las llegadas se les asigna una serie de actividades a realizar (integradas en 'trayectorias') y unos recursos o servidores que resuelven con ellas las actividades.
 
-Para el sistema descrito en ejemplo \@ref(exm:excmtc005) el proceso de llegadas correspondería al momento en que despueés de estar funcionando un timepo la máquina debe ser reparada, mientras que el proceso de servicio es el tiempo dedicado a la reparación de la máquina. En este caso el recurso es el reparador encargado de poner en marcha la máquina de nuevo.
+Para el sistema descrito en ejemplo \@ref(exm:excmtc005) el proceso de llegadas viene identificado por las averías que se producen en determinados instantes de tiempo. El proceso de servicio se corresponde con las reparaciones de las máquinas, a las que se dedica cierto tiempo. En este caso el recurso es el reparador encargado de resolver la avería y poner en marcha la máquina de nuevo.
 
-El primer paso del algoritmo de simulación es cargar las librerías y deifnir la semilla de simulación:
+El primer paso del algoritmo de simulación es cargar las librerías y definir la semilla de simulación:
 
 
 ```r
@@ -530,38 +557,38 @@ Definimos ahora el entorno de simulación del sistema:
 ```r
 # Tasas de permanencia del sistema
 ##################################
-lambda <- 1/4  # reparación
-mu <- 1/60     # funcionamiento
+lambda <- 1/4  # tasa reparación
+mu <- 1/60     # tasa funcionamiento
 
 # Sistema
 #################################################
 sistema.1m <- function(t, lambda, mu)
 {
-  # tarea dentro de sistema
+  # tarea dentro de sistema: reparación de las averías
   reparar <- trajectory() %>%
-    # Máquina estropeada
-    seize("Off", amount = 1) %>%              
-    # Tiempo de reparación
+    # la máquina estropeada se asigna a un reparador
+    seize("reparador", amount = 1) %>%              
+    # el tiempo de reparación es aleatorio
     timeout(function() rexp(1, lambda)) %>%   
-    # Máquina reparada
-    release("Off", amount = 1)               
+    # la máquina ya ha sido reparada
+    release("reparador", amount = 1)               
 
   # Configuración del sistema 
   #################################################
   simmer() %>%
-    # Activación del estado de reparación
-    add_resource("Off", capacity = 1, queue_size = 0) %>%           
-    # Tiempo de funcionamiento antes de reparar
-    add_generator("reparando", reparar, function() rexp(1, mu)) %>% 
+    # Se definen los recursos: un único reparador y cola infinita
+    add_resource("reparador", capacity = 1) %>%           
+    # Simulador de los tiempos entre averías, dirigidas a la trayectoria "reparar"
+    add_generator("averia", reparar, function() rexp(1, mu)) %>% 
     # Tiempo funcionamiento del sistema
     run(until = t)     
 }
 
-### Simulación del sistema
+### Simulación del sistema durante 365 días
 operar <- sistema.1m(365, 1/4, 1/60)
 ```
 
-Analizamos ahora los resultados que proporciona el sistema simulado. Podemos acceder a las información de dos formas diferentes mediante las funciones `get_mon_arrivals()` y `get_mon_resources()`.
+Analizamos ahora los resultados que proporciona el sistema simulado. Podemos acceder a las información de dos formas diferentes mediante las funciones `get_mon_arrivals()` para describir las llegadas (averías) y `get_mon_resources()` para describir la ocupación de los servidores recursos (técnicos reparadores).
 
 
 ```r
@@ -570,35 +597,23 @@ reparacion
 ```
 
 ```
-##         name start_time end_time activity_time finished replication
-## 1 reparando0   150.1055 150.1318    0.02632783     TRUE           1
-## 2 reparando1   164.9110 166.4598    1.54873033     TRUE           1
-## 3 reparando2   269.4758 272.7721    3.29632606     TRUE           1
-## 4 reparando3   274.8728 278.2250    3.35216128     TRUE           1
-## 5 reparando4   287.0299 294.5502    7.52030671     TRUE           1
-## 6 reparando5   332.6557 339.2903    6.63464954     TRUE           1
+##      name start_time end_time activity_time finished replication
+## 1 averia0   150.1055 150.1318    0.02632783     TRUE           1
+## 2 averia1   164.9110 166.4598    1.54873033     TRUE           1
+## 3 averia2   269.4758 272.7721    3.29632606     TRUE           1
+## 4 averia3   274.8728 278.2250    3.35216128     TRUE           1
+## 5 averia4   287.0299 294.5502    7.52030671     TRUE           1
+## 6 averia5   332.6557 339.2903    6.63464954     TRUE           1
 ```
 
 El objeto resultante tiene las columnas siguientes:
 
--   `name`: estado del sistema de acuerdo a las tareas que se deben realziar.
--   `star_time`: instante en el que comienza la tarea definida.
--   `end_time`: instante en el que finaliza la tarea definida.
--   `activity_time`: tiempo dedicado a la tarea.
--   `finished`: si la tarea ha finalizado dentro del periodo de tiempo de simualción establecido.
--   `replication`: número de replicas del sistema.
-
-Con la función `get_mon_resources()` tenemos una descripción continua del proceso con las columnas:
-
--   `resource`: recurso
--   `time`: instante de tiempo donde el sistema registra actividad
--   `server`: variable dicotómica con valor 1 cuando el sistema está en srvicio y 0 cuando no lo esta.
--   `queue`: sujetos en la cola
--   `capacity`: capacidad del sistema.
--   `queue_size`: tamaño de la cola.
--   `system`: elementos en el sistema
--   `limit`: capacidad límite del sistema
--   `replication`: número de replicas del sistema.
+-   `name`: nombre de las llegadas (averías), numeradas correlativamente
+-   `star_time`: instante en el que llega al sistema (se produce la avería)
+-   `end_time`: instante en el que sale del sistema (se ha reparado)
+-   `activity_time`: tiempo dedicado a la tarea (tiempo de reparación)
+-   `finished`: si la tarea ha finalizado dentro del periodo de tiempo de simulación establecido.
+-   `replication`: número de replicas del sistema (1 porque sólo hemos lanzado una cadena).
 
 
 ```r
@@ -607,20 +622,32 @@ recursos
 ```
 
 ```
-##    resource     time server queue capacity queue_size system limit replication
-## 1       Off 150.1055      1     0        1          0      1     1           1
-## 2       Off 150.1318      0     0        1          0      0     1           1
-## 3       Off 164.9110      1     0        1          0      1     1           1
-## 4       Off 166.4598      0     0        1          0      0     1           1
-## 5       Off 269.4758      1     0        1          0      1     1           1
-## 6       Off 272.7721      0     0        1          0      0     1           1
-## 7       Off 274.8728      1     0        1          0      1     1           1
-## 8       Off 278.2250      0     0        1          0      0     1           1
-## 9       Off 287.0299      1     0        1          0      1     1           1
-## 10      Off 294.5502      0     0        1          0      0     1           1
-## 11      Off 332.6557      1     0        1          0      1     1           1
-## 12      Off 339.2903      0     0        1          0      0     1           1
+##     resource     time server queue capacity queue_size system limit replication
+## 1  reparador 150.1055      1     0        1        Inf      1   Inf           1
+## 2  reparador 150.1318      0     0        1        Inf      0   Inf           1
+## 3  reparador 164.9110      1     0        1        Inf      1   Inf           1
+## 4  reparador 166.4598      0     0        1        Inf      0   Inf           1
+## 5  reparador 269.4758      1     0        1        Inf      1   Inf           1
+## 6  reparador 272.7721      0     0        1        Inf      0   Inf           1
+## 7  reparador 274.8728      1     0        1        Inf      1   Inf           1
+## 8  reparador 278.2250      0     0        1        Inf      0   Inf           1
+## 9  reparador 287.0299      1     0        1        Inf      1   Inf           1
+## 10 reparador 294.5502      0     0        1        Inf      0   Inf           1
+## 11 reparador 332.6557      1     0        1        Inf      1   Inf           1
+## 12 reparador 339.2903      0     0        1        Inf      0   Inf           1
 ```
+
+Con la función `get_mon_resources()` tenemos una descripción continua de los recursos del proceso con las columnas:
+
+-   `resource`: recurso (numerado correlativamente si hubiera más de uno)
+-   `time`: instante de tiempo en que se ha registrado alguna actividad (avería, reparación, puesta en marcha)
+-   `server`: número de servidores (recursos) ocupados (como sólo hay un técnico, es igual a 1)
+-   `queue`: llegadas en la cola (averías que están esperando ser reparadas porque el técnico está ocupado)
+-   `capacity`: capacidad del sistema o número de reparadores en el sistema
+-   `queue_size`: tamaño de la cola de espera (averías en espera para ser reparadas)
+-   `system`: llegadas en el sistema (número de averías en ese instante, en reparación o en cola)
+-   `limit`: capacidad + tamaño de la cola
+-   `replication`: número de replica del sistema (1 porque sólo se ha lanzado una cadena).
 
 A partir de los resultados podemos responder a las mismas preguntas que ya planteamos antes:
 
@@ -641,11 +668,11 @@ propor
 ## [1] 93.87
 ```
 
-La proporción de tiempo en que la máquina está funcionando es del 93.87% y el tiempo que está en repación es del 6.13%.
+La proporción de tiempo en que la máquina está funcionando es del 93.87% y el tiempo que está en reparación es del 6.13%.
 
-El número de ocasiones en que la máquina está en reparación corresponde al número de veces que accedemos a la tarea de repación que en este caso es de 6.
+El número de ocasiones en que la máquina está en reparación corresponde al número de veces que accedemos a la tarea de reparación, que en este caso es de 6.
 
-Para calcular el beneficio utilizamos el tiempo de reparación obtenido:
+Para calcular el beneficio obtenido a lo largo del año utilizamos el tiempo de reparación obtenido:
 
 
 ```r
@@ -656,27 +683,31 @@ Para calcular el beneficio utilizamos el tiempo de reparación obtenido:
 ## [1] 694.3972
 ```
 
-Como se puede ver los resultados no son muy similares a los obtenidos con el algoritmo anterior, ya que los tiempos de reparación son superiores. Para conseguir resultados más estables deberiamos realizar diferentes replicaciones del sistema y promediar los beneficios obtenidos mediante un estimador Monte-Carlo. Sin embargo, podemos replicar el sistema añadiendo dos líneas de código a la definición del sistema. En este caso establecemos un parámetro para indicar el número de replicas del sistema.
+Como se puede ver, los resultados no son muy similares a los obtenidos con el algoritmo que programamos nosotros. Para conseguir estimaciones estables deberíamos realizar diferentes replicaciones del sistema (lanzar varias cadenas) y promediar los beneficios obtenidos mediante un estimador Monte-Carlo. Podemos replicar fácilmente el sistema añadiendo dos líneas de código. Cada cadena replicada tendrá un distintivo diferente en el argumento 'replicate' cuando monitorizamos los resultados.
 
 
 ```r
-replicas <- 500
-envs <- lapply(1:replicas, function(i){
+# lanzamos 'nreplicas' de la cadena, que se almacenan en una lista
+nreplicas <- 500
+envs <- lapply(1:nreplicas, function(i){
   operar <- sistema.1m(365, 1/4, 1/60)
 })
 ```
 
-Ahora almacenamos todas las simulaciones, calculamos el resumen de las simulaciones obtenidas (tiempo total de reparación y número de repraciones dentro de cada simulación), y obtnemmos las medidas descriptivas correspondientes (estimadores Monte-Carlo).
+Ahora almacenamos todas las simulaciones a modo de matriz, en concreto 'tibble', para poder realizar los cálculos oportunos agrupando por réplicas y con ellos poder calcular las estimaciones Monte-Carlo del tiempo total de reparación y del número de reparaciones.
 
 
 ```r
-simulaciones<-as_tibble(get_mon_arrivals(envs))
+# guardamos todas las llegadas en formato 'tibble'
+simulaciones <- as_tibble(get_mon_arrivals(envs))
 
-salida<-simulaciones %>% 
+# agrupamos por 'replication' para calcular los descriptivos de interés en cada réplica
+salida <- simulaciones %>% 
   group_by(replication) %>% 
-  # Resumen de las simualciones
+  # Calculamos los descriptivos por cada réplica
   summarise(nreparaciones = n(), 
             tiempoparada = sum(activity_time)) %>% 
+  # Calculamos las estimaciones Monte-Carlo con los descriptivos de las réplicas
   summarise(mmedia_nrepara = mean(nreparaciones),
             min_nrepara = min(nreparaciones),
             max_nrepara = max(nreparaciones),
@@ -693,22 +724,25 @@ salida
 ## # A tibble: 1 x 8
 ##   mmedia_nrepara min_nrepara max_nrepara media_taveria q25_taveria q50_taveria q75_taveria
 ##            <dbl>       <int>       <int>         <dbl>       <dbl>       <dbl>       <dbl>
-## 1           5.81           1          17          20.8        11.8        18.8        27.4
+## 1           6.12           1          15          23.8        13.4        21.3        31.9
 ## # ... with 1 more variable: sd_taveria <dbl>
 ```
 
-Tenemos una media de 21.3 días de máquina en reparación lo que proporciona un beneficio de:
+En 'mmedia_nrepara' tenemos la estimación del número de reparaciones en un año, en 'min_nrepara' y 'max_nrepara' el mínimo y el máximo respectivamente; en 'media_taveria' tenemos una estimación del tiempo medio acumulado en reparaciones en un año, con sus cuartiles (q25, q50 y q75) y desviación típica (sd).
+
+Así podemos calcular los beneficios esperados en función del número de días que la máquina funciona y los que está estropeada:
 
 
 ```r
+# número de días en funcionamiento vs número de días en reparación
 (365-salida$media_taveria)*100 - salida$media_taveria*1500
 ```
 
 ```
-## [1] 3299.58
+## [1] -1561.395
 ```
 
-En la peor situación (mayor número de días con la máquina en reparación = escenario pesismista) podríamos utilizar el cuantil 75 de los tiempos de reparación, mientras que en la mejor situación utilizaríamos el cuantil 25 (escenario optmista), de forma que el beneficio estimado vendrá dado por:
+Podemos considerar también otros dos escenarios posibles: uno pesimista, con un mayor tiempo acumulado de reparación (cuantil 75), y uno optimisma, con un menor tiempo (con el cuantil 25), y calcular con ellos los beneficios:
 
 
 ```r
@@ -717,7 +751,7 @@ En la peor situación (mayor número de días con la máquina en reparación = e
 
 ```
 ##       75% 
-## -7261.455
+## -14480.82
 ```
 
 ```r
@@ -726,24 +760,24 @@ En la peor situación (mayor número de días con la máquina en reparación = e
 
 ```
 ##      25% 
-## 17559.92
+## 15047.35
 ```
 
-¿ qué conclusiones podemos extraer de este análisis?
+¿Qué conclusiones podemos extraer de este análisis?
 
-Pra finalizar este apartado presentamos un nuevo ejemplo donde el espacio de estados está compuesto por una pareja de valores y no por un único valor como en los ejemplso que hemos prsentado hasra ahora.
+Para finalizar este apartado presentamos un nuevo ejemplo donde el espacio de estados está compuesto por una pareja de valores y no por un único valor como en los ejemplos que hemos presentado hasta ahora.
 
-::: {.example #excmtc006 name = "Mantenimiento aeronaves"}
+### Mantenimiento de aronaves
 
-Una empresa de manteniento de aeronaves está interesado en el proceso de avería-repación de cierto tipo de aviones. El tipo de avión de interés es Un avión comercial a reacción con cuatro motores, dos en cada ala. Cuando un motor se enciende el tiempo que se puede mantener en funcionamiento hasta que falla es una variable aleatoria exponencial con parámetro $\lambda$. Si el fallo se produce en vuelo, no puede haber reparación, pero el avión necesita al menos un motor en cada ala para funcionar correctamente y poder volar con seguridad. En concreto, la empresa está interesada en poder predecir la probabilidad de un vuelo sin problemas.
+Una empresa de mantenimiento de aeronaves está interesada en el proceso de avería-reparación de cierto tipo de aviones. El tipo de avión de interés es un avión comercial a reacción con cuatro motores, dos en cada ala. Cuando un motor se enciende, el tiempo que se puede mantener en funcionamiento hasta que falla es una variable aleatoria exponencial con parámetro $\lambda$. Si el fallo se produce en vuelo, no puede haber reparación, pero el avión necesita al menos un motor en cada ala para funcionar correctamente y poder volar con seguridad. En concreto, la empresa está interesada en poder predecir la probabilidad de un vuelo sin problemas.
 
-Si denotamos por $X_L(t)$ y $X_R(t)$ el número de motores funcionando en el instante $t$ en el ala izquierada y el ala derecha respectivamente, podemos considerar el estado del sistema en el instante $t$ como $X(t) = (X_L(t), X_R(t))$. Si asumimos que los fallos en los motores son independientes entre si podemos ver que el proceo $\{X(t), t \geq 0\}$ es una CMTC con espacio de estados:
+Si denotamos por $X_L(t)$ y $X_R(t)$ el número de motores funcionando en el instante $t$ en el ala izquierda y el ala derecha respectivamente, podemos considerar el estado del sistema en el instante $t$ como $X(t) = (X_L(t), X_R(t))$. Si asumimos que los fallos en los motores son independientes entre sí, podemos ver que el proceo $\{X(t), t \geq 0\}$ es una CMTC con espacio de estados:
 
 $$S = \{ (0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2,2) \}$$
 
-En esta situación el avión sigue funcionando en el subconjunto de estados $$S = \{ (1, 1), (1, 2), (2, 1), (2,2) \}$$ :::
+En esta situación, el avión sigue funcionando en el subconjunto de estados $S = \{ (1, 1), (1, 2), (2, 1), (2,2) \}$. 
 
-Vamos a asumir (aunque no es real) que el sistema sigue funcionando, incluso cuando hay posibilidad de un accidente, hasta que llegamos al estado $(0, 0)$. Dado que no hay reparación posible la matriz de tasas entre estados del sistema viene dada por
+Vamos a asumir (aunque no es real) que el sistema sigue funcionando, incluso cuando hay posibilidad de un accidente, hasta que llegamos al estado $(0, 0)$. Dado que no hay reparación posible, la matriz de tasas entre estados del sistema viene dada por
 
 $$R = 
 \begin{pmatrix}
@@ -758,7 +792,7 @@ $$R =
 0 & 0 & 0 & 0 & 0 & 2\lambda & 0 & 2\lambda & 0
 \end{pmatrix} $$
 
-y el diagrama viene dado por:
+y el diagrama que representa el sistema resulta:
 
 \begin{figure}
 
@@ -769,9 +803,11 @@ y el diagrama viene dado por:
 \caption{Diagrama de tasas para el sistema motores de aviones}(\#fig:05-022)
 \end{figure}
 
-Para facilitar el algoritmo de simulación en esta situación vamos a asignar un código a cada uno de los posibles estados del sistema:
+Para facilitar el algoritmo de simulación en esta situación, vamos a asignar un código a cada uno de los posibles estados del sistema:
 
-$$S = \{ 1 = (0, 0), 2 = (0, 1), 3 = (0, 2), 4 = (1, 0), 5 = (1, 1), 6 = (1, 2), 7 = (2, 0), 8 = (2, 1), 9 = (2,2) \}$$ y asumimos que la media del tiempo hasta que un motor falla cuando esta encendido es de 20 horas, es decir, $\lambda = 1/20$. A continuación tenemos la función necesaria para simular el sistema descrito:
+$$S = \{ 1 = (0, 0), 2 = (0, 1), 3 = (0, 2), 4 = (1, 0), 5 = (1, 1), 6 = (1, 2), 7 = (2, 0), 8 = (2, 1), 9 = (2,2) \}$$ 
+
+y asumimos que la media del tiempo hasta que un motor falla cuando está encendido es de 20 horas, es decir, $\lambda = 1/20$. A continuación hemos construido una función para simular el sistema descrito:
 
 
 ```r
@@ -886,9 +922,13 @@ sistema
 ## 4      1   5.67      4
 ```
 
-El resultado obtenido es el estado en cada paso del algoritmo hasta llegar a la parada total, los tiempos para alcanzar cada estado, y el número de motores con fallo. Podemos operar los tiempos para saber cuando alcanzaremos más de dos motores con fallo (últimas dos filas de la simulación). Si el vuelo que acabamos de empezar es de x horas ¿cómo podemos estimar la probabilidad de no poder terminar el vuelo de forma segura? En este caso podemos calcular la proporción de tiempo que corresponde con un fallo leve (1 o 2 motores con fallo) con respecto a las x horas de duración del vuelo.
+El resultado obtenido es el estado en cada paso del algoritmo hasta llegar a la parada total, los tiempos para alcanzar cada estado, y el número de motores con fallo. 
 
-Calculamos el tiempo de fallo del sistema y evaluamos la probabildiad para diferentes tiempos de duración de vuelo
+Podemos operar los tiempos para saber cuándo tendremos más de dos motores con fallo (últimas dos filas de la simulación). 
+
+Si el vuelo que acabamos de empezar es de $x$ horas ¿cómo podemos estimar la probabilidad de no poder terminar el vuelo de forma segura? Para responder esta pregunta podremos calcular la proporción de tiempo que corresponde con un fallo leve (1 o 2 motores con fallo) con respecto a las $x$ horas de duración del vuelo.
+
+Calculamos a continuación el tiempo de fallo del sistema y evaluamos la probabilidad para diferentes tiempos de duración de vuelo.
 
 
 ```r
@@ -911,9 +951,9 @@ limite
 ## [1] 8.8
 ```
 
-Cualquier viaje inferior a 8.8 horas será un viaje seguro, mientras que si el tiempo es susperior la probabilidad de no tener un viaje seguro va aumentando.
+Cualquier viaje inferior a 8.8 horas será un viaje seguro, mientras que si el tiempo es superior, la probabilidad de no tener un viaje seguro aumenta.
 
-Para estudiar la estabildiad de dichas probabilidades realizamos 1000 simulaciones del sistema y estimamos dichas probabilidades mediante estimadores Monte-Carlo de los tiempos de fallo.
+Para estudiar la estabilidad de dichas probabilidades realizamos 1000 simulaciones del sistema y estimamos las probabilidades mediante estimadores Monte-Carlo de los tiempos de fallo.
 
 
 ```r
@@ -944,7 +984,7 @@ limite
 ## [1] 11.9
 ```
 
-Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el tiempo es susperior la probabilidad de no tener un viaje seguro va aumentando. Podemos representar el gráfico de probabilidad de un viaje seguro:
+Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el tiempo es superior, la probabilidad de no tener un viaje seguro aumenta. Podemos representar el gráfico de probabilidad de un viaje seguro:
 
 \begin{figure}
 
@@ -957,11 +997,11 @@ Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el 
 
 ## Procesos de nacimiento y muerte {#CMTCD}
 
-Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un pael muy importante dentro de las CMTC ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.
+Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un pael muy importante dentro de las CMTC, ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.
 
 ::: {.yellowbox data-latex=""}
 ::: {#cmtc002 .definition}
-Una CMTC $\{X_t; t \geq 0\}$ con espacio de estados $S = \{0, 1, 2,...,K\}$ y matriz de tasas dad por:
+Una CMTC $\{X_t; t \geq 0\}$ con espacio de estados $S = \{0, 1, 2,...,K\}$ y matriz de tasas dada por:
 
 $$R = 
 \begin{pmatrix}
@@ -1218,7 +1258,7 @@ salida
 
 ¿Qué conclusiones extraemos del análsis realizado? ¿cómo valorarías la ocupación del sistema? ¿qué ocuriría si añadimos un nuevo cajero y ampliamos la capacidad del sistema a 8 clientes?
 
-### Mantenimiento de máquinas
+### Mantenimiento de máquinas {#excmtc007}
 
 El problema de mantenimiento de máquinas es muy habitual dentro de las CMTC. Supongamos que disponemos de $N$ máquinas que funcionana durante 24 horas seguidas y $M$ personas que pueden reparalas ($M \leq N$). Las máquinas son idénticas, y los tiempos de vida de las máquinas (necesitan reparación o mantenimiento) son variables aleatorias independientes $Exp(\mu)$. Cuando las máquinas fallan, son reparadas en el orden de fallo por los $M$ reparadores. Cada máquina averiada necesita una y sólo una persona de reparación, y los tiempos de reparación son variables aleatorias independientes $Exp(\lambda)$, de forma que Una máquina reparada se comporta como una máquina nueva. Si $X(t)$ el número de máquinas que funcionan en el momento $t$, el proceso $\{X(t), t \geq 0\}$ es un proceso de nacimiento y muerte con parámetros:
 
@@ -1228,7 +1268,7 @@ $$\mu_i = i\mu, \quad 0 \leq i \leq N,$$
 
 donde el "nacimiento" y la "muerte" hacen referencia a la reparación y al funcionamiento de cada máquina respectivamente.
 
-Imaginemos un problema sencillo, que se puede generalizar fácilmente, donde tenemos 4 máquinas y 2 reparador, de forma que el espacio de estados (número de máquinas en funcionamiento) viene dado por $S = \{0, 1, 2, 3, 4\}$. En este ejemplo vamos a ver como los parámetros de nacimiento y muerte corresponden con los definidos en el ejemplo \@ref(exm:excmtc007). Descripción del sistema:
+Imaginemos un problema sencillo, que se puede generalizar fácilmente, donde tenemos 4 máquinas y 2 reparador, de forma que el espacio de estados (número de máquinas en funcionamiento) viene dado por $S = \{0, 1, 2, 3, 4\}$. En este ejemplo vamos a ver como los parámetros de nacimiento y muerte corresponden con los definidos en la sección [Mantenimiento de máquinas](#excmtc007). Descripción del sistema:
 
 -   En el estado 0, todas las máquinas están estropeadas, dos se encuentran en reparación y dos esperando a ser reparadas, Los tiempos de reparación son iid $Exp(\lambda)$ y un vez se complete cualquiera de las dos repaciones el sistema cambiará al estado 1. De esta forma, $r_{01} = \lambda_0 = \lambda + \lambda = 2\lambda$.
 
@@ -1801,7 +1841,7 @@ simarrivals %>%
 ## # A tibble: 1 x 2
 ##    mOFF   mON
 ##   <dbl> <dbl>
-## 1  2.85  28.2
+## 1  3.30  27.7
 ```
 
 *Para practicar este apartado puedes resolver los ejercicios B-5 a B-8 de la colección al final de la unidad.*
@@ -1836,9 +1876,10 @@ Sea $m_{ij}(T)$ el tiempo total esperado que la cadena permanece en el estado ha
 $$\lim_{T \rightarrow \infty} \frac{m_{ij}(T)}{T} = p_j$$
 :::
 
-A continuación se presenta la solución de la distrbución límite para los procesos de nacimiento y muerte. En el resto de sistemas se deberan plantear las ecuaciones de balance y resorverlas. En ambas situaciones presentamos las correspondientes funciones que nos permiten obtener las cantidades de interés.
+A continuación se presenta la solución de la distribución límite para los procesos de nacimiento y muerte. En el resto de sistemas se deberan plantear las ecuaciones de balance y resorverlas. En ambas situaciones presentamos las correspondientes funciones que nos permiten obtener las cantidades de interés.
 
-::: bluebox
+::: {.bluebox data-latex=""}
+
 Sea $\{X(t), t \geq 0\}$ un proceso de nacimiento y muerte con espacio de estados $S = \{0, 1,...,K\}$, y tasas de nacimiento $\{\lambda_i, 0 \leq i < K\}$ y tasas de muerte $\{\mu_i, 1 \leq i \leq K\}$. Entonces la CMTC así definida es irreducible y tiene una única distribuión límite con:
 
 $$p_i = \frac{\rho_i}{\sum_{j = 0}^K \rho_j}, \quad 0 \leq i \leq K,$$ donde $\rho_0 = 1,$ y
@@ -1976,13 +2017,16 @@ $$\int_0^T c(X(t))dt.$$
 
 De esta forma el coste esprado total hasta el instante $T$, empezando en el estado $i$, viene dado por:
 
-$$g(i, T) = E\left( \int_0^T c(X(t))dt \mid X(0) = i \right), \quad 1 \leq i \leq N.$$ ::: {.theorem}
+$$g(i, T) = E\left( \int_0^T c(X(t))dt \mid X(0) = i \right), \quad 1 \leq i \leq N.$$ 
+
+::: {.theorem}
 
 Si $M(T) = [m_{ij}(T)]$ es la matriz de ocupación entonces:
 
 $$g(T) = M(T)c,$$
 
-donde $c = [c(1), c(2),...,c(N-1), c(N)]'$ y $g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.$ :::
+donde $c = [c(1), c(2),...,c(N-1), c(N)]'$ y $g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.$ 
+:::
 
 ::: example
 Para el sistema de mantenimiento de máquinas se conoce que que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas si al finalizar todas las máquinas están funcionando. Si $X(t)$ es el número de máquinas funcionando en el instante $t$, el espacio de estados para 4 máquinas viene dado por $S = \{0, 1, 2, 3, 4\}$ y el vector de costes es:
@@ -2440,7 +2484,7 @@ esperanza
 ```
 
 ```
-## [1] 3.895
+## [1] 3.892
 ```
 
 **Ejercicio B-2.**

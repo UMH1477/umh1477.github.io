@@ -49,17 +49,17 @@ La dificultad principal con $P(t)$ es que resulta díficil de obtener de forma i
 
 Sea $X_t$ el estado de un sistema en el instante temporal $t$. Supongamos que el espacio de estados del proceso estocástico $\{X_t; t \geq 0\}$ es $S=\{1, 2,...,N\}$. La evolución aleatoria del sistema se produce de la siguiente manera:
 
--   Supongamos que el sistema comienza en el estado $i$ y permanece allí durante un tiempo $Exp(r_i)$ que denominamos **tiempo de permanencia** en el estado $i$, con $r_i$ la tasa media de permanencia (recordemos que en la distribución exponencial las tasas medias son el recíproco de los tiempos medios).
+-   Supongamos que el sistema comienza en el estado $i$ y permanece allí durante un tiempo $Exp(r_i)$ que denominamos **tiempo de permanencia** en el estado $i$, con $r_i$ la **tasa media de permanencia**; recordemos que en la distribución exponencial las tasas medias son el recíproco de los tiempos medios.
 
 -   Al final del tiempo de permanencia en el estado $i$, el sistema realiza una transición repentina al estado $j$ con probabilidad $p_{ij}$, independientemente del tiempo que el sistema haya permanecido en el estado $i$. Una vez en el estado $j$, permanece allí durante un tiempo $Exp(r_j)$.
 
 -   A continuación pasa a un nuevo estado $k$ con una probabilidad $p_{jk}$, independientemente de la historia del sistema hasta el momento, y repite este comportamiento hasta que finaliza el tiempo de observación del proceso.
 
-Conviene hacer tres observaciones con respecto al funcionaminto del sistema:
+Conviene hacer tres observaciones con respecto al funcionamiento del sistema:
 
 - En primer lugar, las probabilidades de salto $p_{ij}$ no deben deben confundirse con las probabilidades de transición $p_{ij}(t)$. En este caso, $p_{ij}$ actúa como la probabilidad de que el sistema pase al estado $j$ cuando sale del estado $i$. 
-- En segundo lugar, $p_{ii} = 0$, dado que por definición el tiempo de permanencia en el estado $i$ es el tiempo que el sistema pasa en el estado $i$ hasta que sale de él. Por lo tanto, no se permite una transición de $i$ a $i$. 
-- En tercer lugar, en caso de que el estado $i$ sea absorbente, es decir que el sistema permanece en ese estado para siempre una vez que llega a él, fijamos $r_i = 0$.
+- En segundo lugar, $p_{ii} = 0$, dado que, por definición, el tiempo de permanencia en el estado $i$ es el tiempo que el sistema pasa en el estado $i$ hasta que sale de él; por lo tanto, no es posible una transición de $i$ a $i$. 
+- En tercer lugar, en caso de que el estado $i$ sea absorbente, es decir que el sistema permanezca en ese estado para siempre una vez que llegue a él, fijamos $r_i = 0$.
 
 Con estas premisas podremos obtener la **matriz de probabilidades de salto**, $P$, que denotaremos como:
 
@@ -71,6 +71,7 @@ p_{21} & p_{22} & ... & p_{2N}\\
 p_{N1} & p_{N2} & ... & p_{NN}
 \end{pmatrix}$$
 
+
 ::: {#thecmtc001 .theorem}
 El proceso estocástico $\{X_t; t \geq 0\}$ con parámetros $r_i$, $1 \leq i \leq N$, y probabilidades $p_{ij}$, $1 \leq i,j \leq N$ descrito anteriormente es una CMTC.
 :::
@@ -78,11 +79,15 @@ El proceso estocástico $\{X_t; t \geq 0\}$ con parámetros $r_i$, $1 \leq i \le
 A continuación presentamos un par de ejemplos.
 
 ::: {.example #excmtc001}
-**Sistema de vida útil de un satélite**. Supongamos que la vida útil $T$ de un satélite de gran altitud es una variable aleatoria exponencial de tasa $\mu$ en meses, $Exp(\mu)$, de forma que una vez que falla sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso $X_t = 1$ si el satélite está operativo en el momento $t$, y 0 en caso contrario. En esta situación $r_0 = 0$ y $r_1 = \mu$, pero desconocemos los valores de $P$, aunque podremos obtener la matriz de transición calculando las probabilidades $p_{00}(t)$ y $p_{11}(t)$ que vienen dadas por:
+**Sistema de vida útil de un satélite**. Supongamos que la vida útil $T$ de un satélite de gran altitud es una variable aleatoria exponencial de tasa $\mu$ en meses, $Exp(\mu)$, de forma que una vez que falla sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso $X_t = 1$ si el satélite está operativo en el momento $t$, y 0 en caso contrario. En esta situación $r_0 = 0$ (porque si se estropea, se queda estropeado) y $r_1 = \mu$ (que es el tiempo esperado de vida), pero desconocemos los valores de $P$, aunque podremos obtener la matriz de transición calculando las probabilidades $p_{00}(t)$ y $p_{11}(t)$ que vienen dadas por:
 
 $$p_{00}(t) = P(\text{satélite no está operativo en t} \mid \text{satélite no está operativo en 0}) = 1$$
 
-$$p_{11}(t) = P(\text{satélite está operativo en t} \mid \text{satélite está operativo en 0}) = P(T >t) = e^{-\mu t}$$
+\begin{eqnarray*}
+p_{01}(t) &=& P(X_t=1|X_0=0) = 0 \\
+p_{10}(t) &=& P(X_t=0|X_0=1) = Pr(T \leq t) = 1- e^{-\mu t}\\
+p_{11}(t) &=& P(X_t=1|X_0=1) = Pr(T >t) = e^{-\mu t}
+\end{eqnarray*}
 
 La matriz de transición viene dada pues por:
 
@@ -116,18 +121,24 @@ $$P =
 
 En virtud del teorema \@ref(thm:thecmtc001) todas las CMTC con espacios de estado finitos que tienen tiempos de permanencia no nulos en cada estado pueden ser descritos a través de las tasas de permanencia y la matriz de saltos. En este punto detallamos este análisis e introducimos todos los conceptos necesarios para el análisis del proceso.
 
-De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante un grafo dirigido cuyos nodos (o vértices) indican cada uno de los estados del proceso, y surge un arco dirigido del nodo $i$ al nodo $j$ si $p_{ij} > 0$. La tasa de transición de $i$ a $j$, $r_{ij} = r_i p_{ij}$ , se escribe junto a este arco. Obsérvese que no hay bucles propios (arcos de $i$ a $i$). Esta representación gráfica se denomina **diagrama de tasas de la CMTC**.
+La **tasa de transición** de $i$ a $j$ se define como el producto de la tasa de permanencia en el estado $i$, $r_i$, por la probabilidad de salto al estado $j$, $p_{ij}$ 
 
-Podemos entender la dinámica de una CMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo $i$ durante cierto periodo de tiempo de duración $Exp(r_i)$ y luego elige uno de los arcos de salida del nodo $i$ con probabilidades proporcionales a las tasas de los arcos, trasladándose al nodo que conecta dicho arco con el nodo origen $i$. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el instante $t$ es el estado de la CMTC en el instante t.
+\begin{equation}
+r_{ij} = r_i p_{ij}
+\end{equation}
+
+De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante un grafo dirigido cuyos nodos (o vértices) indican cada uno de los estados del proceso, y surge un arco dirigido del nodo $i$ al nodo $j$ si $p_{ij} > 0$; además junto a cada arco se escribe la tasa de transición $r_{ij} = r_i p_{ij}$. Nunca habrá arcos que empiecen y acaben en el mismo nodo porque $p_{ii}=0$. Esta representación gráfica se denomina **diagrama de tasas de la CMTC**.
+
+Podemos entender la dinámica de una CMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo $i$ durante cierto periodo de tiempo de duración variable $Exp(r_i)$ y luego elige uno de los arcos de salida del nodo $i$ con probabilidades proporcionales a las tasas de los arcos, trasladándose al nodo que conecta dicho arco con el nodo origen $i$. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el instante $t$ es el estado de la CMTC en el instante $t$.
 
 En esta situación resulta posible obtener los valores de $r_i$ y $p_{ij}$ a partir de las tasas $r_{ij}$ dado que:
 
 \begin{eqnarray*}
-r_i &=& \sum_{j=1}^{N} r_{ij}\\
-p_{ij}&=&frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
+\sum_{j=1}^{N} r_{ij} &=& \sum_{j=1}^{N} r_i p_{ij} = r_i \sum_{j=1}^{N} p_{ij} = r_i\\
+p_{ij} &=& \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
 \end{eqnarray*}
 
-Para un mejor manejo de la información, resulta conveniente construir la **matriz de tasas** teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz R es siempre cero. Así tenemos que:
+Para un mejor manejo de la información, resulta conveniente construir la **matriz de tasas de permanencia** (o tasas de ocupación) teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz $R$ es siempre cero. Así tenemos que:
 
 $$R = 
 \begin{pmatrix}
@@ -997,11 +1008,11 @@ Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el 
 
 ## Procesos de nacimiento y muerte {#CMTCD}
 
-Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un pael muy importante dentro de las CMTC, ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.
+Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un papel muy importante dentro de las CMTC, ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.
 
 ::: {.yellowbox data-latex=""}
 ::: {#cmtc002 .definition}
-Una CMTC $\{X_t; t \geq 0\}$ con espacio de estados $S = \{0, 1, 2,...,K\}$ y matriz de tasas dada por:
+Una CMTC $\{X_t; t \geq 0\}$ con espacio de estados $S = \{0, 1, 2,...,N\}$ y matriz de tasas dada por:
 
 $$R = 
 \begin{pmatrix}
@@ -1009,15 +1020,15 @@ $$R =
 \mu_1 & 0 & \lambda_1 & 0 & \ldots & 0 & 0 \\
 0 & \mu_2 & 0 & \lambda_2 & \ldots & 0 & 0 \\
 \vdots & \vdots & \vdots & \vdots & \ldots & \vdots & \vdots \\
-0 & 0 & 0 & 0 & \ldots & 0 & \lambda_{k-1} \\
-0 & 0 & 0 & 0 & \ldots &\mu_k & 0
+0 & 0 & 0 & 0 & \ldots & 0 & \lambda_{N-1} \\
+0 & 0 & 0 & 0 & \ldots &\mu_N & 0
 \end{pmatrix} $$
 
-se denomina proceso finito de nacimiento y muerte donde los $\lambda_i$ se denominan parámetros de nacimiento (transición del estado $i$ al $i+1$) y los $\mu_i$ se denominan parámetros de muerte (transición del estado $i$ al $i-1)$, donde ppr conveniencia se asume que $\lambda_k = 0$ y $\mu_0 = 0$ indicando que no hya nacimientos en el estado $K$ y que no hay muertes en el estado $0$.
+se denomina proceso finito de nacimiento y muerte donde los $\lambda_i$ se denominan **parámetros de nacimiento** (transición del estado $i$ al $i+1$) y los $\mu_i$ se denominan **parámetros de muerte** (transición del estado $i$ al $i-1)$, donde por conveniencia se asume que $\lambda_K = 0$ y $\mu_0 = 0$ indicando que no hay nacimientos en el estado $K$ y que no hay muertes en el estado $0$.
 :::
 :::
 
-En esta situación el proceso permanece una cantidad de tiempo $exp(\lambda_i + \mu_i)$ en el estado $i$ y entonces salta al estado $i+1$ con probabilidad $\lambda_i/(\lambda_i + \mu_i)$, o al estado $i-1$ con probabilidad $\mu_i/(\lambda_i + \mu_i)$. Además, la matriz generadora del proceso viene dada por:
+En esta situación el proceso permanece una cantidad de tiempo $exp(\lambda_i + \mu_i)$ en el estado $i$ y después salta al estado $i+1$ con probabilidad $\lambda_i/(\lambda_i + \mu_i)$, o al estado $i-1$ con probabilidad $\mu_i/(\lambda_i + \mu_i)$. Además, la matriz generadora del proceso viene dada por:
 
 $$R = 
 \begin{pmatrix}
@@ -1033,22 +1044,26 @@ A continuación presentamos diferentes ejemplos de aplicación de los procesos d
 
 ### Colas de espera de capacidad finita con un servidor
 
-Aunque en la unidad siguiente estudiaremos con mucho más detalle los diferentes sistemas de colas de espera, vamos a presentar aquí el mmodelo más sencillo para ver que se puede modelar como un procedimiento de nacimiento y muerte.
+Aunque en la unidad siguiente estudiaremos con mucho más detalle los diferentes sistemas de colas de espera, vamos a presentar aquí el modelo más sencillo de colas, para comprobar que se puede modelar como un proceso de nacimiento y muerte.
 
-Imaginemos que tenemos un cajero bancario al que los clientes acuden de acuerdo a Proceso de Poisson de parámetro $\lambda$, es decir que las llegadas son aleatorias y se distribuyen según una $Exp(\lambda)$. Si hay $K-1$ clientes haciendo cola para ser atendidos, un cliente nuevo tomará la opción de buscar otro cajero, es decir, el sisetma tiene capacidad $K$ (1 cliente atendido y $K-1$ en la cola de espera). Además, el tiempo de servicio del cajero es una nueva variable aleatoria $Exp(\mu)$.
+Imaginemos que tenemos un cajero bancario al que los clientes acuden de acuerdo a Proceso de Poisson de parámetro $\lambda$, es decir que las llegadas son aleatorias y se distribuyen según una $Exp(\lambda)$. Si hay $K-1$ clientes haciendo cola para ser atendidos, un cliente nuevo tomará la opción de buscar otro cajero, es decir, el sistema tiene capacidad $K$ (1 cliente atendido y $K-1$ en la cola de espera). Además, el tiempo de servicio del cajero tiene una distribución $Exp(\mu)$.
 
-En esta situación la variable $X(t)$ que indica el número de sujetos en el sistema en el instante $t$ es una CMTC denominada cola $M/M/1/K$, donde $M$ hace referencia a los tiempos de llegada y servicio exponenciales, el $1$ hace referencia a la capacidad del servicio, $K$ el tamaño del sistema, y con espacio de estados $S = \{0, 1, 2,...K \}$. Este tipo de sistemas son procesos de nacimiento y muerte con:
+En esta situación la variable $X(t)$ que indica el número de sujetos en el sistema en el instante $t$ es una CMTC denominada cola $M/M/1/K$, donde $M$ hace referencia a los tiempos de llegada y servicio exponenciales, el $1$ hace referencia a la capacidad del servicio (sólo un cliente puede ser atendido en un instante dado), $K$ es el tamaño del sistema (o aforo total), y $S = \{0, 1, 2,...K \}$ el espacio de estados. Este tipo de sistemas son procesos de nacimiento y muerte con:
 
-$$\lambda_i = \lambda, \quad 0 \leq i \leq K-1,$$ $$\mu_i = \mu, \quad 0 \leq i \leq K,$$\
+\begin{eqnarray*}
+\lambda_i &=& \lambda, \quad 0 \leq i \leq K-1, \\
+\mu_i &=& \mu, \quad 0 \leq i \leq K,
+\end{eqnarray*}
+
 donde el "nacimiento" y la "muerte" hacen referencia a la llegada al cajero y la salida del cajero respectivamente.
 
 Veamos la descripción del sistema:
 
--   En el estado 0, el sistema está vacío y el único evento que puede ocurrir es una llegada, que se produce después de un tiempo $Exp(\lambda)$ provocando una transición al estado 1. En este caso $r_{01} = \lambda$.
+-   En el estado $X_t=0$ el sistema está vacío y el único evento que puede ocurrir es una llegada, que se produce después de un tiempo $Exp(\lambda)$, provocando una transición al estado $X_t=1$. En este caso $r_{01} = \lambda$.
 
--   En el estado $i$ ($1 \leq i \leq K-1$), tenemos dos posibilidades en el sitema: una llegada o una salida. En el primer caso tenemos $r_{i i+1} = \lambda$, mientras que en el segundo tenemos $r_{i i-1} = \mu$.
+-   En el estado $X_t=i$ ($1 \leq i \leq K-1$), tenemos dos posibilidades en el sistema: una llegada o una salida. En el primer caso tenemos $r_{i, i+1} = \lambda$, mientras que en el segundo tenemos $r_{i, i-1} = \mu$.
 
--   En el estado $K$ sólo se puede producir una salida de forma que $r_{K K-1} = \mu$.
+-   En el estado $X_t=K$ sólo se puede producir una salida de forma que $r_{K, K-1} = \mu$.
 
 Por tanto, la matriz de tasas correspondiente a este proceso viene dada por:
 
@@ -1088,32 +1103,40 @@ cola.MM1K <- function(t, lambda, mu, servidores, usuarios)
   cola <- usuarios - servidores
   
   servicio <- trajectory() %>%
-    seize("atendiendo", amount = 1) %>%              
-    timeout(function() rexp(1, mu)) %>%   
+    # empieza a ser atendido
+    seize("atendiendo", amount = 1) %>%   
+    # durante un tiempo exp(mu)
+    timeout(function() rexp(1, mu)) %>% 
+    # termina el servicio de atención
     release("atendiendo", amount = 1)               
 
   # Configuración del sistema 
   #################################################
   simmer() %>%
-    add_resource("atendiendo", capacity = servidores, queue_size = cola) %>%           
+    # se crean los recursos (servidores) y se dimensiona la cola
+    add_resource("atendiendo", capacity = servidores, queue_size = cola) %>%    
+    # se generan las llegadas de clientes según Exp(lambda)
     add_generator("llegada", servicio, function() rexp(1, lambda)) %>% 
     run(until = t)     
 }
 ```
 
-Imaginemos que por la mañanas (de 8 a 15) las llegadas de clientes se producen con una tasa de 15 clientes/hora, mientras que el tiempo medio que el cliente permanece en el cajero es de 6 minutos. Expresando en minutos tendríamos una tasa de llegadas $\lambda = 15/60$, y una tasa de servicio $\mu = 1/6$. Se ha observado además que cuando la cola de espera es de tres clientes nadie más espera para hacer cola ($K = 4$). Analizamos el sistema de forma básica para una mañana cualquiera, es decir para un periodo de 7 horas (420 minutos).
+Imaginemos que por la mañanas (de 8 a 15) las llegadas de clientes se producen con una tasa de 15 clientes/hora, mientras que el tiempo medio que el cliente permanece en el cajero es de 6 minutos. Expresada en minutos tendríamos una tasa de llegadas $\lambda = 15/60$, y una tasa de servicio $\mu = 1/6$. Se ha observado además que cuando la cola de espera es de tres clientes nadie más espera para hacer cola ($K = 4$). Analizamos el sistema de forma básica para una mañana cualquiera, es decir para un periodo de 7 horas (420 minutos).
 
 
 ```r
 set.seed(12)
 ### Simulación del sistema
-cajero <- cola.MM1K(420, 15/60, 1/6, 1, 4)
+t=420; 
+lambda=15/60; mu=1/6
+servidores=1; usuarios=4
+cajero <- cola.MM1K(t, lambda, mu, servidores, usuarios)
 ### Salidas del sistema
-cajero.df.res <- get_mon_resources(cajero)
-cajero.df.arr <- get_mon_arrivals(cajero)
+cajero.df.res <- get_mon_resources(cajero)  # recursos (servidores)
+cajero.df.arr <- get_mon_arrivals(cajero)   # llegadas (clientes)
 ```
 
-Veamos con un poco de detalle las salidas que porporciona el sistema. Comenzamos con el proceso de llegadas al sistema viendo las primeras 10 llegadas al sistema:
+Veamos con un poco de detalle las salidas que proporciona el sistema. Comenzamos con el proceso de llegadas al sistema viendo las primeras 10 llegadas al sistema:
 
 
 ```r
@@ -1134,16 +1157,30 @@ head(cajero.df.arr, n = 10)
 ## 10  llegada5  45.814971 75.428935     15.870541     TRUE           1
 ```
 
-En la columna `name` tenemos el identificador de la llegada a sistema, en las columnas `star_time` y `end_time` tenemos el instante de tiempo de acceso al cajero y el tiempo en que salimos del sistema (abandonamos el cajero). En la columna `activity_time` tenemos el tiempo de servicio, donde le valor 0 son los clientes que han llegado al cajero pero no ha sido atendidos porque se ha sobrepasado la capacidad del sistema. Estos coinciden con los valores `FALSE` de la columna `finished`, que indica los clientes que no han podido ser atendidos por el sistema. Con estas salida resulta muy fácil calcular el tiempo de servicio del sistema así como el porcentaje de clientes rechazados, y el tiempo esperando en la cola.
+En la columna `name` tenemos el identificador de la llegada al sistema (cajero), en las columnas `start_time` y `end_time` tenemos el instante de tiempo en el que llega y sale del cajero. La columna `activity_time` muestra el tiempo de servicio en el cajero (durante el que es atendido el cliente); un valor 0 identifica a un cliente que no ha sido atendido porque sobrepasó la capacidad del sistema (no esperó al ver la cola y se marchó). Estos coinciden con los valores `FALSE` de la columna `finished`, que identifica a los clientes que no han podido ser atendidos. Con estas salidas resulta muy fácil calcular el tiempo de servicio del sistema así como el porcentaje de clientes rechazados, y el tiempo esperando en la cola.
 
 
 ```r
-# llegadas al sistema
-nsis <- nrow(cajero.df.arr)
+# llegadas al sistema: número de clientes que han pasado por el cajero
+nsis <- nrow(cajero.df.arr);nsis
+```
+
+```
+## [1] 108
+```
+
+```r
 # tiempo total de servicio
-tserver <- sum(cajero.df.arr$activity_time)
-# propoción de tiempo que el sistema está ocupado (atendiendo o en espera)
-round(100*tserver/420,2)
+tserver <- sum(cajero.df.arr$activity_time);tserver
+```
+
+```
+## [1] 407.9837
+```
+
+```r
+# proporción de tiempo que el sistema está ocupado (atendiendo o en espera)
+round(100*tserver/t,2)
 ```
 
 ```
@@ -1151,8 +1188,8 @@ round(100*tserver/420,2)
 ```
 
 ```r
-# porcentaje de clientes rechazados
-rechazados <- nrow(cajero.df.arr[cajero.df.arr$finished == FALSE,])
+# porcentaje de clientes que se marcharon sin ser atendidos
+rechazados <- sum(cajero.df.arr$finished == FALSE)
 round(100*rechazados/nsis,2)
 ```
 
@@ -1161,16 +1198,21 @@ round(100*rechazados/nsis,2)
 ```
 
 ```r
-# Tiempo medio de espera
-tespera <- mean(cajero.df.arr$end_time - cajero.df.arr$start_time - cajero.df.arr$activity_time)
-tespera
+# Tiempos de espera en cola para ser atendido
+tespera <- cajero.df.arr$end_time - cajero.df.arr$start_time - cajero.df.arr$activity_time
+# tiempo medio de espera en cola y desv.típica
+mean(tespera);sd(tespera)
 ```
 
 ```
 ## [1] 8.280251
 ```
 
-Para ser más sofisticados podríamos calcular el tiempo medio en espera en función de los clientes en la cola, o lo que sería más fácil estudiar dichas cantidades mediante un gráfico, pero para ello necesitamos trabajar con el comportamiento de la cola. Veamos dicho comportamiento:
+```
+## [1] 10.53434
+```
+
+Podemos estudiar el comportamiento del sistema, y en particular de la cola, también en términos de los servidores.
 
 
 ```r
@@ -1191,7 +1233,7 @@ head(cajero.df.res, n = 10)
 ## 10 atendiendo 48.326016      1     3        1          3      4     4           1
 ```
 
-En este caso las variables nos indican el tiempo en el que se produce alguna actividad en el sistema (columna `time`), si el usuario está en el sistema (valores 0-1 indicando si esta fuera o dentro) en la variable `server`, el número de clientes en la cola de espera (columna `queue`), la capacidad de servicio del sistema (columna `capacity`), el tamaño máximo de la cola (columna `queue_size`), el número de clientes en el sistema (columna `system`), la capacidad total de sistema (columna `limit`), y un indicador de la replicación del sistema.
+En este caso las columnas nos informan sobre el instante de tiempo (`time`) en el que se produce alguna actividad en el sistema, la columna `server` indica el número de servidores ocupados atendiendo a algún cliente, `queue` el número de clientes en la cola de espera, `capacity` la capacidad de servicio del sistema, `queue_size` el tamaño máximo de la cola, `system` el número de clientes en el sistema, `limit` la capacidad total de sistema, y finalmente `replication` da un indicador de la replicación de las simulaciones.
 
 Con estas salidas podemos describir fácilmente el comportamiento de la cola del sistema ya que podemos estudiar el número de clientes en cola a lo largo del tiempo.
 
@@ -1220,15 +1262,17 @@ ggplot(cajero.df.res, aes(x = queue)) +
 
 \begin{center}\includegraphics[width=0.95\linewidth]{04-CMTC_files/figure-latex/05-034-2} \end{center}
 
-Simulamos ahora el sistema en 500 ocasiones para estudiar la estabildiad de los descriptivos obtenidos.
+Simulamos ahora el sistema en 500 ocasiones para inferir con mayor precisión el comportamiento del sistema.
 
 
 ```r
 # Réplicas del sistema
-replicas <- 500
-envs <- lapply(1:replicas, function(i){
-  repcajero <- cola.MM1K(420, 15/60, 1/6, 1, 5)
-})
+nreplicas=500
+t=420; 
+lambda=15/60; mu=1/6
+servidores=1; usuarios=4
+
+envs <- replicate(nreplicas,cola.MM1K(t, lambda, mu, servidores, usuarios))
 # almacenamos análisis de llegadas del sistema
 simarrivals<-as_tibble(get_mon_arrivals(envs))
 
@@ -1253,32 +1297,35 @@ salida
 ## # A tibble: 1 x 5
 ##   media_clientes media_tserver media_ptserver media_rechazados media_prechazados
 ##            <dbl>         <dbl>          <dbl>            <dbl>             <dbl>
-## 1           102.          387.           92.2             36.0              34.9
+## 1           102.          377.           89.8             37.9              36.7
 ```
 
-¿Qué conclusiones extraemos del análsis realizado? ¿cómo valorarías la ocupación del sistema? ¿qué ocuriría si añadimos un nuevo cajero y ampliamos la capacidad del sistema a 8 clientes?
+> Para comentar: ¿Qué conclusiones extraemos del análisis realizado? ¿Cómo valorarías la ocupación del sistema? ¿Qué ocurriría si añadimos un nuevo cajero y ampliamos la capacidad del sistema a 8 clientes?
 
 ### Mantenimiento de máquinas {#excmtc007}
 
-El problema de mantenimiento de máquinas es muy habitual dentro de las CMTC. Supongamos que disponemos de $N$ máquinas que funcionana durante 24 horas seguidas y $M$ personas que pueden reparalas ($M \leq N$). Las máquinas son idénticas, y los tiempos de vida de las máquinas (necesitan reparación o mantenimiento) son variables aleatorias independientes $Exp(\mu)$. Cuando las máquinas fallan, son reparadas en el orden de fallo por los $M$ reparadores. Cada máquina averiada necesita una y sólo una persona de reparación, y los tiempos de reparación son variables aleatorias independientes $Exp(\lambda)$, de forma que Una máquina reparada se comporta como una máquina nueva. Si $X(t)$ el número de máquinas que funcionan en el momento $t$, el proceso $\{X(t), t \geq 0\}$ es un proceso de nacimiento y muerte con parámetros:
+El problema del mantenimiento de máquinas es muy habitual dentro de las CMTC. Supongamos que disponemos de $N$ máquinas que funcionan durante 24 horas seguidas y $M$ personas que pueden repararlas ($M \leq N$). Las máquinas son idénticas, y los tiempos de vida de las máquinas (reparaciones o mantenimiento) son variables aleatorias independientes $Exp(\mu)$. Cuando las máquinas fallan, son reparadas por orden de fallo (la primera que falla es la primera en ser reparada) por los $M$ reparadores. Cada máquina averiada necesita una y sólo una persona para repararla, y los tiempos de reparación se distribuyen como una $Exp(\lambda)$; una vez reparada, la máquina continúa comportándose como una máquina nueva. Si $X(t)$ el número de máquinas que funcionan en el momento $t$, el proceso $\{X(t), t \geq 0\}$ es un proceso de nacimiento (avería) y muerte (reparación) con parámetros:
 
-$$\lambda_i = min(N-i, M)\lambda, \quad 0 \leq i \leq N,$$
+$$\lambda_i = \lambda \cdot min(N-i, M), \quad 0 \leq i \leq N,$$
 
-$$\mu_i = i\mu, \quad 0 \leq i \leq N,$$
+$$\mu_i = \mu \cdot i, \quad 0 \leq i \leq N.$$
+::: example
 
-donde el "nacimiento" y la "muerte" hacen referencia a la reparación y al funcionamiento de cada máquina respectivamente.
+Imaginemos un problema sencillo de mantenimiento de máquinas, que se puede generalizar fácilmente, en el que tenemos 4 máquinas y 2 reparadores, de forma que el espacio de estados (número de máquinas en funcionamiento) viene dado por $S = \{0, 1, 2, 3, 4\}$. En este ejemplo vamos a ver cómo los parámetros de nacimiento y muerte corresponden con los que acabamos de definir. 
 
-Imaginemos un problema sencillo, que se puede generalizar fácilmente, donde tenemos 4 máquinas y 2 reparador, de forma que el espacio de estados (número de máquinas en funcionamiento) viene dado por $S = \{0, 1, 2, 3, 4\}$. En este ejemplo vamos a ver como los parámetros de nacimiento y muerte corresponden con los definidos en la sección [Mantenimiento de máquinas](#excmtc007). Descripción del sistema:
+:::
 
--   En el estado 0, todas las máquinas están estropeadas, dos se encuentran en reparación y dos esperando a ser reparadas, Los tiempos de reparación son iid $Exp(\lambda)$ y un vez se complete cualquiera de las dos repaciones el sistema cambiará al estado 1. De esta forma, $r_{01} = \lambda_0 = \lambda + \lambda = 2\lambda$.
+Descripción del sistema:
 
--   En el estado 1, una máquina está en funcionamiento, hay dos en reparación y otra está en espera. Cuando una de las dos máquinas es reparada pasamos al estado 2. De esta forma, $r_{12} = \lambda_1 = 2\lambda$. Además, en este estado la máquina que está funcionando puede fallar después de mantenerse en funcionamiento un tiempo $Exp(\mu)$ volviendo al estado 0, de forma que, $r_{10} = \mu_1 = \mu$.
+-   En el estado $X(t)=0$, todas las máquinas están estropeadas, dos se encuentran en reparación (puesto que hay dos reparadores) y dos esperando a ser reparadas, Los tiempos de reparación son iid $Exp(\lambda)$ y un vez se complete cualquiera de las dos repaciones el sistema cambiará al estado 1. De esta forma, $r_{01} = \lambda_0 = \lambda + \lambda = 2\lambda$.
 
--   En el estado 2, con razonamientos similares tendremos que $r_{23} = \lambda_2 = 2\lambda$ y $r_{21} = \mu_2 = 2\mu$.
+-   En el estado $X(t)=1$, una máquina está en funcionamiento, hay dos en reparación y otra está en espera. Cuando una de las dos máquinas es reparada pasamos al estado 2. De esta forma, $r_{12} = \lambda_1 = 2\lambda$. Además, en este estado la máquina que está funcionando puede fallar después de mantenerse en funcionamiento un tiempo $Exp(\mu)$ volviendo al estado 0, de forma que, $r_{10} = \mu_1 = \mu$.
+
+-   En el estado $X(t)=2$, con razonamientos similares, tendremos que $r_{23} = \lambda_2 = 2\lambda$ y $r_{21} = \mu_2 = 2\mu$.
 
 -   Para el resto de estados tendremos que $r_{34} = \lambda_3 = \lambda$, $r_{32} = mu_3 = 3\mu$, y $r_{43} = \mu_4 = 4\mu$.
 
-En esta situación el diagrama del proceso vieen dado por:
+En esta situación el diagrama del proceso viene dado por:
 
 \begin{figure}
 
@@ -1289,12 +1336,12 @@ En esta situación el diagrama del proceso vieen dado por:
 \caption{Diagrama de tasas para el mantenimiento de máquinas}(\#fig:05-036)
 \end{figure}
 
-Este sistema se puede modelizar fácilmente en `simmer` sin nada más que fijar las tasas correspondientes, el número de máquinas disponibles, y el número de operarios. Supongamos que los tiempos de vida de las máquinas son variables aleatorias exponenciales con media de 3 días, mientras que los tiempos de reparación son variables aleatorias exponenciales con media de 2 horas. Expresando en horas tendríamos una tasa de reparación de $\lambda = 1/2$, y una tasa de funcionamiento $\mu = 1/72$.
+Este sistema se puede modelizar fácilmente en `simmer` sin más que fijar las tasas correspondientes, el número de máquinas disponibles, y el número de operarios. Supongamos que los tiempos de vida de las máquinas son variables aleatorias exponenciales con media de 3 días, mientras que los tiempos de reparación son variables exponenciales con media de 2 horas. Expresando todo en horas, tendríamos una tasa de reparación de $\mu = 1/2$, y una tasa de llegadas $\lambda = 1/72$.
 
 De nuevo planteamos una función que nos permita cambiar fácilmente los parámetros del sistema si fuera necesario. La empresa está interesada en:
 
 -   ¿Cuántas máquinas estarán en funcionamiento después de 3 días?
--   ¿cuál es el porcentaje de tiempo en esos tres días que las cuatro máquinas están funcionando?
+-   ¿Durante qué porcentaje del tiempo las cuatro máquinas están funcionando?
 
 
 ```r
@@ -1308,8 +1355,8 @@ mantenimiento <- function(t, lambda, mu, capacidad)
   # K: máquinas
   
   # Distribuciones de tiempos
-  vida <- function() rexp(1, mu)
-  reparacion <- function() rexp(1, lambda)
+  vida <- function() rexp(1, lambda)
+  reparacion <- function() rexp(1, mu)
   
   # Trayectoria 
   maquina <- trajectory() %>%
@@ -1334,8 +1381,11 @@ Simulamos el sistema y analizamos un poco la salida. Dado que en este sistema no
 
 
 ```r
+t=72 # 3 días
+lambda=1/72; mu=1/2
+capacidad=2 # nº reparadores
 ### Simulación del sistema
-maquinas <- mantenimiento(72, 1/2, 1/72, 2)
+maquinas <- mantenimiento(t, lambda,mu, capacidad)
 ### Salidas del sistema
 maquinas.df.res <- get_mon_resources(maquinas)
 head(maquinas.df.res, 10)
@@ -1347,12 +1397,12 @@ head(maquinas.df.res, 10)
 ## 2  funcionando  0.00000      2     0      Inf        Inf      2   Inf           1
 ## 3  funcionando  0.00000      3     0      Inf        Inf      3   Inf           1
 ## 4  funcionando  0.00000      4     0      Inf        Inf      4   Inf           1
-## 5  funcionando 15.01074      3     0      Inf        Inf      3   Inf           1
-## 6    reparando 15.01074      1     0        2        Inf      1   Inf           1
-## 7    reparando 15.19804      0     0        2        Inf      0   Inf           1
-## 8  funcionando 15.19804      4     0      Inf        Inf      4   Inf           1
-## 9  funcionando 16.85568      3     0      Inf        Inf      3   Inf           1
-## 10   reparando 16.85568      1     0        2        Inf      1   Inf           1
+## 5  funcionando 39.64840      3     0      Inf        Inf      3   Inf           1
+## 6    reparando 39.64840      1     0        2        Inf      1   Inf           1
+## 7    reparando 40.91384      0     0        2        Inf      0   Inf           1
+## 8  funcionando 40.91384      4     0      Inf        Inf      4   Inf           1
+## 9  funcionando 63.84362      3     0      Inf        Inf      3   Inf           1
+## 10   reparando 63.84362      1     0        2        Inf      1   Inf           1
 ```
 
 Respondemos en primer lugar al número de máquinas en funcionamiento a los tres días
@@ -1365,7 +1415,7 @@ tail(maquinas.df.res, 1)
 
 ```
 ##       resource     time server queue capacity queue_size system limit replication
-## 20 funcionando 25.30087      4     0      Inf        Inf      4   Inf           1
+## 12 funcionando 65.62617      4     0      Inf        Inf      4   Inf           1
 ```
 
 A las 72 horas el número de máquinas funcionando se corresponde con el valor de `server`. Para conocer el tiempo que las cuatro máquinas han estado funcionando debemos manipular los resultados obtenidos en el proceso de simulación.
@@ -1384,7 +1434,7 @@ t_both_working_4 <- deltas_4[both_working_4]
 res<-sum(t_both_working_4, na.rm=TRUE) / max(maquinas.df.sel$time)
 ```
 
-La proporción de tiempo en que las cuatro máquinas están funcionando simultáneamente es 74. Estudiamos la estabilidad del sistema realizando 500 simulaciones del sistema y estimando las cantidades de interés para la empresa.
+La proporción de tiempo en que las cuatro máquinas están funcionando simultáneamente es 95.36. Estudiamos la estabilidad del sistema realizando 500 simulaciones del sistema y estimando las cantidades de interés para la empresa.
 
 
 ```r
@@ -1417,7 +1467,7 @@ for (i in 1:500)
 }
 ```
 
-Tenemos entonces que el número de máquinas en funcionamiento es 3.736 y el tiempo de funcionamiento de las cuatro máquinas estimado es 87.38 para un periodo de 72 horas cuando al inicio todas las máquinas están paradas.
+Tenemos entonces que el número de máquinas en funcionamiento es 1.97 y el tiempo de funcionamiento de las cuatro máquinas estimado es 3.58 para un periodo de 72 horas cuando al inicio todas las máquinas están paradas.
 
 ### Central telefónica
 
@@ -1471,7 +1521,7 @@ $$\lambda_i = \lambda, \quad 0 \leq i \leq K-1$$ $$\mu_i = min(i, s)\mu, \quad 0
 
 ## Otros tipos de sistemas {#CMTCE}
 
-Presentamos en este punto otros sistemas que no se corresponden con procesos de nacimeinto y muerte, pero que son muy habituales en el mundo real.
+Presentamos en este punto otros sistemas que no se corresponden con procesos de nacimiento y muerte, pero que son muy habituales en el mundo real.
 
 ### Gestión de inventarios
 
@@ -1705,7 +1755,7 @@ round(table(salida$estado)/replicas, 3)
 ```
 ## 
 ##     0     1     2     3     4 
-## 0.090 0.123 0.163 0.250 0.374
+## 0.089 0.122 0.162 0.251 0.376
 ```
 
 Podemos ver que la aproximación obtenida es similar (hasta el segundo decimal) a la obtneida a partir de la matriz $R$ del proceso. Simulando podemos aproximar las cantidades de interés siempre que el sistema empieza desde el punto de interés.
@@ -1841,7 +1891,7 @@ simarrivals %>%
 ## # A tibble: 1 x 2
 ##    mOFF   mON
 ##   <dbl> <dbl>
-## 1  3.30  27.7
+## 1  3.33  27.7
 ```
 
 *Para practicar este apartado puedes resolver los ejercicios B-5 a B-8 de la colección al final de la unidad.*
@@ -2484,7 +2534,7 @@ esperanza
 ```
 
 ```
-## [1] 3.892
+## [1] 0.101
 ```
 
 **Ejercicio B-2.**

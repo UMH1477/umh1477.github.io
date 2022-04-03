@@ -1346,7 +1346,7 @@ De nuevo planteamos una función que nos permita cambiar fácilmente los paráme
 ```r
 # Sistema
 #################################################
-mantenimiento <- function(t, lambda, mu, capacidad)
+mantenimiento <- function(t, lambda, mu, capacidad,K)
 {
   # lambda: tasa de averías
   # mu: tasa de reparación
@@ -1364,10 +1364,7 @@ mantenimiento <- function(t, lambda, mu, capacidad)
   simmer() %>%
     add_resource("mecanico", capacity = capacidad, queue_size = Inf) %>%
     # simulación de averías para 4 máquinas
-    add_generator("machineA", reparacion, function() rexp(1,lambda)) %>%
-    add_generator("machineB", reparacion, function() rexp(1,lambda)) %>%
-    add_generator("machineC", reparacion, function() rexp(1,lambda)) %>%
-    add_generator("machineD", reparacion, function() rexp(1,lambda)) %>%
+    add_generator("machine", reparacion, function() rexp(K,lambda)) %>%
     run(until = t)     
 }
 ```
@@ -1379,9 +1376,10 @@ Simulamos el sistema y analizamos la salida.
 t=24*7 #  tiempo de simulación (en horas)
 lambda=1/72; mu=1/2
 capacidad=2 # nº reparadores
+K=4 # nº máquinas
 
 ### Simulación del sistema
-sim <- mantenimiento(t, lambda,mu, capacidad)
+sim <- mantenimiento(t, lambda,mu, capacidad,K)
 
 ### Salidas del sistema
 sim.arr <- get_mon_arrivals(sim)
@@ -1390,15 +1388,9 @@ head(sim.arr, 10)
 ```
 
 ```
-##        name start_time  end_time activity_time finished replication
-## 1 machineA0   39.64840  40.97665    1.32824925     TRUE           1
-## 2 machineB0   63.84362  66.27195    2.42833291     TRUE           1
-## 3 machineA1   85.20397  85.63229    0.42832245     TRUE           1
-## 4 machineD1   99.85923 100.87531    1.01607634     TRUE           1
-## 5 machineD0   96.17729 103.56452    7.38723145     TRUE           1
-## 6 machineC0  109.80081 111.83345    2.03264516     TRUE           1
-## 7 machineB1  128.01558 128.06688    0.05130007     TRUE           1
-## 8 machineD2  133.67415 136.86906    3.19490675     TRUE           1
+##       name start_time  end_time activity_time finished replication
+## 1 machine0    39.6484  40.91384      1.265432     TRUE           1
+## 2 machine1   103.4920 104.82027      1.328249     TRUE           1
 ```
 
 ```r
@@ -1406,17 +1398,11 @@ head(sim.res, 10)
 ```
 
 ```
-##    resource      time server queue capacity queue_size system limit replication
-## 1  mecanico  39.64840      1     0        2        Inf      1   Inf           1
-## 2  mecanico  40.97665      0     0        2        Inf      0   Inf           1
-## 3  mecanico  63.84362      1     0        2        Inf      1   Inf           1
-## 4  mecanico  66.27195      0     0        2        Inf      0   Inf           1
-## 5  mecanico  85.20397      1     0        2        Inf      1   Inf           1
-## 6  mecanico  85.63229      0     0        2        Inf      0   Inf           1
-## 7  mecanico  96.17729      1     0        2        Inf      1   Inf           1
-## 8  mecanico  99.85923      2     0        2        Inf      2   Inf           1
-## 9  mecanico 100.87531      1     0        2        Inf      1   Inf           1
-## 10 mecanico 103.56452      0     0        2        Inf      0   Inf           1
+##   resource      time server queue capacity queue_size system limit replication
+## 1 mecanico  39.64840      1     0        2        Inf      1   Inf           1
+## 2 mecanico  40.91384      0     0        2        Inf      0   Inf           1
+## 3 mecanico 103.49202      1     0        2        Inf      1   Inf           1
+## 4 mecanico 104.82027      0     0        2        Inf      0   Inf           1
 ```
 
 Respondemos en primer lugar al número de máquinas en funcionamiento al cabo del tiempo simulado. Sabemos que el número de máquinas averiadas en un instante dado será igual al número de reparadores ocupados (`server`) más el número de máquinas en cola esperando ser reparadas (`queue`), o lo que es lo mismo, las máquinas que están en el sistema de reparación (`system`, en resources). Veamos pues, qué ocurre en el último instante en que se ha registrado alguna actividad en el sistema simulado, dado por la última fila en el dataframe de recursos.
@@ -1428,8 +1414,8 @@ tail(sim.res, 1)
 ```
 
 ```
-##    resource     time server queue capacity queue_size system limit replication
-## 16 mecanico 136.8691      0     0        2        Inf      0   Inf           1
+##   resource     time server queue capacity queue_size system limit replication
+## 4 mecanico 104.8203      0     0        2        Inf      0   Inf           1
 ```
 
 ```r
@@ -1463,7 +1449,7 @@ sum(tiempos[sel])*100/t
 ```
 
 ```
-## [1] 66.36941
+## [1] 74.8559
 ```
 
 Por último buscamos responder la cuestión de cuánto tiempo de funcionamiento se pierde por averías. Para ello calculamos el tiempo total gastado en reparaciones (`activity_time` en arrivals), más el tiempo de esperas en cola, y lo restamos al tiempo total que deberían haber estado funcionando las máquinas.
@@ -1481,7 +1467,7 @@ round(t.sinfun,2)
 ```
 
 ```
-## [1] 2.66
+## [1] 0.39
 ```
 
 Para obtener una estimación y su error habremos de realizar estos cálculos para nreplicas (simulaciones) del sistema durante el periodo de interés.
@@ -1492,9 +1478,10 @@ nreplicas<-500 # réplicas para estimación MC
 t=24*7 #  tiempo de simulación (en horas)
 lambda=1/72; mu=1/2
 capacidad=2 # nº reparadores
+K=4 # nº máquinas
 
 envs <- mclapply(1:nreplicas, function(i){
-   mantenimiento(t, lambda,mu, capacidad)%>%
+   mantenimiento(t, lambda,mu, capacidad,K)%>%
     wrap()},mc.set.seed=FALSE)
 
 # almacenamos análisis de llegadas del sistema
@@ -1514,7 +1501,7 @@ cat("\n Máquinas operativas después de una semana: ",m,"(error=",error,")")
 
 ```
 ## 
-##  Máquinas operativas después de una semana:  3.876 (error= 0.0147541 )
+##  Máquinas operativas después de una semana:  3.956332 (error= 0.009149054 )
 ```
 
 ```r
@@ -1533,7 +1520,7 @@ cat("\n % Tiempo en que han funcionado simultáneamente todas las máquinas: ",m
 
 ```
 ## 
-##  % Tiempo en que han funcionado simultáneamente todas las máquinas:  78.4307 % (error= 0.5472132 %)
+##  % Tiempo en que han funcionado simultáneamente todas las máquinas:  66.25604 % (error= 1.022649 %)
 ```
 
 ```r
@@ -1550,7 +1537,7 @@ cat("\n % Tiempo perdido por averías: ",m,"% (error=",error,"%)")
 
 ```
 ## 
-##  % Tiempo perdido por averías:  2.650109 % (error= 0.05616689 %)
+##  % Tiempo perdido por averías:  0.7013907 % (error= 0.0253398 %)
 ```
 
 ### Central telefónica {#centralTelefonica}
@@ -1698,10 +1685,10 @@ r= max\{r_i, 1\leq i \leq N\}.
 (\#eq:rmax)
 \end{equation}
 ```
-Con todo, en algunos casos es más conveniente utilizar un valor de $r$ que sea mayor que el anterior, como $r=sum_{i=1}^N r_i$.
+Con todo, en algunos casos es más conveniente utilizar un valor de $r$ que sea mayor que el anterior, como $r=\sum_{i=1}^N r_i$.
 
 ::: {.silverbox data-latex=""}
-Algoritmo de uniformización para obtener $P$ con una suma finita \@ref(eq:uniformizacionM}:
+Algoritmo de uniformización para obtener $P$ con una suma finita
 
 1.  Fijar $R$, $t$, y $0 < \epsilon < 1$ la tolerancia deseada (máximo error permitido). Por defecto fijamos $\epsilon=0.00001$.
 2.  Obtener $r$ con \@ref(eq:rmax).
@@ -1882,7 +1869,7 @@ round(table(salida$estado)/replicas, 3)
 ```
 ## 
 ##     0     1     2     3     4 
-## 0.017 0.023 0.026 0.050 0.084
+## 0.017 0.023 0.026 0.051 0.083
 ```
 
 Podemos ver que la aproximación obtenida es similar (hasta el segundo decimal) a la teórica obtenida a partir de la matriz $R$ del proceso. Si conocemos el punto de partida del sistema, podremos simular con precisión el comportamiento del mismo después de cierto periodo de tiempo.
@@ -2244,34 +2231,26 @@ g(T) = M(T) \cdot \begin{pmatrix} c(1) \\ c(2) \\ ... \\ c(N)\end{pmatrix}
 donde $c(i)$ representa el coste por permanecer en el estado $i$ y $g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.$
 :::
 
-::: example
-Para el sistema de [Mantenimiento de máquinas](#excmtc007), se sabe que el beneficio por cada hora que la máquina está funcionanado es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas, si sabemos que al inicio del día todas las máquinas están funcionando. Si $X_t$ es el número de máquinas funcionando en el instante $t$, el espacio de estados para 4 máquinas viene dado por $S = \{0, 1, 2, 3, 4\}$ y el vector de costes es:
+::: {.example ##excmtc007bis}
+Para el sistema de [Mantenimiento de máquinas](#excmtc007), se sabe que el beneficio por cada hora que la máquina está funcionando es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas, si sabemos que al inicio del día todas las máquinas están funcionando. 
 :::
+
+Si $X_t$ es el número de máquinas estropeadas en el instante $t$, el espacio de estados para 4 máquinas viene dado por $S = \{0, 1, 2, 3, 4\}$ y el vector de costes es:
+
 
 $$
 \begin{matrix}
-c(0) = & 0*50 - 4*15 - 2*10 = - 80,\\
-c(1) = & 1*50 - 3*15 - 2*10 = - 15,\\
+c(4) = & 0*50 - 4*15 - 2*10 = - 80,\\
+c(3) = & 1*50 - 3*15 - 2*10 = - 15,\\
 c(2) = & 2*50 - 2*15 - 2*10 = 50,\\
-c(3) = & 3*50 - 1*15 - 1*10 = 125,\\
-c(4) = & 4*50 - 0*15 - 0*10 = 200.
+c(1) = & 3*50 - 1*15 - 1*10 = 125,\\
+c(0) = & 4*50 - 0*15 - 0*10 = 200.
 \end{matrix}
 $$ 
 
-El vector de costes para el periodo de 24 horas viene dado por:
 
-$$
-g(24) = M(24)*c =
-\begin{bmatrix}
-3844.69 \\
-4116.57 \\
-4327.23 \\
-4474.96 \\
-4621.05
-\end{bmatrix}
-$$
 
-de forma que la cantidad de interés, $g(4, 24)$ que corresponde con el elemento $(5,1)$ de la matriz, establece un beneficio de 4621.05 euros. Veamos como obtener esta cantidad utilizando el código correspondiente.
+Veamos como obtener los costes acumulados en un día utilizando el código correspondiente.
 
 
 ```r
@@ -2281,33 +2260,34 @@ R <- matrix(nrow = nestados, ncol = nestados, data = 0)
 lambda <- 1/2
 mu <- 1/72 
 
-R[1,2] <- 2*lambda 
+R[1,2] <- 4*lambda 
 R[2,1] <- mu 
-R[2,3] <- 2*lambda 
+R[2,3] <- 3*lambda 
 R[3,2] <- 2*mu 
 R[3,4] <- 2*lambda 
 R[4,3] <- 3*mu 
 R[4,5] <- lambda
 R[5,4] <- 4*mu
+
 # Matriz de ocupación
 mmat <- tiempos.ocupacion(R, 24, 1)
 # Vector de costes
-costes <- matrix(c(-80, -15, 50, 125, 200), ncol = 1)
-# Matriz de beneficios
+costes <- matrix(c(200, 125, 50,-15, -80), ncol = 1)
+# Matriz de beneficios acumulados
 beneficios <- mmat%*%costes
 beneficios
 ```
 
 ```
-##          [,1]
-## [1,] 3844.694
-## [2,] 4116.585
-## [3,] 4327.238
-## [4,] 4474.971
-## [5,] 4621.058
+##           [,1]
+## [1,] -1242.097
+## [2,] -1378.587
+## [3,] -1511.844
+## [4,] -1638.507
+## [5,] -1765.011
 ```
 
-El beneficio es 4621.058 euros.
+Luego si se inicia el estado con todas las máquinas funcionando, el coste acumulado tras un día de funcionamiento es de 1242.0975 euros.
 
 ### Tasas de coste a largo plazo
 

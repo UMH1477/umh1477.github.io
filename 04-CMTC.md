@@ -200,18 +200,17 @@ nestados <- length(estados)
 P <- matrix(nrow = nestados, ncol = nestados, 
             data = c(0, 0.5, 0.5, 0.75, 0, 0.25, 0.75, 0.25, 0), 
             byrow = 3)
-r <- matrix(nrow = nestados, ncol = nestados, 
-            data = rep(c(0.5, 1, 1.5),3))
+r <- c(1/2, 1, 1/1.5)
 
-R <- P*r
+R <- r*P
 R
 ```
 
 ```
-##       [,1]  [,2] [,3]
-## [1,] 0.000 0.250 0.25
-## [2,] 0.750 0.000 0.25
-## [3,] 1.125 0.375 0.00
+##      [,1]      [,2] [,3]
+## [1,] 0.00 0.2500000 0.25
+## [2,] 0.75 0.0000000 0.25
+## [3,] 0.50 0.1666667 0.00
 ```
 
 de forma que el diagrama de tasas viene dado por (asignamos el valor de la ciudad a cada uno de los posibles estados del sistema)
@@ -271,7 +270,7 @@ Algoritmo para el sistema de vida útil de una máquina:
 
 1.  Fijar tasas de funcionamiento $\mu$ y reparación $\lambda$, así como el tiempo en que el sistema estará funcionando ($tfin$).
 2.  Fijar el tiempo de funcionamiento $tfun = 0$, tiempo de reparación $trep = 0$, y tiempo de funcionamiento del sistema $tsis = tfun + trep$.
-3.  Fijar el número de vistas al estado de funcionamiento $nfun = 0$ y al estado de reparación $nrep =0$.
+3.  Fijar el número de visitas al estado de funcionamiento $nfun = 0$ y al estado de reparación $nrep =0$.
 
 Repetir los pasos siguientes hasta abandonar el sistema:
 
@@ -331,7 +330,7 @@ TSIM_one_machine <- function(tasafun, tasarep, tfin)
       break
       }
   }
-  res <- tibble(tfun, nfun, trep, nrep, tsis)
+  res <- tibble(tfun, nfun, trep, nrep,tsis)
   # Devolvemos resultados del sistema quitando la fila de inicialización
   return(res[-1,])
 }
@@ -365,7 +364,7 @@ simulacion
 ## 6  44.5      6 0         5 365
 ```
 
-Podemos ver que el número de ciclos en que la máquina esta en fucionamiento es 6 mientras que el número de veces que ha necesitado reparación son 5.
+Podemos ver que el número de ciclos en que la máquina ha entrado en funcionamiento es 6, mientras que el número de veces que ha necesitado reparación son 5.
 
 Calculamos ahora los tiempos totales de funcionamiento y reparación:
 
@@ -400,7 +399,7 @@ A continuación analizamos el sistema del viajante correspondiente al ejemplo \@
 ::: {.silverbox data-latex=""}
 Algoritmo para el análisis del sistema del viajante:
 
-1.  Fijar tasas de permanencia en cada ciudad $\mu_A$, $\mu_B$, y $\mu_C$, así como las probabilidades de salto dadas en la matriz $P$, y una varibale que indica la ciudad en la que nos encontramos ($ciudad$).
+1.  Fijar tasas de permanencia en cada ciudad $\mu_A$, $\mu_B$, y $\mu_C$, así como las probabilidades de salto dadas en la matriz $P$, y una variable que indica la ciudad en la que nos encontramos ($ciudad$).
 2.  Fijar el tiempo de funcionamiento del sistema $tsis = 0$, tiempo de permanencia en cada ciudad $tiempo = 0$, y el tiempo de estudio $tfin$.
 3.  Generar $tiempo \sim Exp(\mu_a)$ y actualizar $tsis$, de forma que si $tsis > tfin$ abandonamos el sistema.
 4.  Generamos un salto de la ciudad $A$ de acuerdo a las probabilidades de $P$ correspondientes a la ciudad $A$.
@@ -514,7 +513,7 @@ tasaB <- 1/1
 tasaC <- 2/3
 tfin <- 52
 simulacion <- TSIM_viajante(tasaA, tasaB, tasaC, tfin)  
-# Análsis del sistema
+# Análisis del sistema
 simulacion %>% 
   group_by(ciudad) %>% 
   summarise(visita = n(), estancia = sum(tiempo)) %>%
@@ -545,9 +544,11 @@ El primer paso del algoritmo de simulación es cargar las librerías y definir l
 
 
 ```r
+library(tidyverse)
 library(simmer)
 library(simmer.plot)
 library(simmer.bricks)
+library(parallel)
 set.seed(1234)
 ```
 
@@ -555,11 +556,6 @@ Definimos ahora el entorno de simulación del sistema:
 
 
 ```r
-# Tasas de permanencia del sistema
-##################################
-lambda <- 1/4  # tasa reparación
-mu <- 1/60     # tasa funcionamiento
-
 # Sistema
 #################################################
 sistema.1m <- function(t, lambda, mu)
@@ -578,14 +574,19 @@ sistema.1m <- function(t, lambda, mu)
   simmer() %>%
     # Se definen los recursos: un único reparador y cola infinita
     add_resource("reparador", capacity = 1) %>%           
-    # Simulador de los tiempos entre averías, dirigidas a la trayectoria "reparar"
+    # Simulador de los tiempos entre averías, dirigidas a "reparar"
     add_generator("averia", reparar, function() rexp(1, mu)) %>% 
     # Tiempo funcionamiento del sistema
     run(until = t)     
 }
+####################################
+# Tasas de permanencia del sistema
+######
+lambda <- 1/4  # tasa reparación
+mu <- 1/60     # tasa funcionamiento
 
 ### Simulación del sistema durante 365 días
-operar <- sistema.1m(365, 1/4, 1/60)
+operar <- sistema.1m(365, lambda,mu)
 ```
 
 Analizamos ahora los resultados que proporciona el sistema simulado. Podemos acceder a las información de dos formas diferentes mediante las funciones `get_mon_arrivals()` para describir las llegadas (averías) y `get_mon_resources()` para describir la ocupación de los servidores recursos (técnicos reparadores).
@@ -655,7 +656,7 @@ A partir de los resultados podemos responder a las mismas preguntas que ya plant
 -   Número de ocasiones en que la máquina debe ser reparada.
 -   Si el beneficio neto es de 100 euros por cada día que la máquina está funcionando y una pérdida de 1500 euros por cada día que está en reparación ¿cuál es el beneficio esperado para el próximo año?
 
-Para responder al primer pregunta basta con sumar los tiempos de actividad y calcualr su proporción sobre los 365 días de simulación:
+Para responder al primer pregunta basta con sumar los tiempos de actividad y calcular su proporción sobre los 365 días de simulación:
 
 
 ```r
@@ -670,7 +671,24 @@ propor
 
 La proporción de tiempo en que la máquina está funcionando es del 93.87% y el tiempo que está en reparación es del 6.13%.
 
-El número de ocasiones en que la máquina está en reparación corresponde al número de veces que accedemos a la tarea de reparación, que en este caso es de 6.
+El número de ocasiones en que la máquina está en reparación corresponde al número de veces que accedemos a la tarea de reparación, que viene identificado por el número de averías, o lo que es equivalente, el número de veces que el reparador está ocupado (server=1), esto es,
+
+
+```r
+sum(recursos$server==1)
+```
+
+```
+## [1] 6
+```
+
+```r
+nrow(reparacion)
+```
+
+```
+## [1] 6
+```
 
 Para calcular el beneficio obtenido a lo largo del año utilizamos el tiempo de reparación obtenido:
 
@@ -683,7 +701,7 @@ Para calcular el beneficio obtenido a lo largo del año utilizamos el tiempo de 
 ## [1] 694.3972
 ```
 
-Como se puede ver, los resultados no son muy similares a los obtenidos con el algoritmo que programamos nosotros. Para conseguir estimaciones estables deberíamos realizar diferentes replicaciones del sistema (lanzar varias cadenas) y promediar los beneficios obtenidos mediante un estimador Monte-Carlo. Podemos replicar fácilmente el sistema añadiendo dos líneas de código. Cada cadena replicada tendrá un distintivo diferente en el argumento 'replicate' cuando monitorizamos los resultados.
+Como se puede ver, los resultados no son muy similares a los obtenidos con el algoritmo que programamos nosotros. Para conseguir estimaciones eficientes deberíamos realizar diferentes replicaciones del sistema (lanzar varias cadenas) y promediar los beneficios obtenidos mediante un estimador Monte-Carlo. Podemos replicar fácilmente el sistema añadiendo dos líneas de código. Cada cadena replicada tendrá un distintivo diferente en el argumento 'replicate' cuando monitorizamos los resultados.
 
 
 ```r
@@ -2444,7 +2462,7 @@ El tiempo esperado hasta que la cola esté vacía de nuevo es de 0.1736 horas, o
 ::: example
 En las condiciones del sistema de [Mantenimiento de aronaves](#mantAeronaves) descrito anteriormente. Supongamos que en un experimento de prueba, el avión despega con cuatro motores que funcionan correctamente y sigue volando hasta que se estrella. Estamos interesados en conocer el tiempo esperado hasta el accidente.
 
-El espacio de estados del sistema es $\{1, 2,...,,9\}$, y sabemos que el avión se estrallará si en algún momento accedemos al subconjunto de estados $\{1, 2, 3, 4, 7\}$. Calculamos los tiempos de primer paso cuando $X_0 = \{5, 6, 8, 9\}$, aunque como el avión está en condiciones óptimas para despegar nos debemos fijar en el valor correspondiente al estado 9. Recordemos que el tiempo medio hasta que falla un motor es de 200 horas, de forma que $\lambda = 1/200 = 0.005$.
+El espacio de estados del sistema es $\{1, 2,...,,9\}$, y sabemos que el avión se estrellará si en algún momento accedemos al subconjunto de estados $\{1, 2, 3, 4, 7\}$. Calculamos los tiempos de primer paso cuando $X_0 = \{5, 6, 8, 9\}$, aunque como el avión está en condiciones óptimas para despegar nos debemos fijar en el valor correspondiente al estado 9. Recordemos que el tiempo medio hasta que falla un motor es de 200 horas, de forma que $\lambda = 1/200 = 0.005$.
 :::
 
 

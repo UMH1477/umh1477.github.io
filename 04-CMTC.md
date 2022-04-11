@@ -77,7 +77,7 @@ El proceso estocástico $\{X_t; t \geq 0\}$ con parámetros $r_i$, $1 \leq i \le
 A continuación presentamos un par de ejemplos.
 
 ::: {#excmtc001 .example}
-**Sistema de vida útil de un satélite**. Supongamos que la vida útil $T$ de un satélite de gran altitud es una variable aleatoria exponencial de tasa $\mu$ en meses, $Exp(\mu)$, de forma que una vez que falla sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso $X_t = 1$ si el satélite está operativo en el momento $t$, y 0 en caso contrario. En esta situación $r_0 = 0$ (porque si se estropea, se queda estropeado) y $r_1 = \mu$ (que es el tiempo esperado de vida), pero desconocemos los valores de $P$, aunque podremos obtener la matriz de transición calculando las probabilidades $p_{00}(t)$ y $p_{11}(t)$ que vienen dadas por:
+**Sistema de vida útil de un satélite**. Supongamos que la vida útil $T$ de un satélite de gran altitud es una variable aleatoria exponencial de tasa $\mu$ en meses, $Exp(\mu)$, de forma que una vez que falla sigue fallando para siempre, ya que no es posible repararlo. Consideramos el proceso $X_t = 1$ si el satélite está operativo en el momento $t$, y 0 en caso contrario. En esta situación $r_0 = 0$ (porque si se estropea, se queda estropeado) y $r_1 = \mu$ (que es el inverso del tiempo esperado de vida), pero desconocemos los valores de $P$, aunque podremos obtener la matriz de transición calculando las probabilidades $p_{00}(t)$ y $p_{11}(t)$ que vienen dadas por:
 
 $$p_{00}(t) = P(\text{satélite no está operativo en t} \mid \text{satélite no está operativo en 0}) = 1$$
 
@@ -301,8 +301,6 @@ TSIM_one_machine <- function(tasafun, tasarep, tfin)
   tfun[i] = trep [i] = nfun[i] = nrep[i] = 0
   tsis[i] <- tfun[i] + trep[i]
   
-  # Fijamos semilla
-  set.seed(123)
   # Bucle de simulación
   while(tsis[i] <= tfin)
   {
@@ -353,18 +351,16 @@ simulacion
 ```
 
 ```
-## # A tibble: 6 x 5
+## # A tibble: 4 x 5
 ##     tfun  nfun  trep  nrep  tsis
 ##    <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1  50.6      1 2.31      1  52.9
-## 2  79.7      2 0.126     2 133. 
-## 3   3.37     3 1.27      3 137. 
-## 4  18.9      4 0.581     4 157. 
-## 5 164.       5 0.117     5 321. 
-## 6  44.5      6 0         5 365
+## 1  12.1      1  6.58     1  18.7
+## 2 311.       2  3.41     2 333. 
+## 3  27.9      3  2.18     3 363. 
+## 4   1.42     4  2.28     4 370.
 ```
 
-Podemos ver que el número de ciclos en que la máquina ha entrado en funcionamiento es 6, mientras que el número de veces que ha necesitado reparación son 5.
+Podemos ver que el número de ciclos en que la máquina ha entrado en funcionamiento es 4, mientras que el número de veces que ha necesitado reparación son 4.
 
 Calculamos ahora los tiempos totales de funcionamiento y reparación:
 
@@ -375,11 +371,11 @@ tiempos
 ```
 
 ```
-##       tfun       trep 
-## 360.603564   4.396436
+##      tfun      trep 
+## 351.97978  14.44428
 ```
 
-Por tanto, la proporción de tiempo que la máquina está en funcionamiento es 0.99, y el beneficio estimado para el próximo año viene dado por:
+Por tanto, la proporción de tiempo que la máquina está en funcionamiento es 0.96, y el beneficio estimado para el próximo año viene dado por:
 
 
 ```r
@@ -388,8 +384,8 @@ beneficio
 ```
 
 ```
-##    tfun 
-## 29465.7
+##     tfun 
+## 13531.56
 ```
 
 ### Sistema del viajante {#viajanteCMTC}
@@ -435,8 +431,7 @@ TSIM_viajante <- function(tasaA, tasaB, tasaC, tfin)
   # estado inicial del sistema
   i <- 1
   ciudad[i] <- "A"
-  # Fijamos semilla
-  set.seed(123)
+
   # Primer tiempo de estancia
   tiempo[i] = rexp(1, tasaA)
   tsis[i] <- tiempo[i]
@@ -524,9 +519,9 @@ simulacion %>%
 ## # A tibble: 3 x 4
 ##   ciudad visita estancia proporcion
 ##   <fct>   <int>    <dbl>      <dbl>
-## 1 A          16     30.3      0.583
-## 2 B           8     10.7      0.206
-## 3 C          11     11.0      0.211
+## 1 A          16    32.1       0.617
+## 2 B           7     6.27      0.121
+## 3 C          10    13.6       0.262
 ```
 
 ### Análisis con simmer
@@ -789,7 +784,7 @@ Para finalizar este apartado presentamos un nuevo ejemplo donde el espacio de es
 
 Una empresa de mantenimiento de aeronaves está interesada en el proceso de avería-reparación de cierto tipo de aviones. El tipo de avión de interés es un avión comercial a reacción con cuatro motores, dos en cada ala. Cuando un motor se enciende, el tiempo que se puede mantener en funcionamiento hasta que falla es una variable aleatoria exponencial con parámetro $\lambda$. Si el fallo se produce en vuelo, no puede haber reparación, pero el avión necesita al menos un motor en cada ala para funcionar correctamente y poder volar con seguridad. En concreto, la empresa está interesada en poder predecir la probabilidad de un vuelo sin problemas.
 
-Si denotamos por $X_L(t)$ y $X_R(t)$ el número de motores funcionando en el instante $t$ en el ala izquierda y el ala derecha respectivamente, podemos considerar el estado del sistema en el instante $t$ como $X_t = (X_L(t), X_R(t))$. Si asumimos que los fallos en los motores son independientes entre sí, podemos ver que el proceo $\{X_t, t \geq 0\}$ es una CMTC con espacio de estados:
+Si denotamos por $X_L(t)$ y $X_R(t)$ el número de motores funcionando en el instante $t$ en el ala izquierda y el ala derecha respectivamente, podemos considerar el estado del sistema en el instante $t$ como $X_t = (X_L(t), X_R(t))$. Si asumimos que los fallos en los motores son independientes entre sí, podemos ver que el proceso $\{X_t, t \geq 0\}$ es una CMTC con espacio de estados:
 
 $$S = \{ (0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2,2) \}$$
 

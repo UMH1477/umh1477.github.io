@@ -145,7 +145,7 @@ tienda=trajectory() %>%
 # se lanza el entorno de simulación incluyendo el generador de llegadas 
 # (clientes), que aparecen en tres instantes de tiempo,
 # y que son dirigidos a la trayectoria "tienda"
-env=env %>%
+env %>%
   add_generator("cliente", tienda,at(1,2,3)) %>%
   # se muestran los resultados en pantalla
   print() %>%
@@ -165,6 +165,12 @@ env=env %>%
 ## 8: cliente2: Sale de la tienda
 ```
 
+```
+## simmer environment: anonymous | now: 8 | next: 
+## { Monitor: in memory }
+## { Source: cliente | monitored: 1 | n_generated: 3 }
+```
+
 Al visualizar el output, apreciamos que llegan tres clientes en los instantes 1,2,3.
 Cada cliente permanece en la tienda durante 5 minutos inspeccionando la mercancía, y después sale en los instantes 6, 7 y 8 respectivamente.
 En las actividades y generadores de llegadas hemos utilizado parámetros fijos, pero los podemos hacer aleatorios.
@@ -179,7 +185,7 @@ tienda=trajectory() %>%
   timeout(function() rnorm(1,5,1)) %>% 
   log_("Sale de la tienda")
 
-env=env %>%
+env %>%
   # el tiempo entre llegadas de los clientes es aleatorio entre 0 y 2 min.
   add_generator("cliente", tienda,function() runif(1,0,2)) %>% 
   print() %>%
@@ -207,6 +213,12 @@ env=env %>%
 ## 8.88082: cliente4: Sale de la tienda
 ## 9.67203: cliente9: Llega a la tienda
 ## 9.73449: cliente10: Llega a la tienda
+```
+
+```
+## simmer environment: anonymous | now: 10 | next: 10.9227434583744
+## { Monitor: in memory }
+## { Source: cliente | monitored: 1 | n_generated: 12 }
 ```
 
 Ahora vemos en la primera columna los instantes de tiempo en que llegan y se van los clientes.
@@ -272,7 +284,7 @@ trayectoria=trajectory() %>%
   log_("Llegada contabilizada.") %>%
   timeout(3)
 
-env=env %>%
+env %>%
   add_generator("llegada",trayectoria,function() rexp(1,1/2)) %>%
   run(5) %>%
   invisible
@@ -307,7 +319,7 @@ Con el comando `stepn()` podemos hacer correr el sistema durante una única simu
 
 
 ```r
-env=env %>%
+env %>%
   stepn() %>%
   print()
 ```
@@ -353,7 +365,7 @@ tienda=trajectory() %>%
   release("dependiente",1)%>%
   log_(function() "Sale de la tienda")
 
-env=env %>%
+env %>%
   add_generator("cliente", tienda,function() runif(1,0,5)) %>% # tiempo entre llegadas 
   add_resource("dependiente",2) %>% # hay dos dependientes
   print() %>%
@@ -383,6 +395,13 @@ env=env %>%
 ## 19.2013: cliente2: Es atendido
 ```
 
+```
+## simmer environment: anonymous | now: 20 | next: 20.2303100284189
+## { Monitor: in memory }
+## { Resource: dependiente | monitored: TRUE | server status: 2(2) | queue status: 5(Inf) }
+## { Source: cliente | monitored: 1 | n_generated: 11 }
+```
+
 ```r
 llegadas=get_mon_arrivals(env) 
 llegadas
@@ -392,6 +411,26 @@ llegadas
 ##       name start_time end_time activity_time finished replication
 ## 1 cliente0  0.8733795 16.03392      15.16054     TRUE           1
 ## 2 cliente1  3.5312472 19.20127      15.67002     TRUE           1
+```
+
+```r
+llegadas=get_mon_arrivals(env,ongoing=TRUE) 
+llegadas
+```
+
+```
+##         name start_time end_time activity_time finished replication
+## 1   cliente0  0.8733795 16.03392      15.16054     TRUE           1
+## 2   cliente1  3.5312472 19.20127      15.67002     TRUE           1
+## 3  cliente10 -1.0000000       NA            NA    FALSE           1
+## 4   cliente9 18.2267091       NA            NA    FALSE           1
+## 5   cliente8 15.2235215       NA            NA    FALSE           1
+## 6   cliente5 10.6974726       NA            NA    FALSE           1
+## 7   cliente7 10.9381036       NA            NA    FALSE           1
+## 8   cliente6 10.8377775       NA            NA    FALSE           1
+## 9   cliente4  9.3044868       NA            NA    FALSE           1
+## 10  cliente2  4.5521389       NA            NA    FALSE           1
+## 11  cliente3  6.3231729       NA            NA    FALSE           1
 ```
 
 ```r
@@ -434,10 +473,10 @@ mon   # nos muestra la ubicación y nombre de los ficheros
 
 ```
 ## simmer monitor: to disk (delimited files)
-## { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_arrivals.csv }
-## { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_releases.csv }
-## { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_attributes.csv }
-## { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_resources.csv }
+## { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_arrivals.csv }
+## { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_releases.csv }
+## { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_attributes.csv }
+## { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_resources.csv }
 ```
 
 ```r
@@ -451,7 +490,7 @@ tienda=trajectory() %>%
   release("dependiente",1)%>%
   log_(function() "Sale de la tienda")
 
-env_mon=env_mon %>%
+env_mon %>%
   add_generator("cliente", tienda,function() runif(1,0,5)) %>% # tiempo entre llegadas 
   add_resource("dependiente",2) %>% # hay dos dependientes
   print() %>%
@@ -461,10 +500,10 @@ env_mon=env_mon %>%
 ```
 ## simmer environment: anonymous | now: 0 | next: 0
 ## { Monitor: to disk (delimited files) }
-##   { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_arrivals.csv }
-##   { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_releases.csv }
-##   { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_attributes.csv }
-##   { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpUTKE76/file8f282262cef5_resources.csv }
+##   { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_arrivals.csv }
+##   { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_releases.csv }
+##   { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_attributes.csv }
+##   { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_resources.csv }
 ## { Resource: dependiente | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }
 ## { Source: cliente | monitored: 1 | n_generated: 0 }
 ## 0.745177: cliente0: Llega a la tienda
@@ -480,6 +519,17 @@ env_mon=env_mon %>%
 ## 16.559: cliente3: Es atendido
 ## 18.4753: cliente1: Sale de la tienda
 ## 18.4753: cliente2: Es atendido
+```
+
+```
+## simmer environment: anonymous | now: 20 | next: 20.6662881595548
+## { Monitor: to disk (delimited files) }
+##   { arrivals: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_arrivals.csv }
+##   { releases: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_releases.csv }
+##   { attributes: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_attributes.csv }
+##   { resources: /var/folders/m7/28kglwg91xjbzq3fpmfgdw4c0000gn/T//RtmpS6ezyb/fileda3d5e09b674_resources.csv }
+## { Resource: dependiente | monitored: TRUE | server status: 2(2) | queue status: 2(Inf) }
+## { Source: cliente | monitored: 1 | n_generated: 8 }
 ```
 
 para a continuación cargar los datos de estos ficheros y trabajar sobre ellos,
@@ -517,7 +567,7 @@ Para las **llegadas** se pintan gráficos de líneas, con tres opciones o métri
 
 
 ```r
-arrivals=get_mon_arrivals(env_mon)
+arrivals=get_mon_arrivals(env)
 plot(arrivals, metric="waiting_time")
 ```
 
@@ -531,11 +581,11 @@ plot(arrivals, metric="waiting_time")
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 16.549
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 16.018
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 9.1806e-05
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 0.0002508
 ```
 
 ```
@@ -545,12 +595,12 @@ plot(arrivals, metric="waiting_time")
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : pseudoinverse used
-## at 16.549
+## at 16.018
 ```
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : neighborhood
-## radius 0.0095815
+## radius 0.015837
 ```
 
 ```
@@ -559,11 +609,11 @@ plot(arrivals, metric="waiting_time")
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 18.485
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 19.217
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 9.1806e-05
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 0.0002508
 ```
 
 ```
@@ -573,7 +623,7 @@ plot(arrivals, metric="waiting_time")
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : There are other
-## near singularities as well. 9.1806e-05
+## near singularities as well. 0.0002508
 ```
 
 ```
@@ -607,11 +657,11 @@ plot(arrivals, metric="activity_time")
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 16.549
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 16.018
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 9.1806e-05
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 0.0002508
 ```
 
 ```
@@ -621,12 +671,12 @@ plot(arrivals, metric="activity_time")
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : pseudoinverse used
-## at 16.549
+## at 16.018
 ```
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : neighborhood
-## radius 0.0095815
+## radius 0.015837
 ```
 
 ```
@@ -635,11 +685,11 @@ plot(arrivals, metric="activity_time")
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 18.485
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 19.217
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 9.1806e-05
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 0.0002508
 ```
 
 ```
@@ -649,7 +699,7 @@ plot(arrivals, metric="activity_time")
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : There are other
-## near singularities as well. 9.1806e-05
+## near singularities as well. 0.0002508
 ```
 
 ```
@@ -683,11 +733,11 @@ plot(arrivals, metric="flow_time")
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 16.549
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 16.018
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 9.1806e-05
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 0.0002508
 ```
 
 ```
@@ -697,12 +747,12 @@ plot(arrivals, metric="flow_time")
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : pseudoinverse used
-## at 16.549
+## at 16.018
 ```
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : neighborhood
-## radius 0.0095815
+## radius 0.015837
 ```
 
 ```
@@ -711,11 +761,11 @@ plot(arrivals, metric="flow_time")
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 18.485
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : at 19.217
 ```
 
 ```
-## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 9.1806e-05
+## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : radius 0.0002508
 ```
 
 ```
@@ -725,7 +775,7 @@ plot(arrivals, metric="flow_time")
 
 ```
 ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : There are other
-## near singularities as well. 9.1806e-05
+## near singularities as well. 0.0002508
 ```
 
 ```
@@ -949,7 +999,7 @@ tienda=trajectory() %>%
   # sale de la tienda
   log_(function() "Sale de la tienda")
 
-env=env %>%
+env %>%
   # simulación (uniforme(0,5) del tiempo entre llegadas de clientes
   add_generator("cliente", tienda,function() runif(1,0,5)) %>% 
   # dimensionamiento de recursos: dos dependientes
@@ -983,6 +1033,17 @@ env=env %>%
 ## 18.9358: cliente6: Llega a la tienda
 ## 18.9865: cliente1: Sale de la tienda
 ## 18.9865: cliente4: Es atendido
+```
+
+```
+##      resource      time server queue capacity queue_size system limit replication
+## 1 dependiente  5.632797      1     0        2        Inf      1   Inf           1
+## 2 dependiente  8.682379      2     0        2        Inf      2   Inf           1
+## 3 dependiente 11.915736      2     1        2        Inf      3   Inf           1
+## 4 dependiente 14.234133      2     0        2        Inf      2   Inf           1
+## 5 dependiente 15.942074      2     1        2        Inf      3   Inf           1
+## 6 dependiente 17.346796      2     2        2        Inf      4   Inf           1
+## 7 dependiente 18.986475      2     1        2        Inf      3   Inf           1
 ```
 
 Visualizamos a los clientes: cuándo llegan, cuándo son atendidos por un dependiente y cuándo se van de la tienda.
@@ -1190,7 +1251,7 @@ traj=trajectory() %>%
   release("doctor",1) %>% 
   log_("El doctor ya está libre")
 
-env=env %>%
+env %>%
    add_resource("doctor",capacity=1,queue_size=0) %>% 
    add_resource("nurse",capacity=10,queue_size=0) %>%
    add_generator("paciente",traj,at(0,1,5,8)) %>%
@@ -1212,6 +1273,14 @@ env=env %>%
 ## 9: paciente1: El paciente1 sale de enfermería
 ## 10: paciente2: El doctor ya está libre
 ## 16: paciente3: El paciente3 sale de enfermería
+```
+
+```
+## simmer environment: anonymous | now: 16 | next: 
+## { Monitor: in memory }
+## { Resource: doctor | monitored: TRUE | server status: 0(1) | queue status: 0(0) }
+## { Resource: nurse | monitored: TRUE | server status: 0(10) | queue status: 0(0) }
+## { Source: paciente | monitored: 1 | n_generated: 4 }
 ```
 
 A la hora de asignar un recurso, podemos hacerlo especificando explícitamente el nombre del recurso (si tenemos varios), o hacerlo de forma dinámica especificando la política a seguir.
@@ -1324,8 +1393,11 @@ simmer() %>%
 Una rama (branch) es un punto en una trayectoria en el cual se pueden seguir una o más sub-trayectorias.
 `simmer` soporta dos tipos de ramificación:
 
--   La actividad `branch()` coloca la llegada en una de las sub-trayectorias que dependen de alguna condición evaluada en un parámetro dinámico llamado *option*.
-    Es el equivalente de una condición *if/else*, es decir, si el valor de *option* es 'i', entonces se ejecutará la sub-trayectoria 'i'.
+-   La actividad `branch()` coloca la llegada en una de las sub-trayectorias que dependen de alguna condición evaluada en un parámetro dinámico llamado *option* y que ha de devolver un valor entero entre 0 y N. Si es 0, salta la ramificación y continúa a la siguiente actividad. Cualquier valor entre 1 y N hace que la llegada siga la correspondientes subtrayectoria.
+
+Es el equivalente de una condición *if/else*, es decir, si el valor de *option* es 'i', entonces se ejecutará la sub-trayectoria 'i'.
+
+El argumento `continue` es un vector booleano (TRUE/FALSE) de dimensión N que indica si la llegada debe continuar o no a la trayectoria principal después de completar cada sub-trayectoria.
 
 -   Por otro lado, la actividad `clone()` genera n ramas paralelas (clonadas) y replica la llegada n-1 veces, colocando cada una de ellas en las n sub-trayectorias creadas.
     `clone()` es la única actividad de sub-trayectorias que no acepta un parámetro *continue*.
@@ -1368,6 +1440,7 @@ env %>%
 ## 2: Jugador1: uno a María
 ## 2: Jugador1: otro a José
 ```
+
 
 ## Bucles
 
@@ -1440,7 +1513,7 @@ visita=trajectory() %>%
   log_("Visita terminada") 
   
 
-env=env %>%
+env %>%
   add_resource("guia",1) %>%
   add_generator("visitante", visita,function() rnorm(1,5,0.5)) %>%
   print() %>%
@@ -1458,6 +1531,13 @@ env=env %>%
 ## 30.0774: batch_visitaguiada: Visita terminada
 ## 39.3721: batch_visitaguiada: Comienza la visita con el guía
 ## 44.3721: batch_visitaguiada: Visita terminada
+```
+
+```
+## simmer environment: anonymous | now: 50 | next: 52.8456166019689
+## { Monitor: in memory }
+## { Resource: guia | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }
+## { Source: visitante | monitored: 1 | n_generated: 11 }
 ```
 
 ```r

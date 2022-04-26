@@ -6,18 +6,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Unidad 4 Cadenas de Markov de Tiempo Contínuo | Simulación de Procesos y Sistemas</title>
 <meta name="description" content="En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Unidad 4 Cadenas de Markov de Tiempo Contínuo | Simulación de Procesos y Sistemas">
 <meta property="og:type" content="book">
 <meta property="og:description" content="En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unidad 4 Cadenas de Markov de Tiempo Contínuo | Simulación de Procesos y Sistemas">
 <meta name="twitter:description" content="En esta unidad, consideramos un sistema estocástico que se observa continuamente a lo largo del tiempo, siendo \(X_t\) el estado en el momento \(t\), con \(t \geq 0\). Siguiendo la definición de...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -168,7 +194,7 @@ r_{ij} = r_i p_{ij}
 \sum_{j=1}^{N} r_{ij} &amp;=&amp; \sum_{j=1}^{N} r_i p_{ij} = r_i \sum_{j=1}^{N} p_{ij} = r_i\\
 p_{ij} &amp;=&amp; \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
 \end{eqnarray*}\]</span>
-<p>Para un mejor manejo de la información, resulta conveniente construir la <strong>matriz de tasas de permanencia</strong> (o tasas de ocupación) teniendo en cuenta que <span class="math inline">\(r_{ii} = 0\)</span> para cualquier valor de <span class="math inline">\(i\)</span>, y por tanto la diagonal de la matriz <span class="math inline">\(R\)</span> es siempre cero. Así tenemos que:</p>
+<p>Para un mejor manejo de la información, resulta conveniente construir la <strong>matriz de tasas</strong> teniendo en cuenta que <span class="math inline">\(r_{ii} = 0\)</span> para cualquier valor de <span class="math inline">\(i\)</span>, y por tanto la diagonal de la matriz <span class="math inline">\(R\)</span> es siempre cero. Así tenemos que:</p>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
 0 &amp; r_{12} &amp; ... &amp; r_{1N}\\
@@ -888,7 +914,7 @@ Figura 4.5: Probabilidad de un viaje seguro
 <p>se denomina proceso finito de nacimiento y muerte donde los <span class="math inline">\(\lambda_i\)</span> se denominan <strong>parámetros de nacimiento</strong> (transición del estado <span class="math inline">\(i\)</span> al <span class="math inline">\(i+1\)</span>) y los <span class="math inline">\(\mu_i\)</span> se denominan <strong>parámetros de muerte</strong> (transición del estado <span class="math inline">\(i\)</span> al <span class="math inline">\(i-1)\)</span>, donde por conveniencia se asume que <span class="math inline">\(\lambda_N = 0\)</span> y <span class="math inline">\(\mu_0 = 0\)</span> indicando que no hay nacimientos en el estado <span class="math inline">\(N\)</span> y que no hay muertes en el estado <span class="math inline">\(0\)</span>.</p>
 </div>
 </div>
-<p>En esta situación el proceso permanece en el estado <span class="math inline">\(i\)</span> una proporción de tiempo (tasa de permanencia) dada por <span class="math inline">\(r_i=-(\lambda_i + \mu_i)\)</span>. Después salta al estado <span class="math inline">\(i+1\)</span> con probabilidad <span class="math inline">\(p_{i,i+1}=\lambda_i/(\lambda_i + \mu_i)\)</span>, o al estado <span class="math inline">\(i-1\)</span> con probabilidad <span class="math inline">\(p_{i,i-1}=\mu_i/(\lambda_i + \mu_i)\)</span>. Además, la matriz generadora del proceso viene dada por:</p>
+<p>En esta situación el proceso permanece en el estado <span class="math inline">\(i\)</span> un tiempo <span class="math inline">\(Exp(\lambda_i + \mu_i)\)</span>, de modo que la tasa media de permanencia en el estado <span class="math inline">\(i\)</span> es <span class="math inline">\(r_i=\lambda_i+\mu_i\)</span>. Después salta al estado <span class="math inline">\(i+1\)</span> con probabilidad <span class="math inline">\(p_{i,i+1}=\lambda_i/(\lambda_i + \mu_i)\)</span>, o al estado <span class="math inline">\(i-1\)</span> con probabilidad <span class="math inline">\(p_{i,i-1}=\mu_i/(\lambda_i + \mu_i)\)</span>. Además, la matriz generadora del proceso viene dada por:</p>
 <p><span class="math display">\[Q = 
 \begin{pmatrix}
 - \lambda_0&amp; \lambda_0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
@@ -1043,7 +1069,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 <code class="sourceCode R"><span class="co"># Porcentaje de clientes en cola</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cajero.df.res</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">queue</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">..prop..</span> , group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Clientes en la cola"</span>, y <span class="op">=</span> <span class="st">"Porcentaje"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="04-CMTC_files/figure-html/05-034-2.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Simulamos ahora el sistema para 500 jornadas con las que inferir sobre el comportamiento medio del sistema.</p>
@@ -1332,7 +1358,7 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 <p>Hay que tener en cuenta que la máquina siempre está encendida si el número de elementos es <span class="math inline">\(l\)</span> o menos, por lo que no aparecen los estados <span class="math inline">\(\{(i, 0), 0 \leq i \leq l\}\)</span>. El análisis habitual de los eventos desencadenantes arroja las siguientes tasas de transición:</p>
 <span class="math display">\[\begin{eqnarray*}
 r_{(i, 1),(i+1, 1)} &amp;=&amp; \lambda, \quad 0 \leq i &lt; K-1\\
-r_{(K-1, 1),(K, 0)}&amp;=&amp; lambda\\
+r_{(K-1, 1),(K, 0)}&amp;=&amp; \lambda\\
 r_{(i, 1),(i-1, 1)} &amp;=&amp; \mu, \quad 1\leq i\leq K-1\\
 r_{(i, 0),(i-1, 0)} &amp;=&amp;  \mu, \quad l+1 &lt; i\leq K\\
 r_{(l+1, 0),(l, 1)} &amp;=&amp;  \mu.
@@ -1400,7 +1426,7 @@ k = k + 1</code></pre>
   <span class="co">################################################</span>
   
   <span class="co"># Parámetros de la función</span>
-  <span class="co"># Rmat: matriz de tasas de permanencia</span>
+  <span class="co"># Rmat: matriz de tasas </span>
   <span class="co"># ts: instante de tiempo</span>
   <span class="co"># epsilon: error en la aproximación</span>
   <span class="co"># cal: forma de obtener r, con dos valores 1 = máximo, 2 = suma finita</span>
@@ -2209,7 +2235,7 @@ R = \begin{pmatrix}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-04-11.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-04-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

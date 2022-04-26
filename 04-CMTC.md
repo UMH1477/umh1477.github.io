@@ -136,7 +136,7 @@ En esta situación resulta posible obtener los valores de $r_i$ y $p_{ij}$ a par
 p_{ij} &=& \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
 \end{eqnarray*}
 ```
-Para un mejor manejo de la información, resulta conveniente construir la **matriz de tasas de permanencia** (o tasas de ocupación) teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz $R$ es siempre cero. Así tenemos que:
+Para un mejor manejo de la información, resulta conveniente construir la **matriz de tasas** teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz $R$ es siempre cero. Así tenemos que:
 
 $$R = 
 \begin{pmatrix}
@@ -1030,7 +1030,7 @@ se denomina proceso finito de nacimiento y muerte donde los $\lambda_i$ se denom
 :::
 :::
 
-En esta situación el proceso permanece en el estado $i$ una proporción de tiempo (tasa de permanencia) dada por $r_i=-(\lambda_i + \mu_i)$. Después salta al estado $i+1$ con probabilidad $p_{i,i+1}=\lambda_i/(\lambda_i + \mu_i)$, o al estado $i-1$ con probabilidad $p_{i,i-1}=\mu_i/(\lambda_i + \mu_i)$. Además, la matriz generadora del proceso viene dada por:
+En esta situación el proceso permanece en el estado $i$ un tiempo $Exp(\lambda_i + \mu_i)$, de modo que la tasa media de permanencia en el estado $i$ es $r_i=\lambda_i+\mu_i$. Después salta al estado $i+1$ con probabilidad $p_{i,i+1}=\lambda_i/(\lambda_i + \mu_i)$, o al estado $i-1$ con probabilidad $p_{i,i-1}=\mu_i/(\lambda_i + \mu_i)$. Además, la matriz generadora del proceso viene dada por:
 
 $$Q = 
 \begin{pmatrix}
@@ -1641,7 +1641,7 @@ Hay que tener en cuenta que la máquina siempre está encendida si el número de
 ```{=tex}
 \begin{eqnarray*}
 r_{(i, 1),(i+1, 1)} &=& \lambda, \quad 0 \leq i < K-1\\
-r_{(K-1, 1),(K, 0)}&=& lambda\\
+r_{(K-1, 1),(K, 0)}&=& \lambda\\
 r_{(i, 1),(i-1, 1)} &=& \mu, \quad 1\leq i\leq K-1\\
 r_{(i, 0),(i-1, 0)} &=&  \mu, \quad l+1 < i\leq K\\
 r_{(l+1, 0),(l, 1)} &=&  \mu.
@@ -1731,7 +1731,7 @@ matriz.prob.trans<- function(Rmat, ts, cal)
   ################################################
   
   # Parámetros de la función
-  # Rmat: matriz de tasas de permanencia
+  # Rmat: matriz de tasas 
   # ts: instante de tiempo
   # epsilon: error en la aproximación
   # cal: forma de obtener r, con dos valores 1 = máximo, 2 = suma finita

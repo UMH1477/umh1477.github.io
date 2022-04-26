@@ -899,6 +899,14 @@ Figura 4.5: Probabilidad de un viaje seguro
 <span class="header-section-number">4.4</span> Procesos de nacimiento y muerte<a class="anchor" aria-label="anchor" href="#CMTCD"><i class="fas fa-link"></i></a>
 </h2>
 <p>Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un papel muy importante dentro de las CMTC, ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.</p>
+<p>Veamos cierta propiedad que nos va a resultar de interés.</p>
+<div class="bluebox">
+<p>Supongamos que en un instante <span class="math inline">\(t\)</span>, el sistema está en estado <span class="math inline">\(i\)</span>, esto es, <span class="math inline">\(X_t=i\)</span>, y qe es posible transitar al estado <span class="math inline">\(j\)</span> a través de la ocurrencia de <span class="math inline">\(m\)</span> eventos independientes, cada uno de los cuales se produce con tiempos independientes <span class="math inline">\(T_i \sim Exp(\lambda_i)\)</span>.</p>
+<p><em>Es el caso de que haya 5 máquinas funcionando en un sistema y cualquiera de las 5 puede fallar, de manera que un fallo en cualquiera de ellas produciría una transición al estado 4 (4 máquinas funcionando).</em></p>
+<p>Entonces el sistema permanecerá en el estado <span class="math inline">\(i\)</span> hasta que se produzca el primer evento de los <span class="math inline">\(m\)</span> posibles, esto es, el tiempo de permanencia en el estado <span class="math inline">\(i\)</span>, <span class="math inline">\(TP_i\)</span>, será el mínimo de los tiempos de ocurrencia de los <span class="math inline">\(m\)</span> eventos, y su distribución será exponencial de tasa la suma de las tasas de ocurrencia de los <span class="math inline">\(m\)</span> eventos, esto es:</p>
+<p><span class="math display">\[TP_i=min\{T_1,\ldots,T_m\} \sim Exp(\lambda), \qquad \text{con } \lambda=\sum_{i=1}^m \lambda_i.\]</span></p>
+<p>En este caso, la tasa de permanencia es <span class="math inline">\(r_i=\lambda\)</span>, la probabilidad de salto al estado <span class="math inline">\(j\)</span>, <span class="math inline">\(p_{ij}=1\)</span> y la tasa de transición al estado <span class="math inline">\(j\)</span> es <span class="math inline">\(r_{ij}=\lambda\)</span>.</p>
+</div>
 <div class="yellowbox">
 <div class="definition">
 <p><span id="def:cmtc002" class="definition"><strong>Definición 4.2  </strong></span>Una CMTC <span class="math inline">\(\{X_t; t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{0, 1, 2,...,N\}\)</span> y matriz de tasas dada por:</p>

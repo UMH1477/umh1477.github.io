@@ -1012,6 +1012,21 @@ Cualquier viaje inferior a 11.9 horas será un viaje seguro, mientras que si el 
 
 Los procesos de nacimiento y muerte que estudiamos en este apartado juegan un papel muy importante dentro de las CMTC, ya que son de uso habitual en muchas aplicaciones prácticas que veremos de ahora en adelante.
 
+Veamos cierta propiedad que nos va a resultar de interés.
+
+::: {.bluebox data-latex=""}
+Supongamos que en un instante $t$, el sistema está en estado $i$, esto es, $X_t=i$, y qe es posible transitar al estado $j$ a través de la ocurrencia de $m$ eventos independientes, cada uno de los cuales se produce con tiempos independientes $T_i \sim Exp(\lambda_i)$. 
+
+*Es el caso de que haya 5 máquinas funcionando en un sistema y cualquiera de las 5 puede fallar, de manera que un fallo en cualquiera de ellas produciría una transición al estado 4 (4 máquinas funcionando).*
+
+Entonces el sistema permanecerá en el estado $i$ hasta que se produzca el primer evento de los $m$ posibles, esto es, el tiempo de permanencia en el estado $i$, $TP_i$, será el mínimo de los tiempos de ocurrencia de los $m$ eventos, y su distribución será exponencial de tasa la suma de las tasas de ocurrencia de los $m$ eventos, esto es:
+
+$$TP_i=min\{T_1,\ldots,T_m\} \sim Exp(\lambda), \qquad \text{con } \lambda=\sum_{i=1}^m \lambda_i.$$ 
+
+En este caso, la tasa de permanencia es $r_i=\lambda$, la probabilidad de salto al estado $j$, $p_{ij}=1$ y la tasa de transición al estado $j$ es $r_{ij}=\lambda$.
+:::
+
+
 ::: {.yellowbox data-latex=""}
 ::: {#cmtc002 .definition}
 Una CMTC $\{X_t; t \geq 0\}$ con espacio de estados $S = \{0, 1, 2,...,N\}$ y matriz de tasas dada por:

@@ -1645,7 +1645,30 @@ Sea $X_t$ el número de elementos de $P$ en stock en el momento $t$. Obsérvese 
 
 El proceso $X_t, t \geq 0$ definido de esta forma es pues una CMTC.
 
-Consulta sobre modelo simmer para inventarios (<https://stackoverflow.com/questions/51680140/immediate-inventory-restock-in-r-simmer>)
+Si $m=3$ y $l=2$, su matriz de tasas viene dada por:
+$$R=
+\begin{pmatrix}
+0&0&0&\lambda&0&0 \\
+\mu&0&0&0&\lambda&0 \\
+0&\mu&0&0&0&\lambda \\
+0&0&\mu&0&0&0\\
+0&0&0&\mu&0&0\\
+0&0&0&0&\mu&0
+\end{pmatrix}
+$$
+Además, si $0<i\leq 2$, el tiempo de permanencia en un estado $i$ es el mínimo de los tiempos en que se recibe un pedido y aparece un cliente, por lo que se distribuye $Exp(\lambda+\mu)$ y la tasa de permanencia es $r_i=\lambda+\mu$. Si $i>2$, entonces $r_i=\mu$ y $r_0=\lambda$. La matriz generadora del proceso es:
+
+$$Q=
+\begin{pmatrix}
+-\lambda&0&0&\lambda&0&0 \\
+\mu&-(\lambda+\mu)&0&0&\lambda&0 \\
+0&\mu&-(\lambda+\mu)&0&0&\lambda \\
+0&0&\mu&-\mu&0&0\\
+0&0&0&\mu&-\mu&0\\
+0&0&0&0&\mu&-\mu
+\end{pmatrix}
+$$
+Tienes un ejemplo incompleto de sistema de inventario en esta [web](https://stackoverflow.com/questions/51680140/immediate-inventory-restock-in-r-simmer).
 
 ### Proceso de fabricación {#fabricaCMTC}
 

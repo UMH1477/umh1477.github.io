@@ -1356,7 +1356,29 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 <li>En el estado <span class="math inline">\(i\)</span>, <span class="math inline">\((1 \leq i \leq l)\)</span>, hay un pedido pendiente. El estado cambia a <span class="math inline">\(i-1\)</span> si se produce una demanda (a tasa <span class="math inline">\(\mu\)</span>) y a <span class="math inline">\(i + m\)</span> si se entrega el pedido. Por lo tanto, tenemos <span class="math inline">\(r_{i, i+m} = \lambda\)</span> y <span class="math inline">\(r_{i, i-1} = \mu\)</span>. Finalmente, si <span class="math inline">\(X_t = i\)</span>, con <span class="math inline">\(l + 1 \leq i \leq K\)</span>, no hay pedidos pendientes, y la única transición posible es de <span class="math inline">\(i\)</span> a <span class="math inline">\(i- 1\)</span> cuando se produce una demanda. Por lo tanto, <span class="math inline">\(r_{i, i-1} = \mu\)</span>.</li>
 </ul>
 <p>El proceso <span class="math inline">\(X_t, t \geq 0\)</span> definido de esta forma es pues una CMTC.</p>
-<p>Consulta sobre modelo simmer para inventarios (<a href="https://stackoverflow.com/questions/51680140/immediate-inventory-restock-in-r-simmer" class="uri">https://stackoverflow.com/questions/51680140/immediate-inventory-restock-in-r-simmer</a>)</p>
+<p>Si <span class="math inline">\(m=3\)</span> y <span class="math inline">\(l=2\)</span>, su matriz de tasas viene dada por:
+<span class="math display">\[R=
+\begin{pmatrix}
+0&amp;0&amp;0&amp;\lambda&amp;0&amp;0 \\
+\mu&amp;0&amp;0&amp;0&amp;\lambda&amp;0 \\
+0&amp;\mu&amp;0&amp;0&amp;0&amp;\lambda \\
+0&amp;0&amp;\mu&amp;0&amp;0&amp;0\\
+0&amp;0&amp;0&amp;\mu&amp;0&amp;0\\
+0&amp;0&amp;0&amp;0&amp;\mu&amp;0
+\end{pmatrix}
+\]</span>
+Además, si <span class="math inline">\(0&lt;i\leq 2\)</span>, el tiempo de permanencia en un estado <span class="math inline">\(i\)</span> es el mínimo de los tiempos en que se recibe un pedido y aparece un cliente, por lo que se distribuye <span class="math inline">\(Exp(\lambda+\mu)\)</span> y la tasa de permanencia es <span class="math inline">\(r_i=\lambda+\mu\)</span>. Si <span class="math inline">\(i&gt;2\)</span>, entonces <span class="math inline">\(r_i=\mu\)</span> y <span class="math inline">\(r_0=\lambda\)</span>. La matriz generadora del proceso es:</p>
+<p><span class="math display">\[Q=
+\begin{pmatrix}
+-\lambda&amp;0&amp;0&amp;\lambda&amp;0&amp;0 \\
+\mu&amp;-(\lambda+\mu)&amp;0&amp;0&amp;\lambda&amp;0 \\
+0&amp;\mu&amp;-(\lambda+\mu)&amp;0&amp;0&amp;\lambda \\
+0&amp;0&amp;\mu&amp;-\mu&amp;0&amp;0\\
+0&amp;0&amp;0&amp;\mu&amp;-\mu&amp;0\\
+0&amp;0&amp;0&amp;0&amp;\mu&amp;-\mu
+\end{pmatrix}
+\]</span>
+Tienes un ejemplo incompleto de sistema de inventario en esta <a href="https://stackoverflow.com/questions/51680140/immediate-inventory-restock-in-r-simmer">web</a>.</p>
 </div>
 <div id="fabricaCMTC" class="section level3" number="4.5.2">
 <h3>

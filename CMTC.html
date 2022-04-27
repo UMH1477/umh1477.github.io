@@ -1413,7 +1413,7 @@ r_{ij}/r &amp; \text{, si } i \neq j
 \tag{4.1}
 \end{equation}\]</span>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-40" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de probabilidades de transición <span class="math inline">\(P(t)=(p_{ij(t)}\)</span> de una CMTC, que contiene las probabilidades de pasar de un estado <span class="math inline">\(i\)</span> a otro <span class="math inline">\(j\)</span> en un periodo de amplitud <span class="math inline">\(t\)</span>, viene dada por:</p>
+<p><span id="thm:unlabeled-div-40" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de probabilidades de transición <span class="math inline">\(P(t)=(p_{ij}(t))\)</span> de una CMTC, que contiene las probabilidades de pasar de un estado <span class="math inline">\(i\)</span> a otro <span class="math inline">\(j\)</span> en un periodo de amplitud <span class="math inline">\(t\)</span>, viene dada por:</p>
 <p><span class="math display" id="eq:uniformizacion">\[\begin{equation}
 P(t) = \sum_{k=0}^{\infty} e^{-rt}\frac{(rt)^k}{k!} \hat{P}^k
 \tag{4.2}
@@ -1435,20 +1435,20 @@ r= max\{r_i, 1\leq i \leq N\}.
 <div class="silverbox">
 <p>Algoritmo de uniformización para obtener <span class="math inline">\(P\)</span> con una suma finita</p>
 <ol style="list-style-type: decimal">
-<li>Fijar <span class="math inline">\(R\)</span>, <span class="math inline">\(t\)</span>, y <span class="math inline">\(0 &lt; \epsilon &lt; 1\)</span> la tolerancia deseada (máximo error permitido). Por defecto fijamos <span class="math inline">\(\epsilon=0.00001\)</span>.</li>
+<li>Fijar la matriz de tasas <span class="math inline">\(R\)</span>, el instante de tiempo <span class="math inline">\(t\)</span>, y <span class="math inline">\(0 &lt; \epsilon &lt; 1\)</span> la tolerancia deseada (máximo error permitido). Por defecto fijamos <span class="math inline">\(\epsilon=0.00001\)</span>.</li>
 <li>Obtener <span class="math inline">\(r\)</span> con <a href="CMTC.html#eq:rmax">(4.4)</a>.</li>
-<li>Calcular <span class="math inline">\(\hat{P}\)</span> con la ecuación @ref(phat-transicion}.</li>
+<li>Calcular <span class="math inline">\(\hat{P}=Phat\)</span> con la ecuación @ref(eq:phatTransicion}.</li>
 <li>Inicializar <span class="math inline">\(A = \hat{P}\)</span>; <span class="math inline">\(c = e^{rt}\)</span>; <span class="math inline">\(B = e^{rt}I\)</span>; <span class="math inline">\(sum = c\)</span>; <span class="math inline">\(k=1\)</span>.</li>
-<li>Mientras que <span class="math inline">\(sum &lt;1- \epsilon\)</span>, calcular:</li>
+<li>Mientras que <span class="math inline">\(sum &lt;1-\epsilon\)</span>, calcular:</li>
 </ol>
 <!-- --><pre><code>c = c*(rt)/k
 B = B + cA
-A = A \hat{P}
+A = A * Phat
 sum = sum + c
 k = k + 1</code></pre>
 <p>Al finalizar, la matriz <span class="math inline">\(B\)</span> es una aproximación de <span class="math inline">\(P(t)\)</span>, con error acotado por <span class="math inline">\(\epsilon \geq \sum_{k=m+1}^{\infty} e^{-rt} \frac{(rt)^k}{k!}\)</span>.</p>
 </div>
-<p>En nuestro algoritmo añadiremos un parámetro extra para indicar cómo se debe calcular el valor de <span class="math inline">\(r\)</span>, bien como el máximo los elementos por filas de <span class="math inline">\(R\)</span>, o como la suma.</p>
+<p>En nuestro algoritmo añadiremos un parámetro extra para indicar cómo se debe calcular el valor de <span class="math inline">\(r\)</span>, bien como el máximo o como la suma de las tasas de permanencia.</p>
 <div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">matriz.prob.trans</span><span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Rmat</span>, <span class="va">ts</span>, <span class="va">cal</span><span class="op">)</span>
 <span class="op">{</span>
@@ -1490,14 +1490,15 @@ k = k + 1</code></pre>
 <code class="sourceCode R"><span class="va">R</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>Si estamos interesados en las probabilidades de transición entre estados cuando han transcurrido 2 unidades de tiempo, podemos calcular (ambas versiones):</p>
 <div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Pmat1</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>; <span class="va">Pmat1</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ts</span><span class="op">=</span><span class="fl">2</span>
+<span class="va">Pmat1</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="va">ts</span>, <span class="fl">1</span><span class="op">)</span>; <span class="va">Pmat1</span></code></pre></div>
 <pre><code>##        [,1]   [,2] [,3]   [,4]
 ## [1,] 0.2001 0.2001  0.4 0.1998
 ## [2,] 0.2002 0.2001  0.4 0.1997
 ## [3,] 0.1999 0.2000  0.4 0.2001
 ## [4,] 0.1998 0.1999  0.4 0.2003</code></pre>
 <div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Pmat2</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>; <span class="va">Pmat2</span></code></pre></div>
+<code class="sourceCode R"><span class="va">Pmat2</span><span class="op">&lt;-</span><span class="fu">matriz.prob.trans</span><span class="op">(</span><span class="va">R</span>, <span class="va">ts</span>, <span class="fl">2</span><span class="op">)</span>; <span class="va">Pmat2</span></code></pre></div>
 <pre><code>##        [,1]   [,2] [,3]   [,4]
 ## [1,] 0.2001 0.2001  0.4 0.1998
 ## [2,] 0.2002 0.2001  0.4 0.1997

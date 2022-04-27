@@ -1685,6 +1685,7 @@ r_{(i, 0),(i-1, 0)} &=&  \mu, \quad l+1 < i\leq K\\
 r_{(l+1, 0),(l, 1)} &=&  \mu.
 \end{eqnarray*}
 ```
+
 ## Análisis de transición {#CMTCF}
 
 El aspecto fundamental para estudiar el comportamiento de cualquier CMTC es la obtención y análisis de la **distribución de transición** entre los estados del proceso, a partir de la matriz de tasas. Aunque haremos un desarrollo teórico de este problema, veremos que es necesario un algoritmo de computación para obtener dichas probabilidades.
@@ -1708,7 +1709,7 @@ r_{ij}/r & \text{, si } i \neq j
 \end{equation}
 ```
 ::: theorem
-La matriz de probabilidades de transición $P(t)=(p_{ij(t)}$ de una CMTC, que contiene las probabilidades de pasar de un estado $i$ a otro $j$ en un periodo de amplitud $t$, viene dada por:
+La matriz de probabilidades de transición $P(t)=(p_{ij}(t))$ de una CMTC, que contiene las probabilidades de pasar de un estado $i$ a otro $j$ en un periodo de amplitud $t$, viene dada por:
 
 \begin{equation}
 P(t) = \sum_{k=0}^{\infty} e^{-rt}\frac{(rt)^k}{k!} \hat{P}^k
@@ -1741,25 +1742,25 @@ Con todo, en algunos casos es más conveniente utilizar un valor de $r$ que sea 
 ::: {.silverbox data-latex=""}
 Algoritmo de uniformización para obtener $P$ con una suma finita
 
-1.  Fijar $R$, $t$, y $0 < \epsilon < 1$ la tolerancia deseada (máximo error permitido). Por defecto fijamos $\epsilon=0.00001$.
+1.  Fijar la matriz de tasas $R$, el instante de tiempo $t$, y $0 < \epsilon < 1$ la tolerancia deseada (máximo error permitido). Por defecto fijamos $\epsilon=0.00001$.
 2.  Obtener $r$ con \@ref(eq:rmax).
-3.  Calcular $\hat{P}$ con la ecuación \@ref(phat-transicion}.
+3.  Calcular $\hat{P}=Phat$ con la ecuación \@ref(eq:phatTransicion}.
 4.  Inicializar $A = \hat{P}$; $c = e^{rt}$; $B = e^{rt}I$; $sum = c$; $k=1$.
-5.  Mientras que $sum <1- \epsilon$, calcular:
+5.  Mientras que $sum <1-\epsilon$, calcular:
 
 ```{=html}
 <!-- -->
 ```
     c = c*(rt)/k
     B = B + cA
-    A = A \hat{P}
+    A = A * Phat
     sum = sum + c
     k = k + 1
 
 Al finalizar, la matriz $B$ es una aproximación de $P(t)$, con error acotado por $\epsilon \geq \sum_{k=m+1}^{\infty} e^{-rt} \frac{(rt)^k}{k!}$.
 :::
 
-En nuestro algoritmo añadiremos un parámetro extra para indicar cómo se debe calcular el valor de $r$, bien como el máximo los elementos por filas de $R$, o como la suma.
+En nuestro algoritmo añadiremos un parámetro extra para indicar cómo se debe calcular el valor de $r$, bien como el máximo o como la suma de las tasas de permanencia.
 
 
 ```r
@@ -1811,7 +1812,8 @@ Si estamos interesados en las probabilidades de transición entre estados cuando
 
 
 ```r
-Pmat1<-matriz.prob.trans(R, 2, 1); Pmat1
+ts=2
+Pmat1<-matriz.prob.trans(R, ts, 1); Pmat1
 ```
 
 ```
@@ -1823,7 +1825,7 @@ Pmat1<-matriz.prob.trans(R, 2, 1); Pmat1
 ```
 
 ```r
-Pmat2<-matriz.prob.trans(R, 2, 2); Pmat2
+Pmat2<-matriz.prob.trans(R, ts, 2); Pmat2
 ```
 
 ```

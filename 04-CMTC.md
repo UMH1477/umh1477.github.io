@@ -2108,8 +2108,8 @@ Una CMTC $\{X_t, t \geq 0\}$ irreducible con matriz de tasas $R$ tiene una únic
 
 ```{=tex}
 \begin{eqnarray} 
-p_j  r_j &= \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
-\sum_{i=1}^N p_i &= 1. \nonumber
+p_j  r_j &=& \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
+\sum_{i=1}^N p_i &=& 1. \nonumber
 (\#eq:ecubalanceCMTC)
 \end{eqnarray}
 ```
@@ -2128,7 +2128,7 @@ La siguiente cuestión es sobre si ocurre en la CMTC lo mismo que ocurría ya en
 ::: theorem
 
 
-Sea $m_{ij}(T)$ el tiempo total esperado que la cadena permanece en el estado $j$ hasta el instante $T$ para una CMTC irreducible que comienza en el estado $i$. Entonces tenemos la siguiente igualdad que relaciona la distribución límite con la distribución estacionaria dada por $\{p_j; j \in S\}:
+Sea $m_{ij}(T)$ el tiempo total esperado que la cadena permanece en el estado $j$ hasta el instante $T$ para una CMTC irreducible que comienza en el estado $i$. Entonces tenemos la siguiente igualdad que relaciona la distribución límite con la distribución estacionaria dada por $\{p_j; j \in S\}$:
 
 $$\lim_{T \rightarrow \infty} \frac{m_{ij}(T)}{T} = p_j.$$
 :::

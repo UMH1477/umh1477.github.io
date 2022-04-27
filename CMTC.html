@@ -1711,8 +1711,8 @@ suma = suma + ygk</code></pre>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-45" class="theorem"><strong>Teorema 4.5  </strong></span>Una CMTC <span class="math inline">\(\{X_t, t \geq 0\}\)</span> irreducible con matriz de tasas <span class="math inline">\(R\)</span> tiene una única distribución límite <span class="math inline">\(p = (p_1, p_2,...,p_N)\)</span>, que se puede obtener como solución de las ecuaciones de balance:</p>
 <span class="math display" id="eq:ecubalanceCMTC">\[\begin{eqnarray} 
-p_j  r_j &amp;= \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
-\sum_{i=1}^N p_i &amp;= 1. \nonumber
+p_j  r_j &amp;=&amp; \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
+\sum_{i=1}^N p_i &amp;=&amp; 1. \nonumber
 \tag{4.7}
 \end{eqnarray}\]</span>
 <p>Podemos interpretar <span class="math inline">\(p_j r_j\)</span> como la tasa a la que la CMTC deja el estado <span class="math inline">\(j\)</span>, y <span class="math inline">\(p_i r_{ij}\)</span> como la tasa a la que la CMTC entra al estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span>. Por lo tanto, esta ecuación de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.7)</a> nos dice que las probabilidades límite son tales que la tasa de entrada al estado <span class="math inline">\(j\)</span> desde todos los estados restantes es igual a la tasa a la cual el sistema deja el estado <span class="math inline">\(j\)</span>, es decir, se produce un balance entre las entradas y las salidas.</p>
@@ -1722,7 +1722,7 @@ p_j  r_j &amp;= \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
 </div>
 <p>La siguiente cuestión es sobre si ocurre en la CMTC lo mismo que ocurría ya en las CMTD con la distribución de ocupación, esto es, si coincidía con la distribución límite y con la distribución estacionaria. La respuesta la tenemos en el siguiente teorema.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-47" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces tenemos la siguiente igualdad que relaciona la distribución límite con la distribución estacionaria dada por ${p_j; j S}:</p>
+<p><span id="thm:unlabeled-div-47" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces tenemos la siguiente igualdad que relaciona la distribución límite con la distribución estacionaria dada por <span class="math inline">\(\{p_j; j \in S\}\)</span>:</p>
 <p><span class="math display">\[\lim_{T \rightarrow \infty} \frac{m_{ij}(T)}{T} = p_j.\]</span></p>
 </div>
 <p>Así pues, una CMTC ireducible tiene una única distribución límite, que es también su distribución estacionaria y su distribución de ocupación. Se puede calcular pues, resolviendo las ecuaciones de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.7)</a>.</p>

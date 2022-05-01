@@ -1786,6 +1786,35 @@ p_j  r_j &amp;=&amp; \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
 \sum_{i=1}^N p_i &amp;=&amp; 1. \nonumber
 \tag{4.7}
 \end{eqnarray}\]</span>
+<p>En formato matricial esta ecuaciones de balance las podríamos expresar en términos de la matriz generadora del proceso, <span class="math inline">\(Q\)</span>, añadiendo una fila de 1s a su transpuesta,
+<span class="math display">\[\begin{pmatrix}
+Q' \\
+1 1 ... 1
+\end{pmatrix} \cdot 
+p
+=
+\begin{pmatrix}
+0 \\
+0 \\
+.. \\
+1
+\end{pmatrix}\]</span></p>
+<p>Por ejemplo, para un proceso con 2 estados, <span class="math inline">\(p\)</span> se obtiene al resolver el sistema dado por:
+<span class="math display">\[\begin{pmatrix}
+-r_1 &amp; r_{21} \\
+r_{12} &amp; -r_2 \\
+1&amp;1
+\end{pmatrix} \cdot 
+\begin{pmatrix}
+p_1 \\
+p_2 
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}\]</span></p>
 <p>Podemos interpretar <span class="math inline">\(p_j r_j\)</span> como la tasa a la que la CMTC deja el estado <span class="math inline">\(j\)</span>, y <span class="math inline">\(p_i r_{ij}\)</span> como la tasa a la que la CMTC entra al estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span>. Por lo tanto, esta ecuación de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.7)</a> nos dice que las probabilidades límite son tales que la tasa de entrada al estado <span class="math inline">\(j\)</span> desde todos los estados restantes es igual a la tasa a la cual el sistema deja el estado <span class="math inline">\(j\)</span>, es decir, se produce un balance entre las entradas y las salidas.</p>
 </div>
 <div class="theorem">

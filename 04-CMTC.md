@@ -2194,6 +2194,41 @@ p_j  r_j &=& \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
 \end{eqnarray}
 ```
 
+
+En formato matricial esta ecuaciones de balance las podríamos expresar en términos de la matriz generadora del proceso, $Q$, añadiendo una fila de 1s a su transpuesta,
+$$\begin{pmatrix}
+Q' \\
+1 1 ... 1
+\end{pmatrix} \cdot 
+p
+=
+\begin{pmatrix}
+0 \\
+0 \\
+.. \\
+1
+\end{pmatrix}$$
+
+Por ejemplo, para un proceso con 2 estados, $p$ se obtiene al resolver el sistema dado por:
+$$\begin{pmatrix}
+-r_1 & r_{21} \\
+r_{12} & -r_2 \\
+1&1
+\end{pmatrix} \cdot 
+\begin{pmatrix}
+p_1 \\
+p_2 
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}$$
+
+
+
+
 Podemos interpretar $p_j r_j$ como la tasa a la que la CMTC deja el estado $j$, y $p_i  r_{ij}$ como la tasa a la que la CMTC entra al estado $j$ desde el estado $i$. Por lo tanto, esta ecuación de balance \@ref(eq:ecubalanceCMTC) nos dice que las probabilidades límite son tales que la tasa de entrada al estado $j$ desde todos los estados restantes es igual a la tasa a la cual el sistema deja el estado $j$, es decir, se produce un balance entre las entradas y las salidas.
 :::
 

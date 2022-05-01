@@ -179,6 +179,24 @@ $$R =
 
 En esta situación el diagrama de tasas se construye con la librería `diagram`:
 
+
+```r
+library(diagram)
+estados <- c("0", "1")
+nestados <- length(estados)
+
+M <- matrix(nrow = nestados, ncol = nestados, data = 0)
+R <- as.data.frame(M)
+
+R[[2,1]] <- "mu" 
+
+pp <- plotmat(t(R),  pos = 2, curve = 0.2, name = estados,
+              lwd = 1, box.lwd = 2, cex.txt = 0.8,
+              box.type = "circle", box.prop = 0.5, arr.type = "triangle",
+              arr.pos = 0.55, self.cex = 0.6,  
+              shadow.size = 0.01, prefix = "", endhead = FALSE, main = "")
+```
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.95\linewidth]{04-CMTC_files/figure-latex/05-002-1} 
@@ -245,6 +263,24 @@ $$R =
 \end{pmatrix}$$
 
 El diagrama del sistema viene dado por:
+
+
+```r
+estados <- c("0", "1")
+nestados <- length(estados)
+
+M <- matrix(nrow = nestados, ncol = nestados, data = 0)
+R <- as.data.frame(M)
+
+R[[1,2]] <- "lambda" 
+R[[2,1]] <- "mu" 
+
+pp <- plotmat(t(R),  pos = 2, curve = 0.2, name = estados,
+              lwd = 1, box.lwd = 2, cex.txt = 0.8,
+              box.type = "circle", box.prop = 0.5, arr.type = "triangle",
+              arr.pos = 0.55, self.cex = 0.6,  
+              shadow.size = 0.01, prefix = "", endhead = FALSE, main = "")
+```
 
 \begin{figure}
 
@@ -1357,6 +1393,31 @@ Descripción del sistema:
 
 En esta situación el diagrama del proceso viene dado por:
 
+
+```r
+estados <- c(0, 1, 2, 3, 4)
+nestados <- length(estados)
+
+M <- matrix(nrow = nestados, ncol = nestados, data = 0)
+R <- as.data.frame(M)
+
+R[[1,2]] <- "4*lambda" 
+R[[2,1]] <- "mu" 
+R[[2,3]] <- "3*lambda" 
+R[[3,2]] <- "2*mu" 
+R[[3,4]] <- "2*lambda" 
+R[[4,3]] <- "2*mu" 
+R[[4,5]] <- "lambda"
+R[[5,4]] <- "2*mu"
+
+# library(diagram)
+pp <- plotmat(t(R),  pos = 5, curve = 0.5, name = estados,
+              lwd = 1, box.lwd = 2, cex.txt = 0.8,
+              box.type = "circle", box.prop = 0.5, arr.type = "triangle",
+              arr.pos = 0.55, self.cex = 0.6,  
+              shadow.size = 0.01, prefix = "", endhead = FALSE, main = "")
+```
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.95\linewidth]{04-CMTC_files/figure-latex/05-036-1} 
@@ -1376,24 +1437,29 @@ De nuevo planteamos una función que nos permita cambiar fácilmente los paráme
 #################################################
 mantenimiento <- function(t, lambda, mu, capacidad,K)
 {
+  env=simmer()
   # lambda: tasa de averías
   # mu: tasa de reparación
   # capacidad: reparadores
   # K: máquinas
-  
-  # Trayectoria 
-  reparacion <- trajectory() %>%
-    seize("mecanico") %>%
+
+  reparacion <- function(i){
+    trajectory() %>%
+    # mientras reparo la máquina no se puede producir otro fallo
+    deactivate(paste0("maq",i,"_"))%>%
+    seize("mecanico",1) %>%
     # tiempos de reparación 
     timeout(function() rexp(1,mu)) %>%
-    release("mecanico") 
+    activate(paste0("maq",i,"_")) %>%
+    release("mecanico")}
 
-  # Configuración del sistema 
-  simmer() %>%
-    add_resource("mecanico", capacity = capacidad, queue_size = Inf) %>%
-    # simulación de averías para 4 máquinas
-    add_generator("machine", reparacion, function() rexp(K,lambda)) %>%
-    run(until = t)     
+# simulación de averías para K máquinas
+for(i in 1:K) env %>%
+    add_generator(paste0("maq",i,"_"),reparacion(i),function() rexp(1,lambda)) 
+    
+env %>%  
+  add_resource("mecanico", capacity = capacidad)%>%
+  run(until = t)     
 }
 ```
 
@@ -1416,9 +1482,17 @@ head(sim.arr, 10)
 ```
 
 ```
-##       name start_time  end_time activity_time finished replication
-## 1 machine0    39.6484  40.91384      1.265432     TRUE           1
-## 2 machine1   103.4920 104.82027      1.328249     TRUE           1
+##      name start_time  end_time activity_time finished replication
+## 1  maq1_0   39.64840  40.91384     1.2654324     TRUE           1
+## 2  maq2_0   63.84362  65.62617     1.7825544     TRUE           1
+## 3  maq1_1   88.73081  92.10658     3.3757723     TRUE           1
+## 4  maq4_0   96.17729  96.27956     0.1022763     TRUE           1
+## 5  maq1_2  107.52619 108.46549     0.9393034     TRUE           1
+## 6  maq3_0  109.80081 113.18065     3.3798393     TRUE           1
+## 7  maq1_3  145.04424 146.34587     1.3016268     TRUE           1
+## 8  maq1_4  148.19267 153.96245     5.7697764     TRUE           1
+## 9  maq2_1  153.04616 156.24107     3.1949067     TRUE           1
+## 10 maq2_2  158.09906 161.24654     3.1474876     TRUE           1
 ```
 
 ```r
@@ -1426,11 +1500,17 @@ head(sim.res, 10)
 ```
 
 ```
-##   resource      time server queue capacity queue_size system limit replication
-## 1 mecanico  39.64840      1     0        2        Inf      1   Inf           1
-## 2 mecanico  40.91384      0     0        2        Inf      0   Inf           1
-## 3 mecanico 103.49202      1     0        2        Inf      1   Inf           1
-## 4 mecanico 104.82027      0     0        2        Inf      0   Inf           1
+##    resource      time server queue capacity queue_size system limit replication
+## 1  mecanico  39.64840      1     0        2        Inf      1   Inf           1
+## 2  mecanico  40.91384      0     0        2        Inf      0   Inf           1
+## 3  mecanico  63.84362      1     0        2        Inf      1   Inf           1
+## 4  mecanico  65.62617      0     0        2        Inf      0   Inf           1
+## 5  mecanico  88.73081      1     0        2        Inf      1   Inf           1
+## 6  mecanico  92.10658      0     0        2        Inf      0   Inf           1
+## 7  mecanico  96.17729      1     0        2        Inf      1   Inf           1
+## 8  mecanico  96.27956      0     0        2        Inf      0   Inf           1
+## 9  mecanico 107.52619      1     0        2        Inf      1   Inf           1
+## 10 mecanico 108.46549      0     0        2        Inf      0   Inf           1
 ```
 
 Respondemos en primer lugar al número de máquinas en funcionamiento al cabo del tiempo simulado. Sabemos que el número de máquinas averiadas en un instante dado será igual al número de reparadores ocupados (`server`) más el número de máquinas en cola esperando ser reparadas (`queue`), o lo que es lo mismo, las máquinas que están en el sistema de reparación (`system`, en resources). Veamos pues, qué ocurre en el último instante en que se ha registrado alguna actividad en el sistema simulado, dado por la última fila en el dataframe de recursos.
@@ -1442,8 +1522,8 @@ tail(sim.res, 1)
 ```
 
 ```
-##   resource     time server queue capacity queue_size system limit replication
-## 4 mecanico 104.8203      0     0        2        Inf      0   Inf           1
+##    resource    time server queue capacity queue_size system limit replication
+## 22 mecanico 162.612      0     0        2        Inf      0   Inf           1
 ```
 
 ```r
@@ -1477,7 +1557,7 @@ sum(tiempos[sel])*100/t
 ```
 
 ```
-## [1] 74.8559
+## [1] 62.44074
 ```
 
 Por último buscamos responder la cuestión de cuánto tiempo de funcionamiento se pierde por averías. Para ello calculamos el tiempo total gastado en reparaciones (`activity_time` en arrivals), más el tiempo de esperas en cola, y lo restamos al tiempo total que deberían haber estado funcionando las máquinas.
@@ -1495,7 +1575,7 @@ round(t.sinfun,2)
 ```
 
 ```
-## [1] 0.39
+## [1] 3.63
 ```
 
 Para obtener una estimación y su error habremos de realizar estos cálculos para nreplicas (simulaciones) del sistema durante el periodo de interés.
@@ -1529,7 +1609,7 @@ cat("\n Máquinas operativas después de una semana: ",m,"(error=",error,")")
 
 ```
 ## 
-##  Máquinas operativas después de una semana:  3.956332 (error= 0.009149054 )
+##  Máquinas operativas después de una semana:  3.872 (error= 0.01648562 )
 ```
 
 ```r
@@ -1548,7 +1628,7 @@ cat("\n % Tiempo en que han funcionado simultáneamente todas las máquinas: ",m
 
 ```
 ## 
-##  % Tiempo en que han funcionado simultáneamente todas las máquinas:  66.25604 % (error= 1.022649 %)
+##  % Tiempo en que han funcionado simultáneamente todas las máquinas:  77.98291 % (error= 0.5439864 %)
 ```
 
 ```r
@@ -1565,7 +1645,7 @@ cat("\n % Tiempo perdido por averías: ",m,"% (error=",error,"%)")
 
 ```
 ## 
-##  % Tiempo perdido por averías:  0.7013907 % (error= 0.0253398 %)
+##  % Tiempo perdido por averías:  2.727233 % (error= 0.04885752 %)
 ```
 
 ### Central telefónica {#centralTelefonica}
@@ -1924,7 +2004,7 @@ round(table(salida$estado)/replicas, 3)
 ```
 ## 
 ##     0     1     2     3     4 
-## 0.017 0.023 0.026 0.051 0.083
+## 0.016 0.023 0.027 0.047 0.086
 ```
 
 Claramente, la probabilidad estimada es $Pr(X_{50}=4)$, que es distinta a la pretendida, $Pr(X_{50}=4|X_0=0)$.
@@ -2088,7 +2168,7 @@ simarrivals %>%
 ## # A tibble: 1 x 2
 ##    mOFF   mON
 ##   <dbl> <dbl>
-## 1  3.22  27.8
+## 1  3.21  27.8
 ```
 
 > **Para practicar el cálculo de los tiempos de ocupación puedes resolver los ejercicios B4.5 a B4.8 de la colección al final de la unidad.**
@@ -2297,7 +2377,7 @@ La probabilidad de interés viene dada por 0.2987, de forma que la máquina perm
 
 ## Análisis de costes {#CMTCI}
 
-En este punto vemos cómo podemos introducir costes en las CMTC y los procedimientos numéricos necesarios para su análisis. Seguimos considerando $\{X_t, t \geq 0\}$ una CMTC con espacio de estados $S = \{1, 2,...,N\}$ y matriz de tasas $R$. Además, siempre que la CMTC está en el estado $i$ se incurre en costes de modo continua según una tasa $c(i), 1 \leq i \leq N$.
+En este punto vemos cómo podemos introducir costes en las CMTC y los procedimientos numéricos necesarios para su análisis. Seguimos considerando $\{X_t, t \geq 0\}$ una CMTC con espacio de estados $S = \{1, 2,...,N\}$ y matriz de tasas $R$. Además, siempre que la CMTC está en el estado $i$ se incurre en costes de modo continuo según una tasa $c(i), 1 \leq i \leq N$.
 
 ### Coste total esperado hasta $T$
 

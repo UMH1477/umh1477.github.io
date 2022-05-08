@@ -122,6 +122,7 @@ La **tasa de transición** de $i$ a $j$ se define como el producto de la tasa de
 ```{=tex}
 \begin{equation}
 r_{ij} = r_i p_{ij}
+(\#eq:tasatransicion)
 \end{equation}
 ```
 De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante un grafo dirigido cuyos nodos (o vértices) indican cada uno de los estados del proceso, y surge un arco dirigido del nodo $i$ al nodo $j$ si $p_{ij} > 0$; además junto a cada arco se escribe la tasa de transición $r_{ij} = r_i p_{ij}$. Nunca habrá arcos que empiecen y acaben en el mismo nodo porque $p_{ii}=0$. Esta representación gráfica se denomina **diagrama de tasas de la CMTC**.
@@ -131,10 +132,11 @@ Podemos entender la dinámica de una CMTC visualizando una partícula que se mue
 En esta situación resulta posible obtener los valores de $r_i$ y $p_{ij}$ a partir de las tasas $r_{ij}$ dado que:
 
 ```{=tex}
-\begin{eqnarray*}
-\sum_{j=1}^{N} r_{ij} &=& \sum_{j=1}^{N} r_i p_{ij} = r_i \sum_{j=1}^{N} p_{ij} = r_i\\
+\begin{eqnarray}
+\sum_{j=1}^{N} r_{ij} &=& \sum_{j=1}^{N} r_i p_{ij} = r_i \sum_{j=1}^{N} p_{ij} = r_i  (\#eq:tasapermanencia) \\
 p_{ij} &=& \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
-\end{eqnarray*}
+(\#eq:probsalto) 
+\end{eqnarray}
 ```
 Para un mejor manejo de la información, resulta conveniente construir la **matriz de tasas** teniendo en cuenta que $r_{ii} = 0$ para cualquier valor de $i$, y por tanto la diagonal de la matriz $R$ es siempre cero. Así tenemos que:
 
@@ -1366,7 +1368,7 @@ El problema del mantenimiento de máquinas es muy habitual dentro de las CMTC. S
 ```{=tex}
 \begin{eqnarray*}
 \lambda_i &=& \lambda \cdot (N-i), \quad 0 \leq i < N\\
-\mu_i &=& \mu \cdot i, \quad 0 < i \leq N \\
+\mu_i &=& \mu \cdot min(i,M), \quad 0 < i \leq N \\
 \end{eqnarray*}
 ```
 ::: example
@@ -1429,7 +1431,7 @@ pp <- plotmat(t(R),  pos = 5, curve = 0.5, name = estados,
 
 Este sistema se puede modelizar fácilmente en `simmer` sin más que fijar las tasas correspondientes, el número de máquinas disponibles, y el número de operarios. Supongamos que los tiempos de vida de las máquinas son variables aleatorias exponenciales con media de 3 días, mientras que los tiempos de reparación son variables exponenciales con media de 2 horas. Expresando todo en horas, tendríamos una tasa de reparación de $\mu = 1/2$, y una tasa de llegadas (averías) $\lambda = 1/72$.
 
-De nuevo planteamos una función que nos permita cambiar fácilmente los parámetros del sistema si fuera necesario.
+De nuevo planteamos una función que nos permita cambiar fácilmente los parámetros del sistema si fuera necesario. Para simular el sistema hemos de considerar que tenemos 4 máquinas idénticas que cuando se averían han de ser reparadas hasta volver a estar operativas y, en consecuencia, poder volver a estropearse. Es preciso pues, diferenciar las 4 máquinas y utilizar activadores y desactivadores que avisen al sistema de simulación de qué máquina está estropeada y cuál operativa y puede volver a averiarse.
 
 
 ```r
@@ -2406,7 +2408,7 @@ Si $M(T) = (m_{ij}(T))$ es la matriz de ocupación entonces:
 g(T) = M(T) \cdot \begin{pmatrix} c(1) \\ c(2) \\ ... \\ c(N)\end{pmatrix}
 \end{equation}
 
-donde $c(i)$ representa el coste por permanecer en el estado $i$ y $g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.$
+donde $c(i)$ representa el coste por permanecer en el estado $i$ y $g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'$, donde $g(i,T)$ representa el coste esperado total hasta el instante $T$ cuando el sistema se inicia en estado $i$.
 :::
 
 ::: {.example #excmtc007bis}
@@ -2664,6 +2666,9 @@ tiempos.primer.paso(R, A, 1:9)
 
 
 De esta forma, si el avión parte en condiciones óptimas (estado 9) el tiempo hasta que ocurra un accidente que le impida volar es de 183.33 horas, o lo que es lo mismo 183 horas y 20 minutos.
+
+
+
 
 ## Ejercicios {#ejer-u4}
 

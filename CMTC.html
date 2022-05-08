@@ -184,16 +184,18 @@ p_{11}(t) &amp;=&amp; P(X_t=1|X_0=1) = Pr(T &gt;t) = e^{-\mu t}
 </h2>
 <p>En virtud del teorema <a href="CMTC.html#thm:thecmtc001">4.1</a> todas las CMTC con espacios de estado finitos que tienen tiempos de permanencia no nulos en cada estado pueden ser descritos a través de las tasas de permanencia y la matriz de saltos. En este punto detallamos este análisis e introducimos todos los conceptos necesarios para el análisis del proceso.</p>
 <p>La <strong>tasa de transición</strong> de <span class="math inline">\(i\)</span> a <span class="math inline">\(j\)</span> se define como el producto de la tasa de permanencia en el estado <span class="math inline">\(i\)</span>, <span class="math inline">\(r_i\)</span>, por la probabilidad de salto al estado <span class="math inline">\(j\)</span>, <span class="math inline">\(p_{ij}\)</span></p>
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:tasatransicion">\[\begin{equation}
 r_{ij} = r_i p_{ij}
+\tag{4.1}
 \end{equation}\]</span>
 <p>De forma análoga a las CMTD, una CMTC también puede representarse gráficamente mediante un grafo dirigido cuyos nodos (o vértices) indican cada uno de los estados del proceso, y surge un arco dirigido del nodo <span class="math inline">\(i\)</span> al nodo <span class="math inline">\(j\)</span> si <span class="math inline">\(p_{ij} &gt; 0\)</span>; además junto a cada arco se escribe la tasa de transición <span class="math inline">\(r_{ij} = r_i p_{ij}\)</span>. Nunca habrá arcos que empiecen y acaben en el mismo nodo porque <span class="math inline">\(p_{ii}=0\)</span>. Esta representación gráfica se denomina <strong>diagrama de tasas de la CMTC</strong>.</p>
 <p>Podemos entender la dinámica de una CMTC visualizando una partícula que se mueve de nodo en nodo en el diagrama de tasas de la siguiente manera: permanece en el nodo <span class="math inline">\(i\)</span> durante cierto periodo de tiempo de duración variable <span class="math inline">\(Exp(r_i)\)</span> y luego elige uno de los arcos de salida del nodo <span class="math inline">\(i\)</span> con probabilidades proporcionales a las tasas de los arcos, trasladándose al nodo que conecta dicho arco con el nodo origen <span class="math inline">\(i\)</span>. Este movimiento continúa para siempre. El nodo ocupado por la partícula en el instante <span class="math inline">\(t\)</span> es el estado de la CMTC en el instante <span class="math inline">\(t\)</span>.</p>
 <p>En esta situación resulta posible obtener los valores de <span class="math inline">\(r_i\)</span> y <span class="math inline">\(p_{ij}\)</span> a partir de las tasas <span class="math inline">\(r_{ij}\)</span> dado que:</p>
-<span class="math display">\[\begin{eqnarray*}
-\sum_{j=1}^{N} r_{ij} &amp;=&amp; \sum_{j=1}^{N} r_i p_{ij} = r_i \sum_{j=1}^{N} p_{ij} = r_i\\
+<span class="math display" id="eq:probsalto">\[\begin{eqnarray}
+\sum_{j=1}^{N} r_{ij} &amp;=&amp; \sum_{j=1}^{N} r_i p_{ij} = r_i \sum_{j=1}^{N} p_{ij} = r_i  \tag{4.2} \\
 p_{ij} &amp;=&amp; \frac{r_{ij}}{r_i} \quad \text{ si } r_i \neq 0.
-\end{eqnarray*}\]</span>
+\tag{4.3} 
+\end{eqnarray}\]</span>
 <p>Para un mejor manejo de la información, resulta conveniente construir la <strong>matriz de tasas</strong> teniendo en cuenta que <span class="math inline">\(r_{ii} = 0\)</span> para cualquier valor de <span class="math inline">\(i\)</span>, y por tanto la diagonal de la matriz <span class="math inline">\(R\)</span> es siempre cero. Así tenemos que:</p>
 <p><span class="math display">\[R = 
 \begin{pmatrix}
@@ -1152,7 +1154,7 @@ Figura 4.6: Diagrama de tasas para cola M/M/1/4.
 <p>El problema del mantenimiento de máquinas es muy habitual dentro de las CMTC. Supongamos que disponemos de <span class="math inline">\(N\)</span> máquinas que funcionan durante 24 horas seguidas y <span class="math inline">\(M\)</span> personas que pueden repararlas (<span class="math inline">\(M \leq N\)</span>). Las máquinas son idénticas, y los tiempos de vida de las máquinas (tiempo hasta fallo o mantenimiento) son variables aleatorias independientes <span class="math inline">\(Exp(\lambda)\)</span>. Cuando las máquinas fallan, son reparadas por orden de fallo (la primera que falla es la primera en ser reparada) por los <span class="math inline">\(M\)</span> reparadores. Cada máquina averiada necesita una y sólo una persona para repararla, y los tiempos de reparación se distribuyen como una <span class="math inline">\(Exp(\mu)\)</span>; una vez reparada, la máquina continúa comportándose como una máquina nueva. Si <span class="math inline">\(X_t\)</span> es el número de máquinas estropeadas en el momento <span class="math inline">\(t\)</span>, el proceso <span class="math inline">\(\{X_t, t \geq 0\}\)</span> es un proceso de nacimiento (avería) y muerte (reparación) con parámetros:</p>
 <span class="math display">\[\begin{eqnarray*}
 \lambda_i &amp;=&amp; \lambda \cdot (N-i), \quad 0 \leq i &lt; N\\
-\mu_i &amp;=&amp; \mu \cdot i, \quad 0 &lt; i \leq N \\
+\mu_i &amp;=&amp; \mu \cdot min(i,M), \quad 0 &lt; i \leq N \\
 \end{eqnarray*}\]</span>
 <div class="example">
 <p><span id="exm:unlabeled-div-39" class="example"><strong>Ejemplo 4.7  </strong></span>Supongamos el problema de mantenimiento de máquinas en el que tenemos 4 máquinas y 2 reparadores. El espacio de estados (número de máquinas estropeadas) viene dado por <span class="math inline">\(S = \{0, 1, 2, 3, 4\}\)</span>.</p>
@@ -1201,7 +1203,7 @@ Figura 4.7: Diagrama de tasas para el mantenimiento de máquinas
 </p>
 </div>
 <p>Este sistema se puede modelizar fácilmente en <code>simmer</code> sin más que fijar las tasas correspondientes, el número de máquinas disponibles, y el número de operarios. Supongamos que los tiempos de vida de las máquinas son variables aleatorias exponenciales con media de 3 días, mientras que los tiempos de reparación son variables exponenciales con media de 2 horas. Expresando todo en horas, tendríamos una tasa de reparación de <span class="math inline">\(\mu = 1/2\)</span>, y una tasa de llegadas (averías) <span class="math inline">\(\lambda = 1/72\)</span>.</p>
-<p>De nuevo planteamos una función que nos permita cambiar fácilmente los parámetros del sistema si fuera necesario.</p>
+<p>De nuevo planteamos una función que nos permita cambiar fácilmente los parámetros del sistema si fuera necesario. Para simular el sistema hemos de considerar que tenemos 4 máquinas idénticas que cuando se averían han de ser reparadas hasta volver a estar operativas y, en consecuencia, poder volver a estropearse. Es preciso pues, diferenciar las 4 máquinas y utilizar activadores y desactivadores que avisen al sistema de simulación de qué máquina está estropeada y cuál operativa y puede volver a averiarse.</p>
 <div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Sistema</span>
 <span class="co">#################################################</span>
@@ -1481,33 +1483,33 @@ r_{(l+1, 0),(l, 1)} &amp;=&amp;  \mu.
 1-r_i/r &amp; \text{, si } i=j\\
 r_{ij}/r &amp; \text{, si } i \neq j
 \end{cases}
-\tag{4.1}
+\tag{4.4}
 \end{equation}\]</span>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-40" class="theorem"><strong>Teorema 4.2  </strong></span>La matriz de probabilidades de transición <span class="math inline">\(P(t)=(p_{ij}(t))\)</span> de una CMTC, que contiene las probabilidades de pasar de un estado <span class="math inline">\(i\)</span> a otro <span class="math inline">\(j\)</span> en un periodo de amplitud <span class="math inline">\(t\)</span>, viene dada por:</p>
 <p><span class="math display" id="eq:uniformizacion">\[\begin{equation}
 P(t) = \sum_{k=0}^{\infty} e^{-rt}\frac{(rt)^k}{k!} \hat{P}^k
-\tag{4.2}
-\end{equation}\]</span> donde <span class="math inline">\(\hat{P}\)</span> es la matriz definida en la ecuación <a href="CMTC.html#eq:phatTransicion">(4.1)</a>.</p>
+\tag{4.5}
+\end{equation}\]</span> donde <span class="math inline">\(\hat{P}\)</span> es la matriz definida en la ecuación <a href="CMTC.html#eq:phatTransicion">(4.4)</a>.</p>
 </div>
-<p>Esta forma de obtener <span class="math inline">\(P(t)\)</span> dada en <a href="CMTC.html#eq:uniformizacion">(4.2)</a> se denomina <strong>método de uniformización</strong>, y proporciona un método numérico para obtener las probabilidades de transición deseadas, sin más que usar los <span class="math inline">\(m\)</span> primeros términos de la suma infinita definida en <a href="CMTC.html#eq:uniformizacion">(4.2)</a>:</p>
+<p>Esta forma de obtener <span class="math inline">\(P(t)\)</span> dada en <a href="CMTC.html#eq:uniformizacion">(4.5)</a> se denomina <strong>método de uniformización</strong>, y proporciona un método numérico para obtener las probabilidades de transición deseadas, sin más que usar los <span class="math inline">\(m\)</span> primeros términos de la suma infinita definida en <a href="CMTC.html#eq:uniformizacion">(4.5)</a>:</p>
 <span class="math display" id="eq:uniformizacionM">\[\begin{equation}
 P(t)^* = \sum_{k=0}^{m} e^{-rt}\frac{(rt)^k}{k!} \hat{P}^k
-\tag{4.3}
+\tag{4.6}
 \end{equation}\]</span>
-<p>Para asegurar la convergencia de la suma finita <a href="CMTC.html#eq:uniformizacionM">(4.3)</a>, se usan como reglas habituales:</p>
+<p>Para asegurar la convergencia de la suma finita <a href="CMTC.html#eq:uniformizacionM">(4.6)</a>, se usan como reglas habituales:</p>
 <p><span class="math display">\[m \approx max\{rt + r\sqrt{rt}, 20\},\]</span></p>
 <p>y cuando <span class="math inline">\(rt\)</span> es pequeño, es más conveniente utilizar el valor de <span class="math inline">\(r\)</span> más pequeño que es mayor que todas las tasas de permanencia,</p>
 <span class="math display" id="eq:rmax">\[\begin{equation}
 r= max\{r_i, 1\leq i \leq N\}.
-\tag{4.4}
+\tag{4.7}
 \end{equation}\]</span>
 <p>Con todo, en algunos casos es más conveniente utilizar un valor de <span class="math inline">\(r\)</span> que sea mayor que el anterior, como <span class="math inline">\(r=\sum_{i=1}^N r_i\)</span>.</p>
 <div class="silverbox">
 <p>Algoritmo de uniformización para obtener <span class="math inline">\(P\)</span> con una suma finita</p>
 <ol style="list-style-type: decimal">
 <li>Fijar la matriz de tasas <span class="math inline">\(R\)</span>, el instante de tiempo <span class="math inline">\(t\)</span>, y <span class="math inline">\(0 &lt; \epsilon &lt; 1\)</span> la tolerancia deseada (máximo error permitido). Por defecto fijamos <span class="math inline">\(\epsilon=0.00001\)</span>.</li>
-<li>Obtener <span class="math inline">\(r\)</span> con <a href="CMTC.html#eq:rmax">(4.4)</a>.</li>
+<li>Obtener <span class="math inline">\(r\)</span> con <a href="CMTC.html#eq:rmax">(4.7)</a>.</li>
 <li>Calcular <span class="math inline">\(\hat{P}=Phat\)</span> con la ecuación @ref(eq:phatTransicion}.</li>
 <li>Inicializar <span class="math inline">\(A = \hat{P}\)</span>; <span class="math inline">\(c = e^{rt}\)</span>; <span class="math inline">\(B = e^{rt}I\)</span>; <span class="math inline">\(sum = c\)</span>; <span class="math inline">\(k=1\)</span>.</li>
 <li>Mientras que <span class="math inline">\(sum &lt;1-\epsilon\)</span>, calcular:</li>
@@ -1650,7 +1652,7 @@ Obtenemos la distribución de probabilidad asociada al estado 4 para <span class
 <p><span id="thm:unlabeled-div-42" class="theorem"><strong>Teorema 4.3  </strong></span>Si <span class="math inline">\(P(t)\)</span> es la matriz de probabilidades de transición del proceso <span class="math inline">\(\{X_t, t \geq 0\}\)</span> con espacio de estados <span class="math inline">\(S = \{1, 2,...,N\}\)</span>, se define la cantidad <span class="math inline">\(m_{ij}(T)\)</span> como el tiempo de ocupación del estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(T\)</span> partiendo del estado <span class="math inline">\(i\)</span> como:</p>
 <span class="math display" id="eq:ocupacionCMTC">\[\begin{equation}
 m_{ij}(T) = \int_0^T p_{ij}(t)dt, \quad 1 \leq i, j \leq N.
-\tag{4.5}
+\tag{4.8}
 \end{equation}\]</span>
 </div>
 <p>Cuando tenemos formas explícitas para cada uno de los elementos de <span class="math inline">\(P(t)\)</span>, como es el caso para la mayoría de los sistemas de colas de espera, este problema se puede resolver teóricamente. Sin embargo, en la mayoria de ocasiones es necesario un algoritmo de computación para aproximarlos. A continuación se presenta el algoritmo necesario, pero antes veamos la aproximación mediante series de la matriz <span class="math inline">\(M(T) = (m_{ij}(T))\)</span>.</p>
@@ -1658,7 +1660,7 @@ m_{ij}(T) = \int_0^T p_{ij}(t)dt, \quad 1 \leq i, j \leq N.
 <p><span id="thm:unlabeled-div-43" class="theorem"><strong>Teorema 4.4  </strong></span>Si <span class="math inline">\(Y\)</span> es una variable aleatoria Poisson de parámetro <span class="math inline">\(r\cdot T\)</span>, entonces:</p>
 <span class="math display" id="eq:ocupPoissonCMTC">\[\begin{equation}
 M(T) = \frac{1}{r} \sum_{k = 0}^{\infty} Pr(Y &gt; k) \hat{P}^k, \quad T \geq 0.
-\tag{4.6}
+\tag{4.9}
 \end{equation}\]</span>
 <p>y se puede aproximar con una suma finita de orden <span class="math inline">\(m\)</span> utilizando el algoritmo de uniformización a continuación.</p>
 </div>
@@ -1784,9 +1786,9 @@ suma = suma + ygk</code></pre>
 <span class="math display" id="eq:ecubalanceCMTC">\[\begin{eqnarray} 
 p_j  r_j &amp;=&amp; \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
 \sum_{i=1}^N p_i &amp;=&amp; 1. \nonumber
-\tag{4.7}
+\tag{4.10}
 \end{eqnarray}\]</span>
-<p>Podemos interpretar <span class="math inline">\(p_j r_j\)</span> como la tasa a la que la CMTC deja el estado <span class="math inline">\(j\)</span>, y <span class="math inline">\(p_i r_{ij}\)</span> como la tasa a la que la CMTC entra al estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span>. Por lo tanto, esta ecuación de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.7)</a> nos dice que las probabilidades límite son tales que la tasa de entrada al estado <span class="math inline">\(j\)</span> desde todos los estados restantes es igual a la tasa a la cual el sistema deja el estado <span class="math inline">\(j\)</span>, es decir, se produce un balance entre las entradas y las salidas.</p>
+<p>Podemos interpretar <span class="math inline">\(p_j r_j\)</span> como la tasa a la que la CMTC deja el estado <span class="math inline">\(j\)</span>, y <span class="math inline">\(p_i r_{ij}\)</span> como la tasa a la que la CMTC entra al estado <span class="math inline">\(j\)</span> desde el estado <span class="math inline">\(i\)</span>. Por lo tanto, esta ecuación de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.10)</a> nos dice que las probabilidades límite son tales que la tasa de entrada al estado <span class="math inline">\(j\)</span> desde todos los estados restantes es igual a la tasa a la cual el sistema deja el estado <span class="math inline">\(j\)</span>, es decir, se produce un balance entre las entradas y las salidas.</p>
 </div>
 <div class="theorem">
 <p><span id="thm:unlabeled-div-46" class="theorem"><strong>Teorema 4.6  </strong></span>Dada una CMTC <span class="math inline">\(\{X_t, t \geq 0\}\)</span> irreducible con distribución límite <span class="math inline">\(p\)</span>, se tiene que la distribución estacionaria de la CMTC viene dada por <span class="math inline">\(p\)</span>, es decir, <span class="math inline">\(p_j\)</span> es la probabilidad de que el sistema esté en estado <span class="math inline">\(j\)</span> en el largo plazo.</p>
@@ -1796,7 +1798,7 @@ p_j  r_j &amp;=&amp; \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
 <p><span id="thm:unlabeled-div-47" class="theorem"><strong>Teorema 4.7  </strong></span>Sea <span class="math inline">\(m_{ij}(T)\)</span> el tiempo total esperado que la cadena permanece en el estado <span class="math inline">\(j\)</span> hasta el instante <span class="math inline">\(T\)</span> para una CMTC irreducible que comienza en el estado <span class="math inline">\(i\)</span>. Entonces tenemos la siguiente igualdad que relaciona la distribución límite con la distribución estacionaria dada por <span class="math inline">\(\{p_j; j \in S\}\)</span>:</p>
 <p><span class="math display">\[\lim_{T \rightarrow \infty} \frac{m_{ij}(T)}{T} = p_j.\]</span></p>
 </div>
-<p>Así pues, una CMTC ireducible tiene una única distribución límite, que es también su distribución estacionaria y su distribución de ocupación. Se puede calcular pues, resolviendo las ecuaciones de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.7)</a>.</p>
+<p>Así pues, una CMTC ireducible tiene una única distribución límite, que es también su distribución estacionaria y su distribución de ocupación. Se puede calcular pues, resolviendo las ecuaciones de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.10)</a>.</p>
 <p>A continuación se presenta la solución de la distribución límite para los procesos de nacimiento y muerte. En el resto de sistemas se deberán plantear las ecuaciones de balance y resorverlas. En ambas situaciones presentamos las correspondientes funciones que nos permiten obtener las cantidades de interés.</p>
 <div class="bluebox">
 <p>Sea <span class="math inline">\(\{X_t, t \geq 0\}\)</span> un proceso de nacimiento y muerte con espacio de estados <span class="math inline">\(S = \{0, 1,...,K\}\)</span>, y tasas de nacimiento <span class="math inline">\(\{\lambda_i, 0 \leq i &lt; K\}\)</span> y tasas de muerte <span class="math inline">\(\{\mu_i, 1 \leq i \leq K\}\)</span>. Entonces la CMTC así definida es irreducible y tiene una única distribución límite con:</p>
@@ -1842,7 +1844,7 @@ p_j  r_j &amp;=&amp; \sum_{i=1}^N p_i  r_{ij}, \quad 1 \leq j \leq N \\
 <div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">365</span><span class="op">*</span><span class="va">probs</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]  33 332</code></pre>
-<p>Veamos ahora cómo obtener la distribución límite para procesos más generales. Definimos una función que nos permite obtener la distribución límite de un CMTC a partir de cualquier matriz de tasas <span class="math inline">\(R\)</span>, resolviendo las ecuaciones de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.7)</a> matricialmente. Estas ecuaciones equivalen a resolver el sistema:</p>
+<p>Veamos ahora cómo obtener la distribución límite para procesos más generales. Definimos una función que nos permite obtener la distribución límite de un CMTC a partir de cualquier matriz de tasas <span class="math inline">\(R\)</span>, resolviendo las ecuaciones de balance <a href="CMTC.html#eq:ecubalanceCMTC">(4.10)</a> matricialmente. Estas ecuaciones equivalen a resolver el sistema:</p>
 <p><span class="math display">\[A\cdot p= C\]</span></p>
 <p>donde A es una matriz construida a partir de la traspuesta de la matriz generadora <span class="math inline">\(Q=R-diag(r)\)</span>, con <span class="math inline">\(r\)</span> un vector con las tasas de permanencia <span class="math inline">\(r_1,...,r_N\)</span>, a la que se le añade en la última fila un vector de unos,
 y <span class="math inline">\(C\)</span> es una matriz columna de ceros, con la última fila igual a 1 para introducir la restricción de que los <span class="math inline">\(p_j\)</span> definen una distribución de probabilidad y suman 1. Esto es,</p>
@@ -1943,7 +1945,7 @@ g(i, T) = E\left[ \int_0^T c(X_t)dt \mid X_0 = i \right], \quad 1 \leq i \leq N.
 <p><span class="math display">\[\begin{equation}
 g(T) = M(T) \cdot \begin{pmatrix} c(1) \\ c(2) \\ ... \\ c(N)\end{pmatrix}
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(c(i)\)</span> representa el coste por permanecer en el estado <span class="math inline">\(i\)</span> y <span class="math inline">\(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'.\)</span></p>
+<p>donde <span class="math inline">\(c(i)\)</span> representa el coste por permanecer en el estado <span class="math inline">\(i\)</span> y <span class="math inline">\(g(T) = [g(1, T), g(2,T),..., g(N-1, T), g(N, T)]'\)</span>, donde <span class="math inline">\(g(i,T)\)</span> representa el coste esperado total hasta el instante <span class="math inline">\(T\)</span> cuando el sistema se inicia en estado <span class="math inline">\(i\)</span>.</p>
 </div>
 <div class="example">
 <p><span id="exm:excmtc007bis" class="example"><strong>Ejemplo 4.12  </strong></span>Para el sistema de <a href="CMTC.html#excmtc007">Mantenimiento de máquinas</a>, se sabe que el beneficio por cada hora que la máquina está funcionando es de 50 euros, mientras que el coste de que la máquina este apagada es de 15 euros por hora, al que hay que sumar 10 euros por cada hora de reparación. Estamos interesados en conocer el coste-beneficio de un periodo de 24 horas, si sabemos que al inicio del día todas las máquinas están funcionando.</p>
@@ -2372,7 +2374,7 @@ R = \begin{pmatrix}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-05-01.</p>
+    <p>"<strong>Simulación de Procesos y Sistemas</strong>" was written by true, true. It was last built on 2022-05-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

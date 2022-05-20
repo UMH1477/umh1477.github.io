@@ -1,90 +1,90 @@
 # Sistemas de colas {#COLAS}
 
-En esta unidad, consideramos especificamente los sistemas basados en colas de espera. Nos centraremos en los más sencillos y que están basados en el Proceso de Poisson, algunos de los cuales ya hemos presentado en la unidad anterior. 
+En esta unidad, consideramos específicamente los sistemas basados en colas de espera. Nos centraremos en los más sencillos y que están basados en el Proceso de Poisson, algunos de los cuales ya hemos presentado en la unidad anterior. 
 
-Los sistemas de colas están ampliamente extendidos en nuestra vida real y es necesario dedicar una unidad a un análsis
-más extenso para poder responder a preguntas como:
+Los sistemas de colas son muy habituales en nuestra vida y es interesante dedicar tiempo de estudio para poder responder a preguntas como:
 
-* ¿Cuántos clientes hay en la cola en promedio?
-* ¿Cuanto tiempo esta un cliente e la cola?
-* ¿cuántos clientes son rechazados o se pierden por la capacidad de la cola?
-* ¿cómo están de ocupados los servidores?
+* ¿Cuántos clientes hay en la cola?
+* ¿Cuánto tiempo esperan los clientes?
+* ¿Cuántos clientes se pierden por la ineficiencia del sistema?
+* ¿Cómo están de ocupados los servidores?
 
 Comenzamos introduciendo la nomenclatura estándar para los sistemas de colas:
 
-* **Proceso de llegadas**: Es la forma en que los "clientes" entran al sistema de forma que los tiempos de llegadas sucesivas son variables aleatorias iid. Dicho proceso, se describe mediante la distribución de los tiempos de llegada, representados por los símbolos: $M$ (exponencial), $G$ (general), $D$ (determinista), y $E_k$ (Erlang con $k$ fases).
+* **Proceso de llegadas**: Es la forma en que los "clientes" entran al sistema, y se refieren a los tiempos entre llegadas sucesivas, que se modelizan como variables aleatorias iid. El proceso de llegadas se describe con la distribución de los tiempos entre llegadas, representada por los símbolos: $M$ (exponencial), $G$ (general), $D$ (determinista), y $E_k$ (Erlang con $k$ fases).
 
-* **Tiempos de servicio**: Suponemos que los tiempos de servicio de los sucesivos clientes son variables aleatorias iid. Se representan por las mismas letras que los tiempos de interllegada.
+* **Tiempos de servicio**: Se asume que los tiempos de servicio de los sucesivos clientes que llegan al sistema son variables aleatorias iid. Se representan con las mismas letras que los tiempos entre llegadas.
 
-* **Numero de servidores**: Habitualmente se denota por $s$ y se asume que todos ellos se comportan de la misma forma, de forma que cada cliente es antendido por un único servidor.
+* **Numero de servidores**: Habitualmente se denota por $s$ y se asume que todos los servidores que dan servicio a los clientes en el sistema se comportan de la misma forma; además, se asume que cada cliente (o lote de clientes en las colas por lotes) es atendido por un único servidor.
 
-* **Capacidad del sistema**: Habitualmemte se denota por $K$ y es la capacidad total del sistema incluyendo tanto los clientes que pueden ser atendidos como los que pueden esperar en la cola. Si un nuevo cliente encuentra $K$ clientes en el sistema, este se pierde. La capacidad del sistema puede ser finita o infinita, pero sino se indica nada se considera infinita.
+* **Capacidad del sistema**: Habitualmemte se denota por $K$ y es la capacidad total del sistema, esto es, el número de clientes que pueden ser atendidos más los que pueden esperar en la cola. Si un nuevo cliente encuentra $K$ clientes en el sistema, este se pierde. La capacidad del sistema puede ser finita o infinita, pero si no se indica nada, se considera infinita.
 
-* **Disciplina de la cola**: Como son tratados los nuevos clientes cuando acceden al sistema. Las opciones consideradas son: FIFO (el primero que entra es el primero en ser atendido), LIFO (el último en llegar es el primero en ser atendido), SIRO (servicio en orden aleatorio), y PRI (discilina de la cola con prioridades). Sino se indica nada se considera por defecto la disciplina FIFO.
+* **Disciplina de la cola**: Se refiere a cómo son tratados los nuevos clientes cuando acceden al sistema. Las opciones habituales son: FIFO (el primero que entra es el primero en ser atendido), LIFO (el último en llegar es el primero en ser atendido), SIRO (servicio en orden aleatorio), y PRI (cola con prioridades). Si no se indica nada, se asume por defecto la disciplina FIFO.
 
 La notación habitual de una cola se establece como:
 
 $$\text{Llegadas} / \text{Servicio} / \text{Servidores} / \text{Capacidad} / \text{Disciplina}$$
 
-Una cola $M/M/1$ representa que tanto el proceso de llegadas como servicio son exponenciales, sólo disponemos de un servidor, con capacidad de la cola infinita y con disciplina FIFO.
+Una cola $M/M/1$ representa que tanto el proceso de llegadas como de servicio responde a una distribución exponencial, sólo disponemos de un servidor, la capacidad de la cola es infinita y la disciplina de servicio es FIFO.
 
-Todas ls colas que presentamos en esta unidad pueden ser descritas mediante procesos de nacimiento y muerte, tal y como los definimos en la unidad anterior. Sin embargo, en el punto siguienteintroducimos la terminología básica de los sistemas de colas.
+Todas las colas que presentamos en esta unidad pueden ser descritas mediante procesos de nacimiento y muerte, tal y como los definimos en la unidad anterior. Sin embargo, en el punto siguiente introducimos la terminología básica de los sistemas de colas.
 
-## Terminología y y medidas de eficiencia {#COLASA} 
+## Terminología y medidas de eficiencia {#COLASA} 
 
 Notación habitual de los sistemas de colas:
 
-**$N(t)$**: Denota el número de clientes en el sistema en el instante $t$. $N(t)$ es una CMTC con espacio de estdos discreto.
+- **$N(t)$**: Denota el número de clientes en el sistema en el instante $t$. $N(t)$ es una CMTC con espacio de estados discreto.
 
-**$N_q(t)$**: Representa el número de clientes en la cola en el instante $t$.
+- **$N_q(t)$**: Representa el número de clientes en la cola en el instante $t$.
 
-**$P_n(t)$**: Es la probabilidad de que, en el instante  $t$,  se encuentren $n$ clientes en el sistema. A estos efectos se supone conocido el número de clientes en el instante cero (usualmente dicho número es cero). Estas probabilidades se corresponden con las probabilidades de trasnsición comenzando desde el estado 0 que vimos en la unidad anterior.
+- **$P_n(t)$**: Es la probabilidad de que en el instante  $t$ se encuentren $n$ clientes en el sistema. A estos efectos se supone conocido el número de clientes en el instante cero (usualmente dicho número es cero). Estas probabilidades se corresponden con las probabilidades de transición comenzando en el estado 0, que vimos en la unidad anterior.
 
-**$s$**: Denota el número de servidores del mecanismo de servicio.
+- **$s$**: Denota el número de servidores del mecanismo de servicio.
 
-**$\lambda_n$**: Representa el número medio de llegadas de clientes al sistema, por unidad de tiempo, cuando ya hay $n$ clientes en él. También se denomina  tasa  de llegadas (que se correspondería con la tasa de nacimientos si $N(t)$ es un proceso de nacimiento y muerte). Cuando las tasas de llegada no dependen  de $n$  (es decir  todos  los $n$  son  constantes)  suele  denotarse $\lambda$ dicho  valor  constante. 
+- **$\lambda_n$**: Representa el número medio de llegadas de clientes al sistema, por unidad de tiempo, cuando ya hay $n$ clientes en él. También se denomina **tasa  de llegadas** (o nacimientos en terminología de procesos de nacimiento-muerte). Cuando las tasas de llegada no dependen  de $n$  (es decir, la tasa de llegadas no depende del número de clientes en el sistema, y es constante)  $\lambda_n$ se denota por $\lambda$.
 
-**$\mu_n$**:  Es el número  medio de clientes  a los que  se les completa el  servicio,  por unidad de tiempo, cuando hay $n$ clientes en el sistema. Es frecuente referirse a los $mu_n$ como tasas de complección de servicio (o, simplemente, tasas de servicio). Si todos los servidores tienen la misma distribución del tiempo de servicio, suele denotarse por $\mu$ el número medio de clientes que puede atender cada servidor por unidad de tiempo.  Como consecuencia se tiene que $\mu_n = n\mu$ si $n = 1, 2,... ,s$ y $\mu_n = s\mu$ para $n \geq s$.
+- **$\mu_n$**:  Es el número  medio de clientes que completan el servicio por unidad de tiempo, cuando hay $n$ clientes en el sistema. Es frecuente referirse a los $mu_n$ como tasas de compleción de servicio (o simplemente **tasas de servicio**; tasas de muerte en procesos nacimiento-muerte). Si los servidores son siempre regulares en el servicio que prestan (siempre lo realizan al mismo ritmo), y $\mu$ es el número medio de clientes que puede atender cada servidor por unidad de tiempo, entonces $\mu_n = n\mu$ cuando hay $n$ clientes en el sistema ($n = 1, 2,... ,s$) y $\mu_n = s\mu$ cuando hay más clientes que servidores ($n > s$).
 
-**$\rho$**: Es la llamada razón o constante de utilización del sistema (o intensidad de tráfico. Se define, como
+- **$\rho$**: Es la llamada razón o constante de utilización del sistema, y también **intensidad de tráfico**. Se define, como el cociente entre la tasa de llegadas y la tasa máxima de servicio con los servidores disponibles.
 
 $$\rho = \frac{\lambda}{s\mu}$$
 
-Cuando los $\lambda_n$ son constantes y todos los servidores tienen la misma distribución de tiempo de servicio, $\lambda$ es el número medio de clientes que entran en el sistema y $s\mu$ es el número medio de clientes a los que pueden dar servicio los $s$ servidores cuando todos están ocupados. En estas condiciones, $\rho$ representa la fracción de recursos del sistema que es consumida por los clientes. Así, intuitivamente, parece necesario que se cumpla, en estos casos, que $\rho < 1$ y además cuanto más cercano a 1 que sea $\rho$, más tráfico ha de soportar el sistema  (o menos tiempo libre tendrán los servidores, o más espera habrán de sufrir los clientes, como se quiera expresar).
+Cuando los $\lambda_n$ son constantes y todos los servidores tienen la misma distribución de tiempo de servicio, $\lambda$ es el número medio de clientes que entran en el sistema y $s\mu$ es el número máximo de clientes a los que pueden dar servicio los $s$ servidores por unidad de tiempo. En estas condiciones, $\rho$ representa la fracción de recursos del sistema que es consumida por los clientes. Así, intuitivamente, parece necesario que se cumpla $\rho < 1$ para garantizar que el sistema es capaz de dar servicio a todos los clientes que llegan. Cuanto más cercano a 1 está $\rho$, más tráfico ha de soportar el sistema, y en consecuencia menos tiempo libre tendrán los servidores, o más espera habrán de soportar los clientes.
 
-En toda la unidad asumimos que todos los modelos de colas son estacionarios, de forma que los procesos $\{N(t), t \geq 0\}$ y \{N_q(t), t \geq 0\}$ no cambían con el tiempo. Podemos entonces definir las variables de interés del sistema:
+En toda la unidad asumimos que todos los modelos de colas con los que trabajamos son estacionarios, de forma que los procesos $\{N(t), t \geq 0\}$ y \{N_q(t), t \geq 0\}$ no cambian con el tiempo. Podemos entonces definir las **variables de interés del sistema**:
 
-**$N$**: Es la variable aleatoria que contabiliza el número de clientes en el sistema.
+- **$N$**: Es la variable aleatoria que contabiliza el número de clientes en el sistema.
 
-**$N_q$**: Denota la variable aleatoria número de clientes en la cola.
+- **$N_q$**: Denota la variable aleatoria número de clientes en la cola.
 
-**$p_n$**: Probabilidad  de que  se encuentren  $n$  clientes  en el  sistema  $(n = 0, 1,... )$.
+- **$p_n$**: Probabilidad  de que  se encuentren  $n$  clientes  en el  sistema  $(n = 0, 1,... )$.
 
-y las medidas de eficiencia:
+Asociado a todo sistema de colas, definiremos ciertas **medidas de eficiencia** que permitirán estudiar su comportamiento:
 
-**$L$**: Representa el número medio de clientes en el sistema, es decir $L = E(N)$. 
+- **$L$**: Representa el número medio de clientes en el sistema, es decir $L = E(N)$. 
 
-**$L_q$**: Que no es más que el número medio de clientes en la cola, o lo que es lo mismo, $L_q = E(N_q)$.
+- **$L_q$**: Es el número medio de clientes en la cola, o lo que es lo mismo, el tamaño esperado de la cola, $L_q = E(N_q)$.
 
-**$T$**: Es la variable aleatoria que describe el tiempo que un cliente pasa en el sistema.
+- **$T$**: Es la variable aleatoria que describe el tiempo que un cliente pasa en el sistema (siendo atendido y en espera a ser atendido).
 
-**$T_q$**: Representa el tiempo que un cliente espera en la cola.
+- **$W$** : Es el tiempo medio que un cliente está en el sistema, o simplemente, $W = E(T)$.
 
-**$W$** : Es el tiempo medio que un cliente está en el sistema, o simplemente, $W = E(T)$.
+- **$T_q$**: Representa el tiempo que un cliente espera en la cola.
 
-**$W_q$**: Denota el tiempo medio de espera en la cola para un cliente genérico. Matemáticamente, $W_q = E(T_q)$.
+- **$W_q$**: Denota el tiempo medio de espera en la cola de un cliente genérico, $W_q = E(T_q)$.
 
 ## Formulas de Little {#COLASB} 
 
 En los modelos con distribución del tiempo entre llegadas y distribución del servicio exponencial (así como en muchos otros modelos más generales llamados ergódicos) se verifican ciertas fórmulas que relacionan los números medios de clientes, en el sistema o en la cola, con los tiempos medios de un clientes en el sistema o en la cola. Estas son las llamadas fórmulas de Little.
 
-Cuando las tasas de llegada son constantes (es decir $\lambda_n = \lambda$ para $n = 0, 1,... $), la primera fórmula de Little establece la igualdad:
+Cuando las tasas de llegada son constantes (es decir $\lambda_n = \lambda$ para $n \in S$), la primera fórmula de Little establece que el número medio de clientes en el sistema es igual a la tasa de llegadas multiplicada por el tiempo medio de permanencia en el sistema:
 
 $$L = \lambda W,$$
-mientras que la segunda se expresa mediante
+mientras que la segunda viene a ser un equivalente de la anterior, referido a la cola: el tiempo medio de permanencia en cola es igual a la tasa de llegadas por el tiempo medio de espera en cola:
 
 $$L_q = \lambda W_q.$$
-Una forma intuitiva de entender el porqué de la validez de las fórmulas de Little es la siguiente. Considérese un cliente que llega al sistema justo ahora. Después de un tiempo, cuya media es $W$ , ese cliente saldrá servido del sistema. Como el número medio de clientes que llegan al sistema por unidad de tiempo es , el número medio de clientes que habrán llegado desde que nuestro cliente en cuestión entró en el sistema hasta que salió de él es $W$. Por otra parte, es obvio que dicho número medio de clientes es precisamente el número medio de clientes que hay en el sistema justo en el momento que sale del sistema nuestro cliente particular, es decir, $L$. Un razonamiento análogo es válido para la segunda fórmula de Little.
+Estas fórmulas las podemos entender intuitivamente razonando con los costes y ganancias esperadas en el sistema. Para estimar los costes, supongamos que por cada instante de tiempo que permanezca en el sistema, cada cliente ha de pagar 1€. Si cada uno de ellos permanece en media $W$ unidades de tiempo y llegan $\lambda$ clientes por unidad de tiempo, los pagos que se realizarán en total por unidad de tiempo será de $\lambda W$. Por otro lado, atendiendo al número medio de clientes que hay en el sistema en un instante cualquiera, $L$, la ganancia total que se recibirá si cada uno paga 1€ por unidad de tiempo será de $1 \cdot L=L$. Puesto que las ganancias del sistema provienen exclusivamente de los pagos que se realizan, tenemos la igualdad $L=\lambda W$. Un razonamiento análogo es válido para la segunda fórmula de Little.
+
 
 Obviamente, las fórmulas de Little no pueden ser válidas si las $\lambda_n$ no son constantes pero sí pueden generalizarse a esa situación mediante:
 
@@ -93,21 +93,28 @@ $$L_q = \bar{\lambda}W_q$$
 
 con 
 
-$$\bar{\lambda} = \sum_{n = 0}^{\infty} \lambda_np_n$$
+$$\bar{\lambda} = \sum_{n = 0}^{\infty} \lambda_np_n.$$
 Otra relación importante (en este caso para relacionar $W$ y $W_q$) es la dada por:
 
 $$W = W_q + \frac{1}{\mu}$$
-Su deducción es inmediata pues viene a decir que el tiempo medio que un  cliente está en el sistema ($W$) coincide con la suma del tiempo medio en la cola ($W_q$) más el tiempo medio que tarda en ser servido ($1/\mu$, ya que $\mu$ es el número medio de clientes que un servidor puede atender por unidad de tiempo).
+Su deducción es inmediata pues viene a decir que el tiempo medio que un cliente permanece en el sistema, $W$, coincide con la suma del tiempo medio en la cola, $W_q$, y el tiempo medio que tarda en ser atendido, $1/\mu$$.
 
+
+Una derivación de las fórmulas de Little permite estimar el número esperado de clientes que están siendo atendidos, o lo que es lo mismo, servidores que están trabajando -denotado por $B$-, como el ratio de la tasa de llegadas y la tasa de servicios, 
+$$B=\lambda/\mu.$$
 
 ## Colas con un único servidor {#COLASC} 
 
 En este apartado presentamos los aspectos más relvantes referidos a los sistemas de colas con un único servidor.
 empezando por el más sencillo que considera tiempos de llegadas y servicio exponenciales, y con un único servidor.
 
+::: definition
+Una cola M/M/1 es **estable** si $\sum_{i \in S}p_j=1$, e inestable cuando dicha suma es menor que 1, siendo $p_j=lim_{t\rightarrow \infty} Pr[N(t)=j], j\geq 0$ la probabilidad a largo plazo de que haya $j$ clientes en el sistema.
+:::
+
 ### M/M/1
 
-Comenzamos con le sistema más sencillo donde se consideran tiempos de llegadas y servicio exponenciales, un único servidor, capacidad del sistema infinita y prioridad FIFO. De esta forma, tanto las tasas de llegadas como las tasas de servicio vienen dadas por:
+Comenzamos con el sistema más sencillo, donde se consideran tiempos de llegadas y servicio exponenciales, un único servidor, capacidad del sistema infinita y prioridad0 + FIFO. De esta forma, tanto las tasas de llegadas como las tasas de servicio son constantes:
 
 $$
 \begin{matrix}
@@ -115,7 +122,7 @@ $$
 \mu_n = \mu & n = 1, 2,...
 \end{matrix}$$
 
-de forma que la matriz de tasas vieen dada por:
+y la matriz de tasas es:
 
 $$
 R = \begin{pmatrix}
@@ -125,50 +132,69 @@ R = \begin{pmatrix}
 \vdots & \vdots & \vdots & \vdots & \vdots
 \end{pmatrix}$$
 
-donde a partir de las ecuaciones de equilibrio podemos obtener la relación entre tasas de llegadas y servicio:
 
-$$c_n = \frac{\lambda_{n-1}\lambda_{n-2}...\lambda_0}{\mu_{n}\mu_{n-1}...\mu_1} = \frac{\lambda^n}{\mu^n} = \rho^n, \quad n = 1, 2,...$$
 
-Utilizando propiedades de series geométricas, dado que $\rho >0$, el modelo será estacionario si $\rho < 1$. Otra forma de expresarlo es $\lambda < \mu$, que tiene la interpretación adicional de que el número medio de clientes que entran en el sistema por unidad de tiempo sea menor que el número medio de clientes que podrían ser atendidos por el servidor por unidad de tiempo, en caso de que éste estuviese absolutamente todo el tiempo atendiendo a clientes (cosa que no ocurre siempre).  
+A partir de las ecuaciones de equilibrio \@ref(eq:ecubalanceCMTC) si existe distribución estacionaria, esta ha de cumplir: 
 
-En lo que sigue supondremos que el sistema de la cola es estacionario (es decir $\rho < 1$). Lo primero que debemos calcular es la suma de la serie de las $c_n$:
-
-$$\sum_{n = 1}^{\infty} c_n = \sum_{n = 1}^{\infty} \rho^n = \frac{\rho}{1-\rho}.$$
 $$
 \begin{matrix}
+p_0 r_0= p_1 r_{10} & \rightarrow & p_0 \lambda = p_1 \mu \\
 p_0 = 1 - \rho\\
 p_n = c_np_0 = (1 - \rho)\rho^n
 \end{matrix}$$
 
-De esta forma, la distribución de probabilidad de la variable aleatoria del "número de clientes en el sistema" es:
 
-$$P(N = n) = p_n = (1-\rho)\rho^n, \quad n = 0, 1,...$$
+::: theorem
+Definamos $$c_n=\frac{\lambda_{n-1}\lambda_n ...\lambda_1 \lambda_0}{\mu_n \mu_{n-1} ...\mu_2 \mu_1}=\rho^n, \qquad n=1,2,...$$
 
-que corresponde con una distribuión geométrica de parámetro $(1 - \rho)$. Por tanto, el valor de $L$ viene dado por:
+Una cola de nacimiento y muerte con capacidad infinita es estable si y sólo si
+$$\sum_{j=0}^\infty c_j < \infty.$$
+Cuando la cola es estable, su distribución límite viene dada por
+\begin{equation}
+p_i=\frac{c_i}{\sum_{j=0}^{\infty} c_j}, \quad i \geq0
+\end{equation}
+:::
 
-$$L = E(N) = \sum_{n = 0}^{\infty} np_n = (1 - \rho)\rho \sum_{n = 1}^{\infty} n \rho^{n-1} = (1 - \rho)\rho\frac{1}{(1 - \rho^2)} = \frac{\rho}{1 - \rho} = \frac{\lambda}{\mu - \lambda}.$$
-
-A partir de ella podemos obtener:
-
-$$L_q = L - (1 - p_0)$$
-
-que es válido para cualquier sistema de cola, y que en nuestro caso es:
-
-$$L_q = \frac{\lambda^2}{\mu(\mu-\lambda)}$$
-
-Aplicando las fórmulas de Little tenemos:
-
+Como resultado del teorema anterior, una cola M/M/1 es estable si y sólo si $\rho<1$. Derivemos este resultado aplicando dicho teorema. Como en este caso las tasas de llegadas y servicios son constantes, tenemos que 
+$$c_n=\frac{\lambda^n}{\mu^n}=\rho^n.$$
+La condición $\sum_{j=0}^\infty c_j < \infty$ es pues equivalente a $\sum_{j=0}^\infty \rho^j < \infty$, y esta serie infinita toma un valor finito sólo cuando $\rho<1$, es decir, si el número medio de clientes que entran en el sistema por unidad de tiempo es menor que el número medio de clientes que pueden ser atendidos por servidor por unidad de tiempo:
+$$\sum_{j=0}^\infty \rho^j=\begin{cases}
+\frac{1}{1-\rho}, \  \rho<1 \\
+\infty, \quad  \rho \geq 1
+\end{cases}
 $$
-\begin{matrix}
-W = \frac{L}{\lambda} = \frac{1}{\mu - \lambda},\\
-W_q = \frac{L_q}{\lambda} = \frac{\lambda}{\mu(\mu - \lambda),}
-\end{matrix}$$
+Por lo tanto, cuando $\rho<1$ la cola es estable y la distribución estacionaria viene dada por 
+\begin{equation}
+p_i=\frac{\rho^i}{\sum_{j=0}^{\infty} \rho^j}=\rho^i (1-\rho), \quad i\geq 0.
+(\#eq:limite_mm1)
+\end{equation}
+
+
+Esta distribución \@ref(eq:limite_mm1) para el número de clientes en el sistema se corresponde con una distribuión geométrica de parámetro $(1 - \rho)$. Por tanto, el número medio de clientes en el sistema, $L$, viene dado por:
+
+$$L = E(N) = \sum_{n = 0}^{\infty} np_n = \sum_{n = 0}^{\infty} n (1-\rho) \rho^n=\frac{\rho}{1-\rho} = \frac{\lambda}{\mu - \lambda}.$$
+
+::: theorem
+El número esperado de clientes en cualquier sistema de colas viene dado por
+
+$$L_q = L - (1 - p_0).$$
+:::
+
+Este resultado aplicado a la cola M/M/1 da que el número esperado de clientes en la cosa será
+$$L_q = \frac{\rho}{1-\rho}-(1-\rho)=\frac{\lambda^2}{\mu(\mu-\lambda)}$$
+
+Aplicando las fórmulas de Little obtenemos el tiempo medio que un cliente está en el sistema, $W$, y también el tiempo esperado en cola, $W_q$:
+
+\begin{eqnarray*}
+W &=& \frac{L}{\lambda} = \frac{1}{\mu - \lambda},\\
+W_q &=& \frac{L_q}{\lambda} = \frac{\lambda}{\mu(\mu - \lambda),}
+\end{eqnarray*}
 
 de donde podemos deducir:
 
-$$W = W_q + \frac{1}{\mu}$$
+$$W = W_q + \frac{1}{\mu}.$$
 
-Si se desea tener más información sobre la espera de clientes en la cola o en el sistema, debe calcularse la distribución de rpoabbildiad de las variables $T$ y $T_q$. Estas distribuciones permitirán calcular la probabilidad de cualquier suceso relativo al tiempo de estancia en la cola o en el sistema. Si denotamos por $W(t)$ y $W_q(t)$ a las coorespondientes funciones de distribución de $T$ y $T_q$ tendremos:
+Si se desea tener más información sobre la espera de clientes en la cola o en el sistema, debe calcularse la distribución de probabilidad de las variables $T$ y $T_q$. Estas distribuciones permitirán calcular la probabilidad de cualquier suceso relativo al tiempo de estancia en la cola o en el sistema. Si denotamos por $W(t)$ y $W_q(t)$ a las correspondientes funciones de distribución de $T$ y $T_q$ tendremos:
 
 $$W(t) = 1 - exp[-(\mu - \lambda)t]$$
 
@@ -180,9 +206,8 @@ W_q(t) =
 \end{cases}
 $$
 
-::: {.example #colas001 name = "Operador de elevador"}
-
-Un operador de un pequeño elevador de grano tiene un único muelle de descarga. Las llegadas de camiones durante la temporada alta forman un proceso de Poisson con una tasa de llegada media de cuatro por hora. Debido a la variación de las cargas (y al deseo de los conductores de hablar) el tiempo que cada camión pasa frente al muelle de descarga se aproxima por una variable aleatoria exponencial con una media de 14 minutos. Suponiendo que que las plazas de aparcamiento son ilimitadas, el sistema de colas $M/M/1$ puede describir el comportamiento del proceso con tasas de llegadas $\lambda = 4 hora$ y tasa de servicio $\mu = 60/14 hora$.
+::: {.example #colas001}
+**Operador de elevador**. Un operador de un pequeño elevador de grano tiene un único muelle de descarga. Las llegadas de camiones durante la temporada alta forman un proceso de Poisson con una tasa de llegada media de cuatro por hora. Debido a la variación de las cargas (y al deseo de los conductores de hablar) el tiempo que cada camión pasa frente al muelle de descarga se aproxima por una variable aleatoria exponencial con una media de 14 minutos. Suponiendo que que las plazas de aparcamiento son ilimitadas, el sistema de colas $M/M/1$ puede describir el comportamiento del proceso con tasas de llegadas $\lambda = 4 hora$ y tasa de servicio $\mu = 60/14 hora$.
 
 * ¿cuál es la probabilidad de que el muelle de descarga esté inactivo?
 * ¿cuál es la probabilidad de que haya exactamente tres camiones esperando?
@@ -300,16 +325,16 @@ s.MM1
 ## {
 ##     1 - exp(-t/W)
 ## }
-## <bytecode: 0x7f9f0343f5b8>
-## <environment: 0x7f9f0343eef0>
+## <bytecode: 0x7fc260c91110>
+## <environment: 0x7fc260c917d8>
 ## 
 ## $FWq
 ## function (t) 
 ## {
 ##     1 - (RO * exp(-t/W))
 ## }
-## <bytecode: 0x7f9f0343fa18>
-## <environment: 0x7f9f0343eef0>
+## <bytecode: 0x7fc260c90cb0>
+## <environment: 0x7fc260c917d8>
 ## 
 ## attr(,"class")
 ## [1] "o_MM1"
@@ -347,8 +372,8 @@ s.MM1$Pn[5]
 ## [1] 0.7588346
 ```
 
-::: {.example #colas002 name = "Estación de trabajo"}
-
+::: {.example #colas002}
+**Estación de trabajo**.
 En una estación de trabajo con un único procesador se ejecutan programas (que se supone prácticamente su única carga de trabajo) con tiempo de CPU de distribución exponencial de media 3 minutos. Los programas se atienden según una disciplina FIFO. Sabiendo que las llegadas de programas a la estación se producen según un proceso de Poisson con una intensidad de 15 programas cada hora, por término medio, se pide:
 
 *	¿Cuál es la probabilidad de que haya más de dos programas en espera de ejecución (además del que se está ejecutando)?
@@ -610,8 +635,8 @@ $$
 $$
 que efectivamente sí es siempre menor que 1.
 
-::: {.example name = "Taller Mecánico"}
-
+::: {.example #tallermecanico}
+**Taller Mecánico**.
 En un taller mecánico llegan vehículos para una puesta a punto antes de pasar la ITV, las llegadas siguen un proceso de Poisson de promedio 18 vehículos/hora. Las dimensiones del taller sólo permiten que haya 4 vehículos, y las ordenanzas municipales no permiten esperar en la vía pública. El taller despacha un promedio de 6 vehículos/hora de acuerdo con una distribución exponencial. Se pide:
 
 *  ¿Cuál es la probabilidad de que no haya ningún vehículo en el taller?
@@ -732,8 +757,8 @@ $$
 La suma de la serie de los $c_n$ será convergente (el sistema es estacionario) si $\rho < 1$, es decir,
 $\lambda < s\mu$.
 
-::: {.example}
-
+::: {.example #plantafabricacion}
+**Planta de fabricación**.
 En una determinada planta de fabricación, la operación final es una operación de pintura. En el centro de pintura siempre hay dos trabajadores que trabajan en paralelo, aunque debido a la configuración física, no pueden ayudarse mutuamente. Las llegdas al centro de pintura  se producen según un proceso de Poisson con
 con una tasa de llegada media de 100 al día. Cada trabajador tarda una media de 27 minutos en pintar cada artículo. Últimamente, el exceso de trabajo en curso es motivo de preocupación, por lo que la dirección está considerando ampliar el centro de pintura y contratar a un tercer trabajador. (Se supone que el tercer trabajador, tras un periodo de formación, también tardará una media de 27 minutos por pieza). Otra opción sería comprar un robot para realizar la tarea de los trabajadores, ya que se sabe que el tiempo medio que tardará en cada pieza es de 10 minutos.
 
@@ -862,7 +887,8 @@ $$\bar{\rho} = \frac{\bar{\lambda}}{\mu s}$$
 
 Este sistema siempre es estacionario. A continuación, se presenta un ejemplo de este sistema donde se muestra la función que debemos usar para analiar este tipo de cola.
 
-::: {.example}
+::: {.example #centralita}
+**Centralita**.
 Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos siendo atendidas por las operadoras y otras tres en espera, recibe el tono de "línea ocupada"). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada y dicho tiempo de distribución exponencial. Calcular:
 
 * El porcentaje de tiempo en que cada operadora está ocupada y el número medio de servidores ocupados. 
@@ -1021,8 +1047,8 @@ $$L_{q_{red}} = \lambda W_{q_{red}}$$
 
 de esta forma basta con analizar cada una de las clas que conforman la red para estudiar el comportamiento global del sistema.
 
-::: {.example}
-
+::: {.example #empresaitv}
+**Empresa ITV**.
 Una empresa de ITV en una localidad dispone de una superficie que consta de tres partes: Una caseta donde los clientes entregan la documentación del vehículo y realizan el pago de tasas, sin restricciones paa atender ningún vehículo. Una nave formada por dos circuitos (revisión y oficina de personal técnico) atendidos por dos técnicos cada uno de ellos. Los vehículos que llegan a la nave son atendidos con  una tasa de servicio medio de 45 clientes/hora para la revisión y 2 minutos/cliente en la oficina de personal técnico. Los coches acuden a la empresa a una media de 57 clientes/hora, ya que un mayor número de vehículos colapsaría el trabajo de la caseta, cuyo empleado atiende a un ritmo medio de 1 cliente/minuto. Las llegadas siguen un Proceso de Poisson y los tiempos de servicio se distribuyen según una variable exponencial. Se pide:
 
 * Factor de utilziación o intensidad de tráfico en cada nodo de la red.

@@ -355,16 +355,16 @@ s.MM1
 ## {
 ##     1 - exp(-t/W)
 ## }
-## <bytecode: 0x7f97914995e0>
-## <environment: 0x7f9791498ee0>
+## <bytecode: 0x7ff54ee167e8>
+## <environment: 0x7ff54ee16120>
 ## 
 ## $FWq
 ## function (t) 
 ## {
 ##     1 - (RO * exp(-t/W))
 ## }
-## <bytecode: 0x7f9791499a40>
-## <environment: 0x7f9791498ee0>
+## <bytecode: 0x7ff54ee16c48>
+## <environment: 0x7ff54ee16120>
 ## 
 ## attr(,"class")
 ## [1] "o_MM1"
@@ -919,7 +919,7 @@ Este sistema siempre es estacionario. A continuación, se presenta un ejemplo de
 
 ::: {.example #centralita}
 **Centralita**.
-Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos que están siendo atendidas por las operadoras y otras tres en espera, recibe el tono de "línea ocupada"). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo l5 segundos la media del tiempo que tarda cada operadora en direccionar una llamada, según una distribución exponencial. Calcular:
+Por razones técnicas, una centralita con dos operadoras sólo permite mantener tres llamadas en espera (de tal forma que cualquier llamada producida cuando ya hay dos que están siendo atendidas por las operadoras y otras tres en espera, recibe el tono de "línea ocupada"). Las llamadas llegan según un proceso de Poisson, a razón de 6 por minuto, siendo 15 segundos la media del tiempo que tarda cada operadora en direccionar una llamada, según una distribución exponencial. Calcular:
 
 1. El porcentaje de tiempo que cada operadora está ocupada y el número medio de operadoras ocupadas. 
 2. El número medio de llamadas en espera.
@@ -1276,254 +1276,213 @@ cola.MMsK <- function(t, lambda, mu, s, K)
 
 ### Básicos
 
-**Ejercicio B5.1.**  Para el ejemplo del sistema de la estación de trabajo descrito para el sistema $M/M/1$ vamos a contestar a las diferentes cuestiones que allí se planteaban pero considerando que la estación de trabajo dispone de tres servidores idénticos. Hallar también el número medio total de procesos en la estación.
+**Ejercicio B5.1.**  Para el ejemplo del sistema de la **Estación de trabajo** descrito para el sistema $M/M/1$ [\@ref((exm:colas002)], contestar a las diferentes cuestiones que allí se planteaban pero considerando que la estación de trabajo dispone de tres servidores idénticos. Hallar también el número medio total de procesos en la estación.
+
+**Ejercicio B5.2.** Los coches llegan a un peaje 24 horas al día según un proceso de Poisson con
+una tasa media de 15 por hora. Estamos interesados en:
+
+1. ¿Cuál es el número esperado de coches que llegarán a la cabina entre la 1:00 p.m. y 1:30 p.m.?
+2. ¿Cuál es el tiempo esperado entre dos coches que llegan consecutivamente?
+3. Son las 13:12 y acaba de llegar un coche. ¿Cuál es el número esperado de coches que llegarán entre este momento y la 1:30 p.m.?
+4. Son las 13:12 y acaba de llegar un coche. ¿Cuál es la probabilidad de que lleguen dos coches ,más hasta las 13:30?
+5. Son las 13:12 y el último coche en llegar lo hizo a las 13:05. ¿Cuál es la probabilidad de que no lleguen más coches hasta las 13:30?
+6. Son las 13:12 y el último coche en llegar lo hizo a las 13:05. ¿Cuál es la tiempo esperado entre la llegada del último coche y la del siguiente?
+
+
+**Ejercicio B5.3.** Una tienda de alimentación es atendida por una persona. Aparentemente el patrón de llegadas de clientes durante los sábados se comporta siguiendo un proceso de Poisson con una tasa de llegadas de 10 personas por hora. A los clientes se les atiende siguiendo un orden tipo FIFO y debido al prestigio de la tienda, una vez que llegan estan dispuestos a esperar el servicio. Se estima que el tiempo que se tarda en atender a un cliente se distribuye exponencialmente, con un tiempo medio de 4 minutos.
+
+Determina:
+
+1. La probabilidad de que haya alguien en la cola.
+2. La longitud media de la cola.
+3. Tiempo medio que un cliente permanece en la cola.
+
+
+**Ejercicio B5.4**  Un asesor fiscal dispone de un local para atender a sus clientes, los cuales se concentran mayoritariamente entre los meses de mayo y junio. El local tiene una capacidad máxima de 8 asientos en espera, el cliente se va si no encuentra un asiento libre, y el tiempo entre llegadas de clientes se puede considerar distribuido exponencialmente con 20 clientes/hora en período punta. El tiempo de una consulta se distribuye exponencialmente con una media de 12 minutos.
+
+1. ¿Cuántas consultas por hora realizará en promedio?
+2. ¿Cuál es el tiempo medio de permanencia en el local?
+
+**Ejercicio B5.5.** 	Un laboratorio de informática consta de 5 estaciones de trabajo. Cada estación se avería, por término medio, una vez cada 30 días, siendo exponencial (v.a.) el tiempo hasta la próxima avería. El laboratorio dispone de dos personas que, en caso de ser necesario, pueden arreglar estas averías. El tiempo de reparación de cada avería es exponencial, con media de 3 días. Calcular:
+
+1.	El número medio de estaciones funcionando.
+2. El porcentaje de tiempo que cada uno de los técnicos puede dedicar a otras tareas ajenas a la reparación de las estaciones.
 
 ### Avanzados
 
-**Ejercicio A5.1.** Los coches llegan a un peaje 24 horas al día según un proceso de Poisson con
-una tasa media de 15 por hora. Estamos interesados en:
+**Ejercicio A5.1.** Un gran hotel ha colocado un ordenador para uso de los clientes en una sala de atención al cliente. La llegada de clientes que necesitan utilizar el ordenador sigue un proceso de Poisson con una media de ocho clientes por hora. El tiempo que cada persona utiliza el ordenador es variable y se aproxima mediante una distribución exponencial, con un tiempo medio de 5 minutos entre llegadas consecutivas. El hotel está interesado en:
 
-* ¿Cuál es el número esperado de coches que llegarán a la cabina entre la 1:00 p.m. y 1:30 p.m.?
-* ¿Cuál es el tiempo esperado entre dos coches que llegan consecutivamente?
-* Son las 13:12 y acaba de llegar un coche. ¿Cuál es el número esperado de coches que llegarán entre este momento y la 1:30 p.m.?
-* Son las 13:12 y acaba de llegar un coche. ¿Cuál es la probabilidad de que lleguen dos más coches lleguen de aquí a las 13:30?
-* Son las 13:12 y el último coche en llegar lo hizo a las 13:05. ¿Cuál es la probabilidad de que no lleguen más coches hasta las 13:30?
-* Son las 13:12 y el último coche en llegar lo hizo a las 13:05. ¿Cuál es la tiempo esperado entre la llegada del último coche y la del siguiente?
+1. ¿Cuál es la probabilidad de que la sala donde está el ordenador esté vacía?
+2. ¿Cuál es la probabilidad de que nadie esté esperando para utilizar el ordenador?
+3. ¿Cuál es el tiempo medio que un cliente debe esperar en la cola para utilizar el ordenador?
+4. ¿Cuál es la probabilidad de que un cliente que llega vea a dos personas esperando en cola?
 
-**Ejercicio A5.2.** Un gran hotel ha colocado un ordenador para uso de los clientes en una sala de atención al cliente. La llegada de clientes que necesitan utilizar el ordenador sigue un proceso de Poisson con una media de ocho por hora. El tiempo que cada persona utiliza el ordenador es muy variable y se aproxima mediante una distribución exponencial con un tiempo medio de 5 minutos. El hotel está interesado en:
+**Ejercicio A5.2.** Una prensa de taladro en un taller de trabajo tiene piezas que llegan para ser taladradas de acuerdo con un proceso de Poisson con una tasa media de 15 piezas por hora. El tiempo medio que se tarda en completar cada pieza es una variable aleatoria con una función de distribución exponencial cuya media es de 3 minutos. Estamos interesados en conocer:
 
-* ¿Cuál es la probabilidad de que la sala donde está el ordenador esté vacía?
-* ¿Cuál es la probabilidad de que nadie esté esperando para utilizar el ordenador?
-* ¿Cuál es el tiempo medio que un cliente debe esperar en la cola para utilizar el ordenador?
-* ¿Cuál es la probabilidad de que un cliente que llega vea a dos personas esperando en cola?
+1. ¿Cuál es la probabilidad de que el taladro esté ocupado?
+2. ¿Cuál es el número medio de piezas en espera de ser taladradas?
+3. ¿Cuál es la probabilidad de que al menos una pieza esté esperando para ser taladrada?
+4. ¿Cuál es el tiempo medio que pasa una pieza en la sala de taladrado?
+5. A la empresa le cuesta 8 céntimos por cada minuto que pasa cada pieza en la sala de taladrado. Por un gasto adicional de 10 euros por hora, la empresa puede disminuir la duración media de la operación de taladrado a 2 minutos. ¿Merece la pena el coste adicional?
 
-**Ejercicio A5.3.** Una prensa de taladro en un taller de trabajo tiene piezas que llegan para ser taladradas de acuerdo con un proceso de Poisson con una tasa media de 15 por hora. El tiempo medio que se tarda en completar cada pieza es una variable aleatoria con una función de distribución exponencial cuya media es de 3 minutos. Estamos interesados en conocer:
+**Ejercicio A5.3.** En una fabrica existe una oficina de la Seguridad Social a la que los obreros tienen acceso durante las horas de trabajo. El jefe de personal, que ha observado la afluencia de obreros a la ventanilla, ha solicitado que se haga un estudio relativo al funcionamiento de este servicio. Se designa a un especialista para que determine el tiempo medio de espera de los obreros en la cola, y la duración media de la conversación que cada uno mantiene con el empleado de la ventanilla. Este analista llega a la conclusion de que durante la primera y la última media hora de la jornada la afluencia es muy reducida y fluctuante, pero que durante el resto de la jornada el fenómeno se puede considerar estacionario. Del analisis de 100 periodos de 5 minutos, sucesivos o no, pero situados en la fase estacionaria, se dedujo que el número medio de obreros que acudían a la ventanilla era de 1.25 por periodo (en media) y que el tiempo entre llegadas seguía una distribucion exponencial. Un estudio similar sobre la duración de las conversaciones, llevó a la conclusión de que se distribuían exponencialmente con
+duración media de 3.33 minutos. Determina:
 
-* ¿Cuál es la probabilidad de que el taladro esté ocupado?
-* ¿Cuál es el número medio de piezas en espera de ser taladradas?
-* ¿Cuál es la probabilidad de que al menos una pieza esté esperando para ser taladrada?
-* ¿Cuál es el tiempo medio que pasa una pieza en la sala de taladrado?
-* A la empresa le cuesta 8 céntimos por cada minuto que pasa cada pieza en la sala de taladrado. Por un gasto adicional de 10 euros por hora, la empresa puede disminuir la duración media de la operación de taladrado a 2 minutos. ¿Merece la pena el coste adicional?
+1. Número medio de obreros en cola.
+2. Tiempo medio de espera en la cola.
+3. Compara el tiempo perdido por los obreros con el tiempo perdido por el oficinista. Calcula el coste para la empresa, si una hora de inactividad del oficinista vale 250 euros y una hora del obrero 400 euros.
 
-**Ejercicio A5.4.** Una tienda de alimentacion es atendida por una persona. Aparentemente el patr ´ on de llegadas de clientes durante los sabados se comporta siguiendo un proceso de Poisson con una tasa de llegadas de 10 personas por hora. A los clientes se les atiende siguiendo un orden tipo FIFO y debido al prestigio de la tienda, una vez que llegan estan dispuestos a esperar el servicio. Se estima que el tiempo que se tarda en atender a un cliente se distribuye exponencialmente, con un tiempo medio de 4 minutos.
-Determina:
+**Ejercicio A5.4.**  Una compañía ferroviaria pinta sus vagones, según lo van necesitando, en sus propios talleres, donde se pintan a mano, de uno en uno, a un ritmo medio de uno cada 4 horas (tiempos exponenciales) y con un coste anual de 4 millones de euros. Se ha determinado que los vagones pueden llegar según un proceso de Poisson a razón de uno cada 5 horas. Además el coste por cada vagón que no está activo es de 500 euros la hora.
 
-* La probabilidad de que haya alguién en la cola.
-* La longitud media de la cola.
-* Tiempo medio que un cliente permanece en la cola.
+Se plantean otras dos posibilidades. Una es encargar dicho trabajo a una empresa de pintura que lo haría con aerosol, con el consiguiente ahorro de tiempo (un vagón pintado cada 3 horas, con tiempos exponenciales). Sin embargo el presupuesto para esta segunda alternativa es de 10 millones de euros anuales. La otra opción es poner otro taller exactamente igual al que hay actualmente, con igual tasa de servicio y coste anual que permita pintar dos vagones a la vez.
 
-**Ejercicio A5.5.** En una fabrica existe una oficina de la Seguridad Social a la que los obreros tienen acceso durante las horas de trabajo. El jefe de personal, que ha observado la afluencia de obreros a la ventanilla, ha solicitado que se haga un estudio relativo al funcionamiento de este servicio. Se designa a un especialista para que determine el tiempo medio de espera de los obreros en la cola y la duracion 
-media de la conversacion que cada uno mantiene con el empleado de la ventanilla. Este analista  
-llega a la conclusion de que durante la primera y la última media hora de la jornada la afluencia es  
-muy reducida y fluctuante, pero que durante el resto de la jornada el fenómeno se puede considerar 
-estacionario. Del analisis de 100 periodos de 5 minutos, sucesivos o no, pero situados en la fase 
-estacionaria, se dedujo que el numero medio de obreros que acudían a la ventanilla era de 1.25 por
-periodo y que el tiempo entre llegadas seguía una distribucion exponencial. Un estudio similar sobre 
-la duracion de las conversaciones, llevó a la conclusión de que se distribuían exponencialmente con
-duracion media de 3.33 minutos. Determina:
+En todos los casos el trabajo se considera ininterrumpido, esto es, se trabajan 24 × 365 = 8760 horas anuales. ¿Cuál de los tres procedimientos es más eficiente?
 
-* Número medio de obreros en cola.
-* Tiempo medio de espera en la cola.
-* Compara el tiempo perdido por los obreros con el tiempo perdido por el oficinista. Calcula el coste para la empresa, sin una hora de inactividad del oficinista vale 250 euros y una hora del obrero 400 euros.
+**Ejercicio A5.5.** Un taller utiliza 10 máquinas idénticas. Cada máquina deja de funcionar en promedio una vez cada 7 horas. Un operario puede reparar una máquina en 4 horas en promedio, pero el tiempo de reparación real varía según una distribución exponencial.
 
-**Ejercicio A5.6.**  Una  compañía  ferroviaria  pinta  sus  propios  vagones,  según  se  vayan necesitando,  en  sus  propios talleres donde se pinta a mano de uno en uno con una velocidad que se distribuye según una exponencial de media uno cada 4 horas y un coste anual de 4 millones de euros. Se ha determinado que los vagones pueden llegar según un proceso de Poisson de media uno cada 5 horas. Además el coste por cada vagón que no está activo es de 500 euros la hora.
+Responder y comentar las siguientes cuestiones de interés:
 
-Se plantean otras dos posibilidades. Una es encargar dicho trabajo a una empresa de pintura que lo haría con aerosol con el consiguiente ahorro de tiempo. Sin embargo el presupuesto para esta segunda alternativa es de 10 millones de euros anuales. En este caso, el proceso se aproxima a uno de Poisson con una tasa de uno cada 3 horas. La otra opción es poner otro taller exactamente igual al que hay actualmente, con igual tasa de servicio y coste anual que permita pintar dos vagones a la vez.
-
-En todos los casos el trabajo se considera ininterrumpido, esto es, se trabajan 24 × 365 = 8760 horas anuales. ¿Cuál de los tres procedimientos es preferible?
-
-**Ejercicio A5.7.** Un taller utiliza 10 máquinas idénticas. Cada máquina deja de funcionar en promedio una vez cada 7 horas. Un operario puede reparar una máquina en 4 horas en promedio, pero el tiempo de reparación real varía según una distribución exponencial.
-
-Interpretar y comparar las respuestas:
-* El número mínimo de mecánicos que se necesita para que el número estimado de máquinas que fallan sea menor que 4.
-* El número mínimo de mecánicos que se necesita, de manera que la demora esperada hasta que se repare una máquina sea menor que 4 horas. 
-
-**Ejercicio A5.8.**  Un asesor fiscal dispone de un local para atender a sus clientes, los cuales se
-concentran mayoritariamente entre los meses de mayo y junio. El local tiene una capacidad máxima de 8 asientos en espera, el cliente se va si no encuentra un asiento libre, y el tiempo entre llegada de clientes se puede considerar distribuido exponencialmente con 20 clientes/hora en período punta. El tiempo de una consulta esta distribuido exponencialmente con una media de 12 minutos.
-
-* ¿Cuántas consultas por hora realizará en promedio?
-* ¿Cuál es el tiempo medio de permanencia en el local?
-
-**Ejercicio A5.9.** Un estudiante trabaja como encargado de una biblioteca por las noches y es el único en el mostrador durante todo su turno de trabajo. Las llegadas al mostrador siguen una distribución de Poisson con una media de 8 por hora. Cada usuario de la biblioteca es atendido de uno en uno, y el tiempo de servicio sigue una distribución exponencial con una media de 5 minutos.
-
-* ¿Cuál es la probabilidad de que se forme cola?
-* ¿Cuál es la longitud media de la cola?
-* ¿Cuál es el tiempo medio que un cliente pasa en la biblioteca hasta que le han atendido?
-* ¿Cuál es el tiempo medio que un cliente pasa en la cola esperando a que le atiendan?
-* El estudiante pasa su tiempo en que no hay clientes clasificando artículos de revistas. Si puede clasificar 22 fichas por hora como media cuando trabaja continuamente, ¿cuántas fichas puede ordenar durante su trabajo?
-
-**Ejercicio A5.10.** Una compañía de alquiler de coches tiene un servicio de mantenimiento de coches (revisión del aceite, frenos, lavado…) que sólo es capaz de atender los coches de uno en uno y que trabaja 24 horas al día. Los coches llegan al taller con una media de 3 coches por día. El tiempo que dura el servicio de mantenimiento de un coche sigue una distribución exponencial de media 7 horas. El servicio de
-mantenimiento cuesta a la compañía 375 euros por día. La compañía estima en 25 euros/día el coste de tener el coche parado sin poderse alquilar. La compañía se plantea la posibilidad de cambiar el servicio de mantenimiento por uno más rápido que puede bajar el tiempo de mantenimiento a una media de 5 horas, pero esto también supone un incremento del coste. ¿Hasta que valor puede aumentar el coste para que la compañía contrate los nuevos servicios de mantenimiento?
-
-**Ejercicio A5.11.** Nuestro local de comida rápida, “Panis”, tiene mucho que aprender sobre teoría
-de colas. Insta a los clientes a que formen 3 colas en las que se distribuyen de forma aleatoria delante de los empleados durante el periodo de comidas diario. Además han instalado entre las tres colas barreras para que los clientes no se pasen a otras colas para prevenir que la gente se “cambie de cola”. Llegan los
-clientes según una distribución de Poisson con una media de 60 por hora y el tiempo en que un cliente es servido varía según una distribución exponencial de media 150 segundos. Asumiendo el estado permanente del sistema, ¿cuál es el tiempo medio de estancia del cliente hasta que ha sido atendido? El gerente de “Panis” ha creído ahora que es preferible una única cola para distribuir finalmente a los tres servidores y por tanto las barreras son eliminadas. ¿cuál es el tiempo de espera de este modo?
-
-**Ejercicio A5.12.** Una organización está actualmente envuelta en el establecimiento de un centro de telecomunicaciones para tener una mejor capacidad de las mismas. El centro deberá ser el responsable de la salida de los mensajes así como de la entrada y distribución dentro de la organización. El encargado del centro es el responsable de determinar los operadores que deben trabajar en él. Los operarios encargados de la salida de mensajes son responsables de hacer pequeñas correcciones a los mensajes, mantener un índice de códigos y un fichero con los mensajes salientes en los últimos 30 días, y por supuesto, transmitir el mensaje. Se ha establecido que este proceso es exponencial y requiere una media de 28 min/mensaje. Los operarios de transmisión trabajarán en el centro 7 horas al día y cinco días a la semana. Todos los mensajes salientes serán procesados según el orden en que se vayan recibiendo y siguen una distribución de Poisson con una media de 21 por cada 7 horas diarias. Los mensajes deben ser atendidos en 2 horas como máximo. Determine el número mínimo de personal que se necesita para cumplir este criterio de servicio. 
-
-**Ejercicio A5.13.** La empresa “Refrigeración Hermanos Pérez” debe elegir entre dos tipos de sistema para el mantenimiento de sus camiones. Se estima que los camiones llegarán al puesto de mantenimiento de acuerdo con una distribución exponencial de media 40 minutos y se cree que este ratio de llegada es independiente del sistema de servicio que se establezca. El primer tipo de sistema puede atender a dos camiones en paralelo, y cada camión se le haría todo el servicio en una media de 30 minutos (el tiempo sigue una distribución exponencial). En el segundo sistema sólo se podría atender a un camión pero el tiempo medio en que se realiza el mantenimiento de un camión es de 15 minutos (distribución exponencial). Para ayudar al encargado de la decisión responda las siguientes cuestiones:
-
-* ¿cuántos camiones habrá por término medio habrá en cualquiera de los dos sistemas?
-* ¿Cuánto tiempo pasará cada camión en el taller en cualquiera de los dos sistemas?
-* El encargado estima que cada minuto que un camión pasa en el taller reduce los beneficios en 2 euros. Se sabe que el sistema de dos camiones en paralelo tiene un coste de un euro por minuto. ¿Qué debería costar el segundo sistema para que no haya diferencia económica entre los dos?
-
-**Ejercicio A5.14.** Una empresa que alquila ordenadores, considera necesario revisarlos una vez al año. La primera alternativa, con un coste de 750.000 € es hacer un mantenimiento manual en el que cada ordenador necesitaría un tiempo que sigue una distribución exponencial con una media de 6 horas. La segundo opción sería un mantenimiento con máquinas, con un coste de un millón de euros, en este caso el tiempo de mantenimiento es de 3 horas con una distribución exponencial. Para ambas alternativas los ordenadores llegan siguiendo una distribución de poisson 3 al día. El tiempo en que está parado un ordenador tiene un coste de 150 € por hora. ¿Qué alternativa debe elegir la empresa? Se asume que la empresa trabaja 24 horas, 365 días al año.
-
-**Ejercicio A5.15.** Un pequeño autoservicio de lavado en el que el coche que entra no puede hacerlo hasta que el otro haya salido completamente, tiene una capacidad de aparcamiento de 10 coches, incluyendo el que está siendo lavado. La empresa ha estimado que los coches llegan siguiendo una distribución de Poisson con una media de 20 coches/hora, el tiempo de servicio sigue una distribución exponencial de 12 minutos. La empresa abre durante 10 horas al día. ¿Cuál es la media de coches perdidos cada día debido a las limitaciones de espacio? 
-
-**Ejercicio A5.16.** La compañía “Gasolinas y Aceites SA” es la encargada de descargar los barcos cargados de petróleo que llegan al puerto y llevarlo a la refinería. En el puerto tiene 6 muelles de descarga y 4 equipos para la descarga del barco. Cuando los muelles están llenos, los barcos se desvía a muelles de espera hasta que les toca su turno. Los barcos llegan según una media de uno cada 2 horas. Para descargar el barco se necesita una media de 10 horas, siguiendo una distribución exponencial. La compañía desea saber los siguientes datos:
-
-* Por término medio, ¿cuántos barcos hay en el puerto?
-* Por término medio, ¿cuánto tiempo pasa un barco en el puerto?
-* ¿cuál es la media de llegada de los barcos a los muelles de espera?
-* La compañía estudia la posibilidad de construir otro muelle de descarga. La construcción y mantenimiento del puerto costaría X € al año. La compañía estima que desviar un barco hacia los muelles de espera cuando los muelles de descarga están llenos tiene un coste de Y €. ¿Cuál es la relación entre X e Y para que la compañía construya otro puerto de descarga?
-
-**Ejercicio A5.17.** Uno de los hospitales de la ciudad de Valencia ofrece todos los miércoles por la noches revisiones gratis de vista. Un test necesita, por término medio, 20 minutos distribuyéndose según una exponencial. Los clientes llegan según una distribución de Poisson de media 6/hora, y los pacientes se atienden según norma FIFO. Los encargados del hospital desean saber que cantidad de personal sanitario deben disponer. Para ello habría que calcular para diferentes cantidades de doctores: 1) ¿cuál es el número medio de gente esperando? 2) el tiempo medio que un cliente pasa en la clínica y 3) el tiempo medio que los doctores están parados. 
-
-**Ejercicio A5.18.** Una estación de ITV cuenta con tres puestos para inspección y en cada uno sólo puede ser atendido un coche. Cuando un coche sale de un puesto la vacante es ocupada por otro que está en cola. La llegada de coches sigue una distribución de Poisson con una media de un coche por minuto en sus horas punta, que duran tres horas. En el parking sólo caben 4 vehículos. El tiempo de inspección sigue una distribución exponencial de media 6 minutos. El inspector jefe desea saber el número medio de coches en la estación, el tiempo medio (incluida la inspección) de espera, y el número medio de coches en cola debido a que los puestos están ocupados. ¿Cuántos coches tendrán que volver en otro momento?
-
-**Ejercicio A5.19.** En  el  departamento  de  emergencia  de  un  hospital  los  pacientes  llegan  mediante un Proceso de Poisson a  3 clientes/hora. El médico que está en dicho departamento los atiende con una frecuencia de servicio exponencial a una tasa de 4 clientes/hora. ¿Contrataría o no a un segundo médico? Para responder a esta pregunta se deben comparar las siguientes características en ambos sistemas:
-
-* Probabilidad de que no se encuentren pacientes en el departamento de emergencias. 
-* Probabilidad de que existan 3 pacientes en el departamento de emergencias. 
-* Tiempo total del cliente en el departamento de emergencias. 
-* Tiempo total de espera por en el departamento de emergencias. 
-* El número de pacientes en el departamento de emergencias en un momento dado. 
-* El número de pacientes en el departamento de emergencias esperando a ser atendidos. 
-* Probabilidad de que el cliente espere más de 1 hora en el departamento de emergencias.
-* Probabilidad de que el cliente espere más de 1 hora en ser atendido en el departamento de emergencias.
+1. El número mínimo de mecánicos que se necesita para que el número medio de máquinas que fallan sea menor a 4.
+2. El número mínimo de mecánicos que se necesitan para que la demora esperada hasta que se repare una máquina sea menor a 4 horas. 
 
 
-**Ejercicio A5.20.**  Una base de mantenimiento de aviones dispone de recursos para revisar unicamente un motor de avión a la vez. Por tanto, para devolver los aviones lo antes posible, la política que se sigue consiste en aplazar la revision de los 4 motores de cada avión. En otras palabras, solamente se revisa un 
-motor cada vez que un avión llega a la base. Con esta política, los aviones llegan segun una distribucion de Poisson de tasa media uno al día. El tiempo requerido para revisar un motor (una vez que se empieza el trabajo) tiene una distribucion exponencial de media 1/2 día. Se ha hecho una propuesta para cambiar la política de revision de manera que los 4 motores se revisen de forma consecutiva cada vez que un avión llegue a la base. A pesar de que ello supondría cuadruplicar el tiempo esperado de servicio, cada avion necesitaría ser revisado unicamente con una frecuencia 4 veces menor. Utliza las medidas descriptivas del sistema para comparar ambas políticas.
+**Ejercicio A5.6.** Un estudiante trabaja como encargado de una biblioteca por las noches y es el único en el mostrador durante todo su turno de trabajo. Las llegadas al mostrador siguen una distribución de Poisson con una media de 8 por hora. Cada usuario de la biblioteca es atendido de uno en uno, y el tiempo de servicio sigue una distribución exponencial con una media de 5 minutos.
+
+1. ¿Cuál es la probabilidad de que se forme cola?
+2. ¿Cuál es la longitud media de la cola?
+3. ¿Cuál es el tiempo medio que un cliente pasa en la biblioteca hasta que le han atendido?
+4. ¿Cuál es el tiempo medio que un cliente pasa en la cola esperando a que le atiendan?
+5. El estudiante pasa el tiempo en que no hay clientes clasificando artículos de revistas. Si puede clasificar 22 fichas por hora como media cuando trabaja de modo continuo, ¿cuántas fichas puede ordenar durante su jornada de 8 horas?
+
+**Ejercicio A5.7.** Una compañía de alquiler de coches tiene un servicio de mantenimiento de coches (revisión del aceite, frenos, lavado…) que sólo es capaz de atender los coches de uno en uno, y que trabaja 24 horas al día. Los coches llegan al taller a un ritmo de 3 coches por día. El tiempo que dura el servicio de mantenimiento de un coche sigue una distribución exponencial de media 7 horas. El servicio de mantenimiento cuesta a la compañía 375 euros por día. La compañía estima en 25 euros/día el coste de tener el coche parado sin poderse alquilar. La compañía se plantea la posibilidad de cambiar el servicio de mantenimiento por uno más rápido que puede reducir el tiempo de mantenimiento a una media de 5 horas, pero esto también supone un incremento del coste. ¿Hasta que valor puede aumentar el coste para que la compañía contrate los nuevos servicios de mantenimiento?
+
+**Ejercicio A5.8.** Nuestro local de comida rápida, “Panis”, tiene mucho que aprender sobre teoría de colas. Insta a los clientes a que formen 3 colas en las que se distribuyen de forma aleatoria delante de los empleados durante el periodo de comidas diario. Además han instalado barreras entre las tres colas para prevenir que la gente se “cambie de cola”. Llegan los clientes según una distribución de Poisson a un ritmo de 60 por hora y el tiempo en que un cliente es servido varía según una distribución exponencial de media 150 segundos. 
+
+1. Asumiendo el estado estacionario del sistema, ¿cuál es el tiempo medio de estancia del cliente hasta que ha sido atendido? 
+2. En el caso de que se optara por una una única cola para distribuir finalmente a los tres servidores (eliminando las barreras), ¿cuál sería el tiempo de espera en cola?
+
+**Ejercicio A5.9.** Una organización está actualmente envuelta en el establecimiento de un centro de telecomunicaciones para mejorar su capacidad. El centro deberá ser el responsable de la salida de los mensajes así como de la entrada y distribución dentro de la organización. El encargado del centro es el responsable de determinar los operadores que deben trabajar en él. Los operarios encargados de la salida de mensajes son responsables de hacer pequeñas correcciones a los mensajes, mantener un índice de códigos y un fichero con los mensajes salientes en los últimos 30 días, y por supuesto, transmitir el mensaje. Se ha establecido que este proceso es exponencial y requiere una media de 28 min/mensaje. Los operarios de transmisión trabajarán en el centro 7 horas al día y cinco días a la semana. Todos los mensajes salientes serán procesados según el orden en que se vayan recibiendo según un proceso de Poisson con una media de 21 mensajes en 7 horas. Los mensajes deben ser atendidos en 2 horas como máximo. Determine el número mínimo de personal que se necesita para cumplir este criterio de servicio. 
+
+**Ejercicio A5.10.** La empresa “Refrigeración Hermanos Pérez” debe elegir entre dos tipos de sistema para el mantenimiento de sus camiones. Se estima que los camiones llegan al servicio de mantenimiento de acuerdo con una distribución exponencial de media 40 minutos, y que este ratio de llegada es independiente del sistema de servicio que se establezca. El primer tipo de sistema puede atender a dos camiones en paralelo, y a cada camión se le haría todo el mantenimiento en una media de 30 minutos (el tiempo sigue una distribución exponencial). En el segundo sistema sólo se podría atender a un camión, pero el tiempo medio en que se realizaría el mantenimiento sería de 15 minutos (distribución exponencial). Para ayudar al encargado de tomar la decisión, responde las siguientes cuestiones:
+
+1. ¿Cuántos camiones habrá por término medio en cualquiera de los dos sistemas?
+2. ¿Cuánto tiempo pasará cada camión en el taller en cualquiera de los dos sistemas?
+3. El encargado estima que cada minuto que un camión pasa en el taller, reduce los beneficios en 2 euros. Se sabe que el sistema de dos camiones en paralelo tiene un coste de un euro por minuto. ¿Qué debería costar el segundo sistema para que no hubiera diferencia económica entre ellos?
+
+**Ejercicio A5.11.** Una empresa que alquila ordenadores considera necesario revisarlos una vez al año. La primera alternativa, con un coste de 750.000€ es hacer un mantenimiento manual en el que cada ordenador necesitaría un tiempo que sigue una distribución exponencial con una media de 6 horas. La segunda opción sería un mantenimiento con máquinas, con un coste de un millón de euros; en este caso el tiempo de mantenimiento sería de 3 horas con una distribución exponencial. Para ambas alternativas los ordenadores llegan según un proceso de Poisson de tasa 3 al día. El tiempo en que está parado un ordenador tiene un coste de 150€ por hora. ¿Qué alternativa debe elegir la empresa? Se asume que la empresa trabaja 24 horas, 365 días al año.
+
+**Ejercicio A5.12.** Un pequeño autoservicio de lavado en el que el coche que entra no puede hacerlo hasta que el otro haya salido completamente, tiene una capacidad de aparcamiento de 10 coches, incluyendo el que está siendo lavado. La empresa ha estimado que los coches llegan según un proceso de Poisson con una media de 20 coches/hora, y el tiempo de lavado sigue una distribución exponencial de 12 minutos. La empresa abre durante 10 horas al día. ¿Cuál es la media de coches perdidos cada día debido a las limitaciones de espacio? 
+
+**Ejercicio A5.13.** La compañía “Gasolinas y Aceites SA” es la encargada de descargar los barcos cargados de petróleo que llegan al puerto y llevarlo a la refinería. En el puerto tiene 6 muelles de descarga y 4 equipos para la descarga del barco. Cuando los muelles están llenos, los barcos se desvían a muelles de espera hasta que les toca su turno. Los barcos llegan según un proceso de Poisson de tasa uno cada 2 horas. Para descargar el barco se necesita una media de 10 horas, con variabilidad exponencial. La compañía desea saber los siguientes datos:
+
+1. Por término medio, ¿cuántos barcos hay en el puerto?
+2. Por término medio, ¿cuánto tiempo pasa un barco en el puerto?
+3. ¿cuál es la media de llegada de los barcos a los muelles de espera?
+4. La compañía estudia la posibilidad de construir otro muelle de descarga. La construcción y mantenimiento del puerto costaría X€ al año. La compañía estima que desviar un barco hacia los muelles de espera cuando los muelles de descarga están llenos tiene un coste de Y€. ¿Cuál es la relación entre X e Y para que la compañía construya otro puerto de descarga?
+
+**Ejercicio A5.14.** Uno de los hospitales de la ciudad de Valencia ofrece todos los miércoles por la noches revisiones gratis de vista. Un test necesita, por término medio, 20 minutos exponencial. Los clientes llegan según un proceso de Poisson de tasa 6 por hora, y los pacientes se atienden según norma FIFO. Los encargados del hospital desean saber de cuánto personal sanitario deben disponer. Para ello quieren evaluar, para diferentes números de doctores: 1) ¿cuál es el número medio de gente esperando? 2) el tiempo medio que un cliente pasa en la clínica y 3) el tiempo medio que los doctores están parados. 
+
+**Ejercicio A5.15.** Una estación de ITV cuenta con tres puestos para inspección y en cada uno sólo puede ser atendido un coche. Cuando un coche sale de un puesto, la vacante es ocupada por otro que está en cola. La llegada de coches sigue un proceso de Poisson con una tasa de un coche por minuto. En el parking sólo caben 4 vehículos. El tiempo de inspección sigue una distribución exponencial de media 6 minutos. El inspector jefe desea saber el número medio de coches en la estación, el tiempo medio (incluida la inspección) de espera, y el número medio de coches en cola. ¿Cuántos coches tendrán que volver en otro momento?
+
+**Ejercicio A5.16.** Al servicio de urgencias de un hospital los pacientes llegan según un Proceso de Poisson de tasa 3 pacientes/hora. El médico que está en dicho servicio los atiende a razón de 4 clientes/hora (tiempos exponenciales). ¿Contrataría o no a un segundo médico? Para responder a esta pregunta se deben comparar las siguientes características en ambos sistemas:
+
+1. Probabilidad de que no se encuentren pacientes en el departamento de emergencias. 
+2. Probabilidad de que existan 3 pacientes en urgencias. 
+3. Tiempo total del cliente en urgencias. 
+4. Tiempo total de espera por en urgencias. 
+5. El número de pacientes en urgencias en un momento dado. 
+6. El número de pacientes en urgencias esperando a ser atendidos. 
+7. Probabilidad de que el paciente espere más de 1 hora.
+8. Probabilidad de que el paciente espere más de 1 hora en ser atendido.
 
 
-**Ejercicio A5.21.** Una pequeña estación de servicio junto a una autopista interestatal está abierta las 24 horas al día y tiene un surtidor y espacio para otros dos coches. El proceso de llegadas es un PP con tasa media de llegada de 8 coches/hora y el tiempo medio de servicio en el surtidores es una variable aleatoria exponencial de 6 minutos. El beneficio esperado de cada coche es de 5 dólares. Por 60 dólares más al día, el propietario de la estación puede aumentar la capacidad de los coches en espera en uno. Analiza cada uno de los sistemas propuestos y determina si merece la pena pagar 60 dólares más.
+**Ejercicio A5.17.**  Una base de mantenimiento de aviones dispone de recursos para revisar únicamente un motor de avión a la vez. Por tanto, para devolver los aviones lo antes posible a la pista, la política que se sigue consiste en aplazar la revisión de los 4 motores de cada avión, esto es, solamente se revisa un 
+motor cada vez que un avión llega a la base. Con esta política, los aviones llegan al servicio de mantenimiento según un proceso de Poisson de tasa uno al día. El tiempo requerido para revisar un motor (una vez que se empieza el trabajo) tiene una distribucion exponencial de media 1/2 día. Se ha hecho una propuesta para cambiar la política de revisión, de manera que los 4 motores se revisen de forma consecutiva cada vez que un avión llegue a la base. A pesar de que ello supondría cuadruplicar el tiempo esperado de servicio, cada avión necesitaría ser revisado con una frecuencia 4 veces menor. Utliza las medidas descriptivas del sistema para comparar ambas políticas.
 
 
-**Ejercicio A5.22.** Un centro de reparación dentro de una planta de fabricación está abierto las 24 horas del día y siempre hay una persona presente. La llegada de artículos que necesitan ser reparados en el centro de reparación se ajusta a un proceso de Poisson con una tasa media de 6 por día. La duración de la reparación de los artículos es muy variable y sigue una distribución exponencial con una media de 5 horas. La política de gestión actual es permitir un máximo de tres trabajos en el centro de reparación. Si hay tres trabajos en el centro y llega un cuarto, el trabajo se envía a un contratista externo que devolverá el trabajo 24 horas más tarde. Por cada día que un artículo está en el centro de reparaciones, le cuesta a la empresa 30 euros. Cuando un artículo se envía al contratista externo, le cuesta a la empresa 30 euros por el tiempo perdido, más 75 euros por la reparación. Contesta a las cuestiones siguientes:
+**Ejercicio A5.18.** Una pequeña estación de servicio junto a una autopista interestatal está abierta las 24 horas al día y tiene un surtidor y espacio para otros dos coches. El proceso de llegadas es un PP con tasa media de llegada de 8 coches/hora y el tiempo medio de servicio en el surtidor es una variable aleatoria exponencial de 6 minutos. El beneficio esperado de cada coche es de 5 dólares. Por 60 dólares más al día, el propietario de la estación puede aumentar la capacidad de los coches en espera en uno. Analiza cada uno de los sistemas propuestos y determina si merece la pena la inversión.
 
-* Se ha sugerido que la dirección cambie la política para permitir cuatro trabajos en el centro; así los trabajos se enviarían al contratista externo sólo cuando haya cuatro presentes. ¿Es esta una política mejor?
-* ¿Cuál sería la política de corte óptima? En otras palabras, ¿a qué nivel sería mejor  enviar los trabajos excedentes al contratista externo?
-* El personal y el mantenimiento del centro de reparaciones durante las 24 horas del día cuestan 400 por día. ¿Es una política económica acertada o sería mejor cerrar el centro de reparaciones centro de reparaciones y utilizar sólo el contratista externo?
 
-**Ejercicio A5.23.** Una pequeña tienda de informática tiene dos dependientes para atender a los clientes (pero capacidad infinita para retener a los clientes). Los clientes llegan a la tienda según un proceso de Poisson con una tasa media de 5 por hora. El 50% de los que llegan quieren comprar hardware y el 50% quiere comprar software. La política actual de la tienda es que un dependiente atiende sólo a los clientes de software y otro para atender sólo a los clientes de hardware, por lo que la tienda actúa como dos sistemas M/M/1 independientes. Tanto si el cliente quiere hardware como software, el tiempo que pasa con uno de los dependientes de la tienda se distribuye exponencialmente con una media de 20 minutos. El propietario de la tienda está considerando cambiar la política de funcionamiento de la tienda y  hacer que los dependientes ayuden tanto con el software como con el hardware; así, nunca habría nunca habrá un dependiente inactivo cuando haya dos o más clientes en la tienda. La desventaja es que los dependientes serían menos eficientes, ya que tendrían que ocuparse de algunas cosas que no conocen. Se calcula que el cambio aumentaría el tiempo medio de tiempo de servicio a 21 minutos.
+**Ejercicio A5.19.** Un centro de reparación dentro de una planta de fabricación está abierto las 24 horas del día y siempre hay una persona presente. La llegada de artículos que necesitan ser reparados en el centro de reparación se ajusta a un proceso de Poisson con una tasa media de 6 por día. La duración de la reparación de los artículos es muy variable y sigue una distribución exponencial con una media de 5 horas. La política de gestión actual es permitir un máximo de tres trabajos en el centro de reparación. Si hay tres trabajos en el centro y llega un cuarto, el trabajo se envía a un contratista externo que devolverá el trabajo 24 horas más tarde. Por cada día que un artículo está en el centro de reparaciones, le cuesta a la empresa 30 euros. Cuando un artículo se envía al contratista externo, le cuesta a la empresa 30 euros por el tiempo perdido, más 75 euros por la reparación. Contesta a las cuestiones siguientes:
 
-* Si el objetivo es minimizar el tiempo de espera esperado de un cliente, ¿qué política es la mejor?
-* Si el objetivo es minimizar el número esperado de clientes en la tienda, ¿qué política es la mejor?
+1. Se ha sugerido que la dirección cambie la política para permitir cuatro trabajos en el centro; así los trabajos se enviarían al contratista externo sólo cuando hubiera cuatro acumulados ¿Es esta una política mejor?
+2. ¿Cuál sería la política de corte óptima? En otras palabras, ¿a qué nivel sería mejor  enviar los trabajos excedentes al contratista externo?
+3. El personal y el mantenimiento del centro de reparaciones durante las 24 horas del día cuestan 400 por día. ¿Es una política económica acertada o sería mejor cerrar el centro de reparaciones y utilizar sólo el contratista externo?
 
-**Ejercicio A5.24.** Los clientes llegan a una cola de una estación a un ritmo de cinco por hora. Cada cliente necesita una media de 78 minutos de servicio. ¿Cuál es el número mínimo de servidores necesarios para mantener el sistema estable? ¿Cuál es el número esperado de servidores ocupados si el sistema emplea $s$ servidores ($1 \leq s \leq 10$)? ¿¿Cuántos servidores son necesarios si la legislación laboral estipula que un servidor no puede estar ocupado más del 80% del tiempo?
+**Ejercicio A5.20.** Una pequeña tienda de informática tiene dos dependientes para atender a los clientes (pero capacidad infinita para retener a los clientes). Los clientes llegan a la tienda según un proceso de Poisson con una tasa media de 5 por hora. El 50% de los que llegan quieren comprar hardware y el 50% quiere comprar software. La política actual de la tienda es que un dependiente atiende sólo a los clientes de software y otro sólo a los clientes de hardware, por lo que la tienda actúa como dos sistemas M/M/1 independientes. Tanto si el cliente quiere hardware como software, el tiempo que pasa con uno de los dependientes de la tienda se distribuye exponencialmente con una media de 20 minutos. El propietario de la tienda está considerando cambiar la política de funcionamiento de la tienda y  hacer que los dependientes ayuden tanto con el software como con el hardware; así, nunca habría dependiente inactivo cuando hubiera dos o más clientes en la tienda. La desventaja es que los dependientes serían menos eficientes, ya que tendrían que ocuparse de algunas cosas que no conocen. Se calcula que el cambio aumentaría el tiempo medio de servicio a 21 minutos.
 
-**Ejercicio A5.25.** Los clientes llegan a una barbería según un proceso de Poisson a un ritmo de ocho por hora. Cada cliente requiere 15 minutos de media. La barbería tiene cuatro sillas y un solo barbero. Un cliente no espera si todas las sillas están ocupadas. Suponiendo una distribución exponencial de los tiempos de servicio:
+1. Si el objetivo es minimizar el tiempo de espera de un cliente, ¿qué política es la mejor?
+2. Si el objetivo es minimizar el número esperado de clientes en la tienda, ¿qué política es la mejor?
 
-* Calculae el tiempo esperado que pasa un cliente en la barbería. 
-* Supongamos que el barbero cobra 12 euors por el servicio. Calcula la tasa de ingresos a largo plazo del barbero. (Pista: ¿Qué fracción de los clientes que llegan ingresan?)
-* Supongamos que el barbero contrata a un ayudante, por lo que ahora hay dos barberos. ¿Cuál es la nueva tasa de ingresos?
-* Supongamos que el barbero instala una silla más para que los clientes esperen. ¿Cuánto aumentan los ingresos debido a la silla adicional?
+**Ejercicio A5.21.** Los clientes llegan a una cola de una estación a un ritmo de cinco por hora. Cada cliente necesita una media de 78 minutos de servicio. 
 
-**Ejercicio A5.26.** Una máquina produce artículos de uno en uno, siendo los tiempos de producción iid exponenciales con media $1/\lambda$. Los artículos producidos se almacenan en un almacén de capacidad $K$. Cuando el almacén está lleno, la máquina se apaga, y se vuelve a encender cuando el almacén tiene espacio para al menos un artículo. La demanda de los artículos se produce según a un $PP(\mu)$. La demanda que no puede satisfacerse se pierde. Supongamos que el tiempo medio de tiempo de fabricación es de 1 hora y la tasa de demanda es de 20 al día. Supongamos que la capacidad del capacidad del almacén es de 10. 
+1. ¿Cuál es el número mínimo de servidores necesarios para mantener el sistema estable? 
+2. ¿Cuál es el número esperado de servidores ocupados si el sistema emplea $s$ servidores ($1 \leq s \leq 10$)? 
+3. ¿Cuántos servidores son necesarios si la legislación laboral estipula que un servidor no puede estar ocupado más del 80% del tiempo?
 
-* Calcula la fracción de tiempo que la máquina está apagada a largo plazo.
-* Calcula la fracción de la demanda perdida a largo plazo.
-* Cuando un artículo entra en el almacén, su valor es de 100 euros Sin embargo, pierde valor a razón de
-1 euro por hora mientras espera en el almacén. Así, si un artículo ha estado en el almacén durante 10 horas cuando se vende, sólo alcanza 90 euros Calcule los ingresos a largo plazo por hora.
+**Ejercicio A5.22.** Los clientes llegan a una barbería según un proceso de Poisson a un ritmo de ocho por hora. Cada cliente requiere 15 minutos de media. La barbería tiene cuatro sillas y un solo barbero. Un cliente no espera si todas las sillas están ocupadas. Suponiendo una distribución exponencial de los tiempos de servicio:
 
-**Ejercicio A5.27.** Una sucursal bancaria dispone de 3 cajeros automáticos. De vez en cuan- do el papel de algún cajero se atasca y el aparato deja de funcionar hasta que uno de los empleados (especialmente adiestrado para llevar  a cabo esta tarea) consigue arreglar la avería. Se sabe que  el tiempo  que  utiliza dicho empleado sigue una distribución exponencial con media de l0 minutos, mientras que la distribución del tiempo que un cajero está fun- cionando hasta que se atasca el papel es también exponencial pero con media de 2 horas. Calcular:
+1. Calcula el tiempo esperado que pasa un cliente en la barbería. 
+2. Supongamos que el barbero cobra 12 euors por el servicio. Calcula la tasa de ingresos a largo plazo del barbero. (Pista: ¿Qué fracción de los clientes que llegan, pasan?)
+3. Supongamos que el barbero contrata a un ayudante, por lo que ahora hay dos barberos. ¿Cuál es la nueva tasa de ingresos?
+4. Supongamos que el barbero instala una silla más para que los clientes esperen. ¿Cuánto aumentan los ingresos debido a la silla adicional?
 
-*	La probabilidad de que funcionen los tres cajeros. 
-* El número medio de cajeros averiados.
-*	El tiempo medio que un cajero está averiado.
-*	Si en un momento dado funcionan los tres cajeros, ¿cuál es el tiempo medio hasta la próxima avería?
+**Ejercicio A5.23.** Una máquina produce artículos de uno en uno, siendo los tiempos de producción iid exponenciales con media $1/\lambda$. Los artículos producidos se almacenan en un almacén de capacidad $K$. Cuando el almacén está lleno, la máquina se apaga, y se vuelve a encender cuando el almacén tiene espacio para al menos un artículo. La demanda de los artículos se produce según a un $PP(\mu)$. La demanda que no puede satisfacerse se pierde. Supongamos que el tiempo medio de tiempo de fabricación es de 1 hora y la tasa de demanda es de 20 artículos al día. Supongamos que la capacidad del almacén es de 10. 
 
-**Ejercicio A5.28.** 	Un laboratorio de informática consta de 5 estaciones de trabajo. Cada estación se avería, por término medio, una vez cada 30 días, siendo el tiempo hasta la próxima avería, de distribución exponencial. El laboratorio dispone de dos personas que, en caso de ser necesario, pueden arreglar estas averías. El tiempo de reparación (para cada uno de los técnicos) es exponencial, con media de 3 días. Calcular:
+1. Calcula la fracción de tiempo que la máquina está apagada a largo plazo.
+2. Calcula la fracción de la demanda perdida a largo plazo.
+3. Cuando un artículo entra en el almacén, su valor es de 100 euros Sin embargo, pierde valor a razón de 1 euro por hora mientras espera en el almacén. Así, si un artículo ha estado en el almacén durante 10 horas cuando se vende, sólo alcanza 90 euros. Calcular los ingresos a largo plazo por hora.
 
-*	El número medio de estaciones funcionando.
-*	El porcentaje de tiempo que cada uno de los técnicos puede dedicar a otras tareas ajenas a la reparación de las estaciones.
+**Ejercicio A5.24.** Una sucursal bancaria dispone de 3 cajeros automáticos. De vez en cuando el papel de algún cajero se atasca y el aparato deja de funcionar hasta que uno de los empleados (especialmente adiestrado para llevar a cabo esta tarea) consigue arreglar la avería. Se sabe que  el tiempo que tarda dicho empleado en la reparación sigue una distribución exponencial con media 10 minutos, mientras que la distribución del tiempo que un cajero está funcionando hasta que se atasca el papel es también exponencial con media de 2 horas. Calcular:
 
-**Ejercicio A5.29.** A una máquina perforadora de una cadena de producción llegan mecanismos de interruptores diferenciales según un proceso de Poisson, con media de l0 por minuto. El tiempo, en minutos, necesario para llevar a cabo la perforación del mecanismo es de distribución exponencial con parámetro l2. Cuando un nuevo  mecanismo  llega  a la máquina perforadora  y ésta está ocupada, aguarda, según el turno que le corresponda, hasta que pueda ser perforado. A tal efecto, se supone que la zona de espera en la que se van almacenando los mecanismos antes de ser perforados es lo suficientemente amplia para que no existan aglomeraciones que sobrepasen estas dimensiones.
+1. La probabilidad de que funcionen los tres cajeros. 
+2. El número medio de cajeros averiados.
+3. El tiempo medio que un cajero está averiado.
+4. Si en un momento dado funcionan los tres cajeros, ¿cuál es el tiempo medio hasta la próxima avería?
 
-*	¿Cuál es el porcentaje de tiempo durante el cual la perforadora está libre?
-*	¿Cuál es el número medio de mecanismos en toda la zona de per- foración (perforadora y zona de espera)?
-*	Calcular el tiempo medio que un mecanismo pasa en todo el proceso de perforación (desde que llega a esa zona hasta que sale perforado) y la probabilidad de que para un mecanismo se emplee más de un minuto en todo ese proceso.
-*	Si ahora se supone que la zona de espera tiene sólo capacidad para 3 mecanismos y que cuando un mecanismo que llega y se encuentra dicha zona completa, se desvía a otra rama de la cadena de producción, calcular la probabilidad de que se produzca dicho desvío.
 
-**Ejercicio A5.30.** A una máquina perforadora de una cadena de producción llegan mecanismos de interruptores diferenciales según un proceso de Poisson, con media de l0 por minuto. El tiempo, en minutos, necesario para llevar a cabo la perforación del mecanismo es de distribución exponencial con parámetro l2. Cuando un nuevo  mecanismo  llega  a la máquina perforadora  y ésta está ocupada, aguarda, según el turno que le corresponda, hasta que pueda ser perforado. A tal efecto, se supone que la zona de espera en la que se van almacenando los mecanismos antes de ser perforados es lo suficientemente amplia para que no existan aglomeraciones que sobrepasen estas dimensiones.
+**Ejercicio A5.25.** A una máquina perforadora de una cadena de producción llegan mecanismos de interruptores diferenciales según un proceso de Poisson, con tasa 10 por minuto. El tiempo, en minutos, necesario para llevar a cabo la perforación del mecanismo sigue una distribución exponencial con parámetro 12. Cuando un nuevo  mecanismo  llega  a la máquina perforadora y sta está ocupada, aguarda según el turno que le corresponda, hasta que pueda ser perforado. A tal efecto, se supone que la zona de espera en la que se van almacenando los mecanismos antes de ser perforados es lo suficientemente amplia para que no existan aglomeraciones que sobrepasen estas dimensiones.
 
-*	¿Cuál es el porcentaje de tiempo durante el cual la perforadora está libre?
-*	¿Cuál es el número medio de mecanismos en toda la zona de per- foración (perforadora y zona de espera)?
-*	Calcular el tiempo medio que un mecanismo pasa en todo el proceso de perforación (desde que llega a esa zona hasta que sale perforado) y la probabilidad de que para un mecanismo se emplee más de un minuto en todo ese proceso.
-*	Si ahora se supone que la zona de espera tiene sólo capacidad para 3 mecanismos y que cuando un mecanismo que llega y se encuentra dicha zona completa, se desvía a otra rama de la cadena de producción, calcular la probabilidad de que se produzca dicho desvío.
+1. ¿Cuál es el porcentaje de tiempo durante el cual la perforadora está libre?
+2. ¿Cuál es el número medio de mecanismos en toda la zona de perforación (perforadora y zona de espera)?
+3. Calcular el tiempo medio que un mecanismo pasa en todo el proceso de perforación (desde que llega a esa zona hasta que sale perforado) y la probabilidad de que para un mecanismo se emplee más de un minuto en todo ese proceso.
+4. Si ahora se supone que la zona de espera tiene sólo capacidad para 3 mecanismos y que cuando un mecanismo llega y se encuentra dicha zona completa, se desvía a otra rama de la cadena de producción, calcular la probabilidad de que se produzca dicho desvío.
 
-**Ejercicio A5.31.** Un sistema informático de una biblioteca dispone de 3 lectores de CD que funcionan ininterrumpidamente. No obstante, de vez en cuando se produce algún error de lectura en alguno de ellos y deja de funcionar hasta que uno de los encargados de la biblioteca (que es quien siempre lleva a cabo esta tarea) consigue arreglar la avería. Se sabe que el tiempo que esta persona utiliza en dicha reparación sigue una distribución exponen- cial con media de 5 minutos, mientras que la distribución del tiempo que un lector está funcionando hasta que se produce algún error de lectura es también exponencial pero con media de l hora. Calcular:
+**Ejercicio A5.26.** Un sistema informático de una biblioteca dispone de 3 lectores de códigos de barras para inventariar los nuevos libros. No obstante, de vez en cuando se produce algún error de lectura en alguno de ellos y deja de funcionar hasta que uno de los encargados de la biblioteca (que es quien siempre lleva a cabo esta tarea) consigue arreglar la avería. Se sabe que el tiempo que esta persona utiliza en dicha reparación sigue una distribución exponencial con media de 5 minutos, mientras que la distribución del tiempo que un lector está funcionando hasta que se produce algún error de lectura es también exponencial pero con media de 1 hora. Calcular:
 
-* La probabilidad de que funcionen los tres lectores. 
-* El número medio de lectores averiados.
-*	El tiempo medio que un lector está averiado.
-*	Si en un momento dado funcionan dos lectores, ¿cuál es el tiempo medio hasta la próxima avería?
+1. La probabilidad de que funcionen los tres lectores. 
+2. El número medio de lectores averiados.
+3. El tiempo medio que un lector está averiado.
+4. Si en un momento dado funcionan dos lectores, ¿cuál es el tiempo medio hasta la próxima avería?
 
-**Ejercicio A5.32.** Una factoría dispone de cuatro equipos de generación de corriente eléctrica que suministran gran parte de la energía que necesita dicha empresa. La distribución del tiempo que transcurre desde que un generador comienza a funcionar hasta que se avería es exponencial, con media de 40 días. El tiempo de reparación de un generador es una variable aleatoria de distribución exponencial y media l0 días. Sabiendo que existe un único técnico capaz de reparar los generadores, se pide:
+**Ejercicio A5.27.** Una factoría dispone de cuatro equipos de generación de corriente eléctrica que suministran gran parte de la energía que necesita dicha empresa. La distribución del tiempo que transcurre desde que un generador comienza a funcionar hasta que se avería es exponencial, con media de 40 días. El tiempo de reparación de un generador es una variable aleatoria de distribución exponencial y media 10 días. Sabiendo que existe un único técnico capaz de reparar los generadores, se pide:
 
-*	La probabilidad de que el técnico esté ocupado.
-*	El porcentaje medio de tiempo en el que todos los equipos de gene- ración están averiados.
-*	El número medio de averías de equipos en un mes.
-*	El tiempo medio que transcurre desde la avería de un equipo hasta su reparación.
-*	El número medio de equipos funcionando.
+1. La probabilidad de que el técnico esté ocupado.
+2. El porcentaje medio de tiempo en el que todos los equipos de gene- ración están averiados.
+3. El número medio de averías de equipos en un mes.
+4. El tiempo medio que transcurre desde la avería de un equipo hasta su reparación.
+5. El número medio de equipos funcionando.
  
-**Ejercicio A5.33.** Un autoservicio dispone de tres empleados, un camarero sirve el primer plato, el segundo camarero sirve el segundo plato y el tercero se encarga de la caja. El primer camarero dispone de suficiente espacio para atender a clientes sin limitación, mientras que los otros dos camareros tienen un espacio limitado a dos personas como máximo. El autoservicio muestra que la tasa media de llegada a la hora de la comida es de 54 clientes/hora, el pimer camarero tiene un tiempo medio de servicio de un minuto, el segundo camarero de treinta segundos, y el tercero de 1 minuto.  
 
-Se solicita:
-* Medidas de eficiencia del sistema descrito.
-* Longitud de las colas que forman el sistema.
-* Tiempo medio que un cliente pasa en el autoservicio desde que llega hasta que sale dispuesto para comer.
+**Ejercicio A5.28.** Una empresa de fabricación de puertas de madera tiene una unidad de negocio que fabrica puertas de muebles de cocina. Dichas puertas, de dimensiones diferentes según pedidos, reciben un tratamiento en 3 etapas. El número de puertas que la unidad de negocio fabrica es de alrededor de 50.000 puertas al año. La primera etapa consta de una única máquina que es capaz de procesar 220 puertas al día. La segunda etapa consta de dos máquinas que procesan cada una 140 puertas al día. La tercera etapa es una etapa manual, para la que se dispone de 3 trabajadores que tardan aproximadamente 5 minutos por puerta. Los días tienen 480 minutos y los años 240 días. Se pueden suponer tiempos distribuidos según una distribución exponencial tanto para las llegadas de pedidos como para los ritmos de producción.
 
+1. ¿Cuál es el número de puertas que habrá en cada etapa, en un instante cualquiera, incluyendo las puertas en las máquinas y las que están siendo procesadas por los operarios?
+2. ¿En que afectaría al sistema original que en la etapa segunda se colocara un limitador de capacidad, mediante el cual no se aceptaran en el almacén previo a dicha etapa más de 5 puertas?
+3. Supón que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por mantener una sola máquina en la primera etapa, ¿cuántas horas extra al día debe trabajar dicha máquina? ¿En qué afectaría comprar una máquina más para esa etapa al cambio en los plazos de entrega? ¿Cómo se comportarían los almacenes?
+4. Supón que en la segunda etapa, no hay dos si no tres máquinas. Dichas máquinas tardan en estropearse 3 días desde que se arreglan y un mecánico tarda de media 5 horas en arreglarlas cada vez. Sólo se dispone de un mecánico. ¿Tiene este sistema suficiente capacidad para hacer frente a la demanda?
+5. Sobre el caso anterior, ¿qué porcentaje de tiempo sólo hay una máquina trabajando? ¿Y ninguna? ¿Qué ocurre con los almacenes durante el tiempo en que hay menos de dos máquinas trabajando?
+6. Sobre el caso anterior, ¿qué opinión te merece que vaya uno de los trabajadores de la tercera sección a ayudar al mecánico cuando haya dos o más máquinas estropeadas en la sección 2, suponiendo que está formado como mecánico? 
+7. ¿Cuál sería en el caso anterior la probabilidad de que hubiera más de una máquina estropeada?
 
-**Ejercicio A5.34.** Una empresa de fabricación de puertas de madera tiene una unidad de negocio que fabrica puertas de muebles de cocina. Dichas puertas, de dimensiones diferentes según pedidos, reciben un tratamiento en 3 etapas. El número de puertas que la unidad de negocio fabrica son alrededor de 50000 puertas al año. La primera etapa es capaz de procesar 220 puertas al día. La segunda etapa consta de dos
-máquinas que procesan cada una 140 puertas al día. La tercera etapa es una etapa manual, para la que se dispone de 3 trabajadores que tardan aproximadamente 5 minutos por puerta. Los días tienen 480 minutos y los años 240 días. Se pueden suponer tiempos distribuidos según una distribución exponencial tanto para las llegadas de pedidos como para los ritmos de producción.
+**Ejercicio A5.29.** Una sección de una empresa fabrica puertas metálicas para ascensores. Las puertas para ascensores pueden tener una gran variedad de formatos, colores y huecos. Se puede admitir que el proceso de producción se compone de 4 etapas consecutivas. La empresa trabaja alrededor de 220 días al año. Cada día tiene 7 horas y 30 minutos de trabajo efectivo. Durante el pasado año se recibieron pedidos por un total de 8.500 puertas. Los pedidos varían bastante a lo largo del año, pero no parecen repercutir en los ritmos de producción promedio de las diferentes etapas de trabajo.
 
-* ¿Cuál es el número de puertas que habrá en cada etapa, incluyendo las puertas en las máquinas y las que están siendo procesadas por los operarios?
-* ¿En que afectaría al sistema anterior que en la etapa segunda se colocara un limitador de capacidad, mediante el cual no se aceptaran al almacén previo a dicha etapa más de 5 puertas?
-* Suponga que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por no comprar una máquina nueva en la primera etapa, ¿Cuántas horas extra al día debe trabajar la primera máquina? ¿En qué afectaría dicho cambio a los plazos de entrega? ¿Cómo se comportarían los almacenes?
-* Suponga que en la segunda etapa, no hay dos si no tres máquinas. Dichas máquinas tardan en estropearse 3 días desde que se arreglan y un mecánico tarda de media 5 horas en arreglarlas cada vez. Sólo se dispone de un mecánico. ¿Tiene este sistema suficiente capacidad para hacer frente a la demanda?
-* Sobre el caso anterior ¿Qué porcentaje de tiempo sólo hay una máquina trabajando? ¿Y ninguna? ¿Qué ocurre con los almacenes durante este tiempo que hay menos de dos máquinas trabajando?
-* Sobre el caso anterior ¿Qué opinión le merece que vaya uno de los trabajadores de la tercera sección a ayudar al mecánico cuando haya dos o más máquinas estropeadas? Debe sustentar la opinión con datos, suponga para ello que el trabajador de la tercera sección se comporta como un mecánico más, cuando trabaja como tal.
-* ¿Cuál sería en el caso anterior la probabilidad de que hubiera más de una máquina estropeada?
+La primera etapa se realiza simultáneamente por dos equipos de trabajo, con un ritmo promedio cada uno de ellos de una puerta cada 20 minutos. La segunda etapa la realiza un equipo de trabajo con un tiempo de ciclo promedio de 11 minutos por puerta. La tercera etapa requiere del uso de otra máquina con un tiempo de ciclo promedio de 10 minutos por puerta. Por último la cuarta etapa es de preparación final. Como es un trabajo principalmente manual, que realiza un único operario, tiene un tiempo de ciclo de 18 minutos por unidad, y se dispone de tantos trabajadores como se requieran, pues irán viniendo de otras secciones siempre que haya una puerta por preparar. Asumiendo tiempos exponenciales:
 
-**Ejercicio A5.35.** Una sección de una empresa fabrica puertas metálicas para ascensores. Las puertas para ascensores pueden tener una gran variedad de formatos, colores y huecos para vidrios variables.
-Se puede admitir que el proceso de producción se compone de 4 etapas consecutivas pero independientes. La empresa trabaja alrededor de 220 días al año. Cada día tiene 7 horas y 30 minutos de trabajo efectivo. Durante el pasado año se recibieron pedidos por una cantidad de 8.500 puertas. Los pedidos tienen
-una cantidad variable de unidades, y los ajustes de cambio de partida, aunque importantes en ocasiones, no parecen repercutir en los ritmos de producción promedio de las diferentes etapas de trabajo.
-
-La primera etapa se realiza simultáneamente por dos equipos de trabajo, con un ritmo promedio cada uno de ellos de una puerta cada 20 minutos. La segunda etapa la realiza un equipo de trabajo con un tiempo de ciclo promedio de 11 minutos por puerta. La tercera etapa requiere del uso de otra máquina con un
-tiempo de ciclo promedio de 10 minutos por puerta. Por último la cuarta etapa es de preparación final. Como es un trabajo principalmente manual, que realiza un único operario, tiene un tiempo de ciclo de 18
-minutos por unidad, y se dispone de tantos trabajadores como se requieran, pues irán viniendo de otras secciones siempre que haya una puerta por preparar. ASumiendo tiempos exponenciales:
-
-* ¿Cuál será el número medio de puertas que habrá en el sistema?.
-* ¿Cuántos trabajadores serán necesarios normalmente en la cuarta etapa?.
-* Si un pedido tiene 30 puertas ¿Cuánto tiempo tardará en promedio en ser servido?
-* ¿Cuál es el tiempo promedio previsto de entrega de una puerta? Si le dicen que el tiempo de entrega promedio es de 5 días. ¿A qué puede ser debido?. Proponga un mecanismo de corrección.
-* Cual será el efecto sobre la cantidad de puertas en la primera etapa si en lugar de dos equipos de trabajo con tiempos de ciclo como los citados se establece un único equipo más eficiente con un tiempo de ciclo de 9 minutos por unidad.
-
-**Ejercicio A5.36.** Una empresa dedicada a la fabricación de cocinas tiene una linea de producción dedicada en exclusividad a las puertas de cocina. Dichas puertas, de dimensiones diferentes según pedidos, reciben un tratamiento en 3 etapas. El número de puertas que la unidad de negocio fabrica son alrededor de 50000 puertas al año. La primera etapa es capaz de procesar 220 puertas al día. La segunda etapa consta de dos máquinas que procesan cada una 140 puertas al día. La tercera etapa es una etapa manual, para la que se dispone de 3 trabajadores que tardan aproximadamente 5 minutos por puerta. Los días tienen 480 minutos y los años 240 días. Asumiendo que los tiempos y la demanda de pedidos se comportan segun variables aletaorias exponenciales, la empresa está interesada en:
-
-* ¿Cuál es el número de puertas que habrá en cada etapa, incluyendo las puertas en las máquinas y las que están siendo procesadas por los operarios?
-* ¿En que afectaría al sistema anterior que en la etapa segunda se colocara un limitador de capacidad, mediante el cual no se aceptaran al almacén previo a dicha etapa más de 5 puertas?
-* Suponga que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por no comprar una máquina nueva en la primera etapa, ¿Cuántas horas extra al día debe trabajar la primera máquina? ¿En qué afectaría dicho cambio a los plazos de entrega? ¿Cómo se comportarían los almacenes?
-* Suponga que en el sistema original la demanda de puertas asciende a 70000 puertas/año. Si se opta por no comprar una máquina nueva en la primera etapa, ¿Cuántas horas extra al día debe trabajar la primera máquina? ¿En qué afectaría dicho cambio a los plazos de entrega? ¿Cómo se comportarían los almacenes?
-* Suponga que en la segunda etapa, no hay dos si no tres máquinas. Dichas máquinas tardan en estropearse 3 días desde que se arreglan y un mecánico tarda de media 5 horas en arreglarlas cada vez. Sólo se dispone de un mecánico. ¿Tiene este sistema suficiente capacidad para hacer frente a la demanda?
-* Sobre el caso anterior ¿Qué porcentaje de tiempo sólo hay una máquina trabajando? ¿ Y ninguna? ¿Qué ocurre con los almacenes durante este tiempo que hay menos de dos máquinas trabajando?
-* Sobre el caso anterior ¿Qué opinión le merece que vaya uno de los trabajadores de la tercera sección a ayudar al mecánico cuando haya dos o más máquinas estropeadas? Debe sustentar la opinión con datos, suponga para ello que el trabajador de la tercera sección se comporta como un mecánico más, cuando trabaja como tal.
-* ¿Cuál sería en el caso anterior la probabilidad de que hubiera más de una máquina estropeada?
-
-**Ejercicio A5.37.** Una empresa fabrica puertas metálicas para ascensores. Las puertas para ascensores pueden tener una gran variedad de formatos, colores y huecos para vidrios variables. Se puede admitir que el proceso de producción se compone de 4 etapas consecutivas pero independientes. La empresa trabaja alrededor de 220 días al año. Cada día tiene 7 horas y 30 minutos de trabajo efectivo. Durante el pasado año se recibieron pedidos por una cantidad de 8.500 puertas. Los pedidos tienen una cantidad variable de unidades, y los ajustes de cambio de partida, aunque importantes en ocasiones, no parecen repercutir en los ritmos de producción promedio de las diferentes etapas de trabajo.
-
-La primera etapa se realiza simultáneamente por dos equipos de trabajo, con un ritmo promedio cada uno de ellos de una puerta cada 20 minutos. La segunda etapa la realiza un equipo de trabajo con un tiempo de ciclo promedio de 11 minutos por puerta. La tercera etapa requiere del uso de otra máquina con un tiempo de ciclo promedio de 10 minutos por puerta. Por último la cuarta etapa es de preparación final. Como es un trabajo principalmente manual, que realiza un único operario, tiene un tiempo de ciclo de 18 minutos por unidad, y se dispone de tantos trabajadores como se requieran, pues irán viniendo de otras secciones siempre que haya una puerta por preparar.
-
-La empresa está interesada en conocer:
-
-* ¿Cuál será el número medio de puertas que habrá en el sistema?.
-* ¿Cuántos trabajadores serán necesarios normalmente en la cuarta etapa?.
-* Si un pedido tiene 30 puertas ¿Cuánto tiempo tardará en promedio en ser servido?
-* ¿Cuál es el tiempo promedio previsto de entrega de una puerta? Si le dicen que el tiempo de entrega promedio es de 5 días. ¿A qué puede ser debido?. Proponga un mecanismo de corrección.
-* Cual será el efecto sobre la cantidad de puertas en la primera etapa si en lugar de dos equipos de trabajo con tiempos de ciclo como los citados se establece un único equipo más eficiente con un tiempo de ciclo de 9 minutos por unidad.
+1. ¿Cuál será el número medio de puertas que habrá en el sistema?
+2. ¿Cuántos trabajadores serán necesarios normalmente en la cuarta etapa?
+3. Si un pedido tiene 30 puertas ,¿cuánto tiempo tardará en promedio en ser servido?
+4. ¿Cuál es el tiempo promedio previsto de entrega de una puerta? ¿A qué puede ser debido y qué repercusiones tiene? Propón un mecanismo de corrección.
+5. ¿Cual será el efecto sobre la cantidad de puertas en la primera etapa si en lugar de dos equipos de trabajo con tiempos de ciclo como los citados se establece un único equipo más eficiente con un tiempo de ciclo de 9 minutos por unidad?
 
 
 
